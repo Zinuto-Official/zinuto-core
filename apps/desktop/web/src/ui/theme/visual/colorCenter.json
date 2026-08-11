@@ -1,0 +1,758 @@
+[
+  {
+    "id": "S1-Base",
+    "category": "surfaces",
+    "usage": "全局底色：最底层画布与主工作区背景。",
+    "dark": "#080C12",
+    "light": "#EEF2F7"
+  },
+  {
+    "id": "S2-Panel",
+    "category": "surfaces",
+    "usage": "面板/卡片底色：右侧面板、弹窗、独立卡片。",
+    "dark": "#111827",
+    "light": "#FFFFFF"
+  },
+  {
+    "id": "S3-Hover",
+    "category": "surfaces",
+    "usage": "交互/悬停底色：列表项、菜单项、可点击块悬停态。",
+    "dark": "#1E2B3D",
+    "light": "#EAF1FB"
+  },
+  {
+    "id": "S4-Border",
+    "category": "surfaces",
+    "usage": "边框/分割线：弱分割、未激活输入框边框。",
+    "dark": "#26354A",
+    "light": "#D3DBE7"
+  },
+  {
+    "id": "S5-Shell",
+    "category": "surfaces",
+    "usage": "明亮模式壳层底色：桌面 shell、侧栏与页面外层底。",
+    "dark": "#0B111A",
+    "light": "#E7EDF5"
+  },
+  {
+    "id": "S6-PanelSoft",
+    "category": "surfaces",
+    "usage": "明亮模式柔和面板底色：低优先级卡片、表头与弱背景块。",
+    "dark": "#162131",
+    "light": "#F6F8FC"
+  },
+  {
+    "id": "S7-BorderStrong",
+    "category": "surfaces",
+    "usage": "明亮模式强边界：输入聚焦、浮层边框与少数选中态描边。",
+    "dark": "#64748B",
+    "light": "#7A8799"
+  },
+  {
+    "id": "T1-Primary",
+    "category": "text",
+    "usage": "主数据/高对比文本：标题、核心数值、主要标签。",
+    "dark": "#F5F7FA",
+    "light": "#172033"
+  },
+  {
+    "id": "T2-Secondary",
+    "category": "text",
+    "usage": "常规/次级文本：字段名、坐标轴、默认说明文字。",
+    "dark": "#CBD5E1",
+    "light": "#43516A"
+  },
+  {
+    "id": "T3-Disabled",
+    "category": "text",
+    "usage": "禁用/占位文本：placeholder、弱提示、不可用说明。",
+    "dark": "#718096",
+    "light": "#8994A5"
+  },
+  {
+    "id": "T5-Muted",
+    "category": "text",
+    "usage": "弱辅助文本：eyebrow、caption、低优先级状态说明。",
+    "dark": "#8FA0B7",
+    "light": "#5B687C"
+  },
+  {
+    "id": "T4-Inverse",
+    "category": "text",
+    "usage": "反转文本：实心主按钮、强调胶囊上的浅色文字。",
+    "dark": "#FFFFFF",
+    "light": "#FFFFFF"
+  },
+  {
+    "id": "A1-Buy",
+    "category": "actions",
+    "usage": "实心主行动色：确认、保存、开始与当前流程的唯一主提交动作；不表示买入或链接。",
+    "dark": "#2764D8",
+    "light": "#1D64F2"
+  },
+  {
+    "id": "A5-PrimaryHover",
+    "category": "actions",
+    "usage": "主行动悬停色：主按钮、主高亮与激活项的 hover 反馈。",
+    "dark": "#2F6FE4",
+    "light": "#174FC4"
+  },
+  {
+    "id": "A6-SelectedSurface",
+    "category": "actions",
+    "usage": "主强调选中底色：活动 tab、选中行、焦点分段与页面强调条。",
+    "dark": "#17315B",
+    "light": "#DBE9FF"
+  },
+  {
+    "id": "A2-Sell",
+    "category": "actions",
+    "usage": "次行动底色：次按钮、安静控件与低优先级交互；不表示卖出。",
+    "dark": "#202C3D",
+    "light": "#E3EAF3"
+  },
+  {
+    "id": "A3-Danger",
+    "category": "actions",
+    "usage": "危险/不可逆操作色：删除、放弃、强警告。",
+    "dark": "#A91D35",
+    "light": "#B4233C"
+  },
+  {
+    "id": "A4-Locked",
+    "category": "actions",
+    "usage": "锁定/禁用底色：未满足条件时的按钮或胶囊底色。",
+    "dark": "#101722",
+    "light": "#E9EEF5"
+  },
+  {
+    "id": "ST1-SuccessText",
+    "category": "status",
+    "usage": "成功状态前景色：成功标签、完成提示与正向系统状态。",
+    "dark": "#4DDDB5",
+    "light": "#0B6B57"
+  },
+  {
+    "id": "ST2-WarningText",
+    "category": "status",
+    "usage": "警示状态前景色：注意标签、待处理提示与风险说明。",
+    "dark": "#FFC56A",
+    "light": "#8A4B00"
+  },
+  {
+    "id": "ST3-DangerText",
+    "category": "status",
+    "usage": "危险状态前景色：错误标签、破坏性说明与校验反馈。",
+    "dark": "#FF7A86",
+    "light": "#B4233C"
+  },
+  {
+    "id": "ST4-InfoText",
+    "category": "status",
+    "usage": "信息状态前景色：信息标签、帮助提示与非破坏性强调。",
+    "dark": "#8AB8FF",
+    "light": "#1E5EBE"
+  },
+  {
+    "id": "ST5-DangerSolid",
+    "category": "status",
+    "usage": "危险操作实心底色：删除、清空与不可逆确认按钮。",
+    "dark": "#A91D35",
+    "light": "#B4233C"
+  },
+  {
+    "id": "ST6-DangerSolidHover",
+    "category": "status",
+    "usage": "危险操作悬停底色：实心危险按钮的 hover 反馈。",
+    "dark": "#BF2942",
+    "light": "#941B31"
+  },
+  {
+    "id": "ST7-SuccessSurface",
+    "category": "status",
+    "usage": "成功状态柔和底色：成功徽标、完成提示和系统健康状态。",
+    "dark": "#12352E",
+    "light": "#E4F6F0"
+  },
+  {
+    "id": "ST8-WarningSurface",
+    "category": "status",
+    "usage": "警示状态柔和底色：待处理、风险提醒和非阻断警告。",
+    "dark": "#38270E",
+    "light": "#FFF1D6"
+  },
+  {
+    "id": "ST9-DangerSurface",
+    "category": "status",
+    "usage": "危险状态柔和底色：错误、失败和破坏性操作说明。",
+    "dark": "#3A1820",
+    "light": "#FFE8EC"
+  },
+  {
+    "id": "ST10-InfoSurface",
+    "category": "status",
+    "usage": "信息状态柔和底色：帮助、提示和非破坏性强调。",
+    "dark": "#14294A",
+    "light": "#E5EFFF"
+  },
+  {
+    "id": "I1-Active",
+    "category": "icons",
+    "usage": "激活图标：当前选中菜单、当前工具、主导航高亮。",
+    "dark": "#F5F7FA",
+    "light": "#172033"
+  },
+  {
+    "id": "I2-Regular",
+    "category": "icons",
+    "usage": "常规图标：默认图标、齿轮、下拉箭头、日历。",
+    "dark": "#B8C4D4",
+    "light": "#53627A"
+  },
+  {
+    "id": "I3-Muted",
+    "category": "icons",
+    "usage": "弱化图标：禁用、水印、极弱装饰图形。",
+    "dark": "#718096",
+    "light": "#8994A5"
+  },
+  {
+    "id": "P1-Up",
+    "category": "price",
+    "usage": "涨色：价格上涨、做多收益、上涨方向。",
+    "dark": "#39D3AE",
+    "light": "#007A63"
+  },
+  {
+    "id": "P2-Down",
+    "category": "price",
+    "usage": "跌色：价格下跌、做空收益、下跌方向。",
+    "dark": "#FF5B68",
+    "light": "#C72F41"
+  },
+  {
+    "id": "P3-UpSoft",
+    "category": "price",
+    "usage": "亮态涨色：价格相关的亮版强调与图标变体。",
+    "dark": "#4AE0C2",
+    "light": "#26A69A"
+  },
+  {
+    "id": "P4-DownSoft",
+    "category": "price",
+    "usage": "亮态跌色：价格相关的亮版强调与图标变体。",
+    "dark": "#FF7A84",
+    "light": "#EF5350"
+  },
+  {
+    "id": "TP1-InstitutionalBull",
+    "category": "price",
+    "usage": "机构风买入/做多主题色：翡翠绿。",
+    "dark": "#10B981",
+    "light": "#10B981"
+  },
+  {
+    "id": "TP2-InstitutionalBear",
+    "category": "price",
+    "usage": "机构风卖出/做空主题色：玫瑰红。",
+    "dark": "#F43F5E",
+    "light": "#F43F5E"
+  },
+  {
+    "id": "TP3-CryptoBull",
+    "category": "price",
+    "usage": "Web3 极客风买入/做多主题色：薄荷青。",
+    "dark": "#14B8A6",
+    "light": "#14B8A6"
+  },
+  {
+    "id": "TP4-CryptoBear",
+    "category": "price",
+    "usage": "Web3 极客风卖出/做空主题色：珊瑚粉红。",
+    "dark": "#FB7185",
+    "light": "#FB7185"
+  },
+  {
+    "id": "TP5-AccessibleBull",
+    "category": "price",
+    "usage": "色弱友好买入/做多主题色：科技亮蓝。",
+    "dark": "#38BDF8",
+    "light": "#38BDF8"
+  },
+  {
+    "id": "TP6-AccessibleBear",
+    "category": "price",
+    "usage": "色弱友好卖出/做空主题色：琥珀亮橙。",
+    "dark": "#F59E0B",
+    "light": "#F59E0B"
+  },
+  {
+    "id": "AN1-Neutral",
+    "category": "annotation",
+    "usage": "绘图工具中性色：默认注释、线段初始色。",
+    "dark": "#FFFFFF",
+    "light": "#111827"
+  },
+  {
+    "id": "AN2-Warning",
+    "category": "annotation",
+    "usage": "绘图工具警示色：高亮提示、注意点标记。",
+    "dark": "#F59E0B",
+    "light": "#D97706"
+  },
+  {
+    "id": "AN3-Info",
+    "category": "annotation",
+    "usage": "绘图工具信息色：说明线、辅助标注、冷色强调。",
+    "dark": "#06B6D4",
+    "light": "#06B6D4"
+  },
+  {
+    "id": "AN4-Magenta",
+    "category": "annotation",
+    "usage": "绘图工具洋红色：辅助分类、可区分的补充色。",
+    "dark": "#D946EF",
+    "light": "#D946EF"
+  },
+  {
+    "id": "C1-White",
+    "category": "common",
+    "usage": "公共纯白基色。",
+    "dark": "#FFFFFF",
+    "light": "#FFFFFF"
+  },
+  {
+    "id": "C2-Black",
+    "category": "common",
+    "usage": "公共纯黑基色。",
+    "dark": "#000000",
+    "light": "#000000"
+  },
+  {
+    "id": "C3-Transparent",
+    "category": "common",
+    "usage": "公共透明色关键字。",
+    "dark": "transparent",
+    "light": "transparent"
+  },
+  {
+    "id": "CH1-CurveAreaLine",
+    "category": "chart",
+    "usage": "曲线图主线颜色。",
+    "dark": "#3B82F6",
+    "light": "#1D4ED8"
+  },
+  {
+    "id": "CH2-CurveAreaFill",
+    "category": "chart",
+    "usage": "曲线图面积填充背景。",
+    "dark": "rgba(59, 130, 246, 0.16)",
+    "light": "rgba(29, 78, 216, 0.12)"
+  },
+  {
+    "id": "CH3-CurveGrid",
+    "category": "chart",
+    "usage": "曲线图网格线。",
+    "dark": "rgba(78, 87, 101, 0.44)",
+    "light": "rgba(201, 209, 220, 0.64)"
+  },
+  {
+    "id": "CH4-CurveBaseline",
+    "category": "chart",
+    "usage": "曲线图基准线。",
+    "dark": "rgba(157, 167, 181, 0.52)",
+    "light": "rgba(93, 104, 120, 0.48)"
+  },
+  {
+    "id": "CH5-CurveCrosshair",
+    "category": "chart",
+    "usage": "曲线图十字线。",
+    "dark": "rgba(190, 199, 211, 0.72)",
+    "light": "rgba(93, 104, 120, 0.62)"
+  },
+  {
+    "id": "CH6-MainGridHorizontal",
+    "category": "chart",
+    "usage": "K 线主图横向网格线。",
+    "dark": "rgba(74, 83, 96, 0.58)",
+    "light": "rgba(201, 209, 220, 0.74)"
+  },
+  {
+    "id": "CH7-MainGridVertical",
+    "category": "chart",
+    "usage": "K 线主图纵向网格线。",
+    "dark": "rgba(74, 83, 96, 0.42)",
+    "light": "rgba(201, 209, 220, 0.54)"
+  },
+  {
+    "id": "OV1-TooltipBg",
+    "category": "overlay",
+    "usage": "Tooltip 深/浅主题专用背景。",
+    "dark": "rgba(23, 27, 33, 0.98)",
+    "light": "rgba(252, 252, 253, 0.98)"
+  },
+  {
+    "id": "OV2-TooltipShadowTint",
+    "category": "overlay",
+    "usage": "Tooltip 阴影用色。",
+    "dark": "rgb(5 8 12 / 0.52)",
+    "light": "rgb(27 32 40 / 0.14)"
+  },
+  {
+    "id": "OV3-CompactTradeBuyBorder",
+    "category": "overlay",
+    "usage": "紧凑成交标记买入描边。",
+    "dark": "#93C5FD",
+    "light": "#93C5FD"
+  },
+  {
+    "id": "OV4-CompactTradeSellBorder",
+    "category": "overlay",
+    "usage": "紧凑成交标记卖出描边。",
+    "dark": "#CBD5E1",
+    "light": "#CBD5E1"
+  },
+  {
+    "id": "OV5-CompactTradeText",
+    "category": "overlay",
+    "usage": "紧凑成交标记文字。",
+    "dark": "#F8FAFC",
+    "light": "#F8FAFC"
+  },
+  {
+    "id": "OV6-NoteMarkerFill",
+    "category": "overlay",
+    "usage": "笔记标记主填充。",
+    "dark": "#3B82F6",
+    "light": "#2563EB"
+  },
+  {
+    "id": "OV7-NoteMarkerBorder",
+    "category": "overlay",
+    "usage": "笔记标记边框。",
+    "dark": "#93C5FD",
+    "light": "#93C5FD"
+  },
+  {
+    "id": "OV8-NoteMarkerText",
+    "category": "overlay",
+    "usage": "笔记标记文字。",
+    "dark": "#EFF6FF",
+    "light": "#EFF6FF"
+  },
+  {
+    "id": "OV9-DiagnosticWarning",
+    "category": "overlay",
+    "usage": "诊断中心警示色。",
+    "dark": "#E6A23C",
+    "light": "#8B5607"
+  },
+  {
+    "id": "IND1-DefaultLine",
+    "category": "indicator",
+    "usage": "自定义指标默认线色。",
+    "dark": "#60A5FA",
+    "light": "#60A5FA"
+  },
+  {
+    "id": "IND2-FormulaWhite",
+    "category": "indicator",
+    "usage": "公式命名色 COLORWHITE。",
+    "dark": "#F8FAFC",
+    "light": "#F8FAFC"
+  },
+  {
+    "id": "IND3-FormulaBlack",
+    "category": "indicator",
+    "usage": "公式命名色 COLORBLACK。",
+    "dark": "#0F172A",
+    "light": "#0F172A"
+  },
+  {
+    "id": "IND4-FormulaBlue",
+    "category": "indicator",
+    "usage": "公式命名色 COLORBLUE。",
+    "dark": "#3B82F6",
+    "light": "#3B82F6"
+  },
+  {
+    "id": "IND5-FormulaYellow",
+    "category": "indicator",
+    "usage": "公式命名色 COLORYELLOW。",
+    "dark": "#FBBF24",
+    "light": "#FBBF24"
+  },
+  {
+    "id": "IND6-FormulaCyan",
+    "category": "indicator",
+    "usage": "公式命名色 COLORCYAN。",
+    "dark": "#22D3EE",
+    "light": "#22D3EE"
+  },
+  {
+    "id": "IND7-FormulaMagenta",
+    "category": "indicator",
+    "usage": "公式命名色 COLORMAGENTA。",
+    "dark": "#F472B6",
+    "light": "#F472B6"
+  },
+  {
+    "id": "IND8-FormulaGray",
+    "category": "indicator",
+    "usage": "公式命名色 COLORGRAY/COLORGREY。",
+    "dark": "#94A3B8",
+    "light": "#94A3B8"
+  },
+  {
+    "id": "IND9-FormulaPurple",
+    "category": "indicator",
+    "usage": "公式命名色 COLORPURPLE。",
+    "dark": "#A78BFA",
+    "light": "#A78BFA"
+  },
+  {
+    "id": "IND10-FormulaOrange",
+    "category": "indicator",
+    "usage": "公式命名色 COLORORANGE。",
+    "dark": "#FB923C",
+    "light": "#FB923C"
+  },
+  {
+    "id": "IND11-PresetSky",
+    "category": "indicator",
+    "usage": "指标示例/系统模板常用天空蓝。",
+    "dark": "#60A5FA",
+    "light": "#60A5FA"
+  },
+  {
+    "id": "IND12-PresetGreen",
+    "category": "indicator",
+    "usage": "指标示例/系统模板常用绿色。",
+    "dark": "#34D399",
+    "light": "#34D399"
+  },
+  {
+    "id": "IND13-PresetOrange",
+    "category": "indicator",
+    "usage": "指标示例/系统模板常用橙色。",
+    "dark": "#F59E0B",
+    "light": "#F59E0B"
+  },
+  {
+    "id": "IND14-PresetPurple",
+    "category": "indicator",
+    "usage": "指标示例/系统模板常用紫色。",
+    "dark": "#A78BFA",
+    "light": "#A78BFA"
+  },
+  {
+    "id": "IND15-PresetRose",
+    "category": "indicator",
+    "usage": "指标示例/系统模板常用玫红。",
+    "dark": "#F87171",
+    "light": "#F87171"
+  },
+  {
+    "id": "IND16-PresetGold",
+    "category": "indicator",
+    "usage": "指标示例/系统模板常用金色。",
+    "dark": "#F59E0B",
+    "light": "#F59E0B"
+  },
+  {
+    "id": "IND17-PresetCyan",
+    "category": "indicator",
+    "usage": "指标示例文档常用亮青蓝。",
+    "dark": "#00C2FF",
+    "light": "#00C2FF"
+  },
+  {
+    "id": "IND18-PresetWarm",
+    "category": "indicator",
+    "usage": "MACD/KDJ/RSI 系统模板暖橙线。",
+    "dark": "#FF8D1E",
+    "light": "#FF8D1E"
+  },
+  {
+    "id": "IND19-PresetTeal",
+    "category": "indicator",
+    "usage": "MACD/KDJ/RSI 系统模板青色线。",
+    "dark": "#0CAEE6",
+    "light": "#0CAEE6"
+  },
+  {
+    "id": "IND20-PresetPink",
+    "category": "indicator",
+    "usage": "MACD/KDJ/RSI 系统模板粉紫线。",
+    "dark": "#E970DC",
+    "light": "#E970DC"
+  },
+  {
+    "id": "IND21-PresetAmber",
+    "category": "indicator",
+    "usage": "系统运行时双均线常用琥珀色。",
+    "dark": "#D97706",
+    "light": "#D97706"
+  },
+  {
+    "id": "IND22-PresetAlertRed",
+    "category": "indicator",
+    "usage": "指标示例文档常用警示红。",
+    "dark": "#FF4D4F",
+    "light": "#FF4D4F"
+  },
+  {
+    "id": "NT1-Red",
+    "category": "noteColors",
+    "usage": "笔记颜色标记红色。",
+    "dark": "#EF5A5A",
+    "light": "#D9485F"
+  },
+  {
+    "id": "NT2-Orange",
+    "category": "noteColors",
+    "usage": "笔记颜色标记橙色。",
+    "dark": "#F08A36",
+    "light": "#DD7A2A"
+  },
+  {
+    "id": "NT3-Yellow",
+    "category": "noteColors",
+    "usage": "笔记颜色标记黄色。",
+    "dark": "#D9A928",
+    "light": "#C79615"
+  },
+  {
+    "id": "NT4-Green",
+    "category": "noteColors",
+    "usage": "笔记颜色标记绿色。",
+    "dark": "#3FA66B",
+    "light": "#2E8E58"
+  },
+  {
+    "id": "NT5-Blue",
+    "category": "noteColors",
+    "usage": "笔记颜色标记蓝色。",
+    "dark": "#4E8EF7",
+    "light": "#2F6DDE"
+  },
+  {
+    "id": "AS1-SpecialTrainingPrimary",
+    "category": "assets",
+    "usage": "特训 SVG 主轮廓蓝。",
+    "dark": "#2563EB",
+    "light": "#2563EB"
+  },
+  {
+    "id": "AS2-SpecialTrainingUp",
+    "category": "assets",
+    "usage": "特训 SVG 上行/正向绿色。",
+    "dark": "#089981",
+    "light": "#089981"
+  },
+  {
+    "id": "AS3-SpecialTrainingDown",
+    "category": "assets",
+    "usage": "特训 SVG 下行/危险红色。",
+    "dark": "#F23645",
+    "light": "#F23645"
+  },
+  {
+    "id": "AS4-SpecialTrainingWarning",
+    "category": "assets",
+    "usage": "特训 SVG 警示橙色。",
+    "dark": "#F59E0B",
+    "light": "#F59E0B"
+  },
+  {
+    "id": "AS5-AndroidLauncherBackground",
+    "category": "assets",
+    "usage": "Android 启动图标背景色。",
+    "dark": "#FFFFFF",
+    "light": "#FFFFFF"
+  },
+  {
+    "id": "B1-BrandPrimary",
+    "category": "brand",
+    "usage": "品牌前景强调色：链接、激活图标、焦点环与品牌高亮；不作为实心按钮底色。",
+    "dark": "#66A3FF",
+    "light": "#185AD1"
+  },
+  {
+    "id": "B2-BrandPrimaryHover",
+    "category": "brand",
+    "usage": "品牌前景强调悬停态：链接与图标的 hover 反馈；不作为实心按钮 hover 底色。",
+    "dark": "#8AB8FF",
+    "light": "#1249AD"
+  },
+  {
+    "id": "BR1-GoogleBlue",
+    "category": "brand",
+    "usage": "Google 标志蓝：仅用于 Google 官方四色标志。",
+    "dark": "#4285F4",
+    "light": "#4285F4"
+  },
+  {
+    "id": "BR2-GoogleGreen",
+    "category": "brand",
+    "usage": "Google 标志绿：仅用于 Google 官方四色标志。",
+    "dark": "#34A853",
+    "light": "#34A853"
+  },
+  {
+    "id": "BR3-GoogleYellow",
+    "category": "brand",
+    "usage": "Google 标志黄：仅用于 Google 官方四色标志。",
+    "dark": "#FBBC05",
+    "light": "#FBBC05"
+  },
+  {
+    "id": "BR4-GoogleRed",
+    "category": "brand",
+    "usage": "Google 标志红：仅用于 Google 官方四色标志。",
+    "dark": "#EA4335",
+    "light": "#EA4335"
+  },
+  {
+    "id": "BR5-CommunityObsidian",
+    "category": "brand",
+    "usage": "Core 主品牌最深黑阶：主按钮、品牌锚点与深色金属底。",
+    "dark": "#050607",
+    "light": "#0B0C0E"
+  },
+  {
+    "id": "BR6-CommunityGraphite",
+    "category": "brand",
+    "usage": "Core 主品牌石墨黑：主品牌渐变中段、品牌面板与 hover 深层。",
+    "dark": "#111418",
+    "light": "#14171B"
+  },
+  {
+    "id": "BR7-CommunityCharcoal",
+    "category": "brand",
+    "usage": "Core 炭黑层：品牌抬升层、边缘阴影与二级品牌容器。",
+    "dark": "#1C2128",
+    "light": "#232830"
+  },
+  {
+    "id": "BR8-CommunityPorcelain",
+    "category": "brand",
+    "usage": "Core 瓷白高光：白色折线、品牌高光文字与深色模式的结构反差。",
+    "dark": "#F3F1EA",
+    "light": "#F1EEE7"
+  },
+  {
+    "id": "BR9-CommunityIvoryLine",
+    "category": "brand",
+    "usage": "Core 象牙白辅助线：品牌细描边、焦点高光与线性结构语言。",
+    "dark": "#D8D2C8",
+    "light": "#CEC7BB"
+  },
+  {
+    "id": "BR10-CommunityMist",
+    "category": "brand",
+    "usage": "Core 石墨雾灰：品牌次级文案、柔和高光与弱化边界。",
+    "dark": "#98A0AA",
+    "light": "#69717B"
+  }
+]

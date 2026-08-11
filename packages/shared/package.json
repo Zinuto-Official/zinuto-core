@@ -1,0 +1,205 @@
+{
+  "name": "@zinuto/shared",
+  "version": "2.0.1",
+  "license": "GPL-3.0-only",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.18.0 <25"
+  },
+  "scripts": {
+    "build": "node ../../tools/release/check-node-version.mjs && npm run build:workspace",
+    "build:workspace": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\" && node ../../tools/docs/generate-shared-i18n-runtime.mjs && tsc -p tsconfig.json",
+    "report:i18n-review": "node ../../tools/docs/report-i18n-review.mjs",
+    "typecheck": "node ../../tools/release/check-node-version.mjs && npm run typecheck:workspace",
+    "typecheck:workspace": "tsc --noEmit -p tsconfig.json",
+    "test:suggestions": "node ../../tools/release/check-node-version.mjs && npm run build && npm run test:suggestions:workspace",
+    "test:suggestions:workspace": "node ../../tools/quality/run-tracked-js-tests.mjs --suite=shared"
+  },
+  "exports": {
+    "./analytics": {
+      "types": "./dist/analytics.d.ts",
+      "default": "./dist/analytics.js"
+    },
+    "./csv": {
+      "types": "./dist/csv.d.ts",
+      "default": "./dist/csv.js"
+    },
+    "./period": {
+      "types": "./dist/period.d.ts",
+      "default": "./dist/period.js"
+    },
+    "./timeframe": {
+      "types": "./dist/timeframe.d.ts",
+      "default": "./dist/timeframe.js"
+    },
+    "./marketTime": {
+      "types": "./dist/marketTime.d.ts",
+      "default": "./dist/marketTime.js"
+    },
+    "./marketPresets": {
+      "types": "./dist/marketPresets.d.ts",
+      "default": "./dist/marketPresets.js"
+    },
+    "./timezone": {
+      "types": "./dist/timezone.d.ts",
+      "default": "./dist/timezone.js"
+    },
+    "./replay": {
+      "types": "./dist/replay.d.ts",
+      "default": "./dist/replay.js"
+    },
+    "./domain-calculations/fast-decision": {
+      "types": "./dist/domain-calculations/fast-decision.d.ts",
+      "default": "./dist/domain-calculations/fast-decision.js"
+    },
+    "./domain-calculations/fast-decision-capital-review": {
+      "types": "./dist/domain-calculations/fast-decision-capital-review.d.ts",
+      "default": "./dist/domain-calculations/fast-decision-capital-review.js"
+    },
+    "./domain-calculations/special-training-risk": {
+      "types": "./dist/domain-calculations/special-training-risk.d.ts",
+      "default": "./dist/domain-calculations/special-training-risk.js"
+    },
+    "./specialTrainingModes": {
+      "types": "./dist/specialTrainingModes.d.ts",
+      "default": "./dist/specialTrainingModes.js"
+    },
+    "./domain-calculations/special-training-session-summary": {
+      "types": "./dist/domain-calculations/special-training-session-summary.d.ts",
+      "default": "./dist/domain-calculations/special-training-session-summary.js"
+    },
+    "./domain-calculations/training-return-rate": {
+      "types": "./dist/domain-calculations/training-return-rate.d.ts",
+      "default": "./dist/domain-calculations/training-return-rate.js"
+    },
+    "./domain-calculations/replay-review-window": {
+      "types": "./dist/domain-calculations/replay-review-window.d.ts",
+      "default": "./dist/domain-calculations/replay-review-window.js"
+    },
+    "./replayNoteColors": {
+      "types": "./dist/replayNoteColors.d.ts",
+      "default": "./dist/replayNoteColors.js"
+    },
+    "./replayDrawingTools": {
+      "types": "./dist/replayDrawingTools.d.ts",
+      "default": "./dist/replayDrawingTools.js"
+    },
+    "./replayNoteTypes": {
+      "types": "./dist/replayNoteTypes.d.ts",
+      "default": "./dist/replayNoteTypes.js"
+    },
+    "./replayNoteDocument": {
+      "types": "./dist/replayNoteDocument.d.ts",
+      "default": "./dist/replayNoteDocument.js"
+    },
+    "./trading": {
+      "types": "./dist/trading.d.ts",
+      "default": "./dist/trading.js"
+    },
+    "./tradingCalendar": {
+      "types": "./dist/tradingCalendar.d.ts",
+      "default": "./dist/tradingCalendar.js"
+    },
+    "./contracts-desktop/api": {
+      "types": "./dist/contracts-desktop/api.d.ts",
+      "default": "./dist/contracts-desktop/api.js"
+    },
+    "./contracts-desktop/http-api": {
+      "types": "./dist/contracts-desktop/http-api.d.ts",
+      "default": "./dist/contracts-desktop/http-api.js"
+    },
+    "./httpApiRouteBuilder": {
+      "types": "./dist/httpApiRouteBuilder.d.ts",
+      "default": "./dist/httpApiRouteBuilder.js"
+    },
+    "./simulationArtifactIdentity": {
+      "types": "./dist/simulationArtifactIdentity.d.ts",
+      "default": "./dist/simulationArtifactIdentity.js"
+    },
+    "./sessionNaming": {
+      "types": "./dist/sessionNaming.d.ts",
+      "default": "./dist/sessionNaming.js"
+    },
+    "./systemDevSimulationProfiles": {
+      "types": "./dist/systemDevSimulationProfiles.d.ts",
+      "default": "./dist/systemDevSimulationProfiles.js"
+    },
+    "./replayNoteBuilder": {
+      "types": "./dist/replayNoteBuilder.d.ts",
+      "default": "./dist/replayNoteBuilder.js"
+    },
+    "./replayNoteSuggestions": {
+      "types": "./dist/replayNoteSuggestions.d.ts",
+      "default": "./dist/replayNoteSuggestions.js"
+    },
+    "./systemDevSimulationCopy": {
+      "types": "./dist/systemDevSimulationCopy.d.ts",
+      "default": "./dist/systemDevSimulationCopy.js"
+    },
+    "./systemStorageCategories": {
+      "types": "./dist/systemStorageCategories.d.ts",
+      "default": "./dist/systemStorageCategories.js"
+    },
+    "./desktopLocalDocuments": {
+      "types": "./dist/desktopLocalDocuments.d.ts",
+      "default": "./dist/desktopLocalDocuments.js"
+    },
+    "./desktopReleaseNotes": {
+      "types": "./dist/desktopReleaseNotes.d.ts",
+      "default": "./dist/desktopReleaseNotes.js"
+    },
+    "./desktopLegalDocuments": {
+      "types": "./dist/desktopLegalDocuments.d.ts",
+      "default": "./dist/desktopLegalDocuments.js"
+    },
+    "./versionRegistry": {
+      "types": "./dist/versionRegistry.d.ts",
+      "default": "./dist/versionRegistry.js"
+    },
+    "./operatorSummary": {
+      "types": "./dist/operatorSummary.d.ts",
+      "default": "./dist/operatorSummary.js"
+    },
+    "./i18n": {
+      "types": "./dist/i18n.d.ts",
+      "browser": "./dist/i18n.browser.js",
+      "default": "./dist/i18n.js"
+    },
+    "./importRules": {
+      "types": "./dist/importRules.d.ts",
+      "default": "./dist/importRules.js"
+    },
+    "./importTimeZoneRules": {
+      "types": "./dist/importTimeZoneRules.d.ts",
+      "default": "./dist/importTimeZoneRules.js"
+    },
+    "./replayArchive": {
+      "types": "./dist/replayArchive.d.ts",
+      "default": "./dist/replayArchive.js"
+    },
+    "./localImportMockSampleArchive": {
+      "types": "./dist/localImportMockSampleArchive.d.ts",
+      "default": "./dist/localImportMockSampleArchive.js"
+    },
+    "./localDataSourceEligibility": {
+      "types": "./dist/localDataSourceEligibility.d.ts",
+      "default": "./dist/localDataSourceEligibility.js"
+    },
+    "./input-limits": {
+      "types": "./dist/input-limits.d.ts",
+      "source": "./src/input-limits.ts",
+      "default": "./dist/input-limits.js"
+    }
+  },
+  "sideEffects": false,
+  "devDependencies": {
+    "tsx": "^4.23.1",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "@js-temporal/polyfill": "^0.5.1",
+    "intl-messageformat": "^11.2.0",
+    "zod": "^4.1.5"
+  }
+}

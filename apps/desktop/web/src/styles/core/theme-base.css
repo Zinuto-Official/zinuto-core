@@ -1,0 +1,348 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+@import "./motion-tokens.css";
+
+:root {
+  color-scheme: light;
+  --ff-ui: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  --ff-display: var(--ff-ui);
+  --ff-mono: "SF Mono", "Menlo", "Consolas", "Monaco", ui-monospace, monospace;
+  --ty-scale-font: 0.98;
+  --ty-scale-preset: 1;
+  --ty-fit-level-1: 0.94;
+  --ty-fit-level-2: 0.88;
+  --ty-r1: 14.7px;
+  --ty-r2: 15.68px;
+  --ty-r3: 17.64px;
+  --ty-r4: 19.6px;
+  --ty-r5: 23.52px;
+  --ty-r6: 27.44px;
+  --ty-r7: 31.36px;
+  --ty-r8: 34.3px;
+  --ty-leading-caption: 1.55;
+  --ty-leading-label: 1.32;
+  --ty-leading-body: 1.55;
+  --ty-leading-title: 1.32;
+  --ty-leading-metric: 1.2;
+  --ty-leading-display: 1.32;
+  --ty-tracking-caption: 0;
+  --ty-tracking-label: 0;
+  --ty-tracking-body: 0;
+  --ty-tracking-title: 0;
+  --ty-tracking-display: 0;
+  --surface-s1: rgb(var(--color-app-bg));
+  --surface-s2: rgb(var(--color-panel-bg));
+  --surface-s3: rgb(var(--color-hover-bg));
+  --surface-s4: rgb(var(--color-subtle-border));
+  --surface-s5: rgb(var(--color-window-bg));
+  --surface-s6: rgb(var(--color-panel-soft-bg));
+  --surface-s7: rgb(var(--color-strong-border));
+  --text-t1: rgb(var(--color-text-primary));
+  --text-t2: rgb(var(--color-text-secondary));
+  --text-t3: rgb(var(--color-text-tertiary));
+  --text-t4: rgb(var(--color-text-inverse));
+  --text-t5: rgb(var(--color-text-tertiary));
+  --action-a1: rgb(var(--color-primary));
+  --action-a2: rgb(var(--color-secondary-action));
+  --action-a3: rgb(var(--color-danger));
+  --action-a4: rgb(var(--color-locked-bg));
+  --action-a5: rgb(var(--color-primary-hover));
+  --action-a6: rgb(var(--color-selected-bg));
+  --icon-i1: rgb(var(--color-text-primary));
+  --icon-i2: rgb(var(--color-text-secondary));
+  --icon-i3: rgb(var(--color-icon-muted));
+  --icon-accent: rgb(var(--color-link));
+  --space-page-x: clamp(16px, 1.35vw, 28px);
+  --space-page-y: clamp(14px, 1.2vh, 22px);
+  --space-card: clamp(12px, 0.95vw, 18px);
+  --space-section: clamp(12px, 0.9vw, 18px);
+  --space-list: clamp(8px, 0.6vw, 12px);
+  --size-page-max: 1800px;
+  --size-toolbar-h: 42px;
+  --size-input-h: 38px;
+  --size-btn-sm: 30px;
+  --size-btn-md: 36px;
+  --size-btn-lg: 42px;
+  --radius-card-lg: 20px;
+  --radius-card: 16px;
+  --radius-card-sm: 12px;
+  --radius-control: 11px;
+  --radius-pill: 999px;
+  --theme-canvas: rgb(var(--color-app-bg));
+  --theme-shell: rgb(var(--color-window-bg));
+  --theme-shell-toolbar: rgb(var(--color-window-toolbar-bg));
+  --theme-panel: rgb(var(--color-panel-bg));
+  --theme-panel-soft: rgb(var(--color-panel-soft-bg));
+  --theme-control: rgb(var(--color-input-bg));
+  --theme-hover: rgb(var(--color-hover-bg));
+  --theme-active: rgb(var(--color-selected-bg));
+  --theme-float: rgb(var(--color-elevated-bg));
+  --theme-line-hairline: rgb(var(--color-subtle-border) / 0.42);
+  --theme-line-divider: rgb(var(--color-subtle-border) / 0.6);
+  --theme-line-strong: rgb(var(--color-strong-border));
+  --theme-shadow-shell: 0 18px 44px rgb(var(--color-overlay-backdrop) / 0.08), 0 3px 10px rgb(var(--color-overlay-backdrop) / 0.05);
+  --theme-shadow-float: 0 28px 72px rgb(var(--color-overlay-backdrop) / 0.18), 0 10px 28px rgb(var(--color-overlay-backdrop) / 0.1);
+  --shadow-soft: 0 1px 2px rgb(var(--color-text-primary) / 0.05);
+  --shadow-float: 0 20px 50px rgb(var(--color-overlay-backdrop) / 0.24);
+  --shadow-emboss: 0 1px 0 rgb(var(--color-panel-bg) / 0.6), inset 0 -1px 0 rgb(var(--color-subtle-border) / 0.5);
+  --bg: var(--theme-canvas);
+  --window-bg: var(--theme-shell);
+  --window-toolbar-bg: var(--theme-shell-toolbar);
+  --window-line: var(--theme-line-divider);
+  --panel: var(--theme-panel);
+  --panel-soft: var(--theme-panel-soft);
+  --line: var(--theme-line-divider);
+  --line-strong: var(--theme-line-strong);
+  --text: rgb(var(--color-text-primary));
+  --muted: rgb(var(--color-text-secondary));
+  --text-muted: rgb(var(--color-text-secondary));
+  --text-strong: rgb(var(--color-text-primary));
+  --text-subtle: rgb(var(--color-text-tertiary));
+  --text-disabled: rgb(var(--color-text-muted));
+  --primary: rgb(var(--color-primary));
+  --primary-hover: rgb(var(--color-primary-hover));
+  --primary-soft: rgb(var(--color-primary) / 0.14);
+  --visual-accent-base: rgb(var(--color-primary));
+  --visual-accent-hover: rgb(var(--color-primary-hover));
+  --visual-link-accent: rgb(var(--color-link));
+  --visual-link-accent-hover: rgb(var(--color-link-hover));
+  --visual-accent-soft: rgb(var(--color-primary) / 0.14);
+  --visual-accent-surface: rgb(var(--color-selected-bg));
+  --visual-accent-contrast: var(--text-t4);
+  --visual-accent-ring: rgb(var(--color-focus-ring) / 0.22);
+  --success: rgb(var(--color-success));
+  --success-soft: rgb(var(--color-success-surface));
+  --warning: rgb(var(--color-warning));
+  --warning-soft: rgb(var(--color-warning-surface));
+  --danger: rgb(var(--color-danger));
+  --danger-soft: rgb(var(--color-danger-surface));
+  --info: rgb(var(--color-info));
+  --info-soft: rgb(var(--color-info-surface));
+  --green: rgb(var(--color-success));
+  --red: rgb(var(--color-danger));
+  --control-h: var(--size-btn-md);
+  --control-h-compact: var(--size-btn-sm);
+  --radius-rect: var(--radius-card);
+  --radius-panel: var(--radius-card);
+  --shadow: var(--shadow-soft);
+  --chrome-start: rgb(var(--color-panel-bg));
+  --chrome-end: rgb(var(--color-panel-soft-bg));
+  --chrome-border: rgb(var(--color-subtle-border) / 0.56);
+  --rail-border: rgb(var(--color-subtle-border) / 0.56);
+  --rail-icon: rgb(var(--color-text-secondary));
+  --rail-hover-color: rgb(var(--color-text-primary));
+  --rail-hover-bg: rgb(var(--color-hover-bg));
+  --rail-active-bg: rgb(var(--color-selected-bg));
+  --btn-bg: rgb(var(--color-hover-bg));
+  --btn-bg-hover: rgb(var(--color-selected-bg));
+  --btn-bg-active: rgb(var(--color-pressed-bg));
+  --btn-shadow-soft: none;
+  --btn-shadow-hover: none;
+  --btn-shadow-active: none;
+  --settings-panel-bg: rgb(var(--color-panel-bg));
+  --settings-panel-border: rgb(var(--color-card-border) / 0.7);
+  --settings-row-divider: rgb(var(--color-subtle-border) / 0.65);
+  --settings-control-bg: rgb(var(--color-input-bg));
+  --settings-control-active-bg: rgb(var(--color-selected-bg));
+  --brand-word: rgb(var(--color-text-primary));
+  --chart-meta-text: rgb(var(--color-chart-axis));
+  --price-up-color: var(--visual-price-green-down-light);
+  --price-down-color: var(--visual-price-green-up-light);
+  --trade-buy-color: var(--action-a1);
+  --trade-buy-text-color: var(--text-t4);
+  --trade-buy-marker-color: var(--action-a1);
+  --trade-sell-color: var(--action-a2);
+  --trade-sell-border-color: var(--surface-s4);
+  --trade-sell-text-color: var(--text-t1);
+  --trade-sell-marker-color: var(--action-a2);
+  --trade-sell-marker-outline-color: var(--visual-transparent);
+  --trade-position-line-color: var(--action-a1);
+  --history-preview-bg: rgb(var(--color-panel-soft-bg));
+  --history-preview-glass-bg: rgb(var(--color-card-bg) / 0.64);
+  --history-preview-glass-edge: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  font-family: var(--ff-ui);
+  font-feature-settings: 'tnum' 1, 'cv02' 1, 'cv03' 1;
+  color: var(--text, CanvasText);
+  background: var(--bg, Canvas);
+  overflow: hidden;
+}
+
+body.drawer-open {
+  overflow: hidden;
+}
+
+.app-root {
+  --viewport-scale: 1;
+  --control-h: clamp(30px, calc(36px * var(--viewport-scale)), 44px);
+  --control-h-compact: clamp(28px, calc(32px * var(--viewport-scale)), 38px);
+  --radius-rect: clamp(12px, calc(var(--radius-card) * var(--viewport-scale)), 20px);
+  --radius-control: var(--radius-card-sm);
+  --radius-panel: var(--radius-card);
+  --rail-width: clamp(192px, 13.8vw, 246px);
+  --rail-width-compact: clamp(84px, 7.8vw, 116px);
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  background: var(--window-bg);
+  color: var(--text);
+  font-size: var(--ty-r3);
+  line-height: var(--ty-leading-body);
+  font-family: var(--ff-ui);
+  transition:
+    background-color var(--motion-fast),
+    color var(--motion-fast),
+    border-color var(--motion-fast);
+  overflow: auto;
+  border-radius: 0;
+}
+
+.app-root.layout-constrained {
+  overflow: auto;
+}
+
+.app-root.layout-constrained .desktop-main {
+  margin-left: 0;
+}
+
+.app-root.layout-constrained .workspace-page {
+  gap: 12px;
+  padding: clamp(12px, 1.05vw, 20px) clamp(14px, 1.2vw, 24px);
+}
+
+.app-root.layout-tight {
+  --rail-width: clamp(132px, 12.8vw, 168px);
+  --rail-width-compact: clamp(72px, 8vw, 96px);
+}
+
+.app-root button,
+.app-root input,
+.app-root select,
+.app-root textarea {
+  font: inherit;
+}
+
+.app-root.theme-dark {
+  color-scheme: dark;
+  --surface-s1: rgb(var(--color-app-bg));
+  --surface-s2: rgb(var(--color-panel-bg));
+  --surface-s3: rgb(var(--color-hover-bg));
+  --surface-s4: rgb(var(--color-subtle-border));
+  --surface-s5: rgb(var(--color-window-bg));
+  --surface-s6: rgb(var(--color-panel-soft-bg));
+  --surface-s7: rgb(var(--color-strong-border));
+  --text-t1: rgb(var(--color-text-primary));
+  --text-t2: rgb(var(--color-text-secondary));
+  --text-t3: rgb(var(--color-text-tertiary));
+  --text-t4: rgb(var(--color-text-inverse));
+  --text-t5: rgb(var(--color-text-tertiary));
+  --action-a1: rgb(var(--color-primary));
+  --action-a2: rgb(var(--color-secondary-action));
+  --action-a3: rgb(var(--color-danger));
+  --action-a4: rgb(var(--color-locked-bg));
+  --action-a5: rgb(var(--color-primary-hover));
+  --action-a6: rgb(var(--color-selected-bg));
+  --icon-i1: rgb(var(--color-text-primary));
+  --icon-i2: rgb(var(--color-text-secondary));
+  --icon-i3: rgb(var(--color-icon-muted));
+  --icon-accent: rgb(var(--color-link));
+  --theme-line-hairline: rgb(var(--color-subtle-border) / 0.42);
+  --theme-line-divider: rgb(var(--color-subtle-border) / 0.68);
+  --theme-line-strong: rgb(var(--color-subtle-border) / 0.92);
+  --theme-shadow-shell: 0 24px 60px rgb(var(--color-overlay-backdrop) / 0.34), 0 4px 12px rgb(var(--color-overlay-backdrop) / 0.24);
+  --theme-shadow-float: 0 30px 78px rgb(var(--color-overlay-backdrop) / 0.54), 0 12px 30px rgb(var(--color-overlay-backdrop) / 0.32);
+  --shadow-soft: 0 1px 2px rgb(var(--color-overlay-backdrop) / 0.3), 0 10px 28px rgb(var(--color-overlay-backdrop) / 0.16);
+  --shadow-float: var(--theme-shadow-float);
+  --shadow-emboss: 0 1px 0 rgb(var(--color-text-primary) / 0.04), inset 0 -1px 0 rgb(var(--color-text-secondary) / 0.18);
+  --bg: var(--theme-canvas);
+  --window-bg: var(--theme-shell);
+  --window-toolbar-bg: var(--theme-shell-toolbar);
+  --window-line: var(--theme-line-divider);
+  --panel: var(--theme-panel);
+  --panel-soft: var(--theme-panel-soft);
+  --line: var(--theme-line-divider);
+  --line-strong: var(--theme-line-strong);
+  --text: rgb(var(--color-text-primary));
+  --muted: rgb(var(--color-text-secondary));
+  --text-muted: rgb(var(--color-text-secondary));
+  --text-strong: rgb(var(--color-text-primary));
+  --text-subtle: rgb(var(--color-text-tertiary));
+  --text-disabled: rgb(var(--color-text-muted));
+  --primary: rgb(var(--color-primary));
+  --primary-hover: rgb(var(--color-primary-hover));
+  --primary-soft: rgb(var(--color-primary) / 0.22);
+  --visual-accent-base: rgb(var(--color-primary));
+  --visual-accent-hover: rgb(var(--color-primary-hover));
+  --visual-link-accent: rgb(var(--color-link));
+  --visual-link-accent-hover: rgb(var(--color-link-hover));
+  --visual-accent-soft: rgb(var(--color-primary) / 0.22);
+  --visual-accent-surface: rgb(var(--color-selected-bg));
+  --visual-accent-contrast: var(--text-t4);
+  --visual-accent-ring: rgb(var(--color-focus-ring) / 0.3);
+  --green: rgb(var(--color-success));
+  --red: rgb(var(--color-danger));
+  --shadow: var(--shadow-soft);
+  --chrome-start: rgb(var(--color-panel-bg));
+  --chrome-end: rgb(var(--color-panel-soft-bg));
+  --chrome-border: rgb(var(--color-subtle-border) / 0.3);
+  --rail-border: rgb(var(--color-subtle-border) / 0.34);
+  --rail-icon: rgb(var(--color-text-secondary));
+  --rail-hover-color: rgb(var(--color-text-primary));
+  --rail-hover-bg: rgb(var(--color-hover-bg));
+  --rail-active-bg: rgb(var(--color-selected-bg));
+  --btn-bg: rgb(var(--color-hover-bg));
+  --btn-bg-hover: rgb(var(--color-selected-bg));
+  --btn-bg-active: rgb(var(--color-pressed-bg));
+  --settings-panel-bg: rgb(var(--color-panel-bg));
+  --settings-panel-border: rgb(var(--color-card-border) / 0.46);
+  --settings-row-divider: rgb(var(--color-subtle-border) / 0.34);
+  --settings-control-bg: rgb(var(--color-input-bg));
+  --settings-control-active-bg: rgb(var(--color-selected-bg));
+  --brand-word: rgb(var(--color-text-primary));
+  --chart-meta-text: rgb(var(--color-chart-axis));
+  --price-up-color: var(--visual-price-green-down-dark);
+  --price-down-color: var(--visual-price-green-up-dark);
+  --trade-buy-color: var(--action-a1);
+  --trade-buy-text-color: var(--text-t4);
+  --trade-buy-marker-color: var(--action-a1);
+  --trade-sell-color: var(--action-a2);
+  --trade-sell-border-color: var(--action-a2);
+  --trade-sell-text-color: var(--text-t1);
+  --trade-sell-marker-color: var(--action-a2);
+  --trade-sell-marker-outline-color: var(--surface-s1);
+  --trade-position-line-color: var(--action-a1);
+  --history-preview-bg: rgb(var(--color-panel-soft-bg));
+  --history-preview-glass-bg: rgb(var(--color-card-bg) / 0.66);
+  --history-preview-glass-edge: 10px;
+}
+
+.app-root.price-scheme-red-up {
+  --price-up-color: var(--visual-price-green-down-light);
+  --price-down-color: var(--visual-price-green-up-light);
+}
+
+.app-root.theme-dark.price-scheme-red-up {
+  --price-up-color: var(--visual-price-green-down-dark);
+  --price-down-color: var(--visual-price-green-up-dark);
+}
+
+.app-root.price-scheme-green-up {
+  --price-up-color: var(--visual-price-green-up-light);
+  --price-down-color: var(--visual-price-green-down-light);
+}
+
+.app-root.theme-dark.price-scheme-green-up {
+  --price-up-color: var(--visual-price-green-up-dark);
+  --price-down-color: var(--visual-price-green-down-dark);
+}

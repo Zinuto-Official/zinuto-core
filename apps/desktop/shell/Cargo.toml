@@ -1,0 +1,52 @@
+# SPDX-License-Identifier: GPL-3.0-only
+
+[package]
+name = "open-trading-practice"
+version = "2.0.1"
+edition = "2021"
+license = "GPL-3.0-only"
+
+[[bin]]
+name = "open-trading-practice"
+path = "src/main.rs"
+
+[build-dependencies]
+tauri-build = { version = "=2.6.3", features = [] }
+
+[dependencies]
+libc = "0.2"
+rand = "0.8"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+socket2 = "0.6"
+tauri = { version = "=2.11.5", features = ["image-png", "tray-icon"] }
+tauri-plugin-dialog = "=2.7.0"
+tauri-plugin-opener = "=2.5.3"
+tauri-plugin-single-instance = "=2.4.1"
+
+[target.'cfg(target_os = "macos")'.dependencies]
+block2 = "0.6"
+objc2 = { version = "0.6", features = ["exception", "disable-encoding-assertions"] }
+objc2-core-foundation = "0.3"
+objc2-foundation = { version = "0.3", default-features = false, features = ["std", "NSError", "NSString"] }
+objc2-web-kit = { version = "0.3", default-features = false, features = ["std", "block2", "WKWebView"] }
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.60", features = ["Win32_Foundation", "Win32_Security_Cryptography", "Win32_Storage_FileSystem", "Win32_System_Memory", "Win32_System_Threading"] }
+
+[features]
+default = ["custom-protocol"]
+custom-protocol = ["tauri/custom-protocol"]
+
+[profile.release]
+lto = true
+codegen-units = 1
+strip = true
+panic = "abort"
+
+[patch.crates-io]
+# Tauri 2.11 still constrains urlpattern to 0.3. Upstream replaced the
+# unmaintained rust-unic identifier tables before its next release; pin that
+# reviewed commit until Tauri can consume a released urlpattern upgrade.
+urlpattern = { git = "https://github.com/denoland/rust-urlpattern.git", rev = "b047afee9b901e19928f87470ba722bbac05a27f" }

@@ -1,0 +1,560 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.special-training-lightning-donut-inner {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  border-radius: inherit;
+  background: none;
+  box-shadow: none;
+}
+
+.special-training-lightning-donut-inner > strong {
+  color: var(--text-strong);
+  font-size: var(--ty-r3);
+  line-height: 1;
+  font-weight: 820;
+  font-variant-numeric: tabular-nums;
+  font-family: var(--ff-mono);
+}
+
+.special-training-lightning-pace-summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.special-training-lightning-pace-limit {
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-lightning-pace-meter {
+  --special-training-lightning-pace-fill-width: 0%;
+  position: relative;
+  width: 100%;
+  height: 3px;
+  border-radius: 0;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--line) 30%, transparent);
+  box-shadow: none;
+}
+
+.special-training-lightning-pace-meter-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--special-training-lightning-pace-fill-width);
+  border-radius: 0;
+  background: color-mix(in srgb, var(--primary) 86%, var(--text-strong));
+  box-shadow: none;
+}
+
+.special-training-lightning-panel-middle {
+  min-height: 0;
+  height: 100%;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  align-content: stretch;
+}
+
+.special-training-lightning-panel-middle.is-live {
+  overflow: hidden;
+}
+
+.special-training-lightning-panel-middle.is-review {
+  overflow: hidden;
+}
+
+.special-training-lightning-decision-stage {
+  position: relative;
+  min-height: 100%;
+  height: 100%;
+  align-self: stretch;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  place-items: center;
+  padding: clamp(16px, 2.1vw, 24px) clamp(12px, 1.7vw, 18px);
+  border: 1px solid var(--special-training-lightning-surface-edge);
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--surface-s1) 92%, var(--panel));
+  overflow: hidden;
+}
+
+.special-training-lightning-decision-stage::before {
+  display: none;
+}
+
+.special-training-lightning-decision-stage.is-warning {
+  background: color-mix(in srgb, var(--surface-s1) 92%, var(--panel));
+}
+
+.special-training-lightning-decision-stage.is-warning::before {
+  display: none;
+}
+
+.special-training-lightning-decision-stage.is-critical {
+  background: color-mix(in srgb, var(--surface-s1) 92%, var(--panel));
+}
+
+.special-training-lightning-decision-stage.is-critical::before {
+  display: none;
+}
+
+.special-training-lightning-decision-core {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 420px);
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.special-training-lightning-countdown-ring {
+  --special-training-lightning-countdown-angle: 360deg;
+  --special-training-lightning-countdown-color: color-mix(
+    in srgb,
+    var(--primary) 90%,
+    var(--visual-white)
+  );
+  --special-training-lightning-countdown-track-color: color-mix(
+    in srgb,
+    var(--line) 24%,
+    transparent
+  );
+  position: relative;
+  width: min(100%, 236px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: none;
+  box-shadow: none;
+}
+
+.special-training-lightning-countdown-ring::before,
+.special-training-lightning-countdown-ring::after {
+  content: "";
+  position: absolute;
+  border-radius: inherit;
+}
+
+.special-training-lightning-countdown-ring::before {
+  inset: 0;
+  background: repeating-conic-gradient(
+    from -90deg,
+    color-mix(in srgb, var(--text-subtle) 26%, transparent) 0deg 0.8deg,
+    transparent 0.8deg 6deg
+  );
+  -webkit-mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 4px),
+    var(--visual-black) calc(100% - 4px)
+  );
+  mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 4px),
+    var(--visual-black) calc(100% - 4px)
+  );
+}
+
+.special-training-lightning-countdown-ring::after {
+  inset: 10px;
+  background: conic-gradient(
+    from -90deg,
+    var(--special-training-lightning-countdown-color) 0deg,
+    var(--special-training-lightning-countdown-color)
+      var(--special-training-lightning-countdown-angle),
+    var(--special-training-lightning-countdown-track-color)
+      var(--special-training-lightning-countdown-angle),
+    var(--special-training-lightning-countdown-track-color) 360deg
+  );
+  -webkit-mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 3px),
+    var(--visual-black) calc(100% - 3px)
+  );
+  mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 3px),
+    var(--visual-black) calc(100% - 3px)
+  );
+}
+
+.special-training-lightning-countdown-ring.is-warning {
+  --special-training-lightning-countdown-color: color-mix(
+    in srgb,
+    var(--warning) 92%,
+    var(--visual-white)
+  );
+}
+
+.special-training-lightning-countdown-ring.is-critical {
+  --special-training-lightning-countdown-color: color-mix(
+    in srgb,
+    var(--action-a3) 90%,
+    var(--visual-white)
+  );
+}
+
+.special-training-lightning-countdown-ring-inner {
+  position: relative;
+  z-index: 1;
+  width: calc(100% - 56px);
+  height: calc(100% - 56px);
+  border-radius: 50%;
+  display: grid;
+  grid-template-areas: "stack";
+  place-items: center;
+  padding: 0;
+  background: none;
+  border: 1px solid color-mix(in srgb, var(--line) 18%, transparent);
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.special-training-lightning-countdown-top-copy {
+  grid-area: stack;
+  align-self: start;
+  justify-self: center;
+  width: min(calc(100% - 28px), 22ch);
+  margin-top: clamp(20px, 14%, 28px);
+  display: grid;
+  justify-items: center;
+  gap: 7px;
+  text-align: center;
+}
+
+.special-training-lightning-decision-ghost-icon {
+  width: 18px;
+  height: 18px;
+  color: color-mix(in srgb, var(--text-subtle) 72%, var(--text-strong));
+  opacity: 0.9;
+  stroke-width: 1.55;
+}
+
+.special-training-lightning-decision-track {
+  width: 100%;
+  align-self: stretch;
+  margin-bottom: 2px;
+}
+
+.special-training-lightning-decision-kicker {
+  margin: 0;
+  color: color-mix(in srgb, var(--text-subtle) 86%, var(--text-strong));
+  font-size: var(--ty-r1);
+  line-height: 1.25;
+  font-weight: 760;
+  letter-spacing: 0.2em;
+}
+
+.special-training-lightning-decision-countdown {
+  grid-area: stack;
+  align-self: center;
+  justify-self: center;
+  min-height: 0;
+  font-size: var(--ty-r8);
+  line-height: 0.94;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: var(--text-strong);
+  font-family: var(--ff-mono);
+}
+
+.special-training-lightning-decision-countdown.is-warning {
+  color: color-mix(in srgb, var(--warning) 88%, var(--text-strong));
+}
+
+.special-training-lightning-decision-countdown.is-critical {
+  color: color-mix(in srgb, var(--action-a3) 90%, var(--text-strong));
+}
+
+.special-training-lightning-decision-hint {
+  margin: 0;
+  color: color-mix(in srgb, var(--text-subtle) 84%, var(--text-strong));
+  font-size: var(--ty-r2);
+  line-height: 1.55;
+  letter-spacing: 0.06em;
+  max-width: 26ch;
+}
+
+.special-training-live-guide {
+  margin: 0;
+  color: color-mix(in srgb, var(--text-subtle) 72%, var(--text-strong));
+  font-size: var(--ty-r1);
+  line-height: 1.45;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+
+.special-training-lightning-empty-state {
+  min-height: 100%;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  display: grid;
+  place-items: center;
+  padding: 10px 4px 18px;
+  text-align: center;
+}
+
+.special-training-lightning-empty-state > p {
+  margin: 0;
+  color: color-mix(in srgb, var(--text-subtle) 82%, var(--text-strong));
+  font-size: var(--ty-r3);
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+  max-width: 28ch;
+}
+
+.special-training-lightning-result-card {
+  --special-training-lightning-review-accent: var(--primary);
+  position: relative;
+  min-height: 100%;
+  height: 100%;
+  align-self: stretch;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  align-content: stretch;
+  padding: 12px;
+  border: 1px solid var(--special-training-lightning-surface-edge);
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--surface-s1) 92%, var(--panel));
+  box-shadow: none;
+  overflow: hidden;
+  animation: special-training-lightning-panel-enter var(--motion-normal);
+}
+
+.special-training-lightning-result-body {
+  min-height: 0;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  align-content: stretch;
+  gap: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  padding-right: 2px;
+}
+
+.special-training-lightning-capital-hero {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+}
+
+.special-training-lightning-capital-copy {
+  display: grid;
+  gap: 4px;
+}
+
+.special-training-lightning-capital-kicker {
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.special-training-lightning-capital-kicker.is-up {
+  color: color-mix(in srgb, var(--trade-buy-color) 88%, var(--text-strong));
+}
+
+.special-training-lightning-capital-kicker.is-down {
+  color: color-mix(in srgb, var(--trade-sell-color) 90%, var(--text-strong));
+}
+
+.special-training-lightning-capital-kicker.is-flat {
+  color: color-mix(in srgb, var(--text-subtle) 90%, var(--text-strong));
+}
+
+.special-training-lightning-capital-disclaimer {
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1.42;
+}
+
+.special-training-lightning-capital-head {
+  display: grid;
+  gap: 10px;
+}
+
+.special-training-lightning-capital-chart-card {
+  display: grid;
+  gap: 8px;
+}
+
+.special-training-lightning-capital-legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1.2;
+}
+
+.special-training-lightning-capital-legend-line {
+  width: 24px;
+  height: 0;
+  border-top: 1.5px dashed color-mix(in srgb, var(--text-subtle) 74%, transparent);
+}
+
+.special-training-lightning-capital-chart-shell {
+  min-height: clamp(184px, 22vh, 228px);
+  height: clamp(184px, 22vh, 228px);
+  position: relative;
+  isolation: isolate;
+  border: 1px solid color-mix(in srgb, var(--line) 26%, transparent);
+  border-radius: 18px;
+  background:
+    radial-gradient(
+      120% 120% at 12% 0%,
+      color-mix(in srgb, var(--primary) 14%, transparent) 0%,
+      transparent 50%
+    ),
+    color-mix(in srgb, var(--panel-soft) 62%, transparent);
+  backdrop-filter: blur(10px) saturate(116%);
+  -webkit-backdrop-filter: blur(10px) saturate(116%);
+  overflow: hidden;
+}
+
+.special-training-lightning-capital-chart {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.special-training-lightning-capital-anchor-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.special-training-lightning-capital-anchor-strip:where([data-card-count="2"]) {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.special-training-lightning-capital-anchor-strip:where([data-card-count="1"]) {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.special-training-lightning-capital-anchor {
+  --capital-anchor-accent: var(--line);
+  --capital-anchor-border: color-mix(
+    in srgb,
+    var(--capital-anchor-accent) 34%,
+    var(--line)
+  );
+  --capital-anchor-surface: color-mix(
+    in srgb,
+    var(--capital-anchor-accent) 10%,
+    var(--panel-soft)
+  );
+  --capital-anchor-meta: color-mix(
+    in srgb,
+    var(--capital-anchor-accent) 80%,
+    var(--text-subtle)
+  );
+  --capital-anchor-value-color: color-mix(
+    in srgb,
+    var(--capital-anchor-accent) 90%,
+    var(--text-strong)
+  );
+  min-width: 0;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--capital-anchor-border);
+  background: var(--capital-anchor-surface);
+  display: grid;
+  gap: 4px;
+}
+
+.special-training-lightning-capital-anchor-label {
+  color: var(--capital-anchor-meta);
+  font-size: var(--ty-r1);
+  line-height: 1.24;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.special-training-lightning-capital-anchor-value {
+  display: block;
+  color: var(--capital-anchor-value-color);
+  font-size: var(--ty-r4);
+  line-height: 1.1;
+  font-weight: 780;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.special-training-lightning-capital-anchor-time {
+  color: var(--capital-anchor-meta);
+  font-size: var(--ty-r1);
+  line-height: 1.24;
+  font-variant-numeric: tabular-nums;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.special-training-lightning-capital-anchor.is-up {
+  --capital-anchor-accent: var(--price-up-color);
+}
+
+.special-training-lightning-capital-anchor.is-down {
+  --capital-anchor-accent: var(--price-down-color);
+}
+
+.special-training-lightning-capital-anchor.is-final {
+  --capital-anchor-accent: var(--warning);
+}
+
+.special-training-lightning-result-body.is-empty {
+  align-content: stretch;
+}
+
+.special-training-lightning-result-hero {
+  position: relative;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  align-items: stretch;
+  min-height: 0;
+  height: 100%;
+  gap: 8px;
+  padding: 10px 0 0;
+  border-top: 1px solid color-mix(in srgb, var(--line) 28%, transparent);
+  border-radius: 0;
+  background: transparent;
+}
+
+.special-training-lightning-result-summary-deck {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: stretch;
+  min-height: 0;
+  height: 100%;
+}
+
+.special-training-lightning-result-summary-column {
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  align-content: stretch;
+  gap: 10px;
+}

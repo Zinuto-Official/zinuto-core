@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "upstream": {
+    "repository": "https://github.com/notofonts/noto-cjk",
+    "version": "2.004",
+    "commit": "165c01b46ea533872e002e0785ff17e44f6d97d8"
+  },
+  "toolchain": {
+    "fontTools": "4.60.2",
+    "weight": 400,
+    "sourceDateEpoch": 1640995200
+  },
+  "license": {
+    "spdx": "OFL-1.1",
+    "sourceUrl": "https://raw.githubusercontent.com/notofonts/noto-cjk/165c01b46ea533872e002e0785ff17e44f6d97d8/LICENSE",
+    "outputFile": "OFL.txt",
+    "sha256": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2"
+  },
+  "fonts": [
+    {
+      "locale": "SC",
+      "messageLocale": "zh-CN",
+      "sourceFile": "NotoSansSC-VF.ttf",
+      "staticFile": "NotoSansSC-Regular.ttf",
+      "sourceUrl": "https://raw.githubusercontent.com/notofonts/noto-cjk/165c01b46ea533872e002e0785ff17e44f6d97d8/Sans/Variable/TTF/Subset/NotoSansSC-VF.ttf",
+      "sourceSha256": "d68bafcb48a2707749396aa12bbbd833cb70401f3a9a689fd2902c7e0d295964",
+      "outputFile": "NotoSansSC-Stats.ttf",
+      "outputSha256": "38293b421f097f1c62e4776533cf7e1930184f81432a0637be31f8be125fd999"
+    },
+    {
+      "locale": "JP",
+      "messageLocale": "ja",
+      "sourceFile": "NotoSansJP-VF.ttf",
+      "staticFile": "NotoSansJP-Regular.ttf",
+      "sourceUrl": "https://raw.githubusercontent.com/notofonts/noto-cjk/165c01b46ea533872e002e0785ff17e44f6d97d8/Sans/Variable/TTF/Subset/NotoSansJP-VF.ttf",
+      "sourceSha256": "f4b373b226668ee33a6e54b02823dcd2d1209f17159f777421ae8c2275160369",
+      "outputFile": "NotoSansJP-Stats.ttf",
+      "outputSha256": "e18c9e11baf9d3a2f1aed223adb61ac97a47771a4db57c5a5e7a3bd6ad03cf7d"
+    },
+    {
+      "locale": "KR",
+      "messageLocale": "ko",
+      "sourceFile": "NotoSansKR-VF.ttf",
+      "staticFile": "NotoSansKR-Regular.ttf",
+      "sourceUrl": "https://raw.githubusercontent.com/notofonts/noto-cjk/165c01b46ea533872e002e0785ff17e44f6d97d8/Sans/Variable/TTF/Subset/NotoSansKR-VF.ttf",
+      "sourceSha256": "9e1d729e7e2b36f9ef439da102f8c134c10aabe46f1c843bf0aca5c043b86f76",
+      "outputFile": "NotoSansKR-Stats.ttf",
+      "outputSha256": "6dfeb1f6846aafa432238ba23f800bf88f235c2d9c8c16c03f281a92b3dac661"
+    }
+  ]
+}

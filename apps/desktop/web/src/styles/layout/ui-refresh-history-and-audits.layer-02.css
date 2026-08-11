@@ -1,0 +1,730 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.training-note-modal .note-editor-modal-header {
+  gap: 4px;
+}
+
+.training-note-modal .note-editor-modal-title,
+.training-note-modal .note-editor-modal-meta {
+  width: 100%;
+  max-width: 800px;
+}
+
+.training-note-modal .training-note-title-head-input {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  min-width: 0;
+  min-height: 0;
+  height: auto;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--text-t1);
+  font-size: var(--ty-r7);
+  font-weight: 760;
+  line-height: 1.2;
+  text-align: left;
+}
+
+.training-note-modal .training-note-title-head-input:focus,
+.training-note-modal .training-note-title-head-input:focus-visible {
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.training-note-modal .training-note-editor-meta-row {
+  width: 100%;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0;
+  min-height: 0;
+  color: var(--text-t3);
+  font-size: var(--ty-r2);
+  line-height: 1.2;
+  text-align: left;
+}
+
+.training-note-modal .note-editor-modal-content {
+  margin-top: 10px;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.training-note-modal .training-note-modal-body {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: stretch;
+  gap: 0;
+  overflow: hidden;
+}
+
+.training-note-modal .training-note-modal-main {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  max-width: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.training-note-modal .training-note-editor-layout {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.training-note-modal .training-note-editor-body {
+  height: 100%;
+  min-height: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  padding: 0;
+  gap: 12px;
+  overflow: hidden;
+}
+
+.training-note-modal .training-note-editor-snapshot-wrap {
+  padding: 0;
+}
+
+.training-note-modal .training-note-editor-snapshot-wrap > .replay-note-training-snapshot-node {
+  border: 1px solid color-mix(in srgb, var(--surface-s4) 72%, transparent);
+  border-radius: 8px;
+  background: var(--surface-s2);
+  overflow: hidden;
+}
+
+.training-note-modal .training-note-editor-wrap {
+  height: 100%;
+  min-height: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.training-note-modal .training-note-editor-host {
+  height: 100%;
+  min-height: 0;
+}
+
+.training-note-modal .training-note-editor-host {
+  --replay-note-editor-content-max-width: 100%;
+  --replay-note-editor-pad-block-start: 12px;
+  --replay-note-editor-pad-block-end: 28px;
+  --replay-note-editor-pad-inline-start: 24px;
+  --replay-note-editor-pad-inline-end: 24px;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.training-note-modal .replay-note-editor-toolbar {
+  --replay-note-toolbar-button-fg: color-mix(in srgb, var(--text-t1) 90%, var(--primary));
+  --replay-note-toolbar-button-hover-bg: color-mix(in srgb, var(--primary) 12%, transparent);
+  --replay-note-toolbar-button-hover-fg: color-mix(in srgb, var(--primary) 32%, var(--text-t1));
+  --replay-note-toolbar-button-active-border: color-mix(in srgb, var(--primary) 74%, var(--line));
+  --replay-note-toolbar-button-active-bg: color-mix(in srgb, var(--primary) 24%, var(--surface-s2));
+  --replay-note-toolbar-button-active-fg: color-mix(in srgb, var(--primary) 78%, var(--text-t1));
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 8px 12px 12px;
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  gap: 14px;
+  border-bottom: 1px solid color-mix(in srgb, var(--line) 42%, transparent);
+  background: color-mix(in srgb, var(--surface-s1) 98%, var(--surface-s2));
+}
+
+.training-note-modal .replay-note-editor-toolbar-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid color-mix(in srgb, var(--line) 42%, transparent);
+  border-radius: var(--ui-radius-control);
+  background: transparent;
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--surface-s3) 34%, transparent);
+}
+
+.training-note-modal .replay-note-editor-toolbar .replay-note-editor-toolbar-button {
+  width: 34px;
+  min-width: 34px;
+  height: 34px;
+  min-height: 34px;
+  border: 1px solid transparent;
+  border-radius: calc(var(--ui-radius-control) - 2px);
+  background: transparent;
+  color: var(--replay-note-toolbar-button-fg);
+  box-shadow: none;
+}
+
+.training-note-modal .replay-note-editor-toolbar .replay-note-editor-toolbar-button:hover:not(:disabled),
+.training-note-modal .replay-note-editor-toolbar .replay-note-editor-toolbar-button:focus-visible {
+  border-color: transparent;
+  background: var(--replay-note-toolbar-button-hover-bg);
+  color: var(--replay-note-toolbar-button-hover-fg);
+  box-shadow: none;
+}
+
+.training-note-modal .replay-note-editor-toolbar .replay-note-editor-toolbar-button[data-active="true"],
+.training-note-modal .replay-note-editor-toolbar .replay-note-editor-toolbar-button[aria-pressed="true"] {
+  border-color: var(--replay-note-toolbar-button-active-border);
+  background: var(--replay-note-toolbar-button-active-bg);
+  color: var(--replay-note-toolbar-button-active-fg);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--primary) 28%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--surface-s4) 24%, transparent);
+}
+
+.training-note-modal .training-note-editor-host .replay-note-lexical-content {
+  height: 100%;
+  min-height: 0;
+  overflow: auto;
+  outline: none;
+  text-align: left;
+}
+
+.training-note-modal .note-editor-modal-footer {
+  margin-top: 10px;
+}
+
+.training-note-modal .training-note-modal-actions {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.training-note-modal .training-note-modal-actions-left,
+.training-note-modal .training-note-modal-actions-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+@media (max-width: 1240px) {
+  .training-note-modal .note-editor-modal-header,
+  .training-note-modal .note-editor-modal-content,
+  .training-note-modal .note-editor-modal-footer {
+    width: min(100%, 800px);
+  }
+
+  .training-note-modal .training-note-modal-body {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .training-note-modal .training-note-modal-main {
+    height: 100%;
+    max-width: 100%;
+  }
+}
+
+[data-slot="dialog-footer"] > button {
+  white-space: normal;
+  text-align: center;
+}
+
+.utility-modal {
+  gap: 0;
+}
+
+.utility-modal-hero,
+.utility-modal-hero-ring,
+.utility-modal-hero-core {
+  display: none;
+}
+
+.utility-modal-header {
+  display: grid;
+  gap: 8px;
+}
+
+.utility-modal-header .ui-standard-modal-title {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.3;
+}
+
+.utility-modal-header .ui-standard-modal-description {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.55;
+}
+
+.utility-modal-body {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border: 1px solid color-mix(in srgb, var(--line) 78%, transparent);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--panel-soft) 88%, var(--window-bg));
+}
+
+.utility-modal-check {
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.utility-modal-delete-project .utility-modal-header {
+  gap: 6px;
+}
+
+.utility-modal-delete-project .ui-standard-modal-title {
+  font-size: var(--ty-r4);
+  font-weight: 700;
+  color: var(--text-strong);
+}
+
+.utility-modal-delete-project .ui-standard-modal-description {
+  font-size: var(--ty-r3);
+  color: var(--text-subtle);
+  line-height: 1.5;
+}
+
+.utility-modal-delete-project .ui-standard-modal-actions[data-footer-mode="between"] {
+  gap: 10px;
+}
+
+.utility-modal-delete-project .utility-modal-check {
+  width: auto;
+  margin-right: auto;
+  gap: 6px;
+  color: var(--text-subtle);
+}
+
+.utility-modal-delete-project .utility-modal-check-input {
+  width: 14px !important;
+  min-width: 14px;
+  height: 14px;
+  padding: 0;
+  border-radius: 4px;
+  border-color: color-mix(in srgb, var(--line) 84%, transparent);
+  background: color-mix(in srgb, var(--panel) 92%, transparent);
+  accent-color: var(--action-a1);
+}
+
+.utility-modal-warning-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: color-mix(in srgb, var(--action-a3) 88%, var(--text-strong));
+}
+
+.utility-clear-local-body {
+  display: grid;
+  gap: 10px;
+}
+
+.utility-reset-body {
+  display: grid;
+  gap: 10px;
+}
+
+.utility-reset-divider {
+  height: 1px;
+  background: color-mix(in srgb, var(--line) 70%, transparent);
+}
+
+.utility-clear-local-summary {
+  display: grid;
+  gap: 8px;
+}
+
+.utility-clear-local-summary-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.utility-clear-local-summary-label {
+  font-size: var(--ty-r2);
+  color: var(--text-subtle);
+}
+
+.utility-clear-local-summary-value {
+  font-size: var(--ty-r2);
+  font-weight: 700;
+  color: var(--text-strong);
+}
+
+.utility-clear-local-hold-track {
+  height: 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--line) 72%, transparent);
+  overflow: hidden;
+}
+
+.utility-clear-local-hold-track > span {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: color-mix(in srgb, var(--action-a3) 84%, transparent);
+  transition: width var(--motion-progress-tick);
+}
+
+.csv-mapping-panel,
+.summary-section,
+.replay-trainer-settings-modal .modal-section {
+  position: relative;
+}
+
+.csv-mapping-panel-head,
+.summary-section-title,
+.replay-trainer-settings-modal .replay-settings-section .section-title {
+  position: relative;
+  z-index: 1;
+}
+
+.special-training-mode-modal,
+.special-training-mode-modal-card {
+  border-radius: 12px;
+}
+
+.special-training-mode-modal {
+  overflow: hidden;
+}
+
+@media (max-width: 1100px) {
+  .workspace-page-header-inner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .workspace-page-header-actions {
+    justify-content: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-root *,
+  .app-root *::before,
+  .app-root *::after {
+    animation-duration: var(--motion-reduced-duration) !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: var(--motion-reduced-duration) !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ===== Semantic Surface Audit Pass ===== */
+
+.app-root .workspace-page-subtitle,
+.app-root .muted,
+.app-root .empty-text,
+.app-root .modal-countdown,
+.app-root .settings-storage-item-label,
+.app-root .history-side-item-time,
+.app-root .history-side-item-meta,
+.app-root .history-side-item-core-label,
+.app-root .history-side-item-stat-sub,
+.app-root .history-side-item-stat-label,
+.app-root .history-side-footer-meta,
+.app-root .notes-side-item-time-label,
+.app-root .notes-side-item-time-value,
+.app-root .notes-side-item-preview,
+.app-root .notes-editor-meta-row,
+.app-root .training-note-editor-meta-row,
+.app-root .sample-pool-meta,
+.app-root .sample-pool-card-item-path,
+.app-root .check-item,
+.app-root .lot-inline,
+.app-root .data-header-stats,
+.app-root .summary-section-subtitle,
+.app-root .section-subtitle,
+.app-root .curve-meta-date,
+.app-root .curve-meta-total,
+.app-root .training-stats-filter-item > span,
+.app-root .training-stats-card > span,
+.app-root .training-stats-list > div > span,
+.app-root .training-stats-subtable-head,
+.app-root .training-stats-subtable-row > span:first-child,
+.app-root .training-stats-compare-legend > span,
+.app-root .training-stats-compare-matrix-head > span,
+.app-root .training-stats-compare-matrix-row > span:first-child,
+.app-root .training-stats-table th,
+.app-root .training-stats-month-head > span,
+.app-root .training-stats-month-metrics > div > span,
+.app-root .training-stats-loading,
+.app-root .training-stats-empty,
+.app-root .special-training-mode-card-head > span,
+.app-root .special-training-task-card > p,
+.app-root .special-training-stage-head > p,
+.app-root .special-training-stage-head > span,
+.app-root .special-training-task-card dt,
+.app-root .special-training-trainer-topbar-main > span:not(.special-training-topbar-mode),
+.app-root .special-training-inline-hint,
+.app-root .special-training-settlement-meta > span,
+.app-root .special-training-settlement-feedback li,
+.app-root .special-training-settlement-progress > span,
+.app-root .special-training-mode-modal-head > p,
+.app-root .custom-indicator-context-name > span,
+.app-root .custom-indicator-panel-head span,
+.app-root .custom-indicator-section-title,
+.app-root .custom-indicator-param-item > span,
+.app-root .custom-indicator-feedback-item > label,
+.app-root .custom-indicator-save-meta,
+.app-root .custom-indicator-profile-main > span,
+.app-root .custom-indicator-profile-empty,
+.app-root .custom-indicator-rules-head-copy > p,
+.app-root .custom-indicator-rules-overview > p,
+.app-root .custom-indicator-rules-section-toggle > span,
+.app-root .custom-indicator-rules-section-head > p,
+.app-root .custom-indicator-rules-entry > p,
+.app-root .custom-indicator-library-search > span {
+  color: var(--muted);
+}
+
+.app-root .history-side-item-symbol-row,
+.app-root .history-side-item-core-value.flat,
+.app-root .history-side-item-meta-symbol,
+.app-root .history-preview-progress,
+.app-root .history-pool-filter-label,
+.app-root .settings-modern-sub,
+.app-root .csv-mapping-sub,
+.app-root .csv-mapping-row-label,
+.app-root .settings-storage-item-value,
+.app-root .curve-meta-amount,
+.app-root .data-config-page .workspace-page-subtitle,
+.app-root .replay-settings-v2-tab-label,
+.app-root .replay-settings-v2-group-value,
+.app-root .training-stats-table td,
+.app-root .training-stats-panel > h3,
+.app-root .training-stats-compare-head,
+.app-root .training-stats-card > strong,
+.app-root .training-stats-list > div > strong,
+.app-root .training-stats-subtable-row > span:nth-child(2),
+.app-root .training-stats-subtable-row > span:last-child,
+.app-root .training-stats-month-head > strong,
+.app-root .training-stats-month-metrics > div > strong,
+.app-root .custom-indicator-feedback-item > code,
+.app-root .custom-indicator-feedback-list,
+.app-root .custom-indicator-context-symbol,
+.app-root .custom-indicator-context-name-readonly > strong {
+  color: var(--text-strong);
+}
+
+.app-root .history-side-item-meta-pool,
+.app-root .special-training-header-pill,
+.app-root .special-training-mode-card-meta > span,
+.app-root .special-training-settlement-badge:not(.is-pass):not(.is-fail),
+.app-root .custom-indicator-context-status:not(.is-ready):not(.is-error),
+.app-root .notes-side-item-type {
+  border-color: var(--ui-surface-border-soft);
+  background: var(--ui-surface-soft);
+  color: var(--muted);
+}
+
+.app-root .indicator-name-btn,
+.app-root .trade-settings-mini-btn,
+.app-root .custom-indicator-feedback-link,
+.app-root .custom-indicator-rules-module-btn:not(.is-active),
+.app-root .custom-indicator-rules-anchor-btn,
+.app-root .custom-indicator-rules-clear {
+  color: var(--muted);
+  border-color: var(--ui-surface-border-soft);
+  background: var(--ui-surface-bg);
+  box-shadow: none;
+}
+
+.app-root .indicator-name-btn:hover:not(:disabled),
+.app-root .trade-settings-mini-btn:hover:not(:disabled) {
+  color: var(--text);
+  border-color: var(--ui-surface-border-soft);
+  background: var(--ui-surface-hover-bg);
+}
+
+.app-root textarea,
+.app-root .replay-settings-v2-input {
+  color: var(--text);
+  border-color: var(--ui-field-border);
+  background: var(--ui-field-bg);
+  box-shadow: var(--surface-inset-shadow);
+}
+
+.app-root .toolbar-search-input::placeholder,
+.app-root .notes-title-inline-input::placeholder,
+.app-root input::placeholder,
+.app-root textarea::placeholder {
+  color: var(--text-subtle);
+  -webkit-text-fill-color: var(--text-subtle);
+  opacity: 1;
+}
+
+.app-root [data-slot='button'][disabled],
+.app-root [data-slot='button'][data-disabled],
+.app-root [data-slot='select-trigger'][disabled],
+.app-root [data-slot='select-trigger'][data-disabled],
+.app-root [data-slot='input']:disabled,
+.app-root [data-slot='input'][data-disabled],
+.app-root [data-slot='textarea']:disabled,
+.app-root [data-slot='textarea'][data-disabled],
+.app-root .segmented-option:disabled,
+.app-root .segmented-option.cursor-not-allowed,
+.app-root .segmented-option[aria-disabled='true'] {
+  opacity: 1 !important;
+  color: var(--ui-action-disabled-text);
+  -webkit-text-fill-color: var(--ui-action-disabled-text);
+  border-color: var(--ui-surface-border-soft);
+  background: var(--ui-surface-disabled);
+  box-shadow: none;
+}
+
+.app-root [data-slot='select-trigger'][disabled] [data-slot='select-value'],
+.app-root [data-slot='select-trigger'][disabled] svg,
+.app-root [data-slot='select-trigger'][data-disabled] [data-slot='select-value'],
+.app-root [data-slot='select-trigger'][data-disabled] svg,
+.app-root [data-slot='select-trigger'][data-placeholder],
+.app-root [data-slot='select-trigger'][data-placeholder] [data-slot='select-value'],
+.app-root [data-slot='select-trigger'][data-placeholder] svg {
+  color: var(--text-subtle);
+}
+
+.app-root .top-toolbar-form-group.is-locked .anchor-nav-trigger:disabled {
+  border-color: var(--ui-surface-border-soft);
+  background: var(--ui-surface-disabled);
+  color: var(--text-t3) !important;
+  -webkit-text-fill-color: var(--text-t3);
+}
+
+.app-root .desktop-main.is-trainer .trade-side-card {
+  border-color: var(--ui-surface-border-soft);
+  background: var(--ui-surface-soft);
+}
+
+.app-root .desktop-main.is-trainer .estimate-box,
+.app-root .desktop-main.is-trainer .trade-side-card .estimate-box {
+  background: color-mix(in srgb, var(--ui-surface-soft) 90%, var(--panel));
+  border-color: var(--ui-surface-border-strong);
+}
+
+.app-root .desktop-main.is-trainer .trade-side-card .estimate-dl-row dt,
+.app-root .desktop-main.is-trainer .trade-side-card .estimate-dl-meta,
+.app-root .desktop-main.is-trainer .trade-input-unit {
+  color: var(--muted);
+}
+
+.app-root .desktop-main.is-trainer .trade-side-card .estimate-dl-row dd,
+.app-root .desktop-main.is-trainer .trade-side-card .estimate-dl-value,
+.app-root .desktop-main.is-trainer .trade-side-card .estimate-dl-row.estimate-dl-row-ref dt,
+.app-root .desktop-main.is-trainer .trade-side-card .estimate-dl-row.estimate-dl-row-ref dd,
+.app-root .desktop-main.is-trainer .trade-side-card .estimate-dl-value.estimate-dl-main,
+.app-root .desktop-main.is-trainer .trade-box .section-title {
+  color: var(--text);
+}
+
+.app-root .desktop-main.is-trainer .trade-side-card .estimate-dl-row.is-disabled dt,
+.app-root .desktop-main.is-trainer .trade-side-card .estimate-dl-row.is-disabled dd,
+.app-root .desktop-main.is-trainer .trade-side-card .estimate-dl-row.is-disabled .estimate-dl-value {
+  color: var(--text-disabled);
+}
+
+.app-root .desktop-main.is-trainer .estimate-warning-text {
+  color: color-mix(in srgb, rgb(var(--color-warning)) 78%, rgb(var(--color-danger)) 22%);
+}
+
+.app-root .trade-side-card .estimate-dl-row.estimate-dl-row-buy:not(.is-disabled) dt,
+.app-root .trade-side-card .estimate-dl-row.estimate-dl-row-buy:not(.is-disabled) dd,
+.app-root .trade-side-card .estimate-dl-row.estimate-dl-row-buy:not(.is-disabled) .estimate-dl-value {
+  color: var(--trade-side-tone-buy);
+}
+
+.app-root .trade-side-card .estimate-dl-row.estimate-dl-row-sell:not(.is-disabled) dt,
+.app-root .trade-side-card .estimate-dl-row.estimate-dl-row-sell:not(.is-disabled) dd,
+.app-root .trade-side-card .estimate-dl-row.estimate-dl-row-sell:not(.is-disabled) .estimate-dl-value {
+  color: var(--trade-side-tone-sell);
+}
+
+.app-root .history-side-footer .history-count-text,
+.app-root .history-status-line,
+.app-root .chart-period-origin {
+  color: var(--muted);
+}
+
+.app-root .chart-period-sub-indicator-toggle.is-hidden {
+  color: var(--muted);
+  border-color: var(--ui-surface-border-soft);
+  background: transparent;
+}
+
+.app-root .chart-period-sub-indicator-toggle.is-visible {
+  border-color: color-mix(in srgb, var(--primary) 24%, var(--line));
+  background: transparent;
+}
+
+.app-root .notes-side-controls .history-pool-filter-label,
+.app-root .notes-side-panel .history-side-empty,
+.app-root .notes-side-item-preview,
+.app-root .notes-side-item-time-value,
+.app-root .notes-side-footer .history-count-text {
+  color: var(--muted);
+}
+
+.app-root .app-root .notes-side-footer {
+  background: transparent;
+}
+
+.app-root .notes-toolbar-delete-icon {
+  border-color: transparent;
+  background: transparent;
+  color: var(--icon-i2);
+}
+
+.app-root .notes-toolbar-delete-icon:hover:not(:disabled) {
+  background: transparent;
+  color: var(--action-a3);
+}
+
+.app-root .training-stats-filters.card,
+.app-root .training-stats-panel,
+.app-root .training-stats-compare-card,
+.app-root .training-stats-month-card,
+.app-root .training-stats-table-wrap,
+.app-root .training-stats-card.is-secondary,
+.app-root .training-stats-card.is-primary:not(.tone-profit):not(.tone-loss):not(.tone-risk) {
+  border-color: var(--ui-surface-border-soft);
+  background: color-mix(in srgb, var(--panel) 98%, var(--window-bg));
+}
+
+.app-root .training-stats-filters.card {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--panel) 98%, var(--window-bg)),
+    color-mix(in srgb, var(--panel-soft) 90%, var(--window-bg))
+  );
+}
+
+.app-root .training-stats-compare-legend > span,
+.app-root .training-stats-table th {
+  border-color: var(--ui-surface-border-soft);
+  background: var(--ui-surface-soft);
+}
+
+.app-root .training-stats-card.tone-profit,
+.app-root .training-stats-month-card.tone-profit {
+  border-color: color-mix(in srgb, var(--price-up-color) 34%, var(--line));
+  background: color-mix(in srgb, var(--price-up-color) 12%, var(--panel));
+}
+
+.app-root .training-stats-card.tone-loss,
+.app-root .training-stats-month-card.tone-loss {
+  border-color: color-mix(in srgb, var(--price-down-color) 34%, var(--line));
+  background: color-mix(in srgb, var(--price-down-color) 11%, var(--panel));
+}
+
+.app-root .training-stats-card.tone-risk {
+  border-color: color-mix(in srgb, rgb(var(--color-warning)) 36%, var(--line));
+  background: color-mix(in srgb, rgb(var(--color-warning) / 0.12) 72%, var(--panel));
+}

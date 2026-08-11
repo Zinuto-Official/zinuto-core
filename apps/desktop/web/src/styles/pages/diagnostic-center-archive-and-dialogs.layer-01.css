@@ -1,0 +1,778 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.diagnostic-console-history-date-field {
+  width: min(420px, 44vw);
+}
+
+.diagnostic-console-history-date-range {
+  grid-template-columns: repeat(2, minmax(132px, 1fr));
+}
+
+.diagnostic-console-table-card {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+  min-width: 0;
+  border-radius: var(--diagnostic-card-radius);
+}
+
+.diagnostic-console-table-wrap {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.diagnostic-console-table {
+  width: 100%;
+  min-width: 980px;
+  border-collapse: collapse;
+}
+
+.diagnostic-console-archive-table-shell {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.diagnostic-console-archive-table {
+  min-width: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.diagnostic-console-archive-table thead th {
+  background: var(--diagnostic-archive-base-bg, transparent);
+  border-bottom: 1px solid var(--diagnostic-archive-head-line);
+  padding-top: 6px;
+  padding-bottom: 10px;
+  color: color-mix(in srgb, var(--text-t3) 90%, transparent);
+}
+
+.diagnostic-console-archive-table th:nth-child(4),
+.diagnostic-console-archive-table th:nth-child(5),
+.diagnostic-console-archive-table th:nth-child(6),
+.diagnostic-console-archive-table th:nth-child(7),
+.diagnostic-console-archive-table th:nth-child(8),
+.diagnostic-console-archive-table td:nth-child(4),
+.diagnostic-console-archive-table td:nth-child(5),
+.diagnostic-console-archive-table td:nth-child(6),
+.diagnostic-console-archive-table td:nth-child(7),
+.diagnostic-console-archive-table td:nth-child(8) {
+  text-align: right;
+}
+
+.diagnostic-console-archive-table th:nth-child(9),
+.diagnostic-console-archive-table th:nth-child(10),
+.diagnostic-console-archive-table td:nth-child(9),
+.diagnostic-console-archive-table td:nth-child(10) {
+  text-align: right;
+  width: 1%;
+  white-space: nowrap;
+}
+
+.diagnostic-console-table.diagnostic-console-archive-table td {
+  border-bottom: 1px solid var(--diagnostic-archive-row-line);
+  background: transparent;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  vertical-align: top;
+  transition:
+    background-color var(--motion-fast),
+    color var(--motion-fast),
+    opacity var(--motion-fast);
+}
+
+.diagnostic-console-archive-row td:first-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.diagnostic-console-archive-row td:last-child {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.diagnostic-console-table th,
+.diagnostic-console-table td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid color-mix(in srgb, var(--text-t3) 14%, transparent);
+  white-space: nowrap;
+}
+
+.diagnostic-console-table th:first-child,
+.diagnostic-console-table td:first-child {
+  padding-left: 22px;
+}
+
+.diagnostic-console-table th:last-child,
+.diagnostic-console-table td:last-child {
+  padding-right: 22px;
+}
+
+.diagnostic-console-table th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  font-size: var(--ty-r2);
+  font-weight: 620;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-t3);
+  background: color-mix(in srgb, var(--surface-s2) 94%, transparent);
+}
+
+.diagnostic-console-table td {
+  font-size: var(--ty-r3);
+  color: var(--text-t2);
+}
+
+.diagnostic-console-table-select-cell {
+  width: 52px;
+  text-align: center !important;
+}
+
+.diagnostic-console-table th.diagnostic-console-table-select-cell,
+.diagnostic-console-table td.diagnostic-console-table-select-cell {
+  padding-right: 8px;
+}
+
+.diagnostic-console-table-checkbox {
+  width: 16px !important;
+  height: 16px !important;
+  min-width: 16px !important;
+  padding: 0 !important;
+  border-radius: 5px !important;
+  border-color: color-mix(in srgb, var(--line) 68%, transparent) !important;
+  background: color-mix(in srgb, var(--surface-s2) 92%, transparent) !important;
+  accent-color: var(--action-a1);
+  cursor: pointer;
+}
+
+.diagnostic-console-table-checkbox:disabled {
+  cursor: not-allowed;
+}
+
+.diagnostic-console-table-empty-cell {
+  text-align: center !important;
+  color: var(--text-t3) !important;
+  padding: 22px 14px !important;
+}
+
+.diagnostic-console-table tbody tr:hover td {
+  background: color-mix(in srgb, var(--surface-s3) 84%, transparent);
+}
+
+.diagnostic-console-table tbody tr.is-selected td {
+  background: color-mix(in srgb, var(--action-a1) 8%, var(--surface-s1));
+}
+
+.diagnostic-console-table.diagnostic-console-archive-table
+  .diagnostic-console-archive-row:hover
+  td,
+.diagnostic-console-table.diagnostic-console-archive-table
+  .diagnostic-console-archive-row:focus-within
+  td {
+  background: var(--diagnostic-archive-hover);
+}
+
+.diagnostic-console-table.diagnostic-console-archive-table
+  .diagnostic-console-archive-row.is-selected
+  td {
+  background: var(--diagnostic-archive-selected);
+}
+
+.diagnostic-console-stack-cell {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.diagnostic-console-stack-cell > strong {
+  font-size: var(--ty-r2);
+  line-height: 1.25;
+  color: var(--text-t1);
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.diagnostic-console-stack-cell > span {
+  font-size: var(--ty-r2);
+  color: var(--text-t3);
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.diagnostic-console-archive-session-cell > strong {
+  font-size: var(--ty-r3);
+  letter-spacing: 0.04em;
+  font-family: var(--diagnostic-overview-display-font);
+  font-variant-numeric: tabular-nums;
+}
+
+.diagnostic-console-archive-session-cell > span {
+  color: color-mix(in srgb, var(--text-t3) 82%, transparent);
+  font-family: var(--diagnostic-overview-display-font);
+  font-variant-numeric: tabular-nums;
+}
+
+.diagnostic-console-archive-rename-input,
+.app-root .diagnostic-console-archive-rename-input {
+  min-height: 30px;
+  height: 30px;
+  max-width: min(100%, 220px);
+  font-size: var(--ty-r2);
+  font-weight: 700;
+}
+
+.diagnostic-console-archive-row-menu {
+  min-width: 176px;
+}
+
+.diagnostic-console-archive-symbol-cell > strong {
+  font-size: var(--ty-r4);
+  font-weight: 760;
+  color: var(--text-t1);
+  font-family: var(--ff-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.diagnostic-console-archive-environment-label {
+  display: block;
+  font-size: var(--ty-r2);
+  color: var(--text-t3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.diagnostic-console-archive-meta-text {
+  font-size: var(--ty-r1);
+  color: var(--text-t2);
+}
+
+.diagnostic-console-stack-cell > .diagnostic-console-archive-meta-text {
+  color: var(--text-t2);
+}
+
+.diagnostic-console-archive-tags {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  color: color-mix(in srgb, var(--text-t3) 88%, transparent);
+  font-size: var(--ty-r1);
+  line-height: 1.2;
+  font-family: var(--diagnostic-overview-display-font);
+  font-variant-numeric: tabular-nums;
+}
+
+.diagnostic-console-archive-tag-separator {
+  color: color-mix(in srgb, var(--text-t3) 52%, transparent);
+}
+
+.diagnostic-console-archive-tag-text {
+  color: color-mix(in srgb, var(--text-t3) 92%, transparent);
+}
+
+.diagnostic-console-archive-tag-text-accent {
+  color: color-mix(in srgb, var(--text-t2) 86%, var(--text-t1));
+}
+
+.diagnostic-console-archive-tag-text-danger {
+  color: color-mix(in srgb, var(--visual-danger-accent) 72%, var(--text-t3));
+}
+
+.diagnostic-console-symbol-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-t1);
+  font-weight: 600;
+}
+
+.diagnostic-console-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30px;
+  padding: 0 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-family: var(--ff-mono);
+  font-variant-numeric: tabular-nums;
+  border: 1px solid transparent;
+}
+
+.workspace-page.diagnostic-center-page .tone-up {
+  color: var(--diagnostic-positive-ink) !important;
+}
+
+.workspace-page.diagnostic-center-page .tone-down {
+  color: var(--diagnostic-negative-ink) !important;
+}
+
+.workspace-page.diagnostic-center-page .tone-flat {
+  color: var(--text-t2) !important;
+}
+
+.workspace-page.diagnostic-center-page .diagnostic-console-pill.tone-up {
+  background: var(--surface-s1);
+  border-color: color-mix(in srgb, var(--price-up-color) 56%, transparent);
+}
+
+.workspace-page.diagnostic-center-page .diagnostic-console-pill.tone-down {
+  background: var(--surface-s1);
+  border-color: color-mix(in srgb, var(--price-down-color) 56%, transparent);
+}
+
+.workspace-page.diagnostic-center-page .diagnostic-console-pill.tone-flat {
+  background: var(--surface-s1);
+  border-color: color-mix(in srgb, var(--text-t3) 26%, transparent);
+}
+
+.diagnostic-console-environment-metric-cell {
+  vertical-align: middle;
+  text-align: right;
+}
+
+.diagnostic-console-environment-metric-value {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  gap: 2px;
+  min-width: 0;
+  max-width: 100%;
+  font-size: var(--ty-r2);
+  line-height: 1;
+  font-weight: 640;
+  font-family: var(--diagnostic-overview-display-font);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--text-t1);
+}
+
+.diagnostic-console-environment-metric-value--primary {
+  color: var(--text-t1);
+}
+
+.diagnostic-console-environment-metric-value--muted {
+  color: var(--text-t2);
+}
+
+.diagnostic-console-environment-metric-value--contribution {
+  font-weight: 640;
+}
+
+.diagnostic-console-winrate-cell {
+  display: flex;
+  justify-content: flex-end;
+  min-width: 0;
+}
+
+.diagnostic-console-profit-factor-value {
+  gap: 1px;
+}
+
+.diagnostic-console-profit-factor-suffix {
+  font-size: var(--ty-r1);
+  font-weight: 560;
+  line-height: 1;
+  color: var(--text-t3);
+}
+
+.diagnostic-console-table-badge {
+  min-height: 30px;
+}
+
+.diagnostic-console-table-metric {
+  font-weight: 700;
+  font-family: var(--diagnostic-overview-display-font);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-t1);
+}
+
+.diagnostic-console-archive-meta-metric {
+  display: inline-block;
+  font-size: var(--ty-r3);
+  line-height: 1.1;
+  color: color-mix(in srgb, var(--text-t3) 86%, var(--text-t2));
+  font-weight: 640;
+  letter-spacing: 0.02em;
+}
+
+.diagnostic-console-archive-winrate,
+.diagnostic-console-archive-profit-factor {
+  display: inline-block;
+  font-size: var(--ty-r3);
+  font-weight: 720;
+  line-height: 1.05;
+  color: var(--text-t1);
+}
+
+.diagnostic-console-archive-return {
+  display: inline-block;
+  font-size: var(--ty-r4);
+  font-weight: 760;
+  line-height: 1.05;
+  font-family: var(--diagnostic-overview-display-font);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.diagnostic-console-row-action {
+  white-space: nowrap;
+  min-height: 0;
+  height: auto;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: color-mix(in srgb, var(--text-t3) 88%, transparent);
+  font-size: var(--ty-r2);
+  font-weight: 600;
+  text-decoration: none !important;
+  opacity: 0;
+  transform: translateX(6px);
+  pointer-events: auto;
+}
+
+.diagnostic-console-row-delete {
+  justify-content: flex-end;
+  min-height: 0;
+  height: auto;
+  min-width: 0;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: color-mix(in srgb, var(--visual-danger-accent) 82%, var(--text-t1));
+  font-size: var(--ty-r2);
+  font-weight: 600;
+  opacity: 0;
+  transform: translateX(6px);
+  pointer-events: auto;
+}
+
+.diagnostic-console-archive-row:hover .diagnostic-console-row-action,
+.diagnostic-console-archive-row:focus-within .diagnostic-console-row-action,
+.diagnostic-console-archive-row.is-selected .diagnostic-console-row-action,
+.diagnostic-console-archive-row:hover .diagnostic-console-row-delete,
+.diagnostic-console-archive-row:focus-within .diagnostic-console-row-delete,
+.diagnostic-console-archive-row.is-selected .diagnostic-console-row-delete {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.diagnostic-console-row-action:hover:not(:disabled) {
+  color: var(--text-t1);
+}
+
+.diagnostic-console-row-delete:hover:not(:disabled) {
+  color: var(--visual-danger-accent);
+  background: transparent !important;
+}
+
+.diagnostic-console-empty-state,
+.diagnostic-console-dialog-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 220px;
+  padding: 22px 24px;
+  border: 1px dashed color-mix(in srgb, var(--text-t3) 18%, transparent);
+  border-radius: 16px;
+  box-sizing: border-box;
+  text-align: center;
+  line-height: 1.6;
+  color: var(--text-t3);
+  background: color-mix(in srgb, var(--surface-s3) 74%, transparent);
+}
+
+.diagnostic-echart-tooltip-head {
+  margin-bottom: 6px;
+  font-size: var(--ty-r1);
+  font-weight: 400;
+}
+
+.diagnostic-console-dialog {
+  width: min(1480px, calc(100vw - 24px));
+  max-width: min(1480px, calc(100vw - 24px));
+  max-height: calc(100vh - 24px);
+  overflow: auto;
+  scrollbar-gutter: stable both-edges;
+  background: linear-gradient(180deg, var(--surface-s2), var(--surface-s1));
+}
+
+.diagnostic-console-archive-drawer-body {
+  display: grid;
+  height: 100%;
+  gap: 12px;
+  overflow-y: auto;
+  padding-right: 4px;
+  scrollbar-gutter: stable both-edges;
+}
+
+.diagnostic-console-archive-drawer {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--surface-s2) 92%, transparent),
+    color-mix(in srgb, var(--surface-s1) 96%, transparent)
+  ) !important;
+  box-shadow:
+    -28px 0 64px color-mix(in srgb, var(--surface-s1) 48%, transparent),
+    -1px 0 0 color-mix(in srgb, var(--visual-white) 10%, transparent) inset !important;
+  backdrop-filter: blur(18px) saturate(118%);
+  -webkit-backdrop-filter: blur(18px) saturate(118%);
+  will-change: transform, opacity;
+}
+
+.diagnostic-console-archive-drawer[data-state="open"] {
+  animation-duration: var(--motion-content-reveal-duration);
+  animation-timing-function: var(--motion-content-reveal-ease);
+}
+
+.diagnostic-console-archive-drawer[data-state="closed"] {
+  animation-duration: var(--motion-exit-duration);
+  animation-timing-function: var(--motion-exit-ease);
+}
+
+.diagnostic-console-dialog--immersive {
+  width: calc(100vw - 16px);
+  max-width: calc(100vw - 16px);
+  max-height: calc(100vh - 16px);
+}
+
+.diagnostic-console-dialog-meta {
+  font-size: var(--ty-r2);
+  line-height: 1.5;
+  color: var(--text-t3);
+}
+
+.diagnostic-console-dialog-body {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 14px;
+  min-width: 0;
+  min-height: min(760px, calc(100vh - 180px));
+}
+
+.diagnostic-console-dialog-chart {
+  min-height: min(620px, 72vh);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  border-radius: 16px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--surface-s3) 82%, transparent);
+}
+
+.diagnostic-console-dialog-chart > .history-preview-chart {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+}
+
+.diagnostic-console-dialog-chart .history-preview-canvas-wrap,
+.diagnostic-console-dialog-chart .history-preview-canvas {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.diagnostic-console-dialog-side {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr)) auto;
+  align-content: start;
+  gap: 10px;
+}
+
+.diagnostic-console-dialog-metric-card {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--surface-s3) 86%, transparent);
+}
+
+.diagnostic-console-dialog-metric-card > span {
+  font-size: var(--ty-r1);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+  color: var(--text-t3);
+}
+
+.diagnostic-console-dialog-metric-card > strong {
+  font-size: var(--ty-r5);
+  line-height: 1.28;
+  overflow-wrap: anywhere;
+  color: var(--text-t1);
+  font-variant-numeric: tabular-nums;
+}
+
+.diagnostic-console-dialog-note-btn {
+  min-width: 58px;
+  height: 100%;
+  align-self: stretch;
+  border-radius: 16px !important;
+  border: 1px solid color-mix(in srgb, var(--line) 62%, transparent) !important;
+  background: color-mix(in srgb, var(--surface-s3) 76%, transparent) !important;
+  color: var(--text-t2) !important;
+  box-shadow: none !important;
+}
+
+.diagnostic-console-dialog-note-btn:hover:not(:disabled) {
+  color: var(--text-t1) !important;
+  border-color: color-mix(
+    in srgb,
+    var(--action-a1) 38%,
+    transparent
+  ) !important;
+  background: color-mix(in srgb, var(--action-a1) 12%, transparent) !important;
+}
+
+.diagnostic-console-dialog-note-btn > svg {
+  width: 18px;
+  height: 18px;
+}
+
+.diagnostic-console-ai-audit-stack {
+  display: grid;
+  gap: 12px;
+}
+
+.diagnostic-console-ai-audit-card {
+  display: grid;
+  gap: 12px;
+}
+
+.diagnostic-console-ai-audit-copy {
+  display: grid;
+  gap: 4px;
+}
+
+.diagnostic-console-ai-audit-copy > span,
+.diagnostic-console-ai-audit-meta-item > span,
+.diagnostic-console-ai-audit-item > span,
+.diagnostic-console-ai-audit-item > em {
+  color: var(--text-t3);
+  font-size: var(--ty-r1);
+  line-height: 1.35;
+}
+
+.diagnostic-console-ai-audit-copy > strong {
+  color: var(--text-t1);
+  font-size: var(--ty-r4);
+  line-height: 1.2;
+}
+
+.diagnostic-console-ai-audit-copy > p {
+  margin: 0;
+  color: var(--text-t3);
+  font-size: var(--ty-r1);
+  line-height: 1.45;
+}
+
+.diagnostic-console-ai-audit-meta,
+.diagnostic-console-ai-audit-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.diagnostic-console-ai-audit-meta {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.diagnostic-console-ai-audit-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.diagnostic-console-ai-audit-meta-item,
+.diagnostic-console-ai-audit-item {
+  display: grid;
+  gap: 6px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--line) 68%, transparent);
+  background: color-mix(in srgb, var(--surface-s3) 82%, transparent);
+}
+
+.diagnostic-console-ai-audit-meta-item > strong,
+.diagnostic-console-ai-audit-item > strong {
+  color: var(--text-t1);
+  font-size: var(--ty-r2);
+  line-height: 1.25;
+}
+
+.diagnostic-console-ai-audit-item.is-pass {
+  border-color: color-mix(in srgb, var(--action-a1) 34%, transparent);
+}
+
+.diagnostic-console-ai-audit-item.is-warn {
+  border-color: color-mix(in srgb, rgb(var(--color-warning)) 34%, transparent);
+}
+
+.diagnostic-console-ai-audit-item.is-fail {
+  border-color: color-mix(in srgb, rgb(var(--color-danger)) 34%, transparent);
+}
+
+.diagnostic-console-delete-dialog {
+  width: min(520px, calc(100vw - 24px));
+  max-width: min(520px, calc(100vw - 24px));
+}
+
+.diagnostic-console-delete-dialog-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.diagnostic-console-delete-dialog-summary {
+  width: 100%;
+  font-size: var(--ty-r2);
+  line-height: 1.5;
+  color: var(--text-t3);
+}
+
+.diagnostic-console-delete-dialog-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--line) 52%, transparent);
+  background: color-mix(in srgb, var(--surface-s3) 80%, transparent);
+  color: var(--text-t1);
+  font-size: var(--ty-r2);
+  line-height: 1;
+}
+
+.diagnostic-console-delete-dialog-chip.is-muted {
+  color: var(--text-t3);
+}
+
+.diagnostic-console-delete-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+@keyframes diagnostic-console-skeleton-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@media (max-width: 1480px) {
+  .diagnostic-console-competence-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

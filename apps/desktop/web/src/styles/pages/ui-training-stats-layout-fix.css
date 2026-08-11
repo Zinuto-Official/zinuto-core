@@ -1,0 +1,124 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.workspace-page.training-stats-page {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch;
+  align-content: stretch;
+  min-height: 0;
+  height: 100%;
+  gap: 12px;
+  overflow: hidden;
+}
+
+.workspace-page.training-stats-page > .training-stats-page-body {
+  min-height: 0;
+  height: 100%;
+}
+
+.workspace-page.training-stats-page
+  > .training-stats-page-body
+  > .training-stats-shell {
+  width: 100%;
+  min-height: 0;
+  height: 100%;
+  flex: 1 1 auto;
+}
+
+.workspace-page.training-stats-page
+  > .training-stats-page-body
+  > .training-stats-shell
+  > .training-stats-header,
+.workspace-page.training-stats-page
+  > .training-stats-page-body
+  > .training-stats-shell
+  > .training-stats-loading,
+.workspace-page.training-stats-page
+  > .training-stats-page-body
+  > .training-stats-shell
+  > .training-stats-empty,
+.workspace-page.training-stats-page
+  > .training-stats-page-body
+  > .training-stats-shell
+  > .training-stats-content,
+.workspace-page.training-stats-page
+  > .training-stats-page-body
+  > .training-stats-shell
+  > .training-stats-filters-shell {
+  position: relative;
+  inset: auto;
+  margin: 0;
+  top: auto;
+  right: auto;
+  bottom: auto;
+  left: auto;
+  transform: none;
+  width: 100%;
+  min-height: 0;
+  flex: 0 0 auto;
+  grid-row: auto;
+  grid-column: auto;
+}
+
+.workspace-page.training-stats-page
+  > .training-stats-page-body
+  > .training-stats-shell
+  > .training-stats-filters-shell {
+  z-index: 1;
+}
+
+.workspace-page.training-stats-page
+  > .training-stats-page-body
+  > .training-stats-shell
+  > .training-stats-content {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px;
+  z-index: 0;
+}
+
+.workspace-page.training-stats-page .training-stats-filter-bottom {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 12px;
+  align-items: stretch;
+}
+
+.workspace-page.training-stats-page .training-stats-filter-actions {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.workspace-page.training-stats-page .training-stats-grid-overview {
+  display: grid !important;
+  gap: 10px;
+}
+
+.workspace-page.training-stats-page .training-stats-grid-overview-primary {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.workspace-page.training-stats-page .training-stats-grid-overview-secondary {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.workspace-page.training-stats-page .training-stats-single-export {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+  gap: 10px;
+  align-items: stretch;
+}
+
+.workspace-page.training-stats-page .training-stats-single-export > .training-stats-filter-item {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 1080px) {
+  .workspace-page.training-stats-page .training-stats-filter-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

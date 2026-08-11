@@ -1,0 +1,173 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+@media (max-width: 1280px) {
+  .custom-indicator-context-bar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .custom-indicator-context-center {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .custom-indicator-context-name {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .custom-indicator-context-selector-row {
+    width: 100%;
+    min-width: 0;
+    grid-template-columns: minmax(108px, 0.4fr) minmax(0, 1fr);
+  }
+
+  .custom-indicator-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .custom-indicator-chart-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .custom-indicator-chart-head-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .custom-indicator-param-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .custom-indicator-guide-summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .custom-indicator-rules-dialog {
+    width: min(96vw, 880px);
+  }
+
+  .custom-indicator-rules-body {
+    grid-template-columns: minmax(140px, 188px) minmax(0, 1fr);
+  }
+
+  .app-modal-surface.custom-indicator-reference-modal {
+    width: min(1100px, calc(100vw - 24px));
+  }
+
+  .custom-indicator-reference-layout {
+    --layout-sidebar-width: 288px;
+  }
+}
+
+@media (max-width: 860px) {
+  .custom-indicator-guide-summary-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .custom-indicator-rules-head-actions {
+    width: 100%;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .custom-indicator-rules-body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .custom-indicator-rules-modules {
+    border-right: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--line) 44%, transparent);
+    padding-right: 0;
+    padding-bottom: 8px;
+    grid-template-rows: minmax(0, 1fr);
+  }
+
+  .custom-indicator-rules-module-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .custom-indicator-guide-launch-card {
+    padding: 12px;
+  }
+
+  .custom-indicator-rules-function-tree {
+    max-height: 176px;
+  }
+
+  .custom-indicator-rules-entry-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .app-modal-surface.custom-indicator-reference-modal {
+    width: min(100vw - 16px, 100%);
+    height: min(720px, calc(100vh - 16px));
+    max-height: calc(100vh - 16px);
+    padding: 14px;
+  }
+
+  .custom-indicator-reference-header-title-row {
+    align-items: flex-start;
+  }
+
+  .custom-indicator-reference-toolbar-shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .custom-indicator-reference-toolbar {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .custom-indicator-reference-layout:where(
+      .has-sidebar.has-divider
+    )[data-sidebar-position="start"] {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .custom-indicator-reference-layout > .page-main-layout-divider {
+    display: none;
+  }
+
+  .custom-indicator-reference-layout-sidebar {
+    padding-right: 0;
+    padding-bottom: 0;
+  }
+
+  .custom-indicator-reference-layout-main {
+    padding-left: 0;
+    padding-top: 0;
+  }
+
+  .custom-indicator-reference-sidebar {
+    grid-template-rows: auto minmax(0, 1fr);
+    height: auto;
+    max-height: 280px;
+  }
+
+  .custom-indicator-reference-topic-list,
+  .desktop-secondary-window-root .custom-indicator-reference-topic-list {
+    max-height: 240px;
+  }
+
+  .custom-indicator-reference-detail-head,
+  .custom-indicator-reference-secondary-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .custom-indicator-reference-primary-panel.is-formula {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .custom-indicator-reference-detail-aliases {
+    justify-items: start;
+  }
+
+  .custom-indicator-reference-detail-card {
+    max-width: none;
+    padding-bottom: 16px;
+  }
+}

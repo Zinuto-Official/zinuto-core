@@ -1,0 +1,184 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.app-root {
+  --ui-radius-surface: 10px;
+  --ui-radius-control: 8px;
+  --ui-radius-floating: 12px;
+  --ui-radius-pill: 999px;
+  --ui-size-control-compact: clamp(30px, calc(32px * var(--viewport-scale, 1)), 34px);
+  --ui-size-control-default: var(--control-h);
+  --ui-size-control-large: clamp(40px, calc(42px * var(--viewport-scale, 1)), 46px);
+  --ui-space-control-x-compact: 10px;
+  --ui-space-control-x-default: 12px;
+  --ui-space-control-x-large: 14px;
+  --ui-space-control-y-field: 9px;
+  --ui-control-radius: var(--ui-radius-control);
+  --ui-control-border: var(--theme-line-divider);
+  --ui-control-bg: var(--theme-control);
+  --ui-control-bg-muted: var(--theme-panel-soft);
+  --ui-control-focus-ring: var(--visual-accent-ring);
+  --ui-action-bg: var(--visual-accent-base);
+  --ui-action-bg-hover: var(--visual-accent-hover);
+  --ui-action-bg-press: color-mix(in srgb, var(--visual-accent-hover) 72%, var(--visual-accent-base));
+  --ui-action-text: var(--visual-accent-contrast);
+  --ui-action-disabled-bg: color-mix(in srgb, var(--theme-panel-soft) 82%, var(--theme-panel) 18%);
+  --ui-action-disabled-border: var(--theme-line-divider);
+  --ui-action-disabled-text: color-mix(in srgb, var(--text) 56%, var(--text-disabled));
+  --ui-action-border: var(--theme-line-divider);
+  --ui-action-border-strong: var(--theme-line-strong);
+  --ui-action-quiet-bg: color-mix(in srgb, var(--action-a2) 72%, var(--theme-panel));
+  --ui-action-quiet-hover: var(--theme-hover);
+  --ui-action-quiet-border: var(--theme-line-divider);
+  --ui-action-quiet-border-hover: var(--theme-line-strong);
+  --ui-text-action-fg: var(--visual-link-accent);
+  --ui-text-action-hover-bg: color-mix(in srgb, var(--theme-hover) 88%, transparent);
+  --ui-text-action-active-bg: color-mix(in srgb, var(--visual-accent-surface) 92%, var(--theme-panel));
+  --ui-field-border: var(--theme-line-divider);
+  --ui-field-border-strong: var(--theme-line-strong);
+  --ui-field-bg: var(--theme-control);
+  --ui-field-hover-bg: var(--theme-hover);
+  --ui-float-border: var(--theme-line-strong);
+  --ui-float-bg: var(--theme-float);
+  --ui-float-divider: color-mix(in srgb, var(--theme-line-divider) 72%, transparent);
+  --ui-float-row-hover: var(--theme-hover);
+  --ui-float-row-active: color-mix(in srgb, var(--visual-accent-surface) 82%, var(--theme-float));
+  --ui-row-rail: color-mix(in srgb, var(--visual-accent-base) 78%, var(--visual-accent-hover));
+  --ui-segment-track-border: color-mix(in srgb, var(--theme-line-divider) 72%, transparent);
+  --ui-segment-track-bg: color-mix(in srgb, var(--theme-panel-soft) 86%, var(--theme-panel));
+  --ui-segment-active-bg: color-mix(in srgb, var(--visual-accent-surface) 92%, var(--theme-panel));
+  --ui-segment-outline-active-border: color-mix(in srgb, var(--visual-accent-base) 46%, var(--theme-line-strong));
+  --ui-segment-hover-bg: var(--theme-hover);
+  --ui-modal-border: var(--theme-line-strong);
+  --ui-modal-bg: var(--theme-float);
+  --ui-overlay-backdrop: rgb(var(--color-overlay-backdrop) / 0.34);
+  --ui-overlay-filter: blur(9px);
+  --ui-tooltip-border: var(--theme-line-strong);
+  --ui-tooltip-bg: var(--theme-float);
+  --ui-surface-radius: var(--ui-radius-surface);
+  --ui-surface-radius-sm: calc(var(--ui-radius-surface) - 2px);
+  --ui-surface-border: var(--theme-line-divider);
+  --ui-surface-border-soft: var(--theme-line-divider);
+  --ui-surface-border-strong: var(--theme-line-strong);
+  --ui-surface-raised: var(--theme-panel);
+  --ui-surface-soft: var(--theme-panel-soft);
+  --ui-surface-bg: var(--theme-panel);
+  --ui-surface-bg-soft: var(--theme-panel-soft);
+  --ui-surface-bg-elevated: var(--theme-float);
+  --ui-surface-hover-bg: var(--theme-hover);
+  --ui-surface-active-bg: var(--theme-active);
+  --ui-surface-disabled: color-mix(in srgb, var(--theme-panel-soft) 82%, var(--theme-panel) 18%);
+  --ui-divider-soft: color-mix(in srgb, var(--theme-line-divider) 58%, transparent);
+  --ui-divider: color-mix(in srgb, var(--theme-line-strong) 74%, transparent);
+  --ui-menu-bg: var(--theme-float);
+  --ui-menu-highlight: var(--theme-hover);
+  --ui-menu-highlight-strong: color-mix(in srgb, var(--visual-accent-surface) 84%, var(--theme-float));
+  --ui-list-row-accent: var(--visual-accent-base);
+  --ui-list-row-surface: var(--theme-panel);
+  --ui-list-row-hover-bg: var(--theme-hover);
+  --ui-list-row-active-bg: color-mix(in srgb, var(--visual-accent-surface) 92%, var(--theme-panel));
+  --ui-list-row-hover-border: var(--theme-line-divider);
+  --ui-list-row-active-border: color-mix(in srgb, var(--visual-accent-base) 24%, var(--theme-line-strong));
+  --ui-list-row-rail: color-mix(
+    in srgb,
+    var(--visual-accent-base) 84%,
+    var(--visual-accent-hover)
+  );
+  --ui-badge-accent-bg: var(--visual-accent-surface);
+  --ui-badge-accent-border: color-mix(
+    in srgb,
+    var(--visual-accent-base) 24%,
+    var(--theme-line-divider)
+  );
+  --ui-badge-accent-text: color-mix(in srgb, var(--visual-link-accent) 82%, var(--text-strong));
+  --ui-status-success-bg: var(--success-soft);
+  --ui-status-success-border: color-mix(in srgb, var(--success) 36%, var(--theme-line-divider));
+  --ui-status-success-text: var(--success);
+  --ui-status-warning-bg: var(--warning-soft);
+  --ui-status-warning-border: color-mix(in srgb, var(--warning) 36%, var(--theme-line-divider));
+  --ui-status-warning-text: var(--warning);
+  --ui-status-danger-bg: var(--danger-soft);
+  --ui-status-danger-border: color-mix(in srgb, var(--danger) 36%, var(--theme-line-divider));
+  --ui-status-danger-text: var(--danger);
+  --ui-status-info-bg: var(--info-soft);
+  --ui-status-info-border: color-mix(in srgb, var(--info) 36%, var(--theme-line-divider));
+  --ui-status-info-text: var(--info);
+  --ui-press-lift: translateY(0);
+}
+
+.app-root > .app-portal-root {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  pointer-events: none;
+  isolation: isolate;
+}
+
+.app-root > .app-portal-root > * {
+  pointer-events: auto;
+}
+
+.app-root.theme-light {
+  --ui-control-border: var(--theme-line-divider);
+  --ui-control-bg: var(--theme-control);
+  --ui-control-bg-muted: var(--theme-panel-soft);
+  --ui-control-focus-ring: color-mix(in srgb, var(--visual-link-accent) 72%, transparent);
+  --ui-action-border: var(--theme-line-divider);
+  --ui-action-border-strong: var(--theme-line-strong);
+  --ui-action-quiet-bg: color-mix(in srgb, var(--action-a2) 76%, var(--theme-panel));
+  --ui-action-quiet-hover: var(--theme-hover);
+  --ui-action-quiet-border: var(--theme-line-divider);
+  --ui-action-quiet-border-hover: var(--theme-line-strong);
+  --ui-text-action-fg: var(--visual-link-accent);
+  --ui-text-action-hover-bg: color-mix(in srgb, var(--theme-hover) 88%, transparent);
+  --ui-text-action-active-bg: color-mix(in srgb, var(--visual-accent-surface) 94%, var(--theme-panel));
+  --ui-field-border: color-mix(in srgb, var(--theme-line-divider) 82%, var(--theme-panel));
+  --ui-field-border-strong: var(--theme-line-strong);
+  --ui-field-bg: var(--theme-control);
+  --ui-field-hover-bg: color-mix(in srgb, var(--theme-control) 72%, var(--theme-hover));
+  --ui-float-border: color-mix(in srgb, var(--theme-line-strong) 32%, var(--theme-line-divider));
+  --ui-float-bg: var(--theme-float);
+  --ui-float-divider: color-mix(in srgb, var(--theme-line-divider) 72%, transparent);
+  --ui-float-row-hover: var(--theme-hover);
+  --ui-float-row-active: color-mix(in srgb, var(--visual-accent-surface) 86%, var(--theme-float));
+  --ui-row-rail: color-mix(in srgb, var(--visual-accent-base) 86%, transparent);
+  --ui-segment-track-border: var(--theme-line-divider);
+  --ui-segment-track-bg: color-mix(in srgb, var(--theme-panel-soft) 88%, var(--window-bg));
+  --ui-segment-active-bg: color-mix(in srgb, var(--visual-accent-surface) 94%, var(--theme-panel));
+  --ui-segment-outline-active-border: color-mix(in srgb, var(--visual-accent-base) 26%, var(--theme-line-strong));
+  --ui-segment-hover-bg: var(--theme-hover);
+  --ui-modal-border: color-mix(in srgb, var(--theme-line-strong) 32%, var(--theme-line-divider));
+  --ui-modal-bg: var(--theme-float);
+  --ui-tooltip-border: color-mix(in srgb, var(--theme-line-strong) 32%, var(--theme-line-divider));
+  --ui-tooltip-bg: var(--theme-float);
+  --ui-surface-border: var(--theme-line-divider);
+  --ui-surface-border-soft: var(--theme-line-divider);
+  --ui-surface-border-strong: var(--theme-line-strong);
+  --ui-surface-raised: var(--theme-panel);
+  --ui-surface-soft: var(--theme-panel-soft);
+  --ui-surface-bg: var(--theme-panel);
+  --ui-surface-bg-soft: var(--theme-panel-soft);
+  --ui-surface-bg-elevated: var(--theme-float);
+  --ui-surface-hover-bg: var(--theme-hover);
+  --ui-surface-active-bg: var(--theme-active);
+  --ui-surface-disabled: color-mix(in srgb, var(--theme-panel-soft) 82%, var(--theme-panel) 18%);
+  --ui-divider-soft: color-mix(in srgb, var(--theme-line-divider) 50%, transparent);
+  --ui-divider: color-mix(in srgb, var(--theme-line-strong) 68%, transparent);
+  --ui-menu-bg: var(--theme-float);
+  --ui-menu-highlight: var(--theme-hover);
+  --ui-menu-highlight-strong: color-mix(in srgb, var(--visual-accent-surface) 86%, var(--theme-float));
+  --ui-list-row-hover-bg: var(--theme-hover);
+  --ui-list-row-active-bg: color-mix(in srgb, var(--visual-accent-surface) 94%, var(--theme-panel));
+  --ui-list-row-hover-border: transparent;
+  --ui-list-row-active-border: color-mix(in srgb, var(--visual-accent-base) 22%, var(--theme-line-strong));
+  --ui-badge-accent-bg: color-mix(in srgb, var(--visual-accent-surface) 86%, var(--theme-panel));
+  --ui-badge-accent-border: color-mix(in srgb, var(--visual-accent-base) 20%, var(--theme-line-divider));
+  --ui-badge-accent-text: color-mix(in srgb, var(--visual-link-accent) 88%, var(--text-strong));
+}
+
+.app-root.theme-dark {
+  --ui-control-focus-ring: var(--visual-link-accent);
+  --ui-row-rail: color-mix(in srgb, var(--visual-accent-base) 82%, transparent);
+  --ui-badge-accent-bg: color-mix(in srgb, var(--visual-accent-surface) 88%, var(--theme-panel));
+  --ui-badge-accent-border: color-mix(in srgb, var(--visual-accent-base) 34%, var(--theme-line-divider));
+  --ui-badge-accent-text: color-mix(in srgb, var(--visual-link-accent) 58%, var(--text-strong));
+}

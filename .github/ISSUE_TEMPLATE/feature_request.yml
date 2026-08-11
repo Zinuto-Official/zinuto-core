@@ -1,0 +1,47 @@
+# SPDX-License-Identifier: GPL-3.0-only
+
+name: Feature request
+description: Propose a focused improvement to the local Core workspace
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe the problem before the solution. Core is a local desktop application and does not add official accounts, payments, hosted services, product updates, or broker order execution.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem to solve
+      description: What is difficult today, and who encounters it?
+    validations:
+      required: true
+  - type: textarea
+    id: proposed-behavior
+    attributes:
+      label: Proposed behavior
+      description: Describe the smallest useful change from the user's point of view.
+    validations:
+      required: true
+  - type: textarea
+    id: local-data
+    attributes:
+      label: Local-data and privacy impact
+      description: Explain what data the feature reads, writes, imports, exports, or sends over the network.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Mention any current workflow or smaller change that could solve the same problem.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched existing issues and pull requests.
+          required: true
+        - label: The proposal stays within the local Core boundary.
+          required: true

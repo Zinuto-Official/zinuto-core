@@ -1,0 +1,779 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.special-training-risk-mission-progress.special-training-lightning-status-card.is-progress {
+  grid-column: auto;
+}
+
+.special-training-risk-mission-progress-head {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.special-training-risk-mission-progress > span,
+.special-training-risk-mission-countdown > span {
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1.1;
+}
+
+.special-training-risk-mission-progress > .special-training-lightning-status-inline-label,
+.special-training-risk-mission-progress > .special-training-lightning-status-inline-value,
+.special-training-risk-mission-progress-head > .special-training-lightning-status-inline-label,
+.special-training-risk-mission-progress-head > .special-training-lightning-status-inline-value {
+  font-size: var(--ty-r1);
+  line-height: 1;
+  font-weight: 760;
+  white-space: nowrap;
+}
+
+.special-training-risk-mission-progress > .special-training-lightning-status-inline-label,
+.special-training-risk-mission-progress-head > .special-training-lightning-status-inline-label {
+  color: var(--text-subtle);
+}
+
+.special-training-risk-mission-progress > .special-training-lightning-status-inline-value,
+.special-training-risk-mission-progress-head > .special-training-lightning-status-inline-value {
+  color: var(--text-strong);
+}
+
+.special-training-risk-mission-progress > strong {
+  color: var(--text-strong);
+  font-size: var(--ty-r5);
+  line-height: 1;
+  font-weight: 780;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-risk-mission-countdown {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+}
+
+.special-training-risk-mission-countdown > strong {
+  color: var(--text-strong);
+  font-size: var(--ty-r5);
+  line-height: 1;
+  font-weight: 820;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-risk-mission-countdown.is-warning > strong {
+  color: color-mix(in srgb, var(--visual-warning-accent) 92%, var(--text-strong));
+}
+
+.special-training-risk-mission-countdown.is-critical > strong {
+  color: color-mix(in srgb, var(--visual-danger-solid) 92%, var(--text-strong));
+}
+
+.special-training-risk-status-grid {
+  gap: 8px;
+}
+
+.special-training-risk-status-card {
+  gap: 8px;
+}
+
+.special-training-risk-status-magazine-card {
+  align-content: stretch;
+}
+
+.special-training-risk-status-magazine-card
+  .special-training-risk-magazine-block {
+  min-height: 100%;
+}
+
+.special-training-risk-status-card.is-warning {
+  border-color: color-mix(in srgb, var(--warning) 38%, transparent);
+}
+
+.special-training-risk-status-card.is-critical {
+  border-color: color-mix(in srgb, var(--action-a3) 42%, transparent);
+}
+
+.special-training-risk-status-card-support {
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1.35;
+  white-space: normal;
+}
+
+.special-training-risk-panel-middle {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.special-training-risk-panel-stage {
+  min-height: 0;
+  height: 100%;
+  grid-template-rows: minmax(0, 1fr);
+  padding: 8px;
+}
+
+.special-training-risk-status-summary {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.special-training-risk-status-summary-label {
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1.3;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.special-training-risk-status-summary-value {
+  color: var(--text-strong);
+  font-size: var(--ty-r4);
+  line-height: 1.1;
+  font-weight: 760;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-risk-status-main {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+}
+
+.special-training-risk-status-kicker {
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1.3;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}
+
+.special-training-risk-status-value {
+  color: var(--text-strong);
+  font-size: var(--ty-r8);
+  line-height: 1;
+  font-weight: 820;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-risk-status-caption {
+  margin: 0;
+  color: var(--text-subtle);
+  font-size: var(--ty-r2);
+  line-height: 1.35;
+  text-align: center;
+}
+
+.special-training-risk-status-track {
+  position: relative;
+  width: 100%;
+  height: 4px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--line) 62%, transparent);
+  overflow: hidden;
+}
+
+.special-training-risk-status-track.is-top {
+  height: 6px;
+  background: color-mix(in srgb, var(--line) 48%, transparent);
+}
+
+.special-training-risk-status-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--primary) 92%, transparent),
+    color-mix(in srgb, var(--visual-price-green-up-light) 68%, transparent)
+  );
+  transition: width var(--motion-progress-tick);
+}
+
+.special-training-risk-status-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.special-training-risk-status-strip > span {
+  min-height: 42px;
+  border: 1px solid color-mix(in srgb, var(--line) 54%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--panel-soft) 78%, var(--window-bg));
+  padding: 8px 10px;
+  display: grid;
+  gap: 3px;
+  color: var(--text-strong);
+  font-size: var(--ty-r2);
+  line-height: 1.25;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-risk-status-strip > span > strong {
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  font-weight: 600;
+}
+
+.special-training-risk-status-strip > span.up {
+  border-color: color-mix(
+    in srgb,
+    var(--visual-price-green-up-light) 34%,
+    var(--line)
+  );
+}
+
+.special-training-risk-status-strip > span.down {
+  border-color: color-mix(in srgb, var(--visual-danger-solid) 36%, var(--line));
+}
+
+.special-training-header-actions {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.special-training-header-actions > [data-slot="button"] {
+  width: 100%;
+}
+
+.special-training-trainer-left-panel-body > .trainer-chart-workspace {
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+}
+
+.special-training-trainer-left-panel-body > .trainer-chart-workspace > .chart-layout {
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+}
+
+.special-training-trainer-left-panel-body
+  > .trainer-chart-workspace
+  > .chart-layout
+  > .draw-toolbar,
+.special-training-trainer-left-panel-body
+  > .trainer-chart-workspace
+  > .chart-layout
+  > .chart-panel {
+  min-width: 0;
+  min-height: 0;
+}
+
+.desktop-main.is-special-training
+  .special-training-fast-decision-left-panel-body
+  > .trainer-chart-workspace
+  > .chart-layout[data-drawing-density="slim"] {
+  gap: clamp(2px, 0.18vw, 4px);
+}
+
+.desktop-main.is-special-training
+  .special-training-fast-decision-left-panel-body
+  .draw-toolbar[data-density="slim"] {
+  --dt-gap: clamp(2px, 0.32vh, 4px);
+  --dt-pad-x: 1px;
+  --dt-toolbar-width: clamp(42px, 2.72vw, 48px);
+  --dt-control-width: clamp(34px, 2.18vw, 38px);
+  --dt-icon: clamp(14px, 0.95vw, 16px);
+  --dt-color-dot: clamp(13px, 1.42vh, 15px);
+  width: var(--dt-toolbar-width);
+  flex: 0 0 var(--dt-toolbar-width);
+}
+
+.desktop-main.is-special-training
+  .special-training-fast-decision-left-panel-body
+  .draw-toolbar[data-density="slim"]
+  .draw-toolbar-section-config
+  > .tool-cell-color
+  > .color-row {
+  gap: clamp(2px, 0.3vh, 3px);
+}
+
+.special-training-position-grid {
+  gap: 7px 10px;
+}
+
+.special-training-rule-inline {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.special-training-rule-inline > span {
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1.32;
+}
+
+.desktop-main:is(.is-trainer, .is-special-training)
+  .special-training-trade-card {
+  grid-template-rows: none;
+  gap: 7px;
+}
+
+.special-training-trade-actions {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.special-training-observe-btn {
+  width: 100%;
+}
+
+.special-training-control-card [data-slot="card-content"] {
+  display: grid;
+  gap: 8px;
+}
+
+.special-training-risk-engine-card {
+  min-height: auto;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.special-training-risk-engine-card [data-slot="card-content"] {
+  min-height: 0;
+  flex: 0 0 auto;
+}
+
+.desktop-main.is-special-training
+  .special-training-risk-panel-body
+  > .special-training-risk-engine-card {
+  flex: 0 0 auto;
+  min-height: 0;
+  overflow: visible;
+}
+
+.desktop-main.is-special-training
+  .special-training-risk-panel-body
+  > .special-training-risk-engine-card
+  [data-slot="card-content"] {
+  flex: 0 0 auto;
+}
+
+.special-training-control-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.special-training-control-grid.is-post-settlement {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.special-training-control-grid > [data-slot="button"] {
+  width: 100%;
+}
+
+.special-training-inline-hint {
+  margin: 0;
+  color: color-mix(in srgb, var(--primary) 72%, var(--text-subtle));
+  font-size: var(--ty-r2);
+  line-height: 1.36;
+}
+
+.special-training-lightning-shell {
+  --special-training-lightning-action-height: clamp(39px, 4.9vh, 46px);
+  min-height: 0;
+  height: 100%;
+  border: 1px solid color-mix(in srgb, var(--line) 56%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--surface-s1) 90%, var(--panel));
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+  overflow: hidden;
+}
+
+.special-training-lightning-shell.is-slide-out {
+  animation: special-training-lightning-slide-out var(--motion-normal) both;
+}
+
+@keyframes special-training-lightning-slide-out {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-28px);
+    opacity: 0.82;
+  }
+}
+
+.special-training-lightning-top-hud {
+  position: relative;
+  min-height: 40px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  padding: 5px 4px 0;
+}
+
+.special-training-lightning-top-hud-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) auto minmax(0, 1.4fr);
+  align-items: center;
+  gap: 10px;
+}
+
+.special-training-lightning-top-hud-left > span {
+  color: var(--text-strong);
+  font-size: var(--ty-r3);
+  line-height: 1.34;
+  font-weight: 620;
+}
+
+.special-training-lightning-countdown-track {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 2px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--line) 62%, transparent);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.special-training-lightning-countdown-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 100%;
+  background: color-mix(in srgb, var(--trade-buy-color) 95%, transparent);
+  transition: width var(--motion-progress-tick);
+}
+
+.special-training-lightning-countdown-track.is-critical
+  .special-training-lightning-countdown-fill {
+  background: color-mix(in srgb, var(--action-a3) 94%, transparent);
+  animation: special-training-lightning-critical-pulse var(--motion-loop-lightning-pulse)
+    var(--motion-loop-iteration-count);
+}
+
+@keyframes special-training-lightning-critical-pulse {
+  0% {
+    opacity: 0.76;
+    filter: saturate(0.95);
+    box-shadow: 0 0 0 color-mix(in srgb, var(--action-a3) 0%, transparent);
+  }
+  50% {
+    opacity: 1;
+    filter: saturate(1.14);
+    box-shadow: 0 0 12px color-mix(in srgb, var(--action-a3) 56%, transparent);
+  }
+  100% {
+    opacity: 0.82;
+    filter: saturate(1);
+    box-shadow: 0 0 0 color-mix(in srgb, var(--action-a3) 0%, transparent);
+  }
+}
+
+.special-training-lightning-countdown-seconds {
+  position: relative;
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-strong);
+  font-size: var(--ty-r6);
+  line-height: 1;
+  font-family: var(--ff-mono);
+  font-weight: 760;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-lightning-countdown-seconds.is-critical {
+  color: color-mix(in srgb, var(--action-a3) 82%, var(--text-strong));
+  animation: special-training-lightning-countdown-critical var(--motion-loop-lightning-pulse)
+    var(--motion-loop-iteration-count);
+}
+
+@keyframes special-training-lightning-countdown-critical {
+  0% {
+    opacity: 0.84;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.88;
+  }
+}
+
+@keyframes special-training-lightning-stage-breathe {
+  0% {
+    transform: scale(0.96);
+    opacity: 0.68;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.98);
+    opacity: 0.74;
+  }
+}
+
+.special-training-lightning-top-hud-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+.special-training-lightning-top-hud-right > span {
+  color: var(--text-subtle);
+  font-size: var(--ty-r2);
+  line-height: 1.28;
+  border: 1px solid color-mix(in srgb, var(--line) 58%, transparent);
+  border-radius: 999px;
+  min-height: 22px;
+  padding: 0 9px;
+  display: inline-flex;
+  align-items: center;
+  background: color-mix(in srgb, var(--panel-soft) 56%, transparent);
+}
+
+.desktop-main.is-special-training
+  .special-training-trainer-left-panel-body
+  > .trainer-chart-workspace
+  > .chart-layout
+  > .chart-panel {
+  border-radius: 0;
+  background: transparent;
+}
+
+.special-training-lightning-panel-body {
+  --special-training-lightning-action-height: clamp(54px, 5.8vh, 68px);
+  --special-training-lightning-surface-edge: color-mix(
+    in srgb,
+    var(--line) 44%,
+    transparent
+  );
+  --special-training-lightning-instrument-radius: 2px;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 8px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.desktop-main.is-special-training
+  .right-panel-body.special-training-lightning-panel-body {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  align-content: stretch;
+  gap: 8px;
+  overflow-y: hidden;
+  overscroll-behavior: contain;
+}
+
+.special-training-lightning-status-panel {
+  position: relative;
+  display: grid;
+  gap: 8px;
+  padding: 8px 8px 9px;
+  border: none;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--surface-s1) 92%, var(--panel));
+  overflow: hidden;
+  box-shadow: none;
+}
+
+.special-training-lightning-status-panel::after {
+  display: none;
+}
+
+.special-training-lightning-status-track {
+  position: relative;
+  width: 100%;
+  height: 4px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--line) 52%, transparent);
+  overflow: hidden;
+}
+
+.special-training-lightning-status-track-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 100%;
+  background: color-mix(in srgb, var(--primary) 94%, transparent);
+  transition:
+    width var(--motion-progress-tick),
+    background var(--motion-progress-tick),
+    box-shadow var(--motion-progress-tick);
+}
+
+.special-training-lightning-status-track.is-warning
+  .special-training-lightning-status-track-fill {
+  background: color-mix(in srgb, var(--warning) 92%, transparent);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--warning) 18%, transparent);
+}
+
+.special-training-lightning-status-track.is-critical
+  .special-training-lightning-status-track-fill {
+  background: color-mix(in srgb, var(--action-a3) 94%, transparent);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--action-a3) 22%, transparent);
+  animation: special-training-lightning-critical-pulse var(--motion-loop-lightning-pulse)
+    var(--motion-loop-iteration-count);
+}
+
+.special-training-lightning-status-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.special-training-lightning-status-card {
+  min-width: 0;
+  display: grid;
+  gap: 6px;
+  padding: 7px 8px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  text-align: left;
+  box-shadow: none;
+}
+
+.special-training-lightning-status-card.is-progress {
+  grid-column: 1 / -1;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+}
+
+.special-training-lightning-status-inline-label,
+.special-training-lightning-status-inline-value {
+  color: var(--text-strong);
+  font-size: var(--ty-r2);
+  line-height: 1;
+  font-weight: 760;
+  white-space: nowrap;
+}
+
+.special-training-lightning-status-inline-label {
+  color: var(--text-subtle);
+}
+
+.special-training-lightning-status-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.special-training-lightning-status-card-head > span {
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1.25;
+  font-weight: 650;
+  letter-spacing: 0.12em;
+}
+
+.special-training-lightning-status-card-head > strong,
+.special-training-lightning-status-card-value {
+  color: var(--text-strong);
+  font-size: var(--ty-r4);
+  line-height: 1.1;
+  font-weight: 780;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  font-family: var(--ff-mono);
+}
+
+.special-training-lightning-status-card-meta {
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1.2;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-lightning-status-card-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: color-mix(in srgb, var(--text-subtle) 92%, var(--text-strong));
+  background: none;
+}
+
+.special-training-lightning-status-card-icon > svg {
+  width: 14px;
+  height: 14px;
+}
+
+.special-training-lightning-progress-segments {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  gap: 5px;
+  min-width: 0;
+}
+
+.special-training-lightning-progress-segments > span {
+  height: 3px;
+  border-radius: 0;
+  background: color-mix(in srgb, var(--line) 30%, transparent);
+  transition: background var(--motion-fast);
+}
+
+.special-training-lightning-progress-segments > span.is-active {
+  background: color-mix(in srgb, var(--primary) 90%, var(--text-strong));
+}
+
+.special-training-lightning-win-rate-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.special-training-lightning-donut {
+  --special-training-lightning-donut-angle: 0deg;
+  position: relative;
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: none;
+  box-shadow: none;
+}
+
+.special-training-lightning-donut::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: conic-gradient(
+    from -90deg,
+    color-mix(in srgb, var(--primary) 88%, var(--visual-white)) 0deg,
+    color-mix(in srgb, var(--primary) 88%, var(--visual-white))
+      var(--special-training-lightning-donut-angle),
+    color-mix(in srgb, var(--line) 28%, transparent)
+      var(--special-training-lightning-donut-angle),
+    color-mix(in srgb, var(--line) 28%, transparent) 360deg
+  );
+  -webkit-mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 4px),
+    var(--visual-black) calc(100% - 4px)
+  );
+  mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 4px),
+    var(--visual-black) calc(100% - 4px)
+  );
+}

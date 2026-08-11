@@ -1,0 +1,29 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+@import "./styles/core/ui-motion.css";
+@import "./styles/core/theme-base.css";
+@import "./styles/core/ui-control-tokens.css";
+@import "./styles/core/ui-global-consistency.css";
+@import "./styles/core/desktop-motion.css";
+@import "./styles/core/desktop-interaction-policy.css";
+@import "./styles/layout/app-shell.css";
+@import "./styles/layout/ui-refresh-shell.css";
+@import "./styles/layout/workspace-overrides/03-trainer-layout-refresh-shell.css";
+@import "./styles/layout/workspace-hierarchy.css";
+@import "./styles/layout/page-layout-system.css";
+@import "./styles/layout/page-surface-unified.css";
+@import "./styles/layout/radius-unified.css";
+@import "./styles/layout/workspace-shell-unified.css";
+@import "./styles/components/ui-system-business.css";
+@import "./styles/components/date-picker.css";
+@import "./styles/components/inline-feedback.css";
+@import "./styles/components/feature-lock-indicator.css";
+@import "./styles/components/desktop-help-center.css";
+@import "./styles/layout/ui-refresh.css";
+@import "./styles/layout/workspace-overrides/01-visual-polish.css";
+@import "./styles/layout/workspace-overrides/02-unified-flat-layout.css";
+@import "./styles/layout/workspace-overrides/04-layout-stabilization.css";
+@import "./styles/layout/workspace-overrides/05-global-workspace-geometry.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

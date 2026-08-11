@@ -1,0 +1,206 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.special-training-prep-action-main:hover:not(:disabled) {
+  transform: none;
+}
+
+.special-training-prep-action-main:disabled,
+.special-training-prep-action-main.is-disabled {
+  --ui-action-text: var(--text-subtle);
+  opacity: 1 !important;
+  animation: none;
+  color: var(--text-subtle) !important;
+  -webkit-text-fill-color: var(--text-subtle) !important;
+}
+
+.app-root [data-slot='button'].special-training-prep-action-main:disabled,
+.app-root [data-slot='button'].special-training-prep-action-main[disabled],
+.app-root [data-slot='button'].special-training-prep-action-main.is-disabled {
+  --ui-action-text: var(--text-subtle);
+  opacity: 1 !important;
+  color: var(--text-subtle) !important;
+  -webkit-text-fill-color: var(--text-subtle) !important;
+  box-shadow: none !important;
+}
+
+.special-training-prep-action-main.is-risk:disabled {
+  border-color: var(--special-training-divider) !important;
+}
+
+@media (max-width: 1180px) {
+  .special-training-prep-shell {
+    height: auto;
+    grid-template-rows: auto auto auto;
+  }
+}
+
+@media (max-width: 980px) {
+  .special-training-prep-shell {
+    height: auto;
+    grid-template-rows: auto auto auto;
+    overflow: visible;
+    padding-inline: 14px;
+  }
+
+  .special-training-prep-banner-main {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .special-training-prep-banner-status-row {
+    position: static;
+    max-width: 100%;
+    justify-content: flex-start;
+    transform: none;
+  }
+
+  .special-training-risk-vitals-strip,
+  .special-training-risk-status-strip {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .special-training-prep-switcher.plain-tab-bar {
+    max-width: min(100%, 760px);
+    width: min(100%, 760px);
+  }
+
+  .special-training-prep-status-badge {
+    align-self: flex-start;
+  }
+
+  .special-training-prep-action-main {
+    width: 100%;
+  }
+}
+
+@media (max-width: 940px) {
+  .special-training-prep-shell {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
+@media (max-width: 720px) {
+  .desktop-main.is-special-training .special-training-trainer-app-shell {
+    grid-template-columns: minmax(0, 1fr);
+    grid-auto-rows: max-content;
+  }
+
+  .special-training-prep-shell {
+    height: auto;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .special-training-prep-banner-inner {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 4px 0 10px;
+    gap: 8px;
+  }
+
+  .special-training-prep-switcher.plain-tab-bar {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+    max-width: 100%;
+    width: 100%;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .special-training-prep-switcher-option {
+    height: auto !important;
+    min-height: 56px;
+    padding: 10px 10px 14px !important;
+    border-radius: 0 !important;
+  }
+
+  .special-training-prep-switcher .plain-tab-bar-item-label {
+    font-size: var(--ty-r3);
+  }
+
+  .special-training-prep-switcher .plain-tab-bar-item-desc {
+    font-size: var(--ty-r1);
+  }
+
+  .special-training-prep-switcher-label-main {
+    gap: 8px;
+  }
+
+  .special-training-prep-switcher-label-icon-shell {
+    width: 28px;
+    height: 28px;
+  }
+
+  .special-training-prep-switcher-label-icon {
+    width: 15px;
+    height: 15px;
+  }
+
+  .special-training-prep-switcher.plain-tab-bar
+    .special-training-prep-switcher-option::after {
+    bottom: 6px;
+    width: min(220px, calc(100% - 20px));
+  }
+
+  .special-training-lightning-status-grid {
+    gap: 8px 12px;
+  }
+
+  .special-training-lightning-result-card {
+    padding: 12px 10px 10px;
+    gap: 10px;
+  }
+
+  .special-training-lightning-result-hero {
+    gap: 6px;
+  }
+
+  .special-training-lightning-result-selection-tag,
+  .special-training-lightning-result-outcome-tag,
+  .special-training-lightning-result-time {
+    font-size: var(--ty-r1);
+    gap: 6px;
+  }
+
+  .special-training-lightning-result-visual-grid {
+    gap: 8px;
+  }
+
+  .special-training-lightning-decision-countdown {
+    font-size: var(--ty-r8);
+  }
+
+  .special-training-risk-status-panel {
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .special-training-risk-status-banner,
+  .special-training-risk-panel-topbar {
+    flex-wrap: wrap;
+  }
+
+  .special-training-risk-status-headline {
+    gap: 6px;
+  }
+
+  .special-training-risk-status-value {
+    font-size: var(--ty-r7);
+  }
+
+  .special-training-lightning-action-stack.is-post-settlement
+    .special-training-lightning-action-main {
+    font-size: var(--ty-r5);
+  }
+
+  .special-training-risk-panel-body {
+    gap: 8px;
+  }
+
+  .special-training-risk-alpha-value {
+    font-size: var(--ty-r6);
+  }
+
+  .special-training-prep-action-main {
+    width: 100%;
+  }
+}

@@ -1,0 +1,779 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.custom-indicator-side-panel {
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  min-height: 0;
+  border-left: 1px solid var(--custom-indicator-grid-line-hard);
+  display: flex;
+  flex-direction: column;
+  background: var(--custom-indicator-panel-bg);
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.custom-indicator-side-panel.is-collapsed {
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  border-left: 1px solid var(--custom-indicator-grid-line-hard);
+  background: var(--custom-indicator-panel-bg);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.custom-indicator-side-panel.is-collapsed .custom-indicator-side-rail {
+  height: 100%;
+  padding: 12px 8px;
+}
+
+.custom-indicator-side-panel.is-collapsed
+  .custom-indicator-side-rail
+  [data-slot="button"] {
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  padding: 0;
+}
+
+.custom-indicator-side-panel-body {
+  min-width: 0;
+  min-height: 0;
+  flex: 1 1 auto;
+  height: 100%;
+  overflow: hidden;
+  background: var(--custom-indicator-panel-bg);
+}
+
+.custom-indicator-side-tabs-shell {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 10px;
+  padding: 12px;
+  overflow: hidden;
+}
+
+.custom-indicator-side-panel-head {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.custom-indicator-side-panel-head.is-static {
+  padding-bottom: 8px;
+  border-bottom: 1px solid color-mix(in srgb, var(--line) 46%, transparent);
+}
+
+.custom-indicator-side-panel-title {
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.custom-indicator-side-panel-title-kicker {
+  color: color-mix(in srgb, var(--primary) 78%, var(--text-t1));
+  font-size: var(--ty-r1);
+  font-weight: 680;
+  letter-spacing: 0.14px;
+  text-transform: uppercase;
+}
+
+.custom-indicator-side-panel-title > strong {
+  color: var(--text-t1);
+  font-size: var(--ty-r3);
+  font-weight: 700;
+  line-height: 1.28;
+}
+
+.custom-indicator-side-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(14px, 1.2vw, 20px);
+  padding: 0 0 8px;
+  border: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--line) 46%, transparent);
+  border-radius: 0;
+  background: transparent;
+}
+
+.custom-indicator-side-rail {
+  min-height: 0;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 12px 8px;
+}
+
+.custom-indicator-side-tab {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 0 8px 8px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text-t2);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.custom-indicator-side-tab[data-slot="button"] {
+  justify-content: center;
+}
+
+.custom-indicator-side-tab:hover {
+  background: transparent;
+  color: var(--text-t1);
+}
+
+.custom-indicator-side-tab.is-active,
+.custom-indicator-side-tab[aria-selected="true"] {
+  background: transparent;
+  color: var(--text-t1);
+}
+
+.custom-indicator-side-tab-label {
+  min-width: 0;
+  flex: 1 1 auto;
+  inline-size: 100%;
+  max-inline-size: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow-wrap: anywhere;
+  font-size: var(--ty-r3);
+  font-weight: 660;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.custom-indicator-side-tab::after {
+  content: "";
+  position: absolute;
+  left: 14%;
+  right: 14%;
+  bottom: -1px;
+  height: 2px;
+  border-radius: 999px 999px 0 0;
+  background: transparent;
+}
+
+.custom-indicator-side-tab.is-active::after,
+.custom-indicator-side-tab[aria-selected="true"]::after {
+  background: color-mix(in srgb, var(--action-a1) 88%, var(--visual-white));
+}
+
+.custom-indicator-side-tab-panel {
+  min-height: 0;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  overflow: hidden;
+}
+
+.custom-indicator-side-tab-panel > .custom-indicator-side-card-body {
+  min-height: 0;
+  overflow: auto;
+  padding: 12px 14px 14px;
+  align-content: start;
+}
+
+.custom-indicator-side-block {
+  min-width: 0;
+  display: grid;
+  gap: 0;
+  background: transparent;
+}
+
+.custom-indicator-side-block-head {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border-bottom: 1px solid var(--custom-indicator-grid-line-hard);
+  padding: 0 14px;
+  background: transparent;
+}
+
+.custom-indicator-side-block-head > h4 {
+  margin: 0;
+  color: var(--text-t1);
+  font-size: var(--ty-r3);
+  font-weight: 700;
+}
+
+.custom-indicator-side-block-meta {
+  color: color-mix(in srgb, var(--muted) 84%, var(--text-t3));
+  font-size: var(--ty-r1);
+  font-variant-numeric: tabular-nums;
+}
+
+.custom-indicator-side-block-body {
+  min-height: 0;
+  overflow: auto;
+  padding: 12px 14px 14px;
+  background: transparent;
+}
+
+.custom-indicator-side-empty {
+  display: grid;
+  place-items: center;
+  min-height: 140px;
+  border: none;
+  border-radius: 0;
+  color: color-mix(in srgb, var(--muted) 84%, var(--text-t3));
+  font-size: var(--ty-r2);
+  background: transparent;
+  text-align: center;
+  padding: 12px;
+}
+
+.custom-indicator-side-empty.compact {
+  min-height: 84px;
+  border: 1px dashed color-mix(in srgb, var(--line) 52%, transparent);
+  border-radius: calc(var(--radius-rect) - 2px);
+  background: color-mix(in srgb, var(--panel) 86%, transparent);
+}
+
+.custom-indicator-side-accordion {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding: 14px;
+}
+
+.custom-indicator-side-card {
+  border: 1px solid var(--custom-indicator-card-border);
+  border-radius: calc(var(--radius-card-sm) - 2px);
+  background: var(--custom-indicator-card-bg);
+  overflow: hidden;
+}
+
+.custom-indicator-side-card.is-active {
+  border-color: color-mix(in srgb, var(--primary) 24%, var(--custom-indicator-card-border));
+  background: var(--custom-indicator-card-bg-strong);
+}
+
+.custom-indicator-side-card-toggle {
+  width: 100%;
+  min-height: 64px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text-t1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  text-align: left;
+}
+
+.custom-indicator-side-card-toggle:hover {
+  background: color-mix(in srgb, var(--visual-white) 4%, transparent);
+}
+
+.custom-indicator-side-card-copy {
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.custom-indicator-side-card-copy > strong {
+  color: var(--text-t1);
+  font-size: var(--ty-r3);
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.custom-indicator-side-card-kicker {
+  color: color-mix(in srgb, var(--primary) 80%, var(--text-t1));
+  font-size: var(--ty-r1);
+  font-weight: 680;
+  letter-spacing: 0.14px;
+}
+
+.custom-indicator-side-card-tail {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+
+.custom-indicator-side-card-meta {
+  color: color-mix(in srgb, var(--muted) 84%, var(--text-t3));
+  font-size: var(--ty-r1);
+  font-variant-numeric: tabular-nums;
+  max-width: 88px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.custom-indicator-side-card-tail svg {
+  width: 14px;
+  height: 14px;
+  color: color-mix(in srgb, var(--muted) 84%, var(--text-t3));
+}
+
+.custom-indicator-side-card-body {
+  min-height: 0;
+  padding: 0 14px 14px;
+  display: grid;
+  gap: 12px;
+}
+
+.custom-indicator-guide-stack {
+  align-content: start;
+}
+
+.custom-indicator-guide-hint {
+  padding: 12px 13px;
+  border: 1px solid color-mix(in srgb, var(--warning) 24%, var(--custom-indicator-card-border));
+  border-radius: calc(var(--radius-rect) - 2px);
+  background: color-mix(in srgb, var(--warning) 10%, transparent);
+  color: var(--text-t1);
+  font-size: var(--ty-r2);
+  line-height: 1.5;
+}
+
+.custom-indicator-guide-summary-card {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid color-mix(in srgb, var(--line) 48%, var(--custom-indicator-card-border));
+  border-radius: calc(var(--radius-rect) - 1px);
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--primary) 7%, var(--panel)) 0%,
+      color-mix(in srgb, var(--panel) 92%, transparent) 100%
+    );
+}
+
+.custom-indicator-guide-summary-head {
+  display: grid;
+  gap: 5px;
+}
+
+.custom-indicator-guide-summary-head > h4 {
+  margin: 0;
+  color: var(--text-t1);
+  font-size: var(--ty-r2);
+  font-weight: 700;
+}
+
+.custom-indicator-guide-summary-head > p {
+  margin: 0;
+  color: color-mix(in srgb, var(--muted) 84%, var(--text-t3));
+  font-size: var(--ty-r1);
+  line-height: 1.45;
+}
+
+.custom-indicator-guide-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.custom-indicator-guide-summary-chip {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+  padding: 10px 11px;
+  border: 1px solid color-mix(in srgb, var(--line) 40%, transparent);
+  border-radius: calc(var(--radius-rect) - 4px);
+  background: color-mix(in srgb, var(--panel) 90%, transparent);
+}
+
+.custom-indicator-guide-summary-chip > strong {
+  color: color-mix(in srgb, var(--muted) 84%, var(--text-t3));
+  font-size: var(--ty-r1);
+  font-weight: 680;
+  letter-spacing: 0.14px;
+}
+
+.custom-indicator-guide-summary-chip > span {
+  color: var(--text-t1);
+  font-size: var(--ty-r1);
+  font-weight: 680;
+}
+
+.custom-indicator-guide-summary-chip.is-ready {
+  border-color: color-mix(in srgb, rgb(var(--color-success)) 22%, var(--line));
+}
+
+.custom-indicator-guide-summary-chip.is-ready > span {
+  color: color-mix(in srgb, rgb(var(--color-success)) 78%, var(--text-t1));
+}
+
+.custom-indicator-guide-summary-chip.is-error {
+  border-color: color-mix(in srgb, var(--action-a3) 28%, var(--line));
+  background: color-mix(in srgb, var(--action-a3) 8%, var(--panel));
+}
+
+.custom-indicator-guide-summary-chip.is-error > span {
+  color: color-mix(in srgb, var(--action-a3) 86%, var(--text-t1));
+}
+
+.custom-indicator-guide-section {
+  display: grid;
+  gap: 12px;
+}
+
+.custom-indicator-guide-section-head {
+  display: grid;
+  gap: 5px;
+}
+
+.custom-indicator-guide-section-head > h4 {
+  margin: 0;
+  color: var(--text-t1);
+  font-size: var(--ty-r3);
+  font-weight: 700;
+}
+
+.custom-indicator-guide-section-head > p {
+  margin: 0;
+  color: color-mix(in srgb, var(--muted) 86%, var(--text-t3));
+  font-size: var(--ty-r2);
+  line-height: 1.48;
+}
+
+.custom-indicator-guide-launch-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.custom-indicator-guide-launch-card {
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid var(--custom-indicator-card-border);
+  border-radius: calc(var(--radius-rect) - 1px);
+  background: color-mix(in srgb, var(--panel) 92%, transparent);
+  text-align: left;
+}
+
+.custom-indicator-guide-launch-card:hover {
+  background: color-mix(in srgb, var(--visual-white) 4%, var(--panel));
+  border-color: color-mix(in srgb, var(--line) 56%, var(--custom-indicator-card-border));
+}
+
+.custom-indicator-guide-launch-card.is-warning {
+  border-color: color-mix(in srgb, var(--warning) 24%, var(--custom-indicator-card-border));
+  background: color-mix(in srgb, var(--warning) 6%, var(--panel));
+}
+
+.custom-indicator-guide-launch-card.is-directive {
+  border-color: color-mix(in srgb, var(--primary) 26%, var(--custom-indicator-card-border));
+  background: color-mix(in srgb, var(--primary) 7%, var(--panel));
+}
+
+.custom-indicator-guide-launch-card > svg {
+  width: 15px;
+  height: 15px;
+  flex: 0 0 auto;
+  color: color-mix(in srgb, var(--muted) 84%, var(--text-t3));
+}
+
+.custom-indicator-guide-launch-copy {
+  min-width: 0;
+  display: grid;
+  gap: 5px;
+}
+
+.custom-indicator-guide-launch-kicker {
+  color: color-mix(in srgb, var(--primary) 78%, var(--text-t1));
+  font-size: var(--ty-r1);
+  font-weight: 680;
+  letter-spacing: 0.14px;
+}
+
+.custom-indicator-guide-launch-copy > strong {
+  color: var(--text-t1);
+  font-size: var(--ty-r3);
+  font-weight: 700;
+  line-height: 1.28;
+}
+
+.custom-indicator-guide-launch-copy > p {
+  margin: 0;
+  color: color-mix(in srgb, var(--muted) 86%, var(--text-t3));
+  font-size: var(--ty-r2);
+  line-height: 1.5;
+}
+
+.custom-indicator-guide-primary-action {
+  width: 100%;
+  justify-content: center;
+}
+
+.custom-indicator-reference-stack .custom-indicator-guide-summary-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.custom-indicator-reference-module-section {
+  display: grid;
+  gap: 10px;
+}
+
+.custom-indicator-inline-module-list {
+  grid-template-columns: repeat(auto-fit, minmax(76px, 1fr));
+  gap: 8px;
+}
+
+.custom-indicator-inline-module-list .custom-indicator-rules-module-btn {
+  min-height: 28px;
+  justify-content: center;
+  font-size: var(--ty-r1);
+  font-weight: 650;
+  text-align: center;
+  padding: 0 8px;
+}
+
+.custom-indicator-inline-reference-content {
+  min-height: 0;
+  max-height: none;
+  overflow: visible;
+  padding-right: 2px;
+  gap: 10px;
+}
+
+.custom-indicator-inline-reference-content .custom-indicator-rules-entry-grid,
+.custom-indicator-inline-reference-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.custom-indicator-reference-stack .custom-indicator-rules-overview {
+  padding: 7px 8px;
+}
+
+.custom-indicator-reference-stack .custom-indicator-rules-overview > p,
+.custom-indicator-reference-stack .custom-indicator-rules-section-head > p,
+.custom-indicator-reference-stack .custom-indicator-rules-entry > p,
+.custom-indicator-reference-stack .custom-indicator-rules-entry-copy > p,
+.custom-indicator-reference-stack .custom-indicator-rules-empty-state > p {
+  font-size: var(--ty-r2);
+  line-height: 1.42;
+}
+
+.custom-indicator-reference-stack .custom-indicator-rules-section {
+  gap: 8px;
+  padding-top: 8px;
+}
+
+.custom-indicator-reference-stack .custom-indicator-rules-section-head {
+  gap: 4px;
+}
+
+.custom-indicator-reference-stack .custom-indicator-rules-section-head > h4 {
+  font-size: var(--ty-r2);
+}
+
+.custom-indicator-reference-stack .custom-indicator-rules-entry {
+  gap: 7px;
+  padding: 10px;
+}
+
+.custom-indicator-reference-stack .custom-indicator-rules-entry > h5 {
+  font-size: var(--ty-r2);
+}
+
+.custom-indicator-reference-stack .custom-indicator-rules-entry-copy {
+  gap: 4px;
+}
+
+.custom-indicator-reference-stack .custom-indicator-rules-entry-label {
+  font-size: var(--ty-r1);
+}
+
+.custom-indicator-reference-stack .custom-indicator-rules-entry pre {
+  padding: 8px 9px;
+}
+
+.custom-indicator-reference-stack .custom-indicator-rules-entry code {
+  font-size: var(--ty-r1);
+}
+
+.custom-indicator-reference-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.custom-indicator-reference-open-btn {
+  min-width: 0;
+}
+
+.custom-indicator-guide-card-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.custom-indicator-guide-card {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid var(--custom-indicator-card-border);
+  border-radius: calc(var(--radius-rect) - 1px);
+  background: color-mix(in srgb, var(--panel) 88%, transparent);
+}
+
+.custom-indicator-guide-card.is-template {
+  border-color: color-mix(in srgb, var(--primary) 26%, var(--custom-indicator-card-border));
+  background: color-mix(in srgb, var(--primary) 8%, var(--panel));
+}
+
+.custom-indicator-guide-card.is-warning {
+  border-color: color-mix(in srgb, var(--warning) 28%, var(--custom-indicator-card-border));
+  background: color-mix(in srgb, var(--warning) 8%, var(--panel));
+}
+
+.custom-indicator-guide-card.is-directive {
+  border-color: color-mix(in srgb, rgb(var(--color-success)) 22%, var(--custom-indicator-card-border));
+  background: color-mix(in srgb, rgb(var(--color-success) / 0.08), var(--panel));
+}
+
+.custom-indicator-guide-card > h5 {
+  margin: 0;
+  color: var(--text-t1);
+  font-size: var(--ty-r3);
+  font-weight: 700;
+}
+
+.custom-indicator-guide-card > p,
+.custom-indicator-guide-block > p,
+.custom-indicator-guide-warning > p {
+  margin: 0;
+  color: color-mix(in srgb, var(--text-t1) 90%, var(--text-t2));
+  font-size: var(--ty-r2);
+  line-height: 1.52;
+}
+
+.custom-indicator-guide-block,
+.custom-indicator-guide-warning {
+  display: grid;
+  gap: 6px;
+}
+
+.custom-indicator-guide-label {
+  color: color-mix(in srgb, var(--muted) 84%, var(--text-t3));
+  font-size: var(--ty-r1);
+  font-weight: 680;
+  letter-spacing: 0.12px;
+}
+
+.custom-indicator-guide-code {
+  margin: 0;
+  border: 1px solid var(--custom-indicator-card-border);
+  border-radius: calc(var(--radius-rect) - 2px);
+  background: color-mix(in srgb, var(--surface-s1) 90%, var(--panel));
+  padding: 10px 11px;
+  overflow: auto;
+}
+
+.custom-indicator-guide-code code {
+  font-family: var(--ff-mono);
+  font-size: var(--ty-r2);
+  line-height: 1.44;
+  color: var(--text-t1);
+  white-space: pre;
+}
+
+.custom-indicator-guide-code-example {
+  border-color: color-mix(in srgb, rgb(var(--color-success)) 28%, var(--custom-indicator-card-border));
+}
+
+.custom-indicator-param-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
+  gap: 10px;
+  align-content: start;
+}
+
+.custom-indicator-param-item {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid var(--custom-indicator-card-border);
+  border-radius: calc(var(--radius-rect) - 1px);
+  background: color-mix(in srgb, var(--panel) 88%, transparent);
+}
+
+.custom-indicator-param-head {
+  display: grid;
+  gap: 4px;
+}
+
+.custom-indicator-param-head > strong {
+  color: var(--text-t1);
+  font-size: var(--ty-r2);
+  font-weight: 700;
+}
+
+.custom-indicator-param-head > p {
+  margin: 0;
+  color: color-mix(in srgb, var(--muted) 86%, var(--text-t3));
+  font-size: var(--ty-r1);
+  line-height: 1.4;
+}
+
+.custom-indicator-param-usage {
+  display: grid;
+  gap: 6px;
+}
+
+.custom-indicator-param-usage > span {
+  color: color-mix(in srgb, var(--muted) 84%, var(--text-t3));
+  font-size: var(--ty-r1);
+  font-weight: 680;
+}
+
+.custom-indicator-param-usage > code {
+  display: block;
+  padding: 9px 10px;
+  border: 1px solid var(--custom-indicator-card-border);
+  border-radius: calc(var(--radius-rect) - 2px);
+  background: color-mix(in srgb, var(--surface-s1) 90%, var(--panel));
+  color: var(--text-t1);
+  font-family: var(--ff-mono);
+  font-size: var(--ty-r1);
+  line-height: 1.44;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.custom-indicator-param-input {
+  min-height: 40px;
+  height: 40px;
+  border: 1px solid var(--custom-indicator-card-border);
+  border-radius: calc(var(--radius-rect) - 2px);
+  background: color-mix(in srgb, var(--custom-indicator-canvas-bg) 84%, var(--surface-s1));
+  color: var(--text-t1);
+  font-size: var(--ty-r2);
+  font-family: var(--ff-mono);
+  font-variant-numeric: tabular-nums;
+  padding: 0 10px;
+  box-shadow: none;
+  caret-color: color-mix(in srgb, var(--visual-accent-base) 92%, var(--visual-white));
+}

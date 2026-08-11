@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+readonly zero='0000000000000000000000000000000000000000'
+while read -r local_ref local_sha remote_ref remote_sha; do
+  if [[ "$remote_ref" == refs/heads/* && "$remote_ref" != 'refs/heads/main' && "$local_sha" != "$zero" ]]; then
+    printf 'Refusing push: main is the only persistent Zinuto branch (%s).\n' "$remote_ref" >&2
+    exit 1
+  fi
+done

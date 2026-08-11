@@ -1,0 +1,92 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+@import "./training-command-center-foundation.css";
+@import "./training-command-center-modes-and-responsive.css";
+
+.training-command-center-page {
+  --tcc-grid-line: color-mix(in srgb, var(--surface-line) 88%, transparent);
+  --tcc-grid-line-strong: var(--surface-line);
+  --tcc-panel-bg: var(--surface-panel-bg);
+  --tcc-shadow-panel: 0 14px 34px rgb(var(--color-overlay-backdrop) / 0.14);
+  --tcc-shadow-card: 0 8px 22px rgb(var(--color-overlay-backdrop) / 0.1);
+}
+
+.training-command-center-shell {
+  box-shadow: var(--tcc-shadow-panel);
+}
+
+.training-command-center-mode-card,
+.training-command-center-data-card,
+.training-command-center-recent-card,
+.training-command-center-mode-metric-shell,
+.training-command-center-data-highlight {
+  border-color: var(--surface-line);
+  background: linear-gradient(
+    145deg,
+    var(--surface-panel-bg) 0%,
+    color-mix(in srgb, var(--surface-panel-muted) 74%, var(--surface-panel-bg)) 100%
+  );
+  box-shadow: var(--tcc-shadow-card);
+}
+
+.training-command-center-mode-card {
+  border-color: color-mix(
+    in srgb,
+    var(--tcc-mode-accent, var(--visual-link-accent)) 24%,
+    var(--surface-line)
+  );
+  background: linear-gradient(
+    145deg,
+    color-mix(
+      in srgb,
+      var(--tcc-mode-accent, var(--visual-link-accent)) 9%,
+      var(--surface-panel-bg)
+    ) 0%,
+    var(--surface-panel-bg) 56%,
+    color-mix(in srgb, var(--surface-panel-muted) 78%, var(--surface-panel-bg)) 100%
+  );
+}
+
+.training-command-center-mode-card::before,
+.training-command-center-mode-card::after,
+.training-command-center-data-card::after,
+.training-command-center-recent-card::after {
+  opacity: 0.22;
+}
+
+.training-command-center-mode-card:hover,
+.training-command-center-cta.is-secondary:hover,
+.training-command-center-compact-action:hover {
+  box-shadow: 0 10px 24px rgb(var(--color-overlay-backdrop) / 0.13);
+}
+
+.training-command-center-data-highlight {
+  border-color: color-mix(in srgb, var(--visual-link-accent) 24%, var(--surface-line));
+  background: color-mix(in srgb, var(--visual-accent-surface) 58%, var(--surface-panel-bg));
+}
+
+.training-command-center-data-icon {
+  color: var(--visual-link-accent);
+  background: color-mix(in srgb, var(--visual-link-accent) 16%, var(--surface-panel-muted));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--visual-link-accent) 18%, transparent);
+}
+
+.training-command-center-cta.is-primary {
+  color: var(--tcc-mode-cta-text);
+  background: var(--tcc-mode-cta-bg);
+  border-color: var(--tcc-mode-cta-border);
+  box-shadow: var(--tcc-mode-cta-shadow);
+}
+
+.training-command-center-cta.is-primary:hover {
+  background: var(--tcc-mode-cta-bg-hover);
+  border-color: var(--tcc-mode-accent);
+  box-shadow: 0 10px 22px color-mix(in srgb, var(--tcc-mode-accent) 14%, transparent);
+}
+
+.training-command-center-cta.is-secondary,
+.training-command-center-compact-action {
+  background: color-mix(in srgb, var(--surface-panel-muted) 82%, var(--surface-panel-bg));
+  border-color: var(--surface-line);
+  color: var(--text);
+}

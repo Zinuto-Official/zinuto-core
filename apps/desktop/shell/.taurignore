@@ -1,0 +1,6 @@
+apple_auth_bridge/.build/
+apple_auth_bridge/.swiftpm/
+apple_iap_bridge/.build/
+apple_iap_bridge/.swiftpm/
+honor_share_bridge/.build/
+honor_share_bridge/.swiftpm/

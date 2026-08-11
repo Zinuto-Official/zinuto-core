@@ -1,0 +1,181 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+/*
+ * The manual form of DatePicker is a single field, not an input next to a
+ * calendar button. Keep these rules in the shared component layer so
+ * secondary-window button rules cannot change its geometry.
+ */
+[data-slot="date-picker"] {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  height: var(--ui-size-control-default);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--ui-space-control-x-default);
+  border: 1px solid var(--ui-field-border);
+  border-radius: var(--ui-radius-control);
+  background: var(--ui-field-bg);
+  color: var(--text);
+  outline: none;
+  transition:
+    background-color var(--motion-fast),
+    border-color var(--motion-fast),
+    box-shadow var(--motion-fast);
+}
+
+[data-slot="date-picker"][data-density="compact"] {
+  height: var(--ui-size-control-compact);
+  padding: 0 var(--ui-space-control-x-compact);
+}
+
+[data-slot="date-picker"][data-density="large"] {
+  height: var(--ui-size-control-large);
+  padding: 0 var(--ui-space-control-x-large);
+}
+
+[data-slot="date-picker"]:hover:not([data-disabled="true"]) {
+  border-color: var(--ui-field-border-strong);
+  background: var(--ui-field-hover-bg);
+}
+
+[data-slot="date-picker"]:focus-within {
+  border-color: var(--ui-field-border-strong);
+  box-shadow: 0 0 0 3px var(--ui-control-focus-ring);
+}
+
+[data-slot="date-picker"][aria-invalid="true"] {
+  border-color: var(--danger);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--danger) 20%, transparent);
+}
+
+[data-slot="date-picker"][data-disabled="true"] {
+  cursor: not-allowed;
+  pointer-events: none;
+  border-color: var(--ui-action-disabled-border);
+  background: var(--ui-action-disabled-bg);
+  color: var(--ui-action-disabled-text);
+}
+
+[data-slot="date-picker"] [data-date-picker-calendar-trigger="true"] {
+  align-self: stretch;
+  flex: 0 0 var(--ui-size-control-compact);
+  width: var(--ui-size-control-compact);
+  height: auto;
+  min-height: 0;
+  margin-left: calc(-1 * var(--ui-space-control-x-default));
+  padding: 0;
+  border: 0;
+  border-right: 1px solid var(--ui-divider);
+  border-radius: calc(var(--ui-radius-control) - 1px) 0 0
+    calc(var(--ui-radius-control) - 1px);
+  background: transparent;
+  color: var(--ui-text-action-fg);
+}
+
+[data-slot="date-picker"][data-density="compact"]
+  [data-date-picker-calendar-trigger="true"] {
+  margin-left: calc(-1 * var(--ui-space-control-x-compact));
+}
+
+[data-slot="date-picker"][data-density="large"]
+  [data-date-picker-calendar-trigger="true"] {
+  margin-left: calc(-1 * var(--ui-space-control-x-large));
+}
+
+[data-slot="date-picker"]
+  [data-date-picker-calendar-trigger="true"]:hover:not(:disabled) {
+  background: var(--ui-text-action-hover-bg);
+  color: var(--text-strong);
+}
+
+[data-slot="date-picker"] [data-slot="date-picker-input"] {
+  min-width: 0;
+  height: 100%;
+  flex: 1 1 auto;
+  padding: 0 0 0 9px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  outline: none;
+}
+
+[data-slot="date-picker"] [data-slot="date-picker-input"]::placeholder {
+  color: var(--text-disabled);
+}
+
+/*
+ * The secondary-window stylesheet deliberately does not ship Tailwind's
+ * utility layer. DatePicker is shared by both entries, so its calendar
+ * geometry must be expressed here instead of relying on utility classes.
+ */
+[data-slot="dropdown-menu-content"].date-picker-popover {
+  box-sizing: border-box;
+  width: min(280px, calc(100vw - 24px));
+  min-width: min(280px, calc(100vw - 24px));
+  padding: 8px;
+}
+
+.date-picker-calendar {
+  min-width: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.date-picker-calendar-header {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.date-picker-calendar-nav {
+  width: var(--ui-size-control-compact);
+  height: var(--ui-size-control-compact);
+  flex: 0 0 var(--ui-size-control-compact);
+  padding: 0;
+}
+
+.date-picker-calendar-month {
+  min-width: 0;
+  flex: 1 1 auto;
+  color: var(--text-t1);
+  font-size: var(--ty-r3);
+  font-weight: 650;
+  line-height: var(--ty-leading-label);
+  text-align: center;
+}
+
+.date-picker-calendar-grid {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.date-picker-calendar-weekday,
+.date-picker-calendar-day {
+  min-width: 0;
+  width: 100%;
+  height: var(--ui-size-control-compact);
+}
+
+.date-picker-calendar-weekday {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-t2);
+  font-size: var(--ty-r1);
+  font-weight: 650;
+  line-height: 1;
+  text-align: center;
+}
+
+.date-picker-calendar-day {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}

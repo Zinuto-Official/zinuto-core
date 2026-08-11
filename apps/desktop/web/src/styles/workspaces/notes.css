@@ -1,0 +1,6 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+@import "../pages/history-notes.css";
+@import "../components/history-replay-chart-structure.css";
+@import "../popup-note-editor.css";
+@import "../popup-replay.css";

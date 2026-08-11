@@ -1,0 +1,5 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+@import "./diagnostic-center-shell-and-overview.css";
+@import "./diagnostic-center-insights.css";
+@import "./diagnostic-center-archive-and-dialogs.css";

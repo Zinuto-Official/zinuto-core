@@ -1,0 +1,8 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+@import "../pages/diagnostic-center.css";
+@import "../pages/history-notes.css";
+@import "../layout/chart-workspace.css";
+@import "../components/history-replay-chart-structure.css";
+@import "../components/popup-replay-chart.css";
+@import "../components/summary-modal.css";

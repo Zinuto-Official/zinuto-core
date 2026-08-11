@@ -1,0 +1,12 @@
+# The organization has one sole administrator. This file routes external review
+# to that maintainer; it does not establish a two-person approval requirement.
+* @Zinuto
+
+/apps/desktop/shell/ @Zinuto
+/contracts/ @Zinuto
+/.github/ @Zinuto
+/tools/release/ @Zinuto
+/LICENSE @Zinuto
+/TRADEMARKS.md @Zinuto
+/COMMERCIAL-LICENSE.md @Zinuto
+/contributors/cla-signatures.json @Zinuto

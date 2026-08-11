@@ -1,0 +1,779 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.app-root {
+  --workspace-frame-gap-default: 10px;
+  --workspace-frame-pad-top-default: 8px;
+  --workspace-frame-pad-inline-default: 10px;
+  --workspace-frame-pad-bottom-default: 10px;
+  --workspace-frame-gap: var(--workspace-frame-gap-default);
+  --workspace-frame-pad-top: var(--workspace-frame-pad-top-default);
+  --workspace-frame-pad-inline: var(--workspace-frame-pad-inline-default);
+  --workspace-frame-pad-bottom: var(--workspace-frame-pad-bottom-default);
+  --workspace-surface-radius: 6px;
+}
+
+.desktop-main:is(.is-trainer, .is-special-training) .app-shell {
+  gap: var(--workspace-frame-gap);
+  padding: var(--workspace-frame-pad-top) var(--workspace-frame-pad-inline)
+    var(--workspace-frame-pad-bottom);
+}
+
+.desktop-main.is-trainer {
+  --workspace-frame-gap: 0px;
+  --workspace-frame-pad-top: 0px;
+  --workspace-frame-pad-inline: 0px;
+  --workspace-frame-pad-bottom: 0px;
+  --trainer-right-rail-width: clamp(272px, 20vw, 336px);
+}
+
+.desktop-main.is-trainer .app-shell {
+  gap: 0;
+  padding: 0;
+  grid-template-columns: minmax(0, 1fr) var(--trainer-right-rail-width);
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.desktop-main.is-special-training
+  > .workspace-page.special-training-page.is-fast-decision-training,
+.desktop-main.is-special-training
+  > .workspace-page-cache-slot
+  > .workspace-page-cache-slot-content
+  > .workspace-page.special-training-page.is-fast-decision-training,
+.desktop-main.is-special-training
+  > .workspace-page-cache-slot
+  > .workspace-page.special-training-page.is-fast-decision-training {
+  padding-inline-start: 0;
+}
+
+.desktop-main.is-special-training
+  .workspace-page.special-training-page.is-fast-decision-training
+  .special-training-trainer-app-shell {
+  padding-inline-start: 0;
+}
+
+.desktop-main.is-trainer > .workspace-page-cache-slot.is-active {
+  animation: none;
+}
+
+.desktop-main.is-trainer .app-shell > .left-panel,
+.desktop-main.is-trainer .app-shell > .right-panel {
+  min-height: 0;
+  height: 100%;
+}
+
+.desktop-main.is-trainer .app-shell > .left-panel {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  overflow: hidden;
+}
+
+.desktop-main.is-trainer .trainer-workspace-page,
+.trainer-workspace-page {
+  --trainer-workspace-r1: var(--ty-r1);
+  --trainer-workspace-r2: var(--ty-r1);
+  --trainer-workspace-r3: var(--ty-r2);
+  --trainer-workspace-r4: var(--ty-r3);
+  --trainer-workspace-r5: var(--ty-r4);
+  --trainer-workspace-r6: var(--ty-r5);
+  --trainer-workspace-r7: var(--ty-r6);
+  --trainer-workspace-r8: var(--ty-r7);
+  min-height: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+  background: transparent;
+  position: relative;
+  isolation: isolate;
+}
+
+.desktop-main.is-trainer .trainer-workspace-page > .trainer-workspace-body,
+.trainer-workspace-page > .trainer-workspace-body {
+  min-height: 0;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 0;
+}
+
+.desktop-main.is-trainer .trainer-workspace-page > .trainer-workspace-body > .app-shell,
+.trainer-workspace-page > .trainer-workspace-body > .app-shell {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.desktop-main.is-trainer .trainer-market-layout {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.desktop-main.is-trainer .trainer-market-layout-chart {
+  grid-row: 1;
+  align-self: stretch;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.desktop-main.is-trainer .trainer-market-layout-chart > .trainer-market-layout-chart-shell {
+  overflow: hidden;
+}
+
+.desktop-main.is-trainer .trainer-market-layout-chart,
+.desktop-main.is-trainer .trainer-market-layout-chart > .trainer-market-layout-chart-shell,
+.desktop-main.is-trainer .trainer-market-layout-chart > .trainer-market-layout-chart-shell > .trainer-chart-workspace,
+.desktop-main.is-trainer .trainer-market-layout-chart > .trainer-chart-workspace,
+.desktop-main.is-trainer .trainer-chart-workspace > .chart-layout,
+.desktop-main.is-trainer .trainer-chart-workspace > .chart-layout > .chart-panel,
+.desktop-main.is-trainer .chart-panel > .chart-canvas-wrap,
+.desktop-main.is-trainer .chart-panel > .chart-canvas-wrap > .chart-canvas {
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  min-height: 0;
+  height: 100%;
+}
+
+.desktop-main.is-trainer .chart-panel > .chart-canvas-wrap {
+  display: flex;
+}
+
+.desktop-main.is-trainer .chart-panel > .chart-canvas-wrap > .chart-canvas {
+  flex: 1 1 auto;
+}
+
+.desktop-main.is-trainer .left-panel.card,
+.desktop-main.is-trainer .right-panel.card {
+  border-radius: 0;
+}
+
+.desktop-main.is-trainer .left-panel.card,
+.desktop-main.is-special-training .special-training-trainer-left-panel {
+  background: transparent;
+}
+
+.desktop-main.is-trainer .right-panel.card {
+  background: transparent;
+  border-left: 1px solid color-mix(in srgb, var(--line) 52%, transparent);
+}
+
+.desktop-main.is-trainer .top-toolbar {
+  --trainer-top-toolbar-h: calc(var(--trainer-top-row-h) * 0.8);
+  --top-toolbar-control-h: calc(clamp(34px, 0.48vw + 32px, 36px) * 0.8);
+  min-height: var(--trainer-top-toolbar-h);
+  grid-template-columns: minmax(0, 1fr) minmax(0, auto) minmax(0, 1fr);
+  gap: clamp(10px, 0.72vw, 14px);
+  padding-inline: clamp(10px, 0.8vw, 14px);
+  background: transparent;
+  border-bottom: 1px solid color-mix(in srgb, var(--line) 56%, transparent);
+  border-radius: 0;
+}
+
+.desktop-main.is-trainer .trainer-inline-chart-toolbar {
+  min-width: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 0.72vw, 14px);
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  scrollbar-width: none;
+}
+
+.desktop-main.is-trainer .trainer-inline-chart-toolbar::-webkit-scrollbar {
+  display: none;
+}
+
+.desktop-main.is-trainer .trainer-inline-chart-toolbar .chart-period-origin-wrap {
+  flex: 0 0 auto;
+  margin-left: 0;
+}
+
+.desktop-main:is(.is-trainer, .is-special-training) .chart-period-toolbar {
+  background: transparent;
+  border-bottom: 1px solid color-mix(in srgb, var(--line) 56%, transparent);
+}
+
+.desktop-main.is-trainer .core-center-next {
+  min-height: calc(var(--trainer-top-toolbar-h) - 2px);
+}
+
+.desktop-main.is-trainer .trade-log.trade-log-strip {
+  --trainer-bottom-strip-h: calc(var(--trainer-top-row-h) * 0.6667);
+  --trainer-bottom-strip-pill-h: calc(var(--trainer-bottom-strip-h) - 12px);
+  grid-row: 2;
+  align-self: end;
+  min-height: var(--trainer-bottom-strip-h);
+  height: var(--trainer-bottom-strip-h);
+  padding-inline: 0;
+  border: none;
+  border-top: 1px solid color-mix(in srgb, var(--line) 56%, transparent);
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.desktop-main.is-trainer .trade-log-strip-shell {
+  gap: 8px;
+}
+
+.desktop-main.is-trainer .trade-log-strip-list {
+  padding-block: 1px;
+}
+
+.desktop-main.is-trainer .trade-log-strip-list-viewport {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.desktop-main.is-trainer .trade-log-strip-list-viewport::before,
+.desktop-main.is-trainer .trade-log-strip-list-viewport::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(12px, 1vw, 18px);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--motion-normal);
+  z-index: 2;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.desktop-main.is-trainer .trade-log-strip-list-viewport::before {
+  left: 0;
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--panel) 94%, var(--window-bg)) 26%,
+    transparent 100%
+  );
+}
+
+.desktop-main.is-trainer .trade-log-strip-list-viewport::after {
+  right: 0;
+  background: linear-gradient(
+    to left,
+    color-mix(in srgb, var(--panel) 94%, var(--window-bg)) 26%,
+    transparent 100%
+  );
+}
+
+.desktop-main.is-trainer .trade-log-strip-list-viewport[data-has-left-overflow='true']::before {
+  opacity: 1;
+}
+
+.desktop-main.is-trainer .trade-log-strip-list-viewport[data-has-right-overflow='true']::after {
+  opacity: 1;
+}
+
+.desktop-main.is-trainer .trade-log-strip-list-viewport > .trade-log-strip-list {
+  width: 100%;
+}
+
+.desktop-main.is-trainer .trade-log-pill,
+.desktop-main.is-trainer .trade-log-strip-empty {
+  height: var(--trainer-bottom-strip-pill-h);
+  padding-inline: 12px;
+}
+
+.desktop-main.is-trainer .trade-log-pill {
+  gap: 8px;
+}
+
+.desktop-main.is-trainer .trade-log-pill-ai-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 18px;
+  padding: 0 6px;
+  border-radius: 999px;
+  border: 1px solid var(--ui-action-border-strong);
+  background: var(--ui-text-action-active-bg);
+  color: var(--text-strong);
+  font-size: var(--ty-r1);
+  line-height: 1;
+  font-weight: 700;
+}
+
+.desktop-main.is-trainer .trade-log-pill-metrics {
+  gap: 8px;
+}
+
+.desktop-main.is-trainer .trainer-prep-operator-switch-wrap {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.desktop-main.is-trainer .trainer-prep-operator-switch {
+  display: inline-flex;
+  gap: 6px;
+  padding: 6px;
+  border: 1px solid var(--ui-control-border);
+  border-radius: 14px;
+  background: var(--ui-control-bg);
+}
+
+.desktop-main.is-trainer .trainer-prep-operator-switch-btn {
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: 10px;
+}
+
+.desktop-main.is-trainer .trainer-prep-operator-switch-btn.is-active {
+  background: var(--ui-text-action-active-bg) !important;
+  color: var(--text-strong) !important;
+}
+
+.desktop-main.is-trainer .trainer-ai-prep-console,
+.desktop-main.is-trainer .trainer-ai-live-panel {
+  border: 1px solid var(--ui-control-border);
+  border-radius: 16px;
+  background: var(--ui-control-bg);
+}
+
+.desktop-main.is-trainer .trainer-ai-prep-card,
+.desktop-main.is-trainer .trainer-ai-live-panel {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+}
+
+.desktop-main.is-trainer .trainer-ai-prep-intro {
+  display: grid;
+  gap: 6px;
+}
+
+.desktop-main.is-trainer .trainer-ai-prep-intro > strong {
+  color: var(--text-strong);
+  font-size: var(--ty-r3);
+  line-height: 1.25;
+}
+
+.desktop-main.is-trainer .trainer-ai-prep-intro > p,
+.desktop-main.is-trainer .trainer-ai-prep-action-card > p,
+.desktop-main.is-trainer .trainer-ai-guide-note > p,
+.desktop-main.is-trainer .trainer-ai-guide-step-item > p {
+  margin: 0;
+  color: var(--text-subtle);
+  font-size: var(--ty-r2);
+  line-height: 1.55;
+}
+
+.desktop-main.is-trainer .trainer-ai-prep-head,
+.desktop-main.is-trainer .trainer-ai-live-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.desktop-main.is-trainer .trainer-ai-prep-head-badges {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.desktop-main.is-trainer .trainer-ai-live-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 24px;
+  padding: 0 10px;
+  border-radius: 999px;
+  border: 1px solid var(--ui-action-border-strong);
+  background: var(--ui-text-action-active-bg);
+  color: var(--text-strong);
+  font-size: var(--ty-r1);
+  line-height: 1;
+  font-weight: 700;
+}
+
+.desktop-main.is-trainer .trainer-ai-prep-lock-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 24px;
+  padding: 0 10px;
+  border-radius: 999px;
+  border: 1px solid var(--ui-control-border);
+  background: color-mix(in srgb, var(--surface-control-muted) 74%, var(--window-bg));
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1;
+  font-weight: 700;
+}
+
+.desktop-main.is-trainer .trainer-ai-prep-console.is-locked {
+  background: color-mix(in srgb, var(--ui-control-bg) 88%, var(--surface-control-muted));
+  border-color: color-mix(in srgb, var(--ui-control-border) 92%, var(--surface-control-muted));
+}
+
+.desktop-main.is-trainer .trainer-ai-prep-card.is-locked {
+  position: relative;
+}
+
+.desktop-main.is-trainer .trainer-ai-prep-card.is-locked > * {
+  filter: grayscale(1);
+  opacity: 0.74;
+}
+
+.desktop-main.is-trainer .trainer-ai-prep-card.is-locked .trainer-ai-prep-head,
+.desktop-main.is-trainer .trainer-ai-prep-card.is-locked .trainer-ai-prep-lock-badge {
+  filter: none;
+  opacity: 1;
+}
+
+.desktop-main.is-trainer .trainer-ai-prep-grid,
+.desktop-main.is-trainer .trainer-ai-live-panel-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.desktop-main.is-trainer .trainer-ai-prep-field,
+.desktop-main.is-trainer .trainer-ai-live-metric {
+  display: grid;
+  gap: 6px;
+}
+
+.desktop-main.is-trainer .trainer-ai-prep-field > span,
+.desktop-main.is-trainer .trainer-ai-live-metric > span,
+.desktop-main.is-trainer .trainer-ai-live-rationale > span {
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1.2;
+}
+
+.desktop-main.is-trainer .trainer-ai-prep-summary {
+  display: grid;
+  gap: 8px;
+}
+
+.desktop-main.is-trainer .trainer-ai-prep-action-card,
+.desktop-main.is-trainer .trainer-ai-guide-note {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid var(--ui-control-border);
+  background: var(--panel);
+}
+
+.desktop-main.is-trainer .trainer-ai-prep-action-label {
+  color: var(--text-strong);
+  font-size: var(--ty-r2);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.desktop-main.is-trainer .trainer-ai-prep-summary-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--ui-control-border);
+  background: var(--panel);
+}
+
+.desktop-main.is-trainer .trainer-ai-prep-attach {
+  display: grid;
+  gap: 10px;
+}
+
+.desktop-main.is-trainer .trainer-ai-prep-attach-block {
+  display: grid;
+  gap: 6px;
+}
+
+.desktop-main.is-trainer .trainer-ai-prep-attach-block > span {
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+}
+
+.desktop-main.is-trainer .trainer-ai-prep-attach-block > pre {
+  margin: 0;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid var(--ui-control-border);
+  background: var(--panel);
+  color: var(--text-strong);
+  font-size: var(--ty-r1);
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.desktop-main.is-trainer .trainer-ai-prep-empty {
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px dashed var(--ui-control-border);
+  color: var(--text-subtle);
+  background: var(--panel);
+}
+
+.desktop-main.is-trainer .trainer-ai-prep-actions,
+.desktop-main.is-trainer .trainer-ai-live-panel-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.desktop-main.is-trainer .trainer-ai-copy-hint {
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1.2;
+}
+
+.desktop-main.is-trainer .trainer-ai-prep-advanced {
+  display: grid;
+  gap: 8px;
+}
+
+.desktop-main.is-trainer .trainer-ai-prep-advanced-toggle {
+  justify-self: flex-start;
+}
+
+.desktop-main.is-trainer .trainer-ai-prep-advanced-body {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid var(--ui-control-border);
+  background: var(--panel);
+}
+
+.desktop-main.is-trainer .trainer-ai-live-panel-title-stack {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.desktop-main.is-trainer .trainer-ai-live-panel-copy {
+  display: grid;
+  gap: 2px;
+}
+
+.desktop-main.is-trainer .trainer-ai-live-panel-copy > strong {
+  color: var(--text-strong);
+  font-size: var(--ty-r2);
+  line-height: 1.2;
+}
+
+.desktop-main.is-trainer .trainer-ai-live-panel-copy > span {
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+}
+
+.desktop-main.is-trainer .trainer-ai-live-rationale {
+  display: grid;
+  gap: 6px;
+  padding-top: 4px;
+}
+
+.desktop-main.is-trainer .trainer-ai-live-rationale > p {
+  margin: 0;
+  color: var(--text-strong);
+  font-size: var(--ty-r2);
+  line-height: 1.5;
+}
+
+.desktop-main.is-trainer .trainer-ai-prep-guide-btn,
+.desktop-main.is-trainer .trainer-ai-guide-copy-btn {
+  white-space: nowrap;
+}
+
+.desktop-main.is-trainer .trainer-ai-guide-dialog {
+  width: min(980px, calc(100vw - 40px));
+  max-height: calc(100vh - 40px);
+}
+
+.desktop-main.is-trainer .trainer-ai-guide-dialog-body {
+  display: grid;
+  gap: 16px;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.desktop-main.is-trainer .trainer-ai-guide-header-copy {
+  display: grid;
+  gap: 6px;
+}
+
+.desktop-main.is-trainer .trainer-ai-guide-title {
+  margin: 0;
+  color: var(--text-strong);
+  font-size: var(--ty-r4);
+  line-height: 1.15;
+}
+
+.desktop-main.is-trainer .trainer-ai-guide-description,
+.desktop-main.is-trainer .trainer-ai-guide-status-message > p,
+.desktop-main.is-trainer .trainer-ai-guide-step-card > p,
+.desktop-main.is-trainer .trainer-ai-guide-section-copy {
+  margin: 0;
+  color: var(--text-subtle);
+  font-size: var(--ty-r2);
+  line-height: 1.55;
+}
+
+.desktop-main.is-trainer .trainer-ai-guide-status-card,
+.desktop-main.is-trainer .trainer-ai-guide-step-card,
+.desktop-main.is-trainer .trainer-ai-guide-section,
+.desktop-main.is-trainer .trainer-ai-guide-troubleshooting-item {
+  border: 1px solid var(--ui-control-border);
+  border-radius: 16px;
+  background: var(--panel);
+}
+
+.desktop-main.is-trainer .trainer-ai-guide-status-card,
+.desktop-main.is-trainer .trainer-ai-guide-section {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+}
+
+.desktop-main.is-trainer .trainer-ai-guide-status-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.desktop-main.is-trainer .trainer-ai-guide-status-copy,
+.desktop-main.is-trainer .trainer-ai-guide-status-message {
+  display: grid;
+  gap: 4px;
+}
+
+.desktop-main.is-trainer .trainer-ai-guide-section-label,
+.desktop-main.is-trainer .trainer-ai-guide-status-item > span,
+.desktop-main.is-trainer .trainer-ai-guide-meta-item > span,
+.desktop-main.is-trainer .trainer-ai-guide-methods > span {
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1.2;
+}
+
+.desktop-main.is-trainer .trainer-ai-guide-phase-value,
+.desktop-main.is-trainer .trainer-ai-guide-status-message > strong,
+.desktop-main.is-trainer .trainer-ai-guide-status-item > strong,
+.desktop-main.is-trainer .trainer-ai-guide-meta-item > code {
+  color: var(--text-strong);
+}
+
+.desktop-main.is-trainer .trainer-ai-guide-status-grid,
+.desktop-main.is-trainer .trainer-ai-guide-meta-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.desktop-main.is-trainer .trainer-ai-guide-status-list {
+  display: grid;
+  gap: 10px;
+}
+
+.desktop-main.is-trainer .trainer-ai-guide-status-item,
+.desktop-main.is-trainer .trainer-ai-guide-meta-item {
+  display: grid;
+  gap: 6px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--ui-control-border);
+  background: var(--ui-control-bg);
+}
+
+.desktop-main.is-trainer .trainer-ai-guide-inline-copy,
+.desktop-main.is-trainer .trainer-ai-guide-env-head,
+.desktop-main.is-trainer .trainer-ai-guide-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.desktop-main.is-trainer .trainer-ai-guide-inline-copy > code,
+.desktop-main.is-trainer .trainer-ai-guide-inline-copy > strong,
+.desktop-main.is-trainer .trainer-ai-guide-meta-item > code {
+  overflow-wrap: anywhere;
+}
+
+.desktop-main.is-trainer .trainer-ai-guide-timeline,
+.desktop-main.is-trainer .trainer-ai-guide-methods,
+.desktop-main.is-trainer .trainer-ai-guide-troubleshooting {
+  display: grid;
+  gap: 8px;
+}
+
+.desktop-main.is-trainer .trainer-ai-guide-steps-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding-left: 20px;
+}
+
+.desktop-main.is-trainer .trainer-ai-guide-step-item {
+  display: grid;
+  gap: 4px;
+}
+
+.desktop-main.is-trainer .trainer-ai-guide-step-item > strong {
+  color: var(--text-strong);
+  font-size: var(--ty-r2);
+  line-height: 1.3;
+}
+
+.desktop-main.is-trainer .trainer-ai-guide-timeline-chips,
+.desktop-main.is-trainer .trainer-ai-guide-method-chips,
+.desktop-main.is-trainer .trainer-ai-guide-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.desktop-main.is-trainer .trainer-ai-guide-timeline-chip,
+.desktop-main.is-trainer .trainer-ai-guide-method-chips > code {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  border: 1px solid var(--ui-control-border);
+  background: var(--ui-control-bg);
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+}
+
+.desktop-main.is-trainer .trainer-ai-guide-timeline-chip.is-active {
+  border-color: var(--ui-action-border-strong);
+  background: var(--ui-text-action-active-bg);
+  color: var(--text-strong);
+}
+
+.desktop-main.is-trainer .trainer-ai-guide-step-card {
+  flex: 1 1 280px;
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+}
+
+.desktop-main.is-trainer .trainer-ai-guide-step-card > h3,
+.desktop-main.is-trainer .trainer-ai-guide-section > h3,
+.desktop-main.is-trainer .trainer-ai-guide-section-head > h3 {
+  margin: 0;
+  color: var(--text-strong);
+  font-size: var(--ty-r3);
+  line-height: 1.25;
+}

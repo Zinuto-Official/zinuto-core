@@ -1,0 +1,8 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+@import "../components/trading-settings-sheet.css";
+@import "./settings-data-core.css";
+@import "./settings-data-asset-workspace.css";
+@import "./settings-data-asset-library.css";
+@import "./settings-data-sources-and-detail.css";
+@import "./settings-data-diagnostics-and-sync.css";

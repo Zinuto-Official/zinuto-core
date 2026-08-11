@@ -1,0 +1,5445 @@
+# SPDX-License-Identifier: GPL-3.0-only
+
+openapi: 3.1.0
+info:
+  title: Zinuto Desktop Local API
+  version: 1.0.0
+  description: >
+    Canonical v1 HTTP contract for the local desktop backend reached through the
+    Tauri backend_http_request bridge. There are no unversioned aliases.
+servers:
+  - url: zinuto-desktop://local
+    description: Tauri local backend bridge
+x-zinuto-contract:
+  service: desktop-local-api
+  version: v1
+  basePath: /api/v1
+  defaultResponseKind: json-envelope
+components:
+  schemas:
+    SuccessEnvelope:
+      type: object
+      required:
+        - ok
+        - data
+      properties:
+        ok:
+          type: boolean
+          const: true
+        data:
+          description: Route-specific v1 response payload.
+    ErrorEnvelope:
+      type: object
+      required:
+        - ok
+        - requestId
+        - errorCode
+        - errorStage
+        - cause
+        - details
+      properties:
+        ok:
+          type: boolean
+          const: false
+        requestId:
+          type: string
+        errorCode:
+          type: string
+        errorStage:
+          type: string
+          enum:
+            - VALIDATION
+            - AUTHORIZATION
+            - STARTUP
+            - IMPORT
+            - ACQUISITION
+            - SYNC_CHECK
+            - SYSTEM
+        cause:
+          type: object
+          required:
+            - code
+            - stage
+          additionalProperties: false
+          properties:
+            code:
+              type: string
+            stage:
+              type: string
+              enum:
+                - VALIDATION
+                - AUTHORIZATION
+                - STARTUP
+                - IMPORT
+                - ACQUISITION
+                - SYNC_CHECK
+                - SYSTEM
+        details:
+          type: object
+          additionalProperties: true
+          x-zinuto-zod-allow-additional-properties: true
+    JsonEnvelope:
+      oneOf:
+        - $ref: "#/components/schemas/SuccessEnvelope"
+        - $ref: "#/components/schemas/ErrorEnvelope"
+    BoundedId:
+      type: string
+      minLength: 1
+      maxLength: 128
+    DesktopMarketDataAcquisitionTimeframe:
+      type: string
+      enum:
+        - 1m
+        - 5m
+        - 1h
+        - 1d
+    DesktopMarketDataAcquisitionUpstreamTerms:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - upstreamName
+        - termsUrl
+        - docsUrl
+        - termsRevision
+      properties:
+        id:
+          type: string
+          enum:
+            - eastmoney
+            - binance
+            - okx
+        upstreamName:
+          type: string
+          minLength: 1
+          maxLength: 128
+        termsUrl:
+          type: string
+          minLength: 1
+          maxLength: 2048
+        docsUrl:
+          type: string
+          minLength: 1
+          maxLength: 2048
+        termsRevision:
+          type: string
+          minLength: 1
+          maxLength: 128
+    DesktopMarketDataAcquisitionProject:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - name
+        - url
+        - infoUrl
+        - version
+        - license
+      properties:
+        id:
+          type: string
+          enum:
+            - aktools
+            - akshare
+            - ccxt
+        name:
+          type: string
+          minLength: 1
+          maxLength: 128
+        url:
+          type: string
+          minLength: 1
+          maxLength: 2048
+        infoUrl:
+          type: string
+          minLength: 1
+          maxLength: 2048
+        version:
+          type: string
+          minLength: 1
+          maxLength: 64
+        license:
+          type: string
+          minLength: 1
+          maxLength: 64
+    DesktopMarketDataAcquisitionConnectorTerms:
+      type: object
+      additionalProperties: false
+      required:
+        - projects
+        - upstreams
+      properties:
+        projects:
+          type: array
+          minItems: 1
+          maxItems: 2
+          items:
+            $ref: "#/components/schemas/DesktopMarketDataAcquisitionProject"
+        upstreams:
+          type: array
+          minItems: 1
+          maxItems: 2
+          items:
+            $ref: "#/components/schemas/DesktopMarketDataAcquisitionUpstreamTerms"
+    DesktopMarketDataAcquisitionConnector:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - version
+        - market
+        - available
+        - unavailabilityCode
+        - supportedTimeframes
+        - datasets
+        - exchanges
+        - terms
+      properties:
+        id:
+          type: string
+          enum:
+            - akshare
+            - ccxt
+        version:
+          type: string
+          minLength: 1
+          maxLength: 64
+        market:
+          type: string
+          enum:
+            - A_SHARE
+            - CRYPTO_SPOT
+        available:
+          type: boolean
+        unavailabilityCode:
+          type: string
+          minLength: 1
+          maxLength: 128
+          nullable: true
+        supportedTimeframes:
+          type: array
+          minItems: 1
+          maxItems: 4
+          items:
+            $ref: "#/components/schemas/DesktopMarketDataAcquisitionTimeframe"
+        datasets:
+          type: array
+          maxItems: 4
+          items:
+            type: string
+            enum:
+              - stock_zh_a_hist
+              - stock_zh_a_hist_min_em
+              - index_zh_a_hist
+        exchanges:
+          type: array
+          maxItems: 2
+          items:
+            type: string
+            enum:
+              - binance
+              - okx
+        terms:
+          $ref: "#/components/schemas/DesktopMarketDataAcquisitionConnectorTerms"
+    DesktopMarketDataAcquisitionConnectorCatalog:
+      type: object
+      additionalProperties: false
+      required:
+        - connectors
+      properties:
+        connectors:
+          type: array
+          minItems: 2
+          maxItems: 2
+          items:
+            $ref: "#/components/schemas/DesktopMarketDataAcquisitionConnector"
+    DesktopCcxtAcquisitionMarket:
+      type: object
+      additionalProperties: false
+      required:
+        - symbol
+        - base
+        - quote
+        - active
+      properties:
+        symbol:
+          type: string
+          minLength: 3
+          maxLength: 64
+        base:
+          type: string
+          minLength: 1
+          maxLength: 32
+        quote:
+          type: string
+          minLength: 1
+          maxLength: 32
+        active:
+          type: boolean
+          const: true
+    DesktopCcxtAcquisitionMarketCatalog:
+      type: object
+      additionalProperties: false
+      required:
+        - exchangeId
+        - markets
+        - cachedAt
+      properties:
+        exchangeId:
+          type: string
+          enum:
+            - binance
+            - okx
+        markets:
+          type: array
+          maxItems: 500
+          items:
+            $ref: "#/components/schemas/DesktopCcxtAcquisitionMarket"
+        cachedAt:
+          type: string
+          format: date-time
+          maxLength: 64
+    DesktopAkshareAcquisitionInstrument:
+      type: object
+      additionalProperties: false
+      required:
+        - symbol
+        - name
+        - exchangeId
+        - kind
+      properties:
+        symbol:
+          type: string
+          minLength: 6
+          maxLength: 12
+          pattern: "^(?:[0-9]{6}|INDEX-[0-9]{6})$"
+        name:
+          type: string
+          minLength: 1
+          maxLength: 128
+        exchangeId:
+          type: string
+          enum:
+            - SH
+            - SZ
+            - BJ
+        kind:
+          type: string
+          enum:
+            - A_SHARE
+            - INDEX
+    DesktopAkshareAcquisitionInstrumentCatalog:
+      type: object
+      additionalProperties: false
+      required:
+        - instruments
+        - cachedAt
+      properties:
+        instruments:
+          type: array
+          minItems: 1
+          maxItems: 10000
+          items:
+            $ref: "#/components/schemas/DesktopAkshareAcquisitionInstrument"
+        cachedAt:
+          type: string
+          format: date-time
+          maxLength: 64
+    DesktopAkshareDailyAcquisitionJobCreateRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - connectorId
+        - dataset
+        - symbols
+        - timeframe
+        - startAt
+        - endAt
+        - adjustment
+      properties:
+        connectorId:
+          type: string
+          const: akshare
+        dataset:
+          type: string
+          const: stock_zh_a_hist
+        symbols:
+          type: array
+          minItems: 1
+          maxItems: 20
+          uniqueItems: true
+          items:
+            type: string
+            minLength: 1
+            maxLength: 32
+            pattern: "^[0-9]{6}$"
+        timeframe:
+          type: string
+          const: 1d
+        startAt:
+          type: string
+          format: date-time
+          maxLength: 64
+        endAt:
+          type: string
+          format: date-time
+          maxLength: 64
+        adjustment:
+          type: string
+          enum:
+            - none
+            - qfq
+            - hfq
+    DesktopAkshareMinuteAcquisitionJobCreateRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - connectorId
+        - dataset
+        - symbols
+        - timeframe
+        - startAt
+        - endAt
+        - adjustment
+      properties:
+        connectorId:
+          type: string
+          const: akshare
+        dataset:
+          type: string
+          const: stock_zh_a_hist_min_em
+        symbols:
+          type: array
+          minItems: 1
+          maxItems: 20
+          uniqueItems: true
+          items:
+            type: string
+            minLength: 1
+            maxLength: 32
+            pattern: "^[0-9]{6}$"
+        timeframe:
+          type: string
+          enum:
+            - 1m
+            - 5m
+            - 1h
+        startAt:
+          type: string
+          format: date-time
+          maxLength: 64
+        endAt:
+          type: string
+          format: date-time
+          maxLength: 64
+        adjustment:
+          type: string
+          enum:
+            - none
+            - qfq
+            - hfq
+    DesktopAkshareIndexDailyAcquisitionJobCreateRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - connectorId
+        - dataset
+        - symbols
+        - timeframe
+        - startAt
+        - endAt
+        - adjustment
+      properties:
+        connectorId:
+          type: string
+          const: akshare
+        dataset:
+          type: string
+          const: index_zh_a_hist
+        symbols:
+          type: array
+          minItems: 1
+          maxItems: 20
+          uniqueItems: true
+          items:
+            type: string
+            minLength: 12
+            maxLength: 12
+            pattern: "^INDEX-[0-9]{6}$"
+        timeframe:
+          type: string
+          const: 1d
+        startAt:
+          type: string
+          format: date-time
+          maxLength: 64
+        endAt:
+          type: string
+          format: date-time
+          maxLength: 64
+        adjustment:
+          type: string
+          const: none
+    DesktopAkshareAcquisitionJobCreateRequest:
+      oneOf:
+        - $ref: "#/components/schemas/DesktopAkshareDailyAcquisitionJobCreateRequest"
+        - $ref: "#/components/schemas/DesktopAkshareMinuteAcquisitionJobCreateRequest"
+        - $ref: "#/components/schemas/DesktopAkshareIndexDailyAcquisitionJobCreateRequest"
+    DesktopCcxtAcquisitionJobCreateRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - connectorId
+        - exchangeId
+        - marketType
+        - symbols
+        - timeframe
+        - startAt
+        - endAt
+      properties:
+        connectorId:
+          type: string
+          const: ccxt
+        exchangeId:
+          type: string
+          enum:
+            - binance
+            - okx
+        marketType:
+          type: string
+          const: spot
+        symbols:
+          type: array
+          minItems: 1
+          maxItems: 20
+          uniqueItems: true
+          items:
+            type: string
+            minLength: 3
+            maxLength: 64
+            pattern: "^[A-Z0-9._-]+/[A-Z0-9._-]+$"
+        timeframe:
+          $ref: "#/components/schemas/DesktopMarketDataAcquisitionTimeframe"
+        startAt:
+          type: string
+          format: date-time
+          maxLength: 64
+        endAt:
+          type: string
+          format: date-time
+          maxLength: 64
+    DesktopMarketDataAcquisitionJobCreateRequest:
+      oneOf:
+        - $ref: "#/components/schemas/DesktopAkshareAcquisitionJobCreateRequest"
+        - $ref: "#/components/schemas/DesktopCcxtAcquisitionJobCreateRequest"
+    DesktopMarketDataAcquisitionJobProgress:
+      type: object
+      additionalProperties: false
+      required:
+        - stage
+        - completedSymbols
+        - totalSymbols
+        - retryAttempt
+        - retryAfterMs
+      properties:
+        stage:
+          type: string
+          enum:
+            - QUEUED
+            - CONNECTING
+            - DOWNLOADING
+            - NORMALIZING
+            - VALIDATING
+            - RETRY_WAIT
+            - READY_TO_SAVE
+        completedSymbols:
+          type: integer
+          minimum: 0
+          maximum: 20
+        totalSymbols:
+          type: integer
+          minimum: 1
+          maximum: 20
+        retryAttempt:
+          type: integer
+          minimum: 0
+          maximum: 3
+        retryAfterMs:
+          type: integer
+          minimum: 0
+          maximum: 10000
+    DesktopMarketDataAcquisitionStagingSummary:
+      type: object
+      additionalProperties: false
+      required:
+        - fileCount
+        - totalBytes
+        - manifestSha256
+        - outputFolderName
+      properties:
+        fileCount:
+          type: integer
+          minimum: 2
+          maximum: 21
+        totalBytes:
+          type: integer
+          minimum: 1
+        manifestSha256:
+          type: string
+          pattern: "^[0-9a-f]{64}$"
+        outputFolderName:
+          type: string
+          minLength: 1
+          maxLength: 128
+    DesktopMarketDataAcquisitionJobError:
+      type: object
+      additionalProperties: false
+      required:
+        - code
+        - args
+      properties:
+        code:
+          type: string
+          minLength: 1
+          maxLength: 128
+        args:
+          type: object
+          additionalProperties: true
+          x-zinuto-zod-allow-additional-properties: true
+    DesktopMarketDataAcquisitionJob:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - status
+        - connectorId
+        - request
+        - progress
+        - staging
+        - error
+        - createdAt
+        - updatedAt
+      properties:
+        id:
+          $ref: "#/components/schemas/BoundedId"
+        status:
+          type: string
+          enum:
+            - QUEUED
+            - RUNNING
+            - READY_TO_SAVE
+            - FAILED
+            - CANCELED
+        connectorId:
+          type: string
+          enum:
+            - akshare
+            - ccxt
+        request:
+          $ref: "#/components/schemas/DesktopMarketDataAcquisitionJobCreateRequest"
+        progress:
+          $ref: "#/components/schemas/DesktopMarketDataAcquisitionJobProgress"
+        staging:
+          $ref: "#/components/schemas/DesktopMarketDataAcquisitionStagingSummary"
+          nullable: true
+        error:
+          $ref: "#/components/schemas/DesktopMarketDataAcquisitionJobError"
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+          maxLength: 64
+        updatedAt:
+          type: string
+          format: date-time
+          maxLength: 64
+    DesktopMarketDataAcquisitionDiscardResult:
+      type: object
+      additionalProperties: false
+      required:
+        - discarded
+      properties:
+        discarded:
+          type: boolean
+    DesktopWorkspaceId:
+      type: string
+      enum:
+        - command-center
+        - trainer
+        - history-review-console
+        - challenge-stats
+        - special-training
+        - data-management
+        - notes
+        - settings
+        - custom-indicator
+        - strategy-backtest
+    DesktopWorkspaceReadModelTone:
+      type: string
+      enum:
+        - neutral
+        - ready
+        - loading
+        - warning
+        - danger
+        - locked
+    DesktopWorkspaceCopyRef:
+      type: object
+      required:
+        - copyKey
+      properties:
+        copyKey:
+          type: string
+          minLength: 1
+          maxLength: 128
+        copyArgs:
+          type: array
+          maxItems: 16
+          items:
+            oneOf:
+              - type: string
+              - type: number
+              - type: boolean
+      additionalProperties: false
+    DesktopWorkspaceReadModelAction:
+      type: object
+      required:
+        - id
+        - enabled
+        - reasonCode
+        - priority
+      properties:
+        id:
+          $ref: "#/components/schemas/BoundedId"
+        enabled:
+          type: boolean
+        reasonCode:
+          type: string
+          nullable: true
+        priority:
+          type: integer
+          minimum: 0
+          maximum: 100
+        copy:
+          $ref: "#/components/schemas/DesktopWorkspaceCopyRef"
+        facts:
+          type: object
+          additionalProperties: true
+          x-zinuto-zod-allow-additional-properties: true
+      additionalProperties: false
+    DesktopWorkspaceReadModelSection:
+      type: object
+      required:
+        - id
+        - statusCode
+        - reasonCode
+        - tone
+        - priority
+        - facts
+        - actions
+      properties:
+        id:
+          $ref: "#/components/schemas/BoundedId"
+        statusCode:
+          type: string
+          minLength: 1
+          maxLength: 64
+        reasonCode:
+          type: string
+          nullable: true
+        tone:
+          $ref: "#/components/schemas/DesktopWorkspaceReadModelTone"
+        priority:
+          type: integer
+          minimum: 0
+          maximum: 100
+        copy:
+          $ref: "#/components/schemas/DesktopWorkspaceCopyRef"
+        facts:
+          type: object
+          additionalProperties: true
+          x-zinuto-zod-allow-additional-properties: true
+        actions:
+          type: array
+          maxItems: 64
+          items:
+            $ref: "#/components/schemas/DesktopWorkspaceReadModelAction"
+      additionalProperties: false
+    DesktopWorkspaceReadModel:
+      type: object
+      required:
+        - workspaceId
+        - generatedAt
+        - statusCode
+        - reasonCode
+        - tone
+        - priority
+        - facts
+        - actions
+        - sections
+      properties:
+        workspaceId:
+          $ref: "#/components/schemas/DesktopWorkspaceId"
+        generatedAt:
+          type: string
+          format: date-time
+        statusCode:
+          type: string
+          minLength: 1
+          maxLength: 64
+        reasonCode:
+          type: string
+          nullable: true
+        tone:
+          $ref: "#/components/schemas/DesktopWorkspaceReadModelTone"
+        priority:
+          type: integer
+          minimum: 0
+          maximum: 100
+        copy:
+          $ref: "#/components/schemas/DesktopWorkspaceCopyRef"
+        facts:
+          type: object
+          additionalProperties: true
+          x-zinuto-zod-allow-additional-properties: true
+        actions:
+          type: array
+          maxItems: 64
+          items:
+            $ref: "#/components/schemas/DesktopWorkspaceReadModelAction"
+        sections:
+          type: array
+          maxItems: 64
+          items:
+            $ref: "#/components/schemas/DesktopWorkspaceReadModelSection"
+      additionalProperties: false
+    DesktopReleaseChannel:
+      type: string
+      enum:
+        - community
+    DesktopLegalDocumentKey:
+      type: string
+      enum:
+        - privacy
+        - terms
+    DesktopLegalDocumentLocale:
+      type: string
+      enum:
+        - en
+        - zh-CN
+        - ja
+        - ko
+        - es
+    DesktopLegalDocumentCacheStatus:
+      type: string
+      enum:
+        - local
+    DesktopLegalDocument:
+      type: object
+      required:
+        - documentKey
+        - locale
+        - documentVersion
+        - lastUpdated
+        - effectiveDate
+        - markdown
+        - sourceUrl
+        - cacheStatus
+        - fetchedAt
+        - checkedAt
+      properties:
+        documentKey:
+          $ref: "#/components/schemas/DesktopLegalDocumentKey"
+        locale:
+          $ref: "#/components/schemas/DesktopLegalDocumentLocale"
+        documentVersion:
+          type: string
+          minLength: 1
+          maxLength: 64
+        lastUpdated:
+          type: string
+          minLength: 1
+          maxLength: 64
+        effectiveDate:
+          type: string
+          minLength: 1
+          maxLength: 64
+        markdown:
+          type: string
+          minLength: 1
+          maxLength: 100000
+        sourceUrl:
+          type: string
+          minLength: 1
+          maxLength: 8192
+        cacheStatus:
+          $ref: "#/components/schemas/DesktopLegalDocumentCacheStatus"
+        fetchedAt:
+          type: string
+          minLength: 1
+          maxLength: 64
+        checkedAt:
+          type: string
+          minLength: 1
+          maxLength: 64
+      additionalProperties: false
+    DesktopSystemDevSimulationTargets:
+      type: object
+      required:
+        - freeReplayTarget
+        - fastDecisionTarget
+        - riskDisciplineTarget
+        - independentCustomNotes
+        - customIndicatorProfiles
+        - realBacktestBatches
+      additionalProperties: false
+      properties:
+        freeReplayTarget:
+          type: integer
+          minimum: 0
+          maximum: 3000
+        fastDecisionTarget:
+          type: integer
+          minimum: 0
+          maximum: 600
+        riskDisciplineTarget:
+          type: integer
+          minimum: 0
+          maximum: 600
+        independentCustomNotes:
+          type: integer
+          minimum: 0
+          maximum: 500
+        customIndicatorProfiles:
+          type: integer
+          minimum: 0
+          maximum: 1000
+        realBacktestBatches:
+          type: integer
+          minimum: 0
+          maximum: 500
+    DesktopSystemDevSimulationStartRequest:
+      type: object
+      required:
+        - profileId
+        - repeatMode
+        - seed
+        - targets
+      additionalProperties: false
+      properties:
+        profileId:
+          type: string
+          enum:
+            - REALISTIC
+            - STRESS
+        repeatMode:
+          type: string
+          enum:
+            - REPLACE
+            - APPEND
+        seed:
+          type: string
+          minLength: 1
+          maxLength: 128
+        targets:
+          $ref: "#/components/schemas/DesktopSystemDevSimulationTargets"
+    BoundedSymbol:
+      type: string
+      minLength: 1
+      maxLength: 32
+    BacktestBatchStatus:
+      type: string
+      enum:
+        - DRAFT
+        - QUEUED
+        - RUNNING
+        - SUCCEEDED
+        - FAILED
+        - CANCELLED
+    BacktestOrderSizingMode:
+      type: string
+      enum:
+        - FIXED_QTY
+        - FIXED_AMOUNT
+        - EQUITY_PERCENT
+        - ALL_IN
+    BacktestOrderSizing:
+      type: object
+      required:
+        - mode
+      properties:
+        mode:
+          $ref: "#/components/schemas/BacktestOrderSizingMode"
+        value:
+          type: number
+          minimum: 0
+      additionalProperties: false
+    BacktestSignalRuleOperand:
+      oneOf:
+        - type: object
+          required:
+            - kind
+            - key
+          properties:
+            kind:
+              type: string
+              enum:
+                - OUTPUT
+            key:
+              type: string
+              minLength: 1
+              maxLength: 64
+              pattern: ^[A-Z_][A-Z0-9_]*$
+          additionalProperties: false
+        - type: object
+          required:
+            - kind
+            - field
+          properties:
+            kind:
+              type: string
+              enum:
+                - PRICE
+            field:
+              type: string
+              enum:
+                - CLOSE
+                - OPEN
+                - HIGH
+                - LOW
+                - VOLUME
+          additionalProperties: false
+        - type: object
+          required:
+            - kind
+            - value
+          properties:
+            kind:
+              type: string
+              enum:
+                - CONSTANT
+            value:
+              type: number
+          additionalProperties: false
+    BacktestSignalRuleOperator:
+      type: string
+      enum:
+        - CROSS_ABOVE
+        - CROSS_BELOW
+        - GREATER
+        - GREATER_EQUAL
+        - LESS
+        - LESS_EQUAL
+        - EQUAL
+    BacktestSignalRuleCondition:
+      type: object
+      required:
+        - left
+        - operator
+        - right
+      properties:
+        left:
+          $ref: "#/components/schemas/BacktestSignalRuleOperand"
+        operator:
+          $ref: "#/components/schemas/BacktestSignalRuleOperator"
+        right:
+          $ref: "#/components/schemas/BacktestSignalRuleOperand"
+      additionalProperties: false
+    BacktestDirectionSignalRule:
+      type: object
+      required:
+        - connector
+        - conditions
+      properties:
+        connector:
+          type: string
+          enum:
+            - AND
+            - OR
+        conditions:
+          type: array
+          minItems: 1
+          items:
+            $ref: "#/components/schemas/BacktestSignalRuleCondition"
+      additionalProperties: false
+    BacktestSignalRules:
+      type: object
+      properties:
+        buy:
+          $ref: "#/components/schemas/BacktestDirectionSignalRule"
+        sell:
+          $ref: "#/components/schemas/BacktestDirectionSignalRule"
+        short:
+          $ref: "#/components/schemas/BacktestDirectionSignalRule"
+        cover:
+          $ref: "#/components/schemas/BacktestDirectionSignalRule"
+      additionalProperties: false
+    BacktestTradingSettings:
+      type: object
+      required:
+        - assetClass
+        - marketPresetId
+        - minTradeStep
+        - initialSecuritiesBalance
+        - allowShortSelling
+        - tradeSettlementMode
+        - freeReplayEndSettlementMode
+      properties:
+        assetClass:
+          type: string
+          enum:
+            - STOCK
+            - FUTURES
+            - FOREX
+            - CRYPTO
+        marketPresetId:
+          type: string
+          minLength: 1
+          maxLength: 48
+        minTradeStep:
+          type: number
+          exclusiveMinimum: 0
+        initialSecuritiesBalance:
+          type: number
+          exclusiveMinimum: 0
+        allowShortSelling:
+          type: boolean
+        tradeSettlementMode:
+          type: string
+          enum:
+            - T0
+            - T1
+        freeReplayEndSettlementMode:
+          type: string
+          enum:
+            - FORCE_CLOSE
+            - CURRENT_TOTAL_ASSET
+      additionalProperties: true
+      x-zinuto-zod-allow-additional-properties: true
+    BacktestConfig:
+      type: object
+      required:
+        - strategySource
+        - initialCapital
+        - orderSizing
+        - tradingSettings
+      properties:
+        name:
+          type: string
+          maxLength: 64
+        strategySource:
+          type: string
+          minLength: 1
+          maxLength: 65536
+        parameterInputs:
+          type: object
+          additionalProperties:
+            type: string
+            maxLength: 128
+        instrumentIds:
+          type: array
+          maxItems: 20000
+          items:
+            $ref: "#/components/schemas/BoundedId"
+        samplePoolIds:
+          type: array
+          maxItems: 500
+          items:
+            $ref: "#/components/schemas/BoundedId"
+        startIndex:
+          type: integer
+          minimum: 0
+        endIndex:
+          type: integer
+          minimum: 0
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
+        initialCapital:
+          type: number
+          exclusiveMinimum: 0
+        priceMode:
+          type: string
+          enum:
+            - CUR_CLOSE
+            - NEXT_OPEN
+        signalExecutionMode:
+          type: string
+          enum:
+            - CUR_CLOSE
+            - NEXT_OPEN
+        orderSizing:
+          $ref: "#/components/schemas/BacktestOrderSizing"
+        tradingSettings:
+          $ref: "#/components/schemas/BacktestTradingSettings"
+        signalRules:
+          $ref: "#/components/schemas/BacktestSignalRules"
+      additionalProperties: false
+    BacktestBatchCreateRequest:
+      type: object
+      required:
+        - config
+      properties:
+        name:
+          type: string
+          maxLength: 64
+        config:
+          $ref: "#/components/schemas/BacktestConfig"
+      additionalProperties: false
+    BacktestBatchRunRequest:
+      type: object
+      additionalProperties: false
+    BacktestBatch:
+      type: object
+      required:
+        - id
+        - name
+        - status
+        - config
+        - progress
+        - summary
+        - errorCode
+        - errorMessage
+        - createdAt
+        - updatedAt
+        - startedAt
+        - finishedAt
+      properties:
+        id:
+          $ref: "#/components/schemas/BoundedId"
+        name:
+          type: string
+          minLength: 1
+          maxLength: 64
+        status:
+          $ref: "#/components/schemas/BacktestBatchStatus"
+        config:
+          $ref: "#/components/schemas/BacktestConfig"
+        progress:
+          type: object
+          additionalProperties: true
+          x-zinuto-zod-allow-additional-properties: true
+        summary:
+          type: object
+          additionalProperties: true
+          x-zinuto-zod-allow-additional-properties: true
+        errorCode:
+          type: string
+          nullable: true
+        errorMessage:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        startedAt:
+          type: string
+          format: date-time
+          nullable: true
+        finishedAt:
+          type: string
+          format: date-time
+          nullable: true
+      additionalProperties: false
+    BacktestResultListItem:
+      type: object
+      required:
+        - id
+        - batchId
+        - instrumentId
+        - symbol
+        - timeframe
+        - barsCount
+        - finalEquity
+        - totalPnl
+        - profitRate
+        - maxDrawdown
+        - winRate
+        - tradeCount
+        - conflictCount
+        - createdAt
+        - updatedAt
+      properties:
+        id:
+          $ref: "#/components/schemas/BoundedId"
+        batchId:
+          $ref: "#/components/schemas/BoundedId"
+        instrumentId:
+          $ref: "#/components/schemas/BoundedId"
+        symbol:
+          $ref: "#/components/schemas/BoundedSymbol"
+        timeframe:
+          type: string
+          minLength: 1
+          maxLength: 64
+        barsCount:
+          type: integer
+          minimum: 0
+        finalEquity:
+          type: number
+        totalPnl:
+          type: number
+        profitRate:
+          type: number
+        maxDrawdown:
+          type: number
+        winRate:
+          type: number
+        tradeCount:
+          type: integer
+          minimum: 0
+        conflictCount:
+          type: integer
+          minimum: 0
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      additionalProperties: false
+    BacktestResultSummary:
+      type: object
+      required:
+        - id
+        - batchId
+        - instrumentId
+        - symbol
+        - timeframe
+        - barsCount
+        - finalEquity
+        - totalPnl
+        - profitRate
+        - maxDrawdown
+        - winRate
+        - tradeCount
+        - conflictCount
+        - summary
+        - createdAt
+        - updatedAt
+      properties:
+        id:
+          $ref: "#/components/schemas/BoundedId"
+        batchId:
+          $ref: "#/components/schemas/BoundedId"
+        instrumentId:
+          $ref: "#/components/schemas/BoundedId"
+        symbol:
+          $ref: "#/components/schemas/BoundedSymbol"
+        timeframe:
+          type: string
+          minLength: 1
+          maxLength: 64
+        barsCount:
+          type: integer
+          minimum: 0
+        finalEquity:
+          type: number
+        totalPnl:
+          type: number
+        profitRate:
+          type: number
+        maxDrawdown:
+          type: number
+        winRate:
+          type: number
+        tradeCount:
+          type: integer
+          minimum: 0
+        conflictCount:
+          type: integer
+          minimum: 0
+        summary:
+          type: object
+          additionalProperties: true
+          x-zinuto-zod-allow-additional-properties: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      additionalProperties: false
+    BacktestFill:
+      type: object
+      required:
+        - id
+        - batchId
+        - resultId
+        - instrumentId
+        - symbol
+        - orderId
+        - fillIndex
+        - fillTime
+        - side
+        - price
+        - qty
+        - gross
+        - fee
+        - tax
+        - slippage
+        - createdAt
+      properties:
+        id:
+          $ref: "#/components/schemas/BoundedId"
+        batchId:
+          $ref: "#/components/schemas/BoundedId"
+        resultId:
+          $ref: "#/components/schemas/BoundedId"
+        instrumentId:
+          $ref: "#/components/schemas/BoundedId"
+        symbol:
+          $ref: "#/components/schemas/BoundedSymbol"
+        orderId:
+          $ref: "#/components/schemas/BoundedId"
+        fillIndex:
+          type: integer
+          minimum: 0
+        fillTime:
+          type: string
+          format: date-time
+        side:
+          type: string
+          enum:
+            - BUY
+            - SELL
+        price:
+          type: number
+        qty:
+          type: number
+        gross:
+          type: number
+        fee:
+          type: number
+        tax:
+          type: number
+        slippage:
+          type: number
+        createdAt:
+          type: string
+          format: date-time
+      additionalProperties: false
+    BacktestEquityPoint:
+      type: object
+      required:
+        - id
+        - batchId
+        - resultId
+        - instrumentId
+        - symbol
+        - barIndex
+        - barTime
+        - equity
+        - drawdown
+      properties:
+        id:
+          $ref: "#/components/schemas/BoundedId"
+        batchId:
+          $ref: "#/components/schemas/BoundedId"
+        resultId:
+          $ref: "#/components/schemas/BoundedId"
+        instrumentId:
+          $ref: "#/components/schemas/BoundedId"
+        symbol:
+          $ref: "#/components/schemas/BoundedSymbol"
+        barIndex:
+          type: integer
+          minimum: 0
+        barTime:
+          type: string
+          format: date-time
+        equity:
+          type: number
+        drawdown:
+          type: number
+      additionalProperties: false
+    BacktestProgress:
+      type: object
+      required:
+        - batch
+        - progress
+      properties:
+        batch:
+          $ref: "#/components/schemas/BacktestBatch"
+        progress:
+          type: object
+          additionalProperties: true
+          x-zinuto-zod-allow-additional-properties: true
+      additionalProperties: false
+    BacktestResults:
+      type: object
+      required:
+        - batch
+        - results
+      properties:
+        batch:
+          $ref: "#/components/schemas/BacktestBatch"
+        results:
+          type: array
+          items:
+            $ref: "#/components/schemas/BacktestResultListItem"
+      additionalProperties: false
+    BacktestResultDetail:
+      type: object
+      required:
+        - batch
+        - result
+        - fills
+        - equityCurve
+      properties:
+        batch:
+          $ref: "#/components/schemas/BacktestBatch"
+        result:
+          $ref: "#/components/schemas/BacktestResultSummary"
+        fills:
+          type: array
+          items:
+            $ref: "#/components/schemas/BacktestFill"
+        equityCurve:
+          type: array
+          items:
+            $ref: "#/components/schemas/BacktestEquityPoint"
+      additionalProperties: false
+    BacktestDeleteResult:
+      type: object
+      required:
+        - deletedBatchId
+      properties:
+        deletedBatchId:
+          $ref: "#/components/schemas/BoundedId"
+      additionalProperties: false
+    BacktestClearResult:
+      type: object
+      required:
+        - deletedBatchIds
+        - deletedBatchCount
+        - clearedAt
+      properties:
+        deletedBatchIds:
+          type: array
+          items:
+            $ref: "#/components/schemas/BoundedId"
+        deletedBatchCount:
+          type: integer
+          minimum: 0
+        clearedAt:
+          type: string
+          format: date-time
+      additionalProperties: false
+    ReplayNoteType:
+      type: string
+      enum:
+        - FREE_REPLAY
+        - CHALLENGE
+        - CUSTOM
+    ReplayNoteInlineMark:
+      type: string
+      enum:
+        - BOLD
+        - ITALIC
+        - UNDERLINE
+        - HIGHLIGHT
+    ReplayNoteTextInline:
+      type: object
+      required:
+        - inlineKind
+        - text
+      properties:
+        inlineKind:
+          type: string
+          const: TEXT
+        text:
+          type: string
+        marks:
+          type: array
+          items:
+            $ref: "#/components/schemas/ReplayNoteInlineMark"
+      additionalProperties: false
+    ReplayNoteCapsuleInline:
+      type: object
+      required:
+        - inlineKind
+        - attachmentRefId
+      properties:
+        inlineKind:
+          type: string
+          const: CAPSULE
+        attachmentRefId:
+          type: string
+          minLength: 1
+          maxLength: 128
+      additionalProperties: false
+    ReplayNoteInline:
+      oneOf:
+        - $ref: "#/components/schemas/ReplayNoteTextInline"
+        - $ref: "#/components/schemas/ReplayNoteCapsuleInline"
+    ReplayNoteParagraphBlock:
+      type: object
+      required:
+        - blockKind
+        - children
+      properties:
+        blockKind:
+          type: string
+          enum:
+            - PARAGRAPH
+            - H1
+            - H2
+            - H3
+            - QUOTE
+        children:
+          type: array
+          items:
+            $ref: "#/components/schemas/ReplayNoteInline"
+      additionalProperties: false
+    ReplayNoteListBlock:
+      type: object
+      required:
+        - blockKind
+        - items
+      properties:
+        blockKind:
+          type: string
+          enum:
+            - BULLET_LIST
+            - ORDERED_LIST
+        items:
+          type: array
+          items:
+            type: array
+            items:
+              $ref: "#/components/schemas/ReplayNoteInline"
+      additionalProperties: false
+    ReplayNoteCheckListItem:
+      type: object
+      required:
+        - checked
+        - children
+      properties:
+        checked:
+          type: boolean
+        children:
+          type: array
+          items:
+            $ref: "#/components/schemas/ReplayNoteInline"
+      additionalProperties: false
+    ReplayNoteCheckListBlock:
+      type: object
+      required:
+        - blockKind
+        - items
+      properties:
+        blockKind:
+          type: string
+          const: CHECK_LIST
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/ReplayNoteCheckListItem"
+      additionalProperties: false
+    ReplayNoteDividerBlock:
+      type: object
+      required:
+        - blockKind
+      properties:
+        blockKind:
+          type: string
+          const: DIVIDER
+      additionalProperties: false
+    ReplayNoteEmbedBlock:
+      type: object
+      required:
+        - blockKind
+        - attachmentRefId
+      properties:
+        blockKind:
+          type: string
+          const: EMBED
+        attachmentRefId:
+          type: string
+          minLength: 1
+          maxLength: 128
+      additionalProperties: false
+    ReplayNoteBlock:
+      oneOf:
+        - $ref: "#/components/schemas/ReplayNoteParagraphBlock"
+        - $ref: "#/components/schemas/ReplayNoteListBlock"
+        - $ref: "#/components/schemas/ReplayNoteCheckListBlock"
+        - $ref: "#/components/schemas/ReplayNoteDividerBlock"
+        - $ref: "#/components/schemas/ReplayNoteEmbedBlock"
+    ReplayNoteDocumentV1:
+      type: object
+      required:
+        - schemaVersion
+        - blocks
+      properties:
+        schemaVersion:
+          type: integer
+          const: 1
+        blocks:
+          type: array
+          items:
+            $ref: "#/components/schemas/ReplayNoteBlock"
+      additionalProperties: false
+    ReplayNoteAttachmentV1:
+      type: object
+      required:
+        - attachmentRefId
+        - kind
+      properties:
+        attachmentRefId:
+          type: string
+          minLength: 1
+          maxLength: 128
+        kind:
+          type: string
+          enum:
+            - CAPSULE
+            - REPLAY_CONTEXT
+            - CHART_VIEW
+            - DRAWING_LAYER
+        summary:
+          type: object
+          additionalProperties: true
+          x-zinuto-zod-allow-additional-properties: true
+        ref:
+          type: object
+          additionalProperties: true
+          x-zinuto-zod-allow-additional-properties: true
+        payload:
+          description: Optional compact archive payload for portable export or
+            unrecoverable sources.
+      additionalProperties: false
+    ReplayNoteCreateRequest:
+      type: object
+      required:
+        - type
+        - contentDocument
+      properties:
+        id:
+          $ref: "#/components/schemas/BoundedId"
+        title:
+          type: string
+          maxLength: 160
+        type:
+          $ref: "#/components/schemas/ReplayNoteType"
+        contentDocument:
+          $ref: "#/components/schemas/ReplayNoteDocumentV1"
+        attachments:
+          type: array
+          items:
+            $ref: "#/components/schemas/ReplayNoteAttachmentV1"
+        colorTokens:
+          type: array
+          items:
+            type: string
+        meta:
+          type: object
+          additionalProperties: true
+          x-zinuto-zod-allow-additional-properties: true
+        metaSummary:
+          type: object
+          additionalProperties: true
+          x-zinuto-zod-allow-additional-properties: true
+        contextReplay:
+          type: object
+          additionalProperties: true
+          x-zinuto-zod-allow-additional-properties: true
+      additionalProperties: true
+      x-zinuto-zod-allow-additional-properties: true
+    ReplayNoteUpdateRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          maxLength: 160
+        contentDocument:
+          $ref: "#/components/schemas/ReplayNoteDocumentV1"
+        attachments:
+          type: array
+          items:
+            $ref: "#/components/schemas/ReplayNoteAttachmentV1"
+        colorTokens:
+          type: array
+          items:
+            type: string
+        meta:
+          type: object
+          additionalProperties: true
+          x-zinuto-zod-allow-additional-properties: true
+        metaSummary:
+          type: object
+          additionalProperties: true
+          x-zinuto-zod-allow-additional-properties: true
+        contextReplay:
+          type: object
+          additionalProperties: true
+          x-zinuto-zod-allow-additional-properties: true
+      additionalProperties: true
+      x-zinuto-zod-allow-additional-properties: true
+    GeneralName:
+      type: string
+      minLength: 1
+      maxLength: 120
+    ImportFolderPath:
+      type: string
+      minLength: 1
+      maxLength: 4096
+      pattern: \S
+    ImportRelativePath:
+      type: string
+      minLength: 1
+      maxLength: 1024
+      pattern: \S
+    ImportFileName:
+      type: string
+      maxLength: 255
+      pattern: ^(?:$|.*\S.*)$
+    SecurityBookmark:
+      type: string
+      maxLength: 16384
+    LongToken:
+      type: string
+      minLength: 1
+      maxLength: 65536
+    CsvHeaderName:
+      type: string
+      minLength: 1
+      maxLength: 120
+      pattern: \S
+    CsvMapping:
+      oneOf:
+        - $ref: "#/components/schemas/CsvMappingSingleTimestamp"
+        - $ref: "#/components/schemas/CsvMappingSplitTimestamp"
+    CsvMappingSingleTimestamp:
+      type: object
+      required:
+        - date
+        - open
+        - high
+        - low
+        - close
+      properties:
+        timestampMode:
+          type: string
+          enum:
+            - SINGLE
+          default: SINGLE
+        date:
+          $ref: "#/components/schemas/CsvHeaderName"
+        time:
+          type: string
+          maxLength: 120
+          default: ""
+        open:
+          $ref: "#/components/schemas/CsvHeaderName"
+        high:
+          $ref: "#/components/schemas/CsvHeaderName"
+        low:
+          $ref: "#/components/schemas/CsvHeaderName"
+        close:
+          $ref: "#/components/schemas/CsvHeaderName"
+        volume:
+          type: string
+          maxLength: 120
+          default: ""
+      additionalProperties: false
+    CsvMappingSplitTimestamp:
+      type: object
+      required:
+        - timestampMode
+        - date
+        - time
+        - open
+        - high
+        - low
+        - close
+      properties:
+        timestampMode:
+          type: string
+          enum:
+            - SPLIT
+        date:
+          $ref: "#/components/schemas/CsvHeaderName"
+        time:
+          $ref: "#/components/schemas/CsvHeaderName"
+        open:
+          $ref: "#/components/schemas/CsvHeaderName"
+        high:
+          $ref: "#/components/schemas/CsvHeaderName"
+        low:
+          $ref: "#/components/schemas/CsvHeaderName"
+        close:
+          $ref: "#/components/schemas/CsvHeaderName"
+        volume:
+          type: string
+          maxLength: 120
+          default: ""
+      additionalProperties: false
+    CsvMappingDraft:
+      type: object
+      properties:
+        timestampMode:
+          type: string
+          enum:
+            - SINGLE
+            - SPLIT
+          default: SINGLE
+        date:
+          type: string
+          maxLength: 120
+          default: ""
+        time:
+          type: string
+          maxLength: 120
+          default: ""
+        open:
+          type: string
+          maxLength: 120
+          default: ""
+        high:
+          type: string
+          maxLength: 120
+          default: ""
+        low:
+          type: string
+          maxLength: 120
+          default: ""
+        close:
+          type: string
+          maxLength: 120
+          default: ""
+        volume:
+          type: string
+          maxLength: 120
+          default: ""
+      additionalProperties: false
+    TradingSessionRange:
+      type: object
+      required:
+        - startMinute
+        - endMinute
+        - crossesMidnight
+      properties:
+        startMinute:
+          type: integer
+          minimum: 0
+          maximum: 1439
+        endMinute:
+          type: integer
+          minimum: 0
+          maximum: 1440
+        crossesMidnight:
+          type: boolean
+      additionalProperties: false
+    TradingCalendarConfig:
+      type: object
+      required:
+        - tradingDays
+        - sessions
+      properties:
+        tradingDays:
+          type: array
+          minItems: 1
+          maxItems: 7
+          items:
+            type: integer
+            minimum: 1
+            maximum: 7
+        sessions:
+          type: array
+          minItems: 1
+          maxItems: 12
+          items:
+            $ref: "#/components/schemas/TradingSessionRange"
+      additionalProperties: false
+    TradingCalendarSuggestion:
+      type: object
+      required:
+        - calendar
+        - confidence
+        - origin
+        - sampleCount
+        - activeDayCount
+      properties:
+        calendar:
+          $ref: "#/components/schemas/TradingCalendarConfig"
+        confidence:
+          type: string
+          enum:
+            - HIGH
+            - MEDIUM
+            - LOW
+        origin:
+          type: string
+          enum:
+            - DETECTED
+            - EXISTING_SOURCE
+            - PRESET_DEFAULT
+        sampleCount:
+          type: integer
+          minimum: 0
+        activeDayCount:
+          type: integer
+          minimum: 0
+          maximum: 7
+      additionalProperties: false
+    DesktopLocalDataImportUserOverrides:
+      type: object
+      properties:
+        sourceName:
+          type: string
+          maxLength: 120
+        sourceFolder:
+          type: string
+          maxLength: 4096
+          pattern: ^(?:$|.*\S.*)$
+        sourceFolderBookmarkId:
+          $ref: "#/components/schemas/SecurityBookmark"
+        timeZone:
+          type: string
+          minLength: 1
+          maxLength: 128
+        timeZoneOrigin:
+          type: string
+          enum:
+            - PRESET_DEFAULT
+            - INFERRED_DEFAULT
+            - USER_SELECTED
+        tradingCalendar:
+          $ref: "#/components/schemas/TradingCalendarConfig"
+      additionalProperties: false
+    DesktopLocalDataFullReimportUserOverrides:
+      type: object
+      properties:
+        sourceName:
+          type: string
+          maxLength: 120
+        sourceFolder:
+          type: string
+          maxLength: 4096
+          pattern: ^(?:$|.*\S.*)$
+        sourceFolderBookmarkId:
+          $ref: "#/components/schemas/SecurityBookmark"
+        timeZone:
+          type: string
+          minLength: 1
+          maxLength: 128
+        timeZoneOrigin:
+          type: string
+          enum:
+            - PRESET_DEFAULT
+            - INFERRED_DEFAULT
+            - USER_SELECTED
+        tradingCalendar:
+          $ref: "#/components/schemas/TradingCalendarConfig"
+        allowExistingSourceTimeZoneChange:
+          type: boolean
+      additionalProperties: false
+    DesktopLocalDataIncrementalUpdateUserOverrides:
+      type: object
+      properties:
+        sourceName:
+          type: string
+          maxLength: 120
+        sourceFolder:
+          type: string
+          maxLength: 4096
+          pattern: ^(?:$|.*\S.*)$
+        sourceFolderBookmarkId:
+          $ref: "#/components/schemas/SecurityBookmark"
+        sourceFolderUsageMode:
+          type: string
+          enum:
+            - BOUND_SOURCE
+            - ONE_OFF
+      additionalProperties: false
+    DesktopLocalDataImportByPathRequest:
+      type: object
+      required:
+        - previewToken
+        - previewPlanId
+      properties:
+        previewToken:
+          $ref: "#/components/schemas/LongToken"
+        previewPlanId:
+          $ref: "#/components/schemas/BoundedId"
+        mapping:
+          $ref: "#/components/schemas/CsvMapping"
+        userOverrides:
+          $ref: "#/components/schemas/DesktopLocalDataImportUserOverrides"
+      additionalProperties: false
+    DesktopLocalDataFullReimportByPathRequest:
+      type: object
+      required:
+        - previewToken
+        - previewPlanId
+      properties:
+        previewToken:
+          $ref: "#/components/schemas/LongToken"
+        previewPlanId:
+          $ref: "#/components/schemas/BoundedId"
+        mapping:
+          $ref: "#/components/schemas/CsvMapping"
+        userOverrides:
+          $ref: "#/components/schemas/DesktopLocalDataFullReimportUserOverrides"
+      additionalProperties: false
+    DesktopLocalDataSourceTradingCalendarUpdateRequest:
+      type: object
+      required:
+        - tradingCalendar
+      properties:
+        tradingCalendar:
+          $ref: "#/components/schemas/TradingCalendarConfig"
+      additionalProperties: false
+    DesktopTrainingProjectArchiveSessionRequest:
+      type: object
+      required:
+        - sessionId
+        - name
+        - samplePoolId
+        - samplePoolName
+        - displayPeriod
+      properties:
+        sessionId:
+          $ref: "#/components/schemas/BoundedId"
+        name:
+          type: string
+          minLength: 1
+          maxLength: 64
+        samplePoolId:
+          $ref: "#/components/schemas/BoundedId"
+        samplePoolName:
+          type: string
+          minLength: 1
+          maxLength: 48
+        displayPeriod:
+          type: string
+          enum:
+            - 1m
+            - 5m
+            - 1h
+            - 1d
+            - 1w
+            - 1month
+            - 1year
+        finalizePriceMode:
+          type: string
+          enum:
+            - CUR_CLOSE
+            - NEXT_OPEN
+        drawings:
+          type: array
+          items: {}
+        chartIndicators: {}
+      additionalProperties: false
+    DesktopTrainingProjectSettlementPreviewRequest:
+      type: object
+      required:
+        - sessionId
+        - displayPeriod
+      properties:
+        sessionId:
+          $ref: "#/components/schemas/BoundedId"
+        displayPeriod:
+          type: string
+          enum:
+            - 1m
+            - 5m
+            - 1h
+            - 1d
+            - 1w
+            - 1month
+            - 1year
+        finalizePriceMode:
+          type: string
+          enum:
+            - CUR_CLOSE
+            - NEXT_OPEN
+      additionalProperties: false
+    DesktopTrainingReviewConsoleBundleRequest:
+      type: object
+      properties:
+        projectIds:
+          type: array
+          maxItems: 5000
+          default: []
+          items:
+            $ref: "#/components/schemas/BoundedId"
+        window:
+          type: string
+          enum:
+            - LAST_10
+            - LAST_50
+            - LAST_7D
+            - LAST_30D
+            - ALL
+          default: ALL
+        anchorMs:
+          type: integer
+          exclusiveMinimum: 0
+        nowMs:
+          type: integer
+          exclusiveMinimum: 0
+      additionalProperties: false
+    DesktopLocalDataIncrementalUpdateByPathRequest:
+      type: object
+      required:
+        - previewToken
+        - previewPlanId
+      properties:
+        previewToken:
+          $ref: "#/components/schemas/LongToken"
+        previewPlanId:
+          $ref: "#/components/schemas/BoundedId"
+        mapping:
+          $ref: "#/components/schemas/CsvMapping"
+        userOverrides:
+          $ref: "#/components/schemas/DesktopLocalDataIncrementalUpdateUserOverrides"
+      additionalProperties: false
+    DesktopFreeReplayPoolDefaultEnvironmentRequest:
+      type: object
+      required:
+        - assetClass
+        - marketPresetId
+      properties:
+        assetClass:
+          type: string
+          enum:
+            - STOCK
+            - FUTURES
+            - FOREX
+            - CRYPTO
+        marketPresetId:
+          type: string
+          minLength: 1
+          maxLength: 120
+      additionalProperties: false
+    DesktopLocalDataImportPreviewByPathRequest:
+      type: object
+      required:
+        - folderPath
+      properties:
+        folderPath:
+          $ref: "#/components/schemas/ImportFolderPath"
+        sourceFolderName:
+          type: string
+          maxLength: 255
+        sourceId:
+          type: string
+          minLength: 1
+          maxLength: 128
+        locale:
+          type: string
+          maxLength: 32
+      additionalProperties: false
+    DesktopLocalDataImportDraftValidationRequest:
+      type: object
+      required:
+        - previewToken
+        - mapping
+      properties:
+        previewToken:
+          $ref: "#/components/schemas/LongToken"
+        mapping:
+          $ref: "#/components/schemas/CsvMappingDraft"
+        planDrafts:
+          type: array
+          maxItems: 500
+          items:
+            type: object
+            required:
+              - previewPlanId
+              - tradingCalendar
+            properties:
+              previewPlanId:
+                $ref: "#/components/schemas/BoundedId"
+              tradingCalendar:
+                $ref: "#/components/schemas/TradingCalendarConfig"
+            additionalProperties: false
+        planning:
+          type: object
+          properties:
+            importEntryMode:
+              type: string
+              enum:
+                - GENERAL
+                - FULL_REIMPORT
+            fullReimportTargetSourceId:
+              type: string
+              maxLength: 128
+            importTimeZone:
+              type: string
+              minLength: 1
+              maxLength: 128
+            importTimeZoneMode:
+              type: string
+              enum:
+                - AUTO
+                - MANUAL
+            timeZoneConfirmed:
+              type: boolean
+            timeZoneConfidence:
+              type: string
+              enum:
+                - HIGH
+                - MEDIUM
+                - LOW
+            suggestedTimeZone:
+              type: string
+              minLength: 1
+              maxLength: 128
+            suggestedTimeZoneReason:
+              type: string
+              enum:
+                - PRESET_DEFAULT
+                - RULE_INFERRED
+                - TIMESTAMP_INFERRED
+                - EXISTING_SOURCE
+                - SYSTEM_FALLBACK
+            scopeStrategy:
+              type: string
+              enum:
+                - FLAT
+                - WITH_PARENT
+            tradingCalendar:
+              $ref: "#/components/schemas/TradingCalendarConfig"
+            tradingCalendarTouched:
+              type: boolean
+            repairWarningCount:
+              type: integer
+              minimum: 0
+            locale:
+              type: string
+              maxLength: 32
+            planOverrides:
+              type: array
+              maxItems: 500
+              items:
+                type: object
+                required:
+                  - previewPlanId
+                properties:
+                  previewPlanId:
+                    $ref: "#/components/schemas/BoundedId"
+                  targetSourceId:
+                    type: string
+                    maxLength: 128
+                  sourceTouched:
+                    type: boolean
+                  poolName:
+                    type: string
+                    maxLength: 48
+                  nameTouched:
+                    type: boolean
+                additionalProperties: false
+          additionalProperties: false
+      additionalProperties: false
+    DesktopLocalDataSyncQuickCheckByMetadataRequest:
+      type: object
+      properties:
+        sourceFolder:
+          type: string
+          maxLength: 4096
+          pattern: ^(?:$|.*\S.*)$
+        files:
+          type: array
+          maxItems: 20000
+          items:
+            type: object
+            required:
+              - relativePath
+            properties:
+              relativePath:
+                $ref: "#/components/schemas/ImportRelativePath"
+              originalname:
+                $ref: "#/components/schemas/ImportFileName"
+              size:
+                type: integer
+                minimum: 0
+                maximum: 21474836480
+              mtimeMs:
+                type: number
+                minimum: 0
+              fingerprint:
+                type: string
+                maxLength: 65536
+            additionalProperties: false
+      additionalProperties: false
+    DesktopBacktestBatchList:
+      x-zinuto-zod-export-name: desktopBacktestBatchListSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopBacktestBatchListSchema
+    DesktopBarsRange:
+      x-zinuto-zod-export-name: desktopBarsRangeSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopBarsRangeSchema
+    DesktopCustomIndicatorCompileRequest:
+      x-zinuto-zod-export-name: desktopCustomIndicatorCompileRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopCustomIndicatorCompileRequestSchema
+    DesktopCustomIndicatorCompileResult:
+      x-zinuto-zod-export-name: desktopCustomIndicatorCompileResultSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopCustomIndicatorCompileResultSchema
+    DesktopCustomIndicatorExecuteRequest:
+      x-zinuto-zod-export-name: desktopCustomIndicatorExecuteRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopCustomIndicatorExecuteRequestSchema
+    DesktopCustomIndicatorExecuteResult:
+      x-zinuto-zod-export-name: desktopCustomIndicatorExecuteResultSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopCustomIndicatorExecuteResultSchema
+    DesktopCustomIndicatorProfileDeleteRequest:
+      x-zinuto-zod-export-name: desktopCustomIndicatorProfileDeleteRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopCustomIndicatorProfileDeleteRequestSchema
+    DesktopCustomIndicatorProfileDeleteResult:
+      x-zinuto-zod-export-name: desktopCustomIndicatorProfileDeleteResultSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopCustomIndicatorProfileDeleteResultSchema
+    DesktopCustomIndicatorProfileList:
+      x-zinuto-zod-export-name: desktopCustomIndicatorProfileListSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopCustomIndicatorProfileListSchema
+    DesktopCustomIndicatorProfileSaveRequest:
+      x-zinuto-zod-export-name: desktopCustomIndicatorProfileSaveRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopCustomIndicatorProfileSaveRequestSchema
+    DesktopCustomIndicatorProfileSaveResult:
+      x-zinuto-zod-export-name: desktopCustomIndicatorProfileSaveResultSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopCustomIndicatorProfileSaveResultSchema
+    DesktopCustomIndicatorProfilesReplaceRequest:
+      x-zinuto-zod-export-name: desktopCustomIndicatorProfilesReplaceRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopCustomIndicatorProfilesReplaceRequestSchema
+    DesktopCustomIndicatorProfilesReplaceResult:
+      x-zinuto-zod-export-name: desktopCustomIndicatorProfilesReplaceResultSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopCustomIndicatorProfilesReplaceResultSchema
+    DesktopFreeReplayPoolDefaultEnvironmentRecord:
+      x-zinuto-zod-export-name: desktopFreeReplayPoolDefaultEnvironmentRecordSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopFreeReplayPoolDefaultEnvironmentRecordSchema
+    DesktopFreeReplayPoolDefaultEnvironment:
+      x-zinuto-zod-export-name: desktopFreeReplayPoolDefaultEnvironmentSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopFreeReplayPoolDefaultEnvironmentSchema
+    DesktopFreeReplayPrepReadModelRequest:
+      x-zinuto-zod-export-name: desktopFreeReplayPrepReadModelRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopFreeReplayPrepReadModelRequestSchema
+    DesktopFreeReplayPrepReadModel:
+      x-zinuto-zod-export-name: desktopFreeReplayPrepReadModelSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopFreeReplayPrepReadModelSchema
+    DesktopFreeReplayStartPointOverviewRange:
+      x-zinuto-zod-export-name: desktopFreeReplayStartPointOverviewRangeSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopFreeReplayStartPointOverviewRangeSchema
+    DesktopFreeReplayStartPointOverviewRequest:
+      x-zinuto-zod-export-name: desktopFreeReplayStartPointOverviewRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopFreeReplayStartPointOverviewRequestSchema
+    DesktopFreeReplayStartReadinessRequest:
+      x-zinuto-zod-export-name: desktopFreeReplayStartReadinessRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopFreeReplayStartReadinessRequestSchema
+    DesktopFreeReplayStartReadiness:
+      x-zinuto-zod-export-name: desktopFreeReplayStartReadinessSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopFreeReplayStartReadinessSchema
+    DesktopInstrumentList:
+      x-zinuto-zod-export-name: desktopInstrumentListSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopInstrumentListSchema
+    DesktopLegalDocumentResponse:
+      x-zinuto-zod-export-name: desktopLegalDocumentResponseSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopLegalDocumentResponseSchema
+    DesktopLocalDataClearAllResult:
+      x-zinuto-zod-export-name: desktopLocalDataClearAllResultSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopLocalDataClearAllResultSchema
+    DesktopLocalDataDeleteSourceResult:
+      x-zinuto-zod-export-name: desktopLocalDataDeleteSourceResultSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopLocalDataDeleteSourceResultSchema
+    DesktopLocalDataImportControlRequest:
+      x-zinuto-zod-export-name: desktopLocalDataImportControlRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopLocalDataImportControlRequestSchema
+    DesktopLocalDataImportDraftValidation:
+      x-zinuto-zod-export-name: desktopLocalDataImportDraftValidationSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopLocalDataImportDraftValidationSchema
+    DesktopLocalDataImportJob:
+      x-zinuto-zod-export-name: desktopLocalDataImportJobSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopLocalDataImportJobSchema
+    DesktopLocalDataImportPreviewDiscardRequest:
+      x-zinuto-zod-export-name: desktopLocalDataImportPreviewDiscardRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopLocalDataImportPreviewDiscardRequestSchema
+    DesktopLocalDataImportPreviewDiscardResult:
+      x-zinuto-zod-export-name: desktopLocalDataImportPreviewDiscardResultSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopLocalDataImportPreviewDiscardResultSchema
+    DesktopLocalDataImportPreviewJob:
+      x-zinuto-zod-export-name: desktopLocalDataImportPreviewJobSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopLocalDataImportPreviewJobSchema
+    DesktopLocalDataRemoveSymbolsResult:
+      x-zinuto-zod-export-name: desktopLocalDataRemoveSymbolsResultSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopLocalDataRemoveSymbolsResultSchema
+    DesktopLocalDataSourceDiagnosticProfileUpdateRequest:
+      x-zinuto-zod-export-name: desktopLocalDataSourceDiagnosticProfileUpdateRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopLocalDataSourceDiagnosticProfileUpdateRequestSchema
+    DesktopLocalDataSourceDiagnostics:
+      x-zinuto-zod-export-name: desktopLocalDataSourceDiagnosticsSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopLocalDataSourceDiagnosticsSchema
+    DesktopLocalDataSourceList:
+      x-zinuto-zod-export-name: desktopLocalDataSourceListSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopLocalDataSourceListSchema
+    DesktopLocalDataSourceRemoveSymbolsRequest:
+      x-zinuto-zod-export-name: desktopLocalDataSourceRemoveSymbolsRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopLocalDataSourceRemoveSymbolsRequestSchema
+    DesktopLocalDataSourceSummary:
+      x-zinuto-zod-export-name: desktopLocalDataSourceSummarySchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopLocalDataSourceSummarySchema
+    DesktopLocalDataSourceSymbolDiagnostics:
+      x-zinuto-zod-export-name: desktopLocalDataSourceSymbolDiagnosticsSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopLocalDataSourceSymbolDiagnosticsSchema
+    DesktopLocalDataSyncPreviewByPathRequest:
+      x-zinuto-zod-export-name: desktopLocalDataSyncPreviewByPathRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopLocalDataSyncPreviewByPathRequestSchema
+    DesktopLocalDataSyncPreview:
+      x-zinuto-zod-export-name: desktopLocalDataSyncPreviewSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopLocalDataSyncPreviewSchema
+    DesktopLocalDataSyncQuickCheck:
+      x-zinuto-zod-export-name: desktopLocalDataSyncQuickCheckSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopLocalDataSyncQuickCheckSchema
+    DesktopLocalImportMockSampleExportRequest:
+      x-zinuto-zod-export-name: desktopLocalImportMockSampleExportRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopLocalImportMockSampleExportRequestSchema
+    DesktopLocalImportMockSampleExportResult:
+      x-zinuto-zod-export-name: desktopLocalImportMockSampleExportResultSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopLocalImportMockSampleExportResultSchema
+    DesktopMarketBarFrame:
+      x-zinuto-zod-export-name: desktopMarketBarFrameSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopMarketBarFrameSchema
+    DesktopPortableExportPreviewRequest:
+      x-zinuto-zod-export-name: desktopPortableExportPreviewRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopPortableExportPreviewRequestSchema
+    DesktopPortableExportRequest:
+      x-zinuto-zod-export-name: desktopPortableExportRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopPortableExportRequestSchema
+    DesktopPortableImportInspectRequest:
+      x-zinuto-zod-export-name: desktopPortableImportInspectRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopPortableImportInspectRequestSchema
+    DesktopPortableImportRequest:
+      x-zinuto-zod-export-name: desktopPortableImportRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopPortableImportRequestSchema
+    DesktopPreparedFreeReplayStartRequest:
+      x-zinuto-zod-export-name: desktopPreparedFreeReplayStartRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopPreparedFreeReplayStartRequestSchema
+    DesktopPreparedFreeReplayStartResult:
+      x-zinuto-zod-export-name: desktopPreparedFreeReplayStartResultSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopPreparedFreeReplayStartResultSchema
+    DesktopResetAllDataJob:
+      x-zinuto-zod-export-name: desktopResetAllDataJobSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopResetAllDataJobSchema
+    DesktopSessionActionRequest:
+      x-zinuto-zod-export-name: desktopSessionActionRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSessionActionRequestSchema
+    DesktopSessionBootstrapRequest:
+      x-zinuto-zod-export-name: desktopSessionBootstrapRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSessionBootstrapRequestSchema
+    DesktopSessionBootstrap:
+      x-zinuto-zod-export-name: desktopSessionBootstrapSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSessionBootstrapSchema
+    DesktopSessionCreateRequest:
+      x-zinuto-zod-export-name: desktopSessionCreateRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSessionCreateRequestSchema
+    DesktopSessionOrderQuoteRequest:
+      x-zinuto-zod-export-name: desktopSessionOrderQuoteRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSessionOrderQuoteRequestSchema
+    DesktopSessionOrderQuote:
+      x-zinuto-zod-export-name: desktopSessionOrderQuoteSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSessionOrderQuoteSchema
+    DesktopSession:
+      x-zinuto-zod-export-name: desktopSessionSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSessionSchema
+    DesktopSessionSnapshot:
+      x-zinuto-zod-export-name: desktopSessionSnapshotSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSessionSnapshotSchema
+    DesktopSessionStepResult:
+      x-zinuto-zod-export-name: desktopSessionStepResultSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSessionStepResultSchema
+    DesktopSessionTradingSettingsUpdateRequest:
+      x-zinuto-zod-export-name: desktopSessionTradingSettingsUpdateRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSessionTradingSettingsUpdateRequestSchema
+    DesktopSpecialTrainingBankDeleteResult:
+      x-zinuto-zod-export-name: desktopSpecialTrainingBankDeleteResultSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSpecialTrainingBankDeleteResultSchema
+    DesktopSpecialTrainingBankEditorReadModelRequest:
+      x-zinuto-zod-export-name: desktopSpecialTrainingBankEditorReadModelRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSpecialTrainingBankEditorReadModelRequestSchema
+    DesktopSpecialTrainingBankEditorReadModel:
+      x-zinuto-zod-export-name: desktopSpecialTrainingBankEditorReadModelSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSpecialTrainingBankEditorReadModelSchema
+    DesktopSpecialTrainingBankList:
+      x-zinuto-zod-export-name: desktopSpecialTrainingBankListSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSpecialTrainingBankListSchema
+    DesktopSpecialTrainingBank:
+      x-zinuto-zod-export-name: desktopSpecialTrainingBankSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSpecialTrainingBankSchema
+    DesktopSpecialTrainingBankScopeSummary:
+      x-zinuto-zod-export-name: desktopSpecialTrainingBankScopeSummarySchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSpecialTrainingBankScopeSummarySchema
+    DesktopSpecialTrainingChallengeActionRequest:
+      x-zinuto-zod-export-name: desktopSpecialTrainingChallengeActionRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSpecialTrainingChallengeActionRequestSchema
+    DesktopSpecialTrainingChallengeActivityRequest:
+      x-zinuto-zod-export-name: desktopSpecialTrainingChallengeActivityRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSpecialTrainingChallengeActivityRequestSchema
+    DesktopSpecialTrainingChallengeActivityResult:
+      x-zinuto-zod-export-name: desktopSpecialTrainingChallengeActivityResultSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSpecialTrainingChallengeActivityResultSchema
+    DesktopSpecialTrainingChallengeCommandResult:
+      x-zinuto-zod-export-name: desktopSpecialTrainingChallengeCommandResultSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSpecialTrainingChallengeCommandResultSchema
+    DesktopSpecialTrainingChallengeDiscardResult:
+      x-zinuto-zod-export-name: desktopSpecialTrainingChallengeDiscardResultSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSpecialTrainingChallengeDiscardResultSchema
+    DesktopSpecialTrainingChallengeProgress:
+      x-zinuto-zod-export-name: desktopSpecialTrainingChallengeProgressSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSpecialTrainingChallengeProgressSchema
+    DesktopSpecialTrainingChallengeRuntime:
+      x-zinuto-zod-export-name: desktopSpecialTrainingChallengeRuntimeSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSpecialTrainingChallengeRuntimeSchema
+    DesktopSpecialTrainingChallenge:
+      x-zinuto-zod-export-name: desktopSpecialTrainingChallengeSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSpecialTrainingChallengeSchema
+    DesktopSpecialTrainingChallengeStartRequest:
+      x-zinuto-zod-export-name: desktopSpecialTrainingChallengeStartRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSpecialTrainingChallengeStartRequestSchema
+    DesktopSpecialTrainingDecisionRequest:
+      x-zinuto-zod-export-name: desktopSpecialTrainingDecisionRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSpecialTrainingDecisionRequestSchema
+    DesktopSpecialTrainingDurationEstimate:
+      x-zinuto-zod-export-name: desktopSpecialTrainingDurationEstimateSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSpecialTrainingDurationEstimateSchema
+    DesktopSpecialTrainingHistoryClearResult:
+      x-zinuto-zod-export-name: desktopSpecialTrainingHistoryClearResultSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSpecialTrainingHistoryClearResultSchema
+    DesktopSpecialTrainingHistoryQuestionDetail:
+      x-zinuto-zod-export-name: desktopSpecialTrainingHistoryQuestionDetailSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSpecialTrainingHistoryQuestionDetailSchema
+    DesktopSpecialTrainingHistorySessionDetail:
+      x-zinuto-zod-export-name: desktopSpecialTrainingHistorySessionDetailSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSpecialTrainingHistorySessionDetailSchema
+    DesktopSpecialTrainingHistorySessionList:
+      x-zinuto-zod-export-name: desktopSpecialTrainingHistorySessionListSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSpecialTrainingHistorySessionListSchema
+    DesktopSpecialTrainingOrderQuoteRequest:
+      x-zinuto-zod-export-name: desktopSpecialTrainingOrderQuoteRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSpecialTrainingOrderQuoteRequestSchema
+    DesktopSpecialTrainingOrderQuote:
+      x-zinuto-zod-export-name: desktopSpecialTrainingOrderQuoteSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSpecialTrainingOrderQuoteSchema
+    DesktopSpecialTrainingQuestionBankDraftPreviewRequest:
+      x-zinuto-zod-export-name: desktopSpecialTrainingQuestionBankDraftPreviewRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSpecialTrainingQuestionBankDraftPreviewRequestSchema
+    DesktopSpecialTrainingQuestionBankPreviewRequest:
+      x-zinuto-zod-export-name: desktopSpecialTrainingQuestionBankPreviewRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSpecialTrainingQuestionBankPreviewRequestSchema
+    DesktopSpecialTrainingQuestionBankResetRequest:
+      x-zinuto-zod-export-name: desktopSpecialTrainingQuestionBankResetRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSpecialTrainingQuestionBankResetRequestSchema
+    DesktopSpecialTrainingQuestionBankSummary:
+      x-zinuto-zod-export-name: desktopSpecialTrainingQuestionBankSummarySchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSpecialTrainingQuestionBankSummarySchema
+    DesktopSpecialTrainingQuestionSettleRequest:
+      x-zinuto-zod-export-name: desktopSpecialTrainingQuestionSettleRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSpecialTrainingQuestionSettleRequestSchema
+    DesktopSpecialTrainingSettlement:
+      x-zinuto-zod-export-name: desktopSpecialTrainingSettlementSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSpecialTrainingSettlementSchema
+    DesktopSpecialTrainingStatsPayload:
+      x-zinuto-zod-export-name: desktopSpecialTrainingStatsPayloadSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSpecialTrainingStatsPayloadSchema
+    DesktopSpecialTrainingStatsProjectDetail:
+      x-zinuto-zod-export-name: desktopSpecialTrainingStatsProjectDetailSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSpecialTrainingStatsProjectDetailSchema
+    DesktopSpecialTrainingStatsSummary:
+      x-zinuto-zod-export-name: desktopSpecialTrainingStatsSummarySchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSpecialTrainingStatsSummarySchema
+    DesktopStartupLocalDataReinitializeRequest:
+      x-zinuto-zod-export-name: desktopStartupLocalDataReinitializeRequestSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopStartupLocalDataReinitializeRequestSchema
+    DesktopStartupLocalDataReinitializeResult:
+      x-zinuto-zod-export-name: desktopStartupLocalDataReinitializeResultSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopStartupLocalDataReinitializeResultSchema
+    DesktopSystemHealth:
+      x-zinuto-zod-export-name: desktopSystemHealthSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSystemHealthSchema
+    DesktopSystemStartupStatus:
+      x-zinuto-zod-export-name: desktopSystemStartupStatusSchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopSystemStartupStatusSchema
+    DesktopTrainingStatsSummary:
+      x-zinuto-zod-export-name: desktopTrainingStatsSummarySchema
+      x-zinuto-zod-source: external
+      x-zinuto-zod-import:
+        module: ./api.js
+        name: desktopTrainingStatsSummarySchema
+  responses:
+    JsonEnvelope:
+      description: Standard Zinuto v1 JSON envelope.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/JsonEnvelope"
+paths:
+  /api/v1/system/health:
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopSystemHealthSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/system/startup-status:
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopSystemStartupStatusSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/system/startup-local-data/reinitialize:
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-request-schema: desktopStartupLocalDataReinitializeRequestSchema
+      x-zinuto-runtime-response-schema: desktopStartupLocalDataReinitializeResultSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/workspaces/command-center:
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopWorkspaceReadModelSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/workspaces/trainer:
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopWorkspaceReadModelSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/workspaces/history/review-console:
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopWorkspaceReadModelSchema
+      parameters:
+        - name: keyword
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: profitFilter
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - ALL
+              - PROFIT
+              - LOSS
+        - name: samplePoolFilter
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: samplePoolAllId
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: samplePoolUnknownId
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/workspaces/challenge-stats:
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopWorkspaceReadModelSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/workspaces/special-training:
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopWorkspaceReadModelSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/workspaces/data-management:
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopWorkspaceReadModelSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/workspaces/notes:
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopWorkspaceReadModelSchema
+      parameters:
+        - in: query
+          name: keyword
+          schema:
+            type: string
+        - in: query
+          name: scope
+          schema:
+            type: string
+            enum:
+              - ALL
+              - FREE_REPLAY
+              - CHALLENGE
+              - CUSTOM
+        - in: query
+          name: colorTokens
+          schema:
+            type: string
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/workspaces/settings:
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopWorkspaceReadModelSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/workspaces/custom-indicator:
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopWorkspaceReadModelSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/workspaces/strategy-backtest:
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopWorkspaceReadModelSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/system/legal-documents/{documentKey}":
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopLegalDocumentResponseSchema
+      parameters:
+        - name: documentKey
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/DesktopLegalDocumentKey"
+        - name: locale
+          in: query
+          required: false
+          schema:
+            type: string
+            maxLength: 32
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/system/storage-usage:
+    get:
+      x-zinuto-route-kind: json-envelope
+      parameters:
+        - name: refresh
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - "1"
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/system/storage-summary:
+    get:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/system/history-retention:
+    get:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+    put:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/system/history-retention/preview:
+    post:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/system/history-retention/jobs/start:
+    post:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/system/history-retention/jobs/latest:
+    get:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/system/history-retention/jobs/{jobId}":
+    get:
+      x-zinuto-route-kind: json-envelope
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/system/app-preferences:
+    get:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/system/app-preferences/ui-settings:
+    put:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/system/app-preferences/data-pool-removed-symbols:
+    put:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/system/reset-all-data/start:
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopResetAllDataJobSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/system/reset-all-data/jobs/{jobId}":
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopResetAllDataJobSchema
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/system/portable-export/preview:
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-request-schema: desktopPortableExportPreviewRequestSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/system/portable-export:
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-request-schema: desktopPortableExportRequestSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/system/local-import-mock-sample/export:
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopLocalImportMockSampleExportResultSchema
+      x-zinuto-runtime-request-schema: desktopLocalImportMockSampleExportRequestSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/system/portable-import/inspect:
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-request-schema: desktopPortableImportInspectRequestSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/system/portable-import:
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-request-schema: desktopPortableImportRequestSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/system/dev-simulation/start:
+    post:
+      x-zinuto-route-kind: json-envelope
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DesktopSystemDevSimulationStartRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/system/dev-simulation/capabilities:
+    get:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/system/dev-simulation/cancel:
+    post:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/system/dev-simulation/cleanup:
+    post:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/system/dev-simulation/cleanup/start:
+    post:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/system/dev-simulation/cleanup/latest-job:
+    get:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/system/dev-simulation/cleanup/jobs/{jobId}":
+    get:
+      x-zinuto-route-kind: json-envelope
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/system/dev-simulation/latest-job:
+    get:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/system/dev-simulation/jobs/{jobId}":
+    get:
+      x-zinuto-route-kind: json-envelope
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/market/instruments:
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopInstrumentListSchema
+      parameters:
+        - name: query
+          in: query
+          required: false
+          schema:
+            type: string
+            maxLength: 160
+        - name: sourceId
+          in: query
+          required: false
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/market/instruments/{instrumentId}/bars/range":
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopBarsRangeSchema
+      parameters:
+        - name: instrumentId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 3000
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/market/instruments/{instrumentId}/bars/frame":
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopMarketBarFrameSchema
+      parameters:
+        - name: instrumentId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 3000
+        - name: displayPeriod
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - 1m
+              - 5m
+              - 1h
+              - 1d
+              - 1w
+              - 1month
+              - 1year
+        - name: anchorRawIndex
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+        - name: anchorDisplayIndex
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+        - name: direction
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - FORWARD
+              - BACKWARD
+        - name: before
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 3000
+        - name: after
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 3000
+        - name: maxDisplayBars
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 3000
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/free-replay/settings/trading:
+    get:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+    put:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/free-replay/portfolio/summary:
+    get:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/free-replay/sessions:
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopSessionSchema
+      x-zinuto-runtime-request-schema: desktopSessionCreateRequestSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/free-replay/sessions/bootstrap:
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopSessionBootstrapSchema
+      x-zinuto-runtime-request-schema: desktopSessionBootstrapRequestSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/free-replay/sessions/cleanup-stale:
+    post:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/free-replay/sessions/resumable/latest:
+    get:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/training/free-replay/sessions/{id}/bootstrap":
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopSessionBootstrapSchema
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/training/free-replay/sessions/{id}/snapshot":
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopSessionSnapshotSchema
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+        - name: fillCursor
+          in: query
+          required: false
+          schema:
+            type: string
+            maxLength: 2048
+            nullable: true
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/training/free-replay/sessions/{id}/trading-settings":
+    put:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopSessionSnapshotSchema
+      x-zinuto-runtime-request-schema: desktopSessionTradingSettingsUpdateRequestSchema
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/training/free-replay/sessions/{id}/actions":
+    post:
+      description: Execute a backend-authoritative free-replay action (STEP,
+        PLAYBACK_TICK, BUY, SELL, UNDO) and return the runtime delta and chart
+        frame decided by the local API.
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopSessionStepResultSchema
+      x-zinuto-runtime-request-schema: desktopSessionActionRequestSchema
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/training/free-replay/sessions/{id}/playback":
+    post:
+      description: Persist free-replay playback state and return the
+        backend-authoritative runtime state for the session.
+      x-zinuto-route-kind: json-envelope
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/training/free-replay/sessions/{id}/order/quote":
+    post:
+      description: Quote a free-replay order for the requested display period; the
+        returned execution plan matches the backend action engine.
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopSessionOrderQuoteSchema
+      x-zinuto-runtime-request-schema: desktopSessionOrderQuoteRequestSchema
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/training/free-replay/sessions/{id}/order/estimation-read-model":
+    post:
+      description: Return the order estimation read model for a free-replay session.
+      x-zinuto-route-kind: json-envelope
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/free-replay/sessions/start:
+    post:
+      description: "Start Free Replay from the backend-authoritative current
+        preparation state. The request carries only the selected pool,
+        optional focused selection, and trading environment; the runtime
+        resolves the complete READY candidate set locally and rejects stale
+        selections."
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopPreparedFreeReplayStartResultSchema
+      x-zinuto-runtime-request-schema: desktopPreparedFreeReplayStartRequestSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/free-replay/prep-read-model:
+    post:
+      description: "Return the backend-authoritative free replay preparation read
+        model: pool capability, selected defaults, environment options, start
+        candidates, and start readiness."
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopFreeReplayPrepReadModelSchema
+      x-zinuto-runtime-request-schema: desktopFreeReplayPrepReadModelRequestSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/free-replay/start-readiness:
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopFreeReplayStartReadinessSchema
+      x-zinuto-runtime-request-schema: desktopFreeReplayStartReadinessRequestSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/free-replay/start-point-overview:
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopFreeReplayStartPointOverviewRangeSchema
+      x-zinuto-runtime-request-schema: desktopFreeReplayStartPointOverviewRequestSchema
+      parameters:
+        - name: instrumentId
+          in: query
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+        - name: samplePoolId
+          in: query
+          required: false
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+        - name: minimumBaseTimeframe
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - 1m
+              - 5m
+              - 1h
+              - 1d
+              - 1w
+              - 1month
+              - 1year
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 5000
+        - name: rawStartIndex
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+        - name: rawEndIndex
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+        - name: displayPeriod
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - 1m
+              - 5m
+              - 1h
+              - 1d
+              - 1w
+              - 1month
+              - 1year
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/free-replay/pool-default-environments:
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopFreeReplayPoolDefaultEnvironmentRecordSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/training/free-replay/pool-default-environments/{poolId}":
+    put:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopFreeReplayPoolDefaultEnvironmentRecordSchema
+      x-zinuto-runtime-request-schema: desktopFreeReplayPoolDefaultEnvironmentSchema
+      parameters:
+        - name: poolId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DesktopFreeReplayPoolDefaultEnvironmentRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/reset-dialog/read-model:
+    post:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/reset-all:
+    post:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/reset-symbol:
+    post:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/summary:
+    get:
+      x-zinuto-route-kind: json-envelope
+      parameters:
+        - name: symbol
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: timeframe
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - 1m
+              - 5m
+              - 1h
+              - 1d
+        - name: finalizePriceMode
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - CUR_CLOSE
+              - NEXT_OPEN
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/projects:
+    get:
+      x-zinuto-route-kind: json-envelope
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 200
+        - name: cursor
+          in: query
+          required: false
+          schema:
+            type: string
+            maxLength: 2048
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/training/projects/{id}":
+    get:
+      x-zinuto-route-kind: json-envelope
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+    patch:
+      x-zinuto-route-kind: json-envelope
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+    delete:
+      x-zinuto-route-kind: json-envelope
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/projects/archive-session:
+    post:
+      x-zinuto-route-kind: json-envelope
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DesktopTrainingProjectArchiveSessionRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/projects/archive-session/preview:
+    post:
+      x-zinuto-route-kind: json-envelope
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DesktopTrainingProjectSettlementPreviewRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/projects/bulk-delete:
+    post:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/projects/clear-all:
+    post:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/stats:
+    get:
+      x-zinuto-route-kind: json-envelope
+      parameters:
+        - name: from
+          in: query
+          required: false
+          schema:
+            type: string
+            maxLength: 64
+        - name: to
+          in: query
+          required: false
+          schema:
+            type: string
+            maxLength: 64
+        - name: samplePoolId
+          in: query
+          required: false
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+        - name: symbol
+          in: query
+          required: false
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 32
+        - name: timeframe
+          in: query
+          required: false
+          schema:
+            type: string
+            maxLength: 64
+        - name: tag
+          in: query
+          required: false
+          schema:
+            type: string
+            maxLength: 160
+        - name: profitability
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - ALL
+              - PROFIT
+              - LOSS
+        - name: comparePoolA
+          in: query
+          required: false
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+        - name: comparePoolB
+          in: query
+          required: false
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/stats/summary:
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopTrainingStatsSummarySchema
+      parameters:
+        - name: from
+          in: query
+          required: false
+          schema:
+            type: string
+            maxLength: 64
+        - name: to
+          in: query
+          required: false
+          schema:
+            type: string
+            maxLength: 64
+        - name: samplePoolId
+          in: query
+          required: false
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+        - name: symbol
+          in: query
+          required: false
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 32
+        - name: timeframe
+          in: query
+          required: false
+          schema:
+            type: string
+            maxLength: 64
+        - name: tag
+          in: query
+          required: false
+          schema:
+            type: string
+            maxLength: 160
+        - name: profitability
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - ALL
+              - PROFIT
+              - LOSS
+        - name: comparePoolA
+          in: query
+          required: false
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+        - name: comparePoolB
+          in: query
+          required: false
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/review-console/bundle:
+    post:
+      x-zinuto-route-kind: json-envelope
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DesktopTrainingReviewConsoleBundleRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/special/banks:
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopSpecialTrainingBankListSchema
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 30
+        - name: cursor
+          in: query
+          required: false
+          schema:
+            type: string
+            maxLength: 2048
+        - name: keyword
+          in: query
+          required: false
+          schema:
+            type: string
+            maxLength: 160
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopSpecialTrainingBankSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/training/special/banks/{bankId}":
+    patch:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopSpecialTrainingBankSchema
+      parameters:
+        - name: bankId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+    delete:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopSpecialTrainingBankDeleteResultSchema
+      parameters:
+        - name: bankId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/special/estimate:
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopSpecialTrainingDurationEstimateSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/special/challenges/start:
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopSpecialTrainingChallengeSchema
+      x-zinuto-runtime-request-schema: desktopSpecialTrainingChallengeStartRequestSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/training/special/challenges/{challengeId}":
+    delete:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopSpecialTrainingChallengeDiscardResultSchema
+      parameters:
+        - name: challengeId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/training/special/challenges/{challengeId}/runtime":
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopSpecialTrainingChallengeRuntimeSchema
+      parameters:
+        - name: challengeId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/training/special/challenges/{challengeId}/activity":
+    put:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopSpecialTrainingChallengeActivityResultSchema
+      x-zinuto-runtime-request-schema: desktopSpecialTrainingChallengeActivityRequestSchema
+      parameters:
+        - name: challengeId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/training/special/challenges/{challengeId}/progress":
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopSpecialTrainingChallengeProgressSchema
+      parameters:
+        - name: challengeId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/training/special/challenges/{challengeId}/order/quote":
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopSpecialTrainingOrderQuoteSchema
+      x-zinuto-runtime-request-schema: desktopSpecialTrainingOrderQuoteRequestSchema
+      parameters:
+        - name: challengeId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/training/special/challenges/{challengeId}/actions":
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopSpecialTrainingChallengeCommandResultSchema
+      x-zinuto-runtime-request-schema: desktopSpecialTrainingChallengeActionRequestSchema
+      parameters:
+        - name: challengeId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/training/special/challenges/{challengeId}/decision":
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopSpecialTrainingChallengeCommandResultSchema
+      x-zinuto-runtime-request-schema: desktopSpecialTrainingDecisionRequestSchema
+      parameters:
+        - name: challengeId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/training/special/challenges/{challengeId}/questions/{questionId}/settle":
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopSpecialTrainingSettlementSchema
+      x-zinuto-runtime-request-schema: desktopSpecialTrainingQuestionSettleRequestSchema
+      parameters:
+        - name: challengeId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+        - name: questionId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/special/question-bank/preview:
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopSpecialTrainingQuestionBankSummarySchema
+      x-zinuto-runtime-request-schema: desktopSpecialTrainingQuestionBankPreviewRequestSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/special/question-bank/draft-preview:
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopSpecialTrainingBankScopeSummarySchema
+      x-zinuto-runtime-request-schema: desktopSpecialTrainingQuestionBankDraftPreviewRequestSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/special/bank-editor/read-model:
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopSpecialTrainingBankEditorReadModelSchema
+      x-zinuto-runtime-request-schema: desktopSpecialTrainingBankEditorReadModelRequestSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/special/read-model/order-ticket/completed:
+    post:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/special/read-model/order-ticket/runtime:
+    post:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/special/read-model/order-ticket/loading:
+    post:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/special/read-model/order-ticket/visible:
+    post:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/special/read-model/risk/action-facts:
+    post:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/special/read-model/risk/display-facts:
+    post:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/special/read-model/risk/holder-reference:
+    post:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/special/read-model/risk/gravity-field:
+    post:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/special/read-model/risk/survival-progress:
+    post:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/special/read-model/risk/cost-price:
+    post:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/special/read-model/risk/breakeven-price:
+    post:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/special/read-model/fast-decision/training:
+    post:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/special/read-model/fast-decision/review-detail:
+    post:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/special/read-model/fast-decision/gauge:
+    post:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/special/read-model/fast-decision/capital-tone:
+    post:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/special/read-model/mode-picker/readiness:
+    post:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/special/read-model/mode-picker/question-bank:
+    post:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/special/read-model/session-review/fast-decision:
+    post:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/special/read-model/session-review/risk-discipline:
+    post:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/special/read-model/session-review/summary-chips:
+    post:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/special/read-model/session-review/review-note:
+    post:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/special/read-model/session-review/replay-project:
+    post:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/special/question-bank/reset:
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopSpecialTrainingQuestionBankSummarySchema
+      x-zinuto-runtime-request-schema: desktopSpecialTrainingQuestionBankResetRequestSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/special/history:
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopSpecialTrainingHistorySessionListSchema
+      parameters:
+        - name: modeId
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - fast-decision-training
+              - risk-discipline-training
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 200
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/training/special/history/{sessionId}":
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopSpecialTrainingHistorySessionDetailSchema
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/training/special/history/questions/{questionId}":
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopSpecialTrainingHistoryQuestionDetailSchema
+      parameters:
+        - name: questionId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/special/history/clear:
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopSpecialTrainingHistoryClearResultSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/special/stats:
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopSpecialTrainingStatsPayloadSchema
+      parameters:
+        - name: modeId
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - fast-decision-training
+              - risk-discipline-training
+        - name: from
+          in: query
+          required: false
+          schema:
+            type: string
+            maxLength: 64
+        - name: to
+          in: query
+          required: false
+          schema:
+            type: string
+            maxLength: 64
+        - name: symbol
+          in: query
+          required: false
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 32
+        - name: timeframe
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - 1m
+              - 5m
+              - 1h
+              - 1d
+              - __all__
+        - name: profitability
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - ALL
+              - PROFIT
+              - LOSS
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 200
+        - name: detailId
+          in: query
+          required: false
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+        - name: includeProjectDetails
+          in: query
+          required: false
+          schema:
+            type: boolean
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/training/special/stats/summary:
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopSpecialTrainingStatsSummarySchema
+      parameters:
+        - name: modeId
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - fast-decision-training
+              - risk-discipline-training
+        - name: from
+          in: query
+          required: false
+          schema:
+            type: string
+            maxLength: 64
+        - name: to
+          in: query
+          required: false
+          schema:
+            type: string
+            maxLength: 64
+        - name: symbol
+          in: query
+          required: false
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 32
+        - name: timeframe
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - 1m
+              - 5m
+              - 1h
+              - 1d
+              - __all__
+        - name: profitability
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - ALL
+              - PROFIT
+              - LOSS
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 200
+        - name: detailId
+          in: query
+          required: false
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+        - name: includeProjectDetails
+          in: query
+          required: false
+          schema:
+            type: boolean
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/training/special/stats/details/{projectId}":
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopSpecialTrainingStatsProjectDetailSchema
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/data-sources/acquisition-connectors:
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopMarketDataAcquisitionConnectorCatalogSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/data-sources/acquisition-connectors/ccxt/markets:
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopCcxtAcquisitionMarketCatalogSchema
+      parameters:
+        - name: exchangeId
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - binance
+              - okx
+        - name: query
+          in: query
+          required: false
+          schema:
+            type: string
+            maxLength: 64
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/data-sources/acquisition-connectors/akshare/instruments:
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopAkshareAcquisitionInstrumentCatalogSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/data-sources/acquisition-jobs:
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopMarketDataAcquisitionJobSchema
+      x-zinuto-runtime-request-schema: desktopMarketDataAcquisitionJobCreateRequestSchema
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DesktopMarketDataAcquisitionJobCreateRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/data-sources/acquisition-jobs/{jobId}":
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopMarketDataAcquisitionJobSchema
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/BoundedId"
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+    delete:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopMarketDataAcquisitionDiscardResultSchema
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/BoundedId"
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/data-sources/acquisition-jobs/{jobId}/cancel":
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopMarketDataAcquisitionJobSchema
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/BoundedId"
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/data-sources/import/from-paths:
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopLocalDataImportJobSchema
+      x-zinuto-runtime-request-schema: desktopLocalDataImportByPathRequestSchema
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DesktopLocalDataImportByPathRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/data-sources/import/preview/from-path:
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopLocalDataImportPreviewJobSchema
+      x-zinuto-runtime-request-schema: desktopLocalDataImportPreviewByPathRequestSchema
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DesktopLocalDataImportPreviewByPathRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/data-sources/import/preview-jobs/{jobId}":
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopLocalDataImportPreviewJobSchema
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/data-sources/import/preview/discard:
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopLocalDataImportPreviewDiscardResultSchema
+      x-zinuto-runtime-request-schema: desktopLocalDataImportPreviewDiscardRequestSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/data-sources/import/preview/validate:
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopLocalDataImportDraftValidationSchema
+      x-zinuto-runtime-request-schema: desktopLocalDataImportDraftValidationRequestSchema
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DesktopLocalDataImportDraftValidationRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/data-sources/import-jobs/{jobId}":
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopLocalDataImportJobSchema
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/data-sources/import-jobs/{jobId}/control":
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopLocalDataImportJobSchema
+      x-zinuto-runtime-request-schema: desktopLocalDataImportControlRequestSchema
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/data-sources/maintenance-availability:
+    get:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/data-sources:
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopLocalDataSourceListSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/data-sources/clear-all:
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopLocalDataClearAllResultSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/data-sources/{sourceId}":
+    delete:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopLocalDataDeleteSourceResultSchema
+      parameters:
+        - name: sourceId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/data-sources/{sourceId}/incremental-update/from-paths":
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopLocalDataImportJobSchema
+      x-zinuto-runtime-request-schema: desktopLocalDataIncrementalUpdateByPathRequestSchema
+      parameters:
+        - name: sourceId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DesktopLocalDataIncrementalUpdateByPathRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/data-sources/{sourceId}/full-reimport/from-paths":
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopLocalDataImportJobSchema
+      x-zinuto-runtime-request-schema: desktopLocalDataFullReimportByPathRequestSchema
+      parameters:
+        - name: sourceId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DesktopLocalDataFullReimportByPathRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/data-sources/{sourceId}/trading-calendar":
+    put:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopLocalDataSourceSummarySchema
+      x-zinuto-runtime-request-schema: desktopLocalDataSourceTradingCalendarUpdateRequestSchema
+      parameters:
+        - name: sourceId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DesktopLocalDataSourceTradingCalendarUpdateRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/data-sources/{sourceId}/sync-preview/from-paths":
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopLocalDataSyncPreviewSchema
+      x-zinuto-runtime-request-schema: desktopLocalDataSyncPreviewByPathRequestSchema
+      parameters:
+        - name: sourceId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/data-sources/{sourceId}/sync-quick-check/from-metadata":
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopLocalDataSyncQuickCheckSchema
+      x-zinuto-runtime-request-schema: desktopLocalDataSyncQuickCheckByMetadataRequestSchema
+      parameters:
+        - name: sourceId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DesktopLocalDataSyncQuickCheckByMetadataRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/data-sources/{sourceId}/diagnostics":
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopLocalDataSourceDiagnosticsSchema
+      parameters:
+        - name: sourceId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 500
+        - name: cursor
+          in: query
+          required: false
+          schema:
+            type: string
+            maxLength: 64
+        - name: category
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - TIME_INTEGRITY
+              - EXTREME_ANOMALY
+        - name: severity
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - INFO
+              - WARNING
+              - CRITICAL
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/data-sources/{sourceId}/diagnostic-profile":
+    put:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopLocalDataSourceDiagnosticsSchema
+      x-zinuto-runtime-request-schema: desktopLocalDataSourceDiagnosticProfileUpdateRequestSchema
+      parameters:
+        - name: sourceId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - assetClass
+                - marketPresetId
+              properties:
+                assetClass:
+                  type: string
+                  enum:
+                    - STOCK
+                    - FUTURES
+                    - FOREX
+                    - CRYPTO
+                marketPresetId:
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/data-sources/{sourceId}/symbols/{symbol}/diagnostics":
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopLocalDataSourceSymbolDiagnosticsSchema
+      parameters:
+        - name: sourceId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+        - name: symbol
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 32
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/data-sources/{sourceId}/symbols/remove":
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopLocalDataRemoveSymbolsResultSchema
+      x-zinuto-runtime-request-schema: desktopLocalDataSourceRemoveSymbolsRequestSchema
+      parameters:
+        - name: sourceId
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/replay-notes:
+    get:
+      x-zinuto-route-kind: json-envelope
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 200
+        - name: cursor
+          in: query
+          required: false
+          schema:
+            type: string
+            maxLength: 2048
+        - name: keyword
+          in: query
+          required: false
+          schema:
+            type: string
+            maxLength: 160
+        - name: type
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - FREE_REPLAY
+              - CHALLENGE
+              - CUSTOM
+        - name: colorTokens
+          in: query
+          required: false
+          schema:
+            type: string
+            maxLength: 160
+        - name: scope
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - ALL
+              - FREE_REPLAY
+              - CHALLENGE
+              - CUSTOM
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+    post:
+      x-zinuto-route-kind: json-envelope
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReplayNoteCreateRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+    delete:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/replay-notes/recent:
+    get:
+      x-zinuto-route-kind: json-envelope
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 200
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/replay-notes/rebind-training-project:
+    post:
+      x-zinuto-route-kind: json-envelope
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/replay-notes/{id}":
+    get:
+      x-zinuto-route-kind: json-envelope
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+    patch:
+      x-zinuto-route-kind: json-envelope
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReplayNoteUpdateRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+    delete:
+      x-zinuto-route-kind: json-envelope
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/custom-indicators/profiles:
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopCustomIndicatorProfileListSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+    put:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopCustomIndicatorProfilesReplaceResultSchema
+      x-zinuto-runtime-request-schema: desktopCustomIndicatorProfilesReplaceRequestSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/custom-indicators/profiles/save:
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopCustomIndicatorProfileSaveResultSchema
+      x-zinuto-runtime-request-schema: desktopCustomIndicatorProfileSaveRequestSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/custom-indicators/profiles/delete:
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopCustomIndicatorProfileDeleteResultSchema
+      x-zinuto-runtime-request-schema: desktopCustomIndicatorProfileDeleteRequestSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/custom-indicators/compile:
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopCustomIndicatorCompileResultSchema
+      x-zinuto-runtime-request-schema: desktopCustomIndicatorCompileRequestSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/custom-indicators/execute:
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopCustomIndicatorExecuteResultSchema
+      x-zinuto-runtime-request-schema: desktopCustomIndicatorExecuteRequestSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/backtest/batches:
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopBacktestBatchListSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopBacktestBatchSchema
+      x-zinuto-runtime-request-schema: desktopBacktestBatchCreateRequestSchema
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BacktestBatchCreateRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+    delete:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopBacktestClearResultSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/backtest/batches/{id}":
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopBacktestBatchSchema
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+    delete:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopBacktestDeleteResultSchema
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/backtest/batches/{id}/run":
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopBacktestBatchSchema
+      x-zinuto-runtime-request-schema: desktopBacktestBatchRunRequestSchema
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BacktestBatchRunRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/backtest/batches/{id}/cancel":
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopBacktestBatchSchema
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/backtest/batches/{id}/progress":
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopBacktestProgressSchema
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/backtest/batches/{id}/results":
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopBacktestResultsSchema
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/backtest/batches/{id}/results/{symbol}/trades":
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopBacktestResultDetailSchema
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+        - name: symbol
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 32
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"

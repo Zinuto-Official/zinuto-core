@@ -1,0 +1,17 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.desktop-main.is-special-training .special-training-lightning-action-stack,
+.special-training-page .special-training-lightning-action-stack {
+  gap: 8px;
+}
+
+.desktop-main.is-special-training .special-training-lightning-action-stack-live,
+.special-training-page .special-training-lightning-action-stack-live {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+}
+
+.desktop-main.is-special-training .special-training-stage-actions,
+.special-training-page .special-training-stage-actions {
+  gap: 8px;
+}

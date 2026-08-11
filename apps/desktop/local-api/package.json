@@ -1,0 +1,49 @@
+{
+  "name": "@zinuto/desktop-local-api",
+  "version": "2.0.1",
+  "license": "GPL-3.0-only",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.18.0 <25"
+  },
+  "scripts": {
+    "dev": "node ../../../tools/release/check-node-version.mjs && npm --prefix ../../.. run build --workspace=@zinuto/shared && tsx watch src/runtime/index.ts",
+    "build": "node ../../../tools/release/check-node-version.mjs && npm --prefix ../../.. run build --workspace=@zinuto/shared && npm run build:workspace",
+    "build:workspace": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\" && tsc -p tsconfig.json && node ./scripts/copy-runtime-assets.mjs",
+    "test:app": "node ../../../tools/release/check-node-version.mjs && npm --prefix ../../.. run build --workspace=@zinuto/shared && npm run test:app:workspace",
+    "test:app:workspace": "tsx --test --test-concurrency=1 \"tests/app/**/*.test.ts\" \"tests/history/**/*.test.ts\" \"tests/specialTraining/**/*.test.ts\" \"tests/systemDevSimulation/planning.test.ts\" \"tests/systemDevSimulation/executionCoverage.test.ts\" \"tests/systemDevSimulation/simulationNoteLocalization.test.ts\"",
+    "test:file": "node ../../../tools/release/check-node-version.mjs && npm --prefix ../../.. run build --workspace=@zinuto/shared && tsx --test --test-concurrency=1",
+    "test:system-dev-simulation:full": "node ../../../tools/release/check-node-version.mjs && npm --prefix ../../.. run build --workspace=@zinuto/shared && npm run test:system-dev-simulation:full:workspace",
+    "test:system-dev-simulation:full:workspace": "tsx --test --test-concurrency=1 \"tests/systemDevSimulation/fullJob.test.ts\" \"tests/systemDevSimulation/systemFallbackJob.test.ts\"",
+    "test:data-source": "node ../../../tools/release/check-node-version.mjs && npm --prefix ../../.. run build --workspace=@zinuto/shared && npm run test:data-source:workspace",
+    "test:data-source:workspace": "tsx --test \"tests/dataSource/**/*.test.ts\"",
+    "test:all:workspace": "node ../../../tools/quality/run-tracked-js-tests.mjs --suite=local-api",
+    "typecheck": "node ../../../tools/release/check-node-version.mjs && npm --prefix ../../.. run build --workspace=@zinuto/shared && npm run typecheck:workspace",
+    "typecheck:workspace": "npm run check:error-text && tsc --noEmit",
+    "typecheck:incremental": "node ../../../tools/release/check-node-version.mjs && npm run check:error-text && tsc --noEmit --incremental --tsBuildInfoFile ../../../.cache/tsbuildinfo/desktop-local-api.tsbuildinfo",
+    "akshare-sidecar:sync": "node ./scripts/build-akshare-sidecar.mjs --sync-only",
+    "akshare-sidecar:build": "node ./scripts/build-akshare-sidecar.mjs",
+    "bench:backtest-engine": "node ./scripts/bench-backtest-engine.mjs",
+    "check:user-text": "node ./scripts/check-user-text-literals.mjs",
+    "check:error-text": "node ./scripts/check-error-literals.mjs && npm run check:user-text"
+  },
+  "dependencies": {
+    "@duckdb/node-api": "^1.4.4-r.3",
+    "@zinuto/shared": "2.0.1",
+    "better-sqlite3": "^12.2.0",
+    "ccxt": "4.5.71",
+    "express": "^5.1.0",
+    "read-excel-file": "^9.0.9",
+    "unzipper": "^0.12.3",
+    "zod": "^4.1.5"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.13.3",
+    "tsx": "^4.23.1",
+    "typescript": "^5.9.2",
+    "write-excel-file": "^4.0.5"
+  }
+}

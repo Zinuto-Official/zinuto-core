@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "version": "2.0.1",
+  "publishedAt": "2026-08-12T02:00:00.000Z",
+  "releaseHighlights": {
+    "en": [
+      "Free Replay and Challenge screens now keep setup, timers, and resumed activity consistent when you move between workspaces.",
+      "Custom Indicator now has clearer local validation, safer profile saving, and an expanded reference center.",
+      "Device Transfer restores selected local market data and related records more reliably while retaining integrity checks.",
+      "Startup presentation and the desktop close confirmation have been refined."
+    ],
+    "zh-CN": [
+      "在工作区之间切换时，自由推演与挑战页面会更稳定地保持准备配置、计时器和进行中的训练。",
+      "自定义指标新增更清晰的本地校验、更稳妥的配置保存，并扩充了参考中心。",
+      "设备迁移会更可靠地恢复已选本地行情及其关联记录，并继续执行完整性校验。",
+      "优化启动展示与桌面端关闭确认。"
+    ],
+    "ja": [
+      "ワークスペースを移動しても、フリーリプレイとチャレンジの準備設定、タイマー、進行中の内容が安定して維持されます。",
+      "カスタム指標のローカル検証とプロファイル保存を改善し、リファレンスセンターを拡充しました。",
+      "デバイス移行で、選択したローカル相場データと関連記録をより確実に復元し、整合性検証も引き続き行います。",
+      "起動画面とデスクトップ終了時の確認表示を調整しました。"
+    ],
+    "ko": [
+      "작업 공간을 이동해도 자유 리플레이와 챌린지의 준비 설정, 타이머와 진행 중인 내용이 더 안정적으로 유지됩니다.",
+      "사용자 지표의 로컬 검증과 프로필 저장을 개선하고 참고 센터를 확장했습니다.",
+      "기기 이전에서 선택한 로컬 시세 데이터와 관련 기록을 더 안정적으로 복원하며 무결성 검사도 계속 수행합니다.",
+      "시작 화면과 데스크톱 종료 확인 화면을 다듬었습니다."
+    ],
+    "es": [
+      "Replay libre y los desafíos mantienen de forma más fiable la configuración, los temporizadores y la actividad al cambiar de espacio.",
+      "Indicadores personalizados mejora la validación local y el guardado de perfiles, y amplía el centro de referencia.",
+      "Transferencia de dispositivos restaura con más fiabilidad los datos locales seleccionados y sus registros, manteniendo la comprobación de integridad.",
+      "Se han ajustado la presentación de inicio y la confirmación al cerrar la aplicación."
+    ]
+  }
+}

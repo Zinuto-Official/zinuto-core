@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "semanticsVersion": "backtest-evaluator-v1",
+  "cases": [
+    {
+      "id": "non-finite-and-exact-numeric-semantics",
+      "category": "non-finite",
+      "source": "BUY: 1 / 0.000000001; SELL: (0.1 + 0.2) = 0.3; SHORT: 1 / 0; COVER: (1 / 0) = (1 / 0);",
+      "bars": [
+        { "ts": "2026-01-01T00:00:00.000Z", "open": 1, "high": 2, "low": 0.5, "close": 1, "volume": 10 },
+        { "ts": "2026-01-02T00:00:00.000Z", "open": 2, "high": 3, "low": 1.5, "close": 2, "volume": 20 },
+        { "ts": "2026-01-03T00:00:00.000Z", "open": 3, "high": 4, "low": 2.5, "close": 3, "volume": 30 }
+      ]
+    },
+    {
+      "id": "supported-function-matrix",
+      "category": "functions",
+      "source": "R := REF(C, 1); RV := REFV(C, 2); M := MA(C, 2); T := SUM(C, 2); H := HHV(C, 2); L := LLV(C, 2); E := EMA(C, 2); X := EXPMA(C, 2); S := SMA(C, 3, 1); U := CROSS(M, X); D := CROSSDOWN(S, E); BUY: CROSSUP(M, X) OR (MAX(H, L) > MIN(H, L)); SELL: D; SHORT: ABS(C - R) > 0 AND IF(V > 0, TRUE, FALSE); COVER: IFF(RV > 0, NOT FALSE, FALSE);",
+      "bars": [
+        { "ts": "2026-02-01T00:00:00.000Z", "open": 10, "high": 11, "low": 9, "close": 10, "volume": 10 },
+        { "ts": "2026-02-02T00:00:00.000Z", "open": 12, "high": 13, "low": 11, "close": 12, "volume": 11 },
+        { "ts": "2026-02-03T00:00:00.000Z", "open": 9, "high": 10, "low": 8, "close": 9, "volume": 12 },
+        { "ts": "2026-02-04T00:00:00.000Z", "open": 14, "high": 15, "low": 13, "close": 14, "volume": 13 },
+        { "ts": "2026-02-05T00:00:00.000Z", "open": 8, "high": 9, "low": 7, "close": 8, "volume": 14 },
+        { "ts": "2026-02-06T00:00:00.000Z", "open": 16, "high": 17, "low": 15, "close": 16, "volume": 15 }
+      ]
+    },
+    {
+      "id": "dynamic-period-series",
+      "category": "dynamic-period",
+      "source": "N := IF(C > REF(C, 1), 2, 3); BUY: MA(C, N) > REF(C, 1); SELL: SUM(C, N) > HHV(C, N); SHORT: LLV(C, N) < C; COVER: SMA(C, N, 1) > EMA(C, N);",
+      "bars": [
+        { "ts": "2026-03-01T00:00:00.000Z", "open": 5, "high": 6, "low": 4, "close": 5, "volume": 100 },
+        { "ts": "2026-03-02T00:00:00.000Z", "open": 7, "high": 8, "low": 6, "close": 7, "volume": 110 },
+        { "ts": "2026-03-03T00:00:00.000Z", "open": 6, "high": 7, "low": 5, "close": 6, "volume": 120 },
+        { "ts": "2026-03-04T00:00:00.000Z", "open": 9, "high": 10, "low": 8, "close": 9, "volume": 130 },
+        { "ts": "2026-03-05T00:00:00.000Z", "open": 8, "high": 9, "low": 7, "close": 8, "volume": 140 },
+        { "ts": "2026-03-06T00:00:00.000Z", "open": 11, "high": 12, "low": 10, "close": 11, "volume": 150 }
+      ]
+    },
+    {
+      "id": "seeded-random-price-series-7f4a7c15",
+      "category": "seeded-random",
+      "seed": "7f4a7c15",
+      "source": "FAST := EMA(C, 3); SLOW := SMA(C, 5, 2); BUY: CROSS(FAST, SLOW); SELL: CROSSDOWN(FAST, SLOW); SHORT: (HHV(H, 4) - C) > (C - LLV(L, 4)); COVER: MA(V, 3) > REF(MA(V, 3), 1);",
+      "bars": [
+        { "ts": "2026-04-01T00:00:00.000Z", "open": 101.2, "high": 103.8, "low": 99.7, "close": 102.4, "volume": 812 },
+        { "ts": "2026-04-02T00:00:00.000Z", "open": 102.9, "high": 104.1, "low": 100.3, "close": 100.8, "volume": 1204 },
+        { "ts": "2026-04-03T00:00:00.000Z", "open": 100.5, "high": 101.9, "low": 97.2, "close": 98.1, "volume": 931 },
+        { "ts": "2026-04-04T00:00:00.000Z", "open": 98.4, "high": 102.6, "low": 97.9, "close": 101.7, "volume": 1442 },
+        { "ts": "2026-04-05T00:00:00.000Z", "open": 101.1, "high": 105.3, "low": 100.8, "close": 104.6, "volume": 1337 },
+        { "ts": "2026-04-06T00:00:00.000Z", "open": 104.9, "high": 106.2, "low": 101.4, "close": 102.2, "volume": 995 },
+        { "ts": "2026-04-07T00:00:00.000Z", "open": 102.0, "high": 103.1, "low": 98.6, "close": 99.4, "volume": 1620 },
+        { "ts": "2026-04-08T00:00:00.000Z", "open": 99.8, "high": 104.7, "low": 99.1, "close": 103.9, "volume": 1511 }
+      ]
+    }
+  ]
+}

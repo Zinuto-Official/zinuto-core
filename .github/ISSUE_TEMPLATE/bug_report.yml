@@ -1,0 +1,82 @@
+# SPDX-License-Identifier: GPL-3.0-only
+
+name: Bug report
+description: Report a reproducible problem in Zinuto Core
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping improve Zinuto Core. Do not include credentials, personal market data, or security-sensitive details. Use private vulnerability reporting for security issues.
+  - type: input
+    id: commit
+    attributes:
+      label: Core version or commit
+      description: Paste the commit hash or source tag you built.
+      placeholder: e.g. 0123456789abcdef
+    validations:
+      required: true
+  - type: dropdown
+    id: operating-system
+    attributes:
+      label: Operating system
+      options:
+        - macOS
+        - Windows
+        - Other or unsupported
+    validations:
+      required: true
+  - type: input
+    id: architecture
+    attributes:
+      label: Computer architecture
+      placeholder: e.g. Apple Silicon, Intel x64, AMD64
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Give the smallest reliable sequence, including the screen and input type involved.
+      placeholder: |
+        1. Start Core with ...
+        2. Open ...
+        3. Select ...
+        4. Observe ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Logs or screenshots
+      description: Remove account details, file paths containing your name, tokens, and real market data before posting.
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: Mention whether the problem also occurs with bundled sample data and a clean local profile.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched existing issues and pull requests.
+          required: true
+        - label: This concerns Zinuto Core, not an official account, payment, or updater flow.
+          required: true
+        - label: I removed credentials and personal data from the report.
+          required: true

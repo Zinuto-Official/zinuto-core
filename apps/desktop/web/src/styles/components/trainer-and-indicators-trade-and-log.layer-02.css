@@ -1,0 +1,487 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.trade-log-side-stats-text {
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.trade-log-side-stats-text.auto-shrink-text[data-fit-level='1'] {
+  font-size: var(--ty-r1);
+}
+
+.trade-log-side-stats-text.auto-shrink-text[data-fit-level='2'] {
+  font-size: var(--ty-r1);
+}
+
+.trade-log-side-stats-split {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  gap: 0;
+}
+
+.trade-log-side-stats-separator {
+  color: var(--text-subtle);
+}
+
+.trade-side-tone-buy {
+  color: var(--trade-side-tone-buy);
+}
+
+.trade-side-tone-sell {
+  color: var(--trade-side-tone-sell);
+}
+
+.trade-log .log-list {
+  min-height: 0;
+  flex: 1 1 auto;
+  height: auto;
+  max-height: none;
+  overflow-y: auto;
+  overflow-x: hidden;
+  gap: 2px;
+  padding-right: 1px;
+  align-content: start;
+  grid-auto-rows: minmax(22px, max-content);
+}
+
+.trade-log-strip-list {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  min-width: 0;
+  gap: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-block: 2px;
+  scrollbar-gutter: stable;
+}
+
+.trade-log-pill {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  min-width: 0;
+  max-width: min(100%, 560px);
+  gap: 10px;
+  height: calc(var(--trainer-top-row-h) - 20px);
+  padding: 0 14px;
+  border: 1px solid color-mix(in srgb, var(--line) 54%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--panel-soft) 58%, var(--panel));
+}
+
+.trade-log-pill-head {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 6px;
+}
+
+.trade-log-pill-side,
+.trade-log-pill-seq,
+.trade-log-pill-time,
+.trade-log-pill-metric {
+  display: block;
+  min-width: 0;
+  font-size: var(--ty-r1);
+  line-height: 1;
+  font-weight: 600;
+  font-family: inherit;
+  font-variant-numeric: tabular-nums lining-nums;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.trade-log-pill-side.buy {
+  color: var(--trade-side-tone-buy);
+}
+
+.trade-log-pill-side.sell {
+  color: var(--trade-side-tone-sell);
+}
+
+.trade-log-pill-seq {
+  color: var(--text-subtle);
+}
+
+.trade-log-pill-time {
+  color: var(--text-subtle);
+}
+
+.trade-log-pill-metrics {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  gap: 10px;
+}
+
+.trade-log-pill-metric {
+  color: color-mix(in srgb, var(--text-subtle) 88%, var(--text));
+}
+
+.trade-log-strip-empty {
+  min-width: max-content;
+  min-height: 0;
+  height: calc(var(--trainer-top-row-h) - 20px);
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 14px;
+  border-radius: 999px;
+}
+
+.log-row {
+  display: grid;
+  grid-template-columns: minmax(28px, 0.64fr) minmax(34px, 0.56fr) minmax(0, 0.95fr) minmax(0, 0.84fr) minmax(0, 1.1fr);
+  gap: clamp(2px, 0.3vw, 5px);
+  align-items: center;
+}
+
+.log-row {
+  font-size: var(--ty-r2);
+  color: var(--text-subtle);
+  min-height: 22px;
+  padding: 0 1px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+}
+
+.log-side-text {
+  display: block;
+  justify-self: start;
+  min-width: 0;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: var(--ty-r2);
+  line-height: 1.05;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+}
+
+.log-side-text.buy {
+  color: var(--trade-side-tone-buy);
+}
+
+.log-side-text.sell {
+  color: var(--trade-side-tone-sell);
+}
+
+.log-seq-text {
+  display: block;
+  justify-self: start;
+  text-align: left;
+  min-width: 0;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-subtle);
+  font-weight: 600;
+}
+
+.log-col-value {
+  display: block;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+}
+
+.log-col-value.auto-shrink-text[data-fit-level='1'] {
+  font-size: var(--ty-r1);
+}
+
+.log-col-value.auto-shrink-text[data-fit-level='2'] {
+  font-size: var(--ty-r1);
+}
+
+.log-seq-text.auto-shrink-text[data-fit-level='1'] {
+  font-size: var(--ty-r1);
+}
+
+.log-seq-text.auto-shrink-text[data-fit-level='2'] {
+  font-size: var(--ty-r1);
+}
+
+.trade-log-empty {
+  min-height: 40px;
+  display: grid;
+  place-items: center;
+  border: 1px dashed color-mix(in srgb, var(--line) 58%, transparent);
+  border-radius: calc(var(--radius-rect) - 2px);
+  background: color-mix(in srgb, var(--panel-soft) 62%, var(--panel));
+}
+
+.log-row span:first-child {
+  text-align: left;
+}
+
+.log-cost {
+  color: var(--text-subtle);
+  font-weight: 700;
+}
+
+.error-text {
+  font-size: var(--ty-r2);
+  color: var(--red);
+  font-weight: 600;
+}
+
+.inline-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.inline-row.between {
+  justify-content: space-between;
+}
+
+.gap-6 {
+  gap: 6px;
+}
+
+.gap-8 {
+  gap: 8px;
+}
+
+.gap-10 {
+  gap: 10px;
+}
+
+.compact-btn {
+  height: var(--control-h-compact);
+  font-size: var(--ty-r2);
+  padding: 0 10px;
+}
+
+.chip {
+  border: none;
+  border-radius: var(--radius-rect);
+  background: var(--btn-bg);
+  box-shadow: none;
+  color: var(--text-subtle);
+  padding: 2px 8px;
+  font-size: var(--ty-r2);
+  cursor: pointer;
+}
+
+.chip.danger {
+  border-color: var(--visual-danger-border-soft);
+  color: var(--visual-danger-text);
+}
+
+.import-symbol-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  max-height: 120px;
+  overflow: auto;
+}
+
+.hidden-file-input {
+  display: none;
+}
+
+.import-action-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.import-action-row.compact {
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+.symbol-btn {
+  border: none;
+  background: var(--btn-bg);
+  box-shadow: none;
+  color: var(--text-subtle);
+  border-radius: var(--radius-rect);
+  padding: 4px 12px;
+  font-size: var(--ty-r2);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.symbol-btn:hover {
+  background: var(--btn-bg-hover);
+  box-shadow: none;
+}
+
+.balance-input {
+  width: clamp(100px, 7vw, 146px);
+}
+
+.settings-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.settings-field {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.trade-settings-cost-group {
+  border: 1px solid color-mix(in srgb, var(--line) 76%, transparent);
+  border-radius: var(--radius-rect);
+  background: color-mix(in srgb, var(--panel-soft) 84%, var(--panel));
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.trade-settings-cost-group .balance-input {
+  width: 100%;
+}
+
+.replay-trainer-settings-modal .trade-settings-cost-group {
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  padding: 0;
+  gap: 10px;
+}
+
+.replay-trainer-settings-modal .replay-settings-section {
+  border-radius: calc(var(--radius-rect) + 2px);
+  background: color-mix(in srgb, var(--panel-soft) 58%, transparent);
+  padding: 12px 14px;
+  display: grid;
+  gap: 10px;
+}
+
+.replay-trainer-settings-modal .replay-settings-section .section-title {
+  color: var(--text-strong);
+  font-size: var(--ty-r4);
+  font-weight: 700;
+}
+
+.replay-trainer-settings-modal .replay-settings-section .section-subtitle {
+  color: color-mix(in srgb, var(--muted) 90%, var(--text-subtle));
+  font-size: var(--ty-r2);
+  line-height: 1.35;
+}
+
+.replay-trainer-settings-modal .replay-settings-section-period {
+  gap: 10px;
+}
+
+.replay-trainer-settings-modal .replay-settings-section-advance {
+  gap: 8px;
+}
+
+.replay-trainer-settings-modal .replay-settings-history-row {
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.replay-trainer-settings-modal .replay-settings-history-label {
+  white-space: nowrap;
+}
+
+.replay-trainer-settings-modal .replay-settings-history-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.replay-trainer-settings-modal .replay-settings-history-input {
+  width: clamp(118px, 9vw, 176px);
+}
+
+.replay-trainer-settings-modal .replay-settings-density-block {
+  display: grid;
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: calc(var(--radius-rect) - 3px);
+  background: color-mix(in srgb, var(--panel-soft) 68%, transparent);
+}
+
+.replay-trainer-settings-modal .replay-settings-density-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.replay-trainer-settings-modal .replay-settings-density-label {
+  font-weight: 600;
+  color: color-mix(in srgb, var(--muted) 88%, var(--text-subtle));
+}
+
+.replay-trainer-settings-modal .replay-settings-density-value {
+  font-size: var(--ty-r3);
+  font-weight: 700;
+  color: var(--text-strong);
+}
+
+.replay-trainer-settings-modal .replay-settings-density-level-switch {
+  width: 100%;
+  min-width: 0;
+}
+
+.replay-trainer-settings-modal .replay-settings-density-desc {
+  margin-top: 1px;
+}
+
+.replay-trainer-settings-modal .replay-settings-advance-switch {
+  margin-top: 4px;
+}
+
+.replay-trainer-settings-modal .replay-settings-trade-groups {
+  display: grid;
+  gap: 10px;
+}
+
+.replay-trainer-settings-modal .replay-settings-subgroup {
+  border: none;
+  border-radius: calc(var(--radius-rect) - 3px);
+  background: color-mix(in srgb, var(--panel-soft) 68%, transparent);
+  padding: 8px 10px;
+  display: grid;
+  gap: 6px;
+}
+
+.replay-trainer-settings-modal .replay-settings-subgroup + .replay-settings-subgroup {
+  margin-top: 0;
+}
+
+.replay-trainer-settings-modal .replay-settings-subgroup-display {
+  background: color-mix(in srgb, var(--panel-soft) 50%, transparent);
+  padding: 8px 10px;
+  gap: 4px;
+}
+
+.replay-trainer-settings-modal .replay-settings-row {
+  display: grid;
+  grid-template-columns: minmax(110px, max-content) minmax(0, 1fr);
+  align-items: center;
+  column-gap: 10px;
+  row-gap: 6px;
+}
+
+.replay-trainer-settings-modal .replay-settings-row > .muted {
+  white-space: nowrap;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--muted) 88%, var(--text-subtle));
+}

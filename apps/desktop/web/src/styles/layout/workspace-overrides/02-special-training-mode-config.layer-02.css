@@ -1,0 +1,385 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.special-training-risk-hud-card {
+  min-width: 0;
+  min-height: 76px;
+  border: 1px solid color-mix(in srgb, var(--line) 42%, transparent);
+  border-radius: 16px;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--panel-soft) 94%, var(--window-bg)),
+    color-mix(in srgb, var(--panel) 96%, var(--window-bg))
+  );
+  padding: 8px 10px;
+  display: grid;
+  gap: 6px;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--visual-white) 6%, transparent),
+    0 8px 18px color-mix(in srgb, var(--visual-black) 8%, transparent);
+}
+
+.special-training-risk-hud-card-life {
+  align-content: center;
+}
+
+.special-training-risk-hud-life-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.special-training-risk-hud-life-row > span,
+.special-training-risk-hud-life-row > span > em {
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1.15;
+  font-style: normal;
+}
+
+.special-training-risk-hud-life-row > strong {
+  color: var(--text-strong);
+  font-size: var(--ty-r4);
+  line-height: 1;
+  font-weight: 760;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-risk-hud-life-row.is-secondary {
+  align-items: center;
+}
+
+.special-training-risk-hud-life-floating,
+.special-training-risk-hud-life-pressure {
+  min-width: 0;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.special-training-risk-hud-life-floating {
+  flex: 1 1 auto;
+}
+
+.special-training-risk-hud-life-floating > strong {
+  font-size: var(--ty-r6);
+  line-height: 0.98;
+  font-weight: 840;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-risk-hud-life-pressure {
+  flex: 0 0 auto;
+  padding-left: 12px;
+  border-left: 1px solid color-mix(in srgb, var(--line) 44%, transparent);
+}
+
+.special-training-risk-hud-life-pressure > strong {
+  color: var(--text-strong);
+  font-size: var(--ty-r3);
+  line-height: 1;
+  font-weight: 760;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-risk-hud-card-gravity {
+  align-content: center;
+}
+
+.special-training-risk-hud-gravity-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.special-training-risk-hud-gravity-head > span {
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.special-training-risk-hud-gravity-head > span:last-child {
+  justify-items: end;
+  text-align: right;
+}
+
+.special-training-risk-hud-gravity-head em {
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1.2;
+  font-style: normal;
+}
+
+.special-training-risk-hud-gravity-head strong {
+  color: var(--text-strong);
+  font-size: var(--ty-r4);
+  line-height: 1;
+  font-weight: 780;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-risk-hud-gravity-track {
+  position: relative;
+  overflow: hidden;
+  height: 10px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--line) 58%, transparent);
+  background: color-mix(in srgb, var(--text-subtle) 14%, transparent);
+}
+
+.special-training-risk-hud-gravity-track.is-down {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--price-down-color) 20%, transparent),
+    color-mix(in srgb, var(--text-subtle) 12%, transparent)
+  );
+}
+
+.special-training-risk-hud-gravity-track.is-up {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--price-up-color) 16%, transparent),
+    color-mix(in srgb, var(--text-subtle) 12%, transparent)
+  );
+}
+
+.special-training-risk-hud-gravity-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--price-down-color) 88%, transparent),
+    color-mix(in srgb, var(--visual-warning-accent) 76%, transparent)
+  );
+}
+
+.special-training-risk-hud-gravity-track.is-up .special-training-risk-hud-gravity-fill {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--price-up-color) 82%, transparent),
+    color-mix(in srgb, var(--primary) 74%, transparent)
+  );
+}
+
+.special-training-risk-hud-gravity-track.is-flat .special-training-risk-hud-gravity-fill {
+  background: color-mix(in srgb, var(--line) 52%, transparent);
+}
+
+.special-training-risk-hud-gravity-foot {
+  display: flex;
+  justify-content: center;
+}
+
+.special-training-risk-hud-gravity-badge {
+  min-height: 24px;
+  padding: 0 10px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--line) 56%, transparent);
+  background: color-mix(in srgb, var(--panel) 92%, var(--window-bg));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-strong);
+  font-size: var(--ty-r2);
+  line-height: 1;
+  font-weight: 760;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-risk-hud-gravity-badge.is-down {
+  border-color: color-mix(in srgb, var(--price-down-color) 44%, var(--line));
+  color: color-mix(in srgb, var(--price-down-color) 88%, var(--text-strong));
+}
+
+.special-training-risk-hud-gravity-badge.is-up {
+  border-color: color-mix(
+    in srgb,
+    var(--price-up-color) 42%,
+    var(--line)
+  );
+  color: color-mix(
+    in srgb,
+    var(--price-up-color) 88%,
+    var(--text-strong)
+  );
+}
+
+.special-training-risk-hud-card-metric {
+  align-content: center;
+  gap: 4px;
+}
+
+.special-training-risk-hud-card-metric > span {
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1.2;
+}
+
+.special-training-risk-hud-card-metric > strong {
+  color: var(--text-strong);
+  font-size: var(--ty-r4);
+  line-height: 1;
+  font-weight: 780;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-risk-hud-card-metric.is-up {
+  border-color: color-mix(
+    in srgb,
+    var(--price-up-color) 22%,
+    var(--line)
+  );
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--price-up-color) 10%, var(--panel-soft)),
+    color-mix(in srgb, var(--panel) 96%, var(--window-bg))
+  );
+}
+
+.special-training-risk-hud-card-metric.is-up > strong {
+  color: color-mix(
+    in srgb,
+    var(--price-up-color) 88%,
+    var(--text-strong)
+  );
+}
+
+.special-training-risk-hud-card-metric.is-down {
+  border-color: color-mix(in srgb, var(--price-down-color) 22%, var(--line));
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--price-down-color) 10%, var(--panel-soft)),
+    color-mix(in srgb, var(--panel) 96%, var(--window-bg))
+  );
+}
+
+.special-training-risk-hud-card-metric.is-down > strong {
+  color: color-mix(in srgb, var(--price-down-color) 88%, var(--text-strong));
+}
+
+.special-training-risk-left-top-grid .special-training-risk-reality-grid {
+  height: 100%;
+}
+
+.special-training-risk-left-top-grid .special-training-risk-survival-value {
+  font-size: var(--ty-r7);
+}
+
+.special-training-risk-left-top-grid .special-training-risk-gravity-scale {
+  min-height: 112px;
+}
+
+.special-training-right-panel-body {
+  height: 100%;
+}
+
+.special-training-risk-panel-body {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  align-content: stretch;
+  gap: 6px;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.special-training-risk-panel-scroll {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+  overscroll-behavior: contain;
+  padding-right: 2px;
+}
+
+.special-training-risk-panel-scroll > * {
+  flex: 0 0 auto;
+}
+
+.special-training-risk-status-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.special-training-risk-status-banner-main {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.special-training-risk-panel-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.special-training-risk-progress-chip {
+  min-height: var(--control-h-compact);
+  padding: 0 10px;
+  border: 1px solid color-mix(in srgb, var(--line) 64%, transparent);
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--panel-soft) 84%, var(--window-bg));
+  color: var(--text-strong);
+  font-size: var(--ty-r1);
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-risk-status-panel {
+  display: grid;
+  gap: 6px;
+  padding: 4px 6px 2px;
+}
+
+.special-training-risk-status-headline {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.special-training-risk-status-mode {
+  color: var(--text-strong);
+  font-size: var(--ty-r1);
+  line-height: 1.25;
+  font-weight: 740;
+  letter-spacing: 0;
+}
+
+.special-training-risk-console-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 18px;
+}
+
+.special-training-risk-mission-strip {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(92px, 0.42fr);
+  gap: 6px;
+  align-items: stretch;
+}
+
+.special-training-risk-mission-progress,
+.special-training-risk-mission-countdown {
+  min-width: 0;
+  border: 1px solid color-mix(in srgb, var(--line) 48%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--panel-soft) 68%, var(--window-bg));
+  padding: 6px 8px;
+  display: grid;
+  gap: 4px;
+}

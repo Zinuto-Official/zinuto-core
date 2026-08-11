@@ -1,0 +1,14 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.desktop-main:is(.is-trainer, .is-special-training) .log-row {
+  padding: 2px 0;
+  border-radius: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--line) 44%, transparent);
+  background: transparent;
+  min-height: 20px;
+}
+
+.desktop-main:is(.is-trainer, .is-special-training) .trade-log-empty {
+  border: none;
+  background: color-mix(in srgb, var(--panel-soft) 68%, var(--panel));
+}

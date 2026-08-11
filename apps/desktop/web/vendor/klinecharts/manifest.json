@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "package": "klinecharts",
+  "version": "10.0.0-beta2",
+  "upstream": {
+    "repository": "https://github.com/klinecharts/KLineChart",
+    "tag": "v10.0.0-beta2",
+    "tagCommit": "c76ceefcde0217c9e877e5ab08b7dc5ef24742e6",
+    "sourceArchiveSha256": "ac963516f7c9b2d6d978e0529387c12aa4bcbb461fbd6cb759244027375c8346",
+    "npmIntegrity": "sha512-CsbMhpJHNYLaJrvV56Lms2Y9U/DskNJORVvGRPXoKOT2jyW7hCdKI/0AqG1GW8e3HVwFZFOzCcCjcv0+cZf14g=="
+  },
+  "toolchain": {
+    "packageManager": "npm",
+    "vite": "8.0.13",
+    "syncScript": "apps/desktop/web/scripts/build-klinecharts-vendor.mjs"
+  },
+  "inputs": {
+    "esmSha256": "1db5dbaf9cd5d5cd7f5d419f654c43f84921b53881848c850c76c7309c05ae4a",
+    "typesSha256": "475e6961a6388c9a92b6d2194d03b0d7afa0c70c57249bc355dcd950308dcd14",
+    "licenseSha256": "ff8311d55ca5766d3888c688b0ecc0f292289a659e45bfee4dfc0870ab74e4ca",
+    "noticeSha256": "e2a48226872b013c897676c3ae1b65dbebcbdd8d3fdcc29fed5073c3d6e5e231"
+  },
+  "patches": [
+    {
+      "file": "patches/disable-production-logger.patch",
+      "code": "PRODUCTION_LOGGER_DISABLED"
+    },
+    {
+      "file": "patches/pane-axis-compatibility.patch",
+      "code": "PANE_AXIS_COMPATIBILITY"
+    }
+  ],
+  "outputs": {
+    "esmSha256": "b7fd07bf7874751332756080b291934708f2a94791420c9860866cdb4ca884db",
+    "typesSha256": "995d7182eaa8b70ebe2005dd00b2184c0ee13e1d74561d5176e5842478e9421a"
+  },
+  "behavior": {
+    "crosshairOverlayRefresh": true,
+    "productionLogger": false
+  },
+  "license": "Apache-2.0"
+}

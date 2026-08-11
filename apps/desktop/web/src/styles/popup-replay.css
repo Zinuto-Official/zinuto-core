@@ -1,0 +1,6 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+@import "./layout/chart-workspace.css";
+@import "./components/history-replay-chart-structure.css";
+@import "./components/summary-modal.css";
+@import "./components/popup-replay-chart.css";

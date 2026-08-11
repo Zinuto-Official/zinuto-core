@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+branch="$(git symbolic-ref --quiet --short HEAD || true)"
+if [[ "$branch" != 'main' ]]; then
+  printf 'Refusing commit: Zinuto source changes must be committed directly on main (current: %s).\n' "${branch:-detached}" >&2
+  exit 1
+fi
+
+if git diff --cached --quiet --; then
+  exit 0
+fi
+
+npm run check:affected -- --staged

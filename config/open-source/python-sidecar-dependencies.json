@@ -1,0 +1,511 @@
+{
+  "schemaVersion": 1,
+  "id": "aktools-akshare-market-data-sidecar",
+  "policy": "This manifest is an offline, exact-version license review of every registry package in the sidecar uv.lock. Any lock, interpreter, build-tool, root-package, or license declaration change requires explicit review and regeneration.",
+  "lockFile": "apps/desktop/local-api/sidecars/akshare/uv.lock",
+  "lockSha256": "829c5ffc7942462a91657ec8523e78e4c75fbdfdae6d2003b7902f277f6fad51",
+  "projectFile": "apps/desktop/local-api/sidecars/akshare/pyproject.toml",
+  "projectSha256": "4e8298c1203f9dcce9fd1602ebec320d11e52bc42342cb9a3e983a144de6f18d",
+  "pythonVersionFile": "apps/desktop/local-api/sidecars/akshare/.python-version",
+  "pythonVersionFileSha256": "db82937e1f1830581a9553c7814f5c5fcacb6dfdef8310b43e9a812c887acaf5",
+  "requiredRootPackages": [
+    {
+      "name": "akshare",
+      "version": "1.18.64"
+    },
+    {
+      "name": "aktools",
+      "version": "0.0.91"
+    },
+    {
+      "name": "pyinstaller",
+      "version": "6.16.0"
+    }
+  ],
+  "pythonRuntime": {
+    "name": "CPython",
+    "version": "3.11.15",
+    "declaredLicense": "Python Software Foundation License Version 2",
+    "spdxExpression": "PSF-2.0",
+    "evidence": "CPython 3.11.15 LICENSE and PSF license history: https://docs.python.org/3.11/license.html",
+    "purl": "pkg:generic/cpython@3.11.15",
+    "sourceUrl": "https://www.python.org/downloads/release/python-31115/"
+  },
+  "buildTool": {
+    "name": "uv",
+    "version": "0.11.8",
+    "declaredLicense": "Apache-2.0 OR MIT",
+    "spdxExpression": "Apache-2.0 OR MIT",
+    "evidence": "uv 0.11.8 source licenses: https://github.com/astral-sh/uv/tree/0.11.8",
+    "purl": "pkg:github/astral-sh/uv@0.11.8",
+    "sourceUrl": "https://github.com/astral-sh/uv/tree/0.11.8"
+  },
+  "packages": [
+    {
+      "name": "akracer",
+      "version": "0.0.14",
+      "spdxExpression": "MIT",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/akracer/0.0.14/",
+      "role": "platform-conditional-sidecar-lock"
+    },
+    {
+      "name": "akshare",
+      "version": "1.18.64",
+      "spdxExpression": "MIT",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/akshare/1.18.64/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "aktools",
+      "version": "0.0.91",
+      "spdxExpression": "MIT",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/aktools/0.0.91/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "altgraph",
+      "version": "0.17.5",
+      "spdxExpression": "MIT",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/altgraph/0.17.5/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "annotated-doc",
+      "version": "0.0.4",
+      "spdxExpression": "MIT",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/annotated-doc/0.0.4/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "annotated-types",
+      "version": "0.7.0",
+      "spdxExpression": "MIT",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/annotated-types/0.7.0/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "anyio",
+      "version": "4.14.2",
+      "spdxExpression": "MIT",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/anyio/4.14.2/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "beautifulsoup4",
+      "version": "4.15.0",
+      "spdxExpression": "MIT",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/beautifulsoup4/4.15.0/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "certifi",
+      "version": "2026.6.17",
+      "spdxExpression": "MPL-2.0",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/certifi/2026.6.17/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "cffi",
+      "version": "2.1.0",
+      "spdxExpression": "MIT-0",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/cffi/2.1.0/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "charset-normalizer",
+      "version": "3.4.9",
+      "spdxExpression": "MIT",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/charset-normalizer/3.4.9/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "click",
+      "version": "8.4.2",
+      "spdxExpression": "BSD-3-Clause",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/click/8.4.2/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "colorama",
+      "version": "0.4.6",
+      "spdxExpression": "BSD-3-Clause",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/colorama/0.4.6/",
+      "role": "platform-conditional-sidecar-lock"
+    },
+    {
+      "name": "curl-cffi",
+      "version": "0.15.0",
+      "spdxExpression": "MIT",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/curl-cffi/0.15.0/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "decorator",
+      "version": "5.3.1",
+      "spdxExpression": "BSD-2-Clause",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/decorator/5.3.1/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "et-xmlfile",
+      "version": "2.0.0",
+      "spdxExpression": "MIT",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/et-xmlfile/2.0.0/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "fastapi",
+      "version": "0.139.2",
+      "spdxExpression": "MIT",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/fastapi/0.139.2/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "h11",
+      "version": "0.16.0",
+      "spdxExpression": "MIT",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/h11/0.16.0/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "html5lib",
+      "version": "1.1",
+      "spdxExpression": "MIT",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/html5lib/1.1/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "idna",
+      "version": "3.18",
+      "spdxExpression": "BSD-3-Clause",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/idna/3.18/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "jinja2",
+      "version": "3.1.6",
+      "spdxExpression": "BSD-3-Clause",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/jinja2/3.1.6/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "jsonpath",
+      "version": "0.82.2",
+      "spdxExpression": "MIT",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/jsonpath/0.82.2/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "lxml",
+      "version": "6.1.1",
+      "spdxExpression": "BSD-3-Clause",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/lxml/6.1.1/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "macholib",
+      "version": "1.16.4",
+      "spdxExpression": "MIT",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/macholib/1.16.4/",
+      "role": "platform-conditional-sidecar-lock"
+    },
+    {
+      "name": "markdown-it-py",
+      "version": "4.2.0",
+      "spdxExpression": "MIT",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/markdown-it-py/4.2.0/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "markupsafe",
+      "version": "3.0.3",
+      "spdxExpression": "BSD-3-Clause",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/markupsafe/3.0.3/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "mdurl",
+      "version": "0.1.2",
+      "spdxExpression": "MIT",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/mdurl/0.1.2/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "mini-racer",
+      "version": "0.14.1",
+      "spdxExpression": "ISC",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/mini-racer/0.14.1/",
+      "role": "platform-conditional-sidecar-lock"
+    },
+    {
+      "name": "numpy",
+      "version": "2.4.6",
+      "spdxExpression": "BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/numpy/2.4.6/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "openpyxl",
+      "version": "3.1.5",
+      "spdxExpression": "MIT",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/openpyxl/3.1.5/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "packaging",
+      "version": "26.2",
+      "spdxExpression": "Apache-2.0 OR BSD-2-Clause",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/packaging/26.2/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "pandas",
+      "version": "3.0.3",
+      "spdxExpression": "BSD-3-Clause",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/pandas/3.0.3/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "pefile",
+      "version": "2023.2.7",
+      "spdxExpression": "MIT",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/pefile/2023.2.7/",
+      "role": "platform-conditional-sidecar-lock"
+    },
+    {
+      "name": "py-mini-racer",
+      "version": "0.6.0",
+      "spdxExpression": "ISC",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/py-mini-racer/0.6.0/",
+      "role": "platform-conditional-sidecar-lock"
+    },
+    {
+      "name": "pycparser",
+      "version": "3.0",
+      "spdxExpression": "BSD-3-Clause",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/pycparser/3.0/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "pydantic",
+      "version": "2.13.4",
+      "spdxExpression": "MIT",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/pydantic/2.13.4/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "pydantic-core",
+      "version": "2.46.4",
+      "spdxExpression": "MIT",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/pydantic-core/2.46.4/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "pygments",
+      "version": "2.20.0",
+      "spdxExpression": "BSD-2-Clause",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/pygments/2.20.0/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "pyinstaller",
+      "version": "6.16.0",
+      "spdxExpression": "(GPL-2.0-or-later WITH Bootloader-exception) AND Apache-2.0 AND MIT",
+      "evidence": "Exact-release COPYING.txt: GPL-2.0-or-later with Bootloader exception, Apache-2.0 runtime hooks, and MIT isolated module.",
+      "role": "bundled-build-runtime"
+    },
+    {
+      "name": "pyinstaller-hooks-contrib",
+      "version": "2026.6",
+      "spdxExpression": "GPL-2.0-or-later AND Apache-2.0",
+      "evidence": "Exact-release LICENSE: GPL-2.0-or-later standard hooks and Apache-2.0 runtime hooks.",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "python-dateutil",
+      "version": "2.9.0.post0",
+      "spdxExpression": "BSD-3-Clause OR Apache-2.0",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/python-dateutil/2.9.0.post0/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "python-multipart",
+      "version": "0.0.32",
+      "spdxExpression": "Apache-2.0",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/python-multipart/0.0.32/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "pywin32-ctypes",
+      "version": "0.2.3",
+      "spdxExpression": "BSD-3-Clause",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/pywin32-ctypes/0.2.3/",
+      "role": "platform-conditional-sidecar-lock"
+    },
+    {
+      "name": "requests",
+      "version": "2.34.2",
+      "spdxExpression": "Apache-2.0",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/requests/2.34.2/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "rich",
+      "version": "15.0.0",
+      "spdxExpression": "MIT",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/rich/15.0.0/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "setuptools",
+      "version": "83.0.0",
+      "spdxExpression": "MIT",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/setuptools/83.0.0/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "shellingham",
+      "version": "1.5.4",
+      "spdxExpression": "ISC",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/shellingham/1.5.4/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "six",
+      "version": "1.17.0",
+      "spdxExpression": "MIT",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/six/1.17.0/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "soupsieve",
+      "version": "2.9",
+      "spdxExpression": "MIT",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/soupsieve/2.9/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "starlette",
+      "version": "1.3.1",
+      "spdxExpression": "BSD-3-Clause",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/starlette/1.3.1/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "tabulate",
+      "version": "0.10.0",
+      "spdxExpression": "MIT",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/tabulate/0.10.0/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "tqdm",
+      "version": "4.69.0",
+      "spdxExpression": "MPL-2.0 AND MIT",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/tqdm/4.69.0/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "typer",
+      "version": "0.27.0",
+      "spdxExpression": "MIT",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/typer/0.27.0/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "typing-extensions",
+      "version": "4.16.0",
+      "spdxExpression": "PSF-2.0",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/typing-extensions/4.16.0/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "typing-inspection",
+      "version": "0.4.2",
+      "spdxExpression": "MIT",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/typing-inspection/0.4.2/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "tzdata",
+      "version": "2026.3",
+      "spdxExpression": "Apache-2.0",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/tzdata/2026.3/",
+      "role": "platform-conditional-sidecar-lock"
+    },
+    {
+      "name": "urllib3",
+      "version": "2.7.0",
+      "spdxExpression": "MIT",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/urllib3/2.7.0/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "uvicorn",
+      "version": "0.51.0",
+      "spdxExpression": "BSD-3-Clause",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/uvicorn/0.51.0/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "webencodings",
+      "version": "0.5.1",
+      "spdxExpression": "BSD-3-Clause",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/webencodings/0.5.1/",
+      "role": "sidecar-lock"
+    },
+    {
+      "name": "xlrd",
+      "version": "2.0.2",
+      "spdxExpression": "BSD-3-Clause",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/xlrd/2.0.2/",
+      "role": "sidecar-lock"
+    }
+  ],
+  "connectorSoftware": [
+    {
+      "ecosystem": "pypi",
+      "name": "aktools",
+      "label": "AKTools",
+      "version": "0.0.91",
+      "spdxExpression": "MIT",
+      "projectUrl": "https://github.com/akfamily/aktools"
+    },
+    {
+      "ecosystem": "pypi",
+      "name": "akshare",
+      "label": "AKShare",
+      "version": "1.18.64",
+      "spdxExpression": "MIT",
+      "projectUrl": "https://github.com/akfamily/akshare"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "ccxt",
+      "label": "CCXT",
+      "version": "4.5.71",
+      "spdxExpression": "MIT",
+      "projectUrl": "https://github.com/ccxt/ccxt"
+    }
+  ],
+  "marketDataProviderTerms": [
+    {
+      "id": "eastmoney",
+      "name": "Eastmoney",
+      "termsRevision": "eastmoney-terms-2025-07-18",
+      "termsUrl": "https://about.eastmoney.com/home/protocol"
+    },
+    {
+      "id": "binance",
+      "name": "Binance",
+      "termsRevision": "binance-terms-reviewed-2026-07-19",
+      "termsUrl": "https://www.binance.com/en/terms"
+    },
+    {
+      "id": "okx",
+      "name": "OKX",
+      "termsRevision": "okx-terms-2026-04-21",
+      "termsUrl": "https://www.okx.com/help/terms-of-service"
+    }
+  ]
+}

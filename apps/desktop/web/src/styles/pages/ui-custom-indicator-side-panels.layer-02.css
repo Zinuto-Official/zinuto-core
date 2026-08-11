@@ -1,0 +1,504 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.custom-indicator-param-input:focus,
+.custom-indicator-param-input:focus-visible {
+  border-color: color-mix(in srgb, var(--visual-accent-base) 88%, var(--visual-white));
+  background: color-mix(in srgb, var(--visual-accent-surface) 72%, transparent);
+  box-shadow: none;
+}
+
+.custom-indicator-param-input::placeholder {
+  color: color-mix(in srgb, var(--muted) 82%, var(--text-t3));
+}
+
+.custom-indicator-param-item:hover .custom-indicator-param-input {
+  border-color: color-mix(
+    in srgb,
+    var(--visual-accent-base) 42%,
+    var(--custom-indicator-grid-line)
+  );
+  background: color-mix(in srgb, var(--visual-accent-surface) 44%, transparent);
+}
+
+.custom-indicator-status-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.custom-indicator-status-card {
+  display: grid;
+  gap: 5px;
+  padding: 12px;
+  border: 1px solid var(--custom-indicator-card-border);
+  border-radius: calc(var(--radius-rect) - 1px);
+  background: color-mix(in srgb, var(--panel) 88%, transparent);
+}
+
+.custom-indicator-status-card > span {
+  color: color-mix(in srgb, var(--muted) 84%, var(--text-t3));
+  font-size: var(--ty-r1);
+}
+
+.custom-indicator-status-card > strong {
+  color: var(--text-t1);
+  font-size: var(--ty-r2);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.custom-indicator-status-card.is-ready {
+  border-color: color-mix(in srgb, var(--success) 22%, transparent);
+  background: color-mix(in srgb, rgb(var(--color-success) / 0.08), var(--panel));
+}
+
+.custom-indicator-status-card.is-ready > strong {
+  color: color-mix(in srgb, var(--success) 60%, var(--text-t1));
+}
+
+.custom-indicator-status-card.is-error {
+  border-color: color-mix(in srgb, var(--action-a3) 20%, transparent);
+  background: color-mix(in srgb, rgb(var(--color-danger) / 0.08), var(--panel));
+}
+
+.custom-indicator-diagnostics-stack {
+  align-content: start;
+}
+
+.custom-indicator-diagnostics-block {
+  display: grid;
+  gap: 0;
+  border: 1px solid var(--custom-indicator-card-border);
+  border-radius: calc(var(--radius-rect) - 1px);
+  background: color-mix(in srgb, var(--panel) 88%, transparent);
+  overflow: hidden;
+}
+
+.custom-indicator-diagnostics-body {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+}
+
+.custom-indicator-diagnostics-block .custom-indicator-console-body {
+  max-height: 220px;
+}
+
+.custom-indicator-status-card.is-error > strong {
+  color: color-mix(in srgb, var(--action-a3) 86%, var(--text-t1));
+}
+
+.custom-indicator-console-head {
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px;
+  border-bottom: 1px solid var(--custom-indicator-grid-line);
+  background: transparent;
+}
+
+.custom-indicator-console-prompt {
+  font-family: var(--ff-mono);
+  color: color-mix(in srgb, var(--muted) 82%, var(--text-t3));
+  font-size: var(--ty-r2);
+}
+
+.custom-indicator-console-title {
+  color: color-mix(in srgb, var(--text-t1) 92%, var(--text-t2));
+  font-size: var(--ty-r1);
+  font-weight: 680;
+}
+
+.custom-indicator-console-body {
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 10px 14px 16px;
+  display: grid;
+  align-content: start;
+  gap: 5px;
+}
+
+.custom-indicator-console-row {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  gap: 10px;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.custom-indicator-console-time {
+  color: color-mix(in srgb, var(--muted) 82%, var(--text-t3));
+  font-size: var(--ty-r1);
+  font-family: var(--ff-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.custom-indicator-console-message {
+  color: color-mix(in srgb, var(--text-t1) 90%, var(--text-t2));
+  font-size: var(--ty-r1);
+  line-height: 1.5;
+  font-family: var(--ff-mono);
+  min-width: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.custom-indicator-console-row.is-success .custom-indicator-console-message {
+  color: color-mix(in srgb, var(--success) 60%, var(--text-t1));
+}
+
+.custom-indicator-console-row.is-info .custom-indicator-console-message {
+  color: color-mix(in srgb, var(--primary) 74%, var(--text-t1));
+}
+
+.custom-indicator-console-row.is-error .custom-indicator-console-message {
+  color: color-mix(in srgb, var(--action-a3) 88%, var(--text-t1));
+}
+
+.custom-indicator-console-inline-link {
+  display: block;
+  width: 100%;
+  height: auto !important;
+  min-height: 0 !important;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font-size: var(--ty-r3);
+  line-height: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  text-align: left;
+  padding: 0;
+  white-space: pre-wrap !important;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  justify-content: flex-start;
+}
+
+.custom-indicator-console-row.is-error .custom-indicator-console-inline-link {
+  color: color-mix(in srgb, var(--action-a3) 88%, var(--text-t1));
+}
+
+.custom-indicator-console-inline-link:hover {
+  text-decoration: underline;
+}
+
+.custom-indicator-reference-grid {
+  display: grid;
+  gap: 0;
+  align-content: start;
+}
+
+.custom-indicator-reference-row {
+  width: 100%;
+  display: grid;
+  gap: 0;
+  padding: 12px 0;
+  border: none;
+  border-top: 1px solid color-mix(in srgb, var(--line) 36%, transparent);
+  justify-items: stretch;
+  text-align: left;
+  border-radius: 0;
+  background: transparent;
+}
+
+.custom-indicator-reference-row:first-child {
+  border-top: none;
+}
+
+.custom-indicator-reference-row:hover {
+  background: color-mix(in srgb, var(--visual-white) 4%, transparent);
+}
+
+.custom-indicator-reference-row-copy {
+  display: grid;
+  gap: 5px;
+}
+
+.custom-indicator-reference-row-copy > strong {
+  color: var(--text-t1);
+  font-size: var(--ty-r2);
+  font-weight: 700;
+}
+
+.custom-indicator-reference-row-copy > p {
+  margin: 0;
+  color: color-mix(in srgb, var(--muted) 86%, var(--text-t3));
+  font-size: var(--ty-r1);
+  line-height: 1.5;
+}
+
+.custom-indicator-delete-dialog {
+  width: min(380px, 92vw);
+}
+
+.custom-indicator-delete-dialog .ui-standard-modal-title {
+  color: var(--text-t1);
+}
+
+.custom-indicator-delete-dialog-body > p {
+  margin: 0;
+  color: var(--text-t2);
+  font-size: var(--ty-r3);
+  line-height: 1.46;
+  word-break: break-word;
+}
+
+.custom-indicator-delete-dialog-actions {
+  padding-top: 0;
+}
+
+.custom-indicator-delete-dialog-actions .danger {
+  border-color: color-mix(in srgb, var(--action-a3) 54%, var(--surface-s4));
+  color: var(--text-t4);
+  background: color-mix(in srgb, var(--action-a3) 84%, var(--surface-s2));
+}
+
+.custom-indicator-delete-dialog-actions .danger:hover {
+  background: color-mix(in srgb, var(--action-a3) 92%, var(--surface-s2));
+}
+
+@media (max-width: 1240px) {
+  .custom-indicator-page {
+    --custom-indicator-manager-width: 232px;
+    --custom-indicator-inspector-expanded-width: 304px;
+  }
+}
+
+@container custom-indicator-engine (max-width: 1120px) {
+  .custom-indicator-workbench-head {
+    align-items: flex-start;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .custom-indicator-workbench-status-row {
+    justify-self: end;
+    flex-wrap: nowrap;
+  }
+
+  .custom-indicator-workbench-actions {
+    width: 100%;
+    grid-template-columns: repeat(3, max-content);
+    justify-content: center;
+    justify-self: stretch;
+  }
+}
+
+@container custom-indicator-engine (max-width: 560px) {
+  .custom-indicator-workbench-actions {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .custom-indicator-workbench-action[data-slot="button"] {
+    width: 100%;
+  }
+}
+
+@container custom-indicator-viewport (max-width: 860px) {
+  .custom-indicator-viewport-head {
+    grid-template-columns: max-content minmax(0, 1fr);
+    align-items: center;
+    gap: 10px;
+  }
+
+  .custom-indicator-viewport-controls {
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .custom-indicator-viewport-pool-select {
+    width: clamp(126px, 32cqw, 172px) !important;
+  }
+
+  .custom-indicator-viewport-symbol-select {
+    width: clamp(76px, 20cqw, 112px) !important;
+  }
+
+  .custom-indicator-viewport-period-select {
+    width: clamp(82px, 23cqw, 96px) !important;
+  }
+}
+
+@container custom-indicator-viewport (max-width: 520px) {
+  .custom-indicator-viewport-head {
+    gap: 8px;
+    padding-inline: 14px;
+  }
+
+  .custom-indicator-viewport-controls {
+    gap: 6px;
+  }
+
+  .custom-indicator-viewport-pool-select {
+    width: clamp(104px, 31cqw, 136px) !important;
+  }
+
+  .custom-indicator-viewport-symbol-select {
+    width: clamp(68px, 19cqw, 92px) !important;
+  }
+
+  .custom-indicator-viewport-period-select {
+    width: clamp(78px, 25cqw, 92px) !important;
+  }
+}
+
+@media (max-width: 980px) {
+  .custom-indicator-page {
+    --custom-indicator-manager-width: 188px;
+    --custom-indicator-inspector-expanded-width: 252px;
+    padding: 10px;
+  }
+
+  .custom-indicator-body {
+    padding: 5px;
+  }
+
+  .custom-indicator-manager-panel {
+    border-right: 1px solid var(--custom-indicator-grid-line-hard);
+    border-bottom: none;
+  }
+
+  .custom-indicator-main-panel {
+    grid-template-rows:
+      minmax(260px, calc((1 - var(--custom-indicator-workbench-ratio)) * 100%))
+      10px
+      minmax(280px, calc(var(--custom-indicator-workbench-ratio) * 100%));
+  }
+
+  .custom-indicator-panel-resizer {
+    display: block;
+  }
+
+  .custom-indicator-side-panel {
+    border-left: 1px solid var(--custom-indicator-grid-line-hard);
+    border-top: none;
+  }
+
+  .custom-indicator-side-tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .custom-indicator-side-tab {
+    min-height: 42px;
+    padding: 0 6px 8px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .custom-indicator-side-tab-label {
+    font-size: var(--ty-r3);
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow-wrap: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: normal;
+  }
+
+  .custom-indicator-viewport-head {
+    grid-template-columns: max-content minmax(0, 1fr);
+    align-items: center;
+  }
+
+  .custom-indicator-viewport-controls {
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+  }
+}
+
+@media (max-width: 760px) {
+  .custom-indicator-page {
+    --custom-indicator-inspector-expanded-width: 220px;
+    padding: 8px;
+  }
+
+  .custom-indicator-body {
+    padding: 5px;
+  }
+
+  .custom-indicator-workbench-head {
+    align-items: flex-start;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .custom-indicator-viewport-controls {
+    width: 100%;
+    max-width: 100%;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .custom-indicator-viewport-pool-select,
+  .custom-indicator-viewport-symbol-select,
+  .custom-indicator-viewport-period-select {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .custom-indicator-toolbar-name-input {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .custom-indicator-workbench-status-row {
+    justify-self: end;
+    flex-wrap: nowrap;
+  }
+
+  .custom-indicator-workbench-actions {
+    width: 100%;
+    grid-template-columns: minmax(0, 1fr);
+    justify-self: stretch;
+  }
+
+  .custom-indicator-workbench-action[data-slot="button"] {
+    width: 100%;
+  }
+
+  .custom-indicator-engine-body {
+    --custom-indicator-editor-min-block: 96px;
+    --custom-indicator-diagnostics-toggle-block: 72px;
+  }
+
+  .custom-indicator-diagnostics-toggle {
+    padding-inline: 14px;
+    align-items: flex-start;
+  }
+
+  .custom-indicator-diagnostics-toggle[data-slot="button"] {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) auto;
+    align-content: center;
+  }
+
+  .custom-indicator-diagnostics-toggle-tail {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .custom-indicator-diagnostics-drawer-body {
+    padding: 0 14px 14px;
+  }
+
+  .custom-indicator-reference-actions {
+    justify-content: stretch;
+  }
+
+  .custom-indicator-reference-actions > .compact-btn,
+  .custom-indicator-reference-open-btn {
+    width: 100%;
+  }
+
+  .custom-indicator-side-accordion {
+    padding: 12px;
+  }
+
+  .custom-indicator-status-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

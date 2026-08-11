@@ -1,0 +1,7 @@
+{
+  "compositionProtocolVersion": 1,
+  "distributionId": "community",
+  "targetPlatform": "host",
+  "productName": "Zinuto Core",
+  "bundleIdentifier": "org.zinuto.core"
+}

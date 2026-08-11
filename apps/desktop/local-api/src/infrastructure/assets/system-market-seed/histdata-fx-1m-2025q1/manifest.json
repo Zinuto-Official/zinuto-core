@@ -1,0 +1,201 @@
+{
+  "version": "2026-07-30-v2-histdata-fx-1m-2025q1-fixed-est",
+  "sourceName": "HistData FX 1m 2025 Q1",
+  "sourceDataset": "HistData FX 1-minute 2025 Q1 day-boundary trimmed fixed-EST export (UTC-05:00, no daylight saving adjustment)",
+  "sourceUrl": "https://www.histdata.com/download-free-forex-data/",
+  "acquiredAt": "2026-04-27",
+  "rightsBasis": {
+    "classification": "owner-confirmed-redistribution-right",
+    "statement": "HistData publishes the source files as free downloadable historical data; the repository owner confirmed the company's right to redistribute this exact prepared snapshot on 2026-07-17.",
+    "scope": "Only the files and SHA-256 checksums listed in this manifest.",
+    "evidence": "Private launch rights record retained by the copyright holder."
+  },
+  "generatedAt": "2026-04-27T00:00:00.000Z",
+  "generatedFrom": "HistData FX 1m 2025 Q1 owner-held source snapshot",
+  "timeZone": "America/New_York",
+  "timestampTimeZone": "Etc/GMT+5",
+  "baseTimeframe": "1m",
+  "marketPresetId": "FOREX_STANDARD_LOT",
+  "assetClass": "FOREX",
+  "minTradeStep": 0.01,
+  "selectedSymbolCount": 13,
+  "totalRows": 1154459,
+  "dateRange": {
+    "firstDate": "2025-01-02",
+    "lastDate": "2025-03-30",
+    "firstTimestamp": "2025-01-02T05:00:00Z",
+    "lastTimestamp": "2025-03-31T04:59:00Z"
+  },
+  "storageEstimate": {
+    "rawCsvBytes": 55695985,
+    "compressedAssetBytes": 10447456,
+    "seededDuckDbBytes": 70791168
+  },
+  "columns": {
+    "datetime": "datetime",
+    "open": "open",
+    "high": "high",
+    "low": "low",
+    "close": "close",
+    "volume": "volume"
+  },
+  "droppedRows": [],
+  "symbols": [
+    {
+      "symbol": "AUDCAD",
+      "fileName": "AUDCAD.csv.gz",
+      "rowCount": 89039,
+      "firstDate": "2025-01-02",
+      "lastDate": "2025-03-30",
+      "firstTimestamp": "2025-01-02T05:00:00Z",
+      "lastTimestamp": "2025-03-31T04:59:00Z",
+      "rawCsvBytes": 4323138,
+      "compressedBytes": 771994,
+      "sha256": "9adc777bf5425817ba5f8c13be7603475e9267e85a396f4d11712e49aee5f3ad"
+    },
+    {
+      "symbol": "AUDJPY",
+      "fileName": "AUDJPY.csv.gz",
+      "rowCount": 88961,
+      "firstDate": "2025-01-02",
+      "lastDate": "2025-03-30",
+      "firstTimestamp": "2025-01-02T05:00:00Z",
+      "lastTimestamp": "2025-03-31T04:59:00Z",
+      "rawCsvBytes": 3963470,
+      "compressedBytes": 827496,
+      "sha256": "2068a399f91687e6f25932773c35941bb30e35598148ab049a78dd227dd7d709"
+    },
+    {
+      "symbol": "AUDUSD",
+      "fileName": "AUDUSD.csv.gz",
+      "rowCount": 88806,
+      "firstDate": "2025-01-02",
+      "lastDate": "2025-03-30",
+      "firstTimestamp": "2025-01-02T05:00:00Z",
+      "lastTimestamp": "2025-03-31T04:59:00Z",
+      "rawCsvBytes": 4307677,
+      "compressedBytes": 748248,
+      "sha256": "0f053c2cc5138807d0203f1799d2fad9a948ed0e4bb88d28149f38143bb09cdd"
+    },
+    {
+      "symbol": "EURAUD",
+      "fileName": "EURAUD.csv.gz",
+      "rowCount": 88895,
+      "firstDate": "2025-01-02",
+      "lastDate": "2025-03-30",
+      "firstTimestamp": "2025-01-02T05:00:00Z",
+      "lastTimestamp": "2025-03-31T04:59:00Z",
+      "rawCsvBytes": 4316518,
+      "compressedBytes": 839910,
+      "sha256": "5faa8289fa828e163a62b0af995cb6480086fc050c605e38598c1529f5c0932c"
+    },
+    {
+      "symbol": "EURCAD",
+      "fileName": "EURCAD.csv.gz",
+      "rowCount": 88589,
+      "firstDate": "2025-01-02",
+      "lastDate": "2025-03-30",
+      "firstTimestamp": "2025-01-02T05:00:00Z",
+      "lastTimestamp": "2025-03-31T04:59:00Z",
+      "rawCsvBytes": 4303250,
+      "compressedBytes": 816114,
+      "sha256": "3934978b8274dad1638772c90292c018c5bd6dba5d0d1c1c359add8737961c65"
+    },
+    {
+      "symbol": "EURCHF",
+      "fileName": "EURCHF.csv.gz",
+      "rowCount": 88828,
+      "firstDate": "2025-01-02",
+      "lastDate": "2025-03-30",
+      "firstTimestamp": "2025-01-02T05:00:00Z",
+      "lastTimestamp": "2025-03-31T04:59:00Z",
+      "rawCsvBytes": 4312043,
+      "compressedBytes": 739710,
+      "sha256": "c52b6373c37d991513a2728b48a62d2f26430eec4a8e967f7250e5bfcd56d009"
+    },
+    {
+      "symbol": "EURGBP",
+      "fileName": "EURGBP.csv.gz",
+      "rowCount": 88876,
+      "firstDate": "2025-01-02",
+      "lastDate": "2025-03-30",
+      "firstTimestamp": "2025-01-02T05:00:00Z",
+      "lastTimestamp": "2025-03-31T04:59:00Z",
+      "rawCsvBytes": 4315721,
+      "compressedBytes": 706556,
+      "sha256": "c507c0bd4bfa9c3d8e340175be05400c29a4f895da97cc34d5ed8be629ee2abe"
+    },
+    {
+      "symbol": "EURJPY",
+      "fileName": "EURJPY.csv.gz",
+      "rowCount": 88873,
+      "firstDate": "2025-01-02",
+      "lastDate": "2025-03-30",
+      "firstTimestamp": "2025-01-02T05:00:00Z",
+      "lastTimestamp": "2025-03-31T04:59:00Z",
+      "rawCsvBytes": 4315053,
+      "compressedBytes": 881132,
+      "sha256": "dc481713b2825e8c70495581571e7575cdc3070c7e38b149d9cbff333ea48ecc"
+    },
+    {
+      "symbol": "EURNZD",
+      "fileName": "EURNZD.csv.gz",
+      "rowCount": 88520,
+      "firstDate": "2025-01-02",
+      "lastDate": "2025-03-30",
+      "firstTimestamp": "2025-01-02T05:00:00Z",
+      "lastTimestamp": "2025-03-31T04:59:00Z",
+      "rawCsvBytes": 4298836,
+      "compressedBytes": 847810,
+      "sha256": "42f2a0ff980efbeabe1035e91eadcb5fc768af5a831d838b83c69d3951a88823"
+    },
+    {
+      "symbol": "EURUSD",
+      "fileName": "EURUSD.csv.gz",
+      "rowCount": 89013,
+      "firstDate": "2025-01-02",
+      "lastDate": "2025-03-30",
+      "firstTimestamp": "2025-01-02T05:00:00Z",
+      "lastTimestamp": "2025-03-31T04:59:00Z",
+      "rawCsvBytes": 4320937,
+      "compressedBytes": 785470,
+      "sha256": "fb97474422f50d859a1e08e00f79d1107a7a7c644f1c7d29f9d43186465fdedc"
+    },
+    {
+      "symbol": "GBPAUD",
+      "fileName": "GBPAUD.csv.gz",
+      "rowCount": 88588,
+      "firstDate": "2025-01-02",
+      "lastDate": "2025-03-30",
+      "firstTimestamp": "2025-01-02T05:00:00Z",
+      "lastTimestamp": "2025-03-31T04:59:00Z",
+      "rawCsvBytes": 4301667,
+      "compressedBytes": 857259,
+      "sha256": "b76342203ec748797569ee9c14077bc862366d9dc22535d46c22d4ae7cb9feb0"
+    },
+    {
+      "symbol": "GBPCAD",
+      "fileName": "GBPCAD.csv.gz",
+      "rowCount": 88572,
+      "firstDate": "2025-01-02",
+      "lastDate": "2025-03-30",
+      "firstTimestamp": "2025-01-02T05:00:00Z",
+      "lastTimestamp": "2025-03-31T04:59:00Z",
+      "rawCsvBytes": 4300859,
+      "compressedBytes": 837882,
+      "sha256": "958088d03c7dd0b7d59f80d7387f7d363e8c93d4c65cfc82f0e68ed5769965ef"
+    },
+    {
+      "symbol": "GBPCHF",
+      "fileName": "GBPCHF.csv.gz",
+      "rowCount": 88899,
+      "firstDate": "2025-01-02",
+      "lastDate": "2025-03-30",
+      "firstTimestamp": "2025-01-02T05:00:00Z",
+      "lastTimestamp": "2025-03-31T04:59:00Z",
+      "rawCsvBytes": 4316816,
+      "compressedBytes": 787875,
+      "sha256": "602e7f4b505da017daea6c5f0b68dded4a78f49127e0833bcb79679b0ee93093"
+    }
+  ]
+}

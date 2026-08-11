@@ -1,0 +1,299 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+/* ===== Layout Stabilization (2026-03) ===== */
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.app-dialog-overlay {
+  background: var(--ui-overlay-backdrop);
+  backdrop-filter: var(--ui-overlay-filter);
+  -webkit-backdrop-filter: var(--ui-overlay-filter);
+}
+
+.app-dialog-content {
+  color: var(--text);
+}
+
+.modal-size-sm {
+  width: min(calc(500px * var(--viewport-scale)), calc(100vw - 24px));
+}
+
+.modal-size-md {
+  width: min(calc(680px * var(--viewport-scale)), calc(100vw - 24px));
+}
+
+.modal-size-lg {
+  width: min(calc(980px * var(--viewport-scale)), calc(100vw - 24px));
+}
+
+.modal-size-full {
+  width: min(calc(1240px * var(--viewport-scale)), calc(100vw - 24px));
+}
+
+.workspace-page,
+.workspace-page > *,
+.workspace-page-body,
+.workspace-page-body > *,
+.history-workspace,
+.notes-workspace,
+.settings-page-content,
+.training-stats-page,
+.custom-indicator-page,
+.special-training-body,
+.special-training-trainer-shell {
+  min-width: 0;
+  min-height: 0;
+}
+
+.desktop-main.is-single-page > .workspace-page,
+.desktop-main.is-single-page
+  > .workspace-page-cache-slot
+  > .workspace-page-cache-slot-content
+  > .workspace-page,
+.desktop-main.is-single-page > .workspace-page-cache-slot > .workspace-page {
+  overflow: hidden;
+}
+
+.desktop-main.is-single-page > .workspace-page.training-stats-page,
+.desktop-main.is-single-page
+  > .workspace-page-cache-slot
+  > .workspace-page-cache-slot-content
+  > .workspace-page.training-stats-page,
+.desktop-main.is-single-page
+  > .workspace-page-cache-slot
+  > .workspace-page.training-stats-page {
+  overflow: auto;
+}
+
+.workspace-page-body {
+  overflow: hidden;
+}
+
+.workspace-page.settings-page .workspace-page-header {
+  border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--panel-soft) 84%, var(--window-bg));
+  padding: 10px 12px;
+}
+
+.workspace-page.settings-page .workspace-page-body.settings-page-content {
+  display: grid;
+  align-content: stretch;
+  gap: 12px;
+  overflow: hidden;
+  padding: 0;
+}
+
+@media (min-width: 1025px) {
+  .workspace-page.settings-page:not(.data-config-page)
+    .workspace-page-body.settings-page-content.settings-tabbed-page {
+    grid-template-rows: minmax(0, 1fr);
+    align-content: stretch;
+    overflow: hidden;
+  }
+
+  .workspace-page.settings-page:not(.data-config-page)
+    .settings-system-tabs-layout {
+    height: 100%;
+    max-height: none;
+    min-height: 0;
+    align-self: stretch;
+    overflow: hidden;
+  }
+
+  .workspace-page.settings-page:not(.data-config-page)
+    .settings-system-tabs-layout
+    > .page-main-layout-sidebar,
+  .workspace-page.settings-page:not(.data-config-page)
+    .settings-system-tabs-layout
+    > .page-main-layout-main,
+  .workspace-page.settings-page:not(.data-config-page)
+    .settings-system-tabs-layout
+    > .page-main-layout-sidebar
+    > .replay-settings-v2-sidebar,
+  .workspace-page.settings-page:not(.data-config-page)
+    .settings-system-tabs-layout
+    > .page-main-layout-main
+    > .settings-system-tabs-content {
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    overscroll-behavior: contain;
+    scrollbar-gutter: auto;
+  }
+}
+
+.settings-modern-panel {
+  width: min(1160px, 100%);
+  border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+  border-radius: 12px;
+  background: var(--panel);
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.settings-modern-panel [data-slot="card-content"] {
+  padding: 0;
+}
+
+.settings-modern-row {
+  grid-template-columns: minmax(168px, 220px) minmax(0, 1fr);
+  gap: 14px;
+  min-height: 64px;
+  padding: 14px 18px;
+  align-items: start;
+}
+
+.settings-row-divider {
+  display: none;
+}
+
+.settings-row-control {
+  min-width: 0;
+  width: 100%;
+}
+
+.settings-row-control.is-fill .settings-row-control-inner > * {
+  width: min(360px, 100%);
+  max-width: 100%;
+}
+
+.settings-danger-zone {
+  width: min(1160px, 100%);
+  margin-top: 12px;
+}
+
+.settings-storage-panel {
+  border: 1px solid color-mix(in srgb, var(--line) 72%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--panel) 96%, var(--window-bg));
+  padding: 12px 14px;
+  gap: 10px;
+}
+
+.data-config-page .settings-page-content {
+  overflow-y: auto;
+  overflow-x: hidden;
+  align-content: stretch;
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.data-config-page .sample-pool-card-grid {
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  align-content: start;
+}
+
+.special-training-page .workspace-page-body {
+  overflow: hidden;
+}
+
+.workspace-page.settings-page.special-training-page {
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.special-training-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.special-training-stage,
+.special-training-trainer-shell,
+.special-training-settlement-stage {
+  height: 100%;
+  min-height: 0;
+}
+
+.special-training-body > .special-training-stage,
+.special-training-body > .special-training-trainer-shell,
+.special-training-body > .special-training-settlement-stage {
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  width: 100%;
+}
+
+.desktop-main.is-special-training .special-training-trainer-right-panel {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  min-height: 0;
+  overflow: hidden;
+}
+
+.desktop-main.is-special-training
+  .special-training-trainer-right-panel
+  > .special-training-right-panel-body {
+  min-height: 0;
+  height: 100%;
+  padding: 8px 10px 10px;
+  gap: 8px;
+  overflow: hidden !important;
+  scrollbar-gutter: auto;
+}
+
+.desktop-main.is-special-training
+  .special-training-trainer-right-panel
+  > .special-training-fast-decision-panel-body {
+  min-height: 0;
+  height: 100%;
+  padding: 0;
+}
+
+.desktop-main.is-special-training
+  .special-training-trainer-right-panel
+  > .special-training-lightning-panel-body {
+  --special-training-lightning-action-height: clamp(48px, 5vh, 58px);
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  align-content: stretch;
+}
+
+.desktop-main.is-special-training
+  .special-training-trainer-right-panel
+  > .special-training-risk-panel-body {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  align-content: stretch;
+}
+
+.special-training-mode-picker {
+  display: grid;
+  grid-template-rows: auto;
+  height: auto;
+  align-content: start;
+  overflow: auto;
+}
+
+.special-training-mode-grid {
+  height: 100%;
+  align-content: stretch;
+  grid-auto-rows: minmax(0, 1fr);
+}
+
+.special-training-mode-card {
+  min-height: 0;
+  height: 100%;
+}
+
+.special-training-trainer-left-panel-body > .trainer-chart-workspace,
+.special-training-trainer-left-panel-body > .trainer-chart-workspace > .chart-layout,
+.special-training-trainer-left-panel-body
+  > .trainer-chart-workspace
+  > .chart-layout
+  > .chart-panel {
+  height: 100%;
+}
+
+.special-training-mode-modal {
+  width: min(920px, calc(100vw - 24px));
+  max-height: calc(100vh - 24px);
+  border: 1px solid color-mix(in srgb, var(--line) 72%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--panel) 97%, var(--window-bg));
+  box-shadow: var(--shadow-float);
+}

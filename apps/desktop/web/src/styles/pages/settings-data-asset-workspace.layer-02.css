@@ -1,0 +1,484 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.data-asset-import-dialog-drop {
+  min-height: 220px;
+  border: 1px dashed color-mix(in srgb, var(--surface-s4) 70%, transparent);
+  border-radius: var(--radius-rect);
+  background: color-mix(in srgb, var(--surface-s2) 90%, var(--surface-s1));
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  transition:
+    border-color var(--motion-normal),
+    background-color var(--motion-normal),
+    box-shadow var(--motion-normal);
+}
+
+.data-asset-import-dialog-drop:hover:not(.is-blocked):not(.is-previewing),
+.data-asset-import-dialog-drop:focus-within:not(.is-blocked):not(
+    .is-previewing
+  ),
+.data-asset-page.is-drop-active .data-asset-import-dialog-drop {
+  border-color: color-mix(in srgb, var(--primary) 72%, var(--surface-s4));
+  background: color-mix(in srgb, var(--primary-soft) 18%, var(--surface-s2));
+  box-shadow: inset 0 0 0 1px
+    color-mix(in srgb, var(--primary) 28%, transparent);
+}
+
+.data-asset-import-dialog-drop.is-blocked {
+  opacity: 0.64;
+}
+
+.portable-transfer-section,
+.data-config-transfer-dialog,
+.data-config-transfer-panel,
+.portable-transfer-data-banner {
+  --portable-transfer-border: color-mix(
+    in srgb,
+    var(--surface-s4) 34%,
+    transparent
+  );
+  --portable-transfer-strong-text: var(--text-t1);
+  --portable-transfer-text: color-mix(
+    in srgb,
+    var(--text-t1) 86%,
+    var(--text-t2)
+  );
+  --portable-transfer-muted-text: var(--text-t2);
+  --portable-transfer-soft-text: color-mix(
+    in srgb,
+    var(--text-t2) 78%,
+    var(--text-t3)
+  );
+}
+
+.portable-transfer-section,
+.data-config-transfer-dialog,
+.data-config-transfer-panel {
+  --portable-transfer-panel-background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--surface-s1) 64%, var(--surface-s2)),
+      color-mix(in srgb, var(--surface-s3) 58%, var(--surface-s2))
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--surface-s1) 72%, transparent),
+      color-mix(in srgb, var(--surface-s3) 28%, transparent)
+    );
+  --portable-transfer-block-surface: color-mix(
+    in srgb,
+    var(--surface-s2) 92%,
+    var(--surface-s1)
+  );
+  --portable-transfer-preview-surface: color-mix(
+    in srgb,
+    var(--surface-s1) 88%,
+    var(--surface-s2)
+  );
+  --portable-transfer-pill-surface: color-mix(
+    in srgb,
+    var(--surface-s3) 72%,
+    var(--surface-s2)
+  );
+  --portable-transfer-shadow: 0 20px 45px
+    rgb(var(--color-overlay-backdrop) / 0.06);
+}
+
+.portable-transfer-data-banner {
+  --portable-transfer-banner-border: color-mix(
+    in srgb,
+    var(--warning) 18%,
+    var(--surface-s4)
+  );
+  --portable-transfer-banner-background: color-mix(
+    in srgb,
+    var(--warning) 7%,
+    var(--surface-s2)
+  );
+}
+
+.data-config-transfer-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: center;
+  padding: 18px 20px;
+  border: 1px solid var(--portable-transfer-border);
+  border-radius: 18px;
+  background: var(--portable-transfer-panel-background);
+  box-shadow: var(--portable-transfer-shadow);
+}
+
+.data-config-transfer-copy {
+  display: grid;
+  gap: 6px;
+}
+
+.data-config-transfer-title {
+  font-size: var(--ty-r2);
+  font-weight: 700;
+  color: var(--portable-transfer-strong-text);
+}
+
+.data-config-transfer-body,
+.data-config-transfer-hint,
+.data-config-transfer-legal-body {
+  margin: 0;
+  font-size: var(--ty-r2);
+  line-height: 1.6;
+  color: var(--portable-transfer-muted-text);
+}
+
+.data-config-transfer-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.app-modal-surface.portable-transfer-modal-surface[data-preset="workflow"] {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  width: min(1040px, calc(100vw - 24px));
+  height: min(760px, calc(100dvh - 24px));
+  min-height: 0;
+  max-height: calc(100dvh - 24px);
+  overflow: hidden;
+  padding: 0;
+}
+
+.data-config-transfer-dialog {
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.data-config-transfer-dialog-body {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+  min-height: 0;
+  max-height: min(560px, calc(100dvh - 180px));
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable both-edges;
+}
+
+.data-config-transfer-dialog-grid {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+  align-content: start;
+}
+
+.data-config-transfer-field,
+.data-config-transfer-preview,
+.data-config-transfer-legal {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  padding: 14px 16px;
+  border: 1px solid var(--portable-transfer-border);
+  border-radius: 16px;
+  background: var(--portable-transfer-block-surface);
+}
+
+.data-config-transfer-field-label,
+.data-config-transfer-preview-title,
+.data-config-transfer-legal-title {
+  font-size: var(--ty-r1);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--portable-transfer-soft-text);
+}
+
+.data-config-transfer-field-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.data-config-transfer-field-row > strong {
+  font-size: var(--ty-r2);
+  color: var(--portable-transfer-strong-text);
+  word-break: break-all;
+}
+
+.data-config-transfer-checklist,
+.data-config-transfer-preview-list {
+  display: grid;
+  min-width: 0;
+  gap: 8px;
+}
+
+.data-config-transfer-check {
+  display: flex;
+  min-width: 0;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: var(--ty-r2);
+  color: var(--portable-transfer-text);
+}
+
+.data-config-transfer-check > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.data-config-transfer-check input {
+  margin-top: 2px;
+}
+
+.app-checkbox {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--primary);
+}
+
+.data-config-transfer-preview-item {
+  display: grid;
+  min-width: 0;
+  gap: 4px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--portable-transfer-preview-surface);
+}
+
+.data-config-transfer-preview-item > strong {
+  min-width: 0;
+  font-size: var(--ty-r2);
+  color: var(--portable-transfer-strong-text);
+  overflow-wrap: anywhere;
+}
+
+.data-config-transfer-preview-item > span {
+  min-width: 0;
+  font-size: var(--ty-r1);
+  color: var(--portable-transfer-muted-text);
+  overflow-wrap: anywhere;
+}
+
+.portable-transfer-section {
+  display: grid;
+  gap: 18px;
+}
+
+.portable-transfer-result-body,
+.portable-transfer-inline-note,
+.portable-transfer-muted {
+  color: var(--portable-transfer-muted-text);
+}
+
+.portable-transfer-hero-card .settings-panel-card-body,
+.portable-transfer-summary-card .settings-panel-card-body,
+.portable-transfer-step-card .settings-panel-card-body,
+.portable-transfer-result .settings-panel-card-body {
+  gap: 12px;
+}
+
+.portable-transfer-pill-row,
+.portable-transfer-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.portable-transfer-summary-grid,
+.portable-transfer-steps-grid,
+.portable-transfer-dialog-summary-grid {
+  gap: 12px;
+}
+
+.portable-transfer-action-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.portable-transfer-card {
+  min-height: 118px;
+  min-width: 0;
+  justify-content: center !important;
+  align-content: center;
+  justify-items: center;
+  align-items: center !important;
+  text-align: center;
+  white-space: normal !important;
+  padding: 16px;
+  border-radius: 18px;
+  display: grid !important;
+  gap: 6px;
+}
+
+.portable-transfer-card-icon {
+  display: inline-grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  margin-bottom: 2px;
+  border: 1px solid
+    color-mix(in srgb, var(--surface-s4) 42%, transparent);
+  border-radius: 999px;
+  color: var(--portable-transfer-strong-text);
+  background: color-mix(
+    in srgb,
+    var(--surface-s1) 78%,
+    var(--surface-s2)
+  );
+}
+
+.portable-transfer-card.is-primary .portable-transfer-card-icon {
+  border-color: color-mix(in srgb, var(--primary) 36%, var(--surface-s4));
+  color: var(--primary);
+  background: color-mix(in srgb, var(--primary-soft) 36%, var(--surface-s1));
+}
+
+.portable-transfer-card[data-slot="button"] {
+  display: grid;
+  height: auto;
+  min-height: 118px;
+  white-space: normal;
+}
+
+.portable-transfer-card strong,
+.portable-transfer-result strong {
+  font-size: var(--ty-r1);
+  color: var(--portable-transfer-strong-text);
+}
+
+.portable-transfer-card span,
+.portable-transfer-card em,
+.portable-transfer-result span,
+.portable-transfer-result-stats span {
+  min-width: 0;
+  font-size: var(--ty-r2);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.portable-transfer-card em {
+  font-style: normal;
+  color: var(--portable-transfer-muted-text);
+}
+
+.portable-transfer-card.is-primary {
+  border-color: color-mix(
+    in srgb,
+    var(--primary) 42%,
+    var(--ui-surface-border-strong)
+  );
+  background: color-mix(in srgb, var(--primary-soft) 28%, var(--ui-surface-bg));
+}
+
+.portable-transfer-stage-row {
+  display: flex;
+  min-width: 0;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.portable-transfer-stage.is-active {
+  color: var(--text-t4);
+  background: var(--primary);
+  border-color: transparent;
+}
+
+.portable-transfer-result-stats {
+  display: grid;
+  gap: 6px;
+}
+
+.portable-transfer-result-cta .settings-panel-card-body {
+  gap: 8px;
+}
+
+.data-config-transfer-checklist {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+}
+
+.data-config-transfer-check {
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--surface-s4) 34%, transparent);
+  background: color-mix(in srgb, var(--surface-s1) 70%, transparent);
+}
+
+.data-config-transfer-check:hover {
+  border-color: color-mix(in srgb, var(--primary) 38%, var(--surface-s4));
+  background: color-mix(in srgb, var(--primary-soft) 12%, var(--surface-s1));
+}
+
+.data-config-transfer-checklist .data-config-transfer-check input {
+  margin-top: 3px;
+}
+
+.data-config-transfer-legal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.portable-transfer-path-card .settings-panel-card-value {
+  font-size: var(--ty-r3);
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.portable-transfer-data-banner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+  padding: 16px 18px;
+  border-radius: 16px;
+  border: 1px solid var(--portable-transfer-banner-border);
+  background: var(--portable-transfer-banner-background);
+}
+
+.portable-transfer-data-banner-copy {
+  display: grid;
+  gap: 6px;
+}
+
+.portable-transfer-data-banner-copy strong {
+  font-size: var(--ty-r2);
+  color: var(--portable-transfer-strong-text);
+}
+
+.portable-transfer-data-banner-copy p,
+.portable-transfer-data-banner-copy span {
+  margin: 0;
+  font-size: var(--ty-r2);
+  line-height: 1.6;
+  color: var(--portable-transfer-text);
+}
+
+.app-root
+  .portable-transfer-data-banner
+  [data-slot="button"][data-variant="ghost"].portable-transfer-settings-link {
+  color: var(--text-t1);
+}
+
+.app-root
+  .portable-transfer-data-banner
+  [data-slot="button"][data-variant="ghost"].portable-transfer-settings-link:hover:not(
+    :disabled
+  ) {
+  color: var(--text-t1);
+  background: color-mix(in srgb, var(--text-t1) 8%, transparent);
+}
+
+.portable-transfer-data-banner-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}

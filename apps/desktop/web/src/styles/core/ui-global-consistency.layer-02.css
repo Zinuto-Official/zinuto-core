@@ -1,0 +1,461 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.app-root .list-item-card::before,
+.app-root [data-slot='list-item-card']::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 12px;
+  bottom: 12px;
+  width: 3px;
+  border-radius: 999px;
+  background: transparent;
+  transition: background-color var(--motion-fast);
+}
+
+.app-root .list-item-card-body {
+  position: relative;
+  display: grid;
+  gap: 6px;
+  min-height: 56px;
+  padding: 12px 12px 12px 16px;
+  border: 1px solid transparent;
+  border-radius: calc(var(--ui-surface-radius-sm) + 1px);
+  background: transparent;
+  transition:
+    background-color var(--motion-fast),
+    border-color var(--motion-fast),
+    box-shadow var(--motion-fast),
+    color var(--motion-fast);
+}
+
+.app-root .list-item-card:hover .list-item-card-body,
+.app-root [data-slot='list-item-card']:hover .list-item-card-body {
+  background: var(--ui-surface-hover-bg);
+}
+
+.app-root .list-item-card[data-active='true']::before,
+.app-root [data-slot='list-item-card'][data-active='true']::before {
+  background: var(--ui-row-rail);
+}
+
+.app-root .list-item-card[data-active='true'] .list-item-card-body,
+.app-root [data-slot='list-item-card'][data-active='true'] .list-item-card-body {
+  border-color: color-mix(in srgb, var(--visual-brand-ink-soft) 18%, transparent);
+  background: var(--ui-surface-active-bg);
+}
+
+.app-root .list-item-card:focus-visible .list-item-card-body,
+.app-root [data-slot='list-item-card']:focus-visible .list-item-card-body {
+  border-color: color-mix(in srgb, var(--visual-brand-ink-soft) 26%, transparent);
+  box-shadow: 0 0 0 3px var(--ui-control-focus-ring);
+}
+
+/* Keep major selectable list rows/cards on one visual language across workspaces. */
+
+.app-root .challenge-fusion-table-row {
+  --ui-list-row-accent: var(--challenge-fusion-accent);
+  --ui-list-row-surface: var(--panel);
+}
+
+.app-root .challenge-fusion-table-row:hover {
+  border-top-color: var(--ui-list-row-hover-border);
+  background: var(--ui-list-row-hover-bg);
+}
+
+.app-root .notes-page .notes-note-row {
+  --ui-list-row-accent: var(--visual-brand-ink-elevated);
+  --ui-list-row-surface: color-mix(in srgb, var(--panel) 92%, var(--window-bg));
+  box-shadow: none;
+  transition:
+    background-color var(--motion-fast),
+    border-color var(--motion-fast),
+    color var(--motion-fast),
+    box-shadow var(--motion-fast);
+}
+
+.app-root .notes-page .notes-note-row:hover {
+  transform: none;
+  border-color: var(--ui-list-row-hover-border);
+  background: var(--ui-list-row-hover-bg);
+  box-shadow: none;
+}
+
+.app-root .notes-page .notes-note-row.is-active {
+  border-color: var(--ui-list-row-active-border);
+  background: var(--ui-list-row-active-bg);
+  box-shadow: none;
+}
+
+.app-root .notes-page .notes-note-row:focus-visible {
+  border-color: var(--ui-list-row-active-border);
+  box-shadow: 0 0 0 3px var(--ui-control-focus-ring);
+}
+
+.app-root .notes-page .notes-note-row:hover::before,
+.app-root .notes-page .notes-note-row.is-active::before {
+  background: var(--ui-list-row-rail);
+}
+
+.app-root .notes-page .notes-note-row:hover .notes-note-row-title,
+.app-root .notes-page .notes-note-row.is-active .notes-note-row-title {
+  color: var(--text-strong);
+}
+
+.app-root .notes-page .notes-note-row:hover .notes-note-row-time,
+.app-root .notes-page .notes-note-row.is-active .notes-note-row-time {
+  color: var(--text-subtle);
+}
+
+.app-root .notes-page .notes-note-row:hover .notes-note-row-badge,
+.app-root .notes-page .notes-note-row.is-active .notes-note-row-badge {
+  border-color: color-mix(
+    in srgb,
+    var(--ui-list-row-accent) 18%,
+    var(--line)
+  );
+  background: color-mix(
+    in srgb,
+    var(--ui-list-row-accent) 8%,
+    var(--surface-s1)
+  );
+}
+
+.app-root .notes-page .notes-note-row.is-active .notes-note-row-badge {
+  background: color-mix(
+    in srgb,
+    var(--ui-list-row-accent) 12%,
+    var(--surface-s1)
+  );
+}
+
+.app-root .notes-page .notes-note-row:hover .notes-note-row-badge.is-accent,
+.app-root .notes-page .notes-note-row.is-active .notes-note-row-badge.is-accent {
+  border-color: color-mix(
+    in srgb,
+    var(--ui-list-row-accent) 32%,
+    var(--line)
+  );
+  background: color-mix(
+    in srgb,
+    var(--ui-list-row-accent) 13%,
+    var(--surface-s1)
+  );
+  color: color-mix(
+    in srgb,
+    var(--ui-list-row-accent) 58%,
+    var(--text-strong)
+  );
+}
+
+.app-root .diagnostic-console-archive-table {
+  --ui-list-row-accent: var(--visual-warning-accent);
+  --ui-list-row-surface: var(--diagnostic-archive-base-bg, var(--surface-s2));
+}
+
+.app-root
+  .diagnostic-console-table.diagnostic-console-archive-table
+  .diagnostic-console-archive-row:hover
+  td,
+.app-root
+  .diagnostic-console-table.diagnostic-console-archive-table
+  .diagnostic-console-archive-row:focus-within
+  td {
+  border-bottom-color: var(--ui-list-row-hover-border);
+  background: var(--ui-list-row-hover-bg);
+}
+
+.app-root
+  .diagnostic-console-table.diagnostic-console-archive-table
+  .diagnostic-console-archive-row.is-selected
+  td {
+  border-bottom-color: var(--ui-list-row-active-border);
+  background: var(--ui-list-row-active-bg);
+}
+
+.app-root .data-asset-table {
+  --ui-list-row-accent: var(--visual-brand-ink-elevated);
+  --ui-list-row-surface: var(--panel);
+}
+
+.app-root .data-asset-table tbody tr:hover {
+  background: var(--ui-list-row-hover-bg);
+}
+
+.app-root .data-asset-table tbody tr:hover td {
+  border-bottom-color: var(--ui-list-row-hover-border);
+}
+
+.app-root .data-asset-table tbody tr.is-active {
+  background: var(--ui-list-row-active-bg);
+}
+
+.app-root .data-asset-table tbody tr.is-active td {
+  border-bottom-color: var(--ui-list-row-active-border);
+}
+
+.app-root .data-asset-diagnostic-card {
+  --ui-list-row-accent: var(--visual-brand-ink-elevated);
+  --ui-list-row-surface: var(--surface-s2);
+  transition:
+    background-color var(--motion-fast),
+    border-color var(--motion-fast),
+    color var(--motion-fast),
+    box-shadow var(--motion-fast);
+}
+
+.app-root .data-asset-diagnostic-card.is-warning {
+  --ui-list-row-accent: var(--action-a3);
+  --ui-list-row-surface: color-mix(in srgb, var(--action-a3) 10%, var(--surface-s2));
+}
+
+.app-root .data-asset-diagnostic-card.is-safe {
+  --ui-list-row-accent: var(--action-a1);
+  --ui-list-row-surface: color-mix(in srgb, var(--action-a1) 12%, var(--surface-s2));
+}
+
+.app-root .data-asset-diagnostic-card-button:hover:not(:disabled) {
+  background: var(--ui-list-row-hover-bg);
+}
+
+.app-root .data-asset-diagnostic-card.is-active {
+  border-color: var(--ui-list-row-active-border);
+  background: var(--ui-list-row-active-bg);
+  box-shadow: none;
+}
+
+.app-root .data-asset-gap-alert-item {
+  --ui-list-row-accent: var(--visual-brand-ink-elevated);
+  --ui-list-row-surface: var(--surface-s1);
+  transition:
+    background-color var(--motion-fast),
+    border-color var(--motion-fast),
+    color var(--motion-fast),
+    box-shadow var(--motion-fast);
+}
+
+.app-root .data-asset-gap-alert-item:hover:not(:disabled) {
+  border-color: var(--ui-list-row-hover-border);
+  background: var(--ui-list-row-hover-bg);
+}
+
+.app-root .data-asset-gap-alert-item.is-active {
+  border-color: var(--ui-list-row-active-border);
+  background: var(--ui-list-row-active-bg);
+  box-shadow: none;
+}
+
+.app-root .custom-indicator-page .custom-indicator-manager-item-main,
+.app-root .custom-indicator-page .custom-indicator-manager-system-item {
+  --ui-list-row-accent: var(--visual-brand-ink-elevated);
+  --ui-list-row-surface: var(--custom-indicator-card-bg-strong);
+  transition:
+    background-color var(--motion-fast),
+    border-color var(--motion-fast),
+    color var(--motion-fast);
+}
+
+.app-root .custom-indicator-page .custom-indicator-manager-item-main:hover,
+.app-root .custom-indicator-page .custom-indicator-manager-system-item:hover {
+  border-color: var(--ui-list-row-hover-border);
+  background: var(--ui-list-row-hover-bg);
+  color: var(--text-t1);
+}
+
+.app-root
+  .custom-indicator-page
+  .custom-indicator-manager-item.is-active
+  .custom-indicator-manager-item-main,
+.app-root
+  .custom-indicator-page
+  .custom-indicator-manager-system-item.is-active {
+  border-color: var(--ui-list-row-active-border);
+  background: var(--ui-list-row-active-bg);
+  color: var(--text-t1);
+}
+
+.app-root
+  .custom-indicator-page
+  .custom-indicator-manager-item.is-active
+  .custom-indicator-manager-item-main::before,
+.app-root
+  .custom-indicator-page
+  .custom-indicator-manager-system-item.is-active::before {
+  background: var(--ui-list-row-rail);
+}
+
+.app-root .desktop-shell-surface {
+  border-color: var(--ui-divider-soft);
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--window-bg) 98%, transparent) 0%,
+      color-mix(in srgb, var(--panel) 90%, var(--window-bg)) 100%
+    );
+  box-shadow: none;
+}
+
+.app-root .desktop-shell-surface::before {
+  border-color: color-mix(in srgb, var(--text-strong) 4%, transparent);
+}
+
+.app-root .sidebar-nav-item-side-action {
+  border-color: transparent;
+  background: transparent;
+  color: var(--text-subtle);
+}
+
+.app-root .sidebar-nav-item-side-action:hover:not(:disabled) {
+  background: var(--ui-text-action-hover-bg);
+  color: var(--text);
+}
+
+.app-root .training-command-center-shell,
+.app-root .custom-indicator-ide-layout {
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+.app-root .settings-system-tabs-layout,
+.app-root .settings-system-shell {
+  width: 100%;
+  min-height: 100%;
+}
+
+.app-root .workspace-page.settings-page:not(.data-config-page):not(.special-training-page) {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  gap: 0;
+  padding: 12px;
+  overflow: hidden;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.app-root
+  .workspace-page.settings-page:not(.data-config-page):not(.special-training-page)
+  .workspace-page-body.settings-page-content {
+  min-height: 0;
+  display: grid;
+  align-content: stretch;
+  gap: 0;
+  overflow: hidden;
+  padding: 0;
+  background: transparent;
+}
+
+.app-root .custom-indicator-manager-panel,
+.app-root .settings-system-sidebar {
+  background: transparent;
+}
+
+.app-root :is(
+  .training-command-center-mode-card,
+  .training-command-center-data-card,
+  .training-command-center-recent-card,
+  .training-command-center-ribbon-card.is-clickable,
+  .data-asset-card,
+  .data-asset-market-summary,
+  .data-asset-market-summary-card,
+  .trainer-current-position-card,
+  .trainer-market-preset-surface,
+  .custom-indicator-viewport-panel,
+  .custom-indicator-engine-panel,
+  .custom-indicator-side-block
+) {
+  border-color: var(--ui-surface-border-soft);
+  background: var(--ui-surface-bg-elevated);
+  box-shadow: none;
+}
+
+.app-root .training-command-center-ribbon-card.is-clickable:hover,
+.app-root .data-asset-card:hover {
+  border-color: color-mix(in srgb, var(--primary) 24%, var(--ui-surface-border-soft));
+  background: color-mix(in srgb, var(--panel-soft) 82%, var(--window-bg));
+}
+
+.app-root .training-command-center-mode-card,
+.app-root .training-command-center-data-card,
+.app-root .training-command-center-recent-card {
+  box-shadow: none;
+}
+
+.app-root .challenge-fusion-dialog-chart {
+  border-color: var(--ui-surface-border-soft);
+  background: var(--ui-surface-bg-elevated);
+  box-shadow: none;
+}
+
+.app-root .workspace-page.workspace-page--section-surface-only :is(
+  .challenge-fusion-insight,
+  .challenge-fusion-table,
+  .training-stats-header,
+  .training-stats-filters-shell,
+  .training-stats-overview-shell,
+  .training-stats-panel
+) {
+  border-color: var(--ui-divider);
+  box-shadow: none;
+}
+
+.app-root .workspace-page.workspace-page--section-surface-only :is(
+  .challenge-fusion-chart-card,
+  .challenge-fusion-table-wrap,
+  .training-stats-card,
+  .training-stats-compare-card,
+  .training-stats-month-card,
+  .training-stats-table-wrap,
+  .diagnostic-console-chart-card
+) {
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.app-root .settings-system-tabs-content .replay-settings-v2-card,
+.app-root .data-asset-trading-panel .replay-settings-v2-card,
+.app-root .trainer-market-preset-surface .replay-settings-v2-card {
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.app-root .settings-system-tabs-content .replay-settings-v2-card > .section-title,
+.app-root .data-asset-trading-panel .replay-settings-v2-card > .section-title,
+.app-root .trainer-market-preset-surface .replay-settings-v2-card > .section-title {
+  padding-inline: 0;
+  background: transparent;
+}
+
+.app-root .settings-system-tabs-content .replay-settings-v2-card > .section-title {
+  border-bottom-color: var(--ui-divider-soft);
+}
+
+.app-root .data-asset-trading-drawer {
+  border-radius: 0 !important;
+  border-left: 1px solid var(--ui-surface-border-soft) !important;
+  border-top: none !important;
+  border-right: none !important;
+  border-bottom: none !important;
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--panel) 98%, transparent) 0%,
+      color-mix(in srgb, var(--panel-soft) 88%, var(--window-bg)) 100%
+    ) !important;
+  box-shadow: -20px 0 44px rgb(var(--color-overlay-backdrop) / 0.12) !important;
+}
+
+.app-root .data-asset-trading-drawer-body {
+  padding-top: 0;
+}
+
+.ui-num {
+  font-family: var(--ff-mono);
+  font-variant-numeric: tabular-nums;
+}

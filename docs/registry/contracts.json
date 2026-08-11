@@ -1,0 +1,29 @@
+{
+  "version": 3,
+  "contracts": [
+    {
+      "id": "desktop-local-api-v1",
+      "kind": "openapi",
+      "source": "contracts/openapi/desktop-local-api.v1.yaml",
+      "publicBasePath": "/api/v1",
+      "implementingRoutes": ["apps/desktop/local-api/src/http"],
+      "consumers": ["apps/desktop/web/src/api/index.ts", "apps/desktop/shell/src/bridge/transport.rs"],
+      "generatedOutputs": [
+        "packages/shared/src/contracts-desktop/http-api.ts",
+        "packages/shared/src/contracts-desktop/openapi-zod.generated.ts",
+        "contracts/runtime-response-schemas.v1.json"
+      ],
+      "checks": ["npm run contract:generate", "npm run contract:check"]
+    },
+    {
+      "id": "native-bridge-v1",
+      "kind": "native-bridge",
+      "source": "contracts/native-bridge/native-bridge.v1.json",
+      "publicBasePath": null,
+      "implementingRoutes": ["apps/desktop/shell/src"],
+      "consumers": ["apps/desktop/web/src/api"],
+      "generatedOutputs": [],
+      "checks": ["npm run contract:check", "cargo check --manifest-path apps/desktop/shell/Cargo.toml"]
+    }
+  ]
+}

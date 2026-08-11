@@ -1,0 +1,232 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+
+
+.training-command-center-data-card [data-slot="card-header"],
+.training-command-center-data-body,
+.training-command-center-recent-head,
+.training-command-center-recent-card > .training-command-center-recent-list {
+  position: relative;
+  z-index: 1;
+}
+
+.training-command-center-ribbon-card > [data-slot="card-content"],
+.training-command-center-mode-card > [data-slot="card-header"],
+.training-command-center-mode-card > [data-slot="card-content"],
+.training-command-center-data-card > [data-slot="card-header"],
+.training-command-center-data-card > [data-slot="card-content"],
+.training-command-center-recent-card > [data-slot="card-header"],
+.training-command-center-recent-card > [data-slot="card-content"] {
+  padding-left: calc(var(--tcc-card-pad) + 2px);
+  padding-right: calc(var(--tcc-card-pad) + 2px);
+}
+
+.training-command-center-mode-card > [data-slot="card-header"],
+.training-command-center-data-card > [data-slot="card-header"],
+.training-command-center-recent-card > [data-slot="card-header"] {
+  padding-top: calc(var(--tcc-card-pad-sm) + 2px);
+}
+
+.training-command-center-ribbon-card > [data-slot="card-content"],
+.training-command-center-mode-card > [data-slot="card-content"],
+.training-command-center-data-card > [data-slot="card-content"],
+.training-command-center-recent-card > [data-slot="card-content"] {
+  padding-bottom: calc(var(--tcc-card-pad-sm) + 2px);
+}
+
+.training-command-center-data-highlight {
+  display: flex;
+  align-items: center;
+  min-height: 0;
+  flex: 1 1 auto;
+  padding: var(--tcc-card-pad);
+  border: 1px solid color-mix(in srgb, var(--surface-s4) 24%, transparent);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--surface-s3) 18%, transparent);
+  color: var(--text-strong);
+  font-size: var(--ty-r4);
+  font-weight: 600;
+  line-height: 1.6;
+  box-shadow: none;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.training-command-center-data-icon {
+  color: color-mix(in srgb, var(--action-a1) 60%, var(--text-strong));
+  border-color: transparent;
+  background: color-mix(in srgb, var(--action-a1) 12%, var(--surface-s3));
+  box-shadow: 0 6px 12px color-mix(in srgb, var(--action-a1) 16%, transparent);
+}
+
+.training-command-center-recent-card > .training-command-center-recent-list {
+  gap: var(--tcc-space-lg);
+}
+
+.training-command-center-recent-item {
+  padding: calc(var(--tcc-card-pad) + 2px) 0;
+  border: none;
+  border-top: 1px solid color-mix(in srgb, var(--surface-s4) 34%, transparent);
+  background: transparent;
+  box-shadow: none;
+}
+
+.training-command-center-recent-item-copy h3,
+.training-command-center-recent-item-time {
+  white-space: normal;
+  word-break: break-word;
+}
+
+.training-command-center-recent-item-kind {
+  color: color-mix(in srgb, var(--action-a1) 38%, var(--tcc-text-secondary));
+}
+
+.training-command-center-recent-item-copy {
+  gap: 6px;
+}
+
+.training-command-center-recent-item-time {
+  color: var(--tcc-text-tertiary);
+}
+
+.training-command-center-compact-action {
+  min-height: 36px !important;
+  border-radius: 14px !important;
+}
+
+.training-command-center-empty {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  min-height: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: var(--tcc-space-md);
+  padding: calc(var(--tcc-card-pad) + 8px);
+  border: none;
+  background:
+    radial-gradient(
+      80% 80% at 50% 0%,
+      color-mix(in srgb, var(--action-a1) 8%, transparent),
+      transparent 82%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--surface-s4) 48%, transparent),
+      color-mix(in srgb, var(--surface-s2) 88%, transparent)
+    );
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--visual-white) 5%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--visual-white) 3%, transparent),
+    0 24px 44px color-mix(in srgb, var(--panel) 14%, transparent);
+}
+
+.training-command-center-empty::before,
+.training-command-center-empty::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.training-command-center-empty::before {
+  inset: -12%;
+  background:
+    radial-gradient(
+      44% 40% at 20% 18%,
+      color-mix(in srgb, var(--action-a1) 14%, transparent) 0%,
+      transparent 76%
+    ),
+    radial-gradient(
+      38% 34% at 78% 24%,
+      color-mix(in srgb, var(--warning) 10%, transparent) 0%,
+      transparent 78%
+    );
+  opacity: 0.62;
+}
+
+.training-command-center-empty::after {
+  inset: 0;
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    color-mix(in srgb, var(--visual-white) 10%, transparent) 0.7px,
+    transparent 1px
+  );
+  background-size: 16px 16px;
+  opacity: 0.12;
+}
+
+.training-command-center-empty > * {
+  position: relative;
+  z-index: 1;
+}
+
+.training-command-center-empty-graphic {
+  display: grid;
+  place-items: center;
+  width: 74px;
+  height: 74px;
+  border: none;
+  border-radius: 24px;
+  background:
+    linear-gradient(
+      160deg,
+      color-mix(in srgb, var(--action-a1) 10%, transparent) 0%,
+      transparent 48%
+    ),
+    radial-gradient(
+      80% 80% at 28% 18%,
+      color-mix(in srgb, var(--action-a1) 14%, transparent),
+      transparent 72%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--surface-s4) 60%, transparent),
+      color-mix(in srgb, var(--surface-s2) 94%, transparent)
+    );
+  color: color-mix(in srgb, var(--action-a1) 54%, var(--tcc-text-secondary));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--visual-white) 6%, transparent),
+    0 22px 36px color-mix(in srgb, var(--panel) 14%, transparent);
+}
+
+.training-command-center-empty-graphic svg {
+  width: var(--tcc-icon-md);
+  height: var(--tcc-icon-md);
+}
+
+.training-command-center-empty strong {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: 28rem;
+  box-sizing: border-box;
+  color: var(--text-strong);
+  font-size: var(--ty-r4);
+  font-weight: 600;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.training-command-center-recent-empty strong {
+  color: var(--tcc-text-secondary);
+}
+
+.training-command-center-empty span {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: 28rem;
+  box-sizing: border-box;
+  color: var(--tcc-text-tertiary);
+  line-height: 1.55;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.training-command-center-shell {
+  gap: 0;
+  padding: 0;
+  box-shadow: none;
+}

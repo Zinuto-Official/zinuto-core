@@ -1,0 +1,124 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.desktop-secondary-window-special-training-delete-confirm {
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding:
+    calc(var(--secondary-window-titlebar-safe-top) + 20px)
+    48px
+    24px;
+  background: var(--surface-s2);
+  color: var(--text-t1);
+  font-size: var(--secondary-window-type-body);
+  line-height: 1.48;
+  overflow: auto;
+}
+
+.special-training-bank-delete-confirm-header {
+  width: 100%;
+  max-width: 760px;
+  align-self: center;
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+  padding-bottom: 24px;
+}
+
+.special-training-bank-delete-confirm-badge {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 100%;
+  padding: 7px 10px;
+  border-radius: 999px;
+  border: 1px solid
+    color-mix(in srgb, rgb(var(--color-danger)) 24%, transparent);
+  background: color-mix(in srgb, rgb(var(--color-danger)) 8%, transparent);
+  color: rgb(var(--color-danger));
+  font-size: var(--secondary-window-type-sm);
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.special-training-bank-delete-confirm-badge::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: currentColor;
+  box-shadow: 0 0 0 4px color-mix(in srgb, currentColor 16%, transparent);
+  flex: 0 0 auto;
+}
+
+.special-training-bank-delete-confirm-title {
+  margin: 0;
+  min-width: 0;
+  color: var(--text-strong);
+  font-size: var(--secondary-window-type-title);
+  font-weight: 740;
+  line-height: 1.22;
+  letter-spacing: 0;
+}
+
+.special-training-bank-delete-confirm-description {
+  margin: 0;
+  max-width: 64ch;
+  color: var(--text-t2, var(--text));
+  font-size: var(--secondary-window-type-body);
+  line-height: 1.58;
+  overflow-wrap: anywhere;
+}
+
+.special-training-bank-delete-confirm-actions {
+  width: 100%;
+  max-width: 760px;
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 16px;
+  border-top: 1px solid color-mix(in srgb, var(--line) 72%, transparent);
+}
+
+.special-training-bank-delete-confirm-actions > [data-slot="button"] {
+  min-width: 118px;
+  height: 40px;
+  gap: 8px;
+  padding-inline: 15px;
+  font-size: var(--secondary-window-type-body);
+  font-weight: 680;
+}
+
+.special-training-bank-delete-confirm-actions > [data-slot="button"] svg {
+  width: 15px;
+  height: 15px;
+}
+
+@media (max-width: 520px) {
+  .desktop-secondary-window-special-training-delete-confirm {
+    padding:
+      calc(var(--secondary-window-titlebar-safe-top) + 14px)
+      20px
+      18px;
+  }
+
+  .special-training-bank-delete-confirm-header {
+    align-self: start;
+    padding-top: 8px;
+  }
+
+  .special-training-bank-delete-confirm-actions {
+    justify-content: stretch;
+  }
+
+  .special-training-bank-delete-confirm-actions > [data-slot="button"] {
+    flex: 1 1 140px;
+  }
+}

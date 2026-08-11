@@ -1,0 +1,236 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zinuto Core</title>
+    <script>
+      (() => {
+        const supportedLanguages = new Set(["en", "zh-CN", "ja", "ko", "es"]);
+        const normalizeLanguage = (value) => {
+          const tag = String(value ?? "").trim().toLowerCase();
+          if (tag === "en" || tag.startsWith("en-")) return "en";
+          if (tag === "zh" || tag === "zh-cn" || tag.startsWith("zh-hans")) {
+            return "zh-CN";
+          }
+          if (tag === "ja" || tag.startsWith("ja-")) return "ja";
+          if (tag === "ko" || tag.startsWith("ko-")) return "ko";
+          if (tag === "es" || tag.startsWith("es-")) return "es";
+          return null;
+        };
+        const readPersistedLanguage = () => {
+          try {
+            const source = window.localStorage?.getItem(
+              "zinuto:ui-language-source",
+            );
+            const language = window.localStorage?.getItem("zinuto:ui-language");
+            return (source === "USER" || !source) &&
+              supportedLanguages.has(language)
+              ? language
+              : null;
+          } catch {
+            return null;
+          }
+        };
+        const candidates = [
+          new URLSearchParams(window.location.search).get(
+            "zinutoSecondaryLanguage",
+          ),
+          readPersistedLanguage(),
+          ...(Array.isArray(navigator.languages) ? navigator.languages : []),
+          navigator.language,
+        ];
+        const language =
+          candidates.map(normalizeLanguage).find((value) => value !== null) ??
+          "en";
+        const copyByLanguage = {
+          en: {
+            failed: "Zinuto Core could not load",
+            loading: "Loading...",
+            retry: "Retry loading Zinuto Core",
+          },
+          "zh-CN": {
+            failed: "Zinuto Core 加载失败",
+            loading: "加载中...",
+            retry: "重新加载 Zinuto Core",
+          },
+          ja: {
+            failed: "Zinuto Core を読み込めませんでした",
+            loading: "読み込み中...",
+            retry: "Zinuto Core を再読み込み",
+          },
+          ko: {
+            failed: "Zinuto Core를 불러오지 못했습니다",
+            loading: "로드 중...",
+            retry: "Zinuto Core 다시 불러오기",
+          },
+          es: {
+            failed: "No se pudo cargar Zinuto Core",
+            loading: "Cargando...",
+            retry: "Volver a cargar Zinuto Core",
+          },
+        };
+        document.documentElement.lang = language;
+        document.documentElement.dataset.zinutoPrebootLanguage = language;
+        window.__ZINUTO_PREBOOT_COPY__ = copyByLanguage[language];
+      })();
+    </script>
+    <script>
+      (() => {
+        const params = new URLSearchParams(window.location.search);
+        const queryTheme = params.get("zinutoSecondaryTheme");
+        const prefersDark =
+          window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? false;
+        const initialTheme =
+          queryTheme === "dark" || (queryTheme !== "light" && prefersDark)
+            ? "dark"
+            : "light";
+        document.documentElement.dataset.zinutoInitialTheme = initialTheme;
+        document.documentElement.style.colorScheme = initialTheme;
+      })();
+    </script>
+    <style>
+      html,
+      body,
+      #root {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        background: #f3f4f6;
+        color: #1b2028;
+      }
+
+      html[data-zinuto-initial-theme="dark"],
+      html[data-zinuto-initial-theme="dark"] body,
+      html[data-zinuto-initial-theme="dark"] #root {
+        background: #0d1014;
+        color: #f1f3f5;
+      }
+
+      .zinuto-preboot {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        place-items: center;
+        box-sizing: border-box;
+        padding: 24px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      .zinuto-preboot__content {
+        display: grid;
+        justify-items: center;
+        text-align: center;
+        visibility: hidden;
+      }
+
+      html[data-zinuto-bootstrap-state="failed"] .zinuto-preboot__content {
+        visibility: visible;
+      }
+
+      .zinuto-preboot__brand {
+        font-size: 35px;
+        font-weight: 700;
+        line-height: 1.24;
+      }
+
+      .zinuto-preboot__message {
+        margin: 12px 0 0;
+        color: inherit;
+        font-size: 16px;
+        line-height: 1.45;
+        opacity: 0.72;
+      }
+
+      .zinuto-preboot__retry {
+        margin: 20px 0 0;
+        width: 40px;
+        height: 40px;
+        border: 1px solid currentColor;
+        border-radius: 10px;
+        background: transparent;
+        color: inherit;
+        font: inherit;
+        font-size: 24px;
+        line-height: 1;
+        cursor: pointer;
+      }
+
+      .zinuto-preboot__retry[hidden] {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <div
+        class="zinuto-preboot"
+        role="status"
+        aria-busy="true"
+        aria-hidden="true"
+        aria-label="Loading..."
+        data-zinuto-preboot-status
+      >
+        <div class="zinuto-preboot__content">
+          <strong class="zinuto-preboot__brand">Zinuto Core</strong>
+          <p class="zinuto-preboot__message" data-zinuto-preboot-message>Loading...</p>
+          <button
+            class="zinuto-preboot__retry"
+            type="button"
+            data-zinuto-preboot-retry
+            aria-label="Retry loading Zinuto Core"
+            hidden
+          >&#x21bb;</button>
+        </div>
+      </div>
+    </div>
+    <script>
+      (() => {
+        document.documentElement.dataset.zinutoBootstrapState = "loading";
+        const copy = window.__ZINUTO_PREBOOT_COPY__ ?? {
+          failed: "Zinuto Core could not load",
+          loading: "Loading...",
+          retry: "Retry loading Zinuto Core",
+        };
+        const status = document.querySelector("[data-zinuto-preboot-status]");
+        const message = document.querySelector("[data-zinuto-preboot-message]");
+        const retry = document.querySelector("[data-zinuto-preboot-retry]");
+        if (status) {
+          status.setAttribute("aria-label", copy.loading);
+          status.dataset.zinutoFailureLabel = copy.failed;
+        }
+        if (message) {
+          message.textContent = copy.loading;
+        }
+        if (!retry) {
+          return;
+        }
+        retry.setAttribute("aria-label", copy.retry);
+        retry.title = copy.retry;
+        retry.dataset.zinutoRetryBound = "true";
+        retry.addEventListener("click", () => {
+          status?.setAttribute("aria-busy", "true");
+          status?.setAttribute("aria-hidden", "true");
+          status?.setAttribute("aria-label", copy.loading);
+          window.location.reload();
+        });
+        window.setTimeout(() => {
+          if (!retry.isConnected) {
+            return;
+          }
+          document.documentElement.dataset.zinutoBootstrapState = "failed";
+          status?.setAttribute("aria-busy", "false");
+          status?.removeAttribute("aria-hidden");
+          status?.setAttribute("aria-label", copy.failed);
+          if (message) {
+            message.textContent = copy.failed;
+          }
+          retry.hidden = false;
+        }, 8000);
+      })();
+    </script>
+    <script type="module" src="/src/secondaryWindowMain.tsx"></script>
+  </body>
+</html>

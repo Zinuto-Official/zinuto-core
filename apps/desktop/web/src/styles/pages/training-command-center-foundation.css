@@ -1,0 +1,256 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+/*
+ * Shared layout and tokens for the command center's active page.
+ *
+ * Honor-specific presentation used to live beside these rules. Keep this
+ * foundation independent so removing an optional command-center section does
+ * not remove the page frame that the remaining training and activity cards use.
+ */
+.training-command-center-page {
+  --action-a1: var(--visual-accent-base);
+  --tcc-density-scale: 1;
+  --tcc-shell-grid-rows: minmax(0, 2fr) minmax(0, 5fr) minmax(0, 3fr);
+  --tcc-grid-line: color-mix(in srgb, var(--line) 76%, transparent);
+  --tcc-grid-line-strong: color-mix(in srgb, var(--line) 92%, transparent);
+  --tcc-panel-bg: color-mix(in srgb, var(--surface-s1) 99%, transparent);
+  --tcc-text-secondary: var(--muted);
+  --tcc-text-tertiary: var(--text-subtle);
+  --tcc-data-accent: color-mix(in srgb, var(--text-strong) 88%, var(--action-a1));
+  --tcc-flash-accent: color-mix(in srgb, var(--warning) 78%, var(--text-strong));
+  --tcc-crisis-accent: color-mix(
+    in srgb,
+    var(--challenge-risk-mode-accent) 74%,
+    var(--text-strong)
+  );
+  --tcc-space-2xs: calc(4px * var(--tcc-density-scale));
+  --tcc-space-xs: calc(6px * var(--tcc-density-scale));
+  --tcc-space-sm: calc(8px * var(--tcc-density-scale));
+  --tcc-space-md: calc(10px * var(--tcc-density-scale));
+  --tcc-space-lg: calc(14px * var(--tcc-density-scale));
+  --tcc-space-xl: calc(18px * var(--tcc-density-scale));
+  --tcc-card-pad-sm: calc(12px * var(--tcc-density-scale));
+  --tcc-card-pad: calc(18px * var(--tcc-density-scale));
+  --tcc-radius-md: calc(14px * var(--tcc-density-scale));
+  --tcc-radius-lg: calc(18px * var(--tcc-density-scale));
+  --tcc-icon-sm: clamp(16px, calc(20px * var(--tcc-density-scale)), 22px);
+  --tcc-icon-md: clamp(22px, calc(30px * var(--tcc-density-scale)), 34px);
+  --tcc-button-height: clamp(30px, calc(40px * var(--tcc-density-scale)), 44px);
+  --workspace-frame-shell-bg: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--surface-s2) 80%, transparent) 0%,
+    color-mix(in srgb, var(--surface-s1) 92%, transparent) 100%
+  );
+  --workspace-frame-shell-border: color-mix(
+    in srgb,
+    var(--surface-s4) 54%,
+    transparent
+  );
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.app-root.theme-light .training-command-center-page {
+  --tcc-text-tertiary: color-mix(
+    in srgb,
+    var(--text-subtle) 88%,
+    var(--text-strong)
+  );
+}
+
+.workspace-page.training-command-center-page.workspace-page-shell {
+  height: 100%;
+  min-height: 0;
+  grid-template-rows: minmax(0, 1fr);
+  align-content: stretch;
+}
+
+.training-command-center-page-body {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  height: 100%;
+  min-height: 0;
+  align-content: stretch;
+  overflow: hidden;
+}
+
+.training-command-center-shell {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  flex: 1 1 auto;
+  grid-template-rows: var(--tcc-shell-grid-rows);
+  gap: var(--tcc-space-xl);
+  height: 100%;
+  min-height: 0;
+  padding: calc(16px * var(--tcc-density-scale))
+    calc(22px * var(--tcc-density-scale)) calc(22px * var(--tcc-density-scale));
+  box-sizing: border-box;
+}
+
+.training-command-center-shell > * {
+  position: relative;
+  z-index: 1;
+}
+
+.training-command-center-region {
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+
+.training-command-center-header {
+  display: grid;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  gap: var(--tcc-space-xl);
+  grid-template-columns: minmax(0, 1.4fr) minmax(320px, 0.92fr);
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.training-command-center-header-copy {
+  display: flex;
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--tcc-space-sm);
+}
+
+.training-command-center-page-copy {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: var(--tcc-space-xs);
+  max-width: 52rem;
+}
+
+.training-command-center-eyebrow {
+  color: color-mix(in srgb, var(--action-a1) 58%, var(--tcc-text-tertiary));
+  font-size: var(--ty-r1);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.training-command-center-title {
+  margin: 0;
+  color: var(--text-strong);
+  font-size: var(--ty-r8);
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+.training-command-center-section {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.training-command-center-section-scroll {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  padding-right: 4px;
+}
+
+.training-command-center-hero-grid,
+.training-command-center-utility-grid {
+  display: grid;
+  flex: 1 1 auto;
+  height: 100%;
+  min-height: 0;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.training-command-center-hero-grid {
+  gap: 1px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.training-command-center-utility-grid {
+  gap: var(--tcc-space-lg);
+  grid-template-columns: minmax(0, 1.3fr) minmax(320px, 0.95fr);
+}
+
+.training-command-center-hero-grid > [data-slot="card"],
+.training-command-center-utility-grid > [data-slot="card"] {
+  align-self: stretch;
+  min-height: 0;
+}
+
+.training-command-center-mode-card,
+.training-command-center-data-card,
+.training-command-center-recent-card {
+  position: relative;
+  height: 100%;
+  min-height: 0;
+}
+
+.training-command-center-mode-card > [data-slot="card-content"],
+.training-command-center-data-card > [data-slot="card-content"] {
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 0;
+  flex-direction: column;
+}
+
+.training-command-center-recent-card > [data-slot="card-content"] {
+  min-height: 0;
+}
+
+.training-command-center-mode-body,
+.training-command-center-data-body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 0;
+  flex-direction: column;
+}
+
+.training-command-center-data-card [data-slot="card-header"] {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  flex: 0 0 auto;
+  gap: var(--tcc-space-lg);
+}
+
+.training-command-center-recent-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: var(--tcc-space-md);
+}
+
+.training-command-center-recent-head-copy,
+.training-command-center-recent-item-meta,
+.training-command-center-recent-item-colors {
+  min-width: 0;
+}
+
+.training-command-center-recent-item-meta,
+.training-command-center-recent-item-colors {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+}

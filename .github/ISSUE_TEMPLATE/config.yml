@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: GPL-3.0-only
+
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability
+    url: https://github.com/Zinuto-Official/zinuto-core/security/advisories/new
+    about: Send security-sensitive reports privately to the maintainers.
+  - name: Official Zinuto help
+    url: https://www.zinuto.com/en/contact/
+    about: Use this for official accounts, support, payments, downloads, and updates.

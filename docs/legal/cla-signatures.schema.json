@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["agreementVersion", "signatures"],
+  "properties": {
+    "agreementVersion": { "const": "1.0" },
+    "signatures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["login", "type", "signedAt"],
+        "properties": {
+          "login": { "type": "string", "minLength": 1 },
+          "type": { "enum": ["individual", "corporate"] },
+          "company": { "type": "string" },
+          "authorizedBy": { "type": "string" },
+          "signedAt": { "type": "string", "format": "date" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

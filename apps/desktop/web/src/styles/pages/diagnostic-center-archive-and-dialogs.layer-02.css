@@ -1,0 +1,305 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+@media (max-width: 1280px) {
+  .diagnostic-console-growth-grid,
+  .diagnostic-console-kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1360px) {
+  .diagnostic-console-topbar-main {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: stretch;
+  }
+
+  .diagnostic-console-topbar-controls {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .diagnostic-console-dialog-body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .diagnostic-console-dialog-side {
+    grid-template-columns: minmax(0, 1.3fr) repeat(3, minmax(0, 1fr)) auto;
+  }
+
+  .diagnostic-console-ai-audit-meta,
+  .diagnostic-console-ai-audit-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1080px) {
+  .diagnostic-console-overview-main-grid,
+  .diagnostic-console-growth-grid,
+  .diagnostic-console-kpi-grid,
+  .diagnostic-console-behavior-grid,
+  .diagnostic-console-competence-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .diagnostic-console-behavior-column {
+    grid-template-rows: minmax(0, 1fr);
+  }
+
+  .diagnostic-console-behavior-column--primary {
+    border-left: none;
+    border-top: 1px solid var(--diagnostic-behavior-cross-line);
+  }
+
+  .diagnostic-console-inline-metric-strip,
+  .diagnostic-console-issue-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .diagnostic-console-card-action-row,
+  .diagnostic-console-issue-row > .diagnostic-console-inline-action {
+    justify-content: flex-start;
+  }
+
+  .diagnostic-console-margin-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .diagnostic-console-margin-insight-panel {
+    padding-right: 0;
+    padding-bottom: 16px;
+    border-right: none;
+    border-bottom: 1px solid var(--diagnostic-behavior-cross-line);
+  }
+
+  .workspace-page.diagnostic-center-page[data-review-tab="BEHAVIOR"]
+    .diagnostic-console-inline-metric-strip--margin-full {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .workspace-page.diagnostic-center-page[data-review-tab="BEHAVIOR"]
+    .diagnostic-console-chart-short--behavior-margin-full {
+    min-height: 320px;
+  }
+
+  .diagnostic-console-margin-session-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .diagnostic-console-margin-session-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .diagnostic-console-topbar-controls {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .diagnostic-console-panel--overview {
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+  }
+
+  .diagnostic-console-panel--behavior {
+    grid-template-rows: minmax(0, 1fr);
+  }
+
+  .diagnostic-console-overview-main-grid
+    > .diagnostic-console-overview-grid-card:first-child {
+    padding-right: 0;
+    padding-bottom: 18px;
+  }
+
+  .diagnostic-console-overview-main-grid
+    > .diagnostic-console-overview-grid-card:last-child {
+    padding-left: 0;
+    padding-top: 18px;
+    border-left: none;
+    border-top: 1px solid var(--diagnostic-overview-cut-line);
+  }
+
+  .diagnostic-console-history-date-field {
+    width: min(100%, 420px);
+  }
+}
+
+@media (max-width: 1199px) {
+  .diagnostic-console-topbar .workspace-top-bar-main,
+  .diagnostic-console-topbar-flat-row {
+    align-items: stretch;
+    padding: 10px 14px 14px;
+  }
+
+  .diagnostic-console-tab-rail-wrap {
+    padding: 0;
+  }
+
+  .diagnostic-console-tab-rail-wrap::after {
+    inset-inline: 0;
+  }
+
+  .diagnostic-console-tab-rail-item .plain-tab-bar-item-label {
+    font-size: var(--ty-r1);
+  }
+
+  .diagnostic-console-tools-row {
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  .diagnostic-console-tools-tray {
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+  }
+
+}
+
+@media (max-width: 920px) {
+  .diagnostic-console-shell {
+    padding: 14px;
+  }
+
+  .diagnostic-console-topbar-main {
+    padding: 14px;
+  }
+
+  .diagnostic-console-tab-rail-item.plain-tab-bar-item {
+    min-height: 40px;
+    padding-inline: 8px;
+    padding-bottom: 8px;
+  }
+
+  .diagnostic-console-tab-rail-item .plain-tab-bar-item-label {
+    font-size: var(--ty-r1);
+  }
+
+  .diagnostic-console-tools-tray {
+    width: 100%;
+    grid-template-columns: minmax(0, 1fr);
+    justify-content: stretch;
+  }
+
+  .diagnostic-console-range {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .diagnostic-console-section-head {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .diagnostic-console-section-controls {
+    justify-content: flex-start;
+  }
+
+  .diagnostic-console-section-controls--archive {
+    justify-content: flex-start;
+  }
+
+  .diagnostic-console-archive-actions {
+    justify-content: flex-start;
+  }
+
+  .diagnostic-console-chart,
+  .diagnostic-console-chart-mainline,
+  .diagnostic-console-chart-short,
+  .diagnostic-console-sparkline,
+  .diagnostic-console-sparkline-asset {
+    height: auto;
+  }
+
+  .diagnostic-console-dialog-side {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+  }
+
+  .diagnostic-console-ai-audit-meta,
+  .diagnostic-console-ai-audit-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .diagnostic-console-tab-bar {
+    padding-bottom: 0;
+  }
+
+  .diagnostic-console-content {
+    gap: 12px;
+  }
+
+  .diagnostic-console-history-date-field {
+    width: 100%;
+  }
+}
+
+@media (max-width: 720px) {
+  .workspace-page.diagnostic-center-page[data-review-tab="BEHAVIOR"]
+    .diagnostic-console-inline-metric-strip--margin-full {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .workspace-page.diagnostic-center-page,
+  .desktop-main.is-single-page > .workspace-page.diagnostic-center-page,
+  .desktop-main.is-single-page
+    > .workspace-page-cache-slot
+    > .workspace-page-cache-slot-content
+    > .workspace-page.diagnostic-center-page,
+  .desktop-main.is-single-page
+    > .workspace-page-cache-slot
+    > .workspace-page.diagnostic-center-page {
+    padding: 8px;
+  }
+
+  .diagnostic-console-shell {
+    padding: 12px;
+  }
+
+  .diagnostic-console-topbar {
+    top: 0;
+    border-radius: 14px;
+  }
+
+  .diagnostic-console-topbar .workspace-top-bar-main,
+  .diagnostic-console-topbar-flat-row {
+    padding: 8px 12px 12px;
+  }
+
+  .diagnostic-console-tab-rail-wrap::after {
+    inset-inline: 0;
+  }
+
+  .diagnostic-console-tab-rail-item.plain-tab-bar-item {
+    min-height: 38px;
+    padding: 2px 6px 8px;
+  }
+
+  .diagnostic-console-tab-rail-item.plain-tab-bar-item::after {
+    left: 16%;
+    right: 16%;
+  }
+
+  .diagnostic-console-tab-rail-item .plain-tab-bar-item-label {
+    font-size: var(--ty-r1);
+  }
+
+  .diagnostic-console-tools-row {
+    width: 100%;
+  }
+
+  .diagnostic-console-tools-tray {
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+  }
+
+  .diagnostic-console-dialog-side {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .diagnostic-console-ai-audit-meta,
+  .diagnostic-console-ai-audit-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .workspace-page.diagnostic-center-page {
+    --diagnostic-card-padding-inline: 18px;
+    --diagnostic-card-padding-block: 18px;
+    --diagnostic-card-gap: 14px;
+    --diagnostic-shell-gap: 12px;
+  }
+}

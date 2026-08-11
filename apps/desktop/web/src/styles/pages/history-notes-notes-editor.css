@@ -1,0 +1,644 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+
+
+.notes-page {
+  padding: 0;
+  grid-template-rows: minmax(0, 1fr);
+  height: 100%;
+  min-height: 0;
+}
+
+.notes-page-body {
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+  gap: 12px;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.notes-page-body > .workspace-frame-shell,
+.notes-page-body > .workspace-frame-shell > .notes-curation-layout,
+.notes-page-body
+  > .workspace-frame-shell
+  > .notes-curation-layout
+  > .page-main-layout-sidebar,
+.notes-page-body
+  > .workspace-frame-shell
+  > .notes-curation-layout
+  > .page-main-layout-main,
+.notes-page-body
+  > .workspace-frame-shell
+  > .notes-curation-layout
+  > .page-main-layout-sidebar
+  > .notes-curation-panel,
+.notes-page-body
+  > .workspace-frame-shell
+  > .notes-curation-layout
+  > .page-main-layout-main
+  > .notes-preview-panel {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.notes-page-body
+  > .workspace-frame-shell
+  > .notes-curation-layout
+  > .page-main-layout-sidebar
+  > .notes-curation-panel,
+.notes-page-body
+  > .workspace-frame-shell
+  > .notes-curation-layout
+  > .page-main-layout-main
+  > .notes-preview-panel {
+  height: 100%;
+}
+
+.notes-page-body > .workspace-frame-shell {
+  flex: 1 1 auto;
+}
+
+.notes-workspace-shell {
+  padding: 0;
+}
+
+.notes-topbar {
+  --workspace-top-bar-surface: color-mix(
+    in srgb,
+    var(--panel-soft) 90%,
+    var(--window-bg)
+  );
+}
+
+.notes-topbar .workspace-top-bar-main {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.notes-topbar .workspace-top-bar-rail::after {
+  display: none;
+}
+
+.notes-topbar .workspace-top-bar-tools {
+  align-items: center;
+}
+
+.notes-topbar-rail-stack {
+  display: grid;
+  gap: 12px;
+  width: min(100%, 760px);
+}
+
+.notes-topbar-search {
+  width: 100%;
+}
+
+.notes-topbar-content {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(220px, 0.82fr) minmax(0, 1.18fr);
+  align-items: center;
+  gap: 12px;
+}
+
+.notes-topbar-filter-row {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.notes-topbar-filter-row .notes-scope-filter-bar {
+  width: max-content;
+  max-width: 100%;
+  flex: 0 1 auto;
+}
+
+.notes-inline-color-filter {
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex: 0 0 auto;
+  padding-left: 10px;
+  border-left: 1px solid color-mix(in srgb, var(--line) 56%, transparent);
+}
+
+.notes-inline-color-filter .notes-color-toggle-row {
+  flex-wrap: nowrap;
+  gap: 4px;
+  padding: 2px;
+}
+
+.notes-inline-color-filter-swatches {
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex-wrap: nowrap;
+}
+
+.notes-topbar-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.notes-scope-filter-bar {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+}
+
+.notes-scope-filter-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.notes-scope-filter-item {
+  min-width: fit-content;
+}
+
+.notes-side-panel {
+  grid-template-rows: auto minmax(0, 1fr) auto;
+}
+
+.notes-side-header {
+  padding-bottom: 10px;
+  overflow-x: auto;
+  overflow-y: visible;
+}
+
+.notes-side-head-top {
+  align-items: center;
+}
+
+.notes-add-btn {
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  opacity: 1;
+}
+
+.notes-add-btn svg {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.notes-side-list {
+  padding-top: 8px;
+}
+
+.notes-side-item {
+  min-height: 108px;
+  justify-content: center;
+}
+
+.notes-side-item-time-grid {
+  display: grid;
+  gap: 2px;
+  margin-top: 1px;
+}
+
+.notes-side-item-time-row {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 6px;
+}
+
+.notes-side-item-time-label {
+  font-size: var(--ty-r1);
+  color: var(--muted);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.notes-side-item-time-value {
+  font-size: var(--ty-r1);
+  color: var(--muted);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.notes-side-item-preview {
+  margin-top: 2px;
+  font-size: var(--ty-r2);
+  color: var(--muted);
+  line-height: 1.3;
+  min-height: calc(var(--ty-r2) * 2.6);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+}
+
+.notes-side-footer {
+  min-height: 40px;
+}
+
+.notes-preview-panel {
+  padding: 0;
+}
+
+.notes-editor-layout {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.notes-editor-body {
+  width: 100%;
+  max-width: 100%;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  gap: 0;
+  border: 1px solid color-mix(in srgb, var(--line) 72%, transparent);
+  border-radius: var(--radius-rect);
+  background: var(--window-bg);
+  padding: 0;
+}
+
+.notes-editor-body.has-training-snapshot {
+  grid-template-rows: minmax(clamp(210px, 33vh, 380px), 1.18fr) minmax(0, 1fr);
+}
+
+.notes-editor-snapshot-wrap {
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 12px 0;
+  overflow: hidden;
+}
+
+.notes-editor-snapshot-wrap > .replay-note-training-snapshot-node {
+  min-height: 0;
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+.notes-editor-compose-wrap {
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+  padding: 0 12px 10px;
+}
+
+.app-root .notes-title-inline-input {
+  width: min(72vw, 960px);
+  max-width: calc(100% - 56px);
+  min-width: 0;
+  height: auto;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text-strong);
+  font-family: var(--crepe-font-title);
+  font-size: var(--ty-r8);
+  font-weight: 400;
+  line-height: calc(var(--ty-r8) * var(--ty-leading-display));
+  padding: 0;
+  margin: 58px auto 0;
+  text-align: center;
+}
+
+.app-root .notes-title-inline-input::placeholder {
+  color: var(--text-disabled, var(--muted));
+}
+
+.app-root .notes-title-inline-input:focus {
+  outline: none;
+}
+
+.notes-editor-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 18px;
+  min-height: 20px;
+  color: var(--muted);
+  font-size: var(--ty-r2);
+  line-height: 1.2;
+  text-align: center;
+}
+
+.replay-note-editor-host {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+  margin-top: 0;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  overflow: hidden;
+  background: var(--window-bg);
+  position: relative;
+  --replay-note-editor-content-max-width: 100%;
+  --replay-note-editor-pad-block-start: 24px;
+  --replay-note-editor-pad-block-end: 32px;
+  --replay-note-editor-pad-inline-start: 120px;
+  --replay-note-editor-pad-inline-end: 120px;
+}
+
+.replay-note-editor-host[data-editor-mode='read'] {
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.replay-note-editor-toolbar {
+  width: min(100%, var(--replay-note-editor-content-max-width));
+  min-width: 0;
+  margin: 0 auto;
+  padding:
+    10px
+    var(--replay-note-editor-pad-inline-end)
+    12px
+    var(--replay-note-editor-pad-inline-start);
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid color-mix(in srgb, var(--line) 58%, transparent);
+  background: color-mix(in srgb, var(--window-bg) 96%, var(--panel-soft));
+}
+
+.replay-note-editor-toolbar-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid color-mix(in srgb, var(--line) 58%, transparent);
+  border-radius: var(--ui-radius-control);
+  background: color-mix(in srgb, var(--surface-s2, var(--panel-soft)) 70%, transparent);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--panel) 38%, transparent);
+}
+
+.replay-note-editor-toolbar .replay-note-editor-toolbar-button {
+  width: 34px;
+  min-width: 34px;
+  height: 34px;
+  min-height: 34px;
+  border: 1px solid transparent;
+  border-radius: calc(var(--ui-radius-control) - 2px);
+  background: transparent;
+  color: var(--text-subtle);
+  box-shadow: none;
+}
+
+.replay-note-editor-toolbar .replay-note-editor-toolbar-button:hover:not(:disabled),
+.replay-note-editor-toolbar .replay-note-editor-toolbar-button:focus-visible {
+  border-color: transparent;
+  background: color-mix(in srgb, var(--panel) 42%, transparent);
+  color: var(--text-strong);
+  box-shadow: none;
+}
+
+.replay-note-editor-toolbar .replay-note-editor-toolbar-button[data-active="true"],
+.replay-note-editor-toolbar .replay-note-editor-toolbar-button[aria-pressed="true"] {
+  border-color: color-mix(in srgb, var(--primary) 54%, transparent);
+  background: color-mix(in srgb, var(--primary) 16%, var(--panel));
+  color: var(--text-strong);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--primary) 20%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--panel) 28%, transparent);
+}
+
+.replay-note-editor-toolbar-button svg {
+  width: 17px;
+  height: 17px;
+}
+
+.replay-note-editor-toolbar-end {
+  min-width: 0;
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.replay-note-editor-toolbar-end .notes-color-toggle-row {
+  justify-content: flex-end;
+}
+
+.replay-note-lexical-shell {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.replay-note-lexical-content {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  max-width: var(--replay-note-editor-content-max-width);
+  margin: 0 auto;
+  padding:
+    var(--replay-note-editor-pad-block-start)
+    var(--replay-note-editor-pad-inline-end)
+    var(--replay-note-editor-pad-block-end)
+    var(--replay-note-editor-pad-inline-start);
+  height: 100%;
+  overflow: auto;
+  border: none;
+  outline: none;
+  resize: none;
+  background: transparent;
+  color: var(--text-strong);
+  font-family: var(--ff-ui);
+  font-size: var(--ty-r3);
+  line-height: 1.72;
+  overscroll-behavior: contain;
+  caret-color: color-mix(in srgb, var(--primary) 86%, var(--text-strong));
+  text-align: left;
+  text-rendering: optimizeLegibility;
+}
+
+.replay-note-lexical-content:focus {
+  outline: none;
+}
+
+.replay-note-lexical-text-bold {
+  font-weight: 720;
+}
+
+.replay-note-lexical-text-italic {
+  font-style: italic;
+}
+
+.replay-note-lexical-text-underline {
+  text-decoration-line: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.16em;
+}
+
+.replay-note-lexical-content mark,
+.replay-note-lexical-text-highlight {
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  padding: 0 0.1em;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--visual-warning-accent) 32%, var(--panel));
+  color: var(--text-strong);
+  text-shadow: none;
+}
+
+.replay-note-lexical-content h1,
+.replay-note-lexical-content h2,
+.replay-note-lexical-content h3 {
+  margin: 0 0 12px;
+  color: var(--text-strong);
+  font-weight: 760;
+  line-height: 1.24;
+}
+
+.replay-note-lexical-content h1 {
+  font-size: var(--ty-r7);
+  letter-spacing: 0;
+}
+
+.replay-note-lexical-content h2 {
+  font-size: var(--ty-r6);
+}
+
+.replay-note-lexical-content h3 {
+  font-size: var(--ty-r4);
+  font-weight: 720;
+  line-height: 1.34;
+}
+
+.replay-note-lexical-content p {
+  margin: 0 0 12px;
+}
+
+.replay-note-lexical-content ul,
+.replay-note-lexical-content ol {
+  margin: 0 0 12px;
+  padding-left: 28px;
+}
+
+.replay-note-lexical-content ul {
+  list-style: disc outside;
+}
+
+.replay-note-lexical-content ol {
+  list-style: decimal outside;
+}
+
+.replay-note-lexical-content li {
+  margin: 4px 0;
+  padding-left: 4px;
+  display: list-item;
+}
+
+.replay-note-lexical-content li::marker {
+  color: color-mix(in srgb, var(--text-subtle) 78%, var(--primary));
+  font-weight: 680;
+}
+
+.replay-note-lexical-content .replay-note-lexical-check-list {
+  list-style: none;
+  padding-left: 4px;
+}
+
+.replay-note-lexical-content .replay-note-lexical-check-list-item {
+  position: relative;
+  display: block;
+  min-height: 1.45em;
+  list-style: none;
+  padding-left: 30px;
+}
+
+.replay-note-lexical-content .replay-note-lexical-check-list-item::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.34em;
+  width: 14px;
+  height: 14px;
+  border: 1px solid color-mix(in srgb, var(--line) 86%, var(--text-subtle));
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--panel) 88%, var(--window-bg));
+}
+
+.replay-note-lexical-content .replay-note-lexical-check-list-item-checked::before {
+  border-color: color-mix(in srgb, var(--primary) 74%, var(--line));
+  background: color-mix(in srgb, var(--primary) 86%, var(--text-strong));
+}
+
+.replay-note-lexical-content .replay-note-lexical-check-list-item-checked::after {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: calc(0.34em + 2px);
+  width: 4px;
+  height: 8px;
+  border: solid var(--window-bg);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.replay-note-lexical-content blockquote {
+  margin: 4px 0 14px;
+  padding: 8px 14px;
+  border-left: 3px solid color-mix(in srgb, var(--primary) 48%, var(--line));
+  border-radius: 0 var(--radius-card-sm) var(--radius-card-sm) 0;
+  background: color-mix(in srgb, var(--panel-soft) 54%, transparent);
+  color: color-mix(in srgb, var(--text-strong) 88%, var(--text-subtle));
+}
+
+.replay-note-lexical-content hr,
+.replay-note-lexical-divider {
+  height: 1px;
+  margin: 18px 0;
+  border: none;
+  background: color-mix(in srgb, var(--line) 78%, transparent);
+}
+
+.replay-note-lexical-divider.is-selected {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 18%, transparent);
+}
+
+.replay-note-lexical-content::selection,
+.replay-note-lexical-content *::selection {
+  background: color-mix(in srgb, var(--primary-soft) 74%, transparent);
+}
+
+.replay-note-lexical-placeholder {
+  position: absolute;
+  top: var(--replay-note-editor-pad-block-start);
+  left: max(
+    var(--replay-note-editor-pad-inline-start),
+    calc((100% - var(--replay-note-editor-content-max-width)) / 2 + var(--replay-note-editor-pad-inline-start))
+  );
+  color: var(--text-disabled);
+  font-size: var(--ty-r3);
+  line-height: 1.72;
+  pointer-events: none;
+  user-select: none;
+}

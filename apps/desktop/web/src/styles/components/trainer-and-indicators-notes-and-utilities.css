@@ -1,0 +1,840 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+
+
+@media (max-width: 960px) {
+  .replay-trainer-settings-modal .replay-settings-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.up {
+  color: var(--price-up-color);
+  font-weight: 700;
+}
+
+.down {
+  color: var(--price-down-color);
+  font-weight: 700;
+}
+
+.flat {
+  color: var(--visual-flat-value);
+  font-weight: 700;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: var(--ty-r2);
+}
+
+.empty-text {
+  font-size: var(--ty-r2);
+  color: var(--muted);
+}
+
+.modal-countdown {
+  font-size: var(--ty-r2);
+  color: var(--muted);
+  line-height: 1.2;
+}
+
+.blur-mask {
+  background: rgb(var(--color-overlay-backdrop) / 0.34);
+}
+
+.draggable-modal {
+  cursor: grab;
+  will-change: transform;
+}
+
+.draggable-modal.is-dragging {
+  cursor: grabbing;
+}
+
+.training-summary-dialog {
+  width: min(calc(1240px * var(--viewport-scale)), calc(100vw - 28px));
+  min-height: min(calc(760px * var(--viewport-scale)), calc(100vh - 28px));
+  max-height: calc(100vh - 34px);
+  overflow: auto;
+}
+
+.transfer-modal {
+  width: min(calc(520px * var(--viewport-scale)), calc(100vw - 28px));
+  min-height: min(calc(440px * var(--viewport-scale)), calc(100vh - 28px));
+}
+
+.training-note-modal {
+  width: min(calc(1220px * var(--viewport-scale)), calc(100vw - 28px));
+  height: min(calc(860px * var(--viewport-scale)), calc(100vh - 28px));
+  min-height: min(calc(660px * var(--viewport-scale)), calc(100vh - 36px));
+  max-height: calc(100vh - 28px);
+  max-width: calc(100vw - 28px);
+  padding: calc(10px * var(--viewport-scale)) calc(18px * var(--viewport-scale)) calc(14px * var(--viewport-scale));
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.training-note-modal.note-editor-modal-shell {
+  min-height: 0;
+}
+
+.training-note-modal .note-editor-modal-content {
+  margin-top: 0;
+}
+
+.training-note-modal .note-editor-modal-chart-preview {
+  flex: 0 0 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.training-note-modal .note-editor-modal-content {
+  min-height: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+.training-note-modal .note-editor-modal-footer {
+  flex: 0 0 auto;
+}
+
+.training-note-modal.draggable-modal {
+  cursor: default;
+}
+
+.training-note-modal.draggable-modal.is-dragging {
+  cursor: grabbing;
+}
+
+.training-note-modal-body {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  min-height: 0;
+  min-width: 0;
+  display: grid;
+  align-content: stretch;
+  box-sizing: border-box;
+  overflow-x: visible;
+  overflow-y: hidden;
+  padding-right: 0;
+}
+
+.training-note-editor-layout {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.training-note-editor-body {
+  width: 100%;
+  max-width: 100%;
+  min-height: 0;
+  min-width: 0;
+  gap: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--line) 72%, transparent);
+  border-radius: var(--radius-rect);
+  background: var(--window-bg);
+  padding: 0;
+}
+
+.training-note-editor-body.has-training-snapshot {
+  grid-template-rows: minmax(clamp(210px, 33vh, 380px), 1.32fr) minmax(clamp(170px, 28vh, 290px), 1fr);
+  overflow-x: visible;
+  overflow-y: hidden;
+}
+
+.training-note-editor-body > .replay-note-training-snapshot-node,
+.training-note-editor-body > .training-note-editor-wrap {
+  width: 100%;
+  max-width: 100%;
+  justify-self: stretch;
+}
+
+.app-root .training-note-title-input {
+  margin: clamp(10px, 1.1vh, 14px) auto 0;
+}
+
+.app-root .training-note-title-head-input {
+  margin: 0 auto;
+  width: min(72vw, 960px);
+  max-width: 100%;
+}
+
+.training-note-editor-meta-row {
+  margin-top: 2px;
+  margin-bottom: 8px;
+}
+
+.training-note-editor-meta-block {
+  display: grid;
+  gap: 8px;
+}
+
+.training-note-summary-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.training-note-summary-chip {
+  min-height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--line) 48%, transparent);
+  background: color-mix(in srgb, var(--surface-s1) 74%, var(--panel));
+  color: var(--text-subtle);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--ty-r1);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.training-note-summary-chip > strong {
+  color: var(--text-strong);
+  font-size: var(--ty-r1);
+  font-weight: 760;
+}
+
+.training-note-summary-chip.is-positive {
+  border-color: color-mix(in srgb, var(--price-up-color) 34%, var(--line));
+  color: color-mix(in srgb, var(--price-up-color) 84%, var(--text-strong));
+}
+
+.training-note-summary-chip.is-accent {
+  border-color: color-mix(in srgb, var(--primary) 34%, var(--line));
+  color: color-mix(in srgb, var(--primary) 88%, var(--text-strong));
+}
+
+.training-note-summary-chip.is-buy {
+  border-color: color-mix(in srgb, var(--trade-buy-color) 34%, var(--line));
+  background: color-mix(in srgb, var(--trade-buy-color) 12%, var(--panel));
+  color: color-mix(in srgb, var(--trade-buy-color) 88%, var(--text-strong));
+}
+
+.training-note-summary-chip.is-sell {
+  border-color: color-mix(in srgb, var(--trade-sell-color) 34%, var(--line));
+  background: color-mix(in srgb, var(--trade-sell-color) 12%, var(--panel));
+  color: color-mix(in srgb, var(--trade-sell-color) 88%, var(--text-strong));
+}
+
+.training-note-summary-chip.is-warning {
+  border-color: color-mix(in srgb, var(--warning) 40%, var(--line));
+  color: color-mix(in srgb, var(--warning) 84%, var(--text-strong));
+}
+
+.training-note-summary-chip.is-danger {
+  border-color: color-mix(in srgb, var(--price-down-color) 40%, var(--line));
+  color: color-mix(in srgb, var(--price-down-color) 84%, var(--text-strong));
+}
+
+.training-note-editor-snapshot-wrap {
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 12px 0;
+  border-bottom: none;
+  overflow: hidden;
+}
+
+.training-note-editor-snapshot-wrap > .replay-note-training-snapshot-node {
+  min-height: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+.training-note-editor-wrap {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  min-height: 0;
+  min-width: 0;
+  position: relative;
+  border-radius: 0;
+  background: transparent;
+  box-sizing: border-box;
+  border-top: none;
+  padding: 0 12px 10px;
+}
+
+.training-note-editor-wrap::before {
+  display: none;
+}
+
+.training-note-editor-host {
+  margin-top: 0;
+  height: 100%;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  border-radius: 0;
+  position: relative;
+  z-index: 0;
+}
+
+.training-note-editor-host .replay-note-lexical-content {
+  caret-color: color-mix(in srgb, var(--primary) 86%, var(--text-strong));
+  text-rendering: optimizeLegibility;
+}
+
+.training-note-editor-host .replay-note-lexical-content::selection,
+.training-note-editor-host .replay-note-lexical-content *::selection {
+  background: color-mix(in srgb, var(--primary-soft) 74%, transparent);
+}
+
+.replay-note-training-snapshot-node {
+  width: 100%;
+  max-width: 100%;
+  height: clamp(340px, 42vh, 520px);
+  min-height: 320px;
+  max-height: 62vh;
+  margin: 0;
+  min-width: 0;
+  border: none;
+  border-radius: 0;
+  overflow: hidden;
+  background: transparent;
+  box-sizing: border-box;
+  display: flex;
+}
+
+.replay-note-training-snapshot-node-inner {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+  padding-right: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.training-note-snapshot-chart-block {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+  flex: 1;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.training-note-snapshot-chart-block > .history-preview-chart {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 0;
+  box-sizing: border-box;
+}
+
+.replay-note-training-snapshot-node[data-overlay-mode] .history-preview-chart {
+  filter: saturate(0.82) brightness(0.82);
+}
+
+.replay-note-snapshot-loading-shell,
+.replay-note-snapshot-status-overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.replay-note-snapshot-loading-shell {
+  z-index: 1;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 10px;
+  padding: 10px;
+  background: color-mix(in srgb, var(--window-bg) 92%, var(--panel-soft));
+}
+
+.replay-note-snapshot-loading-toolbar,
+.replay-note-snapshot-loading-metrics {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.replay-note-snapshot-loading-block {
+  position: relative;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--ui-surface-soft) 84%, var(--ui-surface-bg));
+  border-radius: 999px;
+}
+
+.replay-note-snapshot-loading-block::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--text-strong) 12%, transparent),
+    transparent
+  );
+  animation: replay-note-snapshot-loading-shimmer var(--motion-loop-shimmer) var(--motion-loop-iteration-count);
+}
+
+.replay-note-snapshot-loading-block.is-toolbar-origin {
+  width: min(164px, 38%);
+  height: 18px;
+}
+
+.replay-note-snapshot-loading-block.is-toolbar-controls {
+  width: min(236px, 48%);
+  height: 28px;
+}
+
+.replay-note-snapshot-loading-block.is-chart {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  border-radius: calc(var(--radius-rect) - 4px);
+}
+
+.replay-note-snapshot-loading-block.is-metric {
+  width: min(140px, 28%);
+  height: 14px;
+}
+
+.replay-note-snapshot-loading-block.is-metric.is-short {
+  width: min(96px, 20%);
+}
+
+.replay-note-snapshot-status-overlay {
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 14px;
+  pointer-events: auto;
+}
+
+.replay-note-snapshot-status-overlay-backdrop {
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--window-bg) 62%, transparent);
+  backdrop-filter: blur(3px);
+}
+
+.replay-note-snapshot-status-card {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  max-width: min(420px, 100%);
+  padding: 12px 14px;
+  border: 1px solid color-mix(in srgb, var(--primary) 18%, var(--line));
+  border-radius: calc(var(--ui-radius-control) - 2px);
+  background: color-mix(in srgb, var(--window-bg) 90%, var(--panel-soft));
+  box-shadow: 0 14px 28px color-mix(in srgb, var(--shadow) 18%, transparent);
+  color: color-mix(in srgb, var(--muted) 88%, var(--text-subtle));
+}
+
+.replay-note-snapshot-status-overlay.is-error .replay-note-snapshot-status-card {
+  border-color: color-mix(in srgb, var(--danger) 24%, var(--line));
+}
+
+.replay-note-snapshot-status-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  margin-top: 1px;
+  color: color-mix(in srgb, var(--primary) 80%, var(--text-strong));
+}
+
+.replay-note-snapshot-status-overlay.is-error .replay-note-snapshot-status-icon-wrap {
+  color: color-mix(in srgb, var(--danger) 84%, var(--text-strong));
+}
+
+.replay-note-snapshot-status-copy {
+  min-width: 0;
+  flex: 1 1 auto;
+  display: grid;
+  gap: 2px;
+}
+
+.replay-note-snapshot-status-copy strong {
+  color: var(--text-strong);
+  font-size: var(--ty-r3);
+}
+
+.replay-note-snapshot-status-copy span {
+  font-size: var(--ty-r2);
+  line-height: 1.5;
+}
+
+.replay-note-snapshot-status-action {
+  flex: 0 0 auto;
+}
+
+.replay-note-training-snapshot-node .history-preview-canvas-wrap {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  overflow: hidden;
+  padding-right: 0;
+  box-sizing: border-box;
+}
+
+.replay-note-training-snapshot-node .history-preview-canvas-wrap::before {
+  right: 0;
+}
+
+.replay-note-training-snapshot-node .history-preview-canvas {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+.notes-detail-panel .notes-detail-chart-preview,
+.training-note-modal .note-editor-modal-chart-preview {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.replay-note-training-snapshot-node .chart-change-float {
+  right: clamp(58px, 4.8vw, 84px);
+}
+
+.replay-note-training-snapshot-node .history-preview-period-toolbar {
+  padding-right: 8px;
+  overflow-x: auto;
+  gap: 4px;
+}
+
+.replay-note-training-snapshot-node .history-chart-info-bar {
+  display: none;
+}
+
+.replay-note-training-snapshot-node .chart-period-origin-wrap {
+  max-width: clamp(148px, 46%, 340px);
+}
+
+.replay-note-training-snapshot-node .chart-period-origin {
+  max-width: 100%;
+  padding-right: 2px;
+}
+
+.training-snapshot-node-empty {
+  padding: 14px 16px;
+  color: var(--muted);
+  font-size: var(--ty-r3);
+}
+
+@keyframes replay-note-snapshot-loading-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.ui-standard-modal[data-variant="alert"].shortcut-modal-frame {
+  width: min(620px, calc(100vw - 72px));
+  max-height: calc(100vh - 56px);
+  grid-template-rows: auto minmax(0, 1fr) auto;
+}
+
+.ui-standard-modal[data-variant="alert"] .shortcut-modal-body {
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+
+.shortcut-modal-list {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.shortcut-modal-section {
+  min-width: 0;
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  border: 1px solid color-mix(in srgb, var(--line) 72%, transparent);
+  border-radius: var(--radius-rect);
+  background: color-mix(in srgb, var(--panel-soft) 84%, var(--panel));
+  padding: 10px;
+}
+
+.shortcut-modal-section-title {
+  margin: 0;
+  color: var(--text-strong);
+  font-size: var(--ty-r1);
+  font-weight: 800;
+  line-height: var(--ty-leading-label);
+}
+
+.shortcut-modal-items {
+  min-width: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.shortcut-modal-section[data-shortcut-section="drawing"] {
+  grid-column: 1 / -1;
+}
+
+.shortcut-modal-section[data-shortcut-section="drawing"] .shortcut-modal-items {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.shortcut-modal-item {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(58px, max-content) minmax(0, 1fr);
+  align-items: center;
+  gap: 9px;
+  border: 1px solid color-mix(in srgb, var(--line) 52%, transparent);
+  border-radius: var(--radius-rect);
+  background: color-mix(in srgb, var(--panel) 92%, transparent);
+  padding: 6px 8px;
+}
+
+.shortcut-modal-key {
+  min-width: 58px;
+  height: 24px;
+  padding: 0 8px;
+  color: var(--text-strong);
+  font-size: var(--ty-r1);
+}
+
+.shortcut-modal-label {
+  min-width: 0;
+  color: var(--text-subtle);
+  font-size: var(--ty-r2);
+  line-height: var(--ty-leading-label);
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 560px) {
+  .ui-standard-modal[data-variant="alert"].shortcut-modal-frame {
+    width: min(100%, calc(100vw - 56px));
+  }
+
+  .shortcut-modal-list {
+    grid-template-columns: 1fr;
+  }
+
+  .shortcut-modal-section[data-shortcut-section="drawing"] .shortcut-modal-items {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+@media (max-width: 1280px) {
+  .app-root {
+    --rail-width: clamp(168px, 16.5vw, 228px);
+    --rail-width-compact: clamp(84px, 8.25vw, 114px);
+  }
+
+  .app-shell {
+    grid-template-columns: minmax(0, 1fr) var(--rail-width);
+  }
+
+  .top-toolbar {
+    gap: clamp(4px, 0.34vw, 6px);
+    padding: clamp(4px, 0.34vw, 7px) clamp(6px, 0.56vw, 10px);
+  }
+
+  .top-toolbar-form-group {
+    gap: 0;
+  }
+
+  .top-toolbar-form-row {
+    gap: 6px;
+  }
+
+  .top-toolbar-form-row.top-toolbar-pool-symbol-cluster {
+    gap: 0;
+    flex: 1 1 auto;
+    max-width: 100%;
+  }
+
+  .top-toolbar-form-item {
+    gap: 0;
+  }
+
+  .top-toolbar-form-item-pool {
+    width: auto;
+    min-width: 96px;
+    flex: 1.15 1 0;
+  }
+
+  .top-toolbar-form-item-symbol {
+    width: auto;
+    min-width: 92px;
+    flex: 1.05 1 0;
+  }
+
+  .top-toolbar-form-item-anchor {
+    width: calc(var(--top-toolbar-anchor-date-ch) * 1ch + 34px);
+    flex-basis: calc(var(--top-toolbar-anchor-date-ch) * 1ch + 34px);
+  }
+
+  .top-toolbar-form-label {
+    width: 50px;
+    flex-basis: 50px;
+  }
+
+  .top-toolbar-right-group {
+    gap: 4px;
+  }
+
+  .autoplay-speed-wrap {
+    gap: 3px;
+  }
+
+  .chart-layout {
+    grid-template-columns: clamp(84px, 8.25vw, 114px) minmax(0, 1fr);
+  }
+
+  .chart-period-origin-wrap {
+    display: none;
+  }
+
+  .chart-period-toolbar {
+    min-height: 34px;
+    padding: 3px 8px;
+    gap: 4px;
+  }
+
+  .chart-period-btn,
+  .chart-period-indicator {
+    height: 24px;
+    padding: 0 8px;
+    font-size: var(--ty-r2);
+  }
+
+
+  .desktop-main {
+    margin-left: 0;
+  }
+
+  .history-workspace {
+    grid-template-columns: var(--rail-width) minmax(0, 1fr);
+  }
+
+  .settings-modern-row {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+
+  .settings-danger-zone {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+
+  .settings-storage-summary-line {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .settings-theme-switch,
+  .settings-language-select {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .app-root {
+    --rail-width: clamp(154px, 18.5vw, 208px);
+    --rail-width-compact: clamp(77px, 9.25vw, 104px);
+  }
+
+  .app-shell {
+    grid-template-columns: minmax(0, 1fr) var(--rail-width);
+  }
+
+  .chart-layout {
+    grid-template-columns: clamp(77px, 9.25vw, 104px) minmax(0, 1fr);
+  }
+
+  .desktop-main {
+    margin-left: 0;
+  }
+
+  .history-workspace {
+    grid-template-columns: var(--rail-width) minmax(0, 1fr);
+  }
+
+  .history-side-header {
+    padding: 16px 10px 10px;
+  }
+
+  .history-side-head-top {
+    align-items: flex-start;
+  }
+
+  .history-side-actions {
+    justify-content: flex-start;
+  }
+
+  .history-side-control-row {
+    grid-template-columns: 1fr;
+  }
+
+  .history-sort-select {
+    width: 100%;
+  }
+
+}
+
+@media (max-width: 760px) {
+  .app-root {
+    overflow: auto;
+  }
+
+}
+
+@media (max-height: 860px) {
+  .app-root {
+    overflow: auto;
+  }
+
+  .desktop-main {
+    margin-left: 0;
+  }
+}
+
+.app-root .trainer-period-btn,
+.app-root .symbol-btn,
+.app-root .chip,
+.app-root .workspace-stat-chip,
+.app-root .sample-pool-card-tag,
+.app-root .history-item-icon-btn,
+.app-root .history-side-compact-btn,
+.app-root .history-sort-order-btn,
+.app-root .history-delete-all-btn,
+.app-root .csv-top-btn,
+.app-root .shortcut-help-btn,
+.app-root .theme-mode-btn,
+.app-root .toolbar-setting-btn,
+.app-root .indicator-name-btn,
+.app-root .next-focus-btn,
+.app-root .trade-settings-mini-btn {
+  border-radius: var(--radius-control);
+}

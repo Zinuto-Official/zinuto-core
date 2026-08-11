@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "scopes": [
+    {
+      "path": ".",
+      "label": "repository governance and routing",
+      "laneId": "governance",
+      "generators": ["new:*"],
+      "rule": "Route the task to the owning path before editing. Runtime, popup, secondary-window, and bundle changes require the real build or runtime guard selected by the impact checker."
+    },
+    {
+      "path": "apps/desktop/web",
+      "label": "desktop WebView UI, workspaces, and domains",
+      "laneId": "desktop-app",
+      "generators": ["new:desktop-page", "new:desktop-workspace", "new:desktop-component"],
+      "rule": "Access the local runtime only through apps/desktop/web/src/api/index.ts. Keep business truth in the runtime, update all five locales, and run the generated bundle checks for popup or secondary-window changes."
+    },
+    {
+      "path": "apps/desktop/local-api",
+      "label": "local application and data runtime",
+      "laneId": "desktop-app",
+      "generators": ["new:local-api-route"],
+      "rule": "Change contracts/openapi/desktop-local-api.v1.yaml before a route shape, then regenerate. Preserve local-only behavior, cancellation, bounded inputs, rollback, and atomic persistence."
+    },
+    {
+      "path": "apps/desktop/shell",
+      "label": "Tauri lifecycle, native bridge, and local packaging",
+      "laneId": "desktop-app",
+      "generators": [],
+      "rule": "Keep native commands inside contracts/native-bridge/native-bridge.v1.json. Core shell code has no official service, updater, Store, signing, or notarization implementation."
+    },
+    {
+      "path": "apps/desktop/local-api/src/infrastructure/assets/system-market-seed",
+      "label": "redistributable desktop seed data",
+      "laneId": "desktop-app",
+      "generators": [],
+      "rule": "Every dataset must match its manifest and THIRD_PARTY_DATA.md record. Never commit caches, generated databases, proprietary data, or machine paths."
+    },
+    {
+      "path": "packages/shared",
+      "label": "shared local contracts, validation, domain facts, and i18n",
+      "laneId": "shared-contracts",
+      "generators": [],
+      "rule": "Do not hand-edit generated contract outputs. Keep the five locales complete and exclude hosted-service implementation types."
+    },
+    {
+      "path": "contracts",
+      "label": "versioned local HTTP and native bridge contracts",
+      "laneId": "shared-contracts",
+      "generators": [],
+      "rule": "Contracts describe local desktop behavior only. Change the contract first, regenerate, and do not add aliases, fallback hosts, or official-service surfaces."
+    },
+    {
+      "path": "tools",
+      "label": "generation, quality, compliance, and local Core build tools",
+      "laneId": "governance",
+      "generators": ["new:quality-check"],
+      "rule": "Tooling may build and validate Core only. Update the matching registry and tests when a generator, quality route, or public-boundary rule changes."
+    }
+  ]
+}

@@ -1,0 +1,501 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.csv-mapping-modal .csv-preview-advanced-body {
+  display: grid;
+  gap: 10px;
+}
+
+.csv-mapping-modal .csv-preview-import-rule-summary {
+  border: 1px solid color-mix(in srgb, var(--line) 66%, transparent);
+  border-radius: var(--radius-rect);
+  background: color-mix(in srgb, var(--surface-s2) 86%, var(--panel));
+  padding: 8px 10px;
+  display: grid;
+  gap: 6px;
+}
+
+.csv-mapping-modal .csv-preview-import-rule-summary-value,
+.csv-mapping-modal .csv-preview-summary-details dd {
+  margin: 0;
+  color: var(--text-strong);
+  font-size: var(--ty-r1);
+  line-height: 1.25;
+  font-weight: 680;
+  overflow-wrap: anywhere;
+}
+
+.csv-mapping-modal .csv-preview-summary-details dd {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.csv-mapping-modal .csv-preview-invalid-file-hint {
+  color: color-mix(in srgb, var(--danger) 82%, var(--text-strong));
+}
+
+.csv-mapping-modal .csv-preview-invalid-file-hint {
+  font-size: var(--ty-r1);
+  line-height: 1.45;
+}
+
+.csv-mapping-modal .csv-preview-timezone-block .csv-preview-invalid-file-hint {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.csv-mapping-modal .csv-preview-timezone-confirm-action {
+  min-height: 26px !important;
+  height: 26px !important;
+  padding-inline: 8px !important;
+  white-space: nowrap;
+}
+
+.csv-mapping-modal .csv-preview-summary-title {
+  font-size: var(--ty-r2);
+  line-height: 1.2;
+  font-weight: 740;
+  color: var(--text-strong);
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  padding-bottom: 2px;
+}
+
+.csv-mapping-modal .csv-preview-summary-note {
+  margin-top: 4px;
+  font-size: var(--ty-r1);
+  line-height: 1.35;
+  color: var(--text-subtle);
+}
+
+.csv-mapping-modal .csv-preview-summary-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.csv-mapping-modal .csv-preview-summary-metric {
+  min-width: 0;
+  border: 1px solid color-mix(in srgb, var(--line) 66%, transparent);
+  border-radius: var(--radius-rect);
+  background: color-mix(in srgb, var(--surface-s2) 86%, var(--panel));
+  padding: 8px;
+  display: grid;
+  gap: 4px;
+}
+
+.csv-mapping-modal .csv-preview-summary-metric span {
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1.2;
+}
+
+.csv-mapping-modal .csv-preview-summary-metric strong {
+  display: block;
+  min-width: 0;
+  color: var(--text-strong);
+  font-size: var(--ty-r2);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.csv-mapping-modal .csv-preview-summary-metric.tone-success strong {
+  color: color-mix(in srgb, var(--primary) 78%, var(--text-strong));
+}
+
+.csv-mapping-modal .csv-preview-summary-metric.tone-warning strong {
+  color: color-mix(in srgb, var(--danger) 82%, var(--text-strong));
+}
+
+.csv-mapping-modal .csv-preview-summary-readiness {
+  border: 1px solid color-mix(in srgb, var(--line) 68%, transparent);
+  border-radius: var(--radius-rect);
+  background: color-mix(in srgb, var(--surface-s2) 72%, var(--panel));
+  padding: 8px 10px;
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1.45;
+}
+
+.csv-mapping-modal .csv-preview-summary-pool-section {
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  gap: 7px;
+  overflow: hidden;
+}
+
+.csv-mapping-modal .csv-preview-summary-pool-section.is-single {
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.csv-mapping-modal .csv-preview-summary-pool-head {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.csv-mapping-modal .csv-preview-summary-pool-row-head {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+}
+
+.csv-mapping-modal .csv-preview-summary-pool-table-head,
+.csv-mapping-modal .csv-preview-summary-pool-row {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(82px, 0.42fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+}
+
+.csv-mapping-modal .csv-preview-summary-pool-table-head.is-single,
+.csv-mapping-modal .csv-preview-summary-pool-row.is-single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.csv-mapping-modal .csv-preview-summary-pool-table-head {
+  min-height: 28px;
+  padding: 6px 8px;
+  border: 1px solid color-mix(in srgb, var(--line) 62%, transparent);
+  border-radius: calc(var(--radius-rect) - 2px);
+  background: color-mix(in srgb, var(--surface-s2) 86%, var(--panel));
+  color: var(--text-strong);
+  font-size: var(--ty-r1);
+  line-height: 1.2;
+  font-weight: 720;
+}
+
+.csv-mapping-modal .csv-preview-summary-pool-list {
+  min-width: 0;
+  min-height: 0;
+  max-height: clamp(126px, 30vh, 260px);
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 4px;
+}
+
+.csv-mapping-modal .csv-preview-summary-pool-name-input {
+  min-height: 34px;
+}
+
+.csv-mapping-modal .csv-preview-summary-pool-name-field {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+}
+
+.csv-mapping-modal .csv-preview-summary-pool-name-count {
+  min-width: 4.25ch;
+  color: var(--text-t2);
+  font-size: var(--ty-r1);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  text-align: right;
+}
+
+.csv-mapping-modal .csv-preview-summary-details {
+  margin: 0;
+  display: grid;
+  gap: 0;
+  border-top: 1px solid color-mix(in srgb, var(--line) 62%, transparent);
+}
+
+.csv-mapping-modal .csv-preview-summary-details > div {
+  min-width: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--line) 50%, transparent);
+  padding: 7px 0;
+  display: grid;
+  grid-template-columns: 78px minmax(0, 1fr);
+  align-items: start;
+  gap: 8px;
+}
+
+.csv-mapping-modal .csv-preview-summary-details > div:last-child {
+  border-bottom: none;
+}
+
+.csv-mapping-modal .csv-preview-modal-actions {
+  margin-top: 0;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.csv-mapping-modal
+  .ui-standard-modal[data-variant="workflow"]
+  .csv-preview-modal-actions {
+  background: transparent;
+}
+
+.csv-mapping-modal .csv-preview-modal-action-buttons {
+  margin-left: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+@media (max-width: 1180px) {
+  .data-asset-class-stat-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .data-config-source-diagnostic-grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(360px, 1fr) minmax(320px, 0.95fr);
+    overflow: auto;
+  }
+
+  .data-config-source-diagnostic-left {
+    min-height: 360px;
+  }
+
+  .data-config-source-diagnostic-chart {
+    min-height: 320px;
+  }
+
+  .data-config-source-diagnostic-metrics {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .data-asset-detail-main {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .data-asset-mini-chart-surface {
+    min-height: 160px;
+  }
+
+  .data-config-source-diagnostic-chart .data-asset-mini-chart-surface {
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 940px) {
+  .csv-preview-result-name-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .csv-preview-result-target-select {
+    width: 100%;
+  }
+
+  .csv-preview-import-rule-editor-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 1100px) {
+  .csv-mapping-modal .csv-preview-workbench {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: max-content max-content;
+    align-items: start;
+    align-content: start;
+    overflow: auto;
+  }
+
+  .csv-mapping-modal .csv-preview-main-stack,
+  .csv-mapping-modal .csv-preview-side-stack {
+    height: auto;
+    overflow: visible;
+  }
+
+  .csv-mapping-modal .csv-preview-modal-actions {
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 900px) {
+  .data-asset-class-section {
+    padding: 9px;
+  }
+
+  .data-asset-class-stat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 7px;
+  }
+
+  .data-asset-panel-slider {
+    width: 200%;
+  }
+
+  .data-asset-panel {
+    padding-right: 0;
+  }
+
+  .data-asset-panel-detail {
+    padding-left: 0;
+  }
+
+  .data-asset-detail-topbar {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .data-asset-detail-side-pane {
+    height: auto;
+    position: static;
+    padding-bottom: 10px;
+    overflow: visible;
+  }
+
+  .data-asset-detail-layout {
+    height: auto;
+    grid-template-rows: auto auto auto;
+  }
+
+  .data-asset-diagnostics-row-primary {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .data-asset-diagnostics-row-secondary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .data-asset-gap-alert-head {
+    flex-wrap: wrap;
+  }
+
+  .data-asset-alerts-grid,
+  .data-asset-alerts-grid.is-unadjusted-risk {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .data-asset-detail-actions {
+    position: static;
+    grid-template-columns: minmax(0, 1fr);
+    border-top: none;
+    padding-top: 0;
+    background: transparent;
+  }
+
+  .csv-mapping-modal .csv-preview-panel-head {
+    display: grid;
+  }
+
+  .csv-mapping-modal .csv-preview-mapping-segment {
+    width: 100%;
+    flex-basis: auto;
+  }
+}
+
+@media (max-width: 899px) {
+  .csv-mapping-modal .csv-preview-main-stack,
+  .csv-mapping-modal .csv-preview-side-stack {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .csv-mapping-modal .csv-preview-side-stack {
+    grid-template-rows: auto;
+  }
+}
+
+@media (max-width: 760px) {
+  .csv-mapping-modal .csv-preview-mapping-grid,
+  .csv-mapping-modal .csv-preview-pool-config-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .csv-mapping-modal .csv-preview-trading-calendar-session-row,
+  .data-config-page .csv-preview-trading-calendar-session-row,
+  .data-config-detail-window .csv-preview-trading-calendar-session-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .csv-mapping-modal .csv-preview-trading-calendar-session-row > .csv-preview-section-label,
+  .data-config-page .csv-preview-trading-calendar-session-row > .csv-preview-section-label,
+  .data-config-detail-window .csv-preview-trading-calendar-session-row > .csv-preview-section-label,
+  .csv-mapping-modal .csv-preview-trading-calendar-session-row > .csv-preview-plan-chip,
+  .data-config-page .csv-preview-trading-calendar-session-row > .csv-preview-plan-chip,
+  .data-config-detail-window .csv-preview-trading-calendar-session-row > .csv-preview-plan-chip {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+
+  .csv-mapping-modal .csv-preview-trading-calendar-session-row [data-slot="button"],
+  .data-config-page .csv-preview-trading-calendar-session-row [data-slot="button"],
+  .data-config-detail-window .csv-preview-trading-calendar-session-row [data-slot="button"] {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+
+  .csv-mapping-modal .csv-preview-mapping-row:last-child:nth-child(odd) {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 620px) {
+  .csv-mapping-modal .csv-preview-mapping-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .csv-mapping-modal .csv-preview-field-issue {
+    grid-column: auto;
+  }
+
+  .csv-mapping-modal .csv-preview-summary-metrics,
+  .csv-mapping-modal .csv-preview-plan-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .csv-mapping-modal .csv-preview-summary-pool-table-head {
+    display: none;
+  }
+
+  .csv-mapping-modal .csv-preview-summary-pool-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .csv-mapping-modal .csv-preview-status-strip,
+  .csv-mapping-modal .csv-preview-timezone-status {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .csv-mapping-modal .csv-preview-modal-action-buttons {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .csv-mapping-modal .csv-preview-modal-action-buttons > * {
+    flex: 1 1 auto;
+  }
+}
+
+.settings-desktop-release-card {
+  min-width: 0;
+}
+
+.settings-desktop-release-actions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+}
+
+@media (max-width: 760px) {
+  .settings-desktop-release-actions {
+    justify-content: flex-start;
+  }
+}

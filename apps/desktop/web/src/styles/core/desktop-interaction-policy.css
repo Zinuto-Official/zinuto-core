@@ -1,0 +1,51 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.app-root {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+html[data-zinuto-dev-text-selection="enabled"] .app-root,
+html[data-zinuto-dev-text-selection="enabled"] .app-root :where(*) {
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+.app-root :where(
+  input:not([type]),
+  input[type="date"],
+  input[type="datetime-local"],
+  input[type="email"],
+  input[type="month"],
+  input[type="number"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="text"],
+  input[type="time"],
+  input[type="url"],
+  input[type="week"],
+  textarea,
+  [contenteditable="true"],
+  [contenteditable="plaintext-only"],
+  [role="textbox"],
+  .cm-editor,
+  .cm-content,
+  .custom-indicator-code-editor,
+  .replay-note-lexical-content
+) {
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+.app-root :where(
+  [contenteditable="true"],
+  [contenteditable="plaintext-only"],
+  [role="textbox"],
+  .cm-content,
+  .custom-indicator-code-editor,
+  .replay-note-lexical-content
+) * {
+  user-select: text;
+  -webkit-user-select: text;
+}

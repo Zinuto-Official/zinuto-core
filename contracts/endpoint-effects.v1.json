@@ -1,0 +1,2102 @@
+{
+  "schemaVersion": 1,
+  "openapiSha256": "ac4db969d5ddc4fbf6ea5d25fafee3d3037b7dca1b8d3ccadb5ba0ef7a9bb914",
+  "endpoints": [
+    {
+      "method": "DELETE",
+      "path": "/api/v1/backtest/batches",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:backtest",
+        "workspace:strategy-backtest"
+      ],
+      "workspaceIds": [
+        "strategy-backtest"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/backtest/batches/{id}",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:backtest",
+        "workspace:strategy-backtest"
+      ],
+      "workspaceIds": [
+        "strategy-backtest"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/data-sources/{sourceId}",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:backtest",
+        "resource:data-sources",
+        "resource:market",
+        "resource:training",
+        "workspace:command-center",
+        "workspace:data-management",
+        "workspace:settings",
+        "workspace:special-training",
+        "workspace:strategy-backtest",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "special-training",
+        "data-management",
+        "settings",
+        "strategy-backtest"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/data-sources/acquisition-jobs/{jobId}",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:backtest",
+        "resource:data-sources",
+        "resource:market",
+        "resource:training",
+        "workspace:command-center",
+        "workspace:data-management",
+        "workspace:settings",
+        "workspace:special-training",
+        "workspace:strategy-backtest",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "special-training",
+        "data-management",
+        "settings",
+        "strategy-backtest"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/replay-notes",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:replay-notes",
+        "workspace:history-review-console",
+        "workspace:notes"
+      ],
+      "workspaceIds": [
+        "notes",
+        "history-review-console"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/replay-notes/{id}",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:replay-notes",
+        "workspace:history-review-console",
+        "workspace:notes"
+      ],
+      "workspaceIds": [
+        "notes",
+        "history-review-console"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/training/projects/{id}",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:training",
+        "workspace:challenge-stats",
+        "workspace:command-center",
+        "workspace:history-review-console",
+        "workspace:special-training",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "history-review-console",
+        "challenge-stats",
+        "special-training"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/training/special/banks/{bankId}",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:training",
+        "workspace:challenge-stats",
+        "workspace:command-center",
+        "workspace:special-training"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "special-training",
+        "challenge-stats"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/training/special/challenges/{challengeId}",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:training",
+        "workspace:challenge-stats",
+        "workspace:command-center",
+        "workspace:special-training"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "special-training",
+        "challenge-stats"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/backtest/batches",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/backtest/batches/{id}",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/backtest/batches/{id}/progress",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/backtest/batches/{id}/results",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/backtest/batches/{id}/results/{symbol}/trades",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/custom-indicators/profiles",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/data-sources",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/data-sources/{sourceId}/diagnostics",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/data-sources/{sourceId}/symbols/{symbol}/diagnostics",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/data-sources/acquisition-connectors",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/data-sources/acquisition-connectors/akshare/instruments",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/data-sources/acquisition-connectors/ccxt/markets",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/data-sources/acquisition-jobs/{jobId}",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/data-sources/import-jobs/{jobId}",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/data-sources/import/preview-jobs/{jobId}",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/data-sources/maintenance-availability",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/market/instruments",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/market/instruments/{instrumentId}/bars/frame",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/market/instruments/{instrumentId}/bars/range",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/replay-notes",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/replay-notes/{id}",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/replay-notes/recent",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/system/app-preferences",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/system/dev-simulation/capabilities",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/system/dev-simulation/cleanup/jobs/{jobId}",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/system/dev-simulation/cleanup/latest-job",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/system/dev-simulation/jobs/{jobId}",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/system/dev-simulation/latest-job",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/system/health",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/system/history-retention",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/system/history-retention/jobs/{jobId}",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/system/history-retention/jobs/latest",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/system/legal-documents/{documentKey}",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/system/reset-all-data/jobs/{jobId}",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/system/startup-status",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/system/storage-summary",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/system/storage-usage",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/training/free-replay/pool-default-environments",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/training/free-replay/portfolio/summary",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/training/free-replay/sessions/{id}/bootstrap",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/training/free-replay/sessions/{id}/snapshot",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/training/free-replay/sessions/resumable/latest",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/training/free-replay/settings/trading",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/training/free-replay/start-point-overview",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/training/projects",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/training/projects/{id}",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/training/special/banks",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/training/special/challenges/{challengeId}/progress",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/training/special/challenges/{challengeId}/runtime",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/training/special/history",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/training/special/history/{sessionId}",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/training/special/history/questions/{questionId}",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/training/special/stats",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/training/special/stats/details/{projectId}",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/training/special/stats/summary",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/training/stats",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/training/stats/summary",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/training/summary",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/workspaces/challenge-stats",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/workspaces/command-center",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/workspaces/custom-indicator",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/workspaces/data-management",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/workspaces/history/review-console",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/workspaces/notes",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/workspaces/settings",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/workspaces/special-training",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/workspaces/strategy-backtest",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/workspaces/trainer",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/replay-notes/{id}",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:replay-notes",
+        "workspace:history-review-console",
+        "workspace:notes"
+      ],
+      "workspaceIds": [
+        "notes",
+        "history-review-console"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/training/projects/{id}",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:training",
+        "workspace:challenge-stats",
+        "workspace:command-center",
+        "workspace:history-review-console",
+        "workspace:special-training",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "history-review-console",
+        "challenge-stats",
+        "special-training"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/training/special/banks/{bankId}",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:training",
+        "workspace:challenge-stats",
+        "workspace:command-center",
+        "workspace:special-training"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "special-training",
+        "challenge-stats"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/backtest/batches",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:backtest",
+        "workspace:strategy-backtest"
+      ],
+      "workspaceIds": [
+        "strategy-backtest"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/backtest/batches/{id}/cancel",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:backtest",
+        "workspace:strategy-backtest"
+      ],
+      "workspaceIds": [
+        "strategy-backtest"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/backtest/batches/{id}/run",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:backtest",
+        "workspace:strategy-backtest"
+      ],
+      "workspaceIds": [
+        "strategy-backtest"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/custom-indicators/compile",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/custom-indicators/execute",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/custom-indicators/profiles/delete",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:backtest",
+        "resource:custom-indicators",
+        "resource:training",
+        "workspace:custom-indicator",
+        "workspace:strategy-backtest",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "custom-indicator",
+        "trainer",
+        "strategy-backtest"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/custom-indicators/profiles/save",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:backtest",
+        "resource:custom-indicators",
+        "resource:training",
+        "workspace:custom-indicator",
+        "workspace:strategy-backtest",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "custom-indicator",
+        "trainer",
+        "strategy-backtest"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/data-sources/{sourceId}/full-reimport/from-paths",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:backtest",
+        "resource:data-sources",
+        "resource:market",
+        "resource:training",
+        "workspace:command-center",
+        "workspace:data-management",
+        "workspace:settings",
+        "workspace:special-training",
+        "workspace:strategy-backtest",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "special-training",
+        "data-management",
+        "settings",
+        "strategy-backtest"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/data-sources/{sourceId}/incremental-update/from-paths",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:backtest",
+        "resource:data-sources",
+        "resource:market",
+        "resource:training",
+        "workspace:command-center",
+        "workspace:data-management",
+        "workspace:settings",
+        "workspace:special-training",
+        "workspace:strategy-backtest",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "special-training",
+        "data-management",
+        "settings",
+        "strategy-backtest"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/data-sources/{sourceId}/symbols/remove",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:backtest",
+        "resource:data-sources",
+        "resource:market",
+        "resource:training",
+        "workspace:command-center",
+        "workspace:data-management",
+        "workspace:settings",
+        "workspace:special-training",
+        "workspace:strategy-backtest",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "special-training",
+        "data-management",
+        "settings",
+        "strategy-backtest"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/data-sources/{sourceId}/sync-preview/from-paths",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/data-sources/{sourceId}/sync-quick-check/from-metadata",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/data-sources/acquisition-jobs",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:backtest",
+        "resource:data-sources",
+        "resource:market",
+        "resource:training",
+        "workspace:command-center",
+        "workspace:data-management",
+        "workspace:settings",
+        "workspace:special-training",
+        "workspace:strategy-backtest",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "special-training",
+        "data-management",
+        "settings",
+        "strategy-backtest"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/data-sources/acquisition-jobs/{jobId}/cancel",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:backtest",
+        "resource:data-sources",
+        "resource:market",
+        "resource:training",
+        "workspace:command-center",
+        "workspace:data-management",
+        "workspace:settings",
+        "workspace:special-training",
+        "workspace:strategy-backtest",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "special-training",
+        "data-management",
+        "settings",
+        "strategy-backtest"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/data-sources/clear-all",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:backtest",
+        "resource:data-sources",
+        "resource:market",
+        "resource:training",
+        "workspace:command-center",
+        "workspace:data-management",
+        "workspace:settings",
+        "workspace:special-training",
+        "workspace:strategy-backtest",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "special-training",
+        "data-management",
+        "settings",
+        "strategy-backtest"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/data-sources/import-jobs/{jobId}/control",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:backtest",
+        "resource:data-sources",
+        "resource:market",
+        "resource:training",
+        "workspace:command-center",
+        "workspace:data-management",
+        "workspace:settings",
+        "workspace:special-training",
+        "workspace:strategy-backtest",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "special-training",
+        "data-management",
+        "settings",
+        "strategy-backtest"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/data-sources/import/from-paths",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:backtest",
+        "resource:data-sources",
+        "resource:market",
+        "resource:training",
+        "workspace:command-center",
+        "workspace:data-management",
+        "workspace:settings",
+        "workspace:special-training",
+        "workspace:strategy-backtest",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "special-training",
+        "data-management",
+        "settings",
+        "strategy-backtest"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/data-sources/import/preview/discard",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:backtest",
+        "resource:data-sources",
+        "resource:market",
+        "resource:training",
+        "workspace:command-center",
+        "workspace:data-management",
+        "workspace:settings",
+        "workspace:special-training",
+        "workspace:strategy-backtest",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "special-training",
+        "data-management",
+        "settings",
+        "strategy-backtest"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/data-sources/import/preview/from-path",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:backtest",
+        "resource:data-sources",
+        "resource:market",
+        "resource:training",
+        "workspace:command-center",
+        "workspace:data-management",
+        "workspace:settings",
+        "workspace:special-training",
+        "workspace:strategy-backtest",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "special-training",
+        "data-management",
+        "settings",
+        "strategy-backtest"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/data-sources/import/preview/validate",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:backtest",
+        "resource:data-sources",
+        "resource:market",
+        "resource:training",
+        "workspace:command-center",
+        "workspace:data-management",
+        "workspace:settings",
+        "workspace:special-training",
+        "workspace:strategy-backtest",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "special-training",
+        "data-management",
+        "settings",
+        "strategy-backtest"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/replay-notes",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:replay-notes",
+        "workspace:history-review-console",
+        "workspace:notes"
+      ],
+      "workspaceIds": [
+        "notes",
+        "history-review-console"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/replay-notes/rebind-training-project",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:replay-notes",
+        "workspace:history-review-console",
+        "workspace:notes"
+      ],
+      "workspaceIds": [
+        "notes",
+        "history-review-console"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/system/dev-simulation/cancel",
+      "effect": "write",
+      "invalidationScopes": [
+        "system:dev-simulation",
+        "workspace:challenge-stats",
+        "workspace:command-center",
+        "workspace:custom-indicator",
+        "workspace:data-management",
+        "workspace:history-review-console",
+        "workspace:notes",
+        "workspace:settings",
+        "workspace:special-training",
+        "workspace:strategy-backtest",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "challenge-stats",
+        "command-center",
+        "custom-indicator",
+        "data-management",
+        "history-review-console",
+        "notes",
+        "settings",
+        "special-training",
+        "strategy-backtest",
+        "trainer"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/system/dev-simulation/cleanup",
+      "effect": "write",
+      "invalidationScopes": [
+        "system:dev-simulation",
+        "workspace:challenge-stats",
+        "workspace:command-center",
+        "workspace:custom-indicator",
+        "workspace:data-management",
+        "workspace:history-review-console",
+        "workspace:notes",
+        "workspace:settings",
+        "workspace:special-training",
+        "workspace:strategy-backtest",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "challenge-stats",
+        "command-center",
+        "custom-indicator",
+        "data-management",
+        "history-review-console",
+        "notes",
+        "settings",
+        "special-training",
+        "strategy-backtest",
+        "trainer"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/system/dev-simulation/cleanup/start",
+      "effect": "write",
+      "invalidationScopes": [
+        "system:dev-simulation",
+        "workspace:challenge-stats",
+        "workspace:command-center",
+        "workspace:custom-indicator",
+        "workspace:data-management",
+        "workspace:history-review-console",
+        "workspace:notes",
+        "workspace:settings",
+        "workspace:special-training",
+        "workspace:strategy-backtest",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "challenge-stats",
+        "command-center",
+        "custom-indicator",
+        "data-management",
+        "history-review-console",
+        "notes",
+        "settings",
+        "special-training",
+        "strategy-backtest",
+        "trainer"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/system/dev-simulation/start",
+      "effect": "write",
+      "invalidationScopes": [
+        "system:dev-simulation",
+        "workspace:challenge-stats",
+        "workspace:command-center",
+        "workspace:custom-indicator",
+        "workspace:data-management",
+        "workspace:history-review-console",
+        "workspace:notes",
+        "workspace:settings",
+        "workspace:special-training",
+        "workspace:strategy-backtest",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "challenge-stats",
+        "command-center",
+        "custom-indicator",
+        "data-management",
+        "history-review-console",
+        "notes",
+        "settings",
+        "special-training",
+        "strategy-backtest",
+        "trainer"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/system/history-retention/jobs/start",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:history",
+        "resource:training",
+        "system:history-retention",
+        "workspace:challenge-stats",
+        "workspace:command-center",
+        "workspace:history-review-console",
+        "workspace:settings"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "history-review-console",
+        "challenge-stats",
+        "settings"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/system/history-retention/preview",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/system/local-import-mock-sample/export",
+      "effect": "write",
+      "invalidationScopes": [
+        "system:local-import-mock-sample"
+      ],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/system/portable-export",
+      "effect": "write",
+      "invalidationScopes": [
+        "system:portable-export"
+      ],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/system/portable-export/preview",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/system/portable-import",
+      "effect": "write",
+      "invalidationScopes": [
+        "*"
+      ],
+      "workspaceIds": [
+        "challenge-stats",
+        "command-center",
+        "custom-indicator",
+        "data-management",
+        "history-review-console",
+        "notes",
+        "settings",
+        "special-training",
+        "strategy-backtest",
+        "trainer"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/system/portable-import/inspect",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/system/reset-all-data/start",
+      "effect": "write",
+      "invalidationScopes": [
+        "*"
+      ],
+      "workspaceIds": [
+        "challenge-stats",
+        "command-center",
+        "custom-indicator",
+        "data-management",
+        "history-review-console",
+        "notes",
+        "settings",
+        "special-training",
+        "strategy-backtest",
+        "trainer"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/system/startup-local-data/reinitialize",
+      "effect": "write",
+      "invalidationScopes": [
+        "*"
+      ],
+      "workspaceIds": [
+        "challenge-stats",
+        "command-center",
+        "custom-indicator",
+        "data-management",
+        "history-review-console",
+        "notes",
+        "settings",
+        "special-training",
+        "strategy-backtest",
+        "trainer"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/free-replay/prep-read-model",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/free-replay/sessions",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:training",
+        "workspace:challenge-stats",
+        "workspace:command-center",
+        "workspace:history-review-console",
+        "workspace:special-training",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "history-review-console",
+        "challenge-stats",
+        "special-training"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/free-replay/sessions/{id}/actions",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:training",
+        "workspace:challenge-stats",
+        "workspace:command-center",
+        "workspace:history-review-console",
+        "workspace:special-training",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "history-review-console",
+        "challenge-stats",
+        "special-training"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/free-replay/sessions/{id}/order/estimation-read-model",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/free-replay/sessions/{id}/order/quote",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/free-replay/sessions/{id}/playback",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:training",
+        "workspace:challenge-stats",
+        "workspace:command-center",
+        "workspace:history-review-console",
+        "workspace:special-training",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "history-review-console",
+        "challenge-stats",
+        "special-training"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/free-replay/sessions/bootstrap",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:training",
+        "workspace:challenge-stats",
+        "workspace:command-center",
+        "workspace:history-review-console",
+        "workspace:special-training",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "history-review-console",
+        "challenge-stats",
+        "special-training"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/free-replay/sessions/cleanup-stale",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:training",
+        "workspace:challenge-stats",
+        "workspace:command-center",
+        "workspace:history-review-console",
+        "workspace:special-training",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "history-review-console",
+        "challenge-stats",
+        "special-training"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/free-replay/sessions/start",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:training",
+        "workspace:challenge-stats",
+        "workspace:command-center",
+        "workspace:history-review-console",
+        "workspace:special-training",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "history-review-console",
+        "challenge-stats",
+        "special-training"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/free-replay/start-readiness",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/projects/archive-session",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:training",
+        "workspace:challenge-stats",
+        "workspace:command-center",
+        "workspace:history-review-console",
+        "workspace:special-training",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "history-review-console",
+        "challenge-stats",
+        "special-training"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/projects/archive-session/preview",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/projects/bulk-delete",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:training",
+        "workspace:challenge-stats",
+        "workspace:command-center",
+        "workspace:history-review-console",
+        "workspace:special-training",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "history-review-console",
+        "challenge-stats",
+        "special-training"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/projects/clear-all",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:training",
+        "workspace:challenge-stats",
+        "workspace:command-center",
+        "workspace:history-review-console",
+        "workspace:special-training",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "history-review-console",
+        "challenge-stats",
+        "special-training"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/reset-all",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:training",
+        "workspace:challenge-stats",
+        "workspace:command-center",
+        "workspace:history-review-console",
+        "workspace:special-training",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "history-review-console",
+        "challenge-stats",
+        "special-training"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/reset-dialog/read-model",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/reset-symbol",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:training",
+        "workspace:challenge-stats",
+        "workspace:command-center",
+        "workspace:history-review-console",
+        "workspace:special-training",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "history-review-console",
+        "challenge-stats",
+        "special-training"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/review-console/bundle",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/special/bank-editor/read-model",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/special/banks",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:training",
+        "workspace:challenge-stats",
+        "workspace:command-center",
+        "workspace:special-training"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "special-training",
+        "challenge-stats"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/special/challenges/{challengeId}/actions",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:training",
+        "workspace:challenge-stats",
+        "workspace:command-center",
+        "workspace:special-training"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "special-training",
+        "challenge-stats"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/special/challenges/{challengeId}/decision",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:training",
+        "workspace:challenge-stats",
+        "workspace:command-center",
+        "workspace:special-training"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "special-training",
+        "challenge-stats"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/special/challenges/{challengeId}/order/quote",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/special/challenges/{challengeId}/questions/{questionId}/settle",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:training",
+        "workspace:challenge-stats",
+        "workspace:command-center",
+        "workspace:special-training"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "special-training",
+        "challenge-stats"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/special/challenges/start",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:training",
+        "workspace:challenge-stats",
+        "workspace:command-center",
+        "workspace:special-training"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "special-training",
+        "challenge-stats"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/special/estimate",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/special/history/clear",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:training",
+        "workspace:challenge-stats",
+        "workspace:command-center",
+        "workspace:special-training"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "special-training",
+        "challenge-stats"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/special/question-bank/draft-preview",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/special/question-bank/preview",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/special/question-bank/reset",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:training",
+        "workspace:challenge-stats",
+        "workspace:command-center",
+        "workspace:special-training"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "special-training",
+        "challenge-stats"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/special/read-model/fast-decision/capital-tone",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/special/read-model/fast-decision/gauge",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/special/read-model/fast-decision/review-detail",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/special/read-model/fast-decision/training",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/special/read-model/mode-picker/question-bank",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/special/read-model/mode-picker/readiness",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/special/read-model/order-ticket/completed",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/special/read-model/order-ticket/loading",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/special/read-model/order-ticket/runtime",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/special/read-model/order-ticket/visible",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/special/read-model/risk/action-facts",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/special/read-model/risk/breakeven-price",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/special/read-model/risk/cost-price",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/special/read-model/risk/display-facts",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/special/read-model/risk/gravity-field",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/special/read-model/risk/holder-reference",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/special/read-model/risk/survival-progress",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/special/read-model/session-review/fast-decision",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/special/read-model/session-review/replay-project",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/special/read-model/session-review/review-note",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/special/read-model/session-review/risk-discipline",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/training/special/read-model/session-review/summary-chips",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/custom-indicators/profiles",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:backtest",
+        "resource:custom-indicators",
+        "resource:training",
+        "workspace:custom-indicator",
+        "workspace:strategy-backtest",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "custom-indicator",
+        "trainer",
+        "strategy-backtest"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/data-sources/{sourceId}/diagnostic-profile",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:backtest",
+        "resource:data-sources",
+        "resource:market",
+        "resource:training",
+        "workspace:command-center",
+        "workspace:data-management",
+        "workspace:settings",
+        "workspace:special-training",
+        "workspace:strategy-backtest",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "special-training",
+        "data-management",
+        "settings",
+        "strategy-backtest"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/data-sources/{sourceId}/trading-calendar",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:backtest",
+        "resource:data-sources",
+        "resource:market",
+        "resource:training",
+        "workspace:command-center",
+        "workspace:data-management",
+        "workspace:settings",
+        "workspace:special-training",
+        "workspace:strategy-backtest",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "special-training",
+        "data-management",
+        "settings",
+        "strategy-backtest"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/system/app-preferences/data-pool-removed-symbols",
+      "effect": "write",
+      "invalidationScopes": [
+        "system:app-preferences",
+        "workspace:command-center",
+        "workspace:data-management",
+        "workspace:settings",
+        "workspace:special-training",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "special-training",
+        "data-management",
+        "settings"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/system/app-preferences/ui-settings",
+      "effect": "write",
+      "invalidationScopes": [
+        "system:app-preferences",
+        "workspace:command-center",
+        "workspace:data-management",
+        "workspace:settings",
+        "workspace:special-training",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "special-training",
+        "data-management",
+        "settings"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/system/history-retention",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:history",
+        "resource:training",
+        "system:history-retention",
+        "workspace:challenge-stats",
+        "workspace:command-center",
+        "workspace:history-review-console",
+        "workspace:settings"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "history-review-console",
+        "challenge-stats",
+        "settings"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/training/free-replay/pool-default-environments/{poolId}",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:training",
+        "workspace:challenge-stats",
+        "workspace:command-center",
+        "workspace:history-review-console",
+        "workspace:special-training",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "history-review-console",
+        "challenge-stats",
+        "special-training"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/training/free-replay/sessions/{id}/trading-settings",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:training",
+        "workspace:challenge-stats",
+        "workspace:command-center",
+        "workspace:history-review-console",
+        "workspace:special-training",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "history-review-console",
+        "challenge-stats",
+        "special-training"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/training/free-replay/settings/trading",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:training",
+        "workspace:challenge-stats",
+        "workspace:command-center",
+        "workspace:history-review-console",
+        "workspace:special-training",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "history-review-console",
+        "challenge-stats",
+        "special-training"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/training/special/challenges/{challengeId}/activity",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:training",
+        "workspace:challenge-stats",
+        "workspace:command-center",
+        "workspace:special-training"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "special-training",
+        "challenge-stats"
+      ]
+    }
+  ]
+}

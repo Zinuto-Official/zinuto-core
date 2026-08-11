@@ -1,0 +1,46 @@
+{
+  "version": 2,
+  "lanes": [
+    {
+      "id": "desktop-app",
+      "title": "Core Desktop App",
+      "description": "Web UI, local runtime, native shell, backtest sidecar, and bundled data.",
+      "codeRoots": ["apps/desktop"],
+      "packageNames": ["@zinuto/desktop-web", "@zinuto/desktop-local-api"],
+      "checks": ["npm run quality:desktop-app"],
+      "requiredChecks": ["npm run quality:desktop-app"]
+    },
+    {
+      "id": "shared-contracts",
+      "title": "Shared Desktop Contracts",
+      "description": "Shared desktop types, localization, public contracts, and generated clients.",
+      "codeRoots": ["packages/shared", "contracts"],
+      "packageNames": ["@zinuto/shared"],
+      "checks": ["npm run quality:shared-contracts"],
+      "requiredChecks": ["npm run quality:shared-contracts"]
+    },
+    {
+      "id": "governance",
+      "title": "Core Source Governance",
+      "description": "Local Core build defaults, local artifact staging, documentation, and publication-boundary scans.",
+      "codeRoots": ["config", "docs", "tools", ".github"],
+      "paths": [
+        "BRANDING.md",
+        "CLA.md",
+        "COMMERCIAL-LICENSE.md",
+        "CONTRIBUTING.md",
+        "GOVERNANCE.md",
+        "LICENSE",
+        "NOTICE",
+        "SECURITY.md",
+        "THIRD_PARTY_DATA.md",
+        "THIRD_PARTY_NOTICES.md",
+        "TRADEMARKS.md",
+        "sbom.cdx.json"
+      ],
+      "packageNames": [],
+      "checks": ["npm run quality:governance"],
+      "requiredChecks": ["npm run quality:governance"]
+    }
+  ]
+}

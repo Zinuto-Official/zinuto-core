@@ -1,0 +1,137 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.ui-inline-feedback-slot {
+  display: grid;
+  align-items: start;
+  width: 100%;
+  min-width: 0;
+  min-height: 64px;
+}
+
+.ui-inline-feedback {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1px solid color-mix(in srgb, var(--line) 36%, transparent);
+  border-radius: 14px;
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--surface-control-bg, var(--ui-surface-bg)) 96%, transparent),
+      color-mix(in srgb, var(--surface-control-muted, var(--ui-surface-soft)) 88%, var(--window-bg))
+    );
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--text-strong) 4%, transparent);
+  animation: inline-feedback-enter var(--motion-fast);
+}
+
+.ui-inline-feedback[data-tone="info"] {
+  border-color: color-mix(in srgb, var(--primary) 18%, var(--line));
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--primary) 8%, var(--surface-control-bg, var(--ui-surface-bg))),
+      color-mix(in srgb, var(--primary) 5%, var(--surface-control-muted, var(--ui-surface-soft)))
+    );
+}
+
+.ui-inline-feedback[data-tone="success"] {
+  border-color: color-mix(in srgb, var(--success, var(--primary)) 28%, var(--line));
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--success, var(--primary)) 10%, var(--surface-control-bg, var(--ui-surface-bg))),
+      color-mix(in srgb, var(--success, var(--primary)) 6%, var(--surface-control-muted, var(--ui-surface-soft)))
+    );
+}
+
+.ui-inline-feedback[data-tone="warning"] {
+  border-color: color-mix(in srgb, var(--warning, var(--primary)) 30%, var(--line));
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--warning, var(--primary)) 10%, var(--surface-control-bg, var(--ui-surface-bg))),
+      color-mix(in srgb, var(--warning, var(--primary)) 6%, var(--surface-control-muted, var(--ui-surface-soft)))
+    );
+}
+
+.ui-inline-feedback[data-tone="error"] {
+  border-color: color-mix(in srgb, var(--red, var(--danger, var(--visual-danger-solid, var(--primary)))) 32%, var(--line));
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--red, var(--danger, var(--visual-danger-solid, var(--primary)))) 10%, var(--surface-control-bg, var(--ui-surface-bg))),
+      color-mix(in srgb, var(--red, var(--danger, var(--visual-danger-solid, var(--primary)))) 6%, var(--surface-control-muted, var(--ui-surface-soft)))
+    );
+}
+
+.ui-inline-feedback-icon {
+  width: 16px;
+  height: 16px;
+  margin-top: 3px;
+  flex: 0 0 auto;
+  color: color-mix(in srgb, var(--primary) 76%, var(--text-strong));
+}
+
+.ui-inline-feedback[data-tone="success"] .ui-inline-feedback-icon {
+  color: color-mix(in srgb, var(--success, var(--primary)) 86%, var(--text-strong));
+}
+
+.ui-inline-feedback[data-tone="warning"] .ui-inline-feedback-icon {
+  color: color-mix(in srgb, var(--warning, var(--primary)) 84%, var(--text-strong));
+}
+
+.ui-inline-feedback[data-tone="error"] .ui-inline-feedback-icon {
+  color: color-mix(in srgb, var(--red, var(--danger, var(--visual-danger-solid, var(--primary)))) 82%, var(--text-strong));
+}
+
+.ui-inline-feedback-message {
+  min-width: 0;
+  color: color-mix(in srgb, var(--text) 90%, var(--text-subtle));
+  font-size: var(--ty-r2);
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.ui-inline-feedback .ui-inline-feedback-dismiss {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: color-mix(in srgb, var(--muted) 84%, var(--text-subtle));
+  transition:
+    background var(--motion-fast),
+    color var(--motion-fast);
+}
+
+.ui-inline-feedback .ui-inline-feedback-dismiss:hover,
+.ui-inline-feedback .ui-inline-feedback-dismiss:focus-visible {
+  background: color-mix(in srgb, var(--surface-control-muted, var(--ui-surface-soft)) 72%, transparent);
+  color: var(--text-strong);
+}
+
+.ui-inline-feedback .ui-inline-feedback-dismiss-icon {
+  width: 14px;
+  height: 14px;
+}
+
+@keyframes inline-feedback-enter {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

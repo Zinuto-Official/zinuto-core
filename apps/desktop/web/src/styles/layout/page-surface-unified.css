@@ -1,0 +1,160 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.app-root {
+  --workspace-page-pad-unified: clamp(10px, 0.88vw, 12px);
+  --workspace-major-surface-radius-unified: calc(
+    var(--workspace-surface-radius, var(--radius-panel)) + 2px
+  );
+  --workspace-major-surface-border-unified: color-mix(
+    in srgb,
+    var(--surface-line, var(--line)) 82%,
+    transparent
+  );
+  --workspace-major-surface-bg-unified: color-mix(
+    in srgb,
+    var(--surface-panel-bg, var(--theme-panel, var(--panel))) 95%,
+    var(--theme-canvas, var(--window-bg)) 5%
+  );
+  --workspace-major-surface-shadow-unified: 0 14px 34px rgb(var(--color-overlay-backdrop) / 0.2);
+  --workspace-major-surface-pad-unified: clamp(10px, 0.88vw, 12px);
+}
+
+.app-root.theme-light {
+  --workspace-major-surface-border-unified: color-mix(
+    in srgb,
+    var(--theme-line-divider) 88%,
+    var(--visual-link-accent) 12%
+  );
+  --workspace-major-surface-bg-unified: linear-gradient(
+    145deg,
+    var(--theme-panel) 0%,
+    color-mix(in srgb, var(--theme-panel-soft) 78%, var(--theme-panel)) 100%
+  );
+  --workspace-major-surface-shadow-unified: 0 10px 28px rgb(var(--color-overlay-backdrop) / 0.065);
+}
+
+.app-root.theme-dark {
+  --workspace-major-surface-border-unified: color-mix(
+    in srgb,
+    var(--theme-line-divider) 88%,
+    var(--visual-link-accent) 12%
+  );
+  --workspace-major-surface-bg-unified: linear-gradient(
+    145deg,
+    var(--theme-panel) 0%,
+    color-mix(in srgb, var(--theme-panel-soft) 82%, var(--theme-panel)) 100%
+  );
+}
+
+.app-root .desktop-main > .workspace-page[data-page-shell="true"]:not(.training-command-center-page),
+.app-root
+  .desktop-main
+  > .workspace-page-cache-slot
+  > .workspace-page-cache-slot-content
+  > .workspace-page[data-page-shell="true"]:not(.training-command-center-page),
+.app-root
+  .desktop-main
+  > .workspace-page-cache-slot
+  > .workspace-page[data-page-shell="true"]:not(.training-command-center-page) {
+  padding: var(--workspace-page-pad-unified);
+  box-sizing: border-box;
+}
+
+.app-root :is(
+  .desktop-main
+    > .workspace-page[data-page-shell="true"]:not(.training-command-center-page)
+    > .workspace-page-body
+    > .workspace-frame-shell,
+  .desktop-main
+    > .workspace-page-cache-slot
+    > .workspace-page-cache-slot-content
+    > .workspace-page[data-page-shell="true"]:not(.training-command-center-page)
+    > .workspace-page-body
+    > .workspace-frame-shell,
+  .desktop-main
+    > .workspace-page-cache-slot
+    > .workspace-page[data-page-shell="true"]:not(.training-command-center-page)
+    > .workspace-page-body
+    > .workspace-frame-shell,
+  .trainer-workspace-page > .trainer-workspace-body > .app-shell,
+  .special-training-body > .special-training-stage,
+  .special-training-body > .special-training-trainer-shell
+) {
+  --workspace-frame-shell-border: var(
+    --workspace-major-surface-border-unified
+  );
+  --workspace-frame-shell-bg: var(--workspace-major-surface-bg-unified);
+  --workspace-frame-shell-radius: var(
+    --workspace-major-surface-radius-unified
+  );
+  --workspace-frame-shell-shadow: var(
+    --workspace-major-surface-shadow-unified
+  );
+  border: 1px solid var(--workspace-frame-shell-border);
+  border-radius: var(--workspace-frame-shell-radius);
+  background: var(--workspace-frame-shell-bg);
+  box-shadow: var(--workspace-frame-shell-shadow);
+}
+
+.app-root :is(
+  .desktop-main
+    > .workspace-page[data-page-shell="true"]:not(.training-command-center-page)
+    > .workspace-page-body
+    > .workspace-frame-shell,
+  .desktop-main
+    > .workspace-page-cache-slot
+    > .workspace-page-cache-slot-content
+    > .workspace-page[data-page-shell="true"]:not(.training-command-center-page)
+    > .workspace-page-body
+    > .workspace-frame-shell,
+  .desktop-main
+    > .workspace-page-cache-slot
+    > .workspace-page[data-page-shell="true"]:not(.training-command-center-page)
+    > .workspace-page-body
+    > .workspace-frame-shell,
+  .trainer-workspace-page > .trainer-workspace-body > .app-shell,
+  .special-training-body > .special-training-trainer-shell
+) {
+  overflow: hidden;
+}
+
+.app-root :is(
+  .diagnostic-console-shell,
+  .training-stats-shell,
+  .custom-indicator-body,
+  .challenge-fusion-shell,
+  .trainer-workspace-page > .trainer-workspace-body > .app-shell,
+  .special-training-body > .special-training-prep-shell,
+  .special-training-body > .special-training-session-settlement-stage,
+  .special-training-trainer-shell > .app-shell
+) {
+  gap: var(--workspace-major-surface-pad-unified);
+  padding: var(--workspace-major-surface-pad-unified);
+  box-sizing: border-box;
+}
+
+.app-root :is(
+  .trainer-workspace-page > .trainer-workspace-body > .app-shell,
+  .special-training-trainer-shell > .app-shell
+) > :is(.left-panel.card, .right-panel.card) {
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.app-root :is(
+  .desktop-main.is-trainer .trainer-prep-inline-layer,
+  .trainer-workspace-page.is-prep-mode .trainer-prep-inline-layer
+) {
+  padding: var(--workspace-major-surface-pad-unified);
+}
+
+.app-root
+  .desktop-main.is-trainer
+  .trainer-workspace-page:not(.is-prep-mode)
+  > .trainer-workspace-body
+  > .app-shell {
+  gap: 0;
+  padding: 0;
+}

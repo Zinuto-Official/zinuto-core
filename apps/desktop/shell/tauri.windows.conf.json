@@ -1,0 +1,20 @@
+{
+  "bundle": {
+    "targets": ["nsis"],
+    "resources": {
+      "gen/backend-runtime/apps/desktop/local-api/": "apps/desktop/local-api/",
+      "gen/backend-runtime/node_modules/": "node_modules/",
+      "gen/backtest-engine/": "backtest-engine/",
+      "gen/market-data-acquisition/": "market-data-acquisition/",
+      "gen/runtime-manifest.json": "runtime-manifest.json",
+      "runtime/node/bin/node.exe": "node-runtime/node.exe",
+      "gen/node-runtime-libs/": "node-runtime/"
+    },
+    "windows": {
+      "nsis": {
+        "displayLanguageSelector": true,
+        "installerHooks": "nsis/windows-runtime-resources.nsh"
+      }
+    }
+  }
+}

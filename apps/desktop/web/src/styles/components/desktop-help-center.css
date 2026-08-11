@@ -1,0 +1,503 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.desktop-help-floating-host {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 700;
+  pointer-events: none;
+}
+
+.desktop-help-launcher,
+.desktop-help-launcher-dismiss,
+.desktop-help-floating-panel {
+  pointer-events: auto;
+}
+
+.desktop-help-launcher {
+  border-radius: var(--ui-radius-pill);
+  box-shadow: var(--shadow-float);
+}
+
+.desktop-help-launcher-dismiss {
+  --ui-size-control-compact: 24px;
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  z-index: 1;
+  visibility: hidden;
+  border-radius: var(--ui-radius-pill);
+  box-shadow: var(--shadow-float);
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.88);
+  transition:
+    opacity var(--motion-duration-fast) var(--motion-ease-standard),
+    transform var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+.desktop-help-floating-host:hover .desktop-help-launcher-dismiss,
+.desktop-help-floating-host:focus-within .desktop-help-launcher-dismiss {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+
+.desktop-help-launcher-dismiss > svg {
+  width: 10px;
+  height: 10px;
+}
+
+.anchored-utility-panel.desktop-help-floating-panel {
+  position: fixed;
+  right: 22px;
+  bottom: 76px;
+  width: min(840px, calc(100vw - 24px));
+  height: min(744px, calc(100vh - 96px));
+  min-height: min(420px, calc(100vh - 96px));
+  overflow: hidden;
+  border: 1px solid var(--ui-float-border);
+  border-radius: var(--ui-radius-floating);
+  background: var(--ui-float-bg);
+  box-shadow: var(--shadow-float);
+  outline: none;
+  transform-origin: bottom right;
+  animation: desktop-help-anchor-enter var(--motion-anchored-float);
+}
+
+@keyframes desktop-help-anchor-enter {
+  from {
+    opacity: 0;
+    transform: translateY(4px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.desktop-help-center {
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+  color: var(--text);
+}
+
+.desktop-help-center.is-floating {
+  height: 100%;
+  flex-direction: column;
+}
+
+.desktop-help-center.is-embedded {
+  width: 100%;
+  min-height: 0;
+  flex-direction: column;
+  overflow: visible;
+  border: 1px solid var(--ui-surface-border);
+  border-radius: var(--ui-radius-surface);
+  background: var(--ui-surface-bg);
+}
+
+.desktop-help-center.is-embedded .desktop-help-scroll {
+  flex: 0 0 auto;
+  overflow: visible;
+}
+
+.desktop-help-header {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 18px 12px;
+}
+
+.desktop-help-header h1,
+.desktop-help-header p,
+.desktop-help-browser-section h2,
+.desktop-help-detail h2,
+.desktop-help-detail h3,
+.desktop-help-empty h3,
+.desktop-help-empty p {
+  margin: 0;
+}
+
+.desktop-help-header h1 {
+  color: var(--text-strong);
+  font-size: var(--ty-r3);
+  line-height: 1.3;
+}
+
+.desktop-help-header p {
+  max-width: 720px;
+  padding-top: 5px;
+  color: var(--muted);
+  font-size: var(--ty-r1);
+  line-height: 1.55;
+}
+
+.desktop-help-search-wrap {
+  position: relative;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 6px;
+  padding: 0 18px 12px;
+}
+
+.desktop-help-search-wrap input {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.desktop-help-scroll {
+  min-height: 0;
+  flex: 1 1 auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0 18px 18px;
+}
+
+.desktop-help-browser-section + .desktop-help-browser-section,
+.desktop-help-related {
+  margin-top: 20px;
+}
+
+.desktop-help-browser-section > h2,
+.desktop-help-related > h3 {
+  margin-bottom: 9px;
+  color: var(--text-strong);
+  font-size: var(--ty-r1);
+  line-height: 1.4;
+}
+
+.desktop-help-article-list {
+  display: grid;
+  gap: 6px;
+}
+
+.desktop-help-article-row[data-slot="button"] {
+  width: 100%;
+  height: auto;
+  min-height: 64px;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 11px;
+  border: 1px solid transparent;
+  border-radius: var(--ui-radius-control);
+  text-align: left;
+  white-space: normal;
+}
+
+.desktop-help-article-row[data-slot="button"]:hover,
+.desktop-help-article-row[data-slot="button"]:focus-visible {
+  border-color: var(--ui-surface-border);
+  background: var(--ui-surface-hover-bg);
+}
+
+.desktop-help-article-row-copy {
+  display: grid;
+  min-width: 0;
+  gap: 2px;
+}
+
+.desktop-help-article-row-copy strong {
+  overflow: hidden;
+  color: var(--text-strong);
+  font-size: var(--ty-r1);
+  line-height: 1.4;
+  text-overflow: ellipsis;
+}
+
+.desktop-help-article-row-copy > span:last-child {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: var(--ty-r1);
+  font-weight: 400;
+  line-height: 1.45;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.desktop-help-article-row-category {
+  color: var(--primary);
+  font-size: var(--ty-r1);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.desktop-help-article-row > svg {
+  width: 15px;
+  height: 15px;
+  flex: 0 0 auto;
+  color: var(--text-subtle);
+}
+
+.desktop-help-category-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.desktop-help-category-grid [data-slot="button"] {
+  justify-content: space-between;
+}
+
+.desktop-help-category-grid [data-slot="button"] span:last-child {
+  color: var(--muted);
+  font-size: var(--ty-r1);
+}
+
+.desktop-help-back[data-slot="button"] {
+  margin: -3px 0 8px -8px;
+}
+
+.desktop-help-detail {
+  width: min(100%, 760px);
+  margin: 0 auto;
+  padding: 2px 0 6px;
+}
+
+.desktop-help-detail-heading {
+  display: grid;
+  gap: 8px;
+  padding: 2px 0 18px;
+  border-bottom: 1px solid var(--ui-surface-border-soft);
+}
+
+.desktop-help-detail-category {
+  display: inline-flex;
+  min-height: 24px;
+  align-items: center;
+  justify-self: start;
+  padding: 2px 9px;
+  border: 1px solid color-mix(in srgb, var(--primary) 24%, var(--ui-surface-border));
+  border-radius: var(--ui-radius-pill);
+  background: color-mix(in srgb, var(--primary-soft) 58%, transparent);
+  color: color-mix(in srgb, var(--primary) 86%, var(--text-strong));
+  font-size: var(--ty-r1);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+}
+
+.desktop-help-detail-heading > h2 {
+  margin: 0;
+  color: var(--text-strong);
+  font-size: var(--ty-r5);
+  line-height: 1.32;
+  letter-spacing: -0.012em;
+}
+
+.desktop-help-summary-block,
+.desktop-help-detail-section,
+.desktop-help-note-block {
+  margin-top: 22px;
+}
+
+.desktop-help-section-heading {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 11px;
+  color: var(--text-strong);
+  font-size: var(--ty-r2);
+  font-weight: 750;
+  line-height: 1.35;
+}
+
+.desktop-help-section-heading-icon {
+  display: grid;
+  width: 27px;
+  height: 27px;
+  flex: 0 0 27px;
+  place-items: center;
+  border-radius: var(--ui-radius-control);
+  background: color-mix(in srgb, var(--primary-soft) 62%, var(--ui-surface-soft));
+  color: color-mix(in srgb, var(--primary) 84%, var(--text-strong));
+}
+
+.desktop-help-section-heading-icon > svg {
+  width: 15px;
+  height: 15px;
+}
+
+.desktop-help-summary-block {
+  padding: 15px 17px 16px;
+  border: 1px solid color-mix(in srgb, var(--primary) 18%, var(--ui-surface-border));
+  border-left: 3px solid color-mix(in srgb, var(--primary) 72%, var(--ui-surface-border-strong));
+  border-radius: var(--ui-radius-control);
+  background: color-mix(in srgb, var(--primary-soft) 28%, var(--ui-surface-soft));
+}
+
+.desktop-help-summary-copy {
+  margin: 0;
+  color: var(--text);
+  font-size: var(--ty-r2);
+  line-height: 1.7;
+}
+
+.desktop-help-step-list,
+.desktop-help-note-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.desktop-help-step-list {
+  display: grid;
+  gap: 9px;
+}
+
+.desktop-help-step-list > li {
+  min-width: 0;
+  padding: 11px 13px;
+  border: 1px solid var(--ui-surface-border-soft);
+  border-radius: var(--ui-radius-control);
+  background: var(--ui-surface-bg);
+  color: var(--text);
+  font-size: var(--ty-r1);
+  line-height: 1.65;
+}
+
+.desktop-help-step-row {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: 30px minmax(0, 1fr);
+  align-items: start;
+  gap: 11px;
+}
+
+.desktop-help-step-number {
+  display: grid;
+  width: 27px;
+  height: 27px;
+  place-items: center;
+  border-radius: var(--ui-radius-pill);
+  background: color-mix(in srgb, var(--primary-soft) 74%, var(--ui-surface-soft));
+  color: color-mix(in srgb, var(--primary) 88%, var(--text-strong));
+  font-size: var(--ty-r1);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.desktop-help-step-row > span:last-child,
+.desktop-help-note-list > li > span {
+  min-width: 0;
+}
+
+.desktop-help-note-block {
+  padding: 15px 17px 16px;
+  border: 1px solid color-mix(in srgb, var(--primary) 16%, var(--ui-surface-border));
+  border-radius: var(--ui-radius-control);
+  background: color-mix(in srgb, var(--primary-soft) 18%, var(--ui-surface-soft));
+}
+
+.desktop-help-note-list {
+  display: grid;
+  gap: 9px;
+}
+
+.desktop-help-note-list > li {
+  position: relative;
+  padding-left: 18px;
+  color: var(--text);
+  font-size: var(--ty-r1);
+  line-height: 1.65;
+}
+
+.desktop-help-note-list > li::before {
+  position: absolute;
+  top: 0.72em;
+  left: 2px;
+  width: 6px;
+  height: 6px;
+  border-radius: var(--ui-radius-pill);
+  background: color-mix(in srgb, var(--primary) 78%, var(--text-strong));
+  content: "";
+  transform: translateY(-50%);
+}
+
+.desktop-help-detail > [data-slot="button"]:not(.desktop-help-back) {
+  margin-top: 20px;
+}
+
+.desktop-help-related {
+  margin-top: 28px;
+  padding-top: 23px;
+  border-top: 1px solid var(--ui-surface-border-soft);
+}
+
+.desktop-help-related > .desktop-help-section-heading {
+  margin-bottom: 10px;
+}
+
+.desktop-help-empty {
+  display: flex;
+  min-height: 190px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 24px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.desktop-help-empty > svg {
+  width: 30px;
+  height: 30px;
+  color: var(--text-subtle);
+}
+
+.desktop-help-empty h3 {
+  color: var(--text-strong);
+  font-size: var(--ty-r1);
+}
+
+.desktop-help-empty p {
+  max-width: 310px;
+  font-size: var(--ty-r1);
+  line-height: 1.5;
+}
+
+@media (max-width: 720px), (max-height: 640px) {
+  .desktop-help-floating-host {
+    right: 12px;
+    bottom: 12px;
+  }
+
+  .desktop-help-launcher-dismiss {
+    right: -12px;
+  }
+
+  .anchored-utility-panel.desktop-help-floating-panel {
+    right: 12px;
+    bottom: 64px;
+    width: calc(100vw - 24px);
+    height: calc(100vh - 76px);
+    min-height: 0;
+  }
+
+  .desktop-help-detail-heading > h2 {
+    font-size: var(--ty-r4);
+  }
+
+  .desktop-help-summary-block,
+  .desktop-help-note-block {
+    padding: 13px 14px 14px;
+  }
+
+  .desktop-help-step-row {
+    grid-template-columns: 28px minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .desktop-help-step-list > li {
+    padding: 10px 11px;
+  }
+
+}

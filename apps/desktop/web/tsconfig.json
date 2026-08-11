@@ -1,0 +1,33 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "noEmit": true,
+    "types": [
+      "vite/client",
+      "node"
+    ],
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": [
+        "./*"
+      ],
+      "klinecharts": [
+        "../vendor/klinecharts/index.d.ts"
+      ]
+    }
+  },
+  "include": [
+    "src",
+    "vendor/**/*.d.ts",
+    "testHarness/**/*.tsx",
+    "tests/**/*.ts",
+    "tests/**/*.tsx",
+    "scripts/**/*.ts",
+    "scripts/**/*.tsx",
+    "scripts/**/*.mts",
+    "vite.config.ts",
+    "playwright.i18n.config.ts",
+    "playwright.hot-interaction.config.ts"
+  ]
+}

@@ -1,0 +1,282 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="zinuto-desktop-dev-app" content="desktop-web" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <script>
+      (() => {
+        const fallbackThemeMode = "light";
+        const isThemeMode = (value) =>
+          value === "dark" || value === "light" || value === "system";
+        const resolvePersistedThemeMode = () => {
+          try {
+            const immediateThemeMode = window.localStorage?.getItem(
+              "zinuto.themeMode.boot.v1",
+            );
+            if (isThemeMode(immediateThemeMode)) {
+              return immediateThemeMode;
+            }
+            const raw = window.localStorage?.getItem(
+              "zinuto.appPreferences.boot.v1",
+            );
+            if (!raw) {
+              return null;
+            }
+            const value = JSON.parse(raw)?.uiSettings?.themeMode;
+            return isThemeMode(value) ? value : null;
+          } catch {
+            return null;
+          }
+        };
+        const persistedThemeMode =
+          resolvePersistedThemeMode() ?? fallbackThemeMode;
+        const prefersDark =
+          window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? false;
+        const initialTheme =
+          persistedThemeMode === "system"
+            ? (prefersDark ? "dark" : "light")
+            : persistedThemeMode;
+        const root = document.documentElement;
+        root.dataset.zinutoThemeMode = persistedThemeMode;
+        root.dataset.zinutoInitialTheme = initialTheme;
+        root.setAttribute("data-theme", initialTheme);
+        root.classList.add(`theme-${initialTheme}`);
+        root.style.colorScheme = initialTheme;
+      })();
+    </script>
+    <link rel="stylesheet" href="/src/styles/startup.css" />
+    <script>
+      (() => {
+        const supportedLanguages = new Set(["en", "zh-CN", "ja", "ko", "es"]);
+        const normalizeLanguage = (value) => {
+          const tag = String(value ?? "").trim().toLowerCase();
+          if (tag === "en" || tag.startsWith("en-")) return "en";
+          if (tag === "zh" || tag === "zh-cn" || tag.startsWith("zh-hans")) {
+            return "zh-CN";
+          }
+          if (tag === "ja" || tag.startsWith("ja-")) return "ja";
+          if (tag === "ko" || tag.startsWith("ko-")) return "ko";
+          if (tag === "es" || tag.startsWith("es-")) return "es";
+          return null;
+        };
+        const readPersistedLanguage = () => {
+          try {
+            const source = window.localStorage?.getItem(
+              "zinuto:ui-language-source",
+            );
+            const language = window.localStorage?.getItem("zinuto:ui-language");
+            return (source === "USER" || !source) &&
+              supportedLanguages.has(language)
+              ? language
+              : null;
+          } catch {
+            return null;
+          }
+        };
+        const candidates = [
+          readPersistedLanguage(),
+          ...(Array.isArray(navigator.languages) ? navigator.languages : []),
+          navigator.language,
+        ];
+        const language =
+          candidates.map(normalizeLanguage).find((value) => value !== null) ??
+          "en";
+        const copyByLanguage = {
+          en: {
+            failed: "Zinuto Core could not load",
+            failedBody: "The app did not finish starting. Retry to continue.",
+            loading: "Loading...",
+            retry: "Retry loading Zinuto Core",
+          },
+          "zh-CN": {
+            failed: "Zinuto Core 加载失败",
+            failedBody: "应用没有完成启动。请重试后继续。",
+            loading: "加载中...",
+            retry: "重新加载 Zinuto Core",
+          },
+          ja: {
+            failed: "Zinuto Core を読み込めませんでした",
+            failedBody: "アプリの起動が完了しませんでした。再試行してください。",
+            loading: "読み込み中...",
+            retry: "Zinuto Core を再読み込み",
+          },
+          ko: {
+            failed: "Zinuto Core를 불러오지 못했습니다",
+            failedBody: "앱이 시작을 완료하지 못했습니다. 다시 시도해 주세요.",
+            loading: "로드 중...",
+            retry: "Zinuto Core 다시 불러오기",
+          },
+          es: {
+            failed: "No se pudo cargar Zinuto Core",
+            failedBody: "La aplicación no terminó de iniciarse. Reinténtalo para continuar.",
+            loading: "Cargando...",
+            retry: "Volver a cargar Zinuto Core",
+          },
+        };
+        document.documentElement.lang = language;
+        document.documentElement.dataset.zinutoPrebootLanguage = language;
+        document.documentElement.dataset.zinutoDesktopProductName = "Zinuto Core";
+        window.__ZINUTO_PREBOOT_COPY__ = copyByLanguage[language];
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root">
+      <div
+        class="zinuto-startup"
+        data-zinuto-startup-copy-visible="false"
+        data-zinuto-startup-state="loading"
+        data-zinuto-startup-surface
+      >
+        <div class="zinuto-startup__content">
+          <div aria-hidden="true" class="zinuto-startup__logo-frame">
+            <span class="zinuto-startup__logo-image"></span>
+          </div>
+          <strong
+            class="zinuto-startup__brand"
+            data-zinuto-startup-product
+          >Zinuto Core</strong>
+          <div
+            class="zinuto-startup__status"
+            role="status"
+            aria-live="polite"
+            aria-busy="true"
+            aria-label="Loading..."
+            data-zinuto-preboot-status
+          >
+            <p
+              aria-hidden="true"
+              class="zinuto-startup__message"
+              data-zinuto-preboot-message
+            >Loading...</p>
+            <h1
+              class="zinuto-startup__failure-title"
+              data-zinuto-preboot-failure-title
+              hidden
+            >Zinuto Core could not load</h1>
+            <p
+              class="zinuto-startup__failure-body"
+              data-zinuto-preboot-failure-body
+              hidden
+            >The app did not finish starting. Retry to continue.</p>
+          </div>
+          <code class="zinuto-startup__diagnostic" hidden></code>
+          <div aria-hidden="true" class="zinuto-startup__progress"></div>
+          <button
+            class="zinuto-startup__retry"
+            type="button"
+            data-zinuto-preboot-retry
+            aria-label="Retry loading Zinuto Core"
+            hidden
+          >Retry loading Zinuto Core</button>
+        </div>
+      </div>
+    </div>
+    <script>
+      (() => {
+        document.documentElement.dataset.zinutoBootstrapState = "loading";
+        const copy = window.__ZINUTO_PREBOOT_COPY__ ?? {
+          failed: "Zinuto Core could not load",
+          failedBody: "The app did not finish starting. Retry to continue.",
+          loading: "Loading...",
+          retry: "Retry loading Zinuto Core",
+        };
+        const surface = document.querySelector("[data-zinuto-startup-surface]");
+        const status = document.querySelector("[data-zinuto-preboot-status]");
+        const message = document.querySelector("[data-zinuto-preboot-message]");
+        const failureTitle = document.querySelector(
+          "[data-zinuto-preboot-failure-title]",
+        );
+        const failureBody = document.querySelector(
+          "[data-zinuto-preboot-failure-body]",
+        );
+        const retry = document.querySelector("[data-zinuto-preboot-retry]");
+        if (status) {
+          status.setAttribute("aria-label", copy.loading);
+          status.dataset.zinutoFailureLabel = copy.failed;
+        }
+        if (message) {
+          message.textContent = copy.loading;
+        }
+        if (failureTitle) {
+          failureTitle.textContent = copy.failed;
+        }
+        if (failureBody) {
+          failureBody.textContent = copy.failedBody;
+        }
+        if (!surface || !retry) {
+          return;
+        }
+        let copyRevealTimer = 0;
+        const scheduleCopyReveal = (visibleAtMs) => {
+          const normalizedVisibleAtMs = Number(visibleAtMs);
+          const delayMs = Number.isFinite(normalizedVisibleAtMs)
+            ? Math.max(0, normalizedVisibleAtMs + 1200 - performance.now())
+            : 1200;
+          window.clearTimeout(copyRevealTimer);
+          copyRevealTimer = window.setTimeout(() => {
+            if (!surface.isConnected || surface.dataset.zinutoStartupState !== "loading") {
+              return;
+            }
+            surface.dataset.zinutoStartupCopyVisible = "true";
+            message?.removeAttribute("aria-hidden");
+          }, delayMs);
+        };
+        const recordedVisibleAtMs = Number(
+          document.documentElement.dataset.zinutoStartupVisibleAtMs,
+        );
+        if (Number.isFinite(recordedVisibleAtMs)) {
+          scheduleCopyReveal(recordedVisibleAtMs);
+        } else {
+          window.addEventListener(
+            "zinuto:startup-surface-visible",
+            (event) => scheduleCopyReveal(event.detail?.visibleAtMs),
+            { once: true },
+          );
+        }
+        retry.setAttribute("aria-label", copy.retry);
+        retry.textContent = copy.retry;
+        retry.title = copy.retry;
+        retry.dataset.zinutoRetryBound = "true";
+        retry.addEventListener("click", () => {
+          surface.dataset.zinutoStartupState = "loading";
+          status?.setAttribute("aria-busy", "true");
+          status?.setAttribute("aria-label", copy.loading);
+          status?.setAttribute("aria-live", "polite");
+          status?.setAttribute("role", "status");
+          if (message) {
+            message.textContent = copy.loading;
+            message.hidden = false;
+          }
+          if (failureTitle) failureTitle.hidden = true;
+          if (failureBody) failureBody.hidden = true;
+          retry.hidden = true;
+          window.location.reload();
+        });
+        window.setTimeout(() => {
+          if (!retry.isConnected) {
+            return;
+          }
+          document.documentElement.dataset.zinutoBootstrapState = "failed";
+          surface.dataset.zinutoStartupCopyVisible = "true";
+          surface.dataset.zinutoStartupState = "failed";
+          status?.setAttribute("aria-busy", "false");
+          status?.setAttribute("aria-label", copy.failed);
+          status?.setAttribute("aria-live", "assertive");
+          status?.setAttribute("role", "alert");
+          if (message) {
+            message.hidden = true;
+          }
+          if (failureTitle) failureTitle.hidden = false;
+          if (failureBody) failureBody.hidden = false;
+          retry.hidden = false;
+        }, 8000);
+      })();
+    </script>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

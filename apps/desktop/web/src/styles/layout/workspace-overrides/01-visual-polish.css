@@ -1,0 +1,154 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+/* ===== Visual Polish Pass (Desktop UI 1.0) ===== */
+.app-root {
+  --ty-scale-preset-safe: var(--ty-scale-preset, 1);
+}
+
+.app-root .card,
+.app-root .workspace-page-header,
+.app-root .settings-modern-panel,
+.app-root .history-side-item,
+.app-root .notes-side-item,
+.app-root .sample-pool-card-item {
+  transition:
+    border-color var(--motion-fast),
+    background-color var(--motion-fast),
+    box-shadow var(--motion-fast),
+    transform var(--motion-fast);
+}
+
+.app-root .history-side-item,
+.app-root .notes-side-item {
+  min-height: clamp(92px, 9.6vh, 112px);
+}
+
+.app-root .history-side-item:hover,
+.app-root .notes-side-item:hover,
+.app-root .sample-pool-card-item:hover {
+  border-color: color-mix(in srgb, var(--primary) 26%, var(--line));
+}
+
+.app-root .history-side-item.active,
+.app-root .notes-side-item.active {
+  box-shadow: inset 0 0 0 1px
+    color-mix(in srgb, var(--primary) 30%, transparent);
+}
+
+.right-panel-head.toolbar {
+  min-height: var(--trainer-top-row-h);
+  padding: 0 var(--rp-pad);
+  border: 0;
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--line-strong) 72%, transparent);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.desktop-main:is(.is-trainer, .is-special-training) .right-panel-head.toolbar {
+  border-bottom: none;
+}
+
+.trainer-chart-info-bar {
+  margin: 0 clamp(8px, 0.65vw, 12px) 8px;
+  padding: 6px 10px;
+  border-radius: calc(var(--radius-rect) - 2px);
+  border: 1px solid color-mix(in srgb, var(--line) 72%, transparent);
+  background: color-mix(in srgb, var(--panel-soft) 90%, var(--window-bg));
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+}
+
+.trainer-chart-info-bar > div {
+  white-space: nowrap;
+}
+
+.history-chart-info-bar {
+  margin: 6px 8px 8px;
+}
+
+.app-root.theme-dark .trainer-chart-info-bar {
+  border-color: color-mix(in srgb, var(--line) 82%, transparent);
+  background: color-mix(in srgb, var(--panel-soft) 78%, var(--window-bg));
+}
+
+.settings-storage-grid {
+  gap: clamp(8px, 0.9vw, 12px);
+}
+
+.settings-storage-item {
+  min-height: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  padding: 0;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.settings-storage-item .settings-storage-item-label {
+  color: var(--muted);
+  font-size: var(--ty-r1);
+  line-height: 1.2;
+}
+
+.settings-storage-item .settings-storage-item-value {
+  color: var(--text-strong);
+  font-size: var(--ty-r2);
+  font-weight: 650;
+  line-height: 1.2;
+}
+
+.notes-detail-panel.notes-preview-panel {
+  padding: 14px;
+  background: color-mix(in srgb, var(--panel) 94%, var(--window-bg));
+  border: 1px solid color-mix(in srgb, var(--line) 74%, transparent);
+  min-width: 0;
+  overflow: hidden;
+}
+
+.notes-detail-panel .notes-title-inline-input {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  text-align: left;
+  font-size: var(--ty-r4);
+  line-height: calc(var(--ty-r4) * var(--ty-leading-title));
+}
+
+.notes-detail-panel .notes-editor-meta-row {
+  justify-content: flex-start;
+  gap: 8px;
+  text-align: left;
+}
+
+.notes-detail-panel .notes-detail-content {
+  min-height: 0;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin-top: 10px;
+}
+
+.notes-detail-panel .replay-note-editor-host {
+  margin-top: 0;
+  border-top: none;
+  background: transparent;
+}
+
+.app-root.theme-dark .workspace-page-header {
+  border-color: color-mix(in srgb, var(--line) 72%, transparent);
+  background: color-mix(in srgb, var(--panel-soft) 82%, var(--window-bg));
+}
+
+.app-root.theme-dark .card {
+  border-color: color-mix(in srgb, var(--line) 72%, transparent);
+}
+
+.app-root.theme-dark .history-side-footer {
+  border-top-color: color-mix(in srgb, var(--line) 68%, transparent);
+  background: color-mix(in srgb, var(--panel) 84%, var(--window-bg));
+}

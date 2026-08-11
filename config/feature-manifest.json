@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 3,
+  "productVersion": "2.0.1",
+  "localFeatures": {
+    "freeReplay": true,
+    "specialTraining": true,
+    "challengeStatistics": true,
+    "replayReview": true,
+    "notes": true,
+    "customIndicators": true,
+    "localMarketDataImport": true,
+    "localMarketDataAcquisition": true,
+    "bundledMarketSamples": true,
+    "strategyBacktesting": true,
+    "portablePackageV2": true
+  }
+}

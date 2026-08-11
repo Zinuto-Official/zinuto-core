@@ -1,0 +1,244 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.special-training-risk-survival-hero-floating {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 8px;
+  border-top: 1px solid color-mix(in srgb, var(--line) 34%, transparent);
+}
+
+.special-training-risk-survival-hero-floating > span {
+  color: var(--text-subtle);
+  font-size: var(--ty-r2);
+  line-height: 1.2;
+}
+
+.special-training-risk-survival-hero-floating > strong {
+  min-width: 0;
+  font-size: var(--ty-r5);
+  line-height: 1;
+  font-weight: 820;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+
+.special-training-risk-snapshot-grid {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: minmax(0, 1fr);
+  gap: 6px;
+}
+
+.special-training-risk-snapshot-card {
+  min-width: 0;
+  min-height: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--special-training-risk-border);
+  border-radius: 8px;
+  background: var(--special-training-risk-surface-soft);
+  display: grid;
+  align-content: center;
+  gap: 8px;
+}
+
+.special-training-risk-snapshot-card > span {
+  color: var(--text-subtle);
+  font-size: var(--ty-r3);
+  line-height: 1.15;
+}
+
+.special-training-risk-snapshot-card > strong {
+  color: var(--text-strong);
+  font-size: var(--ty-r7);
+  line-height: 0.98;
+  font-weight: 840;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+.special-training-risk-panel-scroll > .special-training-risk-trade-card {
+  flex: 1 1 auto;
+  min-height: 0;
+  height: auto;
+}
+
+.special-training-risk-footer-link-grid {
+  gap: 6px;
+}
+
+.special-training-control-grid.special-training-control-grid-low-priority {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.special-training-control-grid.special-training-control-grid-low-priority
+  > [data-slot="button"] {
+  border-style: dashed;
+  color: var(--text-subtle);
+}
+
+.desktop-main.is-special-training .special-training-risk-note-card[data-slot="button"],
+.special-training-page .special-training-risk-note-card[data-slot="button"] {
+  width: 100%;
+  min-height: 56px;
+  justify-content: flex-start;
+  padding: 12px 14px;
+  border: 1px solid var(--special-training-risk-border);
+  border-radius: 8px;
+  background: var(--special-training-risk-surface-soft);
+  color: var(--text-strong);
+  box-shadow: none;
+}
+
+.desktop-main.is-special-training
+  .special-training-risk-note-card[data-slot="button"]:hover:not(:disabled),
+.special-training-page
+  .special-training-risk-note-card[data-slot="button"]:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--primary) 36%, var(--line));
+  background: color-mix(
+    in srgb,
+    var(--special-training-risk-surface-soft) 76%,
+    var(--panel-soft)
+  );
+}
+
+.desktop-main.is-special-training
+  .special-training-risk-note-card[data-slot="button"]:disabled,
+.special-training-page .special-training-risk-note-card[data-slot="button"]:disabled {
+  border-color: color-mix(in srgb, var(--line) 24%, transparent);
+  background: color-mix(
+    in srgb,
+    var(--special-training-risk-surface-soft) 58%,
+    transparent
+  );
+  color: var(--ui-action-disabled-text);
+}
+
+.special-training-risk-note-card-copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+}
+
+.special-training-risk-note-card-icon {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  color: color-mix(in srgb, var(--text-strong) 84%, var(--primary));
+}
+
+.special-training-risk-note-card-label {
+  min-width: 0;
+  overflow: hidden;
+  color: inherit;
+  font-size: var(--ty-r3);
+  font-weight: 760;
+  line-height: 1.1;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.special-training-risk-footer {
+  flex: 0 0 auto;
+  display: grid;
+  gap: 8px;
+  padding-top: 8px;
+  border-top: 1px solid color-mix(in srgb, var(--line) 42%, transparent);
+  background: color-mix(in srgb, var(--window-bg) 36%, transparent);
+}
+
+.desktop-main.is-special-training .special-training-risk-footer {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.special-training-risk-footer.is-post-settlement {
+  padding-top: 0;
+}
+
+@container rightpanel (max-width: 340px) {
+  .special-training-risk-panel-body {
+    gap: 5px;
+  }
+
+  .special-training-risk-status-panel {
+    gap: 5px;
+    padding: 3px 4px 1px;
+  }
+
+  .special-training-risk-mission-strip {
+    grid-template-columns: minmax(0, 1fr) minmax(76px, 0.34fr);
+    gap: 5px;
+  }
+
+  .special-training-risk-mission-progress,
+  .special-training-risk-mission-countdown {
+    padding: 5px 6px;
+  }
+
+  .special-training-risk-mission-countdown {
+    gap: 6px;
+  }
+
+  .special-training-risk-mission-countdown > span {
+    font-size: var(--ty-r1);
+    line-height: 1.05;
+  }
+
+  .special-training-risk-mission-countdown > strong {
+    font-size: var(--ty-r4);
+  }
+
+  .special-training-risk-panel-stage {
+    padding: 7px;
+  }
+
+  .special-training-risk-panel-scroll {
+    gap: 7px;
+  }
+
+  .special-training-risk-trade-card {
+    padding: 7px;
+    gap: 7px;
+  }
+
+  .special-training-risk-survival-hero {
+    gap: 7px;
+    padding: 8px;
+  }
+
+  .special-training-risk-survival-hero-main > strong {
+    font-size: var(--ty-r7);
+  }
+
+  .special-training-risk-survival-hero-floating > strong {
+    font-size: var(--ty-r4);
+  }
+
+  .special-training-risk-snapshot-grid {
+    gap: 5px;
+  }
+
+  .special-training-risk-snapshot-card {
+    min-height: 48px;
+    padding: 8px;
+  }
+
+  .special-training-risk-snapshot-card > span {
+    font-size: var(--ty-r1);
+  }
+
+  .special-training-risk-snapshot-card > strong {
+    font-size: var(--ty-r4);
+  }
+
+}

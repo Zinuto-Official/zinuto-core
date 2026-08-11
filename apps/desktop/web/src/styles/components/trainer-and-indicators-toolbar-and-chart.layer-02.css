@@ -1,0 +1,771 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.toolbar-search-select {
+  position: relative;
+  display: inline-flex;
+  align-items: stretch;
+  min-width: 0;
+}
+
+.sample-pool-search-input {
+  width: 100%;
+}
+
+.symbol-search-input {
+  width: 100%;
+}
+
+.notes-type-filter-search-input {
+  width: 100%;
+}
+
+.advanced-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.advanced-tip {
+  font-size: var(--ty-r2);
+  color: var(--muted);
+}
+
+.advanced-panel {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-rect);
+  background: var(--panel-soft);
+  padding: 6px 8px;
+}
+
+.advanced-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.advanced-card {
+  min-width: 0;
+}
+
+.check-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--ty-r2);
+  color: var(--text-subtle);
+}
+
+.check-item.is-locked {
+  cursor: not-allowed;
+}
+
+.check-item.is-locked input {
+  cursor: not-allowed;
+}
+
+.sample-pool-meta {
+  font-size: var(--ty-r1);
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.lot-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--ty-r1);
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.lot-size-input {
+  width: 56px;
+  height: 24px;
+  border-radius: var(--radius-rect);
+  font-size: var(--ty-r2);
+  padding: 0 6px;
+}
+
+.desktop-main.is-trainer .chart-panel {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.trainer-period-switch {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.trainer-period-switch-head {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.trainer-period-origin {
+  font-size: var(--ty-r1);
+  color: var(--muted);
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.trainer-period-select {
+  width: 100%;
+  min-width: 0;
+}
+
+.trainer-period-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  min-width: 0;
+}
+
+.trainer-period-btn {
+  height: 30px;
+  border: none;
+  border-radius: var(--radius-rect);
+  background: var(--btn-bg);
+  color: var(--text-subtle);
+  font-size: var(--ty-r2);
+  font-weight: 650;
+  padding: 0 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  cursor: pointer;
+  transition: background var(--motion-fast), color var(--motion-fast);
+}
+
+.trainer-period-btn:hover:not(:disabled) {
+  background: var(--btn-bg-hover);
+}
+
+.trainer-period-btn.active {
+  background: color-mix(in srgb, var(--primary-soft) 84%, var(--panel));
+  color: var(--primary);
+}
+
+.trainer-period-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.75;
+}
+
+.trainer-period-grid.settings .trainer-period-btn {
+  height: 32px;
+}
+
+.trainer-period-grid.settings {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.chart-period-toolbar {
+  position: relative;
+  z-index: 11;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 12px;
+  background: var(--window-bg);
+  border-bottom: 1px solid color-mix(in srgb, var(--line-strong) 72%, transparent);
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  scrollbar-width: thin;
+}
+
+.chart-period-toolbar-leading {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 28px;
+  margin-right: 2px;
+  min-width: 0;
+}
+
+.chart-period-origin-wrap {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  min-height: 28px;
+}
+
+.chart-period-origin {
+  flex: 0 1 auto;
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0;
+  font-size: var(--ty-r1);
+  color: var(--muted);
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1;
+}
+
+.chart-period-remaining-inline {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  font-size: var(--ty-r1);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--muted);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.chart-period-remaining-inline.progress-warning {
+  color: var(--red);
+}
+
+.chart-period-btn {
+  flex: 0 0 auto;
+  position: relative;
+  height: 28px;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text-subtle);
+  font-size: var(--ty-r3);
+  font-weight: 560;
+  padding: 0 2px 4px;
+  cursor: pointer;
+  transition: color var(--motion-fast);
+}
+
+.chart-period-toolbar [data-slot="button"].chart-period-btn {
+  height: 28px;
+  min-width: 0;
+  padding: 0 2px 4px;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  white-space: nowrap;
+}
+
+.chart-period-btn::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 2px;
+  width: min(18px, calc(100% - 8px));
+  height: 2px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--primary) 76%, transparent);
+  opacity: 0;
+  transform: translateX(-50%) scaleX(0.5);
+  transform-origin: center;
+  transition:
+    opacity var(--motion-fast),
+    transform var(--motion-fast);
+}
+
+.chart-period-toolbar [data-slot="button"].chart-period-btn:hover:not(:disabled) {
+  border-color: transparent;
+  background: transparent;
+  color: var(--text);
+  box-shadow: none;
+}
+
+.chart-period-toolbar [data-slot="button"].chart-period-btn[aria-pressed="true"] {
+  border-color: transparent;
+  background: transparent;
+  color: var(--text-strong);
+  font-weight: 720;
+  box-shadow: none;
+}
+
+.chart-period-toolbar [data-slot="button"].chart-period-btn[aria-pressed="true"]::after {
+  opacity: 1;
+  transform: translateX(-50%) scaleX(1);
+}
+
+.chart-period-toolbar [data-slot="button"].chart-period-btn:focus-visible {
+  border-color: transparent;
+  border-radius: 4px;
+  background: transparent;
+  outline: 1px solid var(--ui-control-focus-ring);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+.chart-render-mode-switch {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  min-height: 28px;
+  margin-right: 2px;
+}
+
+.chart-period-indicator {
+  flex: 0 0 auto;
+  height: 28px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--text-subtle);
+  font-size: var(--ty-r3);
+  font-weight: 640;
+  padding: 0 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: background var(--motion-fast), color var(--motion-fast);
+}
+
+.chart-period-indicator svg {
+  width: 13px;
+  height: 13px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.chart-period-indicator:hover:not(:disabled) {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--text-strong);
+}
+
+.chart-period-indicator.period-proxy-active {
+  border: 0;
+  background: transparent;
+  color: var(--text-strong);
+  box-shadow: none;
+}
+
+.chart-render-mode-trigger {
+  width: 26px;
+  min-width: 26px;
+  padding: 0;
+  justify-content: center;
+  gap: 0;
+  position: relative;
+}
+
+.chart-render-mode-trigger:hover:not(:disabled),
+.chart-render-mode-trigger[data-state='open'],
+.chart-render-mode-trigger[aria-expanded='true'] {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--text-strong);
+}
+
+.chart-render-mode-trigger-icon-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chart-render-mode-caret {
+  position: absolute;
+  left: 50%;
+  bottom: 2px;
+  width: 5px;
+  height: 5px;
+  border-right: 1.25px solid currentColor;
+  border-bottom: 1.25px solid currentColor;
+  transform: translateX(-50%) rotate(45deg);
+  opacity: 0.82;
+  pointer-events: none;
+}
+
+.chart-render-mode-trigger svg {
+  width: 15px;
+  height: 15px;
+  stroke-width: 1.75;
+}
+
+[data-slot='tooltip-content'].chart-render-mode-tooltip {
+  background: color-mix(in srgb, rgb(var(--color-chart-tooltip-bg)) 96%, rgb(var(--color-window-bg)));
+  border-color: color-mix(in srgb, var(--line) 76%, transparent);
+  color: var(--text-strong);
+}
+
+.chart-render-mode-menu {
+  min-width: 138px;
+  padding: 4px;
+}
+
+.chart-render-mode-menu-item {
+  height: 30px;
+  border-radius: calc(var(--radius-rect) - 2px);
+  color: var(--text-subtle);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 560;
+}
+
+.chart-render-mode-menu-item[data-highlighted] {
+  background: color-mix(in srgb, var(--btn-bg-hover) 84%, transparent);
+  color: var(--text-strong);
+}
+
+.chart-render-mode-menu-item.is-active {
+  background: color-mix(in srgb, var(--primary-soft) 86%, var(--panel));
+  color: var(--primary);
+}
+
+.chart-render-mode-menu-item-icon {
+  width: 15px;
+  height: 15px;
+  stroke-width: 1.75;
+}
+
+.chart-indicator-quick-menu-anchor {
+  position: absolute;
+  width: 1px;
+  min-width: 1px;
+  height: 1px;
+  min-height: 1px;
+  padding: 0 !important;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.chart-indicator-quick-menu {
+  width: min(calc(257px * var(--viewport-scale)), calc(100vw - 20px));
+  min-width: 196px;
+  max-width: min(257px, calc(100vw - 20px));
+  max-height: none !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+
+.chart-indicator-quick-menu-shell {
+  min-width: 0;
+}
+
+.chart-indicator-quick-menu-panel {
+  width: 100%;
+  max-height: calc(var(--radix-dropdown-menu-content-available-height) * 0.5);
+  overflow-y: auto;
+  padding: clamp(10px, 0.42vw + 0.32vh, 14px);
+  border: 1px solid
+    color-mix(in srgb, var(--visual-white) 10%, var(--line)) !important;
+  border-radius: var(--radius-rect);
+  background: none !important;
+  background-color: rgb(var(--color-card-bg) / 0.85) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 24px 48px
+    color-mix(in srgb, var(--visual-black) 100%, transparent) !important;
+}
+
+.chart-indicator-quick-menu-label {
+  padding: 8px 8px 4px;
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.chart-indicator-quick-menu-separator {
+  margin: 4px 0;
+}
+
+.chart-indicator-quick-menu-group {
+  display: grid;
+}
+
+.chart-period-sub-indicator-toggle {
+  width: 26px;
+  min-width: 26px;
+  padding: 0;
+  gap: 0;
+  justify-content: center;
+}
+
+.chart-period-sub-indicator-toggle.is-visible {
+  color: var(--primary);
+  background: transparent;
+}
+
+.chart-period-sub-indicator-toggle.is-hidden {
+  color: color-mix(in srgb, var(--muted) 92%, var(--text-subtle));
+  background: transparent;
+}
+
+.chart-period-sub-indicator-toggle svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 1.7;
+}
+
+.chart-period-sub-indicator-toggle-origin {
+  margin-left: -2px;
+  margin-right: 2px;
+}
+
+.tool-section-title {
+  font-size: var(--ty-r3);
+  font-weight: 700;
+  color: var(--text-subtle);
+}
+
+.tool-icon-svg {
+  width: var(--dt-section-icon-size, var(--dt-icon));
+  height: var(--dt-section-icon-size, var(--dt-icon));
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+[data-slot='tooltip-content'].quick-hover-tooltip-content {
+  font-size: var(--ty-r1);
+  font-weight: 400;
+  line-height: 1.34;
+  padding: 6px 10px;
+  max-width: min(420px, calc(100vw - 20px));
+  animation: none !important;
+  transition: none !important;
+}
+
+.tool-row {
+  display: grid;
+  gap: clamp(4px, 0.62vh, 10px);
+}
+
+.tool-dual-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(4px, 0.62vh, 10px);
+  align-items: start;
+  min-height: 0;
+}
+
+.tool-cell {
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  gap: clamp(4px, 0.62vh, 10px);
+}
+
+.drawing-toolbar.is-disabled {
+  opacity: 0.52;
+}
+
+.drawing-toolbar.is-disabled .draw-toolbar-section {
+  pointer-events: none;
+}
+
+.trainer-advance-mode-switch {
+  margin-top: 8px;
+}
+
+.trainer-period-config-list {
+  display: grid;
+  gap: 10px;
+}
+
+.replay-period-config-list {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  align-items: start;
+}
+
+.replay-period-config-list .trainer-period-config-group {
+  min-height: 0;
+  align-content: start;
+  align-self: start;
+}
+
+.replay-period-grid.settings {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  align-content: start;
+  align-items: start;
+}
+
+.replay-period-grid.settings.replay-period-grid-three-cols {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.replay-period-grid.settings .trainer-period-btn {
+  height: 30px;
+  padding: 0 8px;
+}
+
+.trainer-period-config-group {
+  border: 1px solid color-mix(in srgb, var(--line) 72%, transparent);
+  border-radius: var(--radius-rect);
+  background: color-mix(in srgb, var(--panel-soft) 82%, var(--panel));
+  padding: 8px;
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.trainer-period-config-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+}
+
+.replay-trainer-settings-modal .trainer-period-config-group {
+  border: none;
+  border-radius: calc(var(--radius-rect) - 2px);
+  background: color-mix(in srgb, var(--panel-soft) 72%, transparent);
+  padding: 8px;
+  gap: 8px;
+}
+
+.replay-trainer-settings-modal .trainer-period-config-head {
+  padding-inline: 2px;
+  align-items: center;
+  gap: 6px;
+}
+
+.replay-trainer-settings-modal .trainer-period-config-head span:first-child {
+  color: var(--text-strong);
+  font-weight: 700;
+}
+
+.replay-trainer-settings-modal .trainer-period-config-head .muted {
+  font-size: var(--ty-r1);
+  font-weight: 600;
+  color: color-mix(in srgb, var(--muted) 88%, var(--text-subtle));
+}
+
+.tool-label {
+  font-size: var(--ty-r3);
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 0;
+}
+
+.tool-divider {
+  height: 1px;
+  background: color-mix(in srgb, var(--line) 80%, transparent);
+  margin-block: clamp(4px, 0.62vh, 10px);
+  margin-inline: 0;
+}
+
+.tool-divider.controls-divider {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--line) 55%, transparent) 0%,
+    color-mix(in srgb, var(--line) 78%, transparent) 50%,
+    color-mix(in srgb, var(--line) 55%, transparent) 100%
+  );
+}
+
+.color-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(4px, 0.62vh, 10px);
+  justify-items: center;
+}
+
+.color-dot {
+  width: clamp(12px, 2.1vh, 18px);
+  height: clamp(12px, 2.1vh, 18px);
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  aspect-ratio: 1 / 1;
+  border-radius: 50% !important;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.color-dot.active {
+  border-color: var(--text-strong);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--panel) 88%, transparent);
+}
+
+.chart-panel {
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  position: relative;
+}
+
+.desktop-main.is-trainer .chart-panel {
+  border-radius: var(--radius-rect);
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--history-preview-glass-bg) 74%, transparent) 0%,
+      color-mix(in srgb, var(--history-preview-glass-bg) 58%, transparent) 100%
+    );
+  backdrop-filter: blur(10px) saturate(124%);
+  -webkit-backdrop-filter: blur(10px) saturate(124%);
+  box-shadow: none;
+}
+
+.desktop-main.is-trainer .chart-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 6;
+  background:
+    radial-gradient(
+      120% 92% at 50% -20%,
+      color-mix(in srgb, var(--visual-white) 24%, transparent) 0%,
+      transparent 66%
+    ),
+    color-mix(in srgb, var(--history-preview-glass-bg) 52%, transparent);
+  backdrop-filter: blur(9px) saturate(120%);
+  -webkit-backdrop-filter: blur(9px) saturate(120%);
+  -webkit-mask:
+    linear-gradient(to bottom, var(--visual-black-short) 0%, transparent 100%) top / 100% 14px no-repeat,
+    linear-gradient(to top, var(--visual-black-short) 0%, transparent 100%) bottom / 100% 14px no-repeat,
+    linear-gradient(to right, var(--visual-black-short) 0%, transparent 100%) left / 14px 100% no-repeat,
+    linear-gradient(to left, var(--visual-black-short) 0%, transparent 100%) right / 14px 100% no-repeat;
+  mask:
+    linear-gradient(to bottom, var(--visual-black-short) 0%, transparent 100%) top / 100% 14px no-repeat,
+    linear-gradient(to top, var(--visual-black-short) 0%, transparent 100%) bottom / 100% 14px no-repeat,
+    linear-gradient(to right, var(--visual-black-short) 0%, transparent 100%) left / 14px 100% no-repeat,
+    linear-gradient(to left, var(--visual-black-short) 0%, transparent 100%) right / 14px 100% no-repeat;
+}
+
+.desktop-main.is-trainer .chart-panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 7;
+  box-shadow: none;
+}

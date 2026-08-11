@@ -1,0 +1,309 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+@container rightpanel (max-width: 340px) {
+  .special-training-lightning-status-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .special-training-lightning-status-card {
+    padding: 8px;
+    gap: 5px;
+  }
+
+  .special-training-lightning-donut {
+    width: 54px;
+    height: 54px;
+  }
+
+  .special-training-lightning-win-rate-visual,
+  .special-training-lightning-pace-summary {
+    gap: 6px;
+  }
+
+  .special-training-lightning-pace-limit,
+  .special-training-lightning-status-card-meta {
+    font-size: var(--ty-r1);
+  }
+
+  .special-training-lightning-action-stack-live {
+    grid-template-columns: 1fr;
+  }
+
+  .special-training-lightning-result-card {
+    padding: 12px;
+  }
+
+  .special-training-lightning-result-hero {
+    gap: 6px;
+  }
+
+  .special-training-lightning-result-log-row {
+    gap: 8px;
+  }
+
+  .special-training-lightning-inline-note-btn-copy {
+    gap: 6px;
+  }
+
+}
+
+@keyframes special-training-lightning-panel-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.special-training-record-stage {
+  grid-template-rows: minmax(0, 1fr) auto;
+}
+
+.special-training-record-layout {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 12px;
+}
+
+.special-training-record-overview-card,
+.special-training-record-feedback-card {
+  border: 1px solid color-mix(in srgb, var(--line) 54%, transparent);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--panel-soft) 84%, transparent);
+  padding: 12px;
+  min-height: 0;
+  overflow: auto;
+}
+
+.special-training-record-overview-card {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+}
+
+.special-training-record-feedback-card {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+}
+
+.special-training-record-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.special-training-record-head > h3 {
+  margin: 0;
+  color: var(--text-strong);
+  font-size: var(--ty-r4);
+  line-height: 1.3;
+  font-weight: 680;
+}
+
+.special-training-settlement-badge {
+  min-height: 22px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--line) 54%, transparent);
+  padding: 0 9px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-subtle);
+  font-size: var(--ty-r2);
+  line-height: 1;
+}
+
+.special-training-settlement-badge.is-pass {
+  border-color: color-mix(in srgb, var(--primary) 40%, var(--line));
+  color: color-mix(in srgb, var(--primary) 84%, var(--text-strong));
+  background: color-mix(in srgb, var(--primary) 12%, transparent);
+}
+
+.special-training-settlement-badge.is-fail {
+  border-color: color-mix(in srgb, var(--danger) 40%, var(--line));
+  color: color-mix(in srgb, var(--danger) 84%, var(--text-strong));
+  background: color-mix(in srgb, var(--danger) 12%, transparent);
+}
+
+.special-training-settlement-card {
+  border: 1px solid color-mix(in srgb, var(--line) 54%, transparent);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--panel-soft) 84%, transparent);
+  padding: 10px 11px;
+  min-height: 0;
+  overflow: auto;
+  display: grid;
+  gap: 9px;
+}
+
+.special-training-settlement-score {
+  font-size: var(--ty-r8);
+  line-height: 1;
+  color: var(--text-strong);
+  font-weight: 680;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-record-mode {
+  margin: 0;
+  color: var(--text-subtle);
+  font-size: var(--ty-r3);
+  line-height: 1.42;
+}
+
+.special-training-record-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.special-training-record-kpi-item {
+  border: 1px solid color-mix(in srgb, var(--line) 48%, transparent);
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--panel) 90%, transparent);
+  padding: 8px 9px;
+  display: grid;
+  gap: 4px;
+}
+
+.special-training-record-kpi-item > span {
+  color: var(--text-subtle);
+  font-size: var(--ty-r2);
+  line-height: 1.28;
+}
+
+.special-training-record-kpi-item > strong {
+  color: var(--text-strong);
+  font-size: var(--ty-r4);
+  line-height: 1.25;
+  font-weight: 680;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-record-kpi-item > strong.up {
+  color: var(--price-up-color);
+}
+
+.special-training-record-kpi-item > strong.down {
+  color: var(--price-down-color);
+}
+
+.special-training-record-kpi-item > strong.flat {
+  color: var(--text-strong);
+}
+
+.special-training-record-direction-grid {
+  display: grid;
+  gap: 6px;
+}
+
+.special-training-record-direction-grid > span {
+  min-height: 22px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--line) 52%, transparent);
+  padding: 0 8px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--text-subtle);
+  font-size: var(--ty-r2);
+  line-height: 1;
+}
+
+.special-training-fast-decision-review-card {
+  border: 1px solid color-mix(in srgb, var(--line) 54%, transparent);
+  border-radius: 10px;
+  padding: 10px 11px;
+  display: grid;
+  gap: 6px;
+  background: color-mix(in srgb, var(--panel) 86%, transparent);
+}
+
+.special-training-fast-decision-review-card.is-pass {
+  border-color: color-mix(in srgb, var(--primary) 40%, var(--line));
+  background: color-mix(in srgb, var(--primary) 11%, var(--panel));
+}
+
+.special-training-fast-decision-review-card.is-fail {
+  border-color: color-mix(in srgb, var(--danger) 40%, var(--line));
+  background: color-mix(in srgb, var(--danger) 10%, var(--panel));
+}
+
+.special-training-fast-decision-review-card > h4 {
+  margin: 0;
+  color: var(--text-strong);
+  font-size: var(--ty-r3);
+  line-height: 1.35;
+  font-weight: 700;
+}
+
+.special-training-fast-decision-review-card > p {
+  margin: 0;
+  color: var(--text-subtle);
+  font-size: var(--ty-r3);
+  line-height: 1.42;
+}
+
+.special-training-fast-decision-review-ratio {
+  font-weight: 780;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-fast-decision-review-ratio.is-up {
+  color: var(--price-up-color);
+}
+
+.special-training-fast-decision-review-ratio.is-down {
+  color: var(--price-down-color);
+}
+
+.special-training-settlement-feedback {
+  display: grid;
+  gap: 5px;
+}
+
+.special-training-settlement-feedback > h4 {
+  margin: 0;
+  color: var(--text-strong);
+  font-size: var(--ty-r3);
+  line-height: 1.34;
+  font-weight: 620;
+}
+
+.special-training-settlement-feedback > ul {
+  margin: 0;
+  padding-left: 16px;
+  display: grid;
+  gap: 4px;
+}
+
+.special-training-settlement-feedback li {
+  color: var(--text-subtle);
+  font-size: var(--ty-r3);
+  line-height: 1.42;
+}
+
+.special-training-record-brief-grid {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.special-training-record-brief-grid > span {
+  color: var(--text-subtle);
+  font-size: var(--ty-r2);
+  line-height: 1.28;
+  border: 1px solid color-mix(in srgb, var(--line) 50%, transparent);
+  border-radius: 999px;
+  min-height: 21px;
+  padding: 0 8px;
+  display: inline-flex;
+  align-items: center;
+}

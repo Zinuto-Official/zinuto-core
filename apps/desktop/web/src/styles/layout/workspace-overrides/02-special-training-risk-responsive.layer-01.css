@@ -1,0 +1,778 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+@media (max-width: 680px) {
+  .special-training-risk-snapshot-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.special-training-risk-footer-hint {
+  margin-top: -2px;
+}
+
+.special-training-risk-status-panel {
+  gap: 6px;
+  padding: 4px 6px 2px;
+}
+
+.special-training-risk-progress-segments {
+  margin-top: 0;
+}
+
+.special-training-risk-panel-scroll {
+  gap: 8px;
+  padding-right: 2px;
+}
+
+.special-training-risk-inline-tag {
+  min-height: 22px;
+  padding: 0 8px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--line) 56%, transparent);
+  background: color-mix(in srgb, var(--panel-soft) 80%, var(--window-bg));
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.special-training-risk-inline-tag.is-scenario {
+  border-color: color-mix(in srgb, var(--primary) 40%, var(--line));
+  color: color-mix(in srgb, var(--primary) 84%, var(--text-strong));
+}
+
+.special-training-risk-inline-tag-icon {
+  width: 12px;
+  height: 12px;
+}
+
+.special-training-risk-module-stack {
+  display: grid;
+  gap: 12px;
+}
+
+.special-training-risk-module {
+  display: grid;
+  gap: 8px;
+}
+
+.special-training-risk-module-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.special-training-risk-survival-card,
+.special-training-risk-gravity-card,
+.special-training-risk-reality-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--line) 56%, transparent);
+  border-radius: 14px;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--panel-soft) 92%, var(--window-bg)),
+    color-mix(in srgb, var(--panel) 96%, var(--window-bg))
+  );
+  padding: 12px 13px;
+  display: grid;
+  gap: 10px;
+}
+
+.special-training-risk-survival-card::before,
+.special-training-risk-gravity-card::before,
+.special-training-risk-reality-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--line) 10%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      color-mix(in srgb, var(--line) 8%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 18px 18px;
+  opacity: 0.34;
+  pointer-events: none;
+}
+
+.special-training-risk-survival-card.up,
+.special-training-risk-reality-card.up {
+  border-color: color-mix(
+    in srgb,
+    var(--visual-price-green-up-light) 40%,
+    var(--line)
+  );
+}
+
+.special-training-risk-survival-card.down,
+.special-training-risk-reality-card.down {
+  border-color: color-mix(in srgb, var(--visual-danger-solid) 42%, var(--line));
+}
+
+.special-training-risk-survival-value {
+  color: var(--text-strong);
+  font-size: var(--ty-r7);
+  line-height: 0.98;
+  font-weight: 840;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-risk-survival-card.up .special-training-risk-survival-value {
+  color: color-mix(
+    in srgb,
+    var(--visual-price-green-up-light) 88%,
+    var(--text-strong)
+  );
+}
+
+.special-training-risk-survival-card.down
+  .special-training-risk-survival-value {
+  color: color-mix(in srgb, var(--visual-danger-solid) 88%, var(--text-strong));
+}
+
+.special-training-risk-survival-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.special-training-risk-survival-item {
+  border: 1px solid color-mix(in srgb, var(--line) 50%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--panel) 74%, transparent);
+  padding: 9px 10px;
+  display: grid;
+  gap: 4px;
+}
+
+.special-training-risk-survival-item > span,
+.special-training-risk-gravity-pressure-detail,
+.special-training-risk-gravity-footer > span,
+.special-training-risk-reality-benchmark > span {
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1.3;
+}
+
+.special-training-risk-survival-item > strong,
+.special-training-risk-gravity-footer > strong,
+.special-training-risk-reality-benchmark > strong {
+  color: var(--text-strong);
+  font-size: var(--ty-r3);
+  line-height: 1.15;
+  font-weight: 760;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-risk-survival-item > strong.up,
+.special-training-risk-gravity-footer > strong.up,
+.special-training-risk-reality-card.up .special-training-risk-reality-value {
+  color: color-mix(
+    in srgb,
+    var(--visual-price-green-up-light) 88%,
+    var(--text-strong)
+  );
+}
+
+.special-training-risk-survival-item > strong.down,
+.special-training-risk-gravity-footer > strong.down,
+.special-training-risk-reality-card.down .special-training-risk-reality-value {
+  color: color-mix(in srgb, var(--visual-danger-solid) 88%, var(--text-strong));
+}
+
+.special-training-risk-gravity-card {
+  gap: 11px;
+}
+
+.special-training-risk-gravity-position-row,
+.special-training-risk-gravity-footer,
+.special-training-risk-reality-benchmark {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.special-training-risk-gravity-position-copy {
+  display: grid;
+  gap: 4px;
+}
+
+.special-training-risk-gravity-position-copy > strong {
+  color: var(--text-strong);
+  font-size: var(--ty-r6);
+  line-height: 1.05;
+  font-weight: 780;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-risk-gravity-pressure-pill {
+  min-height: 24px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--primary) 38%, var(--line));
+  background: color-mix(in srgb, var(--panel-soft) 80%, transparent);
+  padding: 0 9px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--text-strong);
+  font-size: var(--ty-r1);
+  line-height: 1;
+  font-weight: 720;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-risk-gravity-pressure-track {
+  position: relative;
+  overflow: hidden;
+  height: 8px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--line) 54%, transparent);
+  background: color-mix(in srgb, var(--panel-soft) 72%, var(--window-bg));
+}
+
+.special-training-risk-gravity-pressure-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--primary) 68%, var(--visual-price-green-up-light)),
+    color-mix(
+      in srgb,
+      var(--visual-price-green-up-light) 88%,
+      var(--visual-warning-accent)
+    )
+  );
+}
+
+.special-training-risk-gravity-scale {
+  position: relative;
+  min-height: 132px;
+}
+
+.special-training-risk-gravity-rail,
+.special-training-risk-gravity-gap {
+  position: absolute;
+  top: 58px;
+  height: 12px;
+  border-radius: 999px;
+}
+
+.special-training-risk-gravity-rail {
+  left: 0;
+  right: 0;
+  border: 1px solid color-mix(in srgb, var(--line) 48%, transparent);
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--visual-warning-accent) 24%, transparent),
+    color-mix(in srgb, var(--primary) 28%, transparent),
+    color-mix(in srgb, var(--visual-price-green-up-light) 28%, transparent)
+  );
+}
+
+.special-training-risk-gravity-gap {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--visual-danger-solid) 66%, transparent),
+    color-mix(in srgb, var(--visual-warning-accent) 82%, transparent)
+  );
+  box-shadow: 0 0 18px
+    color-mix(in srgb, var(--visual-danger-solid) 18%, transparent);
+}
+
+.special-training-risk-gravity-marker {
+  position: absolute;
+  inset: 0 auto 0 auto;
+  transform: translateX(-50%);
+  min-width: 82px;
+  text-align: center;
+}
+
+.special-training-risk-gravity-marker-dot {
+  position: absolute;
+  left: 50%;
+  top: 64px;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  border: 2px solid color-mix(in srgb, var(--panel) 88%, var(--window-bg));
+  background: color-mix(in srgb, var(--text-subtle) 84%, var(--line));
+  box-shadow: 0 4px 10px
+    color-mix(in srgb, var(--visual-black) 12%, transparent);
+}
+
+.special-training-risk-gravity-marker.is-surface
+  .special-training-risk-gravity-marker-dot {
+  background: color-mix(
+    in srgb,
+    var(--visual-warning-accent) 88%,
+    var(--visual-warning-accent-soft)
+  );
+}
+
+.special-training-risk-gravity-marker.is-positive
+  .special-training-risk-gravity-marker-dot {
+  background: color-mix(
+    in srgb,
+    var(--visual-price-green-up-light) 82%,
+    var(--primary)
+  );
+}
+
+.special-training-risk-gravity-marker.is-danger
+  .special-training-risk-gravity-marker-dot {
+  background: color-mix(in srgb, var(--visual-danger-solid) 84%, var(--line));
+}
+
+.special-training-risk-gravity-marker-label {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 96px;
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1.1;
+}
+
+.special-training-risk-gravity-marker > strong,
+.special-training-risk-reality-value {
+  color: var(--text-strong);
+  font-weight: 780;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-risk-gravity-marker > strong {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 96px;
+  font-size: var(--ty-r1);
+  line-height: 1.1;
+}
+
+.special-training-risk-gravity-marker.is-surface
+  .special-training-risk-gravity-marker-label {
+  top: 4px;
+}
+
+.special-training-risk-gravity-marker.is-surface > strong {
+  top: 18px;
+}
+
+.special-training-risk-gravity-marker.is-current
+  .special-training-risk-gravity-marker-label {
+  top: 80px;
+}
+
+.special-training-risk-gravity-marker.is-current > strong {
+  top: 94px;
+}
+
+.special-training-risk-reality-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.special-training-risk-reality-head {
+  display: grid;
+  gap: 8px;
+}
+
+.special-training-risk-reality-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  color: var(--text-subtle);
+  font-size: var(--ty-r2);
+  line-height: 1.3;
+}
+
+.special-training-risk-reality-icon {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+}
+
+.special-training-risk-reality-value {
+  font-size: var(--ty-r6);
+  line-height: 1.04;
+}
+
+.special-training-risk-reality-benchmark {
+  padding-top: 8px;
+  border-top: 1px solid color-mix(in srgb, var(--line) 46%, transparent);
+}
+
+.special-training-risk-overview-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr);
+  gap: 10px;
+}
+
+.special-training-risk-alpha-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.special-training-risk-alpha-badge-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--text-strong);
+  opacity: 0.92;
+}
+
+.special-training-risk-alpha-value {
+  gap: 0;
+  font-size: var(--ty-r7);
+}
+
+.special-training-risk-alpha-compare-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.special-training-risk-alpha-compare-pill {
+  min-height: 46px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--line) 50%, transparent);
+  background: color-mix(in srgb, var(--panel) 74%, transparent);
+  padding: 8px 10px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 3px 8px;
+  align-items: center;
+}
+
+.special-training-risk-alpha-compare-pill > span {
+  min-width: 0;
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1.2;
+}
+
+.special-training-risk-alpha-compare-pill > strong {
+  grid-column: 2;
+  color: var(--text-strong);
+  font-size: var(--ty-r3);
+  line-height: 1.15;
+  font-weight: 760;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-risk-alpha-compare-pill.up > strong {
+  color: color-mix(
+    in srgb,
+    var(--visual-price-green-up-light) 88%,
+    var(--text-strong)
+  );
+}
+
+.special-training-risk-alpha-compare-pill.down > strong {
+  color: color-mix(in srgb, var(--visual-danger-solid) 88%, var(--text-strong));
+}
+
+.special-training-risk-alpha-compare-icon {
+  width: 14px;
+  height: 14px;
+  color: var(--text-subtle);
+}
+
+.special-training-risk-diagnostic-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.special-training-risk-diagnostic-grid.is-single-card {
+  grid-template-columns: 1fr;
+}
+
+.special-training-risk-chart-card,
+.special-training-risk-cost-meter-card {
+  border: 1px solid color-mix(in srgb, var(--line) 52%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--panel) 88%, transparent);
+  padding: 10px 11px;
+  display: grid;
+  gap: 8px;
+  min-height: 0;
+}
+
+.special-training-risk-chart-head,
+.special-training-risk-cost-meter-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.special-training-risk-chart-copy {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.special-training-risk-chart-copy > h4 {
+  margin: 0;
+  color: var(--text-strong);
+  font-size: var(--ty-r3);
+  line-height: 1.24;
+  font-weight: 650;
+}
+
+.special-training-risk-chart-copy > p {
+  margin: 0;
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1.3;
+}
+
+.special-training-risk-chart-pill-group {
+  display: grid;
+  gap: 6px;
+}
+
+.special-training-risk-chart-pill {
+  min-height: 24px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--line) 52%, transparent);
+  background: color-mix(in srgb, var(--panel-soft) 78%, transparent);
+  padding: 0 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.special-training-risk-chart-pill > strong {
+  color: var(--text-strong);
+  font-weight: 760;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-risk-chart-pill.is-user {
+  border-color: color-mix(in srgb, var(--primary) 42%, var(--line));
+}
+
+.special-training-risk-chart-pill.is-hold {
+  border-color: color-mix(
+    in srgb,
+    var(--visual-warning-accent) 46%,
+    var(--line)
+  );
+}
+
+.special-training-risk-chart-pill-icon {
+  width: 12px;
+  height: 12px;
+}
+
+.special-training-risk-chart-surface {
+  width: 100%;
+  min-height: 188px;
+  height: 188px;
+  border: 1px solid color-mix(in srgb, var(--line) 36%, transparent);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--panel-soft) 76%, var(--window-bg));
+}
+
+.special-training-risk-metrics-board-dense .special-training-risk-metric {
+  min-height: 68px;
+  padding: 10px 11px;
+}
+
+.special-training-risk-metric-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.special-training-risk-metric-icon {
+  width: 13px;
+  height: 13px;
+  color: var(--text-subtle);
+}
+
+.special-training-risk-cost-meter-brief {
+  display: grid;
+  gap: 6px;
+}
+
+.special-training-risk-cost-meter-pill {
+  min-height: 22px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--line) 52%, transparent);
+  background: color-mix(in srgb, var(--panel-soft) 74%, transparent);
+  padding: 0 9px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--text-strong);
+  font-size: var(--ty-r1);
+  line-height: 1;
+  font-weight: 720;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-risk-cost-meter-pill.up {
+  border-color: color-mix(
+    in srgb,
+    var(--visual-price-green-up-light) 42%,
+    var(--line)
+  );
+  color: color-mix(
+    in srgb,
+    var(--visual-price-green-up-light) 88%,
+    var(--text-strong)
+  );
+}
+
+.special-training-risk-cost-meter-pill.down {
+  border-color: color-mix(in srgb, var(--visual-danger-solid) 42%, var(--line));
+  color: color-mix(in srgb, var(--visual-danger-solid) 88%, var(--text-strong));
+}
+
+.special-training-risk-cost-meter-body {
+  display: grid;
+  gap: 10px;
+}
+
+.special-training-risk-cost-meter-scale {
+  position: relative;
+  min-height: 86px;
+  padding-top: 18px;
+}
+
+.special-training-risk-cost-meter-rail {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 42px;
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--visual-warning-accent) 26%, transparent),
+    color-mix(in srgb, var(--primary) 28%, transparent),
+    color-mix(in srgb, var(--visual-price-green-up-light) 32%, transparent)
+  );
+  border: 1px solid color-mix(in srgb, var(--line) 48%, transparent);
+}
+
+.special-training-risk-cost-meter-marker {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  min-width: 72px;
+  text-align: center;
+}
+
+.special-training-risk-cost-meter-marker-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  border: 2px solid color-mix(in srgb, var(--panel) 88%, var(--window-bg));
+  background: color-mix(in srgb, var(--text-subtle) 84%, var(--line));
+  box-shadow: 0 4px 10px
+    color-mix(in srgb, var(--visual-black) 12%, transparent);
+}
+
+.special-training-risk-cost-meter-marker.is-positive
+  .special-training-risk-cost-meter-marker-dot {
+  background: color-mix(
+    in srgb,
+    var(--visual-price-green-up-light) 82%,
+    var(--primary)
+  );
+}
+
+.special-training-risk-cost-meter-marker.is-warning
+  .special-training-risk-cost-meter-marker-dot {
+  background: color-mix(in srgb, var(--visual-warning-accent) 84%, var(--line));
+}
+
+.special-training-risk-cost-meter-marker-label {
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1.1;
+}
+
+.special-training-risk-cost-meter-marker > strong {
+  color: var(--text-strong);
+  font-size: var(--ty-r1);
+  line-height: 1.1;
+  font-weight: 760;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-risk-cost-offset-grid-compact {
+  gap: 6px;
+}
+
+.special-training-risk-alpha-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.special-training-risk-alpha-chip {
+  min-height: 24px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--line) 52%, transparent);
+  background: color-mix(in srgb, var(--panel-soft) 76%, transparent);
+  padding: 0 9px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1;
+}
+
+.special-training-risk-alpha-chip > strong {
+  color: var(--text-strong);
+  font-weight: 760;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-risk-alpha-chip.up {
+  border-color: color-mix(
+    in srgb,
+    var(--visual-price-green-up-light) 42%,
+    var(--line)
+  );
+}
+
+.special-training-risk-alpha-chip.down {
+  border-color: color-mix(in srgb, var(--visual-danger-solid) 42%, var(--line));
+}
+
+.special-training-risk-alpha-chip-icon,
+.special-training-risk-magazine-head-icon {
+  width: 13px;
+  height: 13px;
+  flex: 0 0 auto;
+}

@@ -1,0 +1,726 @@
+{
+  "schemaVersion": 1,
+  "policy": "Every binary image is pinned by path and SHA-256. Any addition or byte change requires an explicit allowlist review.",
+  "entries": [
+    {
+      "path": "apps/desktop/shell/dmg/install-background.png",
+      "sha256": "6ee1f9f0f9052b5d61e373d63413789fce37e634f2a28c9a027a7e2998b50570",
+      "bytes": 3458,
+      "purpose": "interface-image-asset",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-17-public-source-asset-review"
+    },
+    {
+      "path": "apps/desktop/shell/icons/128x128.png",
+      "sha256": "39869bb6a0496811972284bced230d7042bd2926a81ad6da161bf47cf8408f45",
+      "bytes": 16576,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/128x128@2x.png",
+      "sha256": "3ac5f4824338fd4ad8a168980545d7d75d2c2ae9526bddacd18ca34a58328e51",
+      "bytes": 59590,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/32x32.png",
+      "sha256": "c85cf016c59bd9ba7869faca5661dfa6a600cbd9213586693405291e4580daf7",
+      "bytes": 1768,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/64x64.png",
+      "sha256": "c93d018ca8f59e721dbcdb8a6fed83d79b75e340076764ae10cc0523c4a5d5ca",
+      "bytes": 5234,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/about-community-rounded-rect.png",
+      "sha256": "69eb8a57d20fcb75941baf2f5f0b0610cd0330716abca56165a02aa473b4b209",
+      "bytes": 260592,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/android/mipmap-hdpi/ic_launcher_foreground.png",
+      "sha256": "54af44b2d20a625ddb59d395f5e417e2ad5528b73eb7cddd48eb05fda9972038",
+      "bytes": 25198,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/android/mipmap-hdpi/ic_launcher_round.png",
+      "sha256": "5d630f0220ba972561ef730ac93009f983c565be4099e28ad2fce4525926334a",
+      "bytes": 2936,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/android/mipmap-hdpi/ic_launcher.png",
+      "sha256": "a7977caaf5c355f2decbf522316c31b73fa6b17e2e1dca3b411b3a6507bfa4a2",
+      "bytes": 2875,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/android/mipmap-mdpi/ic_launcher_foreground.png",
+      "sha256": "80bd46940a5c1bf4a6bdd413543af046a82862dd9d7ed7ee93eb650fdcea0cb1",
+      "bytes": 12359,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/android/mipmap-mdpi/ic_launcher_round.png",
+      "sha256": "00588830d805b94953b56ff74a396e19b9bd9ae472b303617565d401d4d7f699",
+      "bytes": 2836,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/android/mipmap-mdpi/ic_launcher.png",
+      "sha256": "26ca746dd207ea0d84b5d36a61cc3182cf36e8fb799cfa5c8fefeee78afc8830",
+      "bytes": 2776,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/android/mipmap-xhdpi/ic_launcher_foreground.png",
+      "sha256": "96e28addf228be33349fe76e8022f6d1340df9b9e026063672fb660e342c9f53",
+      "bytes": 42648,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/android/mipmap-xhdpi/ic_launcher_round.png",
+      "sha256": "281f041761d6b42c74175b205840dcd4d78fb23f47f48a7aa6c675efdbb5279c",
+      "bytes": 8413,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/android/mipmap-xhdpi/ic_launcher.png",
+      "sha256": "adca469c2b85f4f742d2266e2c3c8140b9eb5aea387806ae4fa2b4c39ae03a95",
+      "bytes": 8419,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/android/mipmap-xxhdpi/ic_launcher_foreground.png",
+      "sha256": "c5983da4ff36361530f2ec8100ad3a44703d527d82ee40c47f689f3f9d984fbe",
+      "bytes": 96991,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/android/mipmap-xxhdpi/ic_launcher_round.png",
+      "sha256": "83157b52930d54087999b6c36cad1984af6ab318c3c031168d1286ef1ca00efd",
+      "bytes": 16450,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/android/mipmap-xxhdpi/ic_launcher.png",
+      "sha256": "e61fbd519158a4675a9662546096de00d5cb8cf2eb41c35f52147bf0094ceae0",
+      "bytes": 16694,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/android/mipmap-xxxhdpi/ic_launcher_foreground.png",
+      "sha256": "eda4facb2a2972af046ed4f1eadab9c47a720eac4b68a00560bcdcdfe368bf49",
+      "bytes": 180356,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/android/mipmap-xxxhdpi/ic_launcher_round.png",
+      "sha256": "4dc56caeae4fee806d848dc05ba4a2106e98fcd50be1a65a92e7ae19d89e3f20",
+      "bytes": 27002,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/android/mipmap-xxxhdpi/ic_launcher.png",
+      "sha256": "484bdce2b7e2906336a085ce59a7a89aae092e8648a393507af30a9f5840c193",
+      "bytes": 27569,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/community-icon-master.png",
+      "sha256": "4a73d1efbcad6af8f707bac423846591a8f220d17b9f1d8712e429bf35a1af25",
+      "bytes": 1107451,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/icon.icns",
+      "sha256": "3a16bac2e681860425b92aac32b84f13720de86ba7b197aba65d83ee1acafa61",
+      "bytes": 1776468,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/icon.ico",
+      "sha256": "23adc8a7385a74966b74b349607010f445bbf182a92b726454164ce66b03f486",
+      "bytes": 74631,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/icon.png",
+      "sha256": "69eb8a57d20fcb75941baf2f5f0b0610cd0330716abca56165a02aa473b4b209",
+      "bytes": 260592,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/ios/AppIcon-20x20@1x.png",
+      "sha256": "9016f22fbc58cbbc302c73daed98ae6921736d399c68bbe43d01e55b30ece25d",
+      "bytes": 882,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/ios/AppIcon-20x20@2x-1.png",
+      "sha256": "c2ddb763c8fd3c0d15895d666792088e4c26105759b7a1453dac8df36464dc8e",
+      "bytes": 2509,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/ios/AppIcon-20x20@2x.png",
+      "sha256": "c2ddb763c8fd3c0d15895d666792088e4c26105759b7a1453dac8df36464dc8e",
+      "bytes": 2509,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/ios/AppIcon-20x20@3x.png",
+      "sha256": "8e10c6b90b7e491849c1d50279e4384be07db7b1fc18a0766f32a7ee871afa37",
+      "bytes": 4698,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/ios/AppIcon-29x29@1x.png",
+      "sha256": "60571963672bed53de84bab137cc0cf65284e5c6db694e7e500d213d6cfd8901",
+      "bytes": 1544,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/ios/AppIcon-29x29@2x-1.png",
+      "sha256": "dcde8c9c848f9ee6f8754e8cfc6eb68390151df79344e25af27ca37b6743fcb5",
+      "bytes": 4476,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/ios/AppIcon-29x29@2x.png",
+      "sha256": "dcde8c9c848f9ee6f8754e8cfc6eb68390151df79344e25af27ca37b6743fcb5",
+      "bytes": 4476,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/ios/AppIcon-29x29@3x.png",
+      "sha256": "1b9a8f771f7c73a3a45eeecc34d38a51c8d63c8d8903c52ce1e53bfba605a050",
+      "bytes": 8637,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/ios/AppIcon-40x40@1x.png",
+      "sha256": "c2ddb763c8fd3c0d15895d666792088e4c26105759b7a1453dac8df36464dc8e",
+      "bytes": 2509,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/ios/AppIcon-40x40@2x-1.png",
+      "sha256": "7ce4b015047b4d9f4800aea7a278264a5bbb95a7fa01b18cf005e8f59d1a4522",
+      "bytes": 7472,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/ios/AppIcon-40x40@2x.png",
+      "sha256": "7ce4b015047b4d9f4800aea7a278264a5bbb95a7fa01b18cf005e8f59d1a4522",
+      "bytes": 7472,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/ios/AppIcon-40x40@3x.png",
+      "sha256": "25ab191f7823cbf21cc83b6439b0a5e426c6f4a7d80259c0cb7c87994c05f2a4",
+      "bytes": 14909,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/ios/AppIcon-512@2x.png",
+      "sha256": "4a73d1efbcad6af8f707bac423846591a8f220d17b9f1d8712e429bf35a1af25",
+      "bytes": 1107451,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/ios/AppIcon-60x60@2x.png",
+      "sha256": "25ab191f7823cbf21cc83b6439b0a5e426c6f4a7d80259c0cb7c87994c05f2a4",
+      "bytes": 14909,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/ios/AppIcon-60x60@3x.png",
+      "sha256": "136a34139d55eb0f911f48a08e971850b15054f29e40810c7822142174789658",
+      "bytes": 30494,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/ios/AppIcon-76x76@1x.png",
+      "sha256": "5ddd0853da3b1c420bcc0d145e2a11d164359bd9d30e2e7f4a834c2ffba4ffb1",
+      "bytes": 6917,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/ios/AppIcon-76x76@2x.png",
+      "sha256": "49fc9e2edf05b30ff32869c4a4cbba86192cdfb56422c0c5a8e9b81e59b7f3c8",
+      "bytes": 22242,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/ios/AppIcon-83.5x83.5@2x.png",
+      "sha256": "85b45f87e98225959cff04dc11732d75a7964fa4765e8d6ccb3004031aaae10d",
+      "bytes": 26378,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/Square107x107Logo.png",
+      "sha256": "0d2c61451c346d412d5c154be460bdafea70e51bd5abb08eed60838c7270901b",
+      "bytes": 12215,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/Square142x142Logo.png",
+      "sha256": "b820cda1efd16ae8d211d36399d6aeae882baaf1318a8d4e2ebf006e30080a70",
+      "bytes": 19818,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/Square150x150Logo.png",
+      "sha256": "356f6364f068f86a046f962dbfc52b917333cec9c7992b1c64e76dd500672941",
+      "bytes": 21771,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/Square284x284Logo.png",
+      "sha256": "c5f1801af3d7c7b048bfe922541581b8b7ee4b1675c7b8fdf6a96c6800f3a447",
+      "bytes": 73559,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/Square30x30Logo.png",
+      "sha256": "2b7563eba58d8511b35d1270d49fa907b986e86e1313bb00d85b2d4e2908aeab",
+      "bytes": 1641,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/Square310x310Logo.png",
+      "sha256": "14568cadb36ba2eabd26efb048d8fb49711096e8529c93c545f10c4c35be8cf4",
+      "bytes": 88244,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/Square44x44Logo.png",
+      "sha256": "78b55de9f6298e4fad95da99e41553059342ed3835f756f6761a00c46998a4f8",
+      "bytes": 2929,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/Square71x71Logo.png",
+      "sha256": "2ea783e00ae7e4bf1bf38edb0bf299dc887b3ab2c02c1af537f34ad293225f74",
+      "bytes": 6208,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/Square89x89Logo.png",
+      "sha256": "ef695467ebec565330295f13f71939e6c02c5376d44f443638811c53880b4602",
+      "bytes": 9004,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/shell/icons/status-bar-template.png",
+      "sha256": "1be90f5098abe6ec50f34029549754cc5fbf090995a2b354ace2ae3abed26bb1",
+      "bytes": 680,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-17-public-source-asset-review"
+    },
+    {
+      "path": "apps/desktop/shell/icons/StoreLogo.png",
+      "sha256": "080f1716a783ba64c85a3d268de13c444d03b807ef046f6e30bfa0c839e01905",
+      "bytes": 3511,
+      "purpose": "community-application-icon",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/web/src/assets/graphics/assets/branding/community-logo-rounded.png",
+      "sha256": "69eb8a57d20fcb75941baf2f5f0b0610cd0330716abca56165a02aa473b4b209",
+      "bytes": 260592,
+      "purpose": "community-brand-asset",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "apps/desktop/web/src/assets/graphics/assets/data-import/local-market-data-import-empty-dark.png",
+      "sha256": "7127d0efc626159df060d912b2d9f0a1770222d6bdb5da99cab7083b0de2b3ea",
+      "bytes": 1106149,
+      "purpose": "product-illustration",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-17-public-source-asset-review"
+    },
+    {
+      "path": "apps/desktop/web/src/assets/graphics/assets/data-import/local-market-data-import-empty-light.png",
+      "sha256": "41f48313c5a3663236e91677416b8a4a886f0b0a8cdf54f6945e7dc2c6aed02b",
+      "bytes": 1098741,
+      "purpose": "product-illustration",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-17-public-source-asset-review"
+    },
+    {
+      "path": "config/brand/assets/zinuto-core-logo.png",
+      "sha256": "96dafa393540e101590946a5ed2bb7dd2e68a2f6301da73164c35955410ed148",
+      "bytes": 1599918,
+      "purpose": "canonical-zinuto-core-community-brand-source",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-07-19-zinuto-core-logo-refresh"
+    },
+    {
+      "path": "docs/assets/readme/alipay-official-logo.png",
+      "sha256": "a9444f5e31df7b8dd32f200f0869fc0b06f908251544195cd1da18c272a2d8be",
+      "bytes": 32214,
+      "purpose": "public-readme-support-channel",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-08-04-user-requested-alipay-logo"
+    },
+    {
+      "path": "docs/assets/readme/core-overview.en.jpg",
+      "sha256": "28cf98ce34d1f72f383731be446d20dd6dc552ec3e9556a28dc2ab3c8523e0fd",
+      "bytes": 90808,
+      "purpose": "localized-core-interface-documentation",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-08-02-public-readme-assets"
+    },
+    {
+      "path": "docs/assets/readme/core-overview.es.jpg",
+      "sha256": "7a6a4595916879275a190bcb57ccdfc1a9f9d61ee0495bafd71048d5f9c2abce",
+      "bytes": 99601,
+      "purpose": "localized-core-interface-documentation",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-08-02-public-readme-assets"
+    },
+    {
+      "path": "docs/assets/readme/core-overview.ja.jpg",
+      "sha256": "26645b863572e9441aff221fdee4104206ff162b22d08a3fb0ea1d579460d2e2",
+      "bytes": 88447,
+      "purpose": "localized-core-interface-documentation",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-08-02-public-readme-assets"
+    },
+    {
+      "path": "docs/assets/readme/core-overview.ko.jpg",
+      "sha256": "a9c7c5271977fd455d4e885f51782478202e241b88670dc0455f392825466a04",
+      "bytes": 76508,
+      "purpose": "localized-core-interface-documentation",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-08-02-public-readme-assets"
+    },
+    {
+      "path": "docs/assets/readme/core-overview.zh-CN.jpg",
+      "sha256": "92d127624aad3c921d8973b768f99c90650c54ccf393cf4a7c53659868a0ba4f",
+      "bytes": 84398,
+      "purpose": "localized-core-interface-documentation",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-08-02-public-readme-assets"
+    },
+    {
+      "path": "docs/assets/readme/directed-replay.en.webp",
+      "sha256": "8d03c2157dcea5ba108cb73df329b16ee485d392014f2d9cf19387c5132f8267",
+      "bytes": 90276,
+      "purpose": "public-readme-local-feature-screenshot",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-08-02-public-readme-images"
+    },
+    {
+      "path": "docs/assets/readme/directed-replay.es.webp",
+      "sha256": "29e732f984a114b3ae73885d78eeca7f129c20223bdb502a6ce06dddff9a60e5",
+      "bytes": 96808,
+      "purpose": "public-readme-local-feature-screenshot",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-08-02-public-readme-images"
+    },
+    {
+      "path": "docs/assets/readme/directed-replay.ja.webp",
+      "sha256": "06fd5437baa4d70cc0878aa7889f332260af0564dcc71db376d57aa857cb9206",
+      "bytes": 81640,
+      "purpose": "public-readme-local-feature-screenshot",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-08-02-public-readme-images"
+    },
+    {
+      "path": "docs/assets/readme/directed-replay.ko.webp",
+      "sha256": "faaa5b01f02e6a3207eaf2259a56d85f8040a604dc74f151a48f7e71be4678fd",
+      "bytes": 72458,
+      "purpose": "public-readme-local-feature-screenshot",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-08-02-public-readme-images"
+    },
+    {
+      "path": "docs/assets/readme/directed-replay.zh-CN.webp",
+      "sha256": "77611d7aa98f2f2a463b5c54ffa81443a248e0bd249469da560e9aad997b95ec",
+      "bytes": 75002,
+      "purpose": "public-readme-local-feature-screenshot",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-08-02-public-readme-images"
+    },
+    {
+      "path": "docs/assets/readme/flash-decision.en.webp",
+      "sha256": "cfb948c64c639c5e4f0180cfc9711d211d2945621834d3476ca3d825201c8296",
+      "bytes": 126682,
+      "purpose": "public-readme-local-training-interface-screenshot",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-08-02-public-readme-images"
+    },
+    {
+      "path": "docs/assets/readme/flash-decision.es.webp",
+      "sha256": "faae9f965dd24ec21c7f4cf98c314dc5548167cc486b12333223918fb804dc5e",
+      "bytes": 137020,
+      "purpose": "public-readme-local-training-interface-screenshot",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-08-02-public-readme-images"
+    },
+    {
+      "path": "docs/assets/readme/flash-decision.ja.webp",
+      "sha256": "0880db57325986871236e4e9d7a3c542e190f8c37c480aed0d1f5c055d4fc887",
+      "bytes": 116314,
+      "purpose": "public-readme-local-training-interface-screenshot",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-08-02-public-readme-images"
+    },
+    {
+      "path": "docs/assets/readme/flash-decision.ko.webp",
+      "sha256": "e488157d70fad9fddcdc00ad086cd58f96f14a248445e6c6fcb9f89ca9ccd807",
+      "bytes": 114502,
+      "purpose": "public-readme-local-training-interface-screenshot",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-08-02-public-readme-images"
+    },
+    {
+      "path": "docs/assets/readme/flash-decision.zh-CN.webp",
+      "sha256": "b6821ded2100c40e8857a8e56d638226db7bfff66e486b2df410c60cf98ea132",
+      "bytes": 115578,
+      "purpose": "public-readme-local-training-interface-screenshot",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-08-02-public-readme-images"
+    },
+    {
+      "path": "docs/assets/readme/free-replay.en.webp",
+      "sha256": "4cfc20ecaeb846d5cb88078fe702884012186d866f269711f878d9421bc94faf",
+      "bytes": 147700,
+      "purpose": "public-readme-local-feature-screenshot",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-08-02-public-readme-images"
+    },
+    {
+      "path": "docs/assets/readme/free-replay.es.webp",
+      "sha256": "ea6f71d0c598cc50a6d4253d07e10ea54068148498fad12430cb86745d5095b6",
+      "bytes": 153682,
+      "purpose": "public-readme-local-feature-screenshot",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-08-02-public-readme-images"
+    },
+    {
+      "path": "docs/assets/readme/free-replay.ja.webp",
+      "sha256": "796a0dabff059e7a6935b4f906d21381ae2b5a74f346393f8d76fc0ab94eb827",
+      "bytes": 143940,
+      "purpose": "public-readme-local-feature-screenshot",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-08-02-public-readme-images"
+    },
+    {
+      "path": "docs/assets/readme/free-replay.ko.webp",
+      "sha256": "ddd5577df01cc4fa65c7a78104a45ce8da3359b4734a3e6e13b012376c744ba5",
+      "bytes": 133478,
+      "purpose": "public-readme-local-feature-screenshot",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-08-02-public-readme-images"
+    },
+    {
+      "path": "docs/assets/readme/free-replay.zh-CN.webp",
+      "sha256": "bf8031c3ed96f0e5699b04600842b7f42ab545fe25eddedfba30f65f80fe4db5",
+      "bytes": 136404,
+      "purpose": "public-readme-local-feature-screenshot",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-08-02-public-readme-images"
+    },
+    {
+      "path": "docs/assets/readme/kofi-support.png",
+      "sha256": "4b87892fe8bfb385fe3a8594e5070960d6e2fca90aa7466b04a4aac74b0b57c1",
+      "bytes": 30718,
+      "purpose": "public-readme-support-channel",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-08-02-public-readme-assets"
+    },
+    {
+      "path": "docs/assets/readme/local-data.en.webp",
+      "sha256": "6d7b9c72f99dc11a7d13554ade040699af89b33d6a60a37a60d87eaf89f34df6",
+      "bytes": 99782,
+      "purpose": "public-readme-local-feature-screenshot",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-08-02-public-readme-images"
+    },
+    {
+      "path": "docs/assets/readme/local-data.es.webp",
+      "sha256": "070ed52e906de67058f18b77bf828073ff3e6ec8ed08add526b2e4b7ce5467cb",
+      "bytes": 119254,
+      "purpose": "public-readme-local-feature-screenshot",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-08-02-public-readme-images"
+    },
+    {
+      "path": "docs/assets/readme/local-data.ja.webp",
+      "sha256": "840f6a6fdde4dfe729b72b9c8c4a370a9412250214d2b3b81a62004182680160",
+      "bytes": 105516,
+      "purpose": "public-readme-local-feature-screenshot",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-08-02-public-readme-images"
+    },
+    {
+      "path": "docs/assets/readme/local-data.ko.webp",
+      "sha256": "940ad4d837fa0d898994f9d8e12697185cc34939c3ee235e2016a7a835f78de0",
+      "bytes": 83748,
+      "purpose": "public-readme-local-feature-screenshot",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-08-02-public-readme-images"
+    },
+    {
+      "path": "docs/assets/readme/local-data.zh-CN.webp",
+      "sha256": "8d10100682aa5daf55ecc26a5bd031b27528d3eacb8b6be41cd9c600a3bb53fb",
+      "bytes": 87044,
+      "purpose": "public-readme-local-feature-screenshot",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-08-02-public-readme-images"
+    },
+    {
+      "path": "docs/assets/readme/strategy-backtests.en.webp",
+      "sha256": "2f3f11a685dc8b4c3394944aae863e7b323d2cd9571541f152450ca7b13fc94c",
+      "bytes": 87058,
+      "purpose": "public-readme-local-feature-screenshot",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-08-02-public-readme-images"
+    },
+    {
+      "path": "docs/assets/readme/strategy-backtests.es.webp",
+      "sha256": "b67f1e411625d71d72ccd8bbf1de02731c0229e7894af731bf5d3f5a454d5228",
+      "bytes": 95494,
+      "purpose": "public-readme-local-feature-screenshot",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-08-02-public-readme-images"
+    },
+    {
+      "path": "docs/assets/readme/strategy-backtests.ja.webp",
+      "sha256": "a6f1f0a09b7d61ae8c2bef10009c08e30796624991e351c2308c7bad18e19012",
+      "bytes": 80530,
+      "purpose": "public-readme-local-feature-screenshot",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-08-02-public-readme-images"
+    },
+    {
+      "path": "docs/assets/readme/strategy-backtests.ko.webp",
+      "sha256": "f05349a4064c6d5b2c31205a6f6ff3d7d40721543b14809c5895fadc6b2a5a3f",
+      "bytes": 68986,
+      "purpose": "public-readme-local-feature-screenshot",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-08-02-public-readme-images"
+    },
+    {
+      "path": "docs/assets/readme/strategy-backtests.zh-CN.webp",
+      "sha256": "83c0fe0205810f9e167862cad5b63c14d76393af5b20bd40d8d9c3a3420ef368",
+      "bytes": 77340,
+      "purpose": "public-readme-local-feature-screenshot",
+      "reviewState": "approved-for-community-source",
+      "approvalRef": "2026-08-02-public-readme-images"
+    }
+  ]
+}

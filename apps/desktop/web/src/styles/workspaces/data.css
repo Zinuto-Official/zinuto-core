@@ -1,0 +1,7 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+@import "../pages/settings-data.css";
+@import "../components/onboarding-tour.css";
+@import "../components/trading-settings-sheet.css";
+@import "../layout/chart-workspace.css";
+@import "../components/summary-modal.css";

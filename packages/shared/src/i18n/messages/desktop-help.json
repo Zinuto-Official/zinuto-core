@@ -1,0 +1,3172 @@
+{
+  "uiConfig.desktopHelp.bundle": {
+    "kind": "json",
+    "locales": {
+      "zh-CN": {
+        "copy": {
+          "launcherLabel": "帮助中心",
+          "hideLauncher": "隐藏悬浮帮助按钮",
+          "panelTitle": "帮助中心",
+          "embeddedTitle": "使用帮助",
+          "embeddedDescription": "浏览经过审核的本地文章，或搜索系统功能。搜索内容不会上传。",
+          "searchLabel": "搜索帮助文章",
+          "searchPlaceholder": "搜索功能、步骤或问题",
+          "clearSearch": "清空搜索",
+          "close": "关闭帮助中心",
+          "back": "返回",
+          "recommendedTitle": "当前页面推荐",
+          "categoriesTitle": "按分类浏览",
+          "searchResultsTitle": "搜索结果",
+          "noResultsTitle": "没有找到可靠匹配",
+          "noResultsDescription": "可以换一个更具体的关键词。",
+          "summaryTitle": "简要说明",
+          "stepsTitle": "操作步骤",
+          "notesTitle": "注意事项",
+          "relatedTitle": "相关问题",
+          "openWorkspace": "打开相关功能",
+          "categoryLabels": {
+            "START": "开始使用",
+            "TRAINING": "自由推演",
+            "REVIEW": "复盘与笔记",
+            "CHALLENGE": "挑战训练",
+            "ANALYSIS": "指标与分析",
+            "DATA": "数据",
+            "SETTINGS": "设置"
+          }
+        },
+        "articles": {
+          "getting-started": {
+            "title": "第一次使用 Zinuto Core 应该做什么？",
+            "summary": "先确认可用数据，再从训练中心进入自由推演、挑战或复盘流程。",
+            "steps": [
+              "打开数据管理，确认至少有一个可用样本池。",
+              "返回训练中心，选择自由推演或专项挑战。",
+              "完成训练后，到复盘诊断和笔记中整理结果。"
+            ],
+            "notes": [
+              "帮助文章只说明操作，不会代替你启动训练或修改数据。"
+            ],
+            "aliases": [
+              "新手入门",
+              "怎么开始"
+            ],
+            "keywords": [
+              "首次使用",
+              "流程",
+              "训练中心"
+            ]
+          },
+          "command-center-overview": {
+            "title": "训练中心能做什么？",
+            "summary": "训练中心汇总训练入口、数据状态和近期活动，是各工作区的起点。",
+            "steps": [
+              "查看数据摘要，确认训练样本可用。",
+              "从模式卡片进入自由推演、闪电盘感或绝境求生。",
+              "通过近期活动继续未完成的工作。"
+            ],
+            "notes": [
+              "卡片只负责导航；训练参数仍在对应准备页确认。"
+            ],
+            "aliases": [
+              "首页",
+              "训练中心"
+            ],
+            "keywords": [
+              "入口",
+              "近期活动"
+            ]
+          },
+          "trainer-prepare": {
+            "title": "如何准备一次自由推演？",
+            "summary": "在准备页选择模式、样本池、交易规则、推进周期和起始位置，再开始本次推演。",
+            "steps": [
+              "选择随机或定向模式，并确认样本池与标的。",
+              "检查本局交易规则和期望推进周期。",
+              "设置起点后开始；需要长期沿用时再保存为默认规则。"
+            ],
+            "notes": [
+              "原始数据周期不会被改写；推进周期是在可用数据之上聚合显示。"
+            ],
+            "aliases": [
+              "自由推演准备",
+              "开始训练"
+            ],
+            "keywords": [
+              "样本池",
+              "起点",
+              "推进周期"
+            ]
+          },
+          "trainer-session": {
+            "title": "自由推演进行中如何操作？",
+            "summary": "进行中可以切换显示周期、使用指标和绘图，并按当前交易规则下单、推进或撤销。",
+            "steps": [
+              "先确认图表周期、持仓与订单估算。",
+              "使用买入、卖出或推进动作观察后续行情。",
+              "结束并归档后，到复盘诊断查看结果。"
+            ],
+            "notes": [
+              "成交数量和价格由本地运行时在动作发生时重新校验。"
+            ],
+            "aliases": [
+              "推演中",
+              "训练操作"
+            ],
+            "keywords": [
+              "下单",
+              "推进",
+              "撤销"
+            ]
+          },
+          "review-overview": {
+            "title": "复盘诊断概览怎么看？",
+            "summary": "概览按所选时间窗口汇总收益、风险和代表性训练，帮助先定位最值得复查的部分。",
+            "steps": [
+              "选择复盘时间范围。",
+              "先看总体指标和风险分布。",
+              "再进入行为或归档页查看具体训练。"
+            ],
+            "notes": [
+              "聚合结果来自同一批本地历史快照，前端不会自行重算另一套口径。"
+            ],
+            "aliases": [
+              "复盘概览",
+              "训练诊断"
+            ],
+            "keywords": [
+              "收益",
+              "风险",
+              "时间范围"
+            ]
+          },
+          "review-behavior": {
+            "title": "行为诊断页显示什么？",
+            "summary": "行为页聚合操作倾向、资本纪律和常见风险信号，用于发现重复出现的训练习惯。",
+            "steps": [
+              "选择与概览一致的时间范围。",
+              "查看行为指标与异常集中区域。",
+              "回到归档打开代表性训练核对上下文。"
+            ],
+            "notes": [
+              "行为指标用于复盘，不构成真实交易建议。"
+            ],
+            "aliases": [
+              "行为分析",
+              "交易习惯"
+            ],
+            "keywords": [
+              "纪律",
+              "风险信号",
+              "诊断"
+            ]
+          },
+          "review-archive": {
+            "title": "如何查看和管理训练归档？",
+            "summary": "归档页列出可回看的自由推演记录，可打开详情、重命名、选择或删除记录。",
+            "steps": [
+              "按时间范围找到目标训练。",
+              "打开详情查看图表、交易和环境证据。",
+              "需要整理时使用重命名、选择或删除操作。"
+            ],
+            "notes": [
+              "历史保留策略可能移除过期的可回放详情，但会保留必要摘要。"
+            ],
+            "aliases": [
+              "训练历史",
+              "回放记录"
+            ],
+            "keywords": [
+              "归档",
+              "回放",
+              "删除"
+            ]
+          },
+          "challenge-mode-selection": {
+            "title": "如何选择专项挑战模式？",
+            "summary": "模式选择页提供闪电盘感与绝境求生，并让两种模式复用已配置的题库。",
+            "steps": [
+              "选择挑战模式和题库。",
+              "确认题库覆盖的样本池、目标周期和题量。",
+              "检查本次参数后再开始训练。"
+            ],
+            "notes": [
+              "打开相关功能只会进入挑战工作区，不会自动开始一局。"
+            ],
+            "aliases": [
+              "挑战模式",
+              "专项训练"
+            ],
+            "keywords": [
+              "题库",
+              "模式选择",
+              "开始挑战"
+            ]
+          },
+          "challenge-fast-decision": {
+            "title": "闪电盘感怎么玩？",
+            "summary": "闪电盘感要求在倒计时内选择看多、看空或观望，再根据后续行情复核判断。",
+            "steps": [
+              "在准备区选择题库与判断强度。",
+              "每题在倒计时结束前提交方向。",
+              "查看单题反馈，并在结算页复盘速度与准确性。"
+            ],
+            "notes": [
+              "超时会按当前挑战规则记录，不会替你自动选择方向。"
+            ],
+            "aliases": [
+              "闪电决策",
+              "盘感训练"
+            ],
+            "keywords": [
+              "倒计时",
+              "看多",
+              "看空"
+            ]
+          },
+          "challenge-risk-survival": {
+            "title": "绝境求生怎么玩？",
+            "summary": "绝境求生围绕仓位、回撤和操作次数限制，训练在压力行情下控制风险。",
+            "steps": [
+              "确认题库、初始资产和本局风险规则。",
+              "使用下单、推进与撤销控制仓位。",
+              "在结算页查看回撤、纪律和恢复表现。"
+            ],
+            "notes": [
+              "按钮禁用原因会直接显示；不要把训练结果视为收益承诺。"
+            ],
+            "aliases": [
+              "危机生存",
+              "风险挑战"
+            ],
+            "keywords": [
+              "回撤",
+              "仓位",
+              "风险纪律"
+            ]
+          },
+          "challenge-settlement": {
+            "title": "挑战结算结果怎么看？",
+            "summary": "结算页汇总本题得分、完成情况、关键风险指标和可复查的操作证据。",
+            "steps": [
+              "先看是否完成、得分和核心指标。",
+              "展开模式对应的判断或风险复核。",
+              "需要长期整理时创建复盘笔记，再继续下一题。"
+            ],
+            "notes": [
+              "不同模式的结算指标不同，应在同一模式内比较。"
+            ],
+            "aliases": [
+              "挑战结果",
+              "训练结算"
+            ],
+            "keywords": [
+              "得分",
+              "复核",
+              "下一题"
+            ]
+          },
+          "challenge-stats": {
+            "title": "挑战统计如何使用？",
+            "summary": "挑战统计按模式和时间汇总完成度、表现与趋势，用于观察长期训练变化。",
+            "steps": [
+              "选择统计范围和挑战模式。",
+              "查看总览指标与趋势图。",
+              "结合结算记录和笔记解释异常变化。"
+            ],
+            "notes": [
+              "统计只包含已保存的本地挑战事实。"
+            ],
+            "aliases": [
+              "挑战成绩",
+              "专项统计"
+            ],
+            "keywords": [
+              "趋势",
+              "完成度",
+              "长期表现"
+            ]
+          },
+          "indicator-create": {
+            "title": "如何创建和验证自定义指标？",
+            "summary": "指标系统用于编辑公式、配置参数，并用本地行情编译、运行和预览输出。",
+            "steps": [
+              "新建指标并填写名称、公式与参数。",
+              "查看编译诊断，修复语法或数据范围问题。",
+              "选择本地标的验证图形后保存配置。"
+            ],
+            "notes": [
+              "指标代码在本地运行；不支持的函数会明确阻断。"
+            ],
+            "aliases": [
+              "公式指标",
+              "编写指标"
+            ],
+            "keywords": [
+              "编译",
+              "参数",
+              "预览"
+            ]
+          },
+          "indicator-reference": {
+            "title": "在哪里查看指标函数说明？",
+            "summary": "指标参考中心按类别列出可用函数、参数、返回值、示例和数据范围限制。",
+            "steps": [
+              "在指标工作台顶部打开指标参考。",
+              "按名称或类别查找函数。",
+              "对照示例和限制修改公式，再回到工作台验证。"
+            ],
+            "notes": [
+              "参考中心说明的是当前版本实际支持的函数。"
+            ],
+            "aliases": [
+              "函数百科",
+              "指标文档"
+            ],
+            "keywords": [
+              "函数",
+              "语法",
+              "示例"
+            ]
+          },
+          "backtest-configure": {
+            "title": "如何配置一次策略回测？",
+            "summary": "选择已保存指标、信号条件、样本池、交易环境和成交方式，生成一个本地回测批次。",
+            "steps": [
+              "选择策略指标，并确认 BUY、SELL、SHORT、COVER 信号或条件。",
+              "设置样本池、交易环境、资金和成交模式。",
+              "检查配置后运行批次，等待每个标的完成。"
+            ],
+            "notes": [
+              "进入回测工作区不会自动运行批次；必须由你确认开始。"
+            ],
+            "aliases": [
+              "回测设置",
+              "运行策略"
+            ],
+            "keywords": [
+              "信号条件",
+              "样本池",
+              "成交模式"
+            ]
+          },
+          "backtest-results": {
+            "title": "如何阅读策略回测结果？",
+            "summary": "批次总览展示收益、胜率、回撤和交易数，详情提供逐标的图表、成交与权益曲线。",
+            "steps": [
+              "先确认批次状态和失败标的。",
+              "比较总收益、胜率、最大回撤与样本数量。",
+              "打开标的详情核对信号、成交点和权益曲线。"
+            ],
+            "notes": [
+              "历史回测不能保证未来结果，比较时应保持数据和交易环境一致。"
+            ],
+            "aliases": [
+              "回测报告",
+              "策略结果"
+            ],
+            "keywords": [
+              "胜率",
+              "最大回撤",
+              "权益曲线"
+            ]
+          },
+          "notes-create": {
+            "title": "如何创建和整理笔记？",
+            "summary": "笔记工作区用于记录训练观察，并通过标题、颜色和内容持续整理。",
+            "steps": [
+              "新建笔记并填写清晰标题。",
+              "记录判断依据、结果和下一次要验证的事项。",
+              "使用颜色或列表整理，保存后在笔记列表继续查找。"
+            ],
+            "notes": [
+              "笔记正文保存在本地，除非你主动使用受支持的迁移功能。"
+            ],
+            "aliases": [
+              "写笔记",
+              "训练记录"
+            ],
+            "keywords": [
+              "标题",
+              "颜色",
+              "复盘记录"
+            ]
+          },
+          "notes-review-links": {
+            "title": "笔记如何关联训练和挑战？",
+            "summary": "从自由推演归档或挑战结算创建笔记时，会保留可读的训练上下文和证据摘要。",
+            "steps": [
+              "在归档详情或挑战结算中选择创建笔记。",
+              "补充你的判断、错误原因和改进动作。",
+              "到笔记工作区统一查看和继续编辑。"
+            ],
+            "notes": [
+              "帮助中心只导航到顶层工作区，不会自动打开某条记录。"
+            ],
+            "aliases": [
+              "复盘笔记",
+              "关联训练"
+            ],
+            "keywords": [
+              "上下文",
+              "证据",
+              "挑战记录"
+            ]
+          },
+          "data-acquire": {
+            "title": "我可以从哪里获取历史行情数据？",
+            "summary": "数据管理页提供可选的本地开源连接器：A 股使用 AKTools/AKShare，数字资产使用 CCXT 访问 Binance 或 OKX 现货公共行情。文件保存到你选择的文件夹，仍需手动检查并导入。",
+            "steps": [
+              "也可以先使用完全离线的内置样本或示例数据。",
+              "在数据管理页选择数据源，然后从真实目录中选择 A 股、主要指数或数字资产交易对，再设置日期、周期和保存文件夹。",
+              "页面只展示本次连接器使用的 AKTools、AKShare 或 CCXT 开源项目信息，不设置行情来源条款门禁。",
+              "保存成功后，点击“继续预检并导入”检查字段、周期、时区和异常数据；下载完成不会自动写入本地数据。",
+              "其他符合格式要求的本地 csv、json、parquet 或 xlsx 文件仍可直接导入。"
+            ],
+            "notes": [
+              "下载由你的电脑直接向第三方数据源发起；Zinuto 服务器不接收查询，也不保存文件。",
+              "Zinuto 不分发、托管或许可行情数据。请自行确认许可、费用、限流和允许用途。"
+            ],
+            "aliases": [
+              "哪里获取数据",
+              "券商导出",
+              "开源下载器",
+              "本地下载行情",
+              "手动导入"
+            ],
+            "keywords": [
+              "AKTools",
+              "AKShare",
+              "CCXT",
+              "Binance Spot",
+              "OKX Spot",
+              "本地连接器",
+              "导入预检"
+            ]
+          },
+          "data-source-by-market": {
+            "title": "不同市场适合从哪里获取数据？",
+            "summary": "先按市场选择来源，再比较历史范围、周期、时区、复权方式和使用授权。",
+            "steps": [
+              "A 股及中国市场可优先考虑券商导出、AkShare 或 Tushare。",
+              "美股、港股和全球股票可从券商、TradingView 或专业数据供应商获取。",
+              "外汇可使用券商或 MT5 导出，也可查看 HistData 提供的历史文件。",
+              "数字资产可使用 Binance、OKX 等交易所的官方 K 线接口。",
+              "期货及其他市场优先选择券商、交易所授权渠道或覆盖相应合约的专业供应商。"
+            ],
+            "notes": [
+              "TradingView 导出的 CSV 只包含图表当前已经加载的历史范围，需要时应先加载更多历史数据。",
+              "API 权限、覆盖范围和限流可能变化；导入前还要确认复权口径、基础周期和时区。"
+            ],
+            "aliases": [
+              "A 股数据",
+              "美股数据",
+              "外汇数据",
+              "数字资产数据",
+              "按市场找数据"
+            ],
+            "keywords": [
+              "AkShare",
+              "Tushare",
+              "TradingView",
+              "MT5",
+              "Binance",
+              "OKX",
+              "HistData",
+              "Nasdaq Data Link",
+              "期货",
+              "K 线 API"
+            ]
+          },
+          "data-prepare": {
+            "title": "下载后的行情数据怎样整理才能导入？",
+            "summary": "把每个标的的历史 K 线整理为结构一致的本地文件，并在导入前核对格式、字段、周期、时区和复权口径。",
+            "steps": [
+              "一个文件对应一个标的，并使用清晰且在同一批次内唯一的标的文件名。",
+              "同一个导入文件夹只放一种格式：csv、json、parquet 或 xlsx。",
+              "每条记录必须包含 date/time、open、high、low、close；volume 可选，缺失时按 0 处理。",
+              "基础周期必须是 1m、5m、1h 或 1d，并确认时间戳所使用的时区。",
+              "原始价格和复权价格不要混用；JSON 使用 records 数组或 JSONL，XLSX 只保留一个工作表。"
+            ],
+            "notes": [
+              "预检会提示缺失字段、异常 OHLC、冲突重复值和时区证据；确认无误后再开始导入。"
+            ],
+            "aliases": [
+              "准备行情",
+              "导入前检查",
+              "整理下载数据",
+              "数据格式要求"
+            ],
+            "keywords": [
+              "OHLCV",
+              "历史行情",
+              "文件格式",
+              "基础周期",
+              "时区",
+              "复权",
+              "记录",
+              "JSONL"
+            ]
+          },
+          "data-import": {
+            "title": "如何导入本地行情文件夹？",
+            "summary": "系统先对整个文件夹做本地预检，再让你确认字段映射、样本池名称、范围、时区和文件校验。",
+            "steps": [
+              "在数据管理拖入文件夹或点击选择文件夹。",
+              "查看预检诊断，确认 date/time、open、high、low、close；volume 缺失时按 0 处理。",
+              "确认样本池、导入范围和时区后开始导入，并等待结果。"
+            ],
+            "notes": [
+              "查询和文件不会因为使用帮助搜索而上传；导入也读取你明确选择的本地文件夹。"
+            ],
+            "aliases": [
+              "导入行情",
+              "字段映射"
+            ],
+            "keywords": [
+              "预检",
+              "时区",
+              "样本池"
+            ]
+          },
+          "data-manage": {
+            "title": "如何管理已导入的数据？",
+            "summary": "数据管理可查看本地 数据源、样本池、周期、时区、诊断和同步状态，并处理重绑或重导入。",
+            "steps": [
+              "在本地行情区域选择 数据源 或样本池。",
+              "查看详情、诊断和变更状态。",
+              "按需要检查变更、增量同步、重绑文件夹或明确删除。"
+            ],
+            "notes": [
+              "删除和清空属于明确操作；打开数据管理不会自动执行。"
+            ],
+            "aliases": [
+              "数据源管理",
+              "同步数据"
+            ],
+            "keywords": [
+              "数据源",
+              "重绑",
+              "增量同步"
+            ]
+          },
+          "settings-general": {
+            "title": "如何修改常规显示设置？",
+            "summary": "常规设置可调整语言、主题、字号、涨跌色、交易配色和桌面关闭行为。",
+            "steps": [
+              "进入设置的常规栏目。",
+              "选择语言、主题或显示偏好。",
+              "返回工作区确认显示效果。"
+            ],
+            "notes": [
+              "多数显示设置会立即生效并保存在本机。"
+            ],
+            "aliases": [
+              "界面设置",
+              "主题语言"
+            ],
+            "keywords": [
+              "字号",
+              "涨跌色",
+              "关闭行为"
+            ]
+          },
+          "settings-transfer": {
+            "title": "如何迁移本机数据和设置？",
+            "summary": "数据与迁移可按域导出或导入未加密的 .otp-package 文件，并选择是否携带本地行情。",
+            "steps": [
+              "在数据与迁移中选择要导出的数据域和行情 数据源。",
+              "生成迁移文件并妥善保存。",
+              "在目标设备离线导入，并处理需要重绑的文件夹。"
+            ],
+            "notes": [
+              "迁移包无需账号或服务器，但未加密且可能包含本地数据，请安全保管。"
+            ],
+            "aliases": [
+              "设备迁移",
+              "导出备份"
+            ],
+            "keywords": [
+              "迁移",
+              "未加密导出",
+              "重绑"
+            ]
+          },
+          "settings-advanced": {
+            "title": "高级设置中的历史保留是什么？",
+            "summary": "高级设置管理本地长期历史保留周期，并可预览或执行过期历史清理。",
+            "steps": [
+              "进入高级设置并选择保留窗口。",
+              "查看预计影响范围。",
+              "确认后应用策略；需要时再手动立即清理。"
+            ],
+            "notes": [
+              "本地行情库不由历史保留策略自动删除，仍在数据管理中处理。"
+            ],
+            "aliases": [
+              "历史清理",
+              "保留策略"
+            ],
+            "keywords": [
+              "高级设置",
+              "过期记录",
+              "存储"
+            ]
+          },
+          "settings-about": {
+            "title": "在哪里查看版本与使用帮助？",
+            "summary": "关于页面包含本地版本、发行说明和离线帮助中心。",
+            "steps": [
+              "进入设置的关于栏目。",
+              "查看当前版本或本地发行说明。",
+              "需要操作说明时，打开帮助中心并搜索相关功能。"
+            ],
+            "notes": [
+              "帮助搜索完全在本地进行，搜索词不会上传。"
+            ],
+            "aliases": [
+              "关于",
+              "使用帮助"
+            ],
+            "keywords": [
+              "版本",
+              "发行说明",
+              "帮助中心"
+            ]
+          }
+        }
+      },
+      "en": {
+        "copy": {
+          "launcherLabel": "Help Center",
+          "hideLauncher": "Hide floating Help button",
+          "panelTitle": "Help Center",
+          "embeddedTitle": "Product Help",
+          "embeddedDescription": "Browse reviewed, offline articles or search product features. Search text is never uploaded.",
+          "searchLabel": "Search help articles",
+          "searchPlaceholder": "Search features, steps, or questions",
+          "clearSearch": "Clear search",
+          "close": "Close Help Center",
+          "back": "Back",
+          "recommendedTitle": "Recommended for this page",
+          "categoriesTitle": "Browse by category",
+          "searchResultsTitle": "Search results",
+          "noResultsTitle": "No reliable match found",
+          "noResultsDescription": "Try a more specific term.",
+          "summaryTitle": "Summary",
+          "stepsTitle": "Steps",
+          "notesTitle": "Notes",
+          "relatedTitle": "Related questions",
+          "openWorkspace": "Open related feature",
+          "categoryLabels": {
+            "START": "Getting started",
+            "TRAINING": "Free Replay",
+            "REVIEW": "Review and notes",
+            "CHALLENGE": "Challenges",
+            "ANALYSIS": "Indicators and analysis",
+            "DATA": "Data",
+            "SETTINGS": "Settings"
+          }
+        },
+        "articles": {
+          "getting-started": {
+            "title": "What should I do first in Zinuto Core?",
+            "summary": "Confirm that usable data is available, then start Free Replay, a challenge, or review from Training Center.",
+            "steps": [
+              "Open Data and confirm that at least one sample pool is available.",
+              "Return to Training Center and choose Free Replay or a focused challenge.",
+              "After training, organize the result in Review Diagnostics and Notes."
+            ],
+            "notes": [
+              "Help articles explain actions but never start training or change data for you."
+            ],
+            "aliases": [
+              "first steps",
+              "how to start"
+            ],
+            "keywords": [
+              "new user",
+              "workflow",
+              "training center"
+            ]
+          },
+          "command-center-overview": {
+            "title": "What can I do in Training Center?",
+            "summary": "Training Center collects training entry points, data status, and recent activity.",
+            "steps": [
+              "Check the data summary to confirm training samples are available.",
+              "Open Free Replay, Flash Decision, or Crisis Survival from a mode card.",
+              "Use recent activity to continue unfinished work."
+            ],
+            "notes": [
+              "Cards navigate only; parameters are confirmed on each preparation page."
+            ],
+            "aliases": [
+              "home",
+              "training training center"
+            ],
+            "keywords": [
+              "entry point",
+              "recent activity"
+            ]
+          },
+          "trainer-prepare": {
+            "title": "How do I prepare a Free Replay session?",
+            "summary": "Choose a mode, sample pool, trading rules, progression interval, and start point before beginning.",
+            "steps": [
+              "Choose random or focused mode, then confirm the sample pool and instrument.",
+              "Review session trading rules and the preferred progression interval.",
+              "Set a start point and begin; save defaults only when you want to reuse them."
+            ],
+            "notes": [
+              "The source interval is not rewritten; supported higher intervals are aggregated for display and progression."
+            ],
+            "aliases": [
+              "free replay preparation",
+              "start training"
+            ],
+            "keywords": [
+              "sample pool",
+              "start point",
+              "interval"
+            ]
+          },
+          "trainer-session": {
+            "title": "How do I operate an active Free Replay?",
+            "summary": "During a session you can change the display interval, use indicators and drawings, and trade, advance, or undo under the current rules.",
+            "steps": [
+              "Confirm the chart interval, position, and order estimate.",
+              "Buy, sell, or advance to inspect later bars.",
+              "Finish and archive the session, then review it in Review Diagnostics."
+            ],
+            "notes": [
+              "The local runtime validates execution quantity and price again when an action occurs."
+            ],
+            "aliases": [
+              "active replay",
+              "training controls"
+            ],
+            "keywords": [
+              "orders",
+              "advance",
+              "undo"
+            ]
+          },
+          "review-overview": {
+            "title": "How do I read Review Diagnostics overview?",
+            "summary": "Overview aggregates return, risk, and representative sessions for the selected window.",
+            "steps": [
+              "Choose a review window.",
+              "Inspect the headline metrics and risk distribution.",
+              "Open Behavior or Archive for the underlying sessions."
+            ],
+            "notes": [
+              "Aggregates come from one local history snapshot and are not recomputed into a second frontend definition."
+            ],
+            "aliases": [
+              "review overview",
+              "training diagnostics"
+            ],
+            "keywords": [
+              "return",
+              "risk",
+              "time window"
+            ]
+          },
+          "review-behavior": {
+            "title": "What does Behavior Diagnostics show?",
+            "summary": "Behavior groups operation tendencies, capital discipline, and recurring risk signals.",
+            "steps": [
+              "Use the same time window as Overview.",
+              "Inspect behavior metrics and concentrated anomalies.",
+              "Open representative sessions in Archive to verify context."
+            ],
+            "notes": [
+              "Behavior metrics support review and are not live trading advice."
+            ],
+            "aliases": [
+              "behavior analysis",
+              "trading habits"
+            ],
+            "keywords": [
+              "discipline",
+              "risk signals",
+              "diagnostics"
+            ]
+          },
+          "review-archive": {
+            "title": "How do I view and manage training archives?",
+            "summary": "Archive lists replayable Free Replay records with detail, rename, selection, and delete actions.",
+            "steps": [
+              "Find a session in the selected time range.",
+              "Open details to inspect chart, trades, and environment evidence.",
+              "Rename, select, or delete records when organizing them."
+            ],
+            "notes": [
+              "History retention may remove expired replay detail while retaining required summaries."
+            ],
+            "aliases": [
+              "training history",
+              "replay records"
+            ],
+            "keywords": [
+              "archive",
+              "replay",
+              "delete"
+            ]
+          },
+          "challenge-mode-selection": {
+            "title": "How do I choose a focused challenge?",
+            "summary": "Choose Flash Decision or Crisis Survival and reuse a configured question bank in either mode.",
+            "steps": [
+              "Select a challenge mode and question bank.",
+              "Confirm its sample pools, target interval, and question count.",
+              "Review session parameters before starting."
+            ],
+            "notes": [
+              "Opening the feature only navigates to Challenges; it never starts a session automatically."
+            ],
+            "aliases": [
+              "challenge mode",
+              "focused training"
+            ],
+            "keywords": [
+              "question bank",
+              "mode selection",
+              "start challenge"
+            ]
+          },
+          "challenge-fast-decision": {
+            "title": "How does Flash Decision work?",
+            "summary": "Choose long, short, or observe before the countdown ends, then compare the decision with later price action.",
+            "steps": [
+              "Choose a question bank and strictness in preparation.",
+              "Submit a direction before each countdown ends.",
+              "Review per-question feedback and settlement accuracy and speed."
+            ],
+            "notes": [
+              "A timeout is recorded under the current rules; the app does not choose a direction for you."
+            ],
+            "aliases": [
+              "lightning decision",
+              "market sense training"
+            ],
+            "keywords": [
+              "countdown",
+              "long",
+              "short"
+            ]
+          },
+          "challenge-risk-survival": {
+            "title": "How does Crisis Survival work?",
+            "summary": "Manage position size, drawdown, and operation limits under a stressed market scenario.",
+            "steps": [
+              "Confirm the bank, starting capital, and risk rules.",
+              "Use orders, advance, and undo to control exposure.",
+              "Review drawdown, discipline, and recovery at settlement."
+            ],
+            "notes": [
+              "Disabled-action reasons appear in place; training results are not a return promise."
+            ],
+            "aliases": [
+              "crisis survival",
+              "risk challenge"
+            ],
+            "keywords": [
+              "drawdown",
+              "position",
+              "risk discipline"
+            ]
+          },
+          "challenge-settlement": {
+            "title": "How do I read challenge settlement?",
+            "summary": "Settlement summarizes score, completion, key risk metrics, and reviewable action evidence.",
+            "steps": [
+              "Check completion, score, and headline metrics.",
+              "Open the mode-specific decision or risk review.",
+              "Create a review note when useful, then continue to the next question."
+            ],
+            "notes": [
+              "Settlement metrics differ by mode and should be compared within the same mode."
+            ],
+            "aliases": [
+              "challenge result",
+              "training settlement"
+            ],
+            "keywords": [
+              "score",
+              "review",
+              "next question"
+            ]
+          },
+          "challenge-stats": {
+            "title": "How do I use Challenge Statistics?",
+            "summary": "Statistics aggregate completion, performance, and trends by mode and time range.",
+            "steps": [
+              "Select a range and challenge mode.",
+              "Inspect overview metrics and trends.",
+              "Use settlement records and notes to explain unusual changes."
+            ],
+            "notes": [
+              "Statistics include saved local challenge facts only."
+            ],
+            "aliases": [
+              "challenge scores",
+              "focused statistics"
+            ],
+            "keywords": [
+              "trend",
+              "completion",
+              "long-term performance"
+            ]
+          },
+          "indicator-create": {
+            "title": "How do I create and validate a custom indicator?",
+            "summary": "Edit formulas and parameters, then compile, run, and preview them against local market data.",
+            "steps": [
+              "Create an indicator and enter its name, formula, and parameters.",
+              "Use diagnostics to fix syntax or data-scope issues.",
+              "Choose a local instrument, validate the plot, and save."
+            ],
+            "notes": [
+              "Indicator code runs locally; unsupported functions are blocked explicitly."
+            ],
+            "aliases": [
+              "formula indicator",
+              "write indicator"
+            ],
+            "keywords": [
+              "compile",
+              "parameters",
+              "preview"
+            ]
+          },
+          "indicator-reference": {
+            "title": "Where can I find indicator function documentation?",
+            "summary": "Indicator Reference lists supported functions, parameters, returns, examples, and data-scope limits.",
+            "steps": [
+              "Open Indicator Reference from the workbench header.",
+              "Find a function by name or category.",
+              "Apply its example and limits, then validate the formula in the workbench."
+            ],
+            "notes": [
+              "The reference describes functions supported by the current app version."
+            ],
+            "aliases": [
+              "function reference",
+              "indicator docs"
+            ],
+            "keywords": [
+              "function",
+              "syntax",
+              "example"
+            ]
+          },
+          "backtest-configure": {
+            "title": "How do I configure a strategy backtest?",
+            "summary": "Select a saved indicator, signal conditions, sample pool, trading environment, and execution mode to create a local batch.",
+            "steps": [
+              "Choose an indicator and confirm BUY, SELL, SHORT, and COVER signals or conditions.",
+              "Set the sample pool, environment, capital, and execution mode.",
+              "Review the configuration and explicitly run the batch."
+            ],
+            "notes": [
+              "Opening Backtest never starts a batch automatically."
+            ],
+            "aliases": [
+              "backtest setup",
+              "run strategy"
+            ],
+            "keywords": [
+              "signal conditions",
+              "sample pool",
+              "execution mode"
+            ]
+          },
+          "backtest-results": {
+            "title": "How do I read strategy backtest results?",
+            "summary": "Batch overview shows return, win rate, drawdown, and trades; detail adds per-instrument charts, executions, and equity curves.",
+            "steps": [
+              "Confirm batch status and any failed instruments.",
+              "Compare total return, win rate, maximum drawdown, and sample count.",
+              "Open instrument detail to verify signals, fills, and the equity curve."
+            ],
+            "notes": [
+              "Past backtests do not guarantee future results; compare with consistent data and environments."
+            ],
+            "aliases": [
+              "backtest report",
+              "strategy results"
+            ],
+            "keywords": [
+              "win rate",
+              "maximum drawdown",
+              "equity curve"
+            ]
+          },
+          "notes-create": {
+            "title": "How do I create and organize notes?",
+            "summary": "Use Notes to capture training observations and organize them with titles, colors, and structured content.",
+            "steps": [
+              "Create a note with a clear title.",
+              "Record the rationale, result, and next item to test.",
+              "Use colors or lists, save, and find it again from the notes list."
+            ],
+            "notes": [
+              "Note content stays local unless you explicitly use a supported transfer flow."
+            ],
+            "aliases": [
+              "write a note",
+              "training journal"
+            ],
+            "keywords": [
+              "title",
+              "color",
+              "review record"
+            ]
+          },
+          "notes-review-links": {
+            "title": "How do notes link to training and challenges?",
+            "summary": "Notes created from an archive or settlement retain readable context and evidence summaries.",
+            "steps": [
+              "Choose Create Note in archive detail or challenge settlement.",
+              "Add your reasoning, error cause, and next action.",
+              "Open Notes to review and continue editing."
+            ],
+            "notes": [
+              "Help navigation opens top-level workspaces only and never a specific record."
+            ],
+            "aliases": [
+              "review note",
+              "link training"
+            ],
+            "keywords": [
+              "context",
+              "evidence",
+              "challenge record"
+            ]
+          },
+          "data-acquire": {
+            "title": "Where can I get historical market data?",
+            "summary": "Data Management offers optional local open-source connectors: AKTools/AKShare for China A-shares and CCXT for public Binance or OKX spot candles. Files are saved to your chosen folder and still require a separate review and import.",
+            "steps": [
+              "You can also start with the fully offline built-in or synthetic samples.",
+              "In Data Management, choose a source, select A-shares, major indices, or crypto pairs from the live catalog, then set dates, interval, and destination folder.",
+              "The page shows only the AKTools, AKShare, or CCXT open-source projects used by the selected connector; there is no market-source terms gate.",
+              "After saving, choose Continue to preflight and import to check fields, interval, time zone, and invalid data. A completed download never writes to local data automatically.",
+              "Other local csv, json, parquet, or xlsx files that meet the format requirements remain supported."
+            ],
+            "notes": [
+              "Your computer contacts the third-party source directly. Zinuto servers receive neither the query nor the files.",
+              "Zinuto does not distribute, host, or license market data. Check permissions, fees, rate limits, and permitted use yourself."
+            ],
+            "aliases": [
+              "where to get data",
+              "broker export",
+              "open-source downloader",
+              "local market download",
+              "manual import"
+            ],
+            "keywords": [
+              "AKTools",
+              "AKShare",
+              "CCXT",
+              "Binance Spot",
+              "OKX Spot",
+              "local connector",
+              "import preflight"
+            ]
+          },
+          "data-source-by-market": {
+            "title": "Which data sources fit each market?",
+            "summary": "Choose a source by market first, then compare historical coverage, intervals, time zone, adjustment method, and usage rights.",
+            "steps": [
+              "For mainland China markets, start with a broker export, AkShare, or Tushare.",
+              "For U.S., Hong Kong, and global equities, use a broker, TradingView, or a professional data vendor.",
+              "For FX, export from a broker or MT5, or review historical files available from HistData.",
+              "For digital assets, use official candlestick APIs from exchanges such as Binance or OKX.",
+              "For futures and other markets, prefer a broker, an exchange-authorized channel, or a vendor covering the required contracts."
+            ],
+            "notes": [
+              "A TradingView CSV contains only the history currently loaded on the chart; load more history before export when needed.",
+              "API permissions, coverage, and rate limits can change. Also confirm adjustment method, base interval, and time zone before import."
+            ],
+            "aliases": [
+              "China stock data",
+              "U.S. stock data",
+              "FX data",
+              "crypto data",
+              "data sources by market"
+            ],
+            "keywords": [
+              "AkShare",
+              "Tushare",
+              "TradingView",
+              "MT5",
+              "Binance",
+              "OKX",
+              "HistData",
+              "Nasdaq Data Link",
+              "futures",
+              "candlestick API"
+            ]
+          },
+          "data-prepare": {
+            "title": "How should I organize downloaded market data for import?",
+            "summary": "Organize each instrument's historical bars into consistent local files, then verify format, fields, interval, time zone, and adjustment method before import.",
+            "steps": [
+              "Use one file per instrument and a clear instrument file name that is unique within the batch.",
+              "Put only one format in an import folder: csv, json, parquet, or xlsx.",
+              "Each record must contain date/time, open, high, low, and close; volume is optional and becomes 0 when missing.",
+              "The base interval must be 1m, 5m, 1h, or 1d, and you must confirm the time zone used by the timestamps.",
+              "Do not mix raw and adjusted prices. Use a records array or JSONL for JSON, and keep one worksheet in each XLSX file."
+            ],
+            "notes": [
+              "Preflight reports missing fields, invalid OHLC, conflicting duplicates, and time-zone evidence; review them before starting import."
+            ],
+            "aliases": [
+              "prepare market data",
+              "pre-import checklist",
+              "organize downloaded data",
+              "data format requirements"
+            ],
+            "keywords": [
+              "OHLCV",
+              "historical data",
+              "file format",
+              "base interval",
+              "time zone",
+              "adjusted prices",
+              "records",
+              "JSONL"
+            ]
+          },
+          "data-import": {
+            "title": "How do I import a local market-data folder?",
+            "summary": "The app runs a local full-folder preflight before you confirm mappings, sample pool name, scope, time zone, and validation.",
+            "steps": [
+              "Drop a folder in Data or choose Select Folder.",
+              "Review diagnostics and map date/time, open, high, low, and close; missing volume becomes 0.",
+              "Confirm the sample pool, scope, and time zone, then start import and wait for the result."
+            ],
+            "notes": [
+              "Help searches never upload queries or files; import reads only the folder you explicitly choose."
+            ],
+            "aliases": [
+              "import data",
+              "field mapping"
+            ],
+            "keywords": [
+              "preflight",
+              "time zone",
+              "sample pool"
+            ]
+          },
+          "data-manage": {
+            "title": "How do I manage local market data?",
+            "summary": "Inspect data sources, sample pools, intervals, time zones, diagnostics, and sync state, then rebind or reimport when needed.",
+            "steps": [
+              "Select a data source or sample pool in Local Market Data.",
+              "Inspect detail, diagnostics, and change state.",
+              "Check changes, sync incrementally, rebind the folder, or explicitly delete."
+            ],
+            "notes": [
+              "Delete and clear are explicit actions; opening Data never runs them automatically."
+            ],
+            "aliases": [
+              "data source management",
+              "sync data"
+            ],
+            "keywords": [
+              "source",
+              "rebind",
+              "incremental sync"
+            ]
+          },
+          "settings-general": {
+            "title": "How do I change general display settings?",
+            "summary": "Adjust language, theme, font size, price colors, trading palette, and desktop close behavior.",
+            "steps": [
+              "Open General in Settings.",
+              "Choose a language, theme, or display preference.",
+              "Return to a workspace and confirm the result."
+            ],
+            "notes": [
+              "Most display preferences apply immediately and are stored on this device."
+            ],
+            "aliases": [
+              "interface settings",
+              "theme and language"
+            ],
+            "keywords": [
+              "font size",
+              "price colors",
+              "close behavior"
+            ]
+          },
+          "settings-transfer": {
+            "title": "How do I transfer this device's data and settings?",
+            "summary": "Export or import selected domains in an unencrypted .otp-package file, optionally including local market data.",
+            "steps": [
+              "Choose data domains and market-data sources in Data and Transfer.",
+              "Create the transfer file and store it safely.",
+              "Import it offline on the target device and rebind folders when requested."
+            ],
+            "notes": [
+              "No account or server is required. The package is not encrypted and may contain local data, so store it securely."
+            ],
+            "aliases": [
+              "device migration",
+              "export backup"
+            ],
+            "keywords": [
+              "transfer",
+              "unencrypted export",
+              "rebind"
+            ]
+          },
+          "settings-advanced": {
+            "title": "What is history retention in Advanced Settings?",
+            "summary": "Advanced Settings manages the local long-term history window and can preview or run expired-history cleanup.",
+            "steps": [
+              "Open Advanced and choose a retention window.",
+              "Review the estimated impact.",
+              "Apply the policy, then run immediate cleanup only when needed."
+            ],
+            "notes": [
+              "The local market-data library is not automatically removed by history retention; manage it in Data."
+            ],
+            "aliases": [
+              "history cleanup",
+              "retention policy"
+            ],
+            "keywords": [
+              "advanced settings",
+              "expired records",
+              "storage"
+            ]
+          },
+          "settings-about": {
+            "title": "Where do I check the version and usage help?",
+            "summary": "About contains the local version, release notes, and offline Help Center.",
+            "steps": [
+              "Open About in Settings.",
+              "Review the current version or local release notes.",
+              "Open Help Center and search for the relevant feature when you need instructions."
+            ],
+            "notes": [
+              "Help search stays entirely local and search terms are never uploaded."
+            ],
+            "aliases": [
+              "about",
+              "usage help"
+            ],
+            "keywords": [
+              "version",
+              "release notes",
+              "help center"
+            ]
+          }
+        }
+      },
+      "ja": {
+        "copy": {
+          "launcherLabel": "ヘルプセンター",
+          "hideLauncher": "フローティングヘルプボタンを非表示",
+          "panelTitle": "ヘルプセンター",
+          "embeddedTitle": "使い方ヘルプ",
+          "embeddedDescription": "確認済みのオフライン記事を閲覧または検索できます。検索内容は送信されません。",
+          "searchLabel": "ヘルプ記事を検索",
+          "searchPlaceholder": "機能、手順、質問を検索",
+          "clearSearch": "検索をクリア",
+          "close": "ヘルプセンターを閉じる",
+          "back": "戻る",
+          "recommendedTitle": "この画面のおすすめ",
+          "categoriesTitle": "カテゴリから探す",
+          "searchResultsTitle": "検索結果",
+          "noResultsTitle": "確かな一致が見つかりません",
+          "noResultsDescription": "より具体的な語句で検索してください。",
+          "summaryTitle": "概要",
+          "stepsTitle": "手順",
+          "notesTitle": "注意事項",
+          "relatedTitle": "関連する質問",
+          "openWorkspace": "関連機能を開く",
+          "categoryLabels": {
+            "START": "はじめに",
+            "TRAINING": "自由推演",
+            "REVIEW": "振り返りとノート",
+            "CHALLENGE": "チャレンジ",
+            "ANALYSIS": "指標と分析",
+            "DATA": "データ",
+            "SETTINGS": "設定"
+          }
+        },
+        "articles": {
+          "getting-started": {
+            "title": "Zinuto Core を最初にどう使えばよいですか？",
+            "summary": "利用可能なデータを確認し、指揮センターから自由推演、チャレンジ、振り返りを始めます。",
+            "steps": [
+              "データ管理で利用可能なサンプルプールを確認します。",
+              "指揮センターに戻り、自由推演または専門チャレンジを選びます。",
+              "終了後に振り返り診断とノートで結果を整理します。"
+            ],
+            "notes": [
+              "ヘルプ記事が訓練開始やデータ変更を自動実行することはありません。"
+            ],
+            "aliases": [
+              "初めての使い方",
+              "始め方"
+            ],
+            "keywords": [
+              "初心者",
+              "流れ",
+              "指揮センター"
+            ]
+          },
+          "command-center-overview": {
+            "title": "指揮センターでは何ができますか？",
+            "summary": "訓練入口、データ状態、最近の活動をまとめた各画面の出発点です。",
+            "steps": [
+              "データ概要で訓練用サンプルを確認します。",
+              "モードカードから自由推演、フラッシュ判断、危機サバイバルを開きます。",
+              "最近の活動から未完了の作業を続けます。"
+            ],
+            "notes": [
+              "カードは移動のみで、訓練条件は準備画面で確定します。"
+            ],
+            "aliases": [
+              "ホーム",
+              "訓練センター"
+            ],
+            "keywords": [
+              "入口",
+              "最近の活動"
+            ]
+          },
+          "trainer-prepare": {
+            "title": "自由推演をどう準備しますか？",
+            "summary": "モード、サンプルプール、取引ルール、進行足、開始位置を選んでから始めます。",
+            "steps": [
+              "ランダムまたは指定モードと銘柄を選びます。",
+              "今回の取引ルールと進行足を確認します。",
+              "開始位置を設定し、必要な場合だけ既定値として保存します。"
+            ],
+            "notes": [
+              "元データの足種は変更されず、対応する上位足へ集約されます。"
+            ],
+            "aliases": [
+              "自由推演の準備",
+              "訓練開始"
+            ],
+            "keywords": [
+              "サンプルプール",
+              "開始位置",
+              "足種"
+            ]
+          },
+          "trainer-session": {
+            "title": "自由推演中はどう操作しますか？",
+            "summary": "表示足の変更、指標や描画、現在のルールに基づく注文、進行、取り消しができます。",
+            "steps": [
+              "チャート足、建玉、注文見積を確認します。",
+              "売買または進行で次の相場を確認します。",
+              "終了して保存し、振り返り診断で確認します。"
+            ],
+            "notes": [
+              "約定数量と価格は操作時にローカル実行環境で再検証されます。"
+            ],
+            "aliases": [
+              "推演中",
+              "訓練操作"
+            ],
+            "keywords": [
+              "注文",
+              "進行",
+              "取り消し"
+            ]
+          },
+          "review-overview": {
+            "title": "振り返り診断の概要はどう見ますか？",
+            "summary": "選択期間の収益、リスク、代表的な訓練を集約します。",
+            "steps": [
+              "振り返り期間を選びます。",
+              "主要指標とリスク分布を確認します。",
+              "行動またはアーカイブで元の訓練を開きます。"
+            ],
+            "notes": [
+              "集計は同一のローカル履歴スナップショットに基づきます。"
+            ],
+            "aliases": [
+              "振り返り概要",
+              "訓練診断"
+            ],
+            "keywords": [
+              "収益",
+              "リスク",
+              "期間"
+            ]
+          },
+          "review-behavior": {
+            "title": "行動診断には何が表示されますか？",
+            "summary": "操作傾向、資金規律、繰り返すリスク信号をまとめます。",
+            "steps": [
+              "概要と同じ期間を選びます。",
+              "行動指標と異常の集中箇所を確認します。",
+              "アーカイブの代表例で状況を確かめます。"
+            ],
+            "notes": [
+              "行動指標は振り返り用で、実取引の助言ではありません。"
+            ],
+            "aliases": [
+              "行動分析",
+              "取引習慣"
+            ],
+            "keywords": [
+              "規律",
+              "リスク信号",
+              "診断"
+            ]
+          },
+          "review-archive": {
+            "title": "訓練アーカイブをどう管理しますか？",
+            "summary": "自由推演記録の詳細表示、名前変更、選択、削除ができます。",
+            "steps": [
+              "期間内の訓練を探します。",
+              "詳細でチャート、取引、環境根拠を確認します。",
+              "必要に応じて名前変更、選択、削除を行います。"
+            ],
+            "notes": [
+              "保持設定により古い再生詳細が削除されても必要な概要は残ります。"
+            ],
+            "aliases": [
+              "訓練履歴",
+              "再生記録"
+            ],
+            "keywords": [
+              "アーカイブ",
+              "再生",
+              "削除"
+            ]
+          },
+          "challenge-mode-selection": {
+            "title": "専門チャレンジをどう選びますか？",
+            "summary": "フラッシュ判断または危機サバイバルを選び、設定済み問題バンクを共用します。",
+            "steps": [
+              "モードと問題バンクを選びます。",
+              "対象サンプルプール、目標足、問題数を確認します。",
+              "今回の条件を確認して開始します。"
+            ],
+            "notes": [
+              "関連機能を開いても自動開始はしません。"
+            ],
+            "aliases": [
+              "チャレンジモード",
+              "専門訓練"
+            ],
+            "keywords": [
+              "問題バンク",
+              "モード選択",
+              "開始"
+            ]
+          },
+          "challenge-fast-decision": {
+            "title": "フラッシュ判断はどう進めますか？",
+            "summary": "制限時間内に買い目線、売り目線、様子見を選び、その後の値動きで検証します。",
+            "steps": [
+              "問題バンクと厳格度を選びます。",
+              "各問の制限時間内に方向を提出します。",
+              "問題ごとの結果と決算の速度・正確性を確認します。"
+            ],
+            "notes": [
+              "時間切れはルールに従って記録され、自動選択はされません。"
+            ],
+            "aliases": [
+              "ライトニング判断",
+              "相場感訓練"
+            ],
+            "keywords": [
+              "カウントダウン",
+              "買い",
+              "売り"
+            ]
+          },
+          "challenge-risk-survival": {
+            "title": "危機サバイバルはどう進めますか？",
+            "summary": "厳しい相場で建玉、ドローダウン、操作回数を管理します。",
+            "steps": [
+              "問題バンク、初期資金、リスクルールを確認します。",
+              "注文、進行、取り消しでエクスポージャーを制御します。",
+              "決算でドローダウン、規律、回復を確認します。"
+            ],
+            "notes": [
+              "訓練結果は収益を保証しません。"
+            ],
+            "aliases": [
+              "危機サバイバル",
+              "リスクチャレンジ"
+            ],
+            "keywords": [
+              "ドローダウン",
+              "建玉",
+              "リスク規律"
+            ]
+          },
+          "challenge-settlement": {
+            "title": "チャレンジ決算をどう見ますか？",
+            "summary": "得点、完了状況、主要リスク指標、操作根拠をまとめます。",
+            "steps": [
+              "完了、得点、主要指標を確認します。",
+              "モード固有の判断またはリスク評価を開きます。",
+              "必要なら振り返りノートを作成し、次の問題へ進みます。"
+            ],
+            "notes": [
+              "指標はモードごとに異なるため同じモード内で比較します。"
+            ],
+            "aliases": [
+              "チャレンジ結果",
+              "訓練決算"
+            ],
+            "keywords": [
+              "得点",
+              "評価",
+              "次の問題"
+            ]
+          },
+          "challenge-stats": {
+            "title": "チャレンジ統計をどう使いますか？",
+            "summary": "モードと期間別に完了度、成績、傾向を集約します。",
+            "steps": [
+              "期間とモードを選びます。",
+              "概要指標と傾向を確認します。",
+              "決算記録とノートで変化を解釈します。"
+            ],
+            "notes": [
+              "保存済みのローカルチャレンジ事実のみを含みます。"
+            ],
+            "aliases": [
+              "チャレンジ成績",
+              "専門統計"
+            ],
+            "keywords": [
+              "傾向",
+              "完了度",
+              "長期成績"
+            ]
+          },
+          "indicator-create": {
+            "title": "カスタム指標をどう作成・検証しますか？",
+            "summary": "数式と引数を編集し、ローカル相場データでコンパイル、実行、プレビューします。",
+            "steps": [
+              "名前、数式、引数を入力します。",
+              "診断で構文やデータ範囲の問題を直します。",
+              "ローカル銘柄で描画を検証して保存します。"
+            ],
+            "notes": [
+              "コードはローカルで動作し、未対応関数は明示的に遮断されます。"
+            ],
+            "aliases": [
+              "数式指標",
+              "指標作成"
+            ],
+            "keywords": [
+              "コンパイル",
+              "引数",
+              "プレビュー"
+            ]
+          },
+          "indicator-reference": {
+            "title": "指標関数の説明はどこにありますか？",
+            "summary": "指標リファレンスに対応関数、引数、戻り値、例、データ範囲制限があります。",
+            "steps": [
+              "ワークベンチ上部から指標リファレンスを開きます。",
+              "名前またはカテゴリで関数を探します。",
+              "例と制限を反映し、ワークベンチで検証します。"
+            ],
+            "notes": [
+              "現在のアプリ版で実際に対応する関数を説明しています。"
+            ],
+            "aliases": [
+              "関数リファレンス",
+              "指標文書"
+            ],
+            "keywords": [
+              "関数",
+              "構文",
+              "例"
+            ]
+          },
+          "backtest-configure": {
+            "title": "戦略バックテストをどう設定しますか？",
+            "summary": "保存済み指標、シグナル条件、サンプルプール、取引環境、約定方式を選んでローカルバッチを作ります。",
+            "steps": [
+              "指標と BUY、SELL、SHORT、COVER のシグナルを確認します。",
+              "サンプルプール、環境、資金、約定方式を設定します。",
+              "設定を確認し、明示的に実行します。"
+            ],
+            "notes": [
+              "画面を開くだけでバッチは開始されません。"
+            ],
+            "aliases": [
+              "バックテスト設定",
+              "戦略実行"
+            ],
+            "keywords": [
+              "シグナル条件",
+              "サンプルプール",
+              "約定方式"
+            ]
+          },
+          "backtest-results": {
+            "title": "バックテスト結果をどう読みますか？",
+            "summary": "収益、勝率、ドローダウン、取引数と、銘柄別チャート・約定・資産曲線を確認できます。",
+            "steps": [
+              "バッチ状態と失敗銘柄を確認します。",
+              "総収益、勝率、最大ドローダウン、標本数を比較します。",
+              "銘柄詳細でシグナル、約定、資産曲線を検証します。"
+            ],
+            "notes": [
+              "過去の結果は将来を保証しません。条件を揃えて比較してください。"
+            ],
+            "aliases": [
+              "バックテスト報告",
+              "戦略結果"
+            ],
+            "keywords": [
+              "勝率",
+              "最大ドローダウン",
+              "資産曲線"
+            ]
+          },
+          "notes-create": {
+            "title": "ノートをどう作成・整理しますか？",
+            "summary": "訓練の気づきをタイトル、色、構造化した内容で記録します。",
+            "steps": [
+              "明確なタイトルでノートを作ります。",
+              "判断根拠、結果、次に検証する内容を記録します。",
+              "色やリストで整理し保存します。"
+            ],
+            "notes": [
+              "対応する移行機能を自分で使わない限り本文はローカルに残ります。"
+            ],
+            "aliases": [
+              "ノートを書く",
+              "訓練日誌"
+            ],
+            "keywords": [
+              "タイトル",
+              "色",
+              "振り返り記録"
+            ]
+          },
+          "notes-review-links": {
+            "title": "ノートは訓練やチャレンジとどう関連しますか？",
+            "summary": "アーカイブや決算から作るノートには読める状況と根拠概要が残ります。",
+            "steps": [
+              "詳細または決算でノート作成を選びます。",
+              "判断、誤りの原因、改善行動を追記します。",
+              "ノート画面でまとめて確認・編集します。"
+            ],
+            "notes": [
+              "ヘルプは最上位画面だけを開き、特定記録は自動で開きません。"
+            ],
+            "aliases": [
+              "振り返りノート",
+              "訓練関連"
+            ],
+            "keywords": [
+              "状況",
+              "根拠",
+              "チャレンジ記録"
+            ]
+          },
+          "data-acquire": {
+            "title": "過去の相場データはどこで入手できますか？",
+            "summary": "データ管理には任意のローカル・オープンソース接続機能があります。中国A株は AKTools/AKShare、暗号資産は CCXT で Binance または OKX の現物公開足を取得します。選択したフォルダに保存後、別途確認して取り込みます。",
+            "steps": [
+              "完全オフラインの組み込み例や架空データから始めることもできます。",
+              "データ管理でデータ元を選び、実際の一覧から中国A株、主要指数、または暗号資産ペアを選択して、日付・足種・保存先を設定します。",
+              "画面には選択した接続機能で使う AKTools、AKShare、または CCXT のオープンソースプロジェクトだけを表示し、相場提供元の利用条件による操作制限は設けません。",
+              "保存後は「事前検査して取込へ進む」で項目・足種・タイムゾーン・異常値を確認します。取得完了だけでローカルデータへ書き込むことはありません。",
+              "形式要件を満たすローカルの csv、json、parquet、xlsx も引き続き取り込めます。"
+            ],
+            "notes": [
+              "第三者へのリクエストは端末から直接送られ、Zinuto のサーバーは検索条件もファイルも受け取りません。",
+              "Zinuto は相場データを配布、保管、許諾しません。利用許可、料金、制限、用途は各自で確認してください。"
+            ],
+            "aliases": [
+              "データの入手先",
+              "ブローカーエクスポート",
+              "オープンソース取得",
+              "ローカル取得",
+              "手動取込"
+            ],
+            "keywords": [
+              "AKTools",
+              "AKShare",
+              "CCXT",
+              "Binance Spot",
+              "OKX Spot",
+              "ローカル接続",
+              "取込前検査"
+            ]
+          },
+          "data-source-by-market": {
+            "title": "市場ごとにどのデータ入手先が向いていますか？",
+            "summary": "まず市場に合う入手先を選び、履歴範囲、足種、タイムゾーン、調整方法、利用権を比較します。",
+            "steps": [
+              "中国本土市場は、証券会社からの出力、AkShare、Tushare を候補にします。",
+              "米国株、香港株、世界の株式は、証券会社、TradingView、専門データベンダーから取得します。",
+              "FX は証券会社や MT5 から出力するか、HistData の履歴ファイルを確認します。",
+              "暗号資産は Binance や OKX など取引所の公式ローソク足 API を使います。",
+              "先物やその他の市場は、証券会社、取引所公認の経路、必要な銘柄を扱う専門ベンダーを優先します。"
+            ],
+            "notes": [
+              "TradingView の CSV にはチャート上で読み込み済みの履歴だけが含まれます。必要なら出力前に履歴を追加で読み込んでください。",
+              "API の権限、範囲、レート制限は変わることがあります。取込前に調整方法、基本足、タイムゾーンも確認してください。"
+            ],
+            "aliases": [
+              "中国株データ",
+              "米国株データ",
+              "FXデータ",
+              "暗号資産データ",
+              "市場別データ入手先"
+            ],
+            "keywords": [
+              "AkShare",
+              "Tushare",
+              "TradingView",
+              "MT5",
+              "Binance",
+              "OKX",
+              "HistData",
+              "Nasdaq Data Link",
+              "先物",
+              "ローソク足 API"
+            ]
+          },
+          "data-prepare": {
+            "title": "ダウンロードした相場データをどう整理すれば取り込めますか？",
+            "summary": "銘柄ごとの履歴足を構造の揃ったローカルファイルにし、形式、項目、足種、タイムゾーン、価格調整方法を取込前に確認します。",
+            "steps": [
+              "1ファイルを1銘柄とし、同じ取込単位内で重複しない分かりやすい銘柄ファイル名を使います。",
+              "1つの取込フォルダには csv、json、parquet、xlsx のいずれか1形式だけを入れます。",
+              "各行に date/time、open、high、low、close が必要です。volume は任意で、ない場合は 0 になります。",
+              "基本足は 1m、5m、1h、1d のいずれかとし、タイムスタンプのタイムゾーンを確認します。",
+              "未調整価格と調整済み価格を混在させないでください。JSON は records 配列または JSONL、XLSX は1ワークシートにします。"
+            ],
+            "notes": [
+              "事前検査は不足項目、不正な OHLC、値が競合する重複、タイムゾーンの根拠を示します。確認後に取込を開始してください。"
+            ],
+            "aliases": [
+              "相場データ準備",
+              "取込前チェック",
+              "ダウンロードデータ整理",
+              "データ形式要件"
+            ],
+            "keywords": [
+              "OHLCV",
+              "履歴データ",
+              "ファイル形式",
+              "基本足",
+              "タイムゾーン",
+              "調整済み価格",
+              "レコード",
+              "JSONL"
+            ]
+          },
+          "data-import": {
+            "title": "ローカル相場フォルダをどう取り込みますか？",
+            "summary": "フォルダ全体をローカルで事前検査し、項目対応、サンプルプール名、範囲、タイムゾーンを確認します。",
+            "steps": [
+              "データ管理にフォルダをドロップまたは選択します。",
+              "date/time、open、high、low、close を確認します。volume がなければ 0 です。",
+              "サンプルプール、範囲、タイムゾーンを確認して開始します。"
+            ],
+            "notes": [
+              "ヘルプ検索は語句やファイルを送信せず、取り込みは選択したフォルダだけを読みます。"
+            ],
+            "aliases": [
+              "データ取り込み",
+              "項目対応"
+            ],
+            "keywords": [
+              "事前検査",
+              "タイムゾーン",
+              "サンプルプール"
+            ]
+          },
+          "data-manage": {
+            "title": "取り込んだデータをどう管理しますか？",
+            "summary": "ローカル データソース、サンプルプール、足種、タイムゾーン、診断、同期状態を確認できます。",
+            "steps": [
+              "ローカル相場で データソース またはサンプルプールを選びます。",
+              "詳細、診断、変更状態を確認します。",
+              "変更確認、増分同期、フォルダ再紐付け、削除を必要に応じて実行します。"
+            ],
+            "notes": [
+              "削除は明示操作であり、画面を開いただけでは実行されません。"
+            ],
+            "aliases": [
+              "データソース管理",
+              "データ同期"
+            ],
+            "keywords": [
+              "データソース",
+              "再紐付け",
+              "増分同期"
+            ]
+          },
+          "settings-general": {
+            "title": "一般表示設定をどう変更しますか？",
+            "summary": "言語、テーマ、文字サイズ、騰落色、取引配色、閉じる動作を調整します。",
+            "steps": [
+              "設定の一般を開きます。",
+              "言語、テーマ、表示設定を選びます。",
+              "作業画面に戻り表示を確認します。"
+            ],
+            "notes": [
+              "多くの表示設定は即時反映され、この端末に保存されます。"
+            ],
+            "aliases": [
+              "画面設定",
+              "テーマと言語"
+            ],
+            "keywords": [
+              "文字サイズ",
+              "騰落色",
+              "閉じる動作"
+            ]
+          },
+          "settings-transfer": {
+            "title": "端末のデータと設定をどう移行しますか？",
+            "summary": "非暗号化の .otp-package に選択した領域を出力・入力し、相場データも選べます。",
+            "steps": [
+              "データと移行で領域と データソース を選びます。",
+              "移行ファイルを作成し安全に保存します。",
+              "移行先でオフライン取り込みし、必要なら再紐付けします。"
+            ],
+            "notes": [
+              "アカウントやサーバーは不要です。パッケージは暗号化されず、ローカルデータを含む場合があるため安全に保管してください。"
+            ],
+            "aliases": [
+              "端末移行",
+              "バックアップ出力"
+            ],
+            "keywords": [
+              "移行",
+              "非暗号化出力",
+              "再紐付け"
+            ]
+          },
+          "settings-advanced": {
+            "title": "詳細設定の履歴保持とは何ですか？",
+            "summary": "ローカル長期履歴の保持期間と期限切れ履歴の整理を管理します。",
+            "steps": [
+              "詳細設定で保持期間を選びます。",
+              "影響範囲を確認します。",
+              "方針を適用し、必要な場合だけ即時整理します。"
+            ],
+            "notes": [
+              "ローカル相場ライブラリは自動削除されず、データ管理で扱います。"
+            ],
+            "aliases": [
+              "履歴整理",
+              "保持方針"
+            ],
+            "keywords": [
+              "詳細設定",
+              "期限切れ記録",
+              "ストレージ"
+            ]
+          },
+          "settings-about": {
+            "title": "バージョンと使い方のヘルプはどこで確認できますか？",
+            "summary": "このアプリについてには、ローカルのバージョン、リリースノート、オフラインヘルプがあります。",
+            "steps": [
+              "設定の「このアプリについて」を開きます。",
+              "現在のバージョンまたはローカルのリリースノートを確認します。",
+              "操作方法が必要な場合は、ヘルプセンターで関連機能を検索します。"
+            ],
+            "notes": [
+              "ヘルプ検索はすべてローカルで行われ、検索語は送信されません。"
+            ],
+            "aliases": [
+              "このアプリについて",
+              "使い方ヘルプ"
+            ],
+            "keywords": [
+              "バージョン",
+              "リリースノート",
+              "ヘルプセンター"
+            ]
+          }
+        }
+      },
+      "ko": {
+        "copy": {
+          "launcherLabel": "도움말 센터",
+          "hideLauncher": "플로팅 도움말 버튼 숨기기",
+          "panelTitle": "도움말 센터",
+          "embeddedTitle": "제품 도움말",
+          "embeddedDescription": "검토된 오프라인 문서를 찾아보거나 검색할 수 있습니다. 검색어는 업로드되지 않습니다.",
+          "searchLabel": "도움말 문서 검색",
+          "searchPlaceholder": "기능, 단계 또는 질문 검색",
+          "clearSearch": "검색 지우기",
+          "close": "도움말 센터 닫기",
+          "back": "뒤로",
+          "recommendedTitle": "현재 화면 추천",
+          "categoriesTitle": "카테고리별 보기",
+          "searchResultsTitle": "검색 결과",
+          "noResultsTitle": "신뢰할 수 있는 결과가 없습니다",
+          "noResultsDescription": "더 구체적인 검색어를 사용해 보세요.",
+          "summaryTitle": "요약",
+          "stepsTitle": "단계",
+          "notesTitle": "주의 사항",
+          "relatedTitle": "관련 질문",
+          "openWorkspace": "관련 기능 열기",
+          "categoryLabels": {
+            "START": "시작하기",
+            "TRAINING": "자유 리플레이",
+            "REVIEW": "복기 및 노트",
+            "CHALLENGE": "도전 훈련",
+            "ANALYSIS": "지표 및 분석",
+            "DATA": "데이터",
+            "SETTINGS": "설정"
+          }
+        },
+        "articles": {
+          "getting-started": {
+            "title": "Zinuto Core를 처음 사용할 때 무엇을 해야 하나요?",
+            "summary": "사용 가능한 데이터를 확인한 뒤 트레이닝 센터에서 자유 리플레이, 도전 또는 복기를 시작하세요.",
+            "steps": [
+              "데이터 관리에서 사용 가능한 샘플 풀이 있는지 확인합니다.",
+              "트레이닝 센터로 돌아가 자유 리플레이나 집중 도전을 선택합니다.",
+              "훈련 후 복기 진단과 노트에서 결과를 정리합니다."
+            ],
+            "notes": [
+              "도움말은 설명만 제공하며 훈련 시작이나 데이터 변경을 대신하지 않습니다."
+            ],
+            "aliases": [
+              "처음 사용",
+              "시작 방법"
+            ],
+            "keywords": [
+              "초보자",
+              "작업 흐름",
+              "트레이닝 센터"
+            ]
+          },
+          "command-center-overview": {
+            "title": "트레이닝 센터에서는 무엇을 할 수 있나요?",
+            "summary": "훈련 진입점, 데이터 상태와 최근 활동을 모아 보여주는 시작 화면입니다.",
+            "steps": [
+              "데이터 요약에서 훈련 샘플을 확인합니다.",
+              "모드 카드에서 자유 리플레이, 플래시 판단 또는 위기 생존을 엽니다.",
+              "최근 활동에서 미완료 작업을 이어갑니다."
+            ],
+            "notes": [
+              "카드는 이동만 하며 훈련 매개변수는 준비 화면에서 확인합니다."
+            ],
+            "aliases": [
+              "홈",
+              "트레이닝 센터"
+            ],
+            "keywords": [
+              "진입점",
+              "최근 활동"
+            ]
+          },
+          "trainer-prepare": {
+            "title": "자유 리플레이를 어떻게 준비하나요?",
+            "summary": "모드, 샘플 풀, 거래 규칙, 진행 주기와 시작 위치를 선택한 뒤 시작합니다.",
+            "steps": [
+              "무작위 또는 지정 모드와 종목을 선택합니다.",
+              "이번 세션의 거래 규칙과 진행 주기를 확인합니다.",
+              "시작 위치를 설정하고 필요할 때만 기본값으로 저장합니다."
+            ],
+            "notes": [
+              "원본 데이터 주기는 바뀌지 않고 지원되는 상위 주기로 집계됩니다."
+            ],
+            "aliases": [
+              "자유 리플레이 준비",
+              "훈련 시작"
+            ],
+            "keywords": [
+              "샘플 풀",
+              "시작 위치",
+              "주기"
+            ]
+          },
+          "trainer-session": {
+            "title": "자유 리플레이 진행 중에는 어떻게 조작하나요?",
+            "summary": "표시 주기, 지표와 그리기 도구를 바꾸고 현재 규칙에 따라 주문, 진행, 실행 취소를 할 수 있습니다.",
+            "steps": [
+              "차트 주기, 포지션과 주문 예상을 확인합니다.",
+              "매수, 매도 또는 진행으로 이후 시세를 살펴봅니다.",
+              "종료해 보관한 뒤 복기 진단에서 확인합니다."
+            ],
+            "notes": [
+              "체결 수량과 가격은 동작 시 로컬 런타임이 다시 검증합니다."
+            ],
+            "aliases": [
+              "리플레이 진행",
+              "훈련 조작"
+            ],
+            "keywords": [
+              "주문",
+              "진행",
+              "실행 취소"
+            ]
+          },
+          "review-overview": {
+            "title": "복기 진단 개요를 어떻게 읽나요?",
+            "summary": "선택 기간의 수익, 위험과 대표 훈련을 집계합니다.",
+            "steps": [
+              "복기 기간을 선택합니다.",
+              "핵심 지표와 위험 분포를 확인합니다.",
+              "행동 또는 보관함에서 실제 훈련을 엽니다."
+            ],
+            "notes": [
+              "집계는 동일한 로컬 기록 스냅샷을 사용합니다."
+            ],
+            "aliases": [
+              "복기 개요",
+              "훈련 진단"
+            ],
+            "keywords": [
+              "수익",
+              "위험",
+              "기간"
+            ]
+          },
+          "review-behavior": {
+            "title": "행동 진단에는 무엇이 표시되나요?",
+            "summary": "조작 성향, 자본 규율과 반복되는 위험 신호를 묶어 보여줍니다.",
+            "steps": [
+              "개요와 같은 기간을 선택합니다.",
+              "행동 지표와 이상 집중 구간을 확인합니다.",
+              "보관함의 대표 훈련으로 맥락을 검증합니다."
+            ],
+            "notes": [
+              "행동 지표는 복기용이며 실제 투자 조언이 아닙니다."
+            ],
+            "aliases": [
+              "행동 분석",
+              "거래 습관"
+            ],
+            "keywords": [
+              "규율",
+              "위험 신호",
+              "진단"
+            ]
+          },
+          "review-archive": {
+            "title": "훈련 보관함을 어떻게 관리하나요?",
+            "summary": "자유 리플레이 기록의 상세 보기, 이름 변경, 선택과 삭제를 제공합니다.",
+            "steps": [
+              "기간 안에서 훈련을 찾습니다.",
+              "상세에서 차트, 거래와 환경 근거를 확인합니다.",
+              "필요하면 이름 변경, 선택 또는 삭제합니다."
+            ],
+            "notes": [
+              "보존 정책이 오래된 재생 상세를 지워도 필요한 요약은 남습니다."
+            ],
+            "aliases": [
+              "훈련 기록",
+              "재생 기록"
+            ],
+            "keywords": [
+              "보관함",
+              "재생",
+              "삭제"
+            ]
+          },
+          "challenge-mode-selection": {
+            "title": "집중 도전 모드는 어떻게 선택하나요?",
+            "summary": "플래시 판단 또는 위기 생존을 선택하고 설정된 문제 은행을 함께 사용합니다.",
+            "steps": [
+              "도전 모드와 문제 은행을 선택합니다.",
+              "샘플 풀, 목표 주기와 문제 수를 확인합니다.",
+              "이번 설정을 확인하고 시작합니다."
+            ],
+            "notes": [
+              "관련 기능 열기는 도전 화면으로만 이동하며 자동 시작하지 않습니다."
+            ],
+            "aliases": [
+              "도전 모드",
+              "집중 훈련"
+            ],
+            "keywords": [
+              "문제 은행",
+              "모드 선택",
+              "도전 시작"
+            ]
+          },
+          "challenge-fast-decision": {
+            "title": "플래시 판단은 어떻게 진행하나요?",
+            "summary": "제한 시간 안에 상승, 하락 또는 관망을 선택하고 이후 가격으로 판단을 검토합니다.",
+            "steps": [
+              "문제 은행과 엄격도를 선택합니다.",
+              "각 문제의 제한 시간 전에 방향을 제출합니다.",
+              "문제 피드백과 결산의 속도·정확도를 확인합니다."
+            ],
+            "notes": [
+              "시간 초과는 규칙대로 기록되며 앱이 방향을 대신 선택하지 않습니다."
+            ],
+            "aliases": [
+              "번개 결정",
+              "시장 감각 훈련"
+            ],
+            "keywords": [
+              "카운트다운",
+              "상승",
+              "하락"
+            ]
+          },
+          "challenge-risk-survival": {
+            "title": "위기 생존은 어떻게 진행하나요?",
+            "summary": "압박 시세에서 포지션, 낙폭과 조작 횟수를 관리합니다.",
+            "steps": [
+              "문제 은행, 초기 자산과 위험 규칙을 확인합니다.",
+              "주문, 진행과 실행 취소로 노출을 조절합니다.",
+              "결산에서 낙폭, 규율과 회복을 확인합니다."
+            ],
+            "notes": [
+              "훈련 결과는 수익을 보장하지 않습니다."
+            ],
+            "aliases": [
+              "위기 생존",
+              "위험 도전"
+            ],
+            "keywords": [
+              "낙폭",
+              "포지션",
+              "위험 규율"
+            ]
+          },
+          "challenge-settlement": {
+            "title": "도전 결산은 어떻게 읽나요?",
+            "summary": "점수, 완료 상태, 핵심 위험 지표와 검토 가능한 조작 근거를 요약합니다.",
+            "steps": [
+              "완료 여부, 점수와 핵심 지표를 확인합니다.",
+              "모드별 판단 또는 위험 검토를 엽니다.",
+              "필요하면 복기 노트를 만들고 다음 문제로 진행합니다."
+            ],
+            "notes": [
+              "모드별 지표가 다르므로 같은 모드 안에서 비교하세요."
+            ],
+            "aliases": [
+              "도전 결과",
+              "훈련 결산"
+            ],
+            "keywords": [
+              "점수",
+              "검토",
+              "다음 문제"
+            ]
+          },
+          "challenge-stats": {
+            "title": "도전 통계는 어떻게 사용하나요?",
+            "summary": "모드와 기간별 완료도, 성과와 추세를 집계합니다.",
+            "steps": [
+              "기간과 모드를 선택합니다.",
+              "개요 지표와 추세를 확인합니다.",
+              "결산 기록과 노트로 변화를 해석합니다."
+            ],
+            "notes": [
+              "저장된 로컬 도전 사실만 포함합니다."
+            ],
+            "aliases": [
+              "도전 성적",
+              "집중 통계"
+            ],
+            "keywords": [
+              "추세",
+              "완료도",
+              "장기 성과"
+            ]
+          },
+          "indicator-create": {
+            "title": "사용자 지표를 어떻게 만들고 검증하나요?",
+            "summary": "수식과 매개변수를 편집하고 로컬 시세로 컴파일, 실행, 미리보기합니다.",
+            "steps": [
+              "이름, 수식과 매개변수를 입력합니다.",
+              "진단에서 문법 또는 데이터 범위 문제를 수정합니다.",
+              "로컬 종목으로 그래프를 검증한 뒤 저장합니다."
+            ],
+            "notes": [
+              "코드는 로컬에서 실행되며 미지원 함수는 명확히 차단됩니다."
+            ],
+            "aliases": [
+              "수식 지표",
+              "지표 작성"
+            ],
+            "keywords": [
+              "컴파일",
+              "매개변수",
+              "미리보기"
+            ]
+          },
+          "indicator-reference": {
+            "title": "지표 함수 설명은 어디에서 보나요?",
+            "summary": "지표 참조에 지원 함수, 매개변수, 반환값, 예제와 데이터 범위 제한이 있습니다.",
+            "steps": [
+              "워크벤치 상단에서 지표 참조를 엽니다.",
+              "이름 또는 카테고리로 함수를 찾습니다.",
+              "예제와 제한을 반영한 뒤 워크벤치에서 검증합니다."
+            ],
+            "notes": [
+              "현재 앱 버전이 실제 지원하는 함수를 설명합니다."
+            ],
+            "aliases": [
+              "함수 참조",
+              "지표 문서"
+            ],
+            "keywords": [
+              "함수",
+              "문법",
+              "예제"
+            ]
+          },
+          "backtest-configure": {
+            "title": "전략 백테스트는 어떻게 설정하나요?",
+            "summary": "저장된 지표, 신호 조건, 샘플 풀, 거래 환경과 체결 방식을 선택해 로컬 배치를 만듭니다.",
+            "steps": [
+              "지표와 BUY, SELL, SHORT, COVER 신호를 확인합니다.",
+              "샘플 풀, 환경, 자금과 체결 방식을 설정합니다.",
+              "구성을 확인하고 명시적으로 실행합니다."
+            ],
+            "notes": [
+              "화면을 여는 것만으로 배치가 시작되지 않습니다."
+            ],
+            "aliases": [
+              "백테스트 설정",
+              "전략 실행"
+            ],
+            "keywords": [
+              "신호 조건",
+              "샘플 풀",
+              "체결 방식"
+            ]
+          },
+          "backtest-results": {
+            "title": "백테스트 결과는 어떻게 읽나요?",
+            "summary": "수익, 승률, 낙폭, 거래 수와 종목별 차트·체결·자산 곡선을 제공합니다.",
+            "steps": [
+              "배치 상태와 실패 종목을 확인합니다.",
+              "총수익, 승률, 최대 낙폭과 표본 수를 비교합니다.",
+              "종목 상세에서 신호, 체결과 자산 곡선을 검증합니다."
+            ],
+            "notes": [
+              "과거 백테스트는 미래 결과를 보장하지 않습니다. 같은 조건으로 비교하세요."
+            ],
+            "aliases": [
+              "백테스트 보고서",
+              "전략 결과"
+            ],
+            "keywords": [
+              "승률",
+              "최대 낙폭",
+              "자산 곡선"
+            ]
+          },
+          "notes-create": {
+            "title": "노트는 어떻게 만들고 정리하나요?",
+            "summary": "훈련 관찰을 제목, 색상과 구조화된 내용으로 기록합니다.",
+            "steps": [
+              "명확한 제목으로 노트를 만듭니다.",
+              "판단 근거, 결과와 다음 검증 항목을 적습니다.",
+              "색상이나 목록으로 정리하고 저장합니다."
+            ],
+            "notes": [
+              "지원되는 이전 기능을 직접 쓰지 않으면 본문은 로컬에 남습니다."
+            ],
+            "aliases": [
+              "노트 작성",
+              "훈련 일지"
+            ],
+            "keywords": [
+              "제목",
+              "색상",
+              "복기 기록"
+            ]
+          },
+          "notes-review-links": {
+            "title": "노트는 훈련과 도전에 어떻게 연결되나요?",
+            "summary": "보관함 또는 결산에서 만든 노트에는 읽을 수 있는 맥락과 근거 요약이 남습니다.",
+            "steps": [
+              "상세 또는 결산에서 노트 만들기를 선택합니다.",
+              "판단, 오류 원인과 개선 행동을 추가합니다.",
+              "노트 화면에서 함께 확인하고 편집합니다."
+            ],
+            "notes": [
+              "도움말 이동은 최상위 화면만 열며 특정 기록을 자동으로 열지 않습니다."
+            ],
+            "aliases": [
+              "복기 노트",
+              "훈련 연결"
+            ],
+            "keywords": [
+              "맥락",
+              "근거",
+              "도전 기록"
+            ]
+          },
+          "data-acquire": {
+            "title": "과거 시세 데이터는 어디에서 구할 수 있나요?",
+            "summary": "데이터 관리에는 선택형 로컬 오픈소스 연결기가 있습니다. 중국 A주는 AKTools/AKShare, 디지털 자산은 CCXT로 Binance 또는 OKX 현물 공개 캔들을 받습니다. 선택한 폴더에 저장한 뒤 별도로 검토하고 가져와야 합니다.",
+            "steps": [
+              "완전 오프라인인 내장 또는 가상 데이터 예제로 시작할 수도 있습니다.",
+              "데이터 관리에서 소스를 고른 뒤 실제 목록에서 중국 A주, 주요 지수 또는 디지털 자산 거래쌍을 선택하고 날짜, 주기와 저장 폴더를 설정합니다.",
+              "화면에는 선택한 연결기에 사용되는 AKTools, AKShare 또는 CCXT 오픈소스 프로젝트만 표시하며 시세 출처 이용 조건을 작업 전제 조건으로 두지 않습니다.",
+              "저장 후 ‘사전 검사 후 가져오기’를 눌러 필드, 주기, 시간대와 이상 데이터를 확인합니다. 다운로드 완료만으로 로컬 데이터에 기록되지 않습니다.",
+              "형식 요건을 충족하는 로컬 csv, json, parquet, xlsx도 계속 지원합니다."
+            ],
+            "notes": [
+              "제3자 요청은 사용자 컴퓨터에서 직접 전송되며 Zinuto 서버는 검색 내용이나 파일을 받지 않습니다.",
+              "Zinuto는 시세 데이터를 배포, 호스팅 또는 허가하지 않습니다. 권한, 비용, 호출 제한과 허용 용도를 직접 확인하세요."
+            ],
+            "aliases": [
+              "데이터 구하는 곳",
+              "브로커 내보내기",
+              "오픈소스 다운로드",
+              "로컬 시세 다운로드",
+              "수동 가져오기"
+            ],
+            "keywords": [
+              "AKTools",
+              "AKShare",
+              "CCXT",
+              "Binance Spot",
+              "OKX Spot",
+              "로컬 연결기",
+              "가져오기 사전 검사"
+            ]
+          },
+          "data-source-by-market": {
+            "title": "시장별로 어떤 데이터 출처가 적합한가요?",
+            "summary": "먼저 시장에 맞는 출처를 고른 뒤 과거 범위, 주기, 시간대, 가격 조정 방식과 이용 권한을 비교하세요.",
+            "steps": [
+              "중국 본토 시장은 증권사 내보내기, AkShare 또는 Tushare부터 검토합니다.",
+              "미국·홍콩·글로벌 주식은 증권사, TradingView 또는 전문 데이터 공급자를 이용합니다.",
+              "FX는 증권사나 MT5에서 내보내거나 HistData의 과거 파일을 확인합니다.",
+              "디지털 자산은 Binance, OKX 같은 거래소의 공식 캔들 API를 이용합니다.",
+              "선물과 기타 시장은 증권사, 거래소가 승인한 경로 또는 필요한 계약을 다루는 전문 공급자를 우선합니다."
+            ],
+            "notes": [
+              "TradingView CSV에는 차트에 현재 불러온 과거 범위만 포함됩니다. 필요하면 내보내기 전에 더 많은 이력을 불러오세요.",
+              "API 권한, 제공 범위와 호출 제한은 바뀔 수 있습니다. 가져오기 전에 가격 조정 방식, 기본 주기와 시간대도 확인하세요."
+            ],
+            "aliases": [
+              "중국 주식 데이터",
+              "미국 주식 데이터",
+              "FX 데이터",
+              "디지털 자산 데이터",
+              "시장별 데이터 출처"
+            ],
+            "keywords": [
+              "AkShare",
+              "Tushare",
+              "TradingView",
+              "MT5",
+              "Binance",
+              "OKX",
+              "HistData",
+              "Nasdaq Data Link",
+              "선물",
+              "캔들 API"
+            ]
+          },
+          "data-prepare": {
+            "title": "다운로드한 시세 데이터는 어떻게 정리해야 가져올 수 있나요?",
+            "summary": "종목별 과거 캔들을 구조가 일관된 로컬 파일로 정리하고 형식, 필드, 주기, 시간대와 가격 조정 방식을 가져오기 전에 확인하세요.",
+            "steps": [
+              "파일 하나에 종목 하나만 넣고 같은 배치 안에서 중복되지 않는 명확한 종목 파일명을 사용합니다.",
+              "하나의 가져오기 폴더에는 csv, json, parquet, xlsx 중 한 가지 형식만 넣습니다.",
+              "각 레코드에는 date/time, open, high, low, close가 필요합니다. volume은 선택이며 없으면 0으로 처리됩니다.",
+              "기본 주기는 1m, 5m, 1h, 1d 중 하나여야 하며 타임스탬프가 사용하는 시간대를 확인합니다.",
+              "원시 가격과 조정 가격을 섞지 마세요. JSON은 records 배열 또는 JSONL을 사용하고 XLSX는 워크시트 하나만 유지합니다."
+            ],
+            "notes": [
+              "사전 검사는 누락 필드, 잘못된 OHLC, 값이 충돌하는 중복과 시간대 근거를 보여 줍니다. 확인 후 가져오기를 시작하세요."
+            ],
+            "aliases": [
+              "시세 준비",
+              "가져오기 전 점검",
+              "다운로드 데이터 정리",
+              "데이터 형식 요건"
+            ],
+            "keywords": [
+              "OHLCV",
+              "과거 시세",
+              "파일 형식",
+              "기본 주기",
+              "시간대",
+              "조정 가격",
+              "레코드",
+              "JSONL"
+            ]
+          },
+          "data-import": {
+            "title": "로컬 시세 폴더는 어떻게 가져오나요?",
+            "summary": "폴더 전체를 로컬에서 사전 검사한 뒤 필드 매핑, 샘플 풀 이름, 범위와 시간대를 확인합니다.",
+            "steps": [
+              "데이터 관리에 폴더를 놓거나 폴더 선택을 누릅니다.",
+              "date/time, open, high, low, close를 확인합니다. volume이 없으면 0입니다.",
+              "샘플 풀, 범위와 시간대를 확인하고 가져오기를 시작합니다."
+            ],
+            "notes": [
+              "도움말 검색은 검색어나 파일을 업로드하지 않으며 선택한 폴더만 읽습니다."
+            ],
+            "aliases": [
+              "데이터 가져오기",
+              "필드 매핑"
+            ],
+            "keywords": [
+              "사전 검사",
+              "시간대",
+              "샘플 풀"
+            ]
+          },
+          "data-manage": {
+            "title": "가져온 데이터는 어떻게 관리하나요?",
+            "summary": "로컬 데이터 소스, 샘플 풀, 주기, 시간대, 진단과 동기화 상태를 확인합니다.",
+            "steps": [
+              "로컬 시세에서 데이터 소스 또는 샘플 풀을 선택합니다.",
+              "상세, 진단과 변경 상태를 확인합니다.",
+              "변경 확인, 증분 동기화, 폴더 재연결 또는 삭제를 실행합니다."
+            ],
+            "notes": [
+              "삭제는 명시적인 동작이며 화면을 여는 것만으로 실행되지 않습니다."
+            ],
+            "aliases": [
+              "데이터 소스 관리",
+              "데이터 동기화"
+            ],
+            "keywords": [
+              "데이터 소스",
+              "재연결",
+              "증분 동기화"
+            ]
+          },
+          "settings-general": {
+            "title": "일반 표시 설정은 어떻게 바꾸나요?",
+            "summary": "언어, 테마, 글자 크기, 등락 색상, 거래 팔레트와 닫기 동작을 조정합니다.",
+            "steps": [
+              "설정의 일반을 엽니다.",
+              "언어, 테마 또는 표시 기본 설정을 선택합니다.",
+              "작업 화면으로 돌아가 결과를 확인합니다."
+            ],
+            "notes": [
+              "대부분 즉시 적용되며 이 기기에 저장됩니다."
+            ],
+            "aliases": [
+              "화면 설정",
+              "테마와 언어"
+            ],
+            "keywords": [
+              "글자 크기",
+              "등락 색상",
+              "닫기 동작"
+            ]
+          },
+          "settings-transfer": {
+            "title": "이 기기의 데이터와 설정은 어떻게 이전하나요?",
+            "summary": "암호화되지 않은 .otp-package 파일로 선택 영역을 내보내거나 가져오며 로컬 시세도 선택할 수 있습니다.",
+            "steps": [
+              "데이터 및 이전에서 영역과 데이터 소스를 선택합니다.",
+              "이전 파일을 만들고 안전하게 보관합니다.",
+              "대상 기기에서 오프라인으로 가져오고 필요하면 폴더를 재연결합니다."
+            ],
+            "notes": [
+              "계정이나 서버가 필요하지 않습니다. 패키지는 암호화되지 않고 로컬 데이터를 포함할 수 있으니 안전하게 보관하세요."
+            ],
+            "aliases": [
+              "기기 이전",
+              "백업 내보내기"
+            ],
+            "keywords": [
+              "이전",
+              "암호화되지 않은 내보내기",
+              "재연결"
+            ]
+          },
+          "settings-advanced": {
+            "title": "고급 설정의 기록 보존은 무엇인가요?",
+            "summary": "로컬 장기 기록의 보존 기간과 만료 기록 정리를 관리합니다.",
+            "steps": [
+              "고급 설정에서 보존 기간을 선택합니다.",
+              "예상 영향을 확인합니다.",
+              "정책을 적용하고 필요할 때만 즉시 정리합니다."
+            ],
+            "notes": [
+              "로컬 시세 라이브러리는 자동 삭제되지 않으며 데이터 관리에서 처리합니다."
+            ],
+            "aliases": [
+              "기록 정리",
+              "보존 정책"
+            ],
+            "keywords": [
+              "고급 설정",
+              "만료 기록",
+              "저장 공간"
+            ]
+          },
+          "settings-about": {
+            "title": "버전과 사용 도움말은 어디에서 확인하나요?",
+            "summary": "정보에는 로컬 버전, 릴리스 노트 및 오프라인 도움말 센터가 있습니다.",
+            "steps": [
+              "설정의 정보를 엽니다.",
+              "현재 버전 또는 로컬 릴리스 노트를 확인합니다.",
+              "사용 방법이 필요하면 도움말 센터에서 관련 기능을 검색합니다."
+            ],
+            "notes": [
+              "도움말 검색은 전부 로컬에서 이루어지며 검색어는 업로드되지 않습니다."
+            ],
+            "aliases": [
+              "정보",
+              "사용 도움말"
+            ],
+            "keywords": [
+              "버전",
+              "릴리스 노트",
+              "도움말 센터"
+            ]
+          }
+        }
+      },
+      "es": {
+        "copy": {
+          "launcherLabel": "Centro de ayuda",
+          "hideLauncher": "Ocultar el botón flotante de ayuda",
+          "panelTitle": "Centro de ayuda",
+          "embeddedTitle": "Ayuda del producto",
+          "embeddedDescription": "Consulta artículos revisados sin conexión o busca funciones. El texto de búsqueda no se sube.",
+          "searchLabel": "Buscar artículos de ayuda",
+          "searchPlaceholder": "Buscar funciones, pasos o preguntas",
+          "clearSearch": "Borrar búsqueda",
+          "close": "Cerrar el Centro de ayuda",
+          "back": "Volver",
+          "recommendedTitle": "Recomendado para esta página",
+          "categoriesTitle": "Explorar por categoría",
+          "searchResultsTitle": "Resultados de búsqueda",
+          "noResultsTitle": "No se encontró una coincidencia fiable",
+          "noResultsDescription": "Prueba con un término más concreto.",
+          "summaryTitle": "Resumen",
+          "stepsTitle": "Pasos",
+          "notesTitle": "Notas",
+          "relatedTitle": "Preguntas relacionadas",
+          "openWorkspace": "Abrir función relacionada",
+          "categoryLabels": {
+            "START": "Primeros pasos",
+            "TRAINING": "Repetición libre",
+            "REVIEW": "Revisión y notas",
+            "CHALLENGE": "Desafíos",
+            "ANALYSIS": "Indicadores y análisis",
+            "DATA": "Datos",
+            "SETTINGS": "Ajustes"
+          }
+        },
+        "articles": {
+          "getting-started": {
+            "title": "¿Qué debo hacer primero en Zinuto Core?",
+            "summary": "Confirma que hay datos disponibles y empieza una repetición libre, un desafío o una revisión desde el Centro de entrenamiento.",
+            "steps": [
+              "Abre Datos y confirma que hay al menos un grupo disponible.",
+              "Vuelve al Centro de entrenamiento y elige Repetición libre o un desafío específico.",
+              "Después, organiza el resultado en Diagnóstico de revisión y Notas."
+            ],
+            "notes": [
+              "La ayuda explica las acciones, pero nunca inicia sesiones ni cambia datos por ti."
+            ],
+            "aliases": [
+              "primer uso",
+              "cómo empezar"
+            ],
+            "keywords": [
+              "usuario nuevo",
+              "flujo",
+              "centro de entrenamiento"
+            ]
+          },
+          "command-center-overview": {
+            "title": "¿Qué puedo hacer en el Centro de entrenamiento?",
+            "summary": "Reúne accesos de entrenamiento, estado de datos y actividad reciente.",
+            "steps": [
+              "Comprueba el resumen de datos.",
+              "Abre Repetición libre, Decisión relámpago o Supervivencia en crisis desde una tarjeta.",
+              "Usa la actividad reciente para continuar trabajos pendientes."
+            ],
+            "notes": [
+              "Las tarjetas solo navegan; los parámetros se confirman en la preparación."
+            ],
+            "aliases": [
+              "inicio",
+              "centro de entrenamiento"
+            ],
+            "keywords": [
+              "acceso",
+              "actividad reciente"
+            ]
+          },
+          "trainer-prepare": {
+            "title": "¿Cómo preparo una sesión de Repetición libre?",
+            "summary": "Elige modo, grupo, reglas, intervalo de avance y punto inicial antes de empezar.",
+            "steps": [
+              "Elige modo aleatorio o dirigido, grupo e instrumento.",
+              "Revisa las reglas y el intervalo de avance.",
+              "Define el inicio y guarda valores predeterminados solo si quieres reutilizarlos."
+            ],
+            "notes": [
+              "El intervalo de origen no cambia; los intervalos superiores compatibles se agregan."
+            ],
+            "aliases": [
+              "preparar repetición",
+              "iniciar entrenamiento"
+            ],
+            "keywords": [
+              "grupo",
+              "punto inicial",
+              "intervalo"
+            ]
+          },
+          "trainer-session": {
+            "title": "¿Cómo uso una Repetición libre activa?",
+            "summary": "Puedes cambiar el intervalo, usar indicadores y dibujos, y operar, avanzar o deshacer según las reglas actuales.",
+            "steps": [
+              "Confirma el intervalo, la posición y la estimación de la orden.",
+              "Compra, vende o avanza para observar barras posteriores.",
+              "Finaliza y archiva; después revisa la sesión."
+            ],
+            "notes": [
+              "El entorno local vuelve a validar cantidad y precio al ejecutar la acción."
+            ],
+            "aliases": [
+              "repetición activa",
+              "controles de entrenamiento"
+            ],
+            "keywords": [
+              "órdenes",
+              "avanzar",
+              "deshacer"
+            ]
+          },
+          "review-overview": {
+            "title": "¿Cómo leo el resumen de Diagnóstico de revisión?",
+            "summary": "Agrega rentabilidad, riesgo y sesiones representativas del periodo elegido.",
+            "steps": [
+              "Elige un periodo.",
+              "Revisa métricas principales y distribución de riesgo.",
+              "Abre Comportamiento o Archivo para ver las sesiones."
+            ],
+            "notes": [
+              "Los agregados proceden de una única instantánea del historial local."
+            ],
+            "aliases": [
+              "resumen de revisión",
+              "diagnóstico"
+            ],
+            "keywords": [
+              "rentabilidad",
+              "riesgo",
+              "periodo"
+            ]
+          },
+          "review-behavior": {
+            "title": "¿Qué muestra Diagnóstico de comportamiento?",
+            "summary": "Agrupa tendencias operativas, disciplina de capital y señales de riesgo repetidas.",
+            "steps": [
+              "Usa el mismo periodo que en Resumen.",
+              "Revisa métricas y anomalías concentradas.",
+              "Verifica el contexto con sesiones del Archivo."
+            ],
+            "notes": [
+              "Estas métricas sirven para revisar y no son asesoramiento de inversión."
+            ],
+            "aliases": [
+              "análisis de comportamiento",
+              "hábitos de trading"
+            ],
+            "keywords": [
+              "disciplina",
+              "señales de riesgo",
+              "diagnóstico"
+            ]
+          },
+          "review-archive": {
+            "title": "¿Cómo veo y gestiono el archivo de sesiones?",
+            "summary": "El Archivo permite ver detalles, renombrar, seleccionar y eliminar repeticiones libres.",
+            "steps": [
+              "Busca una sesión en el periodo.",
+              "Abre detalles para revisar gráfico, operaciones y entorno.",
+              "Renombra, selecciona o elimina al organizar."
+            ],
+            "notes": [
+              "La retención puede quitar detalles antiguos, pero conserva los resúmenes necesarios."
+            ],
+            "aliases": [
+              "historial de entrenamiento",
+              "registros de repetición"
+            ],
+            "keywords": [
+              "archivo",
+              "reproducción",
+              "eliminar"
+            ]
+          },
+          "challenge-mode-selection": {
+            "title": "¿Cómo elijo un desafío específico?",
+            "summary": "Elige Decisión relámpago o Supervivencia en crisis y reutiliza un banco de preguntas configurado.",
+            "steps": [
+              "Selecciona modo y banco.",
+              "Confirma grupos, intervalo objetivo y número de preguntas.",
+              "Revisa parámetros antes de empezar."
+            ],
+            "notes": [
+              "Abrir la función solo navega; nunca inicia una sesión automáticamente."
+            ],
+            "aliases": [
+              "modo desafío",
+              "entrenamiento específico"
+            ],
+            "keywords": [
+              "banco de preguntas",
+              "selección de modo",
+              "iniciar"
+            ]
+          },
+          "challenge-fast-decision": {
+            "title": "¿Cómo funciona Decisión relámpago?",
+            "summary": "Elige alcista, bajista u observar antes de terminar la cuenta atrás y compáralo con el movimiento posterior.",
+            "steps": [
+              "Elige banco y nivel de exigencia.",
+              "Envía una dirección antes de cada límite.",
+              "Revisa comentarios, precisión y velocidad en el resultado."
+            ],
+            "notes": [
+              "El tiempo agotado se registra; la aplicación no elige por ti."
+            ],
+            "aliases": [
+              "decisión relámpago",
+              "entrenar intuición"
+            ],
+            "keywords": [
+              "cuenta atrás",
+              "alcista",
+              "bajista"
+            ]
+          },
+          "challenge-risk-survival": {
+            "title": "¿Cómo funciona Supervivencia en crisis?",
+            "summary": "Gestiona posición, caída y límite de operaciones bajo un mercado exigente.",
+            "steps": [
+              "Confirma banco, capital inicial y reglas de riesgo.",
+              "Usa órdenes, avance y deshacer para controlar exposición.",
+              "Revisa caída, disciplina y recuperación al terminar."
+            ],
+            "notes": [
+              "Los resultados de entrenamiento no prometen rentabilidad."
+            ],
+            "aliases": [
+              "supervivencia",
+              "desafío de riesgo"
+            ],
+            "keywords": [
+              "caída",
+              "posición",
+              "disciplina de riesgo"
+            ]
+          },
+          "challenge-settlement": {
+            "title": "¿Cómo leo el resultado de un desafío?",
+            "summary": "Resume puntuación, finalización, métricas de riesgo y evidencias de acciones.",
+            "steps": [
+              "Comprueba finalización, puntuación y métricas.",
+              "Abre la revisión de decisión o riesgo del modo.",
+              "Crea una nota si resulta útil y continúa."
+            ],
+            "notes": [
+              "Las métricas cambian según el modo; compara dentro del mismo modo."
+            ],
+            "aliases": [
+              "resultado del desafío",
+              "cierre de entrenamiento"
+            ],
+            "keywords": [
+              "puntuación",
+              "revisión",
+              "siguiente pregunta"
+            ]
+          },
+          "challenge-stats": {
+            "title": "¿Cómo uso Estadísticas de desafíos?",
+            "summary": "Agrega finalización, rendimiento y tendencias por modo y periodo.",
+            "steps": [
+              "Elige periodo y modo.",
+              "Revisa métricas y tendencias.",
+              "Usa resultados y notas para explicar cambios."
+            ],
+            "notes": [
+              "Solo incluye hechos de desafíos guardados localmente."
+            ],
+            "aliases": [
+              "puntuaciones",
+              "estadísticas específicas"
+            ],
+            "keywords": [
+              "tendencia",
+              "finalización",
+              "rendimiento"
+            ]
+          },
+          "indicator-create": {
+            "title": "¿Cómo creo y valido un indicador personalizado?",
+            "summary": "Edita fórmulas y parámetros y compila, ejecuta y previsualiza con datos locales.",
+            "steps": [
+              "Crea un indicador con nombre, fórmula y parámetros.",
+              "Corrige problemas de sintaxis o alcance usando Diagnóstico.",
+              "Valida el gráfico con un instrumento local y guarda."
+            ],
+            "notes": [
+              "El código se ejecuta localmente y las funciones no admitidas se bloquean."
+            ],
+            "aliases": [
+              "indicador de fórmula",
+              "crear indicador"
+            ],
+            "keywords": [
+              "compilar",
+              "parámetros",
+              "vista previa"
+            ]
+          },
+          "indicator-reference": {
+            "title": "¿Dónde encuentro la documentación de funciones?",
+            "summary": "Referencia de indicadores enumera funciones, parámetros, retornos, ejemplos y límites.",
+            "steps": [
+              "Ábrela desde la cabecera del área de indicadores.",
+              "Busca por nombre o categoría.",
+              "Aplica el ejemplo y valida la fórmula."
+            ],
+            "notes": [
+              "Describe lo que admite la versión actual."
+            ],
+            "aliases": [
+              "referencia de funciones",
+              "documentación de indicadores"
+            ],
+            "keywords": [
+              "función",
+              "sintaxis",
+              "ejemplo"
+            ]
+          },
+          "backtest-configure": {
+            "title": "¿Cómo configuro una prueba retrospectiva?",
+            "summary": "Elige indicador, condiciones, grupo, entorno y ejecución para crear un lote local.",
+            "steps": [
+              "Confirma señales o condiciones BUY, SELL, SHORT y COVER.",
+              "Define grupo, entorno, capital y ejecución.",
+              "Revisa y ejecuta explícitamente el lote."
+            ],
+            "notes": [
+              "Abrir el área de pruebas nunca ejecuta un lote automáticamente."
+            ],
+            "aliases": [
+              "configurar backtest",
+              "ejecutar estrategia"
+            ],
+            "keywords": [
+              "condiciones",
+              "grupo",
+              "ejecución"
+            ]
+          },
+          "backtest-results": {
+            "title": "¿Cómo leo los resultados de una prueba?",
+            "summary": "El lote muestra rentabilidad, aciertos, caída y operaciones; el detalle añade gráficos, ejecuciones y curva de capital.",
+            "steps": [
+              "Confirma estado e instrumentos fallidos.",
+              "Compara rentabilidad, aciertos, caída máxima y tamaño de muestra.",
+              "Abre el detalle para verificar señales, ejecuciones y curva."
+            ],
+            "notes": [
+              "El pasado no garantiza el futuro; compara con datos y entornos coherentes."
+            ],
+            "aliases": [
+              "informe de backtest",
+              "resultados de estrategia"
+            ],
+            "keywords": [
+              "tasa de acierto",
+              "caída máxima",
+              "curva de capital"
+            ]
+          },
+          "notes-create": {
+            "title": "¿Cómo creo y organizo notas?",
+            "summary": "Registra observaciones con títulos, colores y contenido estructurado.",
+            "steps": [
+              "Crea una nota con título claro.",
+              "Anota razonamiento, resultado y próxima comprobación.",
+              "Organiza con colores o listas y guarda."
+            ],
+            "notes": [
+              "El contenido queda local salvo que uses una transferencia compatible."
+            ],
+            "aliases": [
+              "escribir nota",
+              "diario de entrenamiento"
+            ],
+            "keywords": [
+              "título",
+              "color",
+              "registro de revisión"
+            ]
+          },
+          "notes-review-links": {
+            "title": "¿Cómo se vinculan las notas con sesiones y desafíos?",
+            "summary": "Las notas creadas desde un archivo o resultado conservan contexto y evidencias legibles.",
+            "steps": [
+              "Elige Crear nota en el detalle o resultado.",
+              "Añade razonamiento, causa del error y mejora.",
+              "Abre Notas para revisar y editar."
+            ],
+            "notes": [
+              "La ayuda abre solo áreas principales, nunca un registro concreto."
+            ],
+            "aliases": [
+              "nota de revisión",
+              "vincular sesión"
+            ],
+            "keywords": [
+              "contexto",
+              "evidencia",
+              "registro de desafío"
+            ]
+          },
+          "data-acquire": {
+            "title": "¿Dónde puedo obtener datos históricos de mercado?",
+            "summary": "Gestión de datos ofrece conectores abiertos locales opcionales: AKTools/AKShare para acciones A de China y CCXT para velas spot públicas de Binance u OKX. Los archivos se guardan en la carpeta elegida y después debes revisarlos e importarlos por separado.",
+            "steps": [
+              "También puedes empezar con las muestras integradas o sintéticas totalmente sin conexión.",
+              "En Gestión de datos, elige una fuente, selecciona acciones A, índices principales o pares cripto del catálogo real y configura fechas, intervalo y carpeta de destino.",
+              "La página solo muestra los proyectos abiertos AKTools, AKShare o CCXT usados por el conector seleccionado; las condiciones de la fuente de cotizaciones no bloquean el flujo.",
+              "Tras guardar, pulsa Continuar con revisión e importación para comprobar campos, intervalo, zona horaria y datos anómalos. La descarga no escribe datos locales automáticamente.",
+              "Los archivos locales csv, json, parquet o xlsx que cumplan el formato siguen siendo compatibles."
+            ],
+            "notes": [
+              "Tu equipo contacta directamente con la fuente externa. Los servidores de Zinuto no reciben la consulta ni los archivos.",
+              "Zinuto no distribuye, aloja ni licencia datos de mercado. Comprueba permisos, costes, límites y usos permitidos."
+            ],
+            "aliases": [
+              "dónde obtener datos",
+              "exportación del bróker",
+              "descargador abierto",
+              "descarga local de mercado",
+              "importación manual"
+            ],
+            "keywords": [
+              "AKTools",
+              "AKShare",
+              "CCXT",
+              "Binance Spot",
+              "OKX Spot",
+              "conector local",
+              "revisión previa"
+            ]
+          },
+          "data-source-by-market": {
+            "title": "¿Qué fuentes de datos convienen para cada mercado?",
+            "summary": "Elige primero una fuente adecuada al mercado y compara cobertura histórica, intervalos, zona horaria, ajuste de precios y derechos de uso.",
+            "steps": [
+              "Para China continental, empieza por una exportación del bróker, AkShare o Tushare.",
+              "Para acciones de Estados Unidos, Hong Kong y otros mercados globales, usa un bróker, TradingView o un proveedor profesional.",
+              "Para FX, exporta desde un bróker o MT5, o revisa los archivos históricos de HistData.",
+              "Para activos digitales, usa API oficiales de velas de bolsas como Binance u OKX.",
+              "Para futuros y otros mercados, prioriza un bróker, un canal autorizado por la bolsa o un proveedor que cubra los contratos necesarios."
+            ],
+            "notes": [
+              "Un CSV de TradingView solo contiene el historial ya cargado en el gráfico; carga más datos antes de exportar cuando sea necesario.",
+              "Los permisos, la cobertura y los límites de las API pueden cambiar. Confirma también el ajuste de precios, el intervalo base y la zona horaria antes de importar."
+            ],
+            "aliases": [
+              "datos de acciones chinas",
+              "datos de acciones estadounidenses",
+              "datos FX",
+              "datos de criptoactivos",
+              "fuentes por mercado"
+            ],
+            "keywords": [
+              "AkShare",
+              "Tushare",
+              "TradingView",
+              "MT5",
+              "Binance",
+              "OKX",
+              "HistData",
+              "Nasdaq Data Link",
+              "futuros",
+              "API de velas"
+            ]
+          },
+          "data-prepare": {
+            "title": "¿Cómo organizo los datos descargados para importarlos?",
+            "summary": "Organiza las velas históricas de cada instrumento en archivos locales uniformes y comprueba formato, campos, intervalo, zona horaria y ajuste de precios antes de importar.",
+            "steps": [
+              "Usa un archivo por instrumento y un nombre claro que sea único dentro del lote.",
+              "Incluye un solo formato en cada carpeta de importación: csv, json, parquet o xlsx.",
+              "Cada registro debe contener date/time, open, high, low y close; volume es opcional y se convierte en 0 si falta.",
+              "El intervalo base debe ser 1m, 5m, 1h o 1d; confirma además la zona horaria de las marcas temporales.",
+              "No mezcles precios sin ajustar y ajustados. Para JSON usa un array de records o JSONL; cada XLSX debe tener una sola hoja."
+            ],
+            "notes": [
+              "La inspección previa muestra campos ausentes, OHLC no válidos, duplicados con valores conflictivos y evidencias de zona horaria; revísalos antes de importar."
+            ],
+            "aliases": [
+              "preparar cotizaciones",
+              "lista previa a importar",
+              "organizar datos descargados",
+              "requisitos de formato"
+            ],
+            "keywords": [
+              "OHLCV",
+              "datos históricos",
+              "formato de archivo",
+              "intervalo base",
+              "zona horaria",
+              "precios ajustados",
+              "registros",
+              "JSONL"
+            ]
+          },
+          "data-import": {
+            "title": "¿Cómo importo una carpeta de datos locales?",
+            "summary": "Se inspecciona toda la carpeta localmente antes de confirmar mapeo, nombre, alcance y zona horaria.",
+            "steps": [
+              "Arrastra o selecciona una carpeta en Datos.",
+              "Revisa date/time, open, high, low y close; si falta volume se usa 0.",
+              "Confirma grupo, alcance y zona horaria e inicia la importación."
+            ],
+            "notes": [
+              "La búsqueda no sube consultas ni archivos; solo se lee la carpeta elegida."
+            ],
+            "aliases": [
+              "importar datos",
+              "mapeo de campos"
+            ],
+            "keywords": [
+              "inspección",
+              "zona horaria",
+              "grupo"
+            ]
+          },
+          "data-manage": {
+            "title": "¿Cómo gestiono los datos importados?",
+            "summary": "Revisa fuentes, grupos, intervalos, zonas horarias, diagnósticos y sincronización.",
+            "steps": [
+              "Selecciona una fuente o grupo.",
+              "Revisa detalles, diagnóstico y cambios.",
+              "Comprueba cambios, sincroniza, vuelve a vincular o elimina explícitamente."
+            ],
+            "notes": [
+              "Eliminar y vaciar son acciones explícitas; abrir Datos no las ejecuta."
+            ],
+            "aliases": [
+              "gestionar fuentes",
+              "sincronizar datos"
+            ],
+            "keywords": [
+              "fuente",
+              "volver a vincular",
+              "sincronización incremental"
+            ]
+          },
+          "settings-general": {
+            "title": "¿Cómo cambio los ajustes generales de pantalla?",
+            "summary": "Ajusta idioma, tema, tamaño, colores de precios, paleta de trading y comportamiento de cierre.",
+            "steps": [
+              "Abre General en Ajustes.",
+              "Elige idioma, tema o preferencia.",
+              "Vuelve a un área de trabajo y comprueba el resultado."
+            ],
+            "notes": [
+              "La mayoría se aplica al instante y se guarda en este dispositivo."
+            ],
+            "aliases": [
+              "ajustes de interfaz",
+              "tema e idioma"
+            ],
+            "keywords": [
+              "tamaño de fuente",
+              "colores",
+              "comportamiento de cierre"
+            ]
+          },
+          "settings-transfer": {
+            "title": "¿Cómo transfiero datos y ajustes del dispositivo?",
+            "summary": "Exporta o importa ámbitos elegidos en un .otp-package sin cifrar, con datos locales opcionales.",
+            "steps": [
+              "Elige ámbitos y fuentes en Datos y transferencia.",
+              "Crea el archivo y guárdalo de forma segura.",
+              "Impórtalo sin conexión en el destino y vuelve a vincular carpetas si se solicita."
+            ],
+            "notes": [
+              "No requiere cuenta ni servidor. El paquete no está cifrado y puede contener datos locales; guárdalo de forma segura."
+            ],
+            "aliases": [
+              "migración de dispositivo",
+              "exportar copia"
+            ],
+            "keywords": [
+              "transferencia",
+              "exportación sin cifrar",
+              "volver a vincular"
+            ]
+          },
+          "settings-advanced": {
+            "title": "¿Qué es la retención del historial en Ajustes avanzados?",
+            "summary": "Gestiona cuánto historial local se conserva y permite revisar o limpiar lo vencido.",
+            "steps": [
+              "Elige una ventana de retención.",
+              "Revisa el impacto estimado.",
+              "Aplica la política y limpia de inmediato solo cuando haga falta."
+            ],
+            "notes": [
+              "La biblioteca de mercado local no se elimina por retención; se gestiona en Datos."
+            ],
+            "aliases": [
+              "limpiar historial",
+              "política de retención"
+            ],
+            "keywords": [
+              "ajustes avanzados",
+              "registros vencidos",
+              "almacenamiento"
+            ]
+          },
+          "settings-about": {
+            "title": "¿Dónde consulto la versión y la ayuda de uso?",
+            "summary": "Acerca de contiene la versión local, las notas de la versión y el Centro de ayuda sin conexión.",
+            "steps": [
+              "Abre Acerca de en Ajustes.",
+              "Revisa la versión actual o las notas locales.",
+              "Abre el Centro de ayuda y busca la función correspondiente cuando necesites instrucciones."
+            ],
+            "notes": [
+              "La búsqueda de ayuda se realiza por completo en local y los términos no se suben."
+            ],
+            "aliases": [
+              "acerca de",
+              "ayuda de uso"
+            ],
+            "keywords": [
+              "versión",
+              "notas de la versión",
+              "centro de ayuda"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

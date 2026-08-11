@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "policy": "Entries resolve an exact non-SPDX package declaration to an audited SPDX choice. Version or declaration drift requires a new review.",
+  "entries": [
+    {
+      "ecosystem": "npm",
+      "name": "rgbcolor",
+      "version": "1.0.1",
+      "declaredLicense": "MIT OR SEE LICENSE IN FEEL-FREE.md",
+      "spdxExpression": "MIT",
+      "evidence": "The package metadata offers MIT as an explicit alternative; this distribution selects that option."
+    }
+  ]
+}

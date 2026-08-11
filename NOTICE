@@ -1,0 +1,24 @@
+Zinuto Core Desktop
+Copyright (C) 2026 轻创掘金（青岛）信息技术有限公司
+
+The source code in this repository is licensed under the GNU General Public
+License, version 3 only (GPL-3.0-only), unless a file or directory says
+otherwise.
+
+Zinuto, Zinuto Core, their word marks, logos and application icons, official
+signing identities, and official distribution metadata are not licensed under
+the GPL. See TRADEMARKS.md and BRANDING.md.
+
+Bundled third-party libraries and market-data samples remain subject to their
+respective notices and terms. See THIRD_PARTY_NOTICES.md and
+THIRD_PARTY_DATA.md.
+
+Open-source connector licenses cover connector code only. They do not grant a
+license to market data requested from an exchange, vendor, or other upstream
+source. Acquisition is initiated locally by the user and is not a Zinuto data
+distribution service.
+
+Commercial licenses for closed-source integration, OEM use, or proprietary
+distribution are available separately from the copyright holder. A commercial
+software license does not include trademark rights unless the agreement says
+so explicitly.

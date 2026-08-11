@@ -1,0 +1,826 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.workspace-page.challenge-fusion-page {
+  --challenge-fusion-accent: var(--visual-warning-accent);
+  --challenge-fusion-glow: color-mix(
+    in srgb,
+    var(--challenge-fusion-accent) 20%,
+    transparent
+  );
+  --challenge-fusion-topbar-line: color-mix(in srgb, var(--line) 72%, transparent);
+  --challenge-fusion-topbar-divider: color-mix(
+    in srgb,
+    var(--line) 56%,
+    transparent
+  );
+  --challenge-fusion-topbar-surface: color-mix(
+    in srgb,
+    var(--surface-s2) 96%,
+    var(--panel)
+  );
+  --challenge-fusion-topbar-tab-muted: var(--text-subtle);
+  --challenge-fusion-topbar-tab-active: color-mix(
+    in srgb,
+    var(--challenge-fusion-accent) 78%,
+    var(--text-strong)
+  );
+  --challenge-fusion-topbar-tools-w: 170px;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  margin-inline: 0;
+  padding: 0;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  overflow: hidden;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.workspace-page.challenge-fusion-page.is-risk-mode {
+  --challenge-fusion-accent: var(--challenge-risk-mode-accent);
+}
+
+.desktop-main.is-single-page > .workspace-page.challenge-fusion-page,
+.desktop-main.is-single-page
+  > .workspace-page-cache-slot
+  > .workspace-page-cache-slot-content
+  > .workspace-page.challenge-fusion-page,
+.desktop-main.is-single-page
+  > .workspace-page-cache-slot
+  > .workspace-page.challenge-fusion-page {
+  overflow: hidden;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+}
+
+.challenge-fusion-page .workspace-page-body {
+  min-height: 0;
+  height: 100%;
+}
+
+.challenge-fusion-shell {
+  min-height: 100%;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  grid-template-rows: minmax(0, 1fr);
+  border: none;
+  border-radius: 0;
+  background: transparent;
+}
+
+.challenge-fusion-shell-content {
+  min-height: 0;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto auto minmax(320px, 1fr);
+  gap: 14px;
+  overflow: auto;
+}
+
+.workspace-page.challenge-fusion-page.is-under-sampled .challenge-fusion-insight {
+  grid-template-rows: max-content;
+}
+
+.challenge-fusion-insight,
+.challenge-fusion-table {
+  border: 1px solid color-mix(in srgb, var(--line) 72%, transparent);
+  border-radius: var(--radius-panel);
+  background: var(--surface-s2);
+  box-shadow: none;
+}
+
+.challenge-fusion-topbar {
+  --workspace-top-bar-border: var(--challenge-fusion-topbar-line);
+  --workspace-top-bar-divider: var(--challenge-fusion-topbar-divider);
+  --workspace-top-bar-surface: var(--challenge-fusion-topbar-surface);
+  position: sticky;
+  top: 0;
+  flex: 0 0 auto;
+  z-index: 24;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.challenge-fusion-topbar--flat {
+  display: grid;
+  border: 1px solid var(--challenge-fusion-topbar-line);
+  border-radius: var(--radius-card-sm);
+  background: var(--challenge-fusion-topbar-surface);
+  overflow: hidden;
+}
+
+.challenge-fusion-topbar .workspace-top-bar-main,
+.challenge-fusion-topbar-flat-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--challenge-fusion-topbar-tools-w);
+  align-items: end;
+  gap: 14px 18px;
+  padding: 10px 16px 12px;
+}
+
+.challenge-fusion-tab-rail-wrap {
+  position: relative;
+  min-width: 0;
+  padding: 0;
+  z-index: 1;
+}
+
+.challenge-fusion-tab-rail-wrap::after {
+  display: none;
+}
+
+.challenge-fusion-tab-rail.plain-tab-bar {
+  display: flex;
+  gap: 0;
+  width: 100%;
+  border-bottom: none;
+}
+
+.challenge-fusion-tab-rail-item.plain-tab-bar-item {
+  flex: 1 1 0;
+  height: auto;
+  min-height: 42px;
+  padding: 2px 10px 10px;
+  border-radius: 0;
+  justify-content: center;
+  text-align: center;
+  color: var(--challenge-fusion-topbar-tab-muted);
+  background: transparent;
+}
+
+.challenge-fusion-tab-rail-item .plain-tab-bar-item-copy {
+  display: grid;
+  justify-items: center;
+  gap: 0;
+}
+
+.challenge-fusion-tab-rail-item .plain-tab-bar-item-label {
+  color: inherit;
+  font-size: var(--ty-r2);
+  font-weight: 680;
+  line-height: var(--ty-leading-label);
+  letter-spacing: 0;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  overflow-wrap: anywhere;
+}
+
+.challenge-fusion-tab-rail-item:hover:not(:disabled),
+.challenge-fusion-tab-rail-item:focus-visible {
+  color: var(--text-t1);
+  background: color-mix(in srgb, var(--surface-s3) 42%, transparent);
+}
+
+.challenge-fusion-tab-rail-item.plain-tab-bar-item::after {
+  left: 18%;
+  right: 18%;
+  bottom: -1px;
+  height: 2px;
+  border-radius: 999px 999px 0 0;
+  background: transparent;
+}
+
+.challenge-fusion-tab-rail-item.is-active {
+  color: var(--text-t1);
+}
+
+.challenge-fusion-tab-rail-item.is-active::after {
+  background: var(--challenge-fusion-topbar-tab-active);
+}
+
+.challenge-fusion-tools-row {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+}
+
+.challenge-fusion-slim-controls-tray {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  align-items: stretch;
+  justify-content: end;
+  padding: 0;
+}
+
+.challenge-fusion-tools-tray {
+  width: 100%;
+  max-width: 100%;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+.challenge-fusion-insight {
+  min-height: min-content;
+  padding: 14px;
+  display: grid;
+  grid-template-rows: max-content minmax(280px, 1fr);
+  gap: 12px;
+}
+
+.challenge-fusion-metrics-grid {
+  min-height: min-content;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.challenge-fusion-metric-card {
+  position: relative;
+  min-height: 118px;
+  height: auto;
+  overflow: visible;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  padding: 14px 0 10px;
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  container-type: inline-size;
+}
+
+.challenge-fusion-metric-card-label,
+.challenge-fusion-metric-card-value {
+  position: relative;
+  z-index: 1;
+}
+
+.challenge-fusion-metric-card-label {
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1.25;
+}
+
+.challenge-fusion-metric-card-value {
+  display: block;
+  color: var(--text-strong);
+  font-size: var(--ty-r8);
+  font-weight: 780;
+  line-height: 1.14;
+  font-variant-numeric: tabular-nums;
+  padding-bottom: 2px;
+  overflow: visible;
+}
+
+.challenge-fusion-metric-card-value.is-placeholder {
+  font-size: var(--ty-r6);
+  line-height: 1.2;
+  font-weight: 720;
+  letter-spacing: 0.02em;
+}
+
+.challenge-fusion-metric-card-subtitle {
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1.5;
+  max-width: 26ch;
+  overflow-wrap: anywhere;
+}
+
+.challenge-fusion-metric-card.is-pending .challenge-fusion-metric-card-subtitle {
+  color: color-mix(in srgb, var(--text-subtle) 92%, var(--text-strong));
+}
+
+.challenge-fusion-metric-card.is-pending {
+  border-top-color: transparent;
+}
+
+.challenge-fusion-charts-grid {
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  isolation: isolate;
+}
+
+.challenge-fusion-chart-card {
+  min-width: 0;
+  min-height: 0;
+  position: relative;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 10px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  padding: 0;
+  container-type: size;
+  overflow: hidden;
+}
+
+.challenge-fusion-charts-grid > .challenge-fusion-chart-card:first-child {
+  z-index: 1;
+}
+
+.challenge-fusion-chart-head {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.challenge-fusion-chart-head > div {
+  min-width: 0;
+  display: grid;
+  gap: clamp(4px, min(1.4cqh, 0.8cqw), 6px);
+}
+
+.challenge-fusion-chart-head h3 {
+  margin: 0;
+  color: var(--text-strong);
+  font-size: var(--ty-r5);
+}
+
+.challenge-fusion-chart-head span {
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1.3;
+}
+
+.challenge-fusion-chart-surface {
+  min-width: 0;
+  min-height: 0;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.challenge-fusion-table {
+  min-height: 0;
+  padding: 14px;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 10px;
+}
+
+.challenge-fusion-table-head > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.challenge-fusion-table-head-main {
+  width: 100%;
+}
+
+.challenge-fusion-table-head-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.challenge-fusion-table-head-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.challenge-fusion-table-head h3 {
+  margin: 0;
+  color: var(--text-strong);
+  font-size: var(--ty-r3);
+}
+
+.challenge-fusion-table-head span {
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  font-variant-numeric: tabular-nums;
+}
+
+.challenge-fusion-table-empty {
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  border: 1px solid color-mix(in srgb, var(--line) 38%, transparent);
+  border-radius: var(--radius-card-sm);
+  background: color-mix(in srgb, var(--panel-soft) 64%, transparent);
+  color: var(--text-subtle);
+  font-size: var(--ty-r2);
+  text-align: center;
+}
+
+.challenge-fusion-table-empty.is-compact {
+  min-height: 132px;
+  padding: 18px 20px;
+  border-style: dashed;
+  background: color-mix(in srgb, var(--surface-s3) 72%, transparent);
+}
+
+.challenge-fusion-table-wrap {
+  min-height: 0;
+  overflow: auto;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+}
+
+.challenge-fusion-table-header-row,
+.challenge-fusion-table-row {
+  min-width: 860px;
+  display: grid;
+  grid-template-columns: 170px minmax(140px, 0.9fr) minmax(220px, 1.2fr) 100px 128px minmax(140px, max-content);
+  align-items: center;
+  gap: 10px;
+  padding: 11px 12px;
+}
+
+.challenge-fusion-table-header-row {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  border-bottom: 1px solid color-mix(in srgb, var(--line) 62%, transparent);
+  background: color-mix(
+    in srgb,
+    var(--challenge-fusion-accent) 6%,
+    var(--panel)
+  );
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  font-weight: 700;
+}
+
+.challenge-fusion-table-body {
+  min-height: 0;
+}
+
+.challenge-fusion-table-row {
+  border-top: 1px solid color-mix(in srgb, var(--line) 48%, transparent);
+  transition:
+    background-color var(--motion-fast),
+    border-color var(--motion-fast);
+}
+
+.challenge-fusion-table-row:hover {
+  border-top-color: color-mix(
+    in srgb,
+    var(--challenge-fusion-accent) 20%,
+    var(--line)
+  );
+  background: color-mix(
+    in srgb,
+    var(--challenge-fusion-accent) 8%,
+    var(--panel)
+  );
+}
+
+.challenge-fusion-table-time {
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1.3;
+  font-variant-numeric: tabular-nums;
+}
+
+.challenge-fusion-table-symbol {
+  display: grid;
+  gap: 2px;
+}
+
+.challenge-fusion-table-symbol > strong {
+  color: var(--text-strong);
+  font-size: var(--ty-r2);
+}
+
+.challenge-fusion-table-symbol > em {
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  font-style: normal;
+}
+
+.challenge-fusion-table-context {
+  color: var(--text-subtle);
+  font-size: var(--ty-r3);
+  line-height: 1.35;
+}
+
+.challenge-fusion-table-pill-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.challenge-fusion-table-pill {
+  min-height: 25px;
+  padding: 0 10px 0 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--panel) 56%, transparent);
+  color: var(--text-strong);
+  font-size: var(--ty-r1);
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  position: relative;
+}
+
+.challenge-fusion-table-pill::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 2px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--line) 44%, transparent);
+}
+
+.challenge-fusion-table-pill.is-profit {
+  border-color: color-mix(in srgb, var(--price-up-color) 48%, var(--line));
+  background: color-mix(in srgb, var(--price-up-color) 14%, transparent);
+  color: color-mix(in srgb, var(--price-up-color) 86%, var(--text-strong));
+}
+
+.challenge-fusion-table-pill.is-accent {
+  border-color: color-mix(
+    in srgb,
+    var(--challenge-fusion-accent) 48%,
+    var(--line)
+  );
+  background: color-mix(
+    in srgb,
+    var(--challenge-fusion-accent) 14%,
+    transparent
+  );
+  color: color-mix(
+    in srgb,
+    var(--challenge-fusion-accent) 86%,
+    var(--text-strong)
+  );
+}
+
+.challenge-fusion-table-pill.is-danger {
+  border-color: color-mix(in srgb, var(--danger) 48%, var(--line));
+  background: color-mix(in srgb, var(--danger) 14%, transparent);
+  color: color-mix(in srgb, var(--danger) 86%, var(--text-strong));
+}
+
+.challenge-fusion-table-pill.is-loss {
+  border-color: color-mix(in srgb, var(--price-down-color) 48%, var(--line));
+  background: color-mix(in srgb, var(--price-down-color) 14%, transparent);
+  color: color-mix(in srgb, var(--price-down-color) 86%, var(--text-strong));
+}
+
+.challenge-fusion-table-pill.is-neutral {
+  color: var(--text-subtle);
+}
+
+.challenge-fusion-table-action-heading,
+.challenge-fusion-table-action-cell {
+  justify-self: end;
+}
+
+.challenge-fusion-table-action-heading {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding-inline: var(--ui-space-control-x-compact);
+  text-align: center;
+}
+
+.challenge-fusion-table-action-heading::before {
+  content: "";
+  inline-size: 0.875rem;
+  block-size: 0.875rem;
+  flex: 0 0 0.875rem;
+}
+
+.challenge-fusion-table-action-cell {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.challenge-fusion-dialog {
+  width: min(1360px, calc(100vw - 28px));
+  max-width: none;
+}
+
+.challenge-fusion-dialog-note {
+  min-height: min(74vh, 780px);
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 12px;
+}
+
+.challenge-fusion-dialog-summary {
+  gap: 10px;
+}
+
+.challenge-fusion-dialog-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  font-variant-numeric: tabular-nums;
+}
+
+.challenge-fusion-dialog-note .training-note-summary-chip.is-accent {
+  border-color: color-mix(
+    in srgb,
+    var(--challenge-fusion-accent) 34%,
+    var(--line)
+  );
+  background: color-mix(
+    in srgb,
+    var(--challenge-fusion-accent) 12%,
+    var(--panel)
+  );
+  color: color-mix(
+    in srgb,
+    var(--challenge-fusion-accent) 88%,
+    var(--text-strong)
+  );
+}
+
+.challenge-fusion-dialog-body {
+  min-height: min(74vh, 780px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 12px;
+}
+
+.challenge-fusion-dialog-chart {
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--line) 56%, transparent);
+  border-radius: var(--radius-card-sm);
+  background: color-mix(in srgb, var(--panel-soft) 90%, transparent);
+}
+
+.challenge-fusion-dialog-chart > .history-preview-chart {
+  min-height: 0;
+  height: 100%;
+}
+
+.challenge-fusion-dialog-empty {
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-subtle);
+  font-size: var(--ty-r2);
+}
+
+.challenge-fusion-clear-history-dialog-desc {
+  margin: 0;
+  color: var(--text-subtle);
+  font-size: var(--ty-r2);
+  line-height: 1.6;
+}
+
+.challenge-fusion-clear-history-dialog-body {
+  padding-top: 0;
+}
+
+.challenge-fusion-clear-history-dialog-actions {
+  padding-top: 0;
+}
+
+@media (max-width: 1220px) {
+  .challenge-fusion-topbar .workspace-top-bar-main,
+  .challenge-fusion-topbar-flat-row {
+    align-items: stretch;
+  }
+
+  .challenge-fusion-tools-row {
+    justify-content: flex-end;
+  }
+
+  .challenge-fusion-slim-controls-tray {
+    justify-content: end;
+  }
+
+  .challenge-fusion-insight {
+    grid-template-rows: max-content max-content;
+  }
+
+  .challenge-fusion-metric-card,
+  .challenge-fusion-chart-card {
+    container-type: inline-size;
+  }
+
+  .challenge-fusion-metric-card {
+    min-height: 118px;
+  }
+
+  .challenge-fusion-metric-card-label {
+    font-size: var(--ty-r1);
+    line-height: normal;
+  }
+
+  .challenge-fusion-metric-card-value {
+    font-size: var(--ty-r7);
+  }
+
+  .challenge-fusion-chart-card {
+    grid-template-rows: auto minmax(280px, 1fr);
+  }
+
+  .challenge-fusion-chart-head > div {
+    gap: 4px;
+  }
+
+  .challenge-fusion-chart-head h3 {
+    font-size: var(--ty-r2);
+  }
+
+  .challenge-fusion-chart-head span {
+    font-size: var(--ty-r1);
+  }
+
+  .challenge-fusion-charts-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .challenge-fusion-chart-surface {
+    min-height: 280px;
+  }
+
+  .challenge-fusion-dialog-body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 960px) {
+  .challenge-fusion-metrics-grid,
+  .challenge-fusion-page.is-risk-mode .challenge-fusion-metrics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .workspace-page.challenge-fusion-page {
+    padding: 0;
+  }
+
+  .challenge-fusion-insight,
+  .challenge-fusion-table {
+    padding: 12px;
+  }
+
+  .challenge-fusion-topbar .workspace-top-bar-main,
+  .challenge-fusion-topbar-flat-row {
+    padding: 12px;
+  }
+
+  .challenge-fusion-metrics-grid,
+  .challenge-fusion-page.is-risk-mode .challenge-fusion-metrics-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .challenge-fusion-shell-content {
+    gap: 12px;
+  }
+
+  .challenge-fusion-chart-surface {
+    min-height: 240px;
+  }
+
+  .challenge-fusion-metric-card-subtitle {
+    font-size: var(--ty-r1);
+  }
+
+  .challenge-fusion-slim-controls-tray {
+    width: 100%;
+  }
+
+  .challenge-fusion-slim-controls-tray {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .challenge-fusion-tab-rail-item.plain-tab-bar-item {
+    min-height: 40px;
+    padding-inline: 8px;
+  }
+
+  .challenge-fusion-tab-rail-item .plain-tab-bar-item-label {
+    font-size: var(--ty-r3);
+  }
+}

@@ -1,0 +1,855 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+
+
+.diagnostic-console-margin-summary {
+  padding: 0 4px;
+}
+
+.diagnostic-console-margin-summary p {
+  margin: 0;
+  color: var(--text-t2);
+  font-size: var(--ty-r2);
+  line-height: 1.45;
+}
+
+.diagnostic-console-margin-zone-distribution {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+
+.diagnostic-console-margin-zone-bar {
+  display: flex;
+  width: 100%;
+  height: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text-t3) 7%, transparent);
+}
+
+.diagnostic-console-margin-zone-bar-segment {
+  min-width: 2px;
+  height: 100%;
+}
+
+.diagnostic-console-margin-zone-bar-segment.zone-safe {
+  background: color-mix(in srgb, var(--green) 76%, transparent);
+}
+
+.diagnostic-console-margin-zone-bar-segment.zone-crowded {
+  background: color-mix(in srgb, var(--visual-warning-accent) 82%, transparent);
+}
+
+.diagnostic-console-margin-zone-bar-segment.zone-danger {
+  background: color-mix(in srgb, var(--visual-danger-accent) 82%, transparent);
+}
+
+.diagnostic-console-margin-zone-bar-segment.zone-breach {
+  background: color-mix(in srgb, var(--visual-danger-solid) 88%, transparent);
+}
+
+.diagnostic-console-margin-zone-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.diagnostic-console-margin-zone-pill,
+.diagnostic-console-margin-zone-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+  min-height: 22px;
+  padding: 0 9px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: var(--ty-r1);
+  line-height: 1;
+  font-weight: 620;
+  white-space: nowrap;
+}
+
+.diagnostic-console-margin-zone-pill > strong,
+.diagnostic-console-margin-zone-pill > em {
+  font-style: normal;
+  font-weight: 700;
+  font-family: var(--diagnostic-overview-display-font);
+  font-variant-numeric: tabular-nums;
+}
+
+.diagnostic-console-margin-zone-pill > em {
+  color: inherit;
+  font-weight: 620;
+  opacity: 0.72;
+}
+
+.diagnostic-console-margin-zone-pill.zone-safe,
+.diagnostic-console-margin-zone-badge.zone-safe {
+  color: color-mix(in srgb, var(--green) 76%, var(--text-t1));
+  border-color: color-mix(in srgb, var(--green) 28%, transparent);
+  background: color-mix(in srgb, var(--green) 9%, transparent);
+}
+
+.diagnostic-console-margin-zone-pill.zone-crowded,
+.diagnostic-console-margin-zone-badge.zone-crowded {
+  color: color-mix(
+    in srgb,
+    var(--visual-warning-accent) 84%,
+    var(--text-t1)
+  );
+  border-color: color-mix(
+    in srgb,
+    var(--visual-warning-accent) 34%,
+    transparent
+  );
+  background: color-mix(
+    in srgb,
+    var(--visual-warning-accent) 10%,
+    transparent
+  );
+}
+
+.diagnostic-console-margin-zone-pill.zone-danger,
+.diagnostic-console-margin-zone-badge.zone-danger {
+  color: color-mix(in srgb, var(--visual-danger-accent) 86%, var(--text-t1));
+  border-color: color-mix(in srgb, var(--visual-danger-accent) 32%, transparent);
+  background: color-mix(in srgb, var(--visual-danger-accent) 10%, transparent);
+}
+
+.diagnostic-console-margin-zone-pill.zone-breach,
+.diagnostic-console-margin-zone-badge.zone-breach {
+  color: color-mix(in srgb, var(--visual-danger-solid) 88%, var(--text-t1));
+  border-color: color-mix(in srgb, var(--visual-danger-solid) 34%, transparent);
+  background: color-mix(in srgb, var(--visual-danger-solid) 14%, transparent);
+}
+
+.diagnostic-console-margin-session-section {
+  display: grid;
+  gap: 9px;
+  min-height: 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--diagnostic-behavior-cross-line);
+}
+
+.diagnostic-console-margin-session-head {
+  padding: 0 4px;
+}
+
+.diagnostic-console-margin-session-head > strong {
+  color: var(--text-t1);
+  font-size: var(--ty-r2);
+  line-height: 1.35;
+}
+
+.diagnostic-console-margin-session-list {
+  display: grid;
+  gap: 8px;
+}
+
+.diagnostic-console-margin-session-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+  padding: 8px 0;
+  border-top: 1px solid color-mix(in srgb, var(--line) 46%, transparent);
+}
+
+.diagnostic-console-margin-session-row:first-child {
+  border-top: none;
+}
+
+.diagnostic-console-margin-session-copy {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+.diagnostic-console-margin-session-copy > strong {
+  color: var(--text-t1);
+  font-size: var(--ty-r2);
+  line-height: 1.2;
+  font-weight: 700;
+  font-family: var(--ff-mono);
+}
+
+.diagnostic-console-margin-session-copy > span {
+  color: var(--text-t2);
+  font-size: var(--ty-r2);
+  line-height: 1.35;
+}
+
+.diagnostic-console-margin-session-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.diagnostic-console-margin-session-actions > strong {
+  font-size: var(--ty-r2);
+  line-height: 1.2;
+  font-weight: 700;
+  font-family: var(--diagnostic-overview-display-font);
+  font-variant-numeric: tabular-nums;
+}
+
+.diagnostic-console-issue-list {
+  display: grid;
+  gap: 16px;
+  min-height: 0;
+  overflow: auto;
+  padding-right: 2px;
+}
+
+.diagnostic-console-issue-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: start;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--diagnostic-behavior-cross-line);
+}
+
+.diagnostic-console-issue-row:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.diagnostic-console-issue-main {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.diagnostic-console-issue-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.diagnostic-console-issue-head > strong {
+  color: var(--text-t1);
+  font-size: var(--ty-r2);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.diagnostic-console-issue-score {
+  font-family: var(--diagnostic-overview-display-font);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--ty-r2);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.diagnostic-console-issue-bar {
+  position: relative;
+  height: 6px;
+  background: color-mix(in srgb, var(--visual-white) 6%, transparent);
+  overflow: hidden;
+}
+
+.diagnostic-console-issue-bar-fill {
+  display: block;
+  width: var(--diagnostic-issue-score, 0%);
+  height: 100%;
+  background: color-mix(in srgb, var(--text-t3) 52%, transparent);
+}
+
+.diagnostic-console-issue-bar-fill.tone-up {
+  background: color-mix(in srgb, var(--price-up-color) 82%, transparent);
+}
+
+.diagnostic-console-issue-bar-fill.tone-down {
+  background: color-mix(in srgb, var(--price-down-color) 82%, transparent);
+}
+
+.diagnostic-console-issue-raw,
+.diagnostic-console-issue-drill {
+  color: var(--text-t3);
+  font-size: var(--ty-r1);
+  line-height: 1.45;
+}
+
+.diagnostic-console-issue-drill {
+  color: var(--text-t2);
+}
+
+.diagnostic-console-competence-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  min-width: 0;
+}
+
+.diagnostic-console-competence-card {
+  padding: var(--diagnostic-card-padding-block)
+    var(--diagnostic-card-padding-inline);
+  min-height: 196px;
+}
+
+.diagnostic-console-competence-card.is-empty {
+  opacity: 0.72;
+}
+
+.diagnostic-console-competence-head,
+.diagnostic-console-competence-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+}
+
+.diagnostic-console-competence-title {
+  justify-content: flex-start;
+  flex: 1 1 auto;
+}
+
+.diagnostic-console-competence-title > div {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+.diagnostic-console-competence-title strong {
+  font-size: var(--ty-r3);
+  line-height: 1.36;
+  overflow-wrap: anywhere;
+  color: var(--text-t1);
+}
+
+.diagnostic-console-competence-title span {
+  font-size: var(--ty-r2);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  color: var(--text-t3);
+}
+
+.diagnostic-console-competence-roi {
+  font-size: var(--ty-r5);
+  font-weight: 760;
+  font-variant-numeric: tabular-nums;
+}
+
+.diagnostic-console-arena-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--action-a1) 14%, transparent);
+  color: var(--action-a1);
+  flex-shrink: 0;
+}
+
+.diagnostic-console-history-filter {
+  width: fit-content;
+}
+
+.diagnostic-console-topbar--flat {
+  display: grid;
+  border: 1px solid var(--diagnostic-topbar-line);
+  border-radius: var(--radius-card-sm);
+  background: var(--diagnostic-topbar-surface);
+  overflow: hidden;
+}
+
+.diagnostic-console-topbar .workspace-top-bar-main,
+.diagnostic-console-topbar-flat-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--diagnostic-topbar-tools-w);
+  align-items: end;
+  gap: 14px 18px;
+  padding: 10px 16px 12px;
+}
+
+.diagnostic-console-tab-rail-wrap {
+  position: relative;
+  min-width: 0;
+  padding: 0;
+  z-index: 1;
+}
+
+.diagnostic-console-tab-rail-wrap::after {
+  display: none;
+}
+
+.diagnostic-console-tab-rail.plain-tab-bar {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  width: 100%;
+  border-bottom: none;
+}
+
+.diagnostic-console-tab-rail-item.plain-tab-bar-item {
+  height: auto;
+  min-height: 42px;
+  padding: 2px 10px 10px;
+  border-radius: 0;
+  justify-content: center;
+  text-align: center;
+  color: var(--diagnostic-topbar-tab-muted);
+  background: transparent;
+}
+
+.diagnostic-console-tab-rail-item .plain-tab-bar-item-copy {
+  display: grid;
+  justify-items: center;
+  gap: 0;
+}
+
+.diagnostic-console-tab-rail-item .plain-tab-bar-item-label {
+  color: inherit;
+  font-size: var(--ty-r2);
+  font-weight: 680;
+  line-height: var(--ty-leading-label);
+  letter-spacing: 0;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  overflow-wrap: anywhere;
+}
+
+.diagnostic-console-tab-rail-item:hover:not(:disabled),
+.diagnostic-console-tab-rail-item:focus-visible {
+  color: var(--text-t1);
+  background: color-mix(in srgb, var(--surface-s3) 42%, transparent);
+}
+
+.diagnostic-console-tab-rail-item.plain-tab-bar-item::after {
+  left: 18%;
+  right: 18%;
+  bottom: -1px;
+  height: 2px;
+  border-radius: 999px 999px 0 0;
+  background: transparent;
+}
+
+.diagnostic-console-tab-rail-item.is-active {
+  color: var(--text-t1);
+}
+
+.diagnostic-console-tab-rail-item.is-active::after {
+  background: var(--diagnostic-topbar-tab-active);
+}
+
+.diagnostic-console-tools-row {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+}
+
+.diagnostic-console-slim-controls-tray {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  align-items: stretch;
+  justify-content: end;
+  padding: 0;
+}
+
+.diagnostic-console-tools-tray {
+  width: 100%;
+  max-width: 100%;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+.diagnostic-console-kpi-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.diagnostic-console-kpi-card {
+  min-height: 0;
+  position: relative;
+}
+
+.workspace-page.diagnostic-center-page[data-review-tab="OVERVIEW"]
+  .diagnostic-console-kpi-card {
+  align-items: center;
+  justify-content: center;
+}
+
+.workspace-page.diagnostic-center-page[data-review-tab="OVERVIEW"]
+  .diagnostic-console-kpi-head {
+  position: relative;
+  width: 100%;
+  justify-content: center;
+}
+
+.workspace-page.diagnostic-center-page[data-review-tab="OVERVIEW"]
+  .diagnostic-console-kpi-copy,
+.workspace-page.diagnostic-center-page[data-review-tab="OVERVIEW"]
+  .diagnostic-console-kpi-meta {
+  justify-items: center;
+  text-align: center;
+}
+
+.workspace-page.diagnostic-center-page[data-review-tab="OVERVIEW"]
+  .diagnostic-console-pending-indicator {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.diagnostic-console-section--overview-kpis {
+  padding-bottom: clamp(18px, 1.6vw, 24px);
+}
+
+.diagnostic-console-overview-main-grid {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 0;
+  padding-top: clamp(18px, 1.6vw, 24px);
+  border-top: 1px solid var(--diagnostic-overview-cut-line);
+}
+
+.workspace-page.diagnostic-center-page[data-review-tab="OVERVIEW"]
+  .diagnostic-console-overview-grid-card {
+  padding: 0;
+  border: none !important;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.diagnostic-console-overview-main-grid
+  > .diagnostic-console-overview-grid-card:first-child {
+  padding-right: clamp(18px, 1.8vw, 28px);
+}
+
+.diagnostic-console-overview-main-grid
+  > .diagnostic-console-overview-grid-card:last-child {
+  padding-left: clamp(18px, 1.8vw, 28px);
+  border-left: 1px solid var(--diagnostic-overview-cut-line);
+}
+
+.diagnostic-console-panel--overview .diagnostic-console-chart-head {
+  padding: 0 0 12px;
+}
+
+.diagnostic-console-panel--overview .diagnostic-console-empty-inline,
+.diagnostic-console-panel--overview .diagnostic-console-empty-state {
+  padding-inline: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+}
+
+.diagnostic-console-arena-card {
+  min-height: 0;
+}
+
+.diagnostic-console-environment-table-wrap {
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-gutter: stable both-edges;
+}
+
+.diagnostic-console-environment-table {
+  width: 100%;
+  min-width: 0;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.diagnostic-console-environment-col--environment {
+  width: 27.2727%;
+}
+
+.diagnostic-console-environment-col--count {
+  width: 18.1818%;
+}
+
+.diagnostic-console-environment-col--winrate {
+  width: 18.1818%;
+}
+
+.diagnostic-console-environment-col--profit-factor {
+  width: 18.1818%;
+}
+
+.diagnostic-console-environment-col--contribution {
+  width: 18.1818%;
+}
+
+.diagnostic-console-environment-table th,
+.diagnostic-console-environment-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--diagnostic-overview-row-line);
+  vertical-align: middle;
+}
+
+.diagnostic-console-environment-table th:first-child,
+.diagnostic-console-environment-table td:first-child {
+  padding-left: 14px;
+}
+
+.diagnostic-console-environment-table th:last-child,
+.diagnostic-console-environment-table td:last-child {
+  padding-right: 14px;
+}
+
+.diagnostic-console-environment-table-head {
+  color: var(--text-t2);
+  font-size: var(--ty-r1);
+  font-weight: 600;
+  line-height: 1.2;
+  vertical-align: bottom;
+  letter-spacing: 0;
+}
+
+.diagnostic-console-environment-table-head--label {
+  text-align: left;
+}
+
+.diagnostic-console-environment-table-head--metric {
+  text-align: right;
+}
+
+.diagnostic-console-environment-table td {
+  color: var(--text-t2);
+  font-size: var(--ty-r2);
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+
+.diagnostic-console-environment-table td:not(:first-child) {
+  text-align: right;
+  white-space: nowrap;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.diagnostic-console-environment-row {
+  background: transparent;
+  transition:
+    background-color var(--motion-fast),
+    color var(--motion-fast);
+  cursor: pointer;
+}
+
+.diagnostic-console-environment-row:hover {
+  background: var(--diagnostic-overview-hover);
+}
+
+.diagnostic-console-environment-row:focus-visible {
+  outline: 2px solid var(--ui-control-focus-ring);
+  outline-offset: -2px;
+}
+
+.diagnostic-console-environment-row.is-linked {
+  background: color-mix(in srgb, var(--surface-s3) 24%, transparent);
+}
+
+.diagnostic-console-environment-row--up {
+  box-shadow: none;
+}
+
+.diagnostic-console-environment-row--down {
+  box-shadow: none;
+}
+
+.diagnostic-console-environment-row--flat {
+  box-shadow: none;
+}
+
+.diagnostic-console-environment-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.diagnostic-console-arena-rows {
+  display: grid;
+  gap: 10px;
+}
+
+.diagnostic-console-arena-row {
+  display: grid;
+  gap: 6px;
+}
+
+.diagnostic-console-arena-row-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.diagnostic-console-arena-row-head > span {
+  color: var(--text-t1);
+  font-size: var(--ty-r3);
+  font-weight: 650;
+}
+
+.diagnostic-console-arena-tag {
+  min-height: 24px;
+  border-color: color-mix(in srgb, var(--line) 58%, transparent);
+  background: color-mix(in srgb, var(--surface-s3) 84%, transparent);
+  color: var(--text-t2);
+}
+
+.diagnostic-console-arena-track {
+  position: relative;
+  height: 9px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface-s3) 90%, transparent);
+  overflow: hidden;
+}
+
+.diagnostic-console-arena-track::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: color-mix(in srgb, var(--text-t3) 34%, transparent);
+}
+
+.diagnostic-console-arena-bar {
+  --diagnostic-arena-bar-width: 0%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: var(--diagnostic-arena-bar-width);
+}
+
+.diagnostic-console-arena-bar.tone-up {
+  left: 50%;
+  border-radius: 0 999px 999px 0;
+  background: color-mix(in srgb, var(--price-up-color) 84%, transparent);
+}
+
+.diagnostic-console-arena-bar.tone-down {
+  right: 50%;
+  border-radius: 999px 0 0 999px;
+  background: color-mix(in srgb, var(--price-down-color) 84%, transparent);
+}
+
+.diagnostic-console-arena-row-metrics {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.diagnostic-console-arena-row-metrics > strong {
+  font-size: var(--ty-r2);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.diagnostic-console-arena-row-metrics > span {
+  font-size: var(--ty-r2);
+  color: var(--text-t3);
+}
+
+.diagnostic-console-environment-meta-note {
+  color: color-mix(in srgb, var(--text-t3) 88%, transparent);
+  font-size: var(--ty-r1);
+  line-height: 1.2;
+}
+
+.diagnostic-console-behavior-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: minmax(0, 1fr);
+  gap: 0;
+  min-height: 0;
+  height: 100%;
+}
+
+.diagnostic-console-behavior-column {
+  min-height: 0;
+  display: grid;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 0;
+}
+
+.diagnostic-console-behavior-column--compact {
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+
+.diagnostic-console-behavior-column--primary {
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  border-left: 1px solid var(--diagnostic-behavior-cross-line);
+}
+
+.workspace-page.diagnostic-center-page[data-review-tab="BEHAVIOR"]
+  .diagnostic-console-behavior-card {
+  padding: 18px 22px 18px;
+  border: none !important;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.workspace-page.diagnostic-center-page[data-review-tab="BEHAVIOR"]
+  .diagnostic-console-behavior-column
+  > .diagnostic-console-behavior-card
+  + .diagnostic-console-behavior-card {
+  border-top: 1px solid var(--diagnostic-behavior-cross-line) !important;
+}
+
+.workspace-page.diagnostic-center-page[data-review-tab="BEHAVIOR"]
+  .diagnostic-console-chart-head {
+  padding: 0 0 12px;
+}
+
+.workspace-page.diagnostic-center-page[data-review-tab="BEHAVIOR"]
+  .diagnostic-console-chart {
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.workspace-page.diagnostic-center-page[data-review-tab="BEHAVIOR"]
+  .diagnostic-console-empty-state {
+  border: none;
+  border-radius: 0;
+  background: transparent;
+}
+
+.diagnostic-console-panel--behavior .diagnostic-console-chart-short {
+  min-height: 190px;
+  height: clamp(190px, 22vh, 260px);
+}
+
+.diagnostic-console-behavior-card--hold .diagnostic-console-chart-short {
+  min-height: 168px;
+  height: clamp(168px, 19vh, 220px);
+}
+
+.diagnostic-console-behavior-card--waterfall .diagnostic-console-chart-short {
+  min-height: 150px;
+  height: clamp(150px, 18vh, 210px);
+}
+
+.diagnostic-console-behavior-card--margin .diagnostic-console-chart-short {
+  min-height: 168px;
+  height: clamp(168px, 19vh, 220px);
+}
+
+.diagnostic-console-behavior-card--radar .diagnostic-console-chart-short {
+  min-height: 300px;
+  height: clamp(300px, 33vh, 400px);
+}
+
+.diagnostic-console-history-controls {
+  align-items: flex-end;
+  gap: 12px;
+}

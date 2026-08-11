@@ -1,0 +1,52 @@
+{
+  "version": 3,
+  "features": [
+    {
+      "id": "desktop-workspaces",
+      "keywords": ["workspace", "training", "replay", "backtest", "notes"],
+      "ownerLane": "desktop-app",
+      "truthDocs": ["README.md", "docs/ARCHITECTURE.md"],
+      "codeRoots": ["apps/desktop/web/src/workspaces", "apps/desktop/local-api/src/application"],
+      "contracts": ["desktop-local-api-v1", "native-bridge-v1"],
+      "tests": ["npm run test:desktop-app"],
+      "qualityCommands": ["npm run quality:desktop-app"],
+      "debugPlaybooks": []
+    },
+    {
+      "id": "data-import",
+      "keywords": ["data", "import", "csv", "parquet", "xlsx", "duckdb"],
+      "ownerLane": "desktop-app",
+      "truthDocs": ["CONTRIBUTING.md", "docs/ARCHITECTURE.md"],
+      "codeRoots": ["apps/desktop/local-api/src/application/dataSource", "apps/desktop/web/src/domains/data-import"],
+      "contracts": ["desktop-local-api-v1"],
+      "tests": ["npm run test:desktop-app"],
+      "qualityCommands": ["npm run quality:desktop-app"],
+      "debugPlaybooks": ["CONTRIBUTING.md"]
+    },
+    {
+      "id": "portable-data-v2",
+      "keywords": ["portable", "export", "import", "archive", "checksum"],
+      "ownerLane": "desktop-app",
+      "truthDocs": ["README.md", "docs/ARCHITECTURE.md"],
+      "codeRoots": ["apps/desktop/local-api/src/application/portableData", "apps/desktop/web/src/api/portableData.ts"],
+      "contracts": ["desktop-local-api-v1"],
+      "tests": [
+        "apps/desktop/local-api/tests/app/portableDataRoundTrip.test.ts",
+        "apps/desktop/local-api/tests/app/portableDataContainerSecurity.test.ts"
+      ],
+      "qualityCommands": ["npm run quality:desktop-app"],
+      "debugPlaybooks": []
+    },
+    {
+      "id": "native-runtime",
+      "keywords": ["tauri", "runtime", "bridge", "bundle", "sidecar"],
+      "ownerLane": "desktop-app",
+      "truthDocs": ["docs/ARCHITECTURE.md", "CONTRIBUTING.md"],
+      "codeRoots": ["apps/desktop/shell", "tools/release", "config/open-source/node-runtime-authority.json"],
+      "contracts": ["native-bridge-v1", "desktop-local-api-v1"],
+      "tests": ["npm run desktop:runtime:supply-chain:test", "npm run desktop:runtime:check:build", "cargo check --manifest-path apps/desktop/shell/Cargo.toml"],
+      "qualityCommands": ["npm run quality:desktop-app"],
+      "debugPlaybooks": ["CONTRIBUTING.md"]
+    }
+  ]
+}

@@ -1,0 +1,666 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.app-root .data-config-page .data-config-source-row-import {
+  grid-template-columns: minmax(220px, 0.85fr) minmax(0, 1fr);
+  grid-template-rows: auto minmax(44px, auto) minmax(52px, auto);
+}
+
+.data-config-source-row-import .data-asset-card-folder-tab {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.data-config-source-row-import .data-asset-card-head {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: start;
+  margin: 0;
+}
+
+.data-config-source-row-import .data-asset-card-content {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  min-width: 0;
+  margin: 0;
+}
+
+.data-config-source-row-import .data-asset-card-summary {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px 12px;
+}
+
+.data-config-source-row-import .data-asset-card-summary-lines {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px 12px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.data-config-source-row-import .data-asset-card-meta-line {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.data-config-source-row-import .data-asset-card-foot-import {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  min-height: 52px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  margin: 0;
+  padding-top: 12px;
+  border-top: 1px solid color-mix(in srgb, var(--ui-surface-border) 80%, transparent);
+}
+
+.data-config-source-row-import .data-asset-import-progress {
+  min-width: 0;
+}
+
+@media (max-width: 1180px) {
+  .app-root .data-config-page .data-config-source-row {
+    grid-template-columns: minmax(190px, 0.8fr) minmax(0, 1.5fr);
+  }
+
+  .data-config-source-card-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 860px) {
+  .app-root .data-config-page .data-config-source-row,
+  .app-root .data-config-page .data-config-source-row-import {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto minmax(52px, auto);
+  }
+
+  .data-config-source-row .data-asset-card-folder-tab,
+  .data-config-source-row .data-config-source-card-content,
+  .data-config-source-row-import .data-asset-card-folder-tab,
+  .data-config-source-row-import .data-asset-card-head,
+  .data-config-source-row-import .data-asset-card-content {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .data-config-source-row .data-asset-card-foot-ready,
+  .data-config-source-row-import .data-asset-card-foot-import {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 620px) {
+  .app-root .data-config-page .data-config-source-row {
+    min-height: 0;
+    padding: 14px;
+  }
+
+  .data-config-source-card-metrics {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .data-config-source-card-operation-summary,
+  .data-config-source-row-import .data-asset-card-summary-lines {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .data-config-source-row .data-asset-card-foot-ready,
+  .data-config-source-row-import .data-asset-card-foot-import {
+    align-items: start;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .data-config-source-row .data-asset-card-actions {
+    justify-self: start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-root .data-config-page .data-config-source-row.is-clear-review {
+    animation: none;
+    box-shadow: 0 0 0 2px
+      color-mix(in srgb, var(--visual-danger-accent) 18%, transparent);
+  }
+}
+
+/* Source-card hierarchy refresh: identity, coverage, then status and action. */
+
+.app-root .data-config-page .data-config-source-list {
+  gap: 14px;
+}
+
+.app-root .data-config-page .data-config-source-row {
+  --data-config-source-status-accent: var(--line-strong);
+  position: relative;
+  min-height: 190px;
+  grid-template-columns: minmax(300px, 0.92fr) minmax(520px, 1.58fr);
+  grid-template-rows: minmax(110px, auto) minmax(48px, auto);
+  gap: 16px 22px;
+  padding: 18px 20px;
+  border-color: var(--ui-surface-border-strong);
+  background: var(--ui-surface-bg);
+  box-shadow: var(--shadow-soft);
+  isolation: isolate;
+}
+
+.app-root .data-config-page .data-config-source-row::before {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  inset: 14px auto 14px 0;
+  width: 4px;
+  border-radius: 0 999px 999px 0;
+  background: var(--data-config-source-status-accent);
+}
+
+.app-root .data-config-page .data-config-source-row.is-status-ready {
+  --data-config-source-status-accent: var(--success);
+  border-color: color-mix(
+    in srgb,
+    var(--success) 30%,
+    var(--ui-surface-border-strong)
+  );
+}
+
+.app-root .data-config-page .data-config-source-row.is-status-checking {
+  --data-config-source-status-accent: var(--visual-accent-base);
+  border-color: color-mix(
+    in srgb,
+    var(--visual-accent-base) 38%,
+    var(--ui-surface-border-strong)
+  );
+}
+
+.app-root .data-config-page .data-config-source-row.is-status-warning {
+  --data-config-source-status-accent: var(--visual-warning-accent);
+  border-color: color-mix(
+    in srgb,
+    var(--visual-warning-accent) 40%,
+    var(--ui-surface-border-strong)
+  );
+}
+
+.app-root .data-config-page .data-config-source-row.is-status-danger,
+.app-root .data-config-page .data-config-source-row.is-deleting {
+  --data-config-source-status-accent: var(--visual-danger-accent);
+  border-color: color-mix(
+    in srgb,
+    var(--visual-danger-accent) 42%,
+    var(--ui-surface-border-strong)
+  );
+}
+
+@keyframes data-config-clear-review-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0
+      color-mix(in srgb, var(--visual-danger-accent) 0%, transparent);
+  }
+
+  50% {
+    box-shadow: 0 0 0 3px
+      color-mix(in srgb, var(--visual-danger-accent) 22%, transparent);
+  }
+}
+
+.app-root .data-config-page .data-config-source-row.is-clear-review {
+  --data-config-source-status-accent: var(--visual-danger-accent);
+  border-color: color-mix(
+    in srgb,
+    var(--visual-danger-accent) 60%,
+    var(--ui-surface-border-strong)
+  );
+  background: color-mix(
+    in srgb,
+    var(--visual-danger-accent) 8%,
+    var(--ui-surface-bg)
+  );
+  animation: data-config-clear-review-pulse var(--motion-loop-shimmer)
+    var(--motion-loop-iteration-count);
+}
+
+.app-root .data-config-page .data-config-source-row.is-clear-review::before {
+  background: var(--visual-danger-accent);
+}
+
+.app-root .data-config-page .data-config-source-row.is-clear-review:is(
+  .is-status-ready,
+  .is-status-checking,
+  .is-status-warning,
+  .is-status-danger,
+  .is-status-muted
+) {
+  --data-config-source-status-accent: var(--visual-danger-accent);
+  border-color: color-mix(
+    in srgb,
+    var(--visual-danger-accent) 60%,
+    var(--ui-surface-border-strong)
+  );
+}
+
+.app-root .data-config-page .data-config-source-row.is-clear-review:hover {
+  border-color: color-mix(
+    in srgb,
+    var(--visual-danger-accent) 74%,
+    var(--ui-surface-border-strong)
+  );
+  background: color-mix(
+    in srgb,
+    var(--visual-danger-accent) 12%,
+    var(--ui-surface-hover-bg)
+  );
+}
+
+.app-root .data-config-page .data-config-source-row.is-status-muted,
+.app-root .data-config-page .data-config-source-row.is-not-ready {
+  --data-config-source-status-accent: var(--text-t3);
+}
+
+.app-root .data-config-page .data-config-source-row:hover {
+  border-color: color-mix(
+    in srgb,
+    var(--data-config-source-status-accent) 46%,
+    var(--ui-surface-border-strong)
+  );
+  background: var(--ui-surface-hover-bg);
+  box-shadow: var(--shadow-soft);
+}
+
+.data-config-source-row > .data-asset-card-folder-tab,
+.data-config-source-row > .data-config-source-card-content,
+.data-config-source-row > .data-asset-card-foot {
+  position: relative;
+}
+
+.data-config-source-row[data-card-navigable="true"] {
+  cursor: default;
+}
+
+.data-config-source-row[data-card-navigable="true"].is-draggable:active {
+  cursor: default;
+}
+
+.data-config-source-row[data-card-navigable="true"]:focus-visible {
+  outline: 2px solid var(--visual-accent-base);
+  outline-offset: -4px;
+}
+
+.data-config-source-row .data-asset-card-folder-tab {
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: auto auto;
+  gap: 9px 12px;
+}
+
+.data-config-source-row .data-asset-card-title-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px 9px;
+  padding-right: 22px;
+}
+
+.data-config-source-row .data-asset-card-title-icon {
+  display: inline-grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  line-height: 0;
+  border: 1px solid color-mix(
+    in srgb,
+    var(--data-config-source-status-accent) 26%,
+    var(--ui-surface-border)
+  );
+  border-radius: var(--ui-surface-radius-sm);
+  background: color-mix(
+    in srgb,
+    var(--data-config-source-status-accent) 9%,
+    var(--ui-surface-bg-soft)
+  );
+  color: var(--data-config-source-status-accent);
+}
+
+.data-config-source-row .data-asset-card-title-icon svg {
+  transform: translateY(-1px);
+}
+
+.data-config-source-row .data-asset-card-title-edit {
+  min-width: 0;
+}
+
+.data-config-source-row .data-asset-card-name-field {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 7px;
+}
+
+.data-config-source-row .data-asset-card-name-count {
+  min-width: 4.25ch;
+  color: var(--text-t2);
+  font-size: var(--ty-r1);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  text-align: right;
+}
+
+.data-config-source-row .data-asset-card-title {
+  flex: 1 1 210px;
+  color: var(--text-t1);
+  font-size: var(--ty-r3);
+  font-weight: 740;
+  line-height: 1.3;
+}
+
+.data-config-source-card-drag-handle {
+  position: absolute;
+  top: 3px;
+  right: 0;
+  width: 16px;
+  height: 22px;
+  color: var(--text-t3);
+  cursor: grab;
+  touch-action: none;
+}
+
+.data-config-source-card-drag-handle:active {
+  cursor: grabbing;
+}
+
+.data-config-source-card-drag-handle::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 1px;
+  width: 3px;
+  height: 3px;
+  border-radius: 999px;
+  background: currentColor;
+  box-shadow:
+    0 6px currentColor,
+    0 12px currentColor,
+    6px 0 currentColor,
+    6px 6px currentColor,
+    6px 12px currentColor;
+}
+
+.data-config-source-card-identity-meta {
+  grid-column: 1;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px 9px;
+}
+
+.data-config-source-row .data-asset-card-status-tab {
+  border-color: color-mix(
+    in srgb,
+    var(--data-config-source-status-accent) 38%,
+    var(--ui-surface-border)
+  );
+  background: color-mix(
+    in srgb,
+    var(--data-config-source-status-accent) 10%,
+    var(--ui-surface-bg)
+  );
+}
+
+.data-config-source-row .data-asset-status-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--data-config-source-status-accent);
+}
+
+.data-config-source-card-symbol-preview {
+  min-width: 0;
+  color: var(--text-t2);
+  font-size: var(--ty-r1);
+  font-variant-numeric: tabular-nums;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.data-config-source-card-path {
+  grid-column: 1 / -1;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  color: var(--text-t3);
+  font-size: var(--ty-r1);
+}
+
+.data-config-source-card-path > strong {
+  min-width: 0;
+  color: var(--text-t2);
+  font-weight: 620;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.data-config-source-row .data-config-source-card-content {
+  display: grid;
+  align-items: stretch;
+}
+
+.data-config-source-card-coverage-band {
+  min-width: 0;
+  min-height: 110px;
+  display: grid;
+  grid-template-columns: minmax(220px, 1.1fr) minmax(300px, 1.4fr);
+  border: 1px solid color-mix(
+    in srgb,
+    var(--ui-surface-border) 90%,
+    var(--data-config-source-status-accent)
+  );
+  border-radius: var(--ui-surface-radius-sm);
+  background: var(--ui-surface-bg-soft);
+  overflow: hidden;
+}
+
+.data-config-source-card-coverage-primary {
+  min-width: 0;
+  display: grid;
+  align-content: center;
+  gap: 7px;
+  padding: 16px 18px;
+  border-right: 1px solid var(--ui-surface-border);
+}
+
+.data-config-source-card-coverage-primary > span,
+.data-config-source-card-coverage-fact > span {
+  color: var(--text-t3);
+  font-size: var(--ty-r1);
+  line-height: 1.2;
+}
+
+.data-config-source-card-coverage-primary > strong {
+  min-width: 0;
+  color: var(--text-t1);
+  font-size: var(--ty-r3);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.35;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.data-config-source-card-coverage-facts {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.data-config-source-card-coverage-fact {
+  min-width: 0;
+  display: grid;
+  align-content: center;
+  gap: 5px;
+  padding: 14px 12px;
+}
+
+.data-config-source-card-coverage-fact + .data-config-source-card-coverage-fact {
+  border-left: 1px solid var(--ui-surface-border);
+}
+
+.data-config-source-card-coverage-fact.is-period {
+  background: color-mix(
+    in srgb,
+    var(--data-config-source-status-accent) 5%,
+    transparent
+  );
+}
+
+.data-config-source-card-coverage-fact > strong {
+  min-width: 0;
+  color: var(--text-t1);
+  font-size: var(--ty-r2);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.data-config-source-row .data-asset-card-foot-ready {
+  min-height: 48px;
+  gap: 14px;
+  padding-top: 12px;
+  border-top-color: var(--ui-surface-border);
+}
+
+.data-config-source-card-operation-summary {
+  gap: 8px 12px;
+}
+
+.data-config-source-card-detail-affordance {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  color: var(--visual-accent-base);
+  font-size: var(--ty-r1);
+  font-weight: 680;
+  pointer-events: none;
+}
+
+.data-config-source-card-detail-affordance svg {
+  width: 16px;
+  height: 16px;
+}
+
+.data-config-source-row .data-asset-card-menu-trigger,
+.data-config-source-row .data-asset-card-actions,
+.data-config-source-row .data-asset-card-title-edit,
+.data-config-source-row .data-asset-card-progress-panel,
+.data-config-source-row .data-config-source-card-drag-handle {
+  z-index: 4;
+}
+
+.app-root .data-config-page .data-config-source-row-import {
+  min-height: 190px;
+  grid-template-columns: minmax(300px, 0.92fr) minmax(0, 1.58fr);
+}
+
+.data-config-source-row-import .data-asset-card-summary {
+  padding: 14px 16px;
+  border: 1px solid color-mix(
+    in srgb,
+    var(--data-config-source-status-accent) 24%,
+    var(--ui-surface-border)
+  );
+  border-radius: var(--ui-surface-radius-sm);
+  background: var(--ui-surface-bg-soft);
+}
+
+@media (max-width: 1180px) {
+  .app-root .data-config-page .data-config-source-row,
+  .app-root .data-config-page .data-config-source-row-import {
+    grid-template-columns: minmax(260px, 0.82fr) minmax(0, 1.42fr);
+  }
+
+  .data-config-source-card-coverage-band {
+    grid-template-columns: minmax(190px, 0.95fr) minmax(0, 1.3fr);
+  }
+
+  .data-config-source-card-coverage-facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .data-config-source-card-coverage-fact:nth-child(3) {
+    border-left: 0;
+    border-top: 1px solid var(--ui-surface-border);
+  }
+
+  .data-config-source-card-coverage-fact:nth-child(4) {
+    border-top: 1px solid var(--ui-surface-border);
+  }
+}
+
+@media (max-width: 860px) {
+  .app-root .data-config-page .data-config-source-row,
+  .app-root .data-config-page .data-config-source-row-import {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto minmax(48px, auto);
+  }
+
+  .data-config-source-row .data-asset-card-folder-tab,
+  .data-config-source-row .data-config-source-card-content,
+  .data-config-source-row-import .data-asset-card-folder-tab,
+  .data-config-source-row-import .data-asset-card-head,
+  .data-config-source-row-import .data-asset-card-content,
+  .data-config-source-row .data-asset-card-foot-ready,
+  .data-config-source-row-import .data-asset-card-foot-import {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 620px) {
+  .app-root .data-config-page .data-config-source-row,
+  .app-root .data-config-page .data-config-source-row-import {
+    min-height: 0;
+    padding: 16px;
+  }
+
+  .data-config-source-card-coverage-band {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .data-config-source-card-coverage-primary {
+    border-right: 0;
+    border-bottom: 1px solid var(--ui-surface-border);
+  }
+
+  .data-config-source-card-coverage-facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .data-config-source-card-coverage-fact:nth-child(3) {
+    border-left: 0;
+  }
+
+  .data-config-source-row .data-asset-card-foot-ready {
+    align-items: center;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .data-config-source-card-operation-summary {
+    flex-direction: row;
+    align-items: center;
+  }
+}

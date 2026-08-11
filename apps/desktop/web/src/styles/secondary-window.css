@@ -1,0 +1,25 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+@import "./popup-base.css";
+@import "./core/ui-control-tokens.css";
+@import "./popup-ui-primitives.css";
+@import "./components/date-picker.css";
+@import "./components/feature-lock-indicator.css";
+@import "./components/history-replay-chart-structure.css";
+@import "./layout/page-layout-system.css";
+@import "./components/desktop-secondary-windows.css";
+@import "./core/desktop-interaction-policy.css";
+
+.secondary-window-fatal {
+  width: 100vw;
+  height: 100vh;
+  background: var(--surface-s1, var(--bg, Canvas));
+  color: var(--text-t1, CanvasText);
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: var(--space-4, 16px);
+  padding: var(--space-6, 24px);
+  box-sizing: border-box;
+  text-align: center;
+}

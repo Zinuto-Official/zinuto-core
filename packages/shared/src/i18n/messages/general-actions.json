@@ -1,0 +1,202 @@
+{
+  "appText.plus1RestrictionSharesPurchasedDaySoldSameValue0": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "T+1 限制：当日买入不能当日卖出；今日最多可卖 {0} 股",
+      "en": "T+1 restriction: shares bought today cannot be sold today. You can sell up to {0} shares today",
+      "ja": "T+1制限：本日買い付けた株は当日売却できません。本日売却可能な上限は {0} 株です",
+      "ko": "T+1 제한: 오늘 매수한 주식은 당일 매도할 수 없습니다. 오늘 최대 {0}주까지 매도할 수 있습니다",
+      "es": "Restricción T+1: las acciones compradas hoy no se pueden vender hoy. Puedes vender hasta {0} acciones hoy"
+    }
+  },
+  "appText.reset": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "重置失败",
+      "en": "Reset failed",
+      "ja": "リセットに失敗しました",
+      "ko": "재설정 실패",
+      "es": "Error al restablecer"
+    }
+  },
+  "appText.reset2": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "重置",
+      "en": "Reset",
+      "ja": "リセット",
+      "ko": "재설정",
+      "es": "Restablecer"
+    }
+  },
+  "appText.resetCompleted": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "已完成重置",
+      "en": "Reset completed",
+      "ja": "リセット完了",
+      "ko": "재설정 완료",
+      "es": "Reinicio completado"
+    }
+  },
+  "appText.resetRecommended": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "恢复推荐",
+      "en": "Reset to Recommended",
+      "ja": "推奨に戻す",
+      "ko": "추천으로 복원",
+      "es": "Restaurar recomendación"
+    }
+  },
+  "appText.underPlus1SystemSharesPurchasedSameDay": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "T+1 制度下，当日买入不能当日卖出",
+      "en": "Under T+1, shares bought today cannot be sold today",
+      "ja": "T+1制度では、本日買い付けた株を当日売却できません",
+      "ko": "T+1 제도에서는 오늘 매수한 주식을 당일 매도할 수 없습니다",
+      "es": "Con T+1, las acciones compradas hoy no se pueden vender hoy"
+    }
+  },
+  "appText.underPlus1SystemSharesPurchasedSameDay2": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "T+1 制度下，当日买入不能当日卖出，请下一交易日再卖",
+      "en": "Under T+1, shares bought today cannot be sold today. Sell on the next trading day",
+      "ja": "T+1制度では、本日買い付けた株を当日売却できません。翌営業日に売却してください",
+      "ko": "T+1 제도에서는 오늘 매수한 주식을 당일 매도할 수 없습니다. 다음 거래일에 매도하세요",
+      "es": "Con T+1, las acciones compradas hoy no se pueden vender hoy. Venda en el siguiente día de mercado"
+    }
+  },
+  "dialogs.reset.confirmAction": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "确认重置",
+      "en": "Confirm Reset",
+      "ja": "リセットの確認",
+      "ko": "재설정 확인",
+      "es": "Confirmar Reinicio"
+    }
+  },
+  "dialogs.reset.oneClickDescription": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "一键重置会清理系统、K 线、训练、笔记和统计数据，但保留自定义指标",
+      "en": "Reset clears system, chart, training, notes, and stats. Custom indicators stay",
+      "ja": "リセットでシステム、チャート、訓練、ノート、統計を削除します。カスタム指標は残ります",
+      "ko": "리셋은 시스템, 차트, 훈련, 노트, 통계를 지웁니다. 사용자 지표는 유지됩니다",
+      "es": "El reinicio borra sistema, gráficos, entrenamientos, notas y estadísticas. Conserva indicadores personalizados"
+    }
+  },
+  "dialogs.reset.oneClickTitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "确认一键重置",
+      "en": "Confirm One-Click Reset",
+      "ja": "ワンクリックリセットを確認する",
+      "ko": "원클릭 재설정 확인",
+      "es": "Confirmar Reinicio Con Un Clic"
+    }
+  },
+  "legal.privacyPolicy": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "隐私政策",
+      "en": "Privacy Policy",
+      "ja": "プライバシーポリシー",
+      "ko": "개인정보 처리방침",
+      "es": "Política de privacidad"
+    }
+  },
+  "legal.termsOfUse": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "使用条款",
+      "en": "Terms of Use",
+      "ja": "利用規約",
+      "ko": "이용 약관",
+      "es": "Términos de uso"
+    }
+  },
+  "trainer.position.accountSettings": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "费用与交易账户",
+      "en": "Fees & Trading Account",
+      "ja": "手数料と取引口座",
+      "ko": "수수료 / 거래 계정",
+      "es": "Comisiones y cuenta de trading"
+    }
+  },
+  "trainer.questionBank.resetAction": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "重置题库",
+      "en": "Reset question bank",
+      "ja": "問題バンクをリセット",
+      "ko": "문제 은행 초기화",
+      "es": "Reiniciar banco de preguntas"
+    }
+  },
+  "trainer.questionBank.resetDialogCancelAction": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "取消",
+      "en": "Cancel",
+      "ja": "キャンセル",
+      "ko": "취소",
+      "es": "Cancelar"
+    }
+  },
+  "trainer.questionBank.resetDialogConfirmAction": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "确认重置",
+      "en": "Confirm Reset",
+      "ja": "リセットを確認",
+      "ko": "초기화 확인",
+      "es": "Confirmar reinicio"
+    }
+  },
+  "trainer.questionBank.resetDialogDescription": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "这会清空当前挑战模式下全部题库进度，并让后续训练从头开始。当前正在进行的挑战不会被打断",
+      "en": "Clears progress for this Challenge Hub mode. The current session stays active",
+      "ja": "このチャレンジハブの進捗を消去します。進行中の回は続行されます",
+      "ko": "이 챌린지 허브 모드의 진행도를 지웁니다. 진행 중인 라운드는 유지됩니다",
+      "es": "Borra el progreso de este modo del Centro de desafíos. La ronda actual sigue activa"
+    }
+  },
+  "trainer.questionBank.resetDialogTitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "重置题库",
+      "en": "Reset question bank",
+      "ja": "問題バンクをリセット",
+      "ko": "문제 은행 초기화",
+      "es": "Reiniciar banco de preguntas"
+    }
+  },
+  "trainer.questionBank.resetDoneNotice": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "已清空本模式全部题库进度，后续训练将从头开始",
+      "en": "Progress cleared. New sessions start fresh",
+      "ja": "進捗を消去しました。次回から新しく始まります",
+      "ko": "진행도를 지웠습니다. 다음 라운드는 새로 시작합니다",
+      "es": "Progreso borrado. Las nuevas rondas empiezan desde cero"
+    }
+  },
+  "trainer.questionBank.resettingAction": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "重置中...",
+      "en": "Resetting...",
+      "ja": "リセット中...",
+      "ko": "초기화 중...",
+      "es": "Restableciendo..."
+    }
+  }
+}

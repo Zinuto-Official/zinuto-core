@@ -1,0 +1,12 @@
+# Historical deterministic test-only encryption fixtures removed in commit history.
+# These exact fingerprints are not production credentials; do not broaden this allowlist.
+e815700ec98f6f418b5a5f6bd91746f87575b10d:apps/desktop/local-api/tests/app/freeReplayEndTrainingReset.test.ts:generic-api-key:18
+e815700ec98f6f418b5a5f6bd91746f87575b10d:apps/desktop/local-api/tests/app/freeReplayOrderQuoteRules.test.ts:generic-api-key:19
+e815700ec98f6f418b5a5f6bd91746f87575b10d:apps/desktop/local-api/tests/app/freeReplayPoolDefaultEnvironment.test.ts:generic-api-key:13
+e815700ec98f6f418b5a5f6bd91746f87575b10d:apps/desktop/local-api/tests/app/manualUndoFlows.test.ts:generic-api-key:14
+e815700ec98f6f418b5a5f6bd91746f87575b10d:apps/desktop/local-api/tests/app/marketWindowStressGuards.test.ts:generic-api-key:15
+e815700ec98f6f418b5a5f6bd91746f87575b10d:apps/desktop/local-api/tests/app/systemSeedBars.test.ts:generic-api-key:87
+e815700ec98f6f418b5a5f6bd91746f87575b10d:apps/desktop/local-api/tests/dataSource/marketDiagnosticsTimeframeAlignment.test.ts:generic-api-key:15
+e815700ec98f6f418b5a5f6bd91746f87575b10d:apps/desktop/local-api/tests/systemDevSimulation/executionCoverage.test.ts:generic-api-key:15
+e815700ec98f6f418b5a5f6bd91746f87575b10d:apps/desktop/local-api/tests/systemDevSimulation/fullJob.test.ts:generic-api-key:15
+e815700ec98f6f418b5a5f6bd91746f87575b10d:apps/desktop/local-api/tests/systemDevSimulation/systemFallbackJob.test.ts:generic-api-key:16

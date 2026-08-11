@@ -1,0 +1,11 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+@import "./workspace-overrides/02-special-training-mode-config.css";
+@import "./workspace-overrides/02-special-training-lightning-status.css";
+@import "./workspace-overrides/02-special-training-lightning-results.css";
+@import "./workspace-overrides/02-special-training-session-settlement.css";
+@import "./workspace-overrides/02-special-training-risk-review.css";
+@import "./workspace-overrides/02-special-training-risk-responsive.css";
+@import "./workspace-overrides/03-trainer-layout-refresh.css";
+@import "./workspace-overrides/06-special-training-prep.css";
+@import "./workspace-overrides/02-special-training-action-buttons.css";

@@ -1,0 +1,772 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.app-root .brand-metal-text {
+  --brand-metal-top: var(--visual-brand-ink-elevated);
+  --brand-metal-mid: color-mix(in srgb, var(--visual-brand-ink-soft) 76%, var(--text-strong));
+  --brand-metal-bottom: var(--visual-brand-ink-base);
+  --brand-metal-brush: color-mix(in srgb, var(--visual-brand-mist) 30%, transparent);
+  --brand-metal-specular: color-mix(in srgb, var(--visual-accent-base) 18%, var(--visual-brand-ink-elevated));
+  --brand-metal-shadow: color-mix(in srgb, var(--text-strong) 24%, transparent);
+  --brand-metal-fallback: var(--text-strong);
+  color: var(--brand-metal-fallback);
+  text-shadow:
+    0 1px 0 color-mix(in srgb, var(--theme-panel) 70%, transparent),
+    0 10px 18px color-mix(in srgb, var(--brand-metal-shadow) 12%, transparent);
+}
+
+.app-root.theme-dark .brand-metal-text {
+  --brand-metal-top: var(--visual-brand-porcelain);
+  --brand-metal-mid: color-mix(in srgb, var(--visual-brand-ivory-line) 82%, var(--visual-brand-mist));
+  --brand-metal-bottom: color-mix(in srgb, var(--visual-brand-mist) 88%, var(--visual-brand-ink-soft));
+  --brand-metal-brush: color-mix(in srgb, var(--visual-brand-mist) 52%, transparent);
+  --brand-metal-specular: color-mix(in srgb, var(--visual-brand-porcelain) 56%, transparent);
+  --brand-metal-shadow: color-mix(in srgb, var(--visual-brand-ink-soft) 36%, transparent);
+  --brand-metal-fallback: color-mix(in srgb, var(--visual-brand-porcelain) 90%, var(--visual-brand-mist));
+  text-shadow:
+    0 1px 0 color-mix(in srgb, var(--brand-metal-specular) 40%, transparent),
+    0 10px 18px color-mix(in srgb, var(--brand-metal-shadow) 18%, transparent);
+}
+
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .app-root .brand-metal-text {
+    background-image:
+      linear-gradient(
+        180deg,
+        var(--brand-metal-top) 0%,
+        color-mix(in srgb, var(--brand-metal-specular) 42%, var(--brand-metal-top)) 18%,
+        var(--brand-metal-mid) 44%,
+        color-mix(in srgb, var(--brand-metal-specular) 18%, var(--brand-metal-mid)) 56%,
+        var(--brand-metal-bottom) 82%,
+        color-mix(in srgb, var(--brand-metal-shadow) 68%, var(--brand-metal-bottom)) 100%
+      ),
+      repeating-linear-gradient(
+        100deg,
+        color-mix(in srgb, var(--brand-metal-brush) 12%, transparent) 0px,
+        color-mix(in srgb, var(--brand-metal-brush) 40%, transparent) 1px,
+        transparent 2px,
+        transparent 4px
+      ),
+      linear-gradient(
+        110deg,
+        transparent 0%,
+        color-mix(in srgb, var(--brand-metal-specular) 44%, transparent) 22%,
+        transparent 38%,
+        color-mix(in srgb, var(--brand-metal-shadow) 18%, transparent) 62%,
+        transparent 80%
+      );
+    background-size: 100% 100%, 220% 100%, 180% 100%;
+    background-position: center center, 0% 50%, -16% 50%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+/* Keep scrolling available everywhere without exposing desktop scrollbars or reserved gutters. */
+
+html,
+body,
+#root,
+* {
+  -ms-overflow-style: none !important;
+  scrollbar-gutter: auto !important;
+  scrollbar-width: none !important;
+}
+
+/*
+ * Workspace tabs do not all overflow by the same amount. Keep the root
+ * geometry constant while their internal scroll surfaces change so the fixed
+ * sidebar identity never shifts by a fractional pixel during navigation.
+ */
+
+.app-root {
+  scrollbar-gutter: stable !important;
+}
+
+*::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
+  background: transparent !important;
+}
+
+/* Button consistency: same radius / focus / disabled behavior across all sanctioned button surfaces. */
+
+.app-root [data-slot='button'] {
+  border-radius: var(--ui-control-radius);
+  font-size: var(--ty-r2);
+  font-weight: 600;
+  letter-spacing: 0;
+  box-shadow: none;
+  transform: none;
+  transition:
+    background-color var(--motion-fast),
+    border-color var(--motion-fast),
+    box-shadow var(--motion-fast),
+    color var(--motion-fast),
+    transform var(--motion-instant);
+}
+
+.app-root [data-slot='button']:focus-visible {
+  outline: none;
+  border-color: color-mix(in srgb, var(--ui-control-border) 42%, var(--visual-brand-ink-elevated));
+  box-shadow: 0 0 0 3px var(--ui-control-focus-ring);
+}
+
+.app-root [data-slot='button']:not(:disabled):hover {
+  transform: none;
+}
+
+.app-root [data-slot='button']:not(:disabled):active {
+  transform: scale(0.98);
+}
+
+.app-root [data-slot='button']:disabled {
+  cursor: not-allowed;
+  opacity: 1;
+  box-shadow: none;
+}
+
+.app-root [data-slot='button'][data-variant='default']:not(:disabled) {
+  color: var(--ui-action-text);
+  -webkit-text-fill-color: var(--ui-action-text);
+}
+
+.app-root [data-slot='button'][data-variant='destructive']:not(:disabled) {
+  color: var(--visual-white);
+  -webkit-text-fill-color: var(--visual-white);
+}
+
+.app-root [data-slot='button'][data-variant='default']:not(:disabled)
+  :where(*),
+.app-root [data-slot='button'][data-variant='destructive']:not(:disabled)
+  :where(*) {
+  -webkit-text-fill-color: inherit;
+}
+
+/* I18n text fitting: system copy must stay readable instead of disappearing behind ellipses. */
+
+.app-root :where([data-i18n-critical='true']) {
+  --i18n-text-fit-font-size: 1em;
+  --i18n-text-fit-scale: 1;
+  min-width: 0;
+  max-width: 100%;
+  overflow: visible;
+  text-overflow: clip;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: none;
+  font-size: calc(var(--i18n-text-fit-font-size) * var(--i18n-text-fit-scale));
+}
+
+.app-root :where([data-i18n-critical='true'][data-fit-level='1']) {
+  --i18n-text-fit-scale: var(--ty-fit-level-1);
+}
+
+.app-root :where([data-i18n-critical='true'][data-fit-level='2']) {
+  --i18n-text-fit-scale: var(--ty-fit-level-2);
+}
+
+.app-root
+  :where([data-slot='button'], [data-slot='segmented-option'], [data-slot='badge'])
+  :where([data-i18n-critical='true']) {
+  text-align: inherit;
+}
+
+.app-root
+  :where([data-slot='button'], [data-slot='segmented-option'], [data-slot='badge']):has(
+    [data-i18n-critical='true']
+  ) {
+  height: auto;
+  min-height: var(--ui-size-control-default);
+  align-items: center;
+  white-space: normal;
+  overflow: visible;
+}
+
+.app-root
+  :where([data-slot='button'], [data-slot='segmented-option']):has(
+    [data-i18n-critical='true']
+  ) {
+  padding-block: max(4px, calc(var(--ui-size-control-default) * 0.14));
+}
+
+.app-root
+  :where([data-slot='button'], [data-slot='segmented-option'])
+  :where(.ui-button-content):has([data-i18n-critical='true']) {
+  flex-wrap: wrap;
+  overflow: visible;
+  text-overflow: clip;
+  white-space: normal;
+}
+
+.app-root
+  :where([data-slot='button'], [data-slot='segmented-option'])[data-size='xs']:has(
+    [data-i18n-critical='true']
+  ),
+.app-root
+  :where([data-slot='button'], [data-slot='segmented-option'])[data-size='sm']:has(
+    [data-i18n-critical='true']
+  ) {
+  min-height: var(--ui-size-control-compact);
+  padding-block: max(3px, calc(var(--ui-size-control-compact) * 0.12));
+}
+
+.app-root
+  :where([data-slot='button'], [data-slot='segmented-option'])[data-size='lg']:has(
+    [data-i18n-critical='true']
+  ) {
+  min-height: var(--ui-size-control-large);
+}
+
+/* Input consistency: same geometry/line/focus style for shared field primitives. */
+
+.app-root :where([data-slot='input'], [data-slot='textarea'], [data-slot='select-trigger'], textarea) {
+  border-radius: var(--ui-control-radius);
+  border-color: var(--ui-control-border);
+  background: var(--ui-control-bg);
+  color: var(--text);
+  box-shadow: none;
+}
+
+/* Menu consistency: dropdown/select content and items share the same rectangular radius token */
+
+.app-root :where(
+  [data-slot='dropdown-menu-content'],
+  [data-slot='dropdown-menu-sub-content'],
+  [data-slot='context-menu-content'],
+  [data-slot='context-menu-sub-content'],
+  [data-slot='select-content'],
+  [data-slot='dropdown-menu-item'],
+  [data-slot='dropdown-menu-checkbox-item'],
+  [data-slot='dropdown-menu-radio-item'],
+  [data-slot='context-menu-item'],
+  [data-slot='context-menu-checkbox-item'],
+  [data-slot='select-item']
+) {
+  border-radius: var(--ui-control-radius);
+}
+
+.app-root :where([data-slot='input'], [data-slot='select-trigger']) {
+  min-height: var(--ui-size-control-default);
+  height: var(--ui-size-control-default);
+}
+
+.app-root [data-slot='select-trigger'] > [data-slot='select-value'] {
+  display: block;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: normal;
+}
+
+.app-root :where(
+  [data-slot='input'],
+  [data-slot='select-trigger'],
+  textarea
+):not(:disabled):hover {
+  border-color: var(--ui-control-border);
+  background: var(--ui-field-hover-bg);
+}
+
+.app-root :where([data-slot='input'], [data-slot='select-trigger'], textarea):focus-visible {
+  outline: none;
+  border-color: color-mix(in srgb, var(--ui-control-border) 36%, var(--visual-brand-ink-elevated));
+  box-shadow:
+    0 0 0 3px var(--ui-control-focus-ring),
+    var(--surface-inset-shadow);
+}
+
+/* Choice and range controls share the same owner as button/input/select. */
+
+.app-root :where([data-slot='checkbox'], [data-slot='radio-item']) {
+  appearance: none;
+  display: inline-grid;
+  place-content: center;
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--ui-control-border);
+  background: var(--ui-control-bg);
+  color: var(--visual-accent-contrast);
+  cursor: pointer;
+  outline: none;
+  box-shadow: none;
+  transition:
+    background-color var(--motion-fast),
+    border-color var(--motion-fast),
+    box-shadow var(--motion-fast),
+    color var(--motion-fast);
+}
+
+.app-root [data-slot='checkbox'] {
+  border-radius: calc(var(--ui-control-radius) - 3px);
+}
+
+.app-root [data-slot='radio-item'] {
+  border-radius: var(--ui-radius-pill);
+}
+
+.app-root :where([data-slot='checkbox'], [data-slot='radio-item'])::after {
+  content: "";
+  display: block;
+  opacity: 0;
+  transform: scale(0.72);
+  transition:
+    opacity var(--motion-fast),
+    transform var(--motion-fast);
+}
+
+.app-root [data-slot='checkbox']::after {
+  width: 8px;
+  height: 5px;
+  border-bottom: 2px solid currentColor;
+  border-left: 2px solid currentColor;
+  transform: translateY(-1px) rotate(-45deg) scale(0.72);
+}
+
+.app-root [data-slot='radio-item']::after {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--ui-radius-pill);
+  background: currentColor;
+}
+
+.app-root :where([data-slot='checkbox'], [data-slot='radio-item']):checked {
+  border-color: var(--ui-action-bg);
+  background: var(--ui-action-bg);
+}
+
+.app-root :where([data-slot='checkbox'], [data-slot='radio-item']):checked::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.app-root [data-slot='checkbox']:checked::after {
+  transform: translateY(-1px) rotate(-45deg) scale(1);
+}
+
+.app-root :where([data-slot='checkbox'], [data-slot='radio-item']):focus-visible,
+.app-root [data-slot='switch']:focus-visible,
+.app-root [data-slot='slider']:focus-visible {
+  outline: none;
+  border-color: var(--ui-action-border-strong);
+  box-shadow: 0 0 0 3px var(--ui-control-focus-ring);
+}
+
+.app-root :where([data-slot='checkbox'], [data-slot='radio-item']):disabled {
+  border-color: var(--ui-action-disabled-border);
+  background: var(--ui-action-disabled-bg);
+  color: var(--ui-action-disabled-text);
+  cursor: not-allowed;
+}
+
+.app-root [data-slot='radio-group'] {
+  display: grid;
+  gap: 8px;
+}
+
+.app-root [data-slot='radio-group'][data-orientation='horizontal'] {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.app-root [data-slot='radio-option'] {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+  font-size: var(--ty-r2);
+  line-height: var(--ty-leading-label);
+  cursor: pointer;
+}
+
+.app-root [data-slot='radio-option'][data-disabled='true'] {
+  color: var(--ui-action-disabled-text);
+  cursor: not-allowed;
+}
+
+.app-root [data-slot='switch'] {
+  display: inline-flex;
+  width: 42px;
+  height: 24px;
+  align-items: center;
+  padding: 0;
+  border: 1px solid var(--ui-control-border);
+  border-radius: var(--ui-radius-pill);
+  background: var(--ui-control-bg-muted);
+  color: var(--text);
+  cursor: pointer;
+  outline: none;
+  box-shadow: none;
+  transition:
+    background-color var(--motion-fast),
+    border-color var(--motion-fast),
+    box-shadow var(--motion-fast);
+}
+
+.app-root [data-slot='switch'][data-size='sm'] {
+  width: 34px;
+  height: 20px;
+}
+
+.app-root [data-slot='switch'][data-size='lg'] {
+  width: 50px;
+  height: 28px;
+}
+
+.app-root [data-slot='switch-track'] {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.app-root [data-slot='switch-thumb'] {
+  position: absolute;
+  top: 50%;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--ui-radius-pill);
+  background: var(--text-subtle);
+  transform: translate3d(0, -50%, 0);
+  transition:
+    background-color var(--motion-fast),
+    transform var(--motion-fast);
+}
+
+.app-root [data-slot='switch'][data-size='sm'] [data-slot='switch-thumb'] {
+  width: 14px;
+  height: 14px;
+}
+
+.app-root [data-slot='switch'][data-size='lg'] [data-slot='switch-thumb'] {
+  width: 22px;
+  height: 22px;
+}
+
+.app-root [data-slot='switch'][data-state='checked'] {
+  border-color: var(--ui-action-bg);
+  background: var(--ui-action-bg);
+}
+
+.app-root [data-slot='switch'][data-state='checked'] [data-slot='switch-thumb'] {
+  background: var(--ui-action-text);
+  transform: translate3d(18px, -50%, 0);
+}
+
+.app-root [data-slot='switch'][data-size='sm'][data-state='checked'] [data-slot='switch-thumb'] {
+  transform: translate3d(14px, -50%, 0);
+}
+
+.app-root [data-slot='switch'][data-size='lg'][data-state='checked'] [data-slot='switch-thumb'] {
+  transform: translate3d(22px, -50%, 0);
+}
+
+.app-root [data-slot='switch']:disabled {
+  border-color: var(--ui-action-disabled-border);
+  background: var(--ui-action-disabled-bg);
+  cursor: not-allowed;
+}
+
+.app-root [data-slot='switch']:disabled [data-slot='switch-thumb'] {
+  background: var(--ui-action-disabled-text);
+}
+
+.app-root [data-slot='slider'] {
+  appearance: none;
+  width: 100%;
+  min-width: 0;
+  height: var(--ui-size-control-compact);
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+}
+
+.app-root [data-slot='slider']::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: var(--ui-radius-pill);
+  background: linear-gradient(
+    90deg,
+    var(--ui-action-bg) 0%,
+    var(--ui-action-bg) var(--ui-slider-fill, 0%),
+    var(--ui-control-bg-muted) var(--ui-slider-fill, 0%),
+    var(--ui-control-bg-muted) 100%
+  );
+}
+
+.app-root [data-slot='slider']::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  margin-top: -5px;
+  border: 2px solid var(--ui-action-bg);
+  border-radius: var(--ui-radius-pill);
+  background: var(--ui-modal-bg);
+  box-shadow: var(--shadow-soft);
+}
+
+.app-root [data-slot='slider']::-moz-range-track {
+  height: 6px;
+  border-radius: var(--ui-radius-pill);
+  background: var(--ui-control-bg-muted);
+}
+
+.app-root [data-slot='slider']::-moz-range-progress {
+  height: 6px;
+  border-radius: var(--ui-radius-pill);
+  background: var(--ui-action-bg);
+}
+
+.app-root [data-slot='slider']::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--ui-action-bg);
+  border-radius: var(--ui-radius-pill);
+  background: var(--ui-modal-bg);
+}
+
+.app-root .ui-multi-select-trigger {
+  width: 100%;
+  justify-content: space-between;
+  text-align: left;
+}
+
+.app-root [data-slot='multi-select-value'] {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Modal consistency: all sanctioned dialogs/modals use the same radius, border and overlay tone */
+
+.app-root :where(.app-dialog-content, [data-slot='dialog-content'], .app-modal-surface) {
+  border-radius: var(--ui-radius-floating);
+  border-color: var(--ui-modal-border);
+  background: var(--ui-modal-bg);
+  box-shadow: 0 22px 54px rgb(var(--color-overlay-backdrop) / 0.22);
+}
+
+/* Desktop modal shells size to their content; inner bodies take over scrolling
+   only once the shell reaches its viewport cap. */
+
+.app-root :where(.app-dialog-content[data-layout='modal']:not([data-preset='alert'])) {
+  min-height: 0;
+}
+
+.app-root .app-dialog-overlay {
+  background: rgb(var(--color-overlay-backdrop) / 0.34);
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+}
+
+/* Tooltip consistency: all tips are rectangular floating cards */
+
+.app-root :where([data-slot='tooltip-content'], .quick-hover-tooltip-content, .chart-note-hover-tooltip) {
+  border-radius: calc(var(--ui-control-radius) - 2px);
+  border: 1px solid var(--ui-tooltip-border);
+  background: var(--ui-tooltip-bg);
+  color: var(--text);
+  box-shadow: var(--shadow-soft);
+  font-size: var(--ty-r1);
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.app-root :where([data-slot='dropdown-menu-content'], [data-slot='dropdown-menu-sub-content'], [data-slot='context-menu-content'], [data-slot='context-menu-sub-content'], [data-slot='select-content']) {
+  z-index: 1300;
+  overflow: hidden;
+  border: 1px solid var(--ui-surface-border-soft);
+  border-radius: calc(var(--ui-control-radius) + 2px);
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--panel) 98%, transparent) 0%,
+      color-mix(in srgb, var(--panel-soft) 90%, var(--window-bg)) 100%
+    );
+  box-shadow: 0 18px 40px rgb(var(--color-overlay-backdrop) / 0.18);
+  padding: 6px;
+}
+
+.app-root.theme-light :where([data-slot='dropdown-menu-content'], [data-slot='dropdown-menu-sub-content'], [data-slot='context-menu-content'], [data-slot='context-menu-sub-content'], [data-slot='select-content']) {
+  border: 1px solid var(--ui-float-border);
+  background: var(--ui-float-bg);
+  box-shadow: var(--shadow-float);
+}
+
+.app-root :where(
+  [data-slot='dropdown-menu-item'],
+  [data-slot='dropdown-menu-checkbox-item'],
+  [data-slot='dropdown-menu-radio-item'],
+  [data-slot='context-menu-item'],
+  [data-slot='context-menu-checkbox-item'],
+  [data-slot='select-item']
+) {
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-height: 36px;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid transparent;
+  border-radius: calc(var(--ui-control-radius) - 2px);
+  color: var(--ui-text-action-fg);
+  font-size: var(--ty-r2);
+  font-weight: 600;
+  line-height: var(--ty-leading-label);
+  outline: none;
+  user-select: none;
+  cursor: default;
+  transition:
+    background-color var(--motion-fast),
+    border-color var(--motion-fast),
+    color var(--motion-fast),
+    transform var(--motion-fast);
+}
+
+.app-root :where([data-slot='dropdown-menu-item'], [data-slot='context-menu-item']) {
+  padding: 6px 10px;
+}
+
+.app-root :where(
+  [data-slot='dropdown-menu-checkbox-item'],
+  [data-slot='dropdown-menu-radio-item'],
+  [data-slot='context-menu-checkbox-item']
+) {
+  padding: 6px 10px 6px 32px;
+}
+
+.app-root [data-slot='select-item'] {
+  padding: 6px 32px 6px 12px;
+}
+
+.app-root :where(
+  [data-slot='dropdown-menu-item'],
+  [data-slot='dropdown-menu-checkbox-item'],
+  [data-slot='dropdown-menu-radio-item'],
+  [data-slot='context-menu-item'],
+  [data-slot='context-menu-checkbox-item'],
+  [data-slot='select-item']
+)::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  border-radius: 999px;
+  background: transparent;
+  transition: background-color var(--motion-fast);
+}
+
+.app-root :where(
+  [data-slot='dropdown-menu-item'],
+  [data-slot='dropdown-menu-checkbox-item'],
+  [data-slot='dropdown-menu-radio-item'],
+  [data-slot='context-menu-item'],
+  [data-slot='context-menu-checkbox-item'],
+  [data-slot='select-item']
+)[data-highlighted],
+.app-root :where(
+  [data-slot='dropdown-menu-checkbox-item'],
+  [data-slot='dropdown-menu-radio-item'],
+  [data-slot='context-menu-checkbox-item'],
+  [data-slot='select-item']
+)[data-state='checked'] {
+  border-color: var(--ui-divider-soft);
+  background: var(--ui-menu-highlight);
+  color: var(--text);
+  transform: none;
+}
+
+.app-root :where(
+  [data-slot='dropdown-menu-item'],
+  [data-slot='dropdown-menu-checkbox-item'],
+  [data-slot='dropdown-menu-radio-item'],
+  [data-slot='context-menu-item'],
+  [data-slot='context-menu-checkbox-item'],
+  [data-slot='select-item']
+)[data-highlighted]::before,
+.app-root :where(
+  [data-slot='dropdown-menu-checkbox-item'],
+  [data-slot='dropdown-menu-radio-item'],
+  [data-slot='context-menu-checkbox-item'],
+  [data-slot='select-item']
+)[data-state='checked']::before {
+  background: var(--ui-row-rail);
+}
+
+.app-root [data-slot='select-item-indicator'] {
+  color: currentColor;
+}
+
+.app-root :where(
+  [data-slot='dropdown-menu-item'],
+  [data-slot='context-menu-item']
+).is-danger {
+  color: color-mix(in srgb, var(--visual-danger-accent) 82%, var(--text-strong));
+}
+
+.app-root :where(
+  [data-slot='dropdown-menu-item'],
+  [data-slot='context-menu-item']
+).is-danger[data-highlighted] {
+  border-color: color-mix(in srgb, var(--visual-danger-accent) 34%, transparent);
+  background: color-mix(in srgb, var(--visual-danger-accent) 12%, var(--ui-menu-highlight));
+  color: color-mix(in srgb, var(--visual-danger-accent) 88%, var(--text-strong));
+}
+
+.app-root [data-slot='segmented-control'] {
+  gap: 4px;
+  border-color: color-mix(in srgb, var(--line) 42%, transparent);
+  background: color-mix(in srgb, var(--panel-soft) 58%, var(--window-bg));
+  box-shadow: none;
+}
+
+.app-root [data-slot='segmented-option'] {
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-subtle);
+  box-shadow: none;
+}
+
+.app-root [data-slot='segmented-option'][data-active='true'] {
+  border-color: var(--ui-segment-outline-active-border);
+  background: transparent;
+  color: var(--text);
+}
+
+.app-root [data-slot='segmented-control'][data-selection-style='pill']
+  [data-slot='segmented-option'][data-active='true'] {
+  border-color: color-mix(in srgb, var(--visual-brand-ink-soft) 18%, transparent);
+  background: color-mix(in srgb, var(--panel) 82%, transparent);
+}
+
+.app-root [data-slot='segmented-option']:not(:disabled):hover {
+  background: color-mix(in srgb, var(--panel) 64%, transparent);
+  color: var(--text);
+}
+
+.app-root .list-item-card,
+.app-root [data-slot='list-item-card'] {
+  position: relative;
+  padding-block: 4px;
+  border-bottom: 1px solid var(--ui-divider-soft);
+  border-color: transparent;
+  background: transparent;
+}
+
+.app-root .list-item-card:last-child,
+.app-root [data-slot='list-item-card']:last-child {
+  border-bottom-color: transparent;
+}

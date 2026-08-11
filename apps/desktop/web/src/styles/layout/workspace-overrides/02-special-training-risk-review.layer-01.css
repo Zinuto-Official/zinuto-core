@@ -1,0 +1,777 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.special-training-risk-compare-card,
+.special-training-record-compare-card,
+.special-training-risk-cost-offset-card,
+.special-training-record-cost-offset-card,
+.special-training-record-tag-card {
+  border: 1px solid color-mix(in srgb, var(--line) 52%, transparent);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--panel) 88%, transparent);
+  padding: 10px 11px;
+  display: grid;
+  gap: 8px;
+}
+
+.special-training-risk-compare-card .challenge-fusion-echart {
+  width: 100%;
+  height: auto;
+  min-height: 190px;
+  aspect-ratio: 1.28 / 1;
+  border: 1px solid color-mix(in srgb, var(--line) 36%, transparent);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--panel-soft) 76%, var(--window-bg));
+}
+
+.special-training-risk-settlement-panels {
+  display: grid;
+  gap: 10px;
+}
+
+.special-training-risk-scenario-title {
+  margin: 0;
+  color: var(--text-strong);
+  font-size: var(--ty-r3);
+  line-height: 1.34;
+  font-weight: 620;
+}
+
+.special-training-risk-scenario-subtitle {
+  margin: 0;
+  color: var(--text-subtle);
+  font-size: var(--ty-r2);
+  line-height: 1.4;
+}
+
+.special-training-risk-compare-head,
+.special-training-record-compare-head,
+.special-training-risk-cost-offset-head,
+.special-training-record-cost-offset-head,
+.special-training-record-tag-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.special-training-risk-compare-head > h4,
+.special-training-record-compare-head > h4,
+.special-training-risk-cost-offset-head > h4,
+.special-training-record-cost-offset-head > h4,
+.special-training-record-tag-head > h4 {
+  margin: 0;
+  color: var(--text-strong);
+  font-size: var(--ty-r3);
+  line-height: 1.34;
+  font-weight: 650;
+}
+
+.special-training-risk-compare-series-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+}
+
+.special-training-risk-compare-series-legend > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-subtle);
+  font-size: var(--ty-r2);
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.special-training-risk-compare-series-legend > span::before {
+  content: "";
+  width: 14px;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--legend-line-color, var(--primary));
+}
+
+.special-training-risk-compare-series-legend > span.is-user {
+  --legend-line-color: var(--primary);
+}
+
+.special-training-risk-compare-series-legend > span.is-hold {
+  --legend-line-color: var(--visual-warning-accent);
+}
+
+.special-training-risk-compare-legend,
+.special-training-record-compare-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.special-training-risk-compare-legend > span,
+.special-training-record-compare-legend > span {
+  min-height: 22px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--line) 52%, transparent);
+  background: color-mix(in srgb, var(--panel-soft) 72%, transparent);
+  padding: 0 9px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-subtle);
+  font-size: var(--ty-r2);
+  line-height: 1;
+}
+
+.special-training-risk-compare-legend > span::before,
+.special-training-record-compare-legend > span::before {
+  content: "";
+  width: 12px;
+  height: 3px;
+  border-radius: 999px;
+  background: var(
+    --legend-color,
+    color-mix(in srgb, var(--primary) 72%, var(--text-strong))
+  );
+}
+
+.special-training-risk-compare-legend > span.is-initial,
+.special-training-record-compare-legend > span.is-initial {
+  --legend-color: color-mix(in srgb, var(--text-subtle) 84%, var(--line));
+}
+
+.special-training-risk-compare-legend > span.is-final,
+.special-training-record-compare-legend > span.is-final {
+  --legend-color: color-mix(in srgb, var(--primary) 80%, var(--text-strong));
+}
+
+.special-training-risk-compare-legend > span.is-failure,
+.special-training-record-compare-legend > span.is-failure {
+  --legend-color: color-mix(in srgb, var(--danger) 80%, var(--text-strong));
+}
+
+.special-training-risk-compare-curve-wrap {
+  width: 100%;
+  border: 1px solid color-mix(in srgb, var(--line) 48%, transparent);
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--panel-soft) 72%, transparent);
+  padding: 8px;
+}
+
+.special-training-risk-compare-curve-svg {
+  display: block;
+  width: 100%;
+  height: 160px;
+}
+
+.special-training-risk-compare-path {
+  fill: none;
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.special-training-risk-compare-path.is-user {
+  stroke: color-mix(in srgb, var(--primary) 86%, var(--text-strong));
+}
+
+.special-training-risk-compare-path.is-hold {
+  stroke: color-mix(in srgb, var(--text-subtle) 86%, var(--line));
+  stroke-dasharray: 5 4;
+}
+
+.special-training-risk-compare-path.is-hard-stop {
+  stroke: color-mix(in srgb, var(--danger) 80%, var(--text-strong));
+  stroke-dasharray: 3 3;
+}
+
+.special-training-risk-compare-failure-line {
+  stroke: color-mix(in srgb, var(--danger) 72%, var(--line));
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+  vector-effect: non-scaling-stroke;
+}
+
+.special-training-risk-compare-legend-wrap {
+  display: grid;
+  gap: 6px;
+}
+
+.special-training-risk-compare-legend-label {
+  color: var(--text-subtle);
+  font-size: var(--ty-r2);
+  line-height: 1.3;
+}
+
+.special-training-risk-compare-brief {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.special-training-risk-compare-brief > span {
+  min-height: 22px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--line) 50%, transparent);
+  background: color-mix(in srgb, var(--panel-soft) 70%, transparent);
+  padding: 0 9px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--text-subtle);
+  font-size: var(--ty-r2);
+  line-height: 1;
+}
+
+.special-training-risk-cost-offset-grid,
+.special-training-record-cost-offset-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.special-training-risk-cost-offset-item,
+.special-training-record-cost-offset-item {
+  border: 1px solid color-mix(in srgb, var(--line) 48%, transparent);
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--panel-soft) 70%, transparent);
+  padding: 8px 9px;
+  display: grid;
+  gap: 4px;
+}
+
+.special-training-risk-cost-offset-item > span,
+.special-training-record-cost-offset-item > span {
+  color: var(--text-subtle);
+  font-size: var(--ty-r2);
+  line-height: 1.28;
+}
+
+.special-training-risk-cost-offset-item > strong,
+.special-training-record-cost-offset-item > strong {
+  color: var(--text-strong);
+  font-size: var(--ty-r4);
+  line-height: 1.25;
+  font-weight: 680;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-risk-cost-offset-item > strong.up,
+.special-training-record-cost-offset-item > strong.up {
+  color: var(--price-up-color);
+}
+
+.special-training-risk-cost-offset-item > strong.down,
+.special-training-record-cost-offset-item > strong.down {
+  color: var(--price-down-color);
+}
+
+.special-training-risk-cost-offset-item > strong.flat,
+.special-training-record-cost-offset-item > strong.flat {
+  color: var(--text-strong);
+}
+
+.special-training-record-tag-chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.special-training-record-tag-chip {
+  min-height: 23px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--line) 50%, transparent);
+  background: color-mix(in srgb, var(--panel-soft) 72%, transparent);
+  padding: 0 9px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--text-subtle);
+  font-size: var(--ty-r2);
+  line-height: 1;
+}
+
+.special-training-record-tag-chip.is-positive {
+  border-color: color-mix(in srgb, var(--success) 42%, var(--line));
+  background: color-mix(in srgb, var(--success) 13%, transparent);
+  color: color-mix(in srgb, var(--success) 88%, var(--text-strong));
+}
+
+.special-training-record-tag-chip.is-warning {
+  border-color: color-mix(in srgb, var(--warning) 46%, var(--line));
+  background: color-mix(in srgb, var(--warning) 14%, transparent);
+  color: color-mix(in srgb, var(--warning) 90%, var(--text-strong));
+}
+
+.special-training-record-tag-chip.is-neutral {
+  border-color: color-mix(in srgb, var(--line) 58%, transparent);
+  color: var(--text-subtle);
+}
+
+.special-training-risk-vitals-shell {
+  display: grid;
+  gap: 12px;
+}
+
+.special-training-risk-alpha-card,
+.special-training-risk-cost-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--line) 58%, transparent);
+  border-radius: 14px;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--panel-soft) 92%, var(--window-bg)),
+    color-mix(in srgb, var(--panel) 96%, var(--window-bg))
+  );
+  padding: 12px 13px;
+  display: grid;
+  gap: 8px;
+}
+
+.special-training-risk-alpha-card::before,
+.special-training-risk-cost-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--line) 10%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      color-mix(in srgb, var(--line) 8%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 18px 18px;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.special-training-risk-alpha-card.up {
+  border-color: color-mix(
+    in srgb,
+    var(--price-up-color) 44%,
+    var(--line)
+  );
+  background: linear-gradient(
+    135deg,
+    color-mix(
+      in srgb,
+      var(--price-up-color) 16%,
+      var(--panel-soft)
+    ),
+    color-mix(in srgb, var(--price-up-color) 8%, var(--panel))
+  );
+}
+
+.special-training-risk-alpha-card.down {
+  border-color: color-mix(in srgb, var(--price-down-color) 48%, var(--line));
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--price-down-color) 16%, var(--panel-soft)),
+    color-mix(in srgb, var(--price-down-color) 8%, var(--panel))
+  );
+}
+
+.special-training-risk-alpha-card.flat {
+  border-color: color-mix(in srgb, var(--line) 64%, transparent);
+}
+
+.special-training-risk-card-kicker {
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1.2;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.special-training-risk-card-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.special-training-risk-card-head > strong {
+  color: var(--text-strong);
+  font-size: var(--ty-r2);
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-risk-alpha-value {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-strong);
+  font-size: var(--ty-r7);
+  line-height: 1;
+  font-weight: 840;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-risk-alpha-crown {
+  width: clamp(18px, 1.8vw, 24px);
+  height: clamp(18px, 1.8vw, 24px);
+}
+
+.special-training-risk-alpha-card.up .special-training-risk-alpha-value {
+  color: color-mix(
+    in srgb,
+    var(--price-up-color) 88%,
+    var(--text-strong)
+  );
+}
+
+.special-training-risk-alpha-card.down .special-training-risk-alpha-value {
+  color: color-mix(in srgb, var(--price-down-color) 88%, var(--text-strong));
+}
+
+.special-training-risk-card-subline {
+  margin: 0;
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1.38;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-risk-cost-main {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  color: var(--text-strong);
+  font-size: var(--ty-r5);
+  line-height: 1.2;
+  font-weight: 720;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-risk-cost-main > strong,
+.special-training-risk-card-head > strong.up {
+  color: color-mix(
+    in srgb,
+    var(--price-up-color) 88%,
+    var(--text-strong)
+  );
+}
+
+.special-training-risk-card-head > strong.down {
+  color: color-mix(in srgb, var(--price-down-color) 88%, var(--text-strong));
+}
+
+.special-training-risk-cost-arrow {
+  width: 14px;
+  height: 14px;
+  color: var(--text-subtle);
+}
+
+.special-training-risk-vitals-strip {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.special-training-risk-vitals-strip > span {
+  min-height: 38px;
+  border: 1px solid color-mix(in srgb, var(--line) 54%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--panel-soft) 78%, var(--window-bg));
+  padding: 8px 10px;
+  display: grid;
+  gap: 3px;
+  color: var(--text-strong);
+  font-size: var(--ty-r2);
+  line-height: 1.25;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-risk-vitals-strip > span > strong {
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  font-weight: 600;
+}
+
+.special-training-risk-vitals-strip > span.up {
+  border-color: color-mix(
+    in srgb,
+    var(--price-up-color) 34%,
+    var(--line)
+  );
+}
+
+.special-training-risk-vitals-strip > span.down {
+  border-color: color-mix(in srgb, var(--price-down-color) 36%, var(--line));
+}
+
+.special-training-risk-metrics-board {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--panel-soft) 72%, var(--window-bg));
+  overflow: hidden;
+}
+
+.special-training-risk-metric {
+  min-height: 76px;
+  padding: 11px 12px;
+  display: grid;
+  align-content: end;
+  gap: 4px;
+  background: transparent;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-risk-metric:nth-child(2n) {
+  border-left: 1px solid color-mix(in srgb, var(--line) 44%, transparent);
+}
+
+.special-training-risk-metric:nth-child(n + 3) {
+  border-top: 1px solid color-mix(in srgb, var(--line) 44%, transparent);
+}
+
+.special-training-risk-metric-label {
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1.25;
+}
+
+.special-training-risk-metric-value {
+  color: var(--text-strong);
+  font-size: var(--ty-r5);
+  line-height: 1.08;
+  font-weight: 760;
+}
+
+.special-training-risk-metric.up .special-training-risk-metric-value {
+  color: color-mix(
+    in srgb,
+    var(--price-up-color) 88%,
+    var(--text-strong)
+  );
+}
+
+.special-training-risk-metric.down .special-training-risk-metric-value {
+  color: color-mix(in srgb, var(--price-down-color) 88%, var(--text-strong));
+}
+
+.special-training-risk-magazine-block {
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.special-training-risk-magazine-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.special-training-risk-magazine-head > span {
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1.28;
+}
+
+.special-training-risk-magazine-head > strong {
+  color: var(--text-strong);
+  font-size: var(--ty-r2);
+  line-height: 1.3;
+  font-weight: 760;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-risk-magazine-slots {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.special-training-risk-magazine-slot {
+  aspect-ratio: 1 / 1;
+  min-height: 13px;
+  border-radius: 6px;
+  border: 1px solid color-mix(in srgb, var(--line) 54%, transparent);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--primary) 36%, transparent),
+    color-mix(in srgb, var(--primary) 14%, transparent)
+  );
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--visual-white) 34%, transparent),
+    0 1px 3px color-mix(in srgb, var(--visual-black) 10%, transparent);
+}
+
+.special-training-risk-magazine-slot.is-spent {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--line) 44%, transparent),
+    color-mix(in srgb, var(--line) 18%, transparent)
+  );
+  border-color: color-mix(in srgb, var(--line) 76%, transparent);
+  opacity: 0.55;
+}
+
+.special-training-risk-magazine-slot.is-warning {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--visual-warning-accent) 34%, transparent),
+    color-mix(in srgb, var(--visual-warning-accent-soft) 30%, transparent)
+  );
+  border-color: color-mix(
+    in srgb,
+    var(--visual-warning-accent) 70%,
+    var(--line)
+  );
+}
+
+.special-training-risk-panel-body {
+  --special-training-risk-surface: color-mix(
+    in srgb,
+    var(--surface-s1) 90%,
+    var(--panel)
+  );
+  --special-training-risk-surface-soft: color-mix(
+    in srgb,
+    var(--panel-soft) 52%,
+    transparent
+  );
+  --special-training-risk-border: color-mix(
+    in srgb,
+    var(--line) 30%,
+    transparent
+  );
+}
+
+.desktop-main.is-special-training .special-training-risk-status-panel,
+.desktop-main.is-special-training .special-training-risk-panel-stage,
+.desktop-main.is-special-training .special-training-risk-footer {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.desktop-main.is-special-training .special-training-risk-status-panel {
+  padding: 0;
+}
+
+.desktop-main.is-special-training .special-training-risk-mission-progress,
+.desktop-main.is-special-training .special-training-risk-mission-countdown {
+  border-color: var(--special-training-risk-border);
+  background: var(--special-training-risk-surface);
+  box-shadow: none;
+}
+
+.desktop-main.is-special-training .special-training-risk-live-guide {
+  padding: 8px 10px;
+  border: 1px solid var(--special-training-risk-border);
+  border-radius: 6px;
+  background: var(--special-training-risk-surface-soft);
+}
+
+.desktop-main.is-special-training .special-training-risk-panel-stage {
+  padding: 0;
+}
+
+.desktop-main.is-special-training .special-training-risk-panel-scroll {
+  height: 100%;
+  padding-right: 0;
+}
+
+.desktop-main.is-special-training
+  .special-training-risk-panel-scroll
+  > .special-training-risk-trade-card {
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--special-training-risk-border);
+  border-radius: 8px;
+  padding: 8px;
+  gap: 8px;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  align-content: stretch;
+  background: var(--special-training-risk-surface);
+  border-color: var(--special-training-risk-border);
+  box-shadow: none;
+}
+
+.special-training-risk-section-label {
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.special-training-risk-survival-hero {
+  --special-training-risk-survival-accent: color-mix(
+    in srgb,
+    var(--text-subtle) 62%,
+    transparent
+  );
+  position: relative;
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid var(--special-training-risk-border);
+  border-radius: 8px;
+  background: var(--special-training-risk-surface-soft);
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.special-training-risk-survival-hero::before {
+  content: "";
+  position: absolute;
+  inset: 10px auto 10px 0;
+  width: 2px;
+  border-radius: 999px;
+  background: var(--special-training-risk-survival-accent);
+  opacity: 0.78;
+}
+
+.special-training-risk-survival-hero.is-up {
+  --special-training-risk-survival-accent: color-mix(
+    in srgb,
+    var(--price-up-color) 78%,
+    transparent
+  );
+}
+
+.special-training-risk-survival-hero.is-down {
+  --special-training-risk-survival-accent: color-mix(
+    in srgb,
+    var(--price-down-color) 82%,
+    transparent
+  );
+}
+
+.special-training-risk-survival-hero-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.special-training-risk-survival-hero-main {
+  display: grid;
+  gap: 4px;
+}
+
+.special-training-risk-survival-hero-main > span {
+  color: var(--text-subtle);
+  font-size: var(--ty-r2);
+  line-height: 1.1;
+}
+
+.special-training-risk-survival-hero-main > strong {
+  color: var(--text-strong);
+  font-size: var(--ty-r8);
+  line-height: 1;
+  font-weight: 860;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+}

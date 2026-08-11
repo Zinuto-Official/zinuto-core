@@ -1,0 +1,4527 @@
+{
+  "appText.addChallengeNote": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "添加挑战笔记",
+      "en": "Add Challenge Note",
+      "ja": "チャレンジノートを追加",
+      "ko": "챌린지 노트 추가",
+      "es": "Agregar nota de desafío"
+    }
+  },
+  "appText.addNote": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "添加笔记",
+      "en": "Add Note",
+      "ja": "メモ追加",
+      "ko": "메모 추가",
+      "es": "Añadir Nota"
+    }
+  },
+  "appText.addPostSimulationReviewNote": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "添加推演复盘笔记",
+      "en": "Add Post-Simulation Review Note",
+      "ja": "推演レビュー用ノートを追加",
+      "ko": "시뮬레이션 복기 노트 추가",
+      "es": "Agregar nota de revisión de simulación"
+    }
+  },
+  "appText.addStandaloneNote": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "新增独立笔记",
+      "en": "Add Standalone Note",
+      "ja": "独立したメモを追加する",
+      "ko": "독립 메모 추가",
+      "es": "Agregar notas independientes"
+    }
+  },
+  "appText.archiveHistoricalTraining": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "历史训练归档失败",
+      "en": "Failed to archive historical training",
+      "ja": "履歴トレーニングのアーカイブに失敗しました",
+      "ko": "과거 학습을 보관하지 못했습니다",
+      "es": "No se pudo archivar el entrenamiento histórico"
+    }
+  },
+  "appText.backReview": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "返回回看",
+      "en": "Back To Review",
+      "ja": "レビューに戻る",
+      "ko": "리뷰로 돌아가기",
+      "es": "Volver a la revisión"
+    }
+  },
+  "appText.bold": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "加粗",
+      "en": "Bold",
+      "ja": "太字",
+      "ko": "굵게",
+      "es": "Negrita"
+    }
+  },
+  "appText.challengeReview": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "挑战复盘",
+      "en": "Challenge Review",
+      "ja": "チャレンジレビュー",
+      "ko": "챌린지 복기",
+      "es": "Revisión del desafío"
+    }
+  },
+  "appText.clearedValue0FreeReplaySessionsValue1NotesValue2": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "已清理自由推演 {0} 条、笔记 {1} 条、特训题库记录 {2} 条",
+      "en": "Cleared {0} replays, {1} notes, and {2} challenge records",
+      "ja": "フリーリプレイ {0} 件、ノート {1} 件、特訓記録 {2} 件を削除しました",
+      "ko": "자유 리플레이 {0}건, 노트 {1}건, 특훈 기록 {2}건 정리",
+      "es": "{0} replays, {1} notas y {2} registros de reto borrados"
+    }
+  },
+  "appText.clearingSimulationNotesLedgerRecords": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "清理模拟笔记与题库记录",
+      "en": "Clearing simulation notes and ledger records",
+      "ja": "シミュレーションノートと問題記録を削除中",
+      "ko": "시뮬레이션 노트와 문제 기록 정리 중",
+      "es": "Limpiando notas simuladas y registros del ledger"
+    }
+  },
+  "appText.clearNotes": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "清空笔记失败",
+      "en": "Failed to clear notes",
+      "ja": "メモを消去できませんでした",
+      "ko": "메모를 지우지 못했습니다",
+      "es": "No se pudieron borrar las notas"
+    }
+  },
+  "appText.confirmDeleteNotes": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "确认删除全部笔记",
+      "en": "Confirm Delete All Notes",
+      "ja": "すべてのメモを削除することを確認します",
+      "ko": "모든 메모 삭제 확인",
+      "es": "Confirmar eliminación de todas las notas"
+    }
+  },
+  "appText.createNote": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "创建笔记失败",
+      "en": "Failed to create note",
+      "ja": "メモの作成に失敗しました",
+      "ko": "메모를 작성하지 못했습니다",
+      "es": "No se pudo crear la nota"
+    }
+  },
+  "appText.createSelectNoteLeft": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "请先在左侧新建或选择笔记",
+      "en": "Please create or select a note on the left first",
+      "ja": "まず左側でメモを作成または選択してください",
+      "ko": "먼저 왼쪽에서 메모를 생성하거나 선택하세요",
+      "es": "Primero cree o seleccione una nota a la izquierda"
+    }
+  },
+  "appText.createTrainingRecordNotes": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "创建训练记录笔记失败",
+      "en": "Failed to create training record notes",
+      "ja": "トレーニング記録ノートの作成に失敗しました",
+      "ko": "훈련 기록 메모를 생성하지 못했습니다",
+      "es": "No se pudieron crear notas de registro de entrenamiento"
+    }
+  },
+  "appText.customNote": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "自定义笔记",
+      "en": "Custom Note",
+      "ja": "カスタムノート",
+      "ko": "커스텀 노트",
+      "es": "Nota personalizada"
+    }
+  },
+  "appText.dataSyncPreview": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "数据同步预检",
+      "en": "Data Sync Preview",
+      "ja": "データ同期プレビュー",
+      "ko": "데이터 동기화 미리보기",
+      "es": "Vista previa de sincronización"
+    }
+  },
+  "appText.highlight": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "高亮",
+      "en": "Highlight",
+      "ja": "ハイライト",
+      "ko": "하이라이트",
+      "es": "Resaltar"
+    }
+  },
+  "appText.italic": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "斜体",
+      "en": "Italic",
+      "ja": "斜体",
+      "ko": "기울임",
+      "es": "Cursiva"
+    }
+  },
+  "appText.link": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "链接",
+      "en": "Link",
+      "ja": "リンク",
+      "ko": "링크",
+      "es": "Enlace"
+    }
+  },
+  "appText.underline": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "下划线",
+      "en": "Underline",
+      "ja": "下線",
+      "ko": "밑줄",
+      "es": "Subrayado"
+    }
+  },
+  "appText.deleteHistoricalTraining": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "删除历史训练失败",
+      "en": "Failed to delete historical training",
+      "ja": "過去のトレーニングを削除できませんでした",
+      "ko": "과거 훈련을 삭제하지 못했습니다",
+      "es": "No se pudo eliminar el entrenamiento histórico"
+    }
+  },
+  "appText.deleteNote": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "删除笔记失败",
+      "en": "Failed to delete note",
+      "ja": "メモの削除に失敗しました",
+      "ko": "메모를 삭제하지 못했습니다",
+      "es": "No se pudo eliminar la nota"
+    }
+  },
+  "appText.detailPreview": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "详情预览图",
+      "en": "Detail Preview",
+      "ja": "詳細プレビュー画像",
+      "ko": "상세 미리보기",
+      "es": "Vista previa detallada"
+    }
+  },
+  "appText.diagnostics": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "诊断",
+      "en": "Diagnostics",
+      "ja": "診断",
+      "ko": "진단",
+      "es": "Diagnóstico"
+    }
+  },
+  "appText.directoryChangesFoundPreviewBeforeSyncing": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "发现目录变更，建议先预览再同步",
+      "en": "Directory changes were found. Preview before syncing",
+      "ja": "ディレクトリの変更が見つかりました。同期前にプレビューを確認してください",
+      "ko": "디렉터리 변경이 감지되었습니다. 동기화 전에 미리보기를 확인하세요",
+      "es": "Se detectaron cambios en la carpeta. Revísalos antes de sincronizar"
+    }
+  },
+  "appText.fastDecisionReview": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "闪电盘感复盘",
+      "en": "Flash Decision Review",
+      "ja": "フラッシュ判断レビュー",
+      "ko": "플래시 판단 복기",
+      "es": "Revisión de Decisión relámpago"
+    }
+  },
+  "appText.historicalTrainingData": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "历史训练数据",
+      "en": "Historical training data",
+      "ja": "過去のトレーニングデータ",
+      "ko": "과거 훈련 데이터",
+      "es": "Datos históricos de entrenamiento"
+    }
+  },
+  "appText.historicalTrainingProgramsMatchFilterCriteria": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "没有符合当前筛选条件的训练项目",
+      "en": "There are no historical training programs that match the filter criteria",
+      "ja": "フィルタ条件に一致する過去のトレーニング プログラムはありません",
+      "ko": "필터 기준과 일치하는 과거 훈련 프로그램이 없습니다",
+      "es": "No existen programas de entrenamiento históricos que coincidan con los criterios de filtro"
+    }
+  },
+  "appText.loadingNotes": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "笔记页面加载中...",
+      "en": "Loading Notes...",
+      "ja": "ノートページを読み込んでいます...",
+      "ko": "메모 페이지를 로드하는 중입니다...",
+      "es": "La página de la nota se está cargando..."
+    }
+  },
+  "appText.loadingPreview": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "预览加载中...",
+      "en": "Loading Preview...",
+      "ja": "プレビュー読み込み中...",
+      "ko": "미리보기 로드 중...",
+      "es": "Vista previa cargando..."
+    }
+  },
+  "appText.loadReviewConsole": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "加载复盘诊断中心失败",
+      "en": "Failed to load review console",
+      "ja": "レビューコンソールの読み込みに失敗しました",
+      "ko": "리뷰 콘솔 데이터를 불러오지 못했습니다",
+      "es": "Error al cargar la consola de revisión"
+    }
+  },
+  "appText.manualReviewRetryRequired": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "需人工处理",
+      "en": "Needs review",
+      "ja": "要確認",
+      "ko": "확인 필요",
+      "es": "Requiere revisión"
+    }
+  },
+  "appText.noteContentLoading": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "笔记内容加载中…",
+      "en": "Loading note content…",
+      "ja": "メモ内容を読み込み中…",
+      "ko": "노트 내용 로드 중…",
+      "es": "Cargando contenido de la nota…"
+    }
+  },
+  "appText.noteDoesExist": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "笔记不存在",
+      "en": "Note does not exist",
+      "ja": "メモは存在しません",
+      "ko": "메모가 존재하지 않습니다",
+      "es": "La nota no existe"
+    }
+  },
+  "appText.noteDoesTrainingSnapshotAttached": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "当前笔记未附加训练行情快照",
+      "en": "This note has no training market snapshot attached",
+      "ja": "このノートにはトレーニング時の相場スナップショットが添付されていません",
+      "ko": "이 노트에는 훈련 시세 스냅샷이 첨부되어 있지 않습니다",
+      "es": "Esta nota no tiene adjunta una instantánea de mercado del entrenamiento"
+    }
+  },
+  "appText.trainingSnapshotExpired": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "关联的操作明细与行情快照已过期",
+      "en": "The linked operation details and market snapshot have expired",
+      "ja": "関連する操作詳細と相場スナップショットは期限切れです",
+      "ko": "연결된 작업 상세와 시세 스냅샷이 만료되었습니다",
+      "es": "Los detalles de operación y la instantánea de mercado vinculados han caducado"
+    }
+  },
+  "appText.expandMarketChart": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "展开行情图",
+      "en": "Expand market chart",
+      "ja": "相場チャートを展開",
+      "ko": "시세 차트 펼치기",
+      "es": "Expandir gráfico de mercado"
+    }
+  },
+  "appText.closeMarketChart": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "关闭行情图",
+      "en": "Close market chart",
+      "ja": "相場チャートを閉じる",
+      "ko": "시세 차트 닫기",
+      "es": "Cerrar gráfico de mercado"
+    }
+  },
+  "appText.notes": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "全部笔记",
+      "en": "All Notes",
+      "ja": "すべてのノート",
+      "ko": "모든 노트",
+      "es": "Todas las notas"
+    }
+  },
+  "appText.notes2": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "篇笔记",
+      "en": "Notes",
+      "ja": "ノート",
+      "ko": "노트",
+      "es": "Notas"
+    }
+  },
+  "appText.notesCreatedDuringTrainingAutomaticallyAppearHere": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "训练中的笔记会自动汇总到这里",
+      "en": "Notes created during training will automatically appear here",
+      "ja": "トレーニング中に作成したノートはここに自動で集約されます",
+      "ko": "훈련 중 만든 노트는 여기에 자동으로 모입니다",
+      "es": "Las notas creadas durante el entrenamiento apareceran aqui automáticamente"
+    }
+  },
+  "appText.notesData": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "笔记数据",
+      "en": "Notes Data",
+      "ja": "ノートデータ",
+      "ko": "노트 데이터",
+      "es": "Datos de notas"
+    }
+  },
+  "appText.notesLibrary": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "笔记库",
+      "en": "Notes Library",
+      "ja": "ノートライブラリ",
+      "ko": "노트 라이브러리",
+      "es": "Biblioteca de notas"
+    }
+  },
+  "appText.notesMatchFilter": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "当前筛选下没有笔记",
+      "en": "No notes match this filter",
+      "ja": "この条件に一致するノートはありません",
+      "ko": "현재 필터에 맞는 노트가 없습니다",
+      "es": "No hay notas para este filtro"
+    }
+  },
+  "appText.notesScopeAll": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "全部",
+      "en": "All",
+      "ja": "すべて",
+      "ko": "전체",
+      "es": "Todas"
+    }
+  },
+  "appText.notesScopeCustom": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "自定义",
+      "en": "Custom",
+      "ja": "カスタム",
+      "ko": "사용자",
+      "es": "Personal"
+    }
+  },
+  "appText.notesScopeSpecial": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "挑战",
+      "en": "Challenge",
+      "ja": "チャレンジ",
+      "ko": "챌린지",
+      "es": "Reto"
+    }
+  },
+  "appText.notesScopeTraining": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "推演",
+      "en": "Replay",
+      "ja": "リプレイ",
+      "ko": "리플레이",
+      "es": "Reproducción"
+    }
+  },
+  "appText.notesYet": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "还没有笔记",
+      "en": "No notes yet",
+      "ja": "まだノートがありません",
+      "ko": "아직 노트가 없습니다",
+      "es": "Aún no hay notas"
+    }
+  },
+  "appText.notesYetClickPlusUpperRightCornerCreate": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "暂无笔记。点击右上角 + 新建笔记",
+      "en": "No notes yet. Click + to create one",
+      "ja": "まだメモはありません。右上の + で作成",
+      "ko": "아직 노트가 없습니다. 오른쪽 위 +로 생성",
+      "es": "Sin notas. Pulsa + para crear una"
+    }
+  },
+  "appText.noteUpdate": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "笔记更新失败",
+      "en": "Note update failed",
+      "ja": "メモの更新に失敗しました",
+      "ko": "메모 업데이트 실패",
+      "es": "Error al actualizar la nota"
+    }
+  },
+  "appText.onceDeletedNoteLongerViewable": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "删除后将无法查看这篇笔记",
+      "en": "Once deleted, the note will no longer be viewable",
+      "ja": "削除すると、メモは表示されなくなります",
+      "ko": "삭제되면 해당 메모를 더 이상 볼 수 없습니다",
+      "es": "Una vez eliminada, la nota ya no será visible"
+    }
+  },
+  "appText.oneClickResetClearsSystemChartTrainingNotes": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "一键重置会清理系统、K 线、训练、笔记和统计数据，不会删除自定义指标",
+      "en": "Reset clears system, chart, training, notes, and stats. Custom indicators stay",
+      "ja": "リセットでシステム、チャート、訓練、ノート、統計を削除します。カスタム指標は残ります",
+      "ko": "리셋은 시스템, 차트, 훈련, 노트, 통계를 지웁니다. 사용자 지표는 유지됩니다",
+      "es": "El reinicio borra sistema, gráficos, entrenamientos, notas y estadísticas. Conserva indicadores personalizados"
+    }
+  },
+  "appText.oneClickResetClearsSystemLineTrainingNote": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "一键重置会清理系统、K 线、训练、笔记和统计数据，不会删除自定义指标",
+      "en": "Reset clears system, chart, training, notes, and stats. Custom indicators stay",
+      "ja": "リセットでシステム、K線、訓練、ノート、統計を削除します。カスタム指標は残ります",
+      "ko": "리셋은 시스템, 봉, 훈련, 노트, 통계를 지웁니다. 사용자 지표는 유지됩니다",
+      "es": "El reinicio borra sistema, velas, entrenamientos, notas y estadísticas. Conserva indicadores"
+    }
+  },
+  "appText.operationClearHistoricalTrainingItemsRestored": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "此操作会清空全部历史训练项目，且无法恢复",
+      "en": "This operation will clear all historical training items and cannot be restored",
+      "ja": "この操作により、過去のトレーニング項目がすべて消去され、復元することはできません",
+      "ko": "이 작업을 수행하면 모든 과거 훈련 항목이 지워지며 복원할 수 없습니다",
+      "es": "Esta operación borrará todos los elementos de entrenamiento históricos y no se podrá restaurar"
+    }
+  },
+  "appText.permanentlyRemoveReplayNotes": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "此操作会清空全部复盘笔记，且无法恢复",
+      "en": "This will permanently remove all replay notes",
+      "ja": "この操作ですべての復盤ノートが削除され、元に戻せません",
+      "ko": "모든 복기 노트가 영구 삭제되며 복구할 수 없습니다",
+      "es": "Esta acción eliminará de forma permanente todas las notas de revisión"
+    }
+  },
+  "appText.poolBuildPreview": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "建池预演区",
+      "en": "Sample Pool Build Preview",
+      "ja": "サンプルプール作成プレビューエリア",
+      "ko": "샘플 풀 생성 프리뷰 영역",
+      "es": "Área de previsualización de creación del grupo"
+    }
+  },
+  "appText.postSimulationReview": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "推演结束复盘",
+      "en": "Post-Simulation Review",
+      "ja": "推演終了レビュー",
+      "ko": "시뮬레이션 종료 복기",
+      "es": "Revisión tras simulación"
+    }
+  },
+  "appText.preview": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "预览",
+      "en": "Preview",
+      "ja": "プレビュー",
+      "ko": "미리보기",
+      "es": "Vista Previa"
+    }
+  },
+  "appText.previewHistoricalQuotes": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "暂无可预览的历史行情",
+      "en": "No historical market data is available to preview",
+      "ja": "プレビューできる過去の相場データはありません",
+      "ko": "미리 볼 수 있는 과거 시세 데이터가 없습니다",
+      "es": "No hay datos históricos de mercado para previsualizar"
+    }
+  },
+  "appText.readHistoricalTraining": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "读取历史训练失败",
+      "en": "Failed to read historical training",
+      "ja": "履歴トレーニングの読み取りに失敗しました",
+      "ko": "기록 학습을 읽지 못했습니다",
+      "es": "No se pudo leer el entrenamiento histórico"
+    }
+  },
+  "appText.readNotes": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "读取笔记失败",
+      "en": "Failed to read notes",
+      "ja": "メモの読み取りに失敗しました",
+      "ko": "메모를 읽지 못했습니다",
+      "es": "No se pudieron leer las notas"
+    }
+  },
+  "appText.releaseNotes": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "版本说明",
+      "en": "Release Notes",
+      "ja": "リリースノート",
+      "ko": "릴리스 노트",
+      "es": "Notas de versión"
+    }
+  },
+  "appText.replayNote.builder.customNote": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "自定义笔记",
+      "en": "Custom Note",
+      "ja": "カスタムノート",
+      "ko": "사용자 노트",
+      "es": "Nota personalizada"
+    }
+  },
+  "appText.replayNote.builder.historyReview": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "推演笔记",
+      "en": "Replay Note",
+      "ja": "推演ノート",
+      "ko": "리플레이 노트",
+      "es": "Nota de replay"
+    }
+  },
+  "appText.replayNote.builder.maxDrawdown": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "最大回撤",
+      "en": "Max drawdown",
+      "ja": "最大ドローダウン",
+      "ko": "최대 낙폭",
+      "es": "Drawdown máximo"
+    }
+  },
+  "appText.replayNote.builder.period": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "周期",
+      "en": "Period",
+      "ja": "足種",
+      "ko": "주기",
+      "es": "Período"
+    }
+  },
+  "appText.replayNote.builder.profitLossRatio": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "盈亏比",
+      "en": "P/L Ratio",
+      "ja": "損益比",
+      "ko": "손익비",
+      "es": "Ratio P/L"
+    }
+  },
+  "appText.replayNote.builder.reflection": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "反思",
+      "en": "Reflection",
+      "ja": "振り返り",
+      "ko": "복기",
+      "es": "Reflexión"
+    }
+  },
+  "appText.replayNote.builder.scenario": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "场景",
+      "en": "Scenario",
+      "ja": "シナリオ",
+      "ko": "시나리오",
+      "es": "Escenario"
+    }
+  },
+  "appText.replayNote.builder.summary": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "摘要",
+      "en": "Summary",
+      "ja": "要約",
+      "ko": "요약",
+      "es": "Resumen"
+    }
+  },
+  "appText.replayNote.builder.symbol": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "标的",
+      "en": "Instrument",
+      "ja": "銘柄",
+      "ko": "종목",
+      "es": "Instrumento"
+    }
+  },
+  "appText.replayNote.builder.trades": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "交易",
+      "en": "Trades",
+      "ja": "取引",
+      "ko": "거래",
+      "es": "Operaciones"
+    }
+  },
+  "appText.replayNote.builder.trainingRecord": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "推演笔记",
+      "en": "Replay Note",
+      "ja": "推演ノート",
+      "ko": "리플레이 노트",
+      "es": "Nota de replay"
+    }
+  },
+  "appText.replayNote.builder.winRate": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "胜率",
+      "en": "Win rate",
+      "ja": "勝率",
+      "ko": "승률",
+      "es": "Tasa de acierto"
+    }
+  },
+  "appText.replayNote.semantic.CHALLENGE": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "挑战笔记",
+      "en": "Challenge Note",
+      "ja": "チャレンジノート",
+      "ko": "챌린지 노트",
+      "es": "Nota de reto"
+    }
+  },
+  "appText.replayNote.semantic.CUSTOM": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "自定义笔记",
+      "en": "Custom Note",
+      "ja": "カスタムノート",
+      "ko": "사용자 노트",
+      "es": "Nota personalizada"
+    }
+  },
+  "appText.replayNote.semantic.FREE_REPLAY": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "推演笔记",
+      "en": "Replay Note",
+      "ja": "推演ノート",
+      "ko": "리플레이 노트",
+      "es": "Nota de replay"
+    }
+  },
+  "appText.replayNote.titleMetric.advantageRatio": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "优势比",
+      "en": "Advantage",
+      "ja": "優位比",
+      "ko": "우위비",
+      "es": "Ventaja"
+    }
+  },
+  "appText.replayNote.titleMetric.grade": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "评级",
+      "en": "Rating",
+      "ja": "評価",
+      "ko": "등급",
+      "es": "Calificación"
+    }
+  },
+  "appText.replayNote.titleMetric.profitLossRatio": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "盈亏比",
+      "en": "P/L Ratio",
+      "ja": "損益比",
+      "ko": "손익비",
+      "es": "Ratio P/L"
+    }
+  },
+  "appText.replayNote.titleMetric.recoveryRate": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "净值挽回率",
+      "en": "Recovery",
+      "ja": "回復率",
+      "ko": "회복률",
+      "es": "Recuperación"
+    }
+  },
+  "appText.replayNote.titleMetric.winRate": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "胜率",
+      "en": "Win rate",
+      "ja": "勝率",
+      "ko": "승률",
+      "es": "Tasa de acierto"
+    }
+  },
+  "appText.reviewArchivist": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "复盘档案官",
+      "en": "Review Archivist",
+      "ja": "レビューアーキビスト",
+      "ko": "복기 기록관",
+      "es": "Archivista de revisión"
+    }
+  },
+  "appText.reviewNotes": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "复盘笔记",
+      "en": "Review notes",
+      "ja": "振り返りノート",
+      "ko": "복기 노트",
+      "es": "Notas de revisión"
+    }
+  },
+  "appText.riskDisciplineReview": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "绝境求生复盘",
+      "en": "Crisis Survival Review",
+      "ja": "危機サバイバルレビュー",
+      "ko": "위기 생존 복기",
+      "es": "Revisión de Supervivencia en crisis"
+    }
+  },
+  "appText.saveHistoricalTraining": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "历史训练保存失败",
+      "en": "Failed to save historical training",
+      "ja": "履歴トレーニングの保存に失敗しました",
+      "ko": "과거 학습을 저장하지 못했습니다",
+      "es": "No se pudo guardar el entrenamiento histórico"
+    }
+  },
+  "appText.saveNote": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "保存笔记失败",
+      "en": "Failed to save note",
+      "ja": "メモの保存に失敗しました",
+      "ko": "메모를 저장하지 못했습니다",
+      "es": "No se pudo guardar la nota"
+    }
+  },
+  "appText.saveNote2": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "笔记保存失败",
+      "en": "Failed to save note",
+      "ja": "メモの保存に失敗しました",
+      "ko": "메모를 저장하지 못했습니다",
+      "es": "No se pudo guardar la nota"
+    }
+  },
+  "appText.searchNotes": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "搜索笔记",
+      "en": "Search notes",
+      "ja": "メモを検索",
+      "ko": "노트 검색",
+      "es": "Buscar notas"
+    }
+  },
+  "appText.surfaceNotesWorthRevisiting": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "筛出值得回看的笔记",
+      "en": "Surface the notes worth revisiting",
+      "ja": "見返す価値のあるノートだけを絞り込みます",
+      "ko": "다시 볼 가치가 있는 노트만 추려보세요",
+      "es": "Muestra solo las notas que vale la pena revisar"
+    }
+  },
+  "appText.systemDevSimulation.challengeLabel.notes": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "记录",
+      "en": "Notes",
+      "ja": "記録",
+      "ko": "기록",
+      "es": "Notas"
+    }
+  },
+  "appText.systemDevSimulation.challengeReview.fastDecision": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "闪电盘感挑战复盘",
+      "en": "Flash Decision Review",
+      "ja": "フラッシュ判断チャレンジレビュー",
+      "ko": "플래시 판단 챌린지 복기",
+      "es": "Revisión de Decisión relámpago"
+    }
+  },
+  "appText.systemDevSimulation.challengeReview.riskDiscipline": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "绝境求生挑战复盘",
+      "en": "Crisis Survival Review",
+      "ja": "危機サバイバルレビュー",
+      "ko": "위기 생존 복기",
+      "es": "Revisión de Supervivencia en crisis"
+    }
+  },
+  "appText.systemDevSimulation.narrativeSeed.historyReview": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "推演复盘：",
+      "en": "Replay review:",
+      "ja": "リプレイ振り返り:",
+      "ko": "리플레이 복기:",
+      "es": "Revisión del replay:"
+    }
+  },
+  "appText.systemDevSimulation.noteTitle.custom": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "模拟独立笔记 {0} · {1}",
+      "en": "Sim Standalone Note {0} · {1}",
+      "ja": "シミュ単独ノート {0} · {1}",
+      "ko": "시뮬 독립 노트 {0} · {1}",
+      "es": "Nota de simulación independiente {0} · {1}"
+    }
+  },
+  "appText.systemDevSimulation.noteTitle.fastDecisionReview": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "模拟闪电盘感复盘 {0} · {1}",
+      "en": "Sim Flash Decision Review {0} · {1}",
+      "ja": "シミュ フラッシュ判断レビュー {0} · {1}",
+      "ko": "시뮬 플래시 판단 복기 {0} · {1}",
+      "es": "Simulación de Decisión relámpago {0} · {1}"
+    }
+  },
+  "appText.systemDevSimulation.noteTitle.historyReview": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "模拟推演复盘 {0} · {1}",
+      "en": "Sim Replay Review {0} · {1}",
+      "ja": "シミュリプレイ振り返り {0} · {1}",
+      "ko": "시뮬 리플레이 복기 {0} · {1}",
+      "es": "Revisión de simulación del replay {0} · {1}"
+    }
+  },
+  "appText.systemDevSimulation.noteTitle.riskDisciplineReview": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "模拟绝境求生复盘 {0} · {1}",
+      "en": "Sim Crisis Survival Review {0} · {1}",
+      "ja": "シミュ 危機サバイバルレビュー {0} · {1}",
+      "ko": "시뮬 위기 생존 복기 {0} · {1}",
+      "es": "Simulación de Supervivencia en crisis {0} · {1}"
+    }
+  },
+  "appText.systemDevSimulation.noteTitle.trainingRecord": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "模拟训练记录 {0} · {1}",
+      "en": "Sim Training Record {0} · {1}",
+      "ja": "シミュ訓練記録 {0} · {1}",
+      "ko": "시뮬 훈련 기록 {0} · {1}",
+      "es": "Registro de simulación de entrenamiento {0} · {1}"
+    }
+  },
+  "appText.totalValue0NotesValue1": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "共 {0} 篇笔记\n{1}",
+      "en": "Total {0} notes\n{1}",
+      "ja": "メモ合計 {0} 件\n{1}",
+      "ko": "총 {0} 메모\n{1}",
+      "es": "Total de {0} notas\n{1}"
+    }
+  },
+  "appText.trainingCommandCenter": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "训练中心",
+      "en": "Training Center",
+      "ja": "トレーニングセンター",
+      "ko": "트레이닝 센터",
+      "es": "Centro de entrenamiento"
+    }
+  },
+  "appText.trainingProgressTrainingNotesCreated": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "当前没有进行中的训练，无法创建训练记录笔记",
+      "en": "There is currently no training in progress and training notes cannot be created",
+      "ja": "現在進行中のトレーニングがないため、トレーニング ノートを作成できません",
+      "ko": "현재 진행 중인 훈련이 없으며 훈련 노트를 생성할 수 없습니다",
+      "es": "Actualmente no hay entrenamiento en progreso y no se pueden crear notas de entrenamiento"
+    }
+  },
+  "appText.trainingRecordNote": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "训练记录笔记",
+      "en": "Training Record Note",
+      "ja": "トレーニング記録メモ",
+      "ko": "훈련 기록 메모",
+      "es": "Notas de registro de entrenamiento"
+    }
+  },
+  "appText.trainingRecordNoteCreatedButTrainingDataToo": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "训练记录笔记已创建，但当前训练数据过大，无法附加冻结行情快照",
+      "en": "Note created, but training data is too large for a frozen snapshot",
+      "ja": "ノートを作成しましたが、データが大きすぎるため固定スナップショットは添付できません",
+      "ko": "노트는 만들었지만 데이터가 커서 고정 스냅샷은 첨부할 수 없습니다",
+      "es": "Nota creada, pero los datos son demasiado grandes para adjuntar snapshot"
+    }
+  },
+  "appText.trendPreviewSymbolsSamplePool": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "当前样本池标的走势预览",
+      "en": "Trend preview of instruments in the current sample pool",
+      "ja": "現在のサンプルプール銘柄の推移プレビュー",
+      "ko": "현재 샘플 풀 종목 추세 미리보기",
+      "es": "Vista previa de tendencia de los instrumentos del grupo actual"
+    }
+  },
+  "appText.untitledNote": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "未命名笔记",
+      "en": "Untitled Note",
+      "ja": "無題のメモ",
+      "ko": "제목 없는 메모",
+      "es": "Nota sin título"
+    }
+  },
+  "appText.viewNote": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "查看笔记",
+      "en": "View Note",
+      "ja": "ノートを見る",
+      "ko": "노트 보기",
+      "es": "Ver nota"
+    }
+  },
+  "dialogs.notes.deleteAllDescription": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "此操作会清空全部复盘笔记，且无法恢复",
+      "en": "This will permanently remove all replay notes",
+      "ja": "この操作ですべての復盤ノートが削除され、元に戻せません",
+      "ko": "모든 복기 노트가 영구 삭제되며 복구할 수 없습니다",
+      "es": "Esta acción eliminará de forma permanente todas las notas de revisión"
+    }
+  },
+  "dialogs.notes.deleteAllTitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "确认删除全部笔记",
+      "en": "Confirm Delete All Notes",
+      "ja": "すべてのメモを削除することを確認します",
+      "ko": "모든 메모 삭제 확인",
+      "es": "Confirmar eliminación de todas las notas"
+    }
+  },
+  "dialogs.notes.deleteOneDescription": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "删除后将无法查看这篇笔记",
+      "en": "Once deleted, the note will no longer be viewable",
+      "ja": "削除すると、メモは表示されなくなります",
+      "ko": "삭제되면 해당 메모를 더 이상 볼 수 없습니다",
+      "es": "Una vez eliminada, la nota ya no será visible"
+    }
+  },
+  "dialogs.notes.deleteOneTitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "确认删除 {title}",
+      "en": "Confirm Delete {title}",
+      "ja": "{title} の削除を確認",
+      "ko": "{title} 삭제 확인",
+      "es": "Confirmar eliminación de {title}"
+    }
+  },
+  "settings.devSimulation.status.customNotes": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "独立笔记",
+      "en": "Custom Notes",
+      "ja": "独立ノート",
+      "ko": "독립 노트",
+      "es": "Notas personalizadas"
+    }
+  },
+  "shell.navigation.group.reflection": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "指标策略",
+      "en": "Indicators",
+      "ja": "指標戦略",
+      "ko": "지표 전략",
+      "es": "Indicadores"
+    }
+  },
+  "shell.navigation.item.commandCenter": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "训练中心",
+      "en": "Training Center",
+      "ja": "トレーニングセンター",
+      "ko": "트레이닝 센터",
+      "es": "Centro de entrenamiento"
+    }
+  },
+  "shell.navigation.item.notes": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "笔记",
+      "en": "Review Notes",
+      "ja": "復盤ノート",
+      "ko": "복기 노트",
+      "es": "Notas de repaso"
+    }
+  },
+  "trainer.durationEstimate.fallbackFastDecisionNote": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "按当前题量与判断时限估算，历史样本不足",
+      "en": "Estimated from the current question count and decision timer because history samples are limited",
+      "ja": "履歴サンプルが少ないため、現在の問題数と判断時間から見積もっています",
+      "ko": "기록 샘플이 부족해 현재 문제 수와 판단 시간 제한을 기준으로 추정했습니다",
+      "es": "Estimado según el número actual de preguntas y el tiempo de decisión porque faltan muestras históricas"
+    }
+  },
+  "trainer.durationEstimate.fallbackRiskDisciplineNote": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "按当前题量与固定 K 线窗口估算，历史样本不足",
+      "en": "Estimated from the current question count and fixed candlestick window because history samples are limited",
+      "ja": "履歴サンプルが少ないため、現在の問題数と固定ローソク足ウィンドウから見積もっています",
+      "ko": "기록 샘플이 부족해 현재 문제 수와 고정 봉 창을 기준으로 추정했습니다",
+      "es": "Estimado según el número actual de preguntas y la ventana fija de velas porque faltan muestras históricas"
+    }
+  },
+  "trainer.durationEstimate.historyBasedNote": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "基于最近 {count} 次已完成记录估算",
+      "en": "Estimated from the most recent {count} completed runs",
+      "ja": "直近 {count} 件の完了記録をもとに見積もり",
+      "ko": "최근 완료 기록 {count}건을 기준으로 추정했습니다",
+      "es": "Estimado a partir de las {count} sesiones completadas más recientes"
+    }
+  },
+  "trainer.specialTrainingBanks.editorPreviewLoading": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "正在生成预览...",
+      "en": "Building preview...",
+      "ja": "プレビューを生成中...",
+      "ko": "미리보기를 생성 중...",
+      "es": "Generando vista previa..."
+    }
+  },
+  "trainer.specialTrainingBanks.editorPreviewSubtitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "核对题量、周期和样本范围，确认无误后保存",
+      "en": "Review question count, period, and sample scope before saving",
+      "ja": "保存前に問題数、周期、サンプル範囲を確認します",
+      "ko": "저장하기 전에 문제 수, 주기, 샘플 범위를 확인합니다",
+      "es": "Revisa preguntas, período y alcance de pools antes de guardar"
+    }
+  },
+  "trainer.specialTrainingBanks.editorPreviewTitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "预览确认",
+      "en": "Preview and Confirm",
+      "ja": "プレビュー確認",
+      "ko": "미리보기 확인",
+      "es": "Vista previa y confirmación"
+    }
+  },
+  "trainer.specialTrainingBanks.editorStepPreview": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "预览确认",
+      "en": "Preview",
+      "ja": "プレビュー確認",
+      "ko": "미리보기 확인",
+      "es": "Vista previa"
+    }
+  },
+  "uiConfig.replayNote.defaultTitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "未命名笔记",
+      "en": "Untitled Note",
+      "ja": "無題ノート",
+      "ko": "제목 없는 노트",
+      "es": "Nota sin título"
+    }
+  },
+  "uiConfig.replayNote.filter.all": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "全部",
+      "en": "All",
+      "ja": "すべて",
+      "ko": "전체",
+      "es": "Todos"
+    }
+  },
+  "uiConfig.replayNote.filter.allColorsLabel": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "全部颜色",
+      "en": "All Colors",
+      "ja": "すべてのカラー",
+      "ko": "모든 색상",
+      "es": "Todos los colores"
+    }
+  },
+  "uiConfig.replayNote.filter.allSourcesLabel": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "全部来源",
+      "en": "All Sources",
+      "ja": "すべてのソース",
+      "ko": "모든 출처",
+      "es": "Todos los orígenes"
+    }
+  },
+  "uiConfig.replayNote.filter.colorLabel": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "颜色",
+      "en": "Color",
+      "ja": "カラー",
+      "ko": "색상",
+      "es": "Color de nota"
+    }
+  },
+  "uiConfig.replayNote.filter.sourceLabel": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "来源",
+      "en": "Source",
+      "ja": "ソース",
+      "ko": "출처",
+      "es": "Origen"
+    }
+  },
+  "uiConfig.replayNote.filter.unknownSourceLabel": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "未绑定来源",
+      "en": "Unlinked Source",
+      "ja": "未連携ソース",
+      "ko": "연결되지 않은 출처",
+      "es": "Origen no vinculado"
+    }
+  },
+  "uiConfig.replayNote.panel.bars": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "K 线数",
+      "en": "Bars",
+      "ja": "本数",
+      "ko": "봉 수",
+      "es": "Barras"
+    }
+  },
+  "uiConfig.replayNote.panel.drawdownCurve": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "回撤曲线",
+      "en": "Drawdown Curve",
+      "ja": "ドローダウン曲線",
+      "ko": "낙폭 곡선",
+      "es": "Curva de drawdown"
+    }
+  },
+  "uiConfig.replayNote.panel.equityCurve": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "权益曲线",
+      "en": "Equity Curve",
+      "ja": "資産曲線",
+      "ko": "자산 곡선",
+      "es": "Curva de capital"
+    }
+  },
+  "uiConfig.replayNote.panel.fills": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "成交数",
+      "en": "Fills",
+      "ja": "約定数",
+      "ko": "체결",
+      "es": "Ejecuciones"
+    }
+  },
+  "uiConfig.replayNote.panel.finalEquity": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "期末权益",
+      "en": "Final Equity",
+      "ja": "最終資産",
+      "ko": "최종 자산",
+      "es": "Capital final"
+    }
+  },
+  "uiConfig.replayNote.panel.maxDrawdown": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "最大回撤",
+      "en": "Max drawdown",
+      "ja": "最大ドローダウン",
+      "ko": "최대 낙폭",
+      "es": "Drawdown máximo"
+    }
+  },
+  "uiConfig.replayNote.panel.range": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "区间",
+      "en": "Range",
+      "ja": "範囲",
+      "ko": "구간",
+      "es": "Rango"
+    }
+  },
+  "uiConfig.replayNote.panel.returnRate": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "收益率",
+      "en": "Return",
+      "ja": "リターン",
+      "ko": "수익률",
+      "es": "Retorno"
+    }
+  },
+  "uiConfig.replayNote.panel.symbol": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "标的",
+      "en": "Instrument",
+      "ja": "銘柄",
+      "ko": "종목",
+      "es": "Instrumento"
+    }
+  },
+  "uiConfig.replayNote.panel.timeframe": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "周期",
+      "en": "Period",
+      "ja": "時間足",
+      "ko": "주기",
+      "es": "periodo"
+    }
+  },
+  "uiConfig.replayNote.panel.trades": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "回合数",
+      "en": "Rounds",
+      "ja": "ラウンド数",
+      "ko": "라운드",
+      "es": "Rondas"
+    }
+  },
+  "uiConfig.replayNote.reference.add": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "添加案例",
+      "en": "Add Case",
+      "ja": "ケースを追加",
+      "ko": "사례 추가",
+      "es": "Añadir caso"
+    }
+  },
+  "uiConfig.replayNote.reference.currentLabel": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "当前案例",
+      "en": "Current Cases",
+      "ja": "現在のケース",
+      "ko": "현재 사례",
+      "es": "Casos actuales"
+    }
+  },
+  "uiConfig.replayNote.reference.empty": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "当前还没有关联案例快照",
+      "en": "No linked snapshot cases yet",
+      "ja": "まだ関連付けられたスナップショットケースはありません",
+      "ko": "아직 연결된 스냅샷 사례가 없습니다",
+      "es": "Todavía no hay casos de instantáneas vinculados"
+    }
+  },
+  "uiConfig.replayNote.reference.remove": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "移除",
+      "en": "Remove",
+      "ja": "削除",
+      "ko": "제거",
+      "es": "Quitar"
+    }
+  },
+  "uiConfig.replayNote.reference.selectPlaceholder": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "选择历史快照案例",
+      "en": "Select a historical snapshot case",
+      "ja": "履歴スナップショットケースを選択",
+      "ko": "과거 스냅샷 사례 선택",
+      "es": "Selecciona un caso de instantánea histórica"
+    }
+  },
+  "uiConfig.replayNote.reference.title": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "案例引用",
+      "en": "Case References",
+      "ja": "ケース参照",
+      "ko": "사례 레퍼런스",
+      "es": "Referencias de casos"
+    }
+  },
+  "uiConfig.replayNote.reflectionCopy.bundle": {
+    "kind": "json",
+    "locales": {
+      "zh-CN": {
+        "dashboardTitle": "数据看板",
+        "replayTitle": "视觉复原",
+        "reflectionTitle": "深度反思",
+        "markdownTitle": "补充笔记",
+        "reflectionEmpty": "当前笔记没有结构化反思问题",
+        "sections": {
+          "marketFacts": {
+            "label": "客观盘面",
+            "placeholder": "当前趋势、关键支撑阻力、结构特征是什么？"
+          },
+          "subjectivePlan": {
+            "label": "主观逻辑",
+            "placeholder": "什么条件触发进场？止损和应对预案是什么？"
+          },
+          "emotionState": {
+            "label": "情绪状态",
+            "placeholder": "此刻是否焦躁、犹豫、害怕错过或过度自信？"
+          },
+          "executionAssessment": {
+            "label": "执行评估",
+            "placeholder": "这一局是否严格执行了系统？给自己一个客观评估"
+          },
+          "bestAndWorstTrade": {
+            "label": "最佳/最差交易",
+            "placeholder": "哪一笔最好，哪一笔最差，为什么？"
+          },
+          "nextAction": {
+            "label": "优化动作",
+            "placeholder": "下次遇到类似行情，需要新增或强化哪条纪律？"
+          },
+          "speedAssessment": {
+            "label": "反应速度评估",
+            "placeholder": "进场是否犹豫？平仓是否拖拉？"
+          },
+          "instinctCheck": {
+            "label": "盘感校验",
+            "placeholder": "这次是顺势判断还是在猜顶抄底？"
+          },
+          "breakdownMoment": {
+            "label": "情绪崩溃点",
+            "placeholder": "在哪一刻开始失去理智或偏离计划？"
+          },
+          "riskReflection": {
+            "label": "风控反思",
+            "placeholder": "为什么会陷入绝境？是仓位、加仓还是逆势问题？"
+          },
+          "recoveryAction": {
+            "label": "自救行动",
+            "placeholder": "最后是如何停战或挽回的？靠纪律还是靠运气？"
+          }
+        }
+      },
+      "en": {
+        "dashboardTitle": "Dashboard",
+        "replayTitle": "Replay",
+        "reflectionTitle": "Reflection",
+        "markdownTitle": "Extra Notes",
+        "reflectionEmpty": "This note has no structured reflection prompts",
+        "sections": {
+          "marketFacts": {
+            "label": "Market Facts",
+            "placeholder": "What was the trend, the key support/resistance, and the structure?"
+          },
+          "subjectivePlan": {
+            "label": "Trade Plan",
+            "placeholder": "What would trigger the entry? Where was the stop and fallback plan?"
+          },
+          "emotionState": {
+            "label": "Emotional State",
+            "placeholder": "Were you impatient, hesitant, fearful of missing out, or overconfident?"
+          },
+          "executionAssessment": {
+            "label": "Execution Assessment",
+            "placeholder": "Did you follow the system or drift from it?"
+          },
+          "bestAndWorstTrade": {
+            "label": "Best / Worst Trade",
+            "placeholder": "Which trade was best, which was worst, and why?"
+          },
+          "nextAction": {
+            "label": "Next Improvement",
+            "placeholder": "What rule should you add or strengthen next time?"
+          },
+          "speedAssessment": {
+            "label": "Speed Assessment",
+            "placeholder": "Did you hesitate to enter or delay the exit?"
+          },
+          "instinctCheck": {
+            "label": "Instinct Check",
+            "placeholder": "Were you following momentum or guessing tops and bottoms?"
+          },
+          "breakdownMoment": {
+            "label": "Breakdown Moment",
+            "placeholder": "When did you start losing discipline or acting emotionally?"
+          },
+          "riskReflection": {
+            "label": "Risk Reflection",
+            "placeholder": "Why did the situation become dangerous in the first place?"
+          },
+          "recoveryAction": {
+            "label": "Recovery Action",
+            "placeholder": "How did you stabilize or recover, and was it discipline or luck?"
+          }
+        }
+      },
+      "ja": {
+        "dashboardTitle": "ダッシュボード",
+        "replayTitle": "ビジュアルリプレイ",
+        "reflectionTitle": "深い振り返り",
+        "markdownTitle": "補足メモ",
+        "reflectionEmpty": "このノートには構造化された振り返り項目がありません",
+        "sections": {
+          "marketFacts": {
+            "label": "市場の事実",
+            "placeholder": "現在のトレンド、重要な支持線・抵抗線、構造の特徴は何か？"
+          },
+          "subjectivePlan": {
+            "label": "主観ロジック",
+            "placeholder": "どの条件でエントリーするか？損切りと対応プランは？"
+          },
+          "emotionState": {
+            "label": "感情状態",
+            "placeholder": "焦り、迷い、取り逃がしへの恐れ、過信はあったか？"
+          },
+          "executionAssessment": {
+            "label": "実行評価",
+            "placeholder": "今回はルールどおりに実行できたか？客観的に評価する"
+          },
+          "bestAndWorstTrade": {
+            "label": "最良 / 最悪のトレード",
+            "placeholder": "どのトレードが最良で、どれが最悪だったのか？その理由は？"
+          },
+          "nextAction": {
+            "label": "次の改善点",
+            "placeholder": "次に同じ相場に出会ったら、どのルールを追加・強化するか？"
+          },
+          "speedAssessment": {
+            "label": "反応速度の評価",
+            "placeholder": "エントリーをためらったか？決済が遅れたか？"
+          },
+          "instinctCheck": {
+            "label": "直感の確認",
+            "placeholder": "流れに乗った判断だったか、それとも天井・底当てだったか？"
+          },
+          "breakdownMoment": {
+            "label": "崩れた瞬間",
+            "placeholder": "どの瞬間から理性や計画が崩れ始めたか？"
+          },
+          "riskReflection": {
+            "label": "リスクの振り返り",
+            "placeholder": "なぜ危険な状態に陥ったのか？ポジション、ナンピン、逆張りのどれか？"
+          },
+          "recoveryAction": {
+            "label": "立て直しの行動",
+            "placeholder": "最後にどうやって立て直したか？規律か、それとも運か？"
+          }
+        }
+      },
+      "ko": {
+        "dashboardTitle": "대시보드",
+        "replayTitle": "리플레이",
+        "reflectionTitle": "복기",
+        "markdownTitle": "추가 메모",
+        "reflectionEmpty": "이 노트에는 구조화된 복기 프롬프트가 없습니다",
+        "sections": {
+          "marketFacts": {
+            "label": "시장 사실",
+            "placeholder": "현재 추세, 핵심 지지와 저항, 구조적 특징은 무엇인가요?"
+          },
+          "subjectivePlan": {
+            "label": "거래 계획",
+            "placeholder": "무엇이 진입 조건이었나요? 손절과 대응 계획은 어디였나요?"
+          },
+          "emotionState": {
+            "label": "감정 상태",
+            "placeholder": "조급함, 망설임, 놓칠까 봐 두려움, 과신이 있었나요?"
+          },
+          "executionAssessment": {
+            "label": "실행 평가",
+            "placeholder": "이번 세션은 시스템을 따랐나요, 아니면 벗어났나요?"
+          },
+          "bestAndWorstTrade": {
+            "label": "최고 / 최악의 거래",
+            "placeholder": "어떤 거래가 가장 좋았고 어떤 거래가 가장 나빴나요? 이유는 무엇인가요?"
+          },
+          "nextAction": {
+            "label": "다음 개선",
+            "placeholder": "다음에는 어떤 규칙을 추가하거나 강화해야 하나요?"
+          },
+          "speedAssessment": {
+            "label": "반응 속도 평가",
+            "placeholder": "진입을 망설였거나 청산을 늦췄나요?"
+          },
+          "instinctCheck": {
+            "label": "직감 점검",
+            "placeholder": "추세를 따른 판단이었나요, 아니면 고점과 저점을 맞히려 했나요?"
+          },
+          "breakdownMoment": {
+            "label": "무너진 순간",
+            "placeholder": "언제부터 규율을 잃거나 감정적으로 행동하기 시작했나요?"
+          },
+          "riskReflection": {
+            "label": "리스크 회고",
+            "placeholder": "왜 상황이 위험해졌나요? 포지션, 물타기, 역추세 중 무엇이 문제였나요?"
+          },
+          "recoveryAction": {
+            "label": "회복 행동",
+            "placeholder": "어떻게 안정시키거나 회복했나요? 규율이었나요, 운이었나요?"
+          }
+        }
+      },
+      "es": {
+        "dashboardTitle": "Panel",
+        "replayTitle": "Replay visual",
+        "reflectionTitle": "Reflexión profunda",
+        "markdownTitle": "Notas adicionales",
+        "reflectionEmpty": "Esta nota no tiene preguntas de reflexión estructuradas",
+        "sections": {
+          "marketFacts": {
+            "label": "Hechos del mercado",
+            "placeholder": "Captura la tendencia, los soportes/resistencias clave y la estructura"
+          },
+          "subjectivePlan": {
+            "label": "Plan de decisión",
+            "placeholder": "¿Qué activa la entrada/salida y dónde está el stop-loss?"
+          },
+          "emotionState": {
+            "label": "Estado emocional",
+            "placeholder": "Ejemplo: paciente, ansioso, FOMO"
+          },
+          "executionAssessment": {
+            "label": "Evaluación de ejecución",
+            "placeholder": "¿Esta sesión siguió tu sistema? Añade puntuación y motivo"
+          },
+          "bestAndWorstTrade": {
+            "label": "Mejor / peor operación",
+            "placeholder": "¿Cuáles fueron las mejores y peores operaciones, y por qué?"
+          },
+          "nextAction": {
+            "label": "Siguiente mejora",
+            "placeholder": "¿Qué regla vas a añadir o reforzar la próxima vez?"
+          },
+          "speedAssessment": {
+            "label": "Evaluación de velocidad",
+            "placeholder": "¿Hubo dudas al entrar o retraso al salir?"
+          },
+          "instinctCheck": {
+            "label": "Chequeo de intuición",
+            "placeholder": "¿Seguiste la tendencia o intentaste adivinar techo/suelo?"
+          },
+          "breakdownMoment": {
+            "label": "Momento de quiebre",
+            "placeholder": "¿Cuándo se rompió la disciplina y qué lo desencadenó?"
+          },
+          "riskReflection": {
+            "label": "Reflexión sobre riesgo",
+            "placeholder": "¿Por qué se amplió el riesgo: exceso de tamaño, añadir contra tendencia o sin stop?"
+          },
+          "recoveryAction": {
+            "label": "Acción de recuperación",
+            "placeholder": "¿Cómo te recuperaste o dejaste de operar a tiempo?"
+          }
+        }
+      }
+    }
+  },
+  "uiConfig.replayNote.reflectionForm.bundle": {
+    "kind": "json",
+    "locales": {
+      "zh-CN": {
+        "dashboardTitle": "数据看板",
+        "replayTitle": "视觉复原",
+        "title": "结构化反思",
+        "subtitle": "按模板补充关键复盘要点，避免只写情绪化结论",
+        "requiredTag": "必填",
+        "optionalTag": "可选",
+        "emptyText": "当前模板没有结构化反思字段"
+      },
+      "en": {
+        "dashboardTitle": "Dashboard",
+        "replayTitle": "Visual Replay",
+        "title": "Structured Reflection",
+        "subtitle": "Use guided prompts to capture actionable review points instead of emotional notes",
+        "requiredTag": "Required",
+        "optionalTag": "Optional",
+        "emptyText": "No structured reflection fields for this template"
+      },
+      "ja": {
+        "dashboardTitle": "ダッシュボード",
+        "replayTitle": "視覚再生",
+        "title": "構造の反射",
+        "subtitle": "感情的なメモだけで終わらせず、ガイドに沿って実用的な振り返りを残します",
+        "requiredTag": "続行",
+        "optionalTag": "オプション",
+        "emptyText": "このテンプレートのリフレクションフィールドは構成されていません"
+      },
+      "ko": {
+        "dashboardTitle": "대시보드",
+        "replayTitle": "비주얼 리플레이",
+        "title": "구조화 복기",
+        "subtitle": "감정적인 메모에 그치지 않도록 가이드에 따라 실행 가능한 복기 포인트를 정리하세요",
+        "requiredTag": "필수",
+        "optionalTag": "선택",
+        "emptyText": "이 템플릿에는 구조화 복기 항목이 없습니다"
+      },
+      "es": {
+        "dashboardTitle": "Panel",
+        "replayTitle": "Revisión visual",
+        "title": "Reflexión estructurada",
+        "subtitle": "Usa preguntas guiadas para capturar puntos de revisión accionables, no solo notas emocionales",
+        "requiredTag": "Obligatorio",
+        "optionalTag": "Opcional",
+        "emptyText": "No hay campos de reflexión estructurada para esta plantilla"
+      }
+    }
+  },
+  "uiConfig.replayNote.reflectionSection.bundle": {
+    "kind": "json",
+    "locales": {
+      "zh-CN": {
+        "marketFacts": {
+          "label": "客观盘面",
+          "placeholder": "记录趋势、关键支撑阻力与结构信息",
+          "description": "尽量写可验证事实，不混入主观看法"
+        },
+        "subjectivePlan": {
+          "label": "主观逻辑",
+          "placeholder": "如果下一根 K 线怎样走，你会如何进出场？",
+          "description": "写清触发条件、止损位置和执行动作"
+        },
+        "emotionState": {
+          "label": "情绪状态",
+          "placeholder": "例如：耐心等待、焦躁、害怕错过",
+          "description": "可选填写，用于识别情绪与执行偏差"
+        },
+        "executionAssessment": {
+          "label": "执行评估",
+          "placeholder": "这局执行是否遵守系统？可写 1-5 分及原因"
+        },
+        "bestAndWorstTrade": {
+          "label": "最佳/最差交易",
+          "placeholder": "分别是哪一笔？为什么？是否在模式内？"
+        },
+        "nextAction": {
+          "label": "优化动作",
+          "placeholder": "下次遇到类似行情，你要新增或强化哪条纪律？"
+        },
+        "speedAssessment": {
+          "label": "反应速度评估",
+          "placeholder": "进场是否犹豫？平仓是否拖拉？"
+        },
+        "instinctCheck": {
+          "label": "盘感校验",
+          "placeholder": "顺势还是猜顶抄底？止损是否果断？"
+        },
+        "breakdownMoment": {
+          "label": "情绪崩溃点",
+          "placeholder": "在哪一刻开始失去纪律？对应哪根 K 线？"
+        },
+        "riskReflection": {
+          "label": "风控反思",
+          "placeholder": "为何陷入绝境：重仓、逆势加仓或止损失守？"
+        },
+        "recoveryAction": {
+          "label": "自救行动",
+          "placeholder": "最后如何停战或挽回？靠运气还是靠纪律？"
+        }
+      },
+      "en": {
+        "marketFacts": {
+          "label": "Market Facts",
+          "placeholder": "Capture trend, key support/resistance, and structure",
+          "description": "Focus on verifiable observations"
+        },
+        "subjectivePlan": {
+          "label": "Decision Plan",
+          "placeholder": "What triggers entry/exit and where is stop-loss?",
+          "description": "Write explicit trigger conditions and actions"
+        },
+        "emotionState": {
+          "label": "Emotional State",
+          "placeholder": "Example: patient, anxious, FOMO",
+          "description": "Optional but useful for behavior review"
+        },
+        "executionAssessment": {
+          "label": "Execution Assessment",
+          "placeholder": "Did this session follow your system? Add score and reason"
+        },
+        "bestAndWorstTrade": {
+          "label": "Best / Worst Trade",
+          "placeholder": "Which trades were best and worst, and why?"
+        },
+        "nextAction": {
+          "label": "Next Improvement",
+          "placeholder": "What rule will you add or reinforce next time?"
+        },
+        "speedAssessment": {
+          "label": "Speed Assessment",
+          "placeholder": "Was entry hesitant or exit delayed?"
+        },
+        "instinctCheck": {
+          "label": "Instinct Check",
+          "placeholder": "Trend-following or top/bottom guessing?"
+        },
+        "breakdownMoment": {
+          "label": "Breakdown Moment",
+          "placeholder": "When did discipline break and what triggered it?"
+        },
+        "riskReflection": {
+          "label": "Risk Reflection",
+          "placeholder": "Why did risk expand: oversize, add-against-trend, no stop?"
+        },
+        "recoveryAction": {
+          "label": "Recovery Action",
+          "placeholder": "How did you recover or stop trading in time?"
+        }
+      },
+      "ja": {
+      "marketFacts": {
+        "label": "市場の事実",
+        "placeholder": "トレンド、主要な支持線・抵抗線、市場構造を記録してください",
+        "description": "主観を交えず、検証できる事実に絞ってください"
+      },
+      "subjectivePlan": {
+        "label": "売買判断プラン",
+        "placeholder": "エントリー・決済の条件と損切り位置は？",
+        "description": "発動条件と実行する行動を具体的に書いてください"
+      },
+      "emotionState": {
+        "label": "感情の状態",
+        "placeholder": "例：冷静、焦り、不安、取り残される恐怖",
+        "description": "任意項目ですが、行動の振り返りに役立ちます"
+      },
+      "executionAssessment": {
+        "label": "実行評価",
+        "placeholder": "このセッションではルールを守れましたか？点数と理由を記録してください"
+      },
+      "bestAndWorstTrade": {
+        "label": "ベスト / ワースト取引",
+        "placeholder": "最も良かった取引と悪かった取引はどれですか？その理由は？"
+      },
+      "nextAction": {
+        "label": "次の改善",
+        "placeholder": "次回、追加または徹底するルールは何ですか？"
+      },
+      "speedAssessment": {
+        "label": "スピード評価",
+        "placeholder": "エントリーをためらったり、決済が遅れたりしませんでしたか？"
+      },
+      "instinctCheck": {
+        "label": "直感の検証",
+        "placeholder": "トレンドに沿いましたか？それとも天井・底を当てようとしましたか？"
+      },
+      "breakdownMoment": {
+        "label": "規律が崩れた瞬間",
+        "placeholder": "いつ規律が崩れ、何がきっかけになりましたか？"
+      },
+      "riskReflection": {
+        "label": "リスクの振り返り",
+          "placeholder": "なぜリスクが拡大したのか：過大ポジション、逆張り増し、損切りなし？"
+        },
+      "recoveryAction": {
+        "label": "立て直しの行動",
+        "placeholder": "どのように立て直し、または適切な時点で取引を止めましたか？"
+      }
+      },
+      "ko": {
+        "marketFacts": {
+          "label": "시장 사실",
+          "placeholder": "추세, 핵심 지지/저항, 구조를 정리하세요",
+          "description": "검증 가능한 관찰에 집중하세요"
+        },
+        "subjectivePlan": {
+          "label": "의사결정 계획",
+          "placeholder": "진입/청산 조건은 무엇이며 손절선은 어디인가요?",
+          "description": "트리거 조건과 대응 행동을 명확히 적어 두세요"
+        },
+        "emotionState": {
+          "label": "감정 상태",
+          "placeholder": "예: 침착함, 불안함, FOMO",
+          "description": "선택 사항이지만 행동 복기에 도움이 됩니다"
+        },
+        "executionAssessment": {
+          "label": "실행 평가",
+          "placeholder": "이번 세션이 본인 시스템을 따랐나요? 점수와 이유를 적어 보세요"
+        },
+        "bestAndWorstTrade": {
+          "label": "최고 / 최악의 거래",
+          "placeholder": "가장 좋았던 거래와 가장 아쉬웠던 거래는 무엇이며, 이유는 무엇인가요?"
+        },
+        "nextAction": {
+          "label": "다음 개선점",
+          "placeholder": "다음 번에 어떤 규칙을 추가하거나 강화할 건가요?"
+        },
+        "speedAssessment": {
+          "label": "속도 평가",
+          "placeholder": "진입을 망설였나요, 아니면 청산이 늦었나요?"
+        },
+        "instinctCheck": {
+          "label": "직관 점검",
+          "placeholder": "추세를 따라갔나요, 아니면 고점/저점을 추측했나요?"
+        },
+        "breakdownMoment": {
+          "label": "무너진 순간",
+          "placeholder": "규율이 흔들린 순간은 언제였고, 무엇이 계기가 되었나요?"
+        },
+        "riskReflection": {
+          "label": "리스크 복기",
+          "placeholder": "리스크가 커진 이유는 무엇인가요: 과도한 규모, 역추세 추가, 손절 없음?"
+        },
+        "recoveryAction": {
+          "label": "회복 행동",
+          "placeholder": "어떻게 회복했거나 제때 멈출 수 있었나요?"
+        }
+      },
+      "es": {
+        "marketFacts": {
+          "label": "Hechos del mercado",
+          "placeholder": "Captura la tendencia, los soportes/resistencias clave y la estructura",
+          "description": "Céntrate en observaciones verificables"
+        },
+        "subjectivePlan": {
+          "label": "Plan de decisión",
+          "placeholder": "¿Qué activa la entrada/salida y dónde está el stop-loss?",
+          "description": "Escribe condiciones de activación y acciones explícitas"
+        },
+        "emotionState": {
+          "label": "Estado emocional",
+          "placeholder": "Ejemplo: paciente, ansioso, FOMO",
+          "description": "Opcional, pero útil para revisar el comportamiento"
+        },
+        "executionAssessment": {
+          "label": "Evaluación de ejecución",
+          "placeholder": "¿Esta sesión siguió tu sistema? Añade puntuación y motivo"
+        },
+        "bestAndWorstTrade": {
+          "label": "Mejor / peor operación",
+          "placeholder": "¿Cuáles fueron las mejores y peores operaciones, y por qué?"
+        },
+        "nextAction": {
+          "label": "Siguiente mejora",
+          "placeholder": "¿Qué regla vas a añadir o reforzar la próxima vez?"
+        },
+        "speedAssessment": {
+          "label": "Evaluación de velocidad",
+          "placeholder": "¿Hubo dudas al entrar o retraso al salir?"
+        },
+        "instinctCheck": {
+          "label": "Chequeo de intuición",
+          "placeholder": "¿Seguiste la tendencia o intentaste adivinar techo/suelo?"
+        },
+        "breakdownMoment": {
+          "label": "Momento de quiebre",
+          "placeholder": "¿Cuándo se rompió la disciplina y qué lo desencadenó?"
+        },
+        "riskReflection": {
+          "label": "Reflexión sobre riesgo",
+          "placeholder": "¿Por qué se amplió el riesgo: exceso de tamaño, añadir contra tendencia o sin stop?"
+        },
+        "recoveryAction": {
+          "label": "Acción de recuperación",
+          "placeholder": "¿Cómo te recuperaste o dejaste de operar a tiempo?"
+        }
+      }
+    }
+  },
+  "uiConfig.replayNote.seeding.bundle": {
+    "kind": "json",
+    "locales": {
+      "zh-CN": {
+        "FREE_REPLAY": {
+          "content": "记录本次自由推演的开局假设、关键决策与复盘结论"
+        },
+        "CHALLENGE": {
+          "content": "记录本题挑战的判断依据、结果反馈与下一次修正动作"
+        },
+        "CUSTOM": {
+          "content": "写下需要长期保留的观察、规则、清单或盘后想法"
+        }
+      },
+      "en": {
+        "FREE_REPLAY": {
+          "content": "Record the setup, key decisions, and review conclusion for this free replay"
+        },
+        "CHALLENGE": {
+          "content": "Record the reasoning, result feedback, and next correction for this challenge"
+        },
+        "CUSTOM": {
+          "content": "Write the observation, rule, checklist item, or after-market thought you want to keep"
+        }
+      },
+      "ja": {
+        "FREE_REPLAY": {
+          "content": "この自由リプレイの前提、主要判断、振り返りの結論を記録します"
+        },
+        "CHALLENGE": {
+          "content": "このチャレンジの判断根拠、結果フィードバック、次の修正を記録します"
+        },
+        "CUSTOM": {
+          "content": "長く残したい観察、ルール、チェック項目、または引け後の考えを書き留めます"
+        }
+      },
+      "ko": {
+        "FREE_REPLAY": {
+          "content": "이번 자유 리플레이의 설정, 핵심 판단, 복기 결론을 기록합니다"
+        },
+        "CHALLENGE": {
+          "content": "이번 도전의 판단 근거, 결과 피드백, 다음 수정 행동을 기록합니다"
+        },
+        "CUSTOM": {
+          "content": "오래 보관할 관찰, 규칙, 체크리스트 항목 또는 장후 생각을 적어 둡니다"
+        }
+      },
+      "es": {
+        "FREE_REPLAY": {
+          "content": "Registra la configuración, las decisiones clave y la conclusión de revisión de este replay libre"
+        },
+        "CHALLENGE": {
+          "content": "Registra el razonamiento, el resultado y la próxima corrección de este desafío"
+        },
+        "CUSTOM": {
+          "content": "Escribe la observación, regla, punto de lista o idea posterior al mercado que quieras conservar"
+        }
+      }
+    }
+  },
+  "uiConfig.replayNote.semantic.CHALLENGE": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "挑战模式",
+      "en": "Challenge Hub",
+      "ja": "チャレンジハブ",
+      "ko": "챌린지 허브",
+      "es": "Centro de desafíos"
+    }
+  },
+  "uiConfig.replayNote.semantic.CUSTOM": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "自定义笔记",
+      "en": "Custom Note",
+      "ja": "カスタムノート",
+      "ko": "사용자 노트",
+      "es": "Nota personalizada"
+    }
+  },
+  "uiConfig.replayNote.semantic.FREE_REPLAY": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "自由推演",
+      "en": "Free Replay",
+      "ja": "自由リプレイ",
+      "ko": "자유 리플레이",
+      "es": "Replay libre"
+    }
+  },
+  "uiConfig.replayNote.type.CHALLENGE": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "挑战笔记",
+      "en": "Challenge Note",
+      "ja": "チャレンジノート",
+      "ko": "챌린지 노트",
+      "es": "Nota de reto"
+    }
+  },
+  "uiConfig.replayNote.type.CUSTOM": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "自定义笔记",
+      "en": "Custom Note",
+      "ja": "カスタムノート",
+      "ko": "사용자 노트",
+      "es": "Nota personalizada"
+    }
+  },
+  "uiConfig.replayNote.type.FREE_REPLAY": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "推演笔记",
+      "en": "Replay Note",
+      "ja": "リプレイノート",
+      "ko": "리플레이 노트",
+      "es": "Nota de replay"
+    }
+  },
+  "uiConfig.trainingCommandCenter.bundle": {
+    "kind": "json",
+    "locales": {
+      "zh-CN": {
+        "eyebrow": "训练中心",
+        "title": "Zinuto Core ｜ 训练中心",
+        "heroSectionTitle": "核心训练入口",
+        "heroSectionSubtitle": "先确定今天的训练重点，再查看当前状态与数据准备",
+        "strategySummary": "完整仓位推演与策略复盘",
+        "strategyMetricLabel": "数据准备状态",
+        "strategyResumeMetricLabel": "进行中断点",
+        "strategyResumeMetricSupportTemplate": "第 {0} 根 · {1}",
+        "strategyRecentMetricLabelTemplate": "最近 {0} 场盈亏比",
+        "strategyRecentMetricSupportTemplate": "胜率 {0} / 最大回撤 {1}",
+        "strategyEnvironmentMetricLabel": "当前训练环境",
+        "strategyMetricPairTemplate": "{0} · {1}",
+        "strategyProfitRatioValueTemplate": "{0}x",
+        "strategyProfitRatioInfinity": "∞x",
+        "strategyEnvironmentFocusedSupportTemplate": "聚焦标的 · {0}",
+        "strategyEnvironmentFocusedSupportFallback": "聚焦标的",
+        "strategyEnvironmentRandomSupportTemplate": "随机池 · {0}",
+        "strategyEnvironmentRandomSupportFallback": "随机池",
+        "strategyPrimaryAction": "进入自由推演",
+        "strategySecondaryAction": "继续上次训练",
+        "strategyDatasetTemplate": "{0} 样本池 / {1} 标的",
+        "strategyPoolUnitLabel": "样本池",
+        "strategySymbolUnitLabel": "标的",
+        "strategyContinueEmpty": "当前没有进行中的自由推演",
+        "flashSummary": "限时方向判断",
+        "flashPrimaryAction": "进入闪电盘感",
+        "flashMetricLabel": "今日最佳优势比",
+        "flashMetricEmpty": "今日还没有闪电盘感记录",
+        "flashMetricHintEmpty": "完成一组闪电盘感后，这里会显示今日优势比",
+        "flashTodayMetricLabel": "今日最佳优势比",
+        "flashTodayMetricSupportTemplate": "今日命中率 {0} / 决策速度 {1}秒",
+        "flashRecentMetricLabelTemplate": "最近 {0} 题有效命中率",
+        "flashRecentMetricSupportTemplate": "决策速度 {0}秒 / 错失机会 {1}",
+        "flashColdMetricLabel": "当前训练重点",
+        "flashColdMetricValue": "方向判断",
+        "flashColdMetricSupport": "有效命中率 · 错失机会",
+        "crisisSummary": "逆风处置与风险修复训练",
+        "crisisPrimaryAction": "进入训练",
+        "crisisMetricLabel": "全网排名",
+        "crisisMetricPending": "暂无排名数据",
+        "crisisMetricSupportLabel": "近期生存率",
+        "crisisTodayMetricLabel": "今日生存率",
+        "crisisTodayMetricSupportTemplate": "今日挽回率 {0} / 处理时机 {1}根",
+        "crisisRecentMetricLabelTemplate": "最近 {0} 题正Alpha率",
+        "crisisRecentMetricSupportTemplate": "多数选择：{0}（{1}） / 第 {2} 根出手",
+        "crisisColdMetricLabel": "当前训练重点",
+        "crisisColdMetricValue": "风险修复",
+        "crisisColdMetricSupport": "正Alpha率 · 处理节奏",
+        "utilitySectionTitle": "数据资产与复盘笔记",
+        "utilitySectionSubtitle": "把数据准备与最近复盘集中保留在同一页",
+        "dataCenterTitle": "数据中心",
+        "dataCenterSubtitle": "导入本地行情与资产管理",
+        "dataCenterSummaryLabel": "数据状态",
+        "dataCenterAction": "打开数据中心",
+        "recentActivitiesTitle": "复盘笔记",
+        "recentActivitiesMoreAction": "更多",
+        "recentActivitiesEmpty": "最近还没有复盘笔记",
+        "recentActivitiesEmptyHint": "完成训练或写下笔记后，最近复盘会出现在这里",
+        "recentActivityViewChart": "查看图表",
+        "recentActivityViewNote": "查看笔记",
+        "recentActivityContinueEdit": "继续编辑",
+        "recentActivityOpen": "打开",
+        "crisisBehaviorCutLossLabel": "止损",
+        "crisisBehaviorAddPositionLabel": "加仓",
+        "crisisBehaviorFreezeLabel": "暂不处理",
+        "crisisRecentNoActionMetricSupportTemplate": "多数选择：{0}（{1}） / 多数题全程未出手"
+      },
+      "en": {
+        "eyebrow": "Training Center",
+        "title": "Zinuto Core ｜ Training Center",
+        "heroSectionTitle": "Train Today",
+        "heroSectionSubtitle": "Pick a focus, check data, then start",
+        "strategySummary": "Full-position replay and review",
+        "strategyMetricLabel": "Data Ready",
+        "strategyResumeMetricLabel": "Resume Point",
+        "strategyResumeMetricSupportTemplate": "Bar {0} · {1}",
+        "strategyRecentMetricLabelTemplate": "Last {0} P/L",
+        "strategyRecentMetricSupportTemplate": "Win {0} / Max DD {1}",
+        "strategyEnvironmentMetricLabel": "Training Setup",
+        "strategyMetricPairTemplate": "{0} · {1}",
+        "strategyProfitRatioValueTemplate": "{0}x",
+        "strategyProfitRatioInfinity": "∞x",
+        "strategyEnvironmentFocusedSupportTemplate": "Focused instrument · {0}",
+        "strategyEnvironmentFocusedSupportFallback": "Focus Instrument",
+        "strategyEnvironmentRandomSupportTemplate": "Random sample pool · {0}",
+        "strategyEnvironmentRandomSupportFallback": "Random sample pool",
+        "strategyPrimaryAction": "Open Free Replay",
+        "strategySecondaryAction": "Continue Training",
+        "strategyDatasetTemplate": "{0} sample pools / {1} instruments",
+        "strategyPoolUnitLabel": "Sample Pool",
+        "strategySymbolUnitLabel": "Instrument",
+        "strategyContinueEmpty": "No Free Replay is currently running",
+        "flashSummary": "Timed direction drills",
+        "flashPrimaryAction": "Open Flash Decision",
+        "flashMetricLabel": "Best Edge Today",
+        "flashMetricEmpty": "No Flash Decision today",
+        "flashMetricHintEmpty": "Finish one Flash Decision run to see today’s edge",
+        "flashTodayMetricLabel": "Best Edge Today",
+        "flashTodayMetricSupportTemplate": "Hit {0} / Speed {1} sec",
+        "flashRecentMetricLabelTemplate": "Last {0} Hit Rate",
+        "flashRecentMetricSupportTemplate": "Speed {0} sec / Missed {1}",
+        "flashColdMetricLabel": "Current Focus",
+        "flashColdMetricValue": "Direction Call",
+        "flashColdMetricSupport": "Hit rate · Missed chances",
+        "crisisSummary": "Risk repair drills",
+        "crisisPrimaryAction": "Start",
+        "crisisMetricLabel": "Global Rank",
+        "crisisMetricPending": "No ranking data",
+        "crisisMetricSupportLabel": "Recent Survival",
+        "crisisTodayMetricLabel": "Survival Today",
+        "crisisTodayMetricSupportTemplate": "Recovery {0} / Action bar {1}",
+        "crisisRecentMetricLabelTemplate": "Last {0} Positive Alpha",
+        "crisisRecentMetricSupportTemplate": "Top choice: {0} ({1}) / Bar {2}",
+        "crisisColdMetricLabel": "Current Focus",
+        "crisisColdMetricValue": "Risk Repair",
+        "crisisColdMetricSupport": "Positive alpha · Action rhythm",
+        "utilitySectionTitle": "Data & Notes",
+        "utilitySectionSubtitle": "Data and reviews in one place",
+        "dataCenterTitle": "Data Center",
+        "dataCenterSubtitle": "Local market data and asset management",
+        "dataCenterSummaryLabel": "Data Status",
+        "dataCenterAction": "Open Data Center",
+        "recentActivitiesTitle": "Review Notes",
+        "recentActivitiesMoreAction": "More",
+        "recentActivitiesEmpty": "No review notes yet",
+        "recentActivitiesEmptyHint": "Finish a session or write a note to see reviews here",
+        "recentActivityViewChart": "View Chart",
+        "recentActivityViewNote": "View Note",
+        "recentActivityContinueEdit": "Continue Editing",
+        "recentActivityOpen": "Open",
+        "crisisBehaviorCutLossLabel": "Stop Loss",
+        "crisisBehaviorAddPositionLabel": "Add Position",
+        "crisisBehaviorFreezeLabel": "Wait",
+        "crisisRecentNoActionMetricSupportTemplate": "Top choice: {0} ({1}) / Most questions untouched"
+      },
+      "ja": {
+        "eyebrow": "トレーニングセンター",
+        "title": "Zinuto Core ｜ トレーニングセンター",
+        "heroSectionTitle": "今日のトレーニング",
+        "heroSectionSubtitle": "重点とデータを確認して開始します",
+        "strategySummary": "ポジション全体のリプレイとレビュー",
+        "strategyMetricLabel": "データ準備",
+        "strategyResumeMetricLabel": "再開位置",
+        "strategyResumeMetricSupportTemplate": "{0} 本目 · {1}",
+        "strategyRecentMetricLabelTemplate": "直近 {0} 回のPF",
+        "strategyRecentMetricSupportTemplate": "勝率 {0} / 最大DD {1}",
+        "strategyEnvironmentMetricLabel": "トレーニング設定",
+        "strategyMetricPairTemplate": "{0} · {1}",
+        "strategyProfitRatioValueTemplate": "{0}x",
+        "strategyProfitRatioInfinity": "∞x",
+        "strategyEnvironmentFocusedSupportTemplate": "対象銘柄 · {0}",
+        "strategyEnvironmentFocusedSupportFallback": "注目銘柄",
+        "strategyEnvironmentRandomSupportTemplate": "ランダムサンプルプール{0}",
+        "strategyEnvironmentRandomSupportFallback": "ランダムサンプルプール",
+        "strategyPrimaryAction": "自由リプレイを開く",
+        "strategySecondaryAction": "前回から続行",
+        "strategyDatasetTemplate": "{0} サンプルプール / {1} 銘柄",
+        "strategyPoolUnitLabel": "サンプルプール",
+        "strategySymbolUnitLabel": "銘柄",
+        "strategyContinueEmpty": "進行中の自由リプレイはありません",
+        "flashSummary": "制限時間内の方向判断",
+        "flashPrimaryAction": "フラッシュ判断を開く",
+        "flashMetricLabel": "今日の最高エッジ",
+        "flashMetricEmpty": "今日はフラッシュ判断なし",
+        "flashMetricHintEmpty": "フラッシュ判断を1回終えると今日のエッジが表示されます",
+        "flashTodayMetricLabel": "今日の最高エッジ",
+        "flashTodayMetricSupportTemplate": "命中 {0} / 速度 {1}秒",
+        "flashRecentMetricLabelTemplate": "直近 {0} 問の正答率",
+        "flashRecentMetricSupportTemplate": "速度 {0}秒 / 見送り {1}",
+        "flashColdMetricLabel": "現在の重点",
+        "flashColdMetricValue": "方向判断",
+        "flashColdMetricSupport": "正答率 · 機会損失",
+        "crisisSummary": "リスク立て直し練習",
+        "crisisPrimaryAction": "開始",
+        "crisisMetricLabel": "グローバル順位",
+        "crisisMetricPending": "ランキングデータなし",
+        "crisisMetricSupportLabel": "直近の生存率",
+        "crisisTodayMetricLabel": "今日の生存率",
+        "crisisTodayMetricSupportTemplate": "回復 {0} / 判断足 {1}",
+        "crisisRecentMetricLabelTemplate": "直近 {0} 問のプラスα率",
+        "crisisRecentMetricSupportTemplate": "最多選択：{0}（{1}）/ {2}本目",
+        "crisisColdMetricLabel": "現在の重点",
+        "crisisColdMetricValue": "リスク修復",
+        "crisisColdMetricSupport": "プラスα · 判断リズム",
+        "utilitySectionTitle": "データとノート",
+        "utilitySectionSubtitle": "データとレビューを1か所で確認",
+        "dataCenterTitle": "データセンター",
+        "dataCenterSubtitle": "ローカル相場データ取り込みと管理",
+        "dataCenterSummaryLabel": "データステータス",
+        "dataCenterAction": "データセンターを開く",
+        "recentActivitiesTitle": "レビューノート",
+        "recentActivitiesMoreAction": "もっと見る",
+        "recentActivitiesEmpty": "まだレビューノートがありません",
+        "recentActivitiesEmptyHint": "セッション完了またはノート作成後にここへ表示されます",
+        "recentActivityViewChart": "チャートを見る",
+        "recentActivityViewNote": "ノートを見る",
+        "recentActivityContinueEdit": "編集を続ける",
+        "recentActivityOpen": "開く",
+        "crisisBehaviorCutLossLabel": "損切り",
+        "crisisBehaviorAddPositionLabel": "追加",
+        "crisisBehaviorFreezeLabel": "見送り",
+        "crisisRecentNoActionMetricSupportTemplate": "最多選択：{0}（{1}）/ 多くは未操作"
+      },
+      "ko": {
+        "eyebrow": "트레이닝 센터",
+        "title": "Zinuto Core ｜ 트레이닝 센터",
+        "heroSectionTitle": "오늘의 훈련",
+        "heroSectionSubtitle": "초점과 데이터를 확인한 뒤 시작하세요",
+        "strategySummary": "전체 포지션 리플레이와 복기",
+        "strategyMetricLabel": "데이터 준비",
+        "strategyResumeMetricLabel": "재개 지점",
+        "strategyResumeMetricSupportTemplate": "{0}번째 봉 · {1}",
+        "strategyRecentMetricLabelTemplate": "최근 {0}회 손익계수",
+        "strategyRecentMetricSupportTemplate": "승률 {0} / 최대 DD {1}",
+        "strategyEnvironmentMetricLabel": "훈련 설정",
+        "strategyMetricPairTemplate": "{0} · {1}",
+        "strategyProfitRatioValueTemplate": "{0}x",
+        "strategyProfitRatioInfinity": "∞x",
+        "strategyEnvironmentFocusedSupportTemplate": "집중 종목 · {0}",
+        "strategyEnvironmentFocusedSupportFallback": "집중 종목",
+        "strategyEnvironmentRandomSupportTemplate": "랜덤 샘플 풀 · {0}",
+        "strategyEnvironmentRandomSupportFallback": "랜덤 샘플 풀",
+        "strategyPrimaryAction": "자유 리플레이 열기",
+        "strategySecondaryAction": "이전 훈련 계속",
+        "strategyDatasetTemplate": "{0}개 샘플 풀 / {1}개 종목",
+        "strategyPoolUnitLabel": "샘플 풀",
+        "strategySymbolUnitLabel": "종목",
+        "strategyContinueEmpty": "진행 중인 자유 리플레이가 없습니다",
+        "flashSummary": "제한 시간 방향 판단",
+        "flashPrimaryAction": "플래시 판단 열기",
+        "flashMetricLabel": "오늘 최고 엣지",
+        "flashMetricEmpty": "오늘 플래시 판단 기록 없음",
+        "flashMetricHintEmpty": "플래시 판단 1회를 완료하면 오늘의 엣지가 표시됩니다",
+        "flashTodayMetricLabel": "오늘 최고 엣지",
+        "flashTodayMetricSupportTemplate": "적중 {0} / 속도 {1}초",
+        "flashRecentMetricLabelTemplate": "최근 {0}문항 적중률",
+        "flashRecentMetricSupportTemplate": "속도 {0}초 / 놓침 {1}",
+        "flashColdMetricLabel": "현재 초점",
+        "flashColdMetricValue": "방향 판단",
+        "flashColdMetricSupport": "적중률 · 놓친 기회",
+        "crisisSummary": "리스크 회복 훈련",
+        "crisisPrimaryAction": "시작",
+        "crisisMetricLabel": "글로벌 순위",
+        "crisisMetricPending": "순위 데이터 없음",
+        "crisisMetricSupportLabel": "최근 생존율",
+        "crisisTodayMetricLabel": "오늘 생존율",
+        "crisisTodayMetricSupportTemplate": "회복 {0} / 행동 봉 {1}",
+        "crisisRecentMetricLabelTemplate": "최근 {0}문항 양의 알파율",
+        "crisisRecentMetricSupportTemplate": "최다 선택: {0}({1}) / {2}번째 봉",
+        "crisisColdMetricLabel": "현재 초점",
+        "crisisColdMetricValue": "리스크 회복",
+        "crisisColdMetricSupport": "양의 알파 · 행동 리듬",
+        "utilitySectionTitle": "데이터와 노트",
+        "utilitySectionSubtitle": "데이터와 복기를 한곳에서 확인하세요",
+        "dataCenterTitle": "데이터 센터",
+        "dataCenterSubtitle": "로컬 시세 데이터 가져오기 및 관리",
+        "dataCenterSummaryLabel": "데이터 상태",
+        "dataCenterAction": "데이터 센터 열기",
+        "recentActivitiesTitle": "복기 노트",
+        "recentActivitiesMoreAction": "더 보기",
+        "recentActivitiesEmpty": "아직 복기 노트가 없습니다",
+        "recentActivitiesEmptyHint": "세션을 마치거나 노트를 작성하면 여기에 표시됩니다",
+        "recentActivityViewChart": "차트 보기",
+        "recentActivityViewNote": "노트 보기",
+        "recentActivityContinueEdit": "계속 편집",
+        "recentActivityOpen": "열기",
+        "crisisBehaviorCutLossLabel": "손절",
+        "crisisBehaviorAddPositionLabel": "추가 진입",
+        "crisisBehaviorFreezeLabel": "대기",
+        "crisisRecentNoActionMetricSupportTemplate": "최다 선택: {0}({1}) / 대부분 미조작"
+      },
+      "es": {
+        "eyebrow": "Centro de entrenamiento",
+        "title": "Zinuto Core ｜ Centro de entrenamiento",
+        "heroSectionTitle": "Entrena hoy",
+        "heroSectionSubtitle": "Elige foco, revisa datos y empieza",
+        "strategySummary": "Replay completo y revisión",
+        "strategyMetricLabel": "Datos listos",
+        "strategyResumeMetricLabel": "Punto de reanudación",
+        "strategyResumeMetricSupportTemplate": "Vela {0} · {1}",
+        "strategyRecentMetricLabelTemplate": "P/L últimas {0}",
+        "strategyRecentMetricSupportTemplate": "Acierto {0} / DD máx. {1}",
+        "strategyEnvironmentMetricLabel": "Configuración",
+        "strategyMetricPairTemplate": "{0} · {1}",
+        "strategyProfitRatioValueTemplate": "{0}x",
+        "strategyProfitRatioInfinity": "∞x",
+        "strategyEnvironmentFocusedSupportTemplate": "Instrumento enfocado · {0}",
+        "strategyEnvironmentFocusedSupportFallback": "Instrumento foco",
+        "strategyEnvironmentRandomSupportTemplate": "Random Pool · {0}",
+        "strategyEnvironmentRandomSupportFallback": "Pool aleatorio",
+        "strategyPrimaryAction": "Abrir Replay libre",
+        "strategySecondaryAction": "Continuar entrenamiento",
+        "strategyDatasetTemplate": "{0} pools / {1} instrumentos",
+        "strategyPoolUnitLabel": "Conjunto de muestras",
+        "strategySymbolUnitLabel": "Instrumento",
+        "strategyContinueEmpty": "No hay Replay libre en curso",
+        "flashSummary": "Dirección cronometrada",
+        "flashPrimaryAction": "Abrir Decisión relámpago",
+        "flashMetricLabel": "Mejor ventaja hoy",
+        "flashMetricEmpty": "Sin Decisión relámpago hoy",
+        "flashMetricHintEmpty": "Completa una ronda para ver la ventaja de hoy",
+        "flashTodayMetricLabel": "Mejor ventaja hoy",
+        "flashTodayMetricSupportTemplate": "Acierto {0} / velocidad {1} s",
+        "flashRecentMetricLabelTemplate": "Acierto últimas {0}",
+        "flashRecentMetricSupportTemplate": "Velocidad {0} s / perdidas {1}",
+        "flashColdMetricLabel": "Foco actual",
+        "flashColdMetricValue": "Dirección",
+        "flashColdMetricSupport": "Acierto · oportunidades perdidas",
+        "crisisSummary": "Ejercicios de reparación de riesgo",
+        "crisisPrimaryAction": "Iniciar",
+        "crisisMetricLabel": "Ranking global",
+        "crisisMetricPending": "Sin datos de ranking",
+        "crisisMetricSupportLabel": "Supervivencia reciente",
+        "crisisTodayMetricLabel": "Supervivencia hoy",
+        "crisisTodayMetricSupportTemplate": "Recuperación {0} / vela {1}",
+        "crisisRecentMetricLabelTemplate": "Alfa positiva últimas {0}",
+        "crisisRecentMetricSupportTemplate": "Opción principal: {0} ({1}) / vela {2}",
+        "crisisColdMetricLabel": "Foco actual",
+        "crisisColdMetricValue": "Reparación de riesgo",
+        "crisisColdMetricSupport": "Alfa positiva · ritmo",
+        "utilitySectionTitle": "Datos y notas",
+        "utilitySectionSubtitle": "Datos y revisiones en un solo lugar",
+        "dataCenterTitle": "Centro de datos",
+        "dataCenterSubtitle": "Importación de datos de mercado locales y gestión de datos",
+        "dataCenterSummaryLabel": "Estado de los datos",
+        "dataCenterAction": "Abrir Centro de datos",
+        "recentActivitiesTitle": "Notas de revisión",
+        "recentActivitiesMoreAction": "Más",
+        "recentActivitiesEmpty": "Aún no hay notas de revisión",
+        "recentActivitiesEmptyHint": "Completa una sesión o escribe una nota para verla aquí",
+        "recentActivityViewChart": "Ver gráfico",
+        "recentActivityViewNote": "Ver nota",
+        "recentActivityContinueEdit": "Seguir editando",
+        "recentActivityOpen": "Abrir",
+        "crisisBehaviorCutLossLabel": "Stop loss",
+        "crisisBehaviorAddPositionLabel": "Añadir posición",
+        "crisisBehaviorFreezeLabel": "Esperar",
+        "crisisRecentNoActionMetricSupportTemplate": "Opción principal: {0} ({1}) / mayoría sin acción"
+      }
+    }
+  },
+  "uiLabels.ui.commandCenterActivityContinueEdit": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "继续编辑",
+      "en": "Continue Editing",
+      "ja": "編集を続ける",
+      "ko": "계속 편집",
+      "es": "Seguir editando"
+    }
+  },
+  "uiLabels.ui.commandCenterActivityEmpty": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "还没有最近足迹，先开启第一局训练",
+      "en": "No recent activity yet. Start your first session",
+      "ja": "まだ最近のアクティビティはありません。最初のセッションを始めましょう",
+      "ko": "아직 최근 활동이 없습니다. 첫 세션을 시작하세요",
+      "es": "Aún no hay actividad reciente. Inicia tu primera sesión"
+    }
+  },
+  "uiLabels.ui.commandCenterActivityViewChart": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "查看图表",
+      "en": "View Chart",
+      "ja": "チャートを見る",
+      "ko": "차트 보기",
+      "es": "Ver gráfico"
+    }
+  },
+  "uiLabels.ui.commandCenterActivityViewNote": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "查看笔记",
+      "en": "View Note",
+      "ja": "ノートを見る",
+      "ko": "노트 보기",
+      "es": "Ver nota"
+    }
+  },
+  "uiLabels.ui.commandCenterCrisisMetric": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "绝境求生评级",
+      "en": "Crisis Grade",
+      "ja": "危機グレード",
+      "ko": "위기 등급",
+      "es": "Nota de crisis"
+    }
+  },
+  "uiLabels.ui.commandCenterCrisisPrimary": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "进入竞技场",
+      "en": "Enter Arena",
+      "ja": "アリーナへ",
+      "ko": "훈련 입장",
+      "es": "Entrar en la arena"
+    }
+  },
+  "uiLabels.ui.commandCenterCrisisSubtitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "压力测试、风控与心态重建",
+      "en": "Risk control under pressure",
+      "ja": "プレッシャー下のリスク管理",
+      "ko": "압박 속 리스크 관리",
+      "es": "Control de riesgo bajo presión"
+    }
+  },
+  "uiLabels.ui.commandCenterCrisisTitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "绝境求生竞技场",
+      "en": "Crisis Survival",
+      "ja": "危機サバイバル",
+      "ko": "위기 생존",
+      "es": "Supervivencia en crisis"
+    }
+  },
+  "uiLabels.ui.commandCenterDataCenterLabel": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "数据资产中心",
+      "en": "Data Asset Center",
+      "ja": "データ資産センター",
+      "ko": "데이터 자산 센터",
+      "es": "Centro de activos de datos"
+    }
+  },
+  "uiLabels.ui.commandCenterDataCenterSubtitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "导入本地行情与管理",
+      "en": "Import and manage local data",
+      "ja": "ローカル市場データを取り込み・管理",
+      "ko": "로컬 시장 데이터를 가져오고 관리하세요",
+      "es": "Importa y gestiona datos de mercado locales"
+    }
+  },
+  "uiLabels.ui.commandCenterDataDossierSubtitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "用一组核心指标概括你的训练画像",
+      "en": "A compact snapshot of your current training profile",
+      "ja": "現在のトレーニングプロフィールをひと目で把握できる要約です",
+      "ko": "현재 훈련 프로필을 간결하게 요약한 스냅샷입니다",
+      "es": "Una vista compacta de tu perfil de entrenamiento actual"
+    }
+  },
+  "uiLabels.ui.commandCenterDataDossierTitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "个人数据档案",
+      "en": "Data Dossier",
+      "ja": "データ概要",
+      "ko": "데이터 브리프",
+      "es": "Dossier de datos"
+    }
+  },
+  "uiLabels.ui.commandCenterFlashMetric": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "最近 50 题命中率",
+      "en": "Last 50 Hit Rate",
+      "ja": "直近50問の正答率",
+      "ko": "최근 50문항 적중률",
+      "es": "Acierto últimas 50"
+    }
+  },
+  "uiLabels.ui.commandCenterFlashPrimary": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "开始挑战",
+      "en": "Start Challenge",
+      "ja": "チャレンジ開始",
+      "ko": "도전 시작",
+      "es": "Iniciar desafío"
+    }
+  },
+  "uiLabels.ui.commandCenterFlashSubtitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "极速、纯视觉反应训练",
+      "en": "Fast visual reaction drills",
+      "ja": "高速の視覚判断トレーニング",
+      "ko": "빠른 시각 반응 훈련",
+      "es": "Ejercicios visuales rápidos"
+    }
+  },
+  "uiLabels.ui.commandCenterFlashTitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "闪电盘感挑战",
+      "en": "Flash Decision",
+      "ja": "フラッシュ判断",
+      "ko": "플래시 판단",
+      "es": "Decisión relámpago"
+    }
+  },
+  "uiLabels.ui.commandCenterGlobalRankPlaceholder": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "生存率 / 排名",
+      "en": "Survival / ranking",
+      "ja": "生存率 / ランキング",
+      "ko": "생존율 / 순위",
+      "es": "Supervivencia / ranking"
+    }
+  },
+  "uiLabels.ui.commandCenterKlineEstimate": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "按平均持仓 K 线估算",
+      "en": "Estimated from average bars held",
+      "ja": "平均保有本数から推定",
+      "ko": "평균 보유 봉으로 추정",
+      "es": "Estimado a partir de las velas medias mantenidas"
+    }
+  },
+  "uiLabels.ui.commandCenterMetricCrisisGrade": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "绝境求生评级",
+      "en": "Crisis Grade",
+      "ja": "危機グレード",
+      "ko": "위기 등급",
+      "es": "Nota de crisis"
+    }
+  },
+  "uiLabels.ui.commandCenterMetricReplayBars": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "累计推演K 线",
+      "en": "Replay Bars",
+      "ja": "リプレイ本数",
+      "ko": "리플레이 봉 수",
+      "es": "Barras de replay"
+    }
+  },
+  "uiLabels.ui.commandCenterRecentNoteLabel": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "复盘笔记",
+      "en": "Review Notes",
+      "ja": "復盤ノート",
+      "ko": "복기 노트",
+      "es": "Notas de revisión"
+    }
+  },
+  "uiLabels.ui.commandCenterRecentSubtitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "把最近的训练、挑战与笔记串成一条可继续的时间线",
+      "en": "Latest sessions, challenges, and notes",
+      "ja": "最近のセッション、チャレンジ、ノート",
+      "ko": "최근 세션, 챌린지, 노트",
+      "es": "Últimas sesiones, desafíos y notas"
+    }
+  },
+  "uiLabels.ui.commandCenterRecentTitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "最近足迹与复盘",
+      "en": "Recent Activity",
+      "ja": "最近のアクティビティ",
+      "ko": "최근 활동",
+      "es": "Actividad reciente"
+    }
+  },
+  "uiLabels.ui.commandCenterReplayBuiltinBadge": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "内置样本池",
+      "en": "Built-in sample pools",
+      "ja": "内蔵サンプルプール",
+      "ko": "내장 샘플 풀",
+      "es": "Pools de muestras incluidos"
+    }
+  },
+  "uiLabels.ui.commandCenterReplayFallbackBody": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "先用美股日线或外汇1分钟内置样本池开始第一局，再逐步接入你自己的数据资产",
+      "en": "Start with the built-in US stocks daily or FX 1m sample pool, then add your own data",
+      "ja": "米国株日足またはFX 1分足の内蔵サンプルプールから始め、後で自分のデータを追加できます",
+      "ko": "미국 주식 일봉 또는 FX 1분 내장 샘플 풀로 시작하고, 이후 직접 데이터를 추가하세요",
+      "es": "Empieza con el pool incluido de acciones de EE. UU. diario o el de FX 1 min; añade tus datos después"
+    }
+  },
+  "uiLabels.ui.commandCenterReplayFallbackTitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "没有本地数据？使用内置样本池",
+      "en": "No local data yet? Start with built-in sample pools",
+      "ja": "まだローカルデータがありませんか？ まずは内蔵サンプルプールから始めましょう",
+      "ko": "아직 로컬 데이터가 없나요? 내장 샘플 풀로 시작하세요",
+      "es": "¿Aún no tienes datos locales? Empieza con pools de muestras incluidos"
+    }
+  },
+  "uiLabels.ui.commandCenterReplayPoolBadge": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "个已启用样本池",
+      "en": "enabled sample pools",
+      "ja": "有効サンプルプール",
+      "ko": "활성 샘플 풀",
+      "es": "pools activos"
+    }
+  },
+  "uiLabels.ui.commandCenterReplaySubtitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "深度策略、全品种配置",
+      "en": "Deep strategy work across markets",
+      "ja": "市場横断の深い戦略検証",
+      "ko": "시장 전반의 심화 전략 훈련",
+      "es": "Trabajo estratégico profundo por mercados"
+    }
+  },
+  "uiLabels.ui.commandCenterReplayTitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "自由策略推演",
+      "en": "Strategy Replay",
+      "ja": "戦略リプレイ",
+      "ko": "전략 리플레이",
+      "es": "Replay estratégico"
+    }
+  },
+  "uiLabels.ui.commandCenterReservedValue": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "暂无数据",
+      "en": "No data",
+      "ja": "データなし",
+      "ko": "데이터 없음",
+      "es": "Sin datos"
+    }
+  },
+  "uiLabels.ui.commandCenterSubtitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "在同一页面统览训练进度与数据资产，快速确认当前状态与下一步操作",
+      "en": "Training progress and data in one view",
+      "ja": "進捗とデータを1画面で確認",
+      "ko": "훈련 진행도와 데이터를 한 화면에서 확인하세요",
+      "es": "Progreso y datos en una vista"
+    }
+  },
+  "uiLabels.ui.commandCenterTitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "训练中心",
+      "en": "Training Center",
+      "ja": "トレーニングセンター",
+      "ko": "트레이닝 센터",
+      "es": "Centro de entrenamiento"
+    }
+  },
+  "uiLabels.ui.navGroupReflection": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "指标策略",
+      "en": "Indicators",
+      "ja": "指標戦略",
+      "ko": "지표 전략",
+      "es": "Indicadores"
+    }
+  },
+  "uiLabels.ui.navGroupReview": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "进阶模块",
+      "en": "Challenges",
+      "ja": "チャレンジ",
+      "ko": "도전 모듈",
+      "es": "Desafíos"
+    }
+  },
+  "uiLabels.ui.navNotes": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "笔记",
+      "en": "Review Notes",
+      "ja": "復盤ノート",
+      "ko": "복기 노트",
+      "es": "Notas de repaso"
+    }
+  },
+  "uiLabels.ui.navTrainingCommandCenter": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "训练中心",
+      "en": "Training Center",
+      "ja": "トレーニングセンター",
+      "ko": "트레이닝 센터",
+      "es": "Centro de entrenamiento"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionDirection.LONG": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "做多",
+      "en": "Long",
+      "ja": "ロング",
+      "ko": "롱",
+      "es": "Largo"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionDirection.OBSERVE": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "观望",
+      "en": "Observe",
+      "ja": "見送り",
+      "ko": "관망",
+      "es": "Observar"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionDirection.SHORT": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "做空",
+      "en": "Short",
+      "ja": "ショート",
+      "ko": "숏",
+      "es": "Corto"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionEmpty": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "当前没有高置信系统提示",
+      "en": "No high-confidence tips yet",
+      "ja": "高信頼のヒントはまだありません",
+      "ko": "신뢰도 높은 팁이 아직 없습니다",
+      "es": "Sin sugerencias confiables aún"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionEvidenceLiveBreakoutConfirmed": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "当前收盘价 {close} 已突破关键边界 {level}，最近 14 根平均波动为 {avgRange}",
+      "en": "Close {close} broke past {level}. Recent average bar range was {avgRange}",
+      "ja": "終値 {close} が {level} を上抜けました。直近の平均値幅は {avgRange} でした",
+      "ko": "종가 {close}가 {level}을 돌파했습니다. 최근 평균 봉 범위는 {avgRange}였습니다",
+      "es": "El cierre {close} superó {level}. El rango medio reciente por vela fue {avgRange}"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionEvidenceLiveMidRangeNoEdge": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "当前收盘落在前序区间的 {closePercent}，区间高度为 {rangeSize}，边际优势不足",
+      "en": "Price closed near the middle of the prior range ({closePercent}). Range height was {rangeSize}",
+      "ja": "価格は直前レンジの中央付近（{closePercent}）で引けました。レンジ幅は {rangeSize} でした",
+      "ko": "가격이 이전 박스 중간({closePercent}) 부근에서 마감했습니다. 박스 높이는 {rangeSize}였습니다",
+      "es": "El precio cerró cerca de la mitad del rango previo ({closePercent}). La amplitud del rango fue {rangeSize}"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionEvidenceLiveOverheatedChaseRisk": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "当前 K 线范围 {currentRange} 明显高于均值 {avgRange}，收盘接近极端位（{closePercent}）",
+      "en": "Current bar range {currentRange} beat average {avgRange}; close near the extreme ({closePercent})",
+      "ja": "現在バーの幅 {currentRange} は平均 {avgRange} を大きく上回り、終値は極値付近（{closePercent}）",
+      "ko": "현재 봉 범위 {currentRange}가 평균 {avgRange}를 크게 넘고 종가는 극단 근처({closePercent})",
+      "es": "Rango actual {currentRange} sobre media {avgRange}; cierre cerca del extremo ({closePercent})"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionEvidencePostBreakoutConfirmedEntry": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "入场匹配确认突破，加权收益 {returnRate}，仓位 {quantity}",
+      "en": "Entry matched a confirmed breakout. Weighted return {returnRate}, size {quantity}",
+      "ja": "エントリーは確認済みブレイクに一致。加重リターン {returnRate}、数量 {quantity}",
+      "ko": "진입이 확인된 돌파와 일치했습니다. 가중 수익 {returnRate}, 수량 {quantity}",
+      "es": "Entrada con ruptura confirmada. Retorno {returnRate}, tamaño {quantity}"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionEvidencePostContrarianMisread": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "你的选择是 {selection}，但实际方向是 {actual}",
+      "en": "You chose {selection}, but the actual direction was {actual}",
+      "ja": "あなたの選択は {selection} でしたが、実際の方向は {actual} でした",
+      "ko": "당신은 {selection}을 선택했지만 실제 방향은 {actual}였습니다",
+      "es": "Elegiste {selection}, pero la dirección real fue {actual}"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionEvidencePostCostBasisNotImproving": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "最终持仓成本仍继续抬高，成本偏移为 {shiftRate}",
+      "en": "Cost basis still widened by {shiftRate}",
+      "ja": "平均建値はなお {shiftRate} 悪化していました",
+      "ko": "원가 기준이 여전히 {shiftRate}만큼 불리하게 벌어졌습니다",
+      "es": "La base de costo todavía se amplió en {shiftRate}"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionEvidencePostDelayedLossCut": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "价格首次跌破入场后，亏损单又持有了 {delayBars} 根 K 线",
+      "en": "The losing trade stayed open {delayBars} bars after price first crossed entry",
+      "ja": "価格が初めて建値を割った後、損失取引をさらに {delayBars} 本保有しました",
+      "ko": "가격이 처음 진입가를 넘긴 뒤 손실 거래를 {delayBars}봉 더 보유했습니다",
+      "es": "La pérdida siguió abierta {delayBars} velas tras cruzar la entrada"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionEvidencePostDirectionValid": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "你的选择是 {selection}，实际方向也是 {actual}",
+      "en": "You chose {selection}, and the actual direction was {actual}",
+      "ja": "あなたの選択は {selection} で、実際の方向は {actual} でした",
+      "ko": "당신은 {selection}을 선택했고 실제 방향은 {actual}였습니다",
+      "es": "Elegiste {selection} y la dirección real fue {actual}"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionEvidencePostMarginPressure": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "最大维持占用 {utilization}，最薄安全垫 {buffer}",
+      "en": "Peak maintenance use {utilization}; thinnest buffer {buffer}",
+      "ja": "維持使用率の最大 {utilization}、最小安全余裕 {buffer}",
+      "ko": "최대 유지 사용률 {utilization}, 최소 버퍼 {buffer}",
+      "es": "Uso máximo de mantenimiento {utilization}; buffer mínimo {buffer}"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionEvidencePostMidRangeEntry": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "入场点位位于前序区间的 {entryPercent}，利润捕获率只有 {captureRate}",
+      "en": "Entry landed near the middle of the prior range ({entryPercent}). Capture rate ended at {captureRate}",
+      "ja": "エントリーは直前レンジの中央付近（{entryPercent}）でした。獲得率は {captureRate} で終わりました",
+      "ko": "진입이 이전 박스 중간({entryPercent}) 부근에서 이뤄졌습니다. 수익 포착률은 {captureRate}로 마감했습니다",
+      "es": "La entrada cayó cerca de la mitad del rango previo ({entryPercent}). La tasa de captura terminó en {captureRate}"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionEvidencePostObserveMissedOpportunity": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "这次观望错过了主要的 {actual} 机会",
+      "en": "Staying flat missed the main {actual} opportunity",
+      "ja": "何もしなかったため、主な {actual} の機会を逃しました",
+      "ko": "포지션을 잡지 않아 주요 {actual} 기회를 놓쳤습니다",
+      "es": "Quedarte al margen hizo que perdieras la principal oportunidad {actual}"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionEvidencePostOverheatedEntry": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "入场当根波动达到 {currentRange}，明显高于近期均值 {avgRange}",
+      "en": "Entry bar range {currentRange} was much hotter than the recent average {avgRange}",
+      "ja": "エントリー足の値幅 {currentRange} は直近平均 {avgRange} よりかなり大きい状態でした",
+      "ko": "진입 봉 범위 {currentRange}가 최근 평균 {avgRange}보다 훨씬 과열되어 있었습니다",
+      "es": "El rango de la vela de entrada {currentRange} fue mucho más agresivo que el promedio reciente {avgRange}"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionEvidencePostProfitCutTooEarly": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "单笔最大有利波动达到 {mfeRate}，最终只带走 {returnRate}",
+      "en": "Max favorable excursion reached {mfeRate}, but only {returnRate} was kept",
+      "ja": "最大有利変動は {mfeRate} まで伸びましたが、保持できたのは {returnRate} だけでした",
+      "ko": "최대 유리 변동은 {mfeRate}까지 갔지만 실제 확보한 수익은 {returnRate}뿐이었습니다",
+      "es": "La excursión favorable máxima llegó a {mfeRate}, pero solo se conservó {returnRate}"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionEvidencePostRecoveryEfficiencyInsufficient": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "评级 {grade}，净值挽回率只有 {recoveryRate}",
+      "en": "Grade {grade}, recovery reached only {recoveryRate}",
+      "ja": "評価 {grade}、立て直し到達率は {recoveryRate} にとどまりました",
+      "ko": "등급 {grade}, 회복률은 {recoveryRate}에 그쳤습니다",
+      "es": "Calificación {grade}; la recuperación solo llegó a {recoveryRate}"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionEvidencePostRepairEffective": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "评级 {grade}，相对持有 {alphaHold}，相对硬止损 {alphaStop}",
+      "en": "Grade {grade}, alpha vs hold {alphaHold}, alpha vs hard stop {alphaStop}",
+      "ja": "評価 {grade}、ホールド比アルファ {alphaHold}、ハードストップ比アルファ {alphaStop}",
+      "ko": "등급 {grade}, 홀드 대비 알파 {alphaHold}, 하드 스탑 대비 알파 {alphaStop}",
+      "es": "Calificación {grade}, alpha frente a mantener {alphaHold}, alpha frente a stop duro {alphaStop}"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionEvidencePostWeakEdgeAction": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "你选择了 {selection}，但真实结果更接近观望",
+      "en": "You chose {selection}, but the actual result was observe",
+      "ja": "あなたの選択は {selection} でしたが、実際には見送りが妥当でした",
+      "ko": "당신은 {selection}을 선택했지만 실제 정답은 관망이었습니다",
+      "es": "Elegiste {selection}, pero el resultado real fue observar"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionEvidencePostWinnerGaveBackToLoss": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "这笔交易一度拿到 {mfeRate} 的有利波动，最终却收在 {returnRate}",
+      "en": "Trade once had {mfeRate} in favorable excursion, but ended at {returnRate}",
+      "ja": "一時は {mfeRate} の有利変動がありましたが、最終的には {returnRate} で終わりました",
+      "ko": "한때 {mfeRate}의 유리 변동이 있었지만 최종 결과는 {returnRate}였습니다",
+      "es": "La operación llegó a tener una excursión favorable de {mfeRate}, pero terminó en {returnRate}"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionEvidencePostWorseThanBenchmark": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "相对持有为 {alphaHold}，相对硬止损为 {alphaStop}，两边都没跑赢",
+      "en": "Alpha vs hold {alphaHold}, alpha vs hard stop {alphaStop}",
+      "ja": "ホールド比アルファ {alphaHold}、ハードストップ比アルファ {alphaStop}",
+      "ko": "홀드 대비 알파 {alphaHold}, 하드 스탑 대비 알파 {alphaStop}",
+      "es": "Alpha frente a mantener {alphaHold}, alpha frente a stop duro {alphaStop}"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionLabelLiveBreakoutConfirmed": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "结构突破已确认",
+      "en": "Confirmed breakout",
+      "ja": "ブレイクアウト確定",
+      "ko": "돌파 확인",
+      "es": "Ruptura confirmada"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionLabelLiveMidRangeNoEdge": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "区间中部暂无边际",
+      "en": "No edge in range middle",
+      "ja": "レンジ中央に優位性なし",
+      "ko": "박스 중단에서는 우위 없음",
+      "es": "Sin ventaja en la zona media del rango"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionLabelLiveOverheatedChaseRisk": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "波动过热谨慎追价",
+      "en": "Overheated chase risk",
+      "ja": "過熱追随リスク",
+      "ko": "과열 추격 위험",
+      "es": "Riesgo de perseguir un movimiento recalentado"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionLabelPostBreakoutConfirmedEntry": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "突破确认后入场",
+      "en": "Breakout confirmed entry",
+      "ja": "ブレイクアウト確認後のエントリー",
+      "ko": "돌파 확인 후 진입",
+      "es": "Entrada tras ruptura confirmada"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionLabelPostContrarianMisread": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "主观逆向判断",
+      "en": "Counter-trend misread",
+      "ja": "逆張り判断ミス",
+      "ko": "역추세 오판",
+      "es": "Lectura contraria equivocada"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionLabelPostCostBasisNotImproving": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "降本无效",
+      "en": "Cost basis not improving",
+      "ja": "平均建値が改善していない",
+      "ko": "원가 기준 개선 없음",
+      "es": "La base de costo no mejora"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionLabelPostDelayedLossCut": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "亏损处理拖延",
+      "en": "Delayed loss cut",
+      "ja": "損切り遅れ",
+      "ko": "손실 컷 지연",
+      "es": "Recorte de pérdidas retrasado"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionLabelPostDirectionValid": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "方向判断有效",
+      "en": "Direction call valid",
+      "ja": "方向判断は有効",
+      "ko": "방향 판단 적중",
+      "es": "Lectura de dirección válida"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionLabelPostMarginPressure": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "保证金压力过高",
+      "en": "Margin pressure too high",
+      "ja": "証拠金圧力が高すぎる",
+      "ko": "증거금 압박 과다",
+      "es": "Presión de margen demasiado alta"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionLabelPostMidRangeEntry": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "区间中部入场",
+      "en": "Mid-range entry",
+      "ja": "レンジ中央エントリー",
+      "ko": "박스 중단 진입",
+      "es": "Entrada en mitad del rango"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionLabelPostObserveMissedOpportunity": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "观望错失主机会",
+      "en": "Observe missed main move",
+      "ja": "見送りで主な値動きを逃した",
+      "ko": "관망으로 본 움직임을 놓침",
+      "es": "Observar hizo perder el movimiento principal"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionLabelPostOverheatedEntry": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "波动过热追价",
+      "en": "Overheated chase",
+      "ja": "過熱追随",
+      "ko": "과열 추격",
+      "es": "Persecución recalentada"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionLabelPostProfitCutTooEarly": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "盈利截断过早",
+      "en": "Profit cut too early",
+      "ja": "利益確定が早すぎる",
+      "ko": "이익을 너무 일찍 확정",
+      "es": "Recortaste ganancias demasiado pronto"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionLabelPostRecoveryEfficiencyInsufficient": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "减亏但效率不足",
+      "en": "Recovery efficiency insufficient",
+      "ja": "立て直し効率が不足",
+      "ko": "회복 효율 부족",
+      "es": "Eficiencia de recuperación insuficiente"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionLabelPostRepairEffective": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "修复有效",
+      "en": "Recovery was effective",
+      "ja": "立て直しは有効だった",
+      "ko": "회복 대응이 효과적이었음",
+      "es": "La recuperación fue efectiva"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionLabelPostWeakEdgeAction": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "赔率不足仍出手",
+      "en": "Weak edge but still acted",
+      "ja": "優位性が弱いのに実行した",
+      "ko": "우위가 약한데도 진입함",
+      "es": "Actuaste con una ventaja débil"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionLabelPostWinnerGaveBackToLoss": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "盈利回吐成亏",
+      "en": "Winner gave back to loss",
+      "ja": "利益トレードが損失に転じた",
+      "ko": "수익 구간을 손실로 반납",
+      "es": "Una ganadora se devolvió a pérdida"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionLabelPostWorseThanBenchmark": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "操作越做越差",
+      "en": "Worse than both benchmarks",
+      "ja": "両ベンチマークを下回る",
+      "ko": "두 기준 모두 하회",
+      "es": "Peor que ambos referentes"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionLayerLive": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "当下",
+      "en": "Live",
+      "ja": "ライブ",
+      "ko": "실시간",
+      "es": "En vivo"
+    }
+  },
+  "uiLabels.ui.replayNoteSuggestionLayerPostmortem": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "复盘",
+      "en": "Review",
+      "ja": "復盤",
+      "ko": "복기",
+      "es": "Revisión"
+    }
+  },
+  "uiLabels.ui.reviewAccumulating": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "样本不足",
+      "en": "Sample Too Small",
+      "ja": "サンプル不足",
+      "ko": "표본이 너무 적음",
+      "es": "Muestra demasiado pequeña"
+    }
+  },
+  "uiLabels.ui.reviewAggregationRange": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "聚合范围",
+      "en": "Aggregation Window",
+      "ja": "集計ウィンドウ",
+      "ko": "집계 구간",
+      "es": "Ventana de agregación"
+    }
+  },
+  "uiLabels.ui.reviewAlertCurrent": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "当前值",
+      "en": "Current",
+      "ja": "現在値",
+      "ko": "현재값",
+      "es": "Actual"
+    }
+  },
+  "uiLabels.ui.reviewAlertReasonEnvironmentMismatch": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "{weakCount}/{totalCount} 个有效环境为负期望，最弱分组为 {expectancy}",
+      "en": "{weakCount}/{totalCount} valid environments have negative expectancy; weakest is {expectancy}",
+      "ja": "{weakCount}/{totalCount} の有効環境が負の期待値。最弱は {expectancy}",
+      "ko": "유효 환경 {weakCount}/{totalCount}개가 음의 기대값입니다. 최약 구간: {expectancy}",
+      "es": "{weakCount}/{totalCount} entornos válidos tienen expectativa negativa; peor: {expectancy}"
+    }
+  },
+  "uiLabels.ui.reviewAlertReasonExitDelay": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "亏损单平均止损延迟 {delayBars}，危险延迟占比 {dangerRate}",
+      "en": "Average loss-exit delay is {delayBars}, and danger-delay rate is {dangerRate}",
+      "ja": "平均損失退出遅れは {delayBars} 本で、危険遅延率は {dangerRate} です",
+      "ko": "평균 손실 청산 지연은 {delayBars}이며, 위험 지연 비율은 {dangerRate}입니다",
+      "es": "El retraso medio de salida en pérdida es {delayBars} y la tasa de retraso de riesgo es {dangerRate}"
+    }
+  },
+  "uiLabels.ui.reviewAlertReasonMarginPressure": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "{dangerRate} 的训练接近爆仓，{warningCount} 次低于 15%，{breachCount} 次破线",
+      "en": "{dangerRate} neared liquidation; {warningCount} fell below 15%; {breachCount} broke the line",
+      "ja": "{dangerRate} が清算に接近。{warningCount} 件は15%未満、{breachCount} 件はライン割れ",
+      "ko": "{dangerRate}가 청산에 근접. {warningCount}개는 15% 미만, {breachCount}개는 선 이탈",
+      "es": "{dangerRate} cerca de liquidación; {warningCount} bajo 15%; {breachCount} rompieron línea"
+    }
+  },
+  "uiLabels.ui.reviewAlertThreshold": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "阈值",
+      "en": "Threshold",
+      "ja": "しきい値",
+      "ko": "임계값",
+      "es": "Umbral"
+    }
+  },
+  "uiLabels.ui.reviewAssetMatrixSubtitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "按市场预设和交收规则查看不同交易环境下的表现差异",
+      "en": "Compare performance across market presets and settlement rules",
+      "ja": "市場プリセットと決済ルール別に成績を比較します",
+      "ko": "시장 프리셋과 결제 규칙별 성과를 비교합니다",
+      "es": "Compara rendimiento por preset y regla de liquidación"
+    }
+  },
+  "uiLabels.ui.reviewAssetMatrixTitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "环境适配矩阵",
+      "en": "Environment Adaptation Matrix",
+      "ja": "環境適応マトリクス",
+      "ko": "환경 적응 매트릭스",
+      "es": "Matriz de adaptación al entorno"
+    }
+  },
+  "uiLabels.ui.reviewAvgDecisionSpeed": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "场均决策耗时",
+      "en": "Avg Decision Speed",
+      "ja": "平均判断速度",
+      "ko": "평균 판단 속도",
+      "es": "Velocidad media de decisión"
+    }
+  },
+  "uiLabels.ui.reviewAvgProfitFactorPerSession": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "场均盈利因子",
+      "en": "Avg Profit Factor",
+      "ja": "1 セッションあたり平均プロフィットファクター",
+      "ko": "평균 손익계수",
+      "es": "Factor de beneficio medio"
+    }
+  },
+  "uiLabels.ui.reviewAvgRoiPerSession": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "每场平均收益率",
+      "en": "Average return per session",
+      "ja": "1 セッションあたり平均リターン",
+      "ko": "세션당 평균 수익률",
+      "es": "Retorno medio por sesión"
+    }
+  },
+  "uiLabels.ui.reviewBehaviorAvgLossDelayLabel": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "平均止损延迟",
+      "en": "Avg Loss Delay",
+      "ja": "平均損失退出遅れ",
+      "ko": "평균 손실 지연",
+      "es": "Retraso medio en pérdida"
+    }
+  },
+  "uiLabels.ui.reviewBehaviorBucketMonth": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "按月",
+      "en": "Monthly",
+      "ja": "月次",
+      "ko": "월간",
+      "es": "Mensual"
+    }
+  },
+  "uiLabels.ui.reviewBehaviorBucketWeek": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "按周",
+      "en": "Weekly",
+      "ja": "週次",
+      "ko": "주간",
+      "es": "Semanal"
+    }
+  },
+  "uiLabels.ui.reviewBehaviorCostTrend": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "摩擦拆解",
+      "en": "Friction Breakdown",
+      "ja": "摩擦コスト内訳",
+      "ko": "마찰 비용 분해",
+      "es": "Desglose de fricción"
+    }
+  },
+  "uiLabels.ui.reviewBehaviorCostTrendSubtitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "只看比例：滑点、手续费税费、资金费 / 借券费一共吃掉了多少成本前利润",
+      "en": "Shows how much pre-cost profit was eaten by slippage, fees, funding, and borrow",
+      "ja": "スリッページ、手数料、資金費、借株費がコスト前利益をどれだけ削ったかを表示",
+      "ko": "슬리피지, 수수료, 자금비, 대차비가 비용 전 이익을 얼마나 줄였는지 봅니다",
+      "es": "Muestra cuánto profit consumen slippage, comisiones, funding y préstamo"
+    }
+  },
+  "uiLabels.ui.reviewBehaviorCutLoss": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "止损与持盈",
+      "en": "Cutting Losses and Holding Winners",
+      "ja": "損切りと利益保有",
+      "ko": "손절과 수익 보유",
+      "es": "Cortar pérdidas y mantener ganancias"
+    }
+  },
+  "uiLabels.ui.reviewBehaviorCutLossSubtitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "盈利局在右，亏损局在左，按平均持仓 K 线数对比",
+      "en": "Winning sessions appear on the right and losing sessions on the left, measured by average bars held",
+      "ja": "勝ちセッションは右、負けセッションは左に表示し、平均保有本数で比較します",
+      "ko": "수익 세션은 오른쪽, 손실 세션은 왼쪽에 표시하고 평균 보유 봉 수로 비교합니다",
+      "es": "Las sesiones ganadoras aparecen a la derecha y las perdedoras a la izquierda, según las velas medias mantenidas"
+    }
+  },
+  "uiLabels.ui.reviewBehaviorDangerDelayRateLabel": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "危险延迟占比",
+      "en": "Danger Delay Rate",
+      "ja": "危険遅延率",
+      "ko": "위험 지연 비율",
+      "es": "Tasa de retraso de riesgo"
+    }
+  },
+  "uiLabels.ui.reviewBehaviorDangerPositionRateLabel": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "逼近强平局占比",
+      "en": "Near-Liquidation Share",
+      "ja": "清算接近比率",
+      "ko": "청산 근접 세션 비중",
+      "es": "Proporción cercana a liquidación"
+    }
+  },
+  "uiLabels.ui.reviewBehaviorDangerPositionRateTooltip": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "统计最低安全边际小于或等于 15% 的训练局占比",
+      "en": "Share of sessions whose lowest safety buffer fell to 15% or below",
+      "ja": "最低安全余力が 15% 以下まで落ちたセッションの比率です",
+      "ko": "최저 안전 버퍼가 15% 이하로 떨어진 세션 비중입니다",
+      "es": "Proporción de sesiones cuyo colchón de seguridad mínimo cayó al 15 % o menos"
+    }
+  },
+  "uiLabels.ui.reviewBehaviorExitDiscipline": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "止损延迟与出场纪律",
+      "en": "Exit Discipline",
+      "ja": "手仕舞い規律",
+      "ko": "청산 규율",
+      "es": "Disciplina de salida"
+    }
+  },
+  "uiLabels.ui.reviewBehaviorExitDisciplineSubtitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "只追踪亏损单的止损拖延，聚焦最需要修正的出场纪律",
+      "en": "Tracks delayed exits on losing trades so you can focus on the exit discipline that needs fixing most",
+      "ja": "損失トレードの退出遅れを追跡し、最優先で直すべき出口規律に絞ります",
+      "ko": "손실 거래의 늦은 청산을 추적해 가장 먼저 고쳐야 할 청산 규율에 집중합니다",
+      "es": "Sigue las salidas tardías en pérdidas para centrarte en la disciplina de salida que más necesita corrección"
+    }
+  },
+  "uiLabels.ui.reviewBehaviorFullPositionRateLabel": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "满仓场次占比",
+      "en": "Full-Size Session Rate",
+      "ja": "フルサイズセッション率",
+      "ko": "풀사이즈 세션 비율",
+      "es": "Tasa de sesiones a tamaño completo"
+    }
+  },
+  "uiLabels.ui.reviewBehaviorLossDelayLabel": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "亏损单止损延迟",
+      "en": "Loss Exit Delay",
+      "ja": "損失退出の遅れ",
+      "ko": "손실 청산 지연",
+      "es": "Retraso al salir en pérdida"
+    }
+  },
+  "uiLabels.ui.reviewBehaviorSubtitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "只保留有证据的坏习惯提示，直接说明触发原因，聚焦可执行信号",
+      "en": "Evidence-backed habits, triggers, and actionable signals only",
+      "ja": "根拠のある習慣、トリガー、実行できる信号だけを表示",
+      "ko": "근거 있는 습관, 트리거, 실행 가능한 신호만 표시합니다",
+      "es": "Solo hábitos con evidencia, detonantes y señales accionables"
+    }
+  },
+  "uiLabels.ui.reviewBehaviorTitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "行动提示",
+      "en": "Actionable Alerts",
+      "ja": "対応すべきアラート",
+      "ko": "조치 가능한 경고",
+      "es": "Alertas accionables"
+    }
+  },
+  "uiLabels.ui.reviewBehaviorWinHoldLabel": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "盈利单持有分布",
+      "en": "Winning Hold Range",
+      "ja": "利益保持レンジ",
+      "ko": "수익 구간 보유 범위",
+      "es": "Rango de mantenimiento ganador"
+    }
+  },
+  "uiLabels.ui.reviewBehaviorWinHoldMedianLabel": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "盈利持有中位数",
+      "en": "Winning Hold Median",
+      "ja": "利益保持中央値",
+      "ko": "수익 보유 중앙값",
+      "es": "Mediana de mantenimiento ganador"
+    }
+  },
+  "uiLabels.ui.reviewCompareDay": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "较昨天",
+      "en": "vs Yesterday",
+      "ja": "前日比",
+      "ko": "어제 대비",
+      "es": "vs. ayer"
+    }
+  },
+  "uiLabels.ui.reviewCompareMonth": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "较上月",
+      "en": "vs Last Month",
+      "ja": "先月比",
+      "ko": "지난달 대비",
+      "es": "vs. el mes pasado"
+    }
+  },
+  "uiLabels.ui.reviewComparePreviousWindow": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "较上个窗口",
+      "en": "vs Previous Window",
+      "ja": "前の期間比",
+      "ko": "이전 구간 대비",
+      "es": "vs. la ventana anterior"
+    }
+  },
+  "uiLabels.ui.reviewCompareWeek": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "较上周",
+      "en": "vs Last Week",
+      "ja": "先週比",
+      "ko": "지난주 대비",
+      "es": "vs. la semana pasada"
+    }
+  },
+  "uiLabels.ui.reviewCompareYear": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "较去年",
+      "en": "vs Last Year",
+      "ja": "前年比",
+      "ko": "작년 대비",
+      "es": "vs. el año pasado"
+    }
+  },
+  "uiLabels.ui.reviewComparisonLabel": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "趋势对比基准",
+      "en": "Trend Baseline",
+      "ja": "比較基準",
+      "ko": "비교 기준선",
+      "es": "Línea base de tendencia"
+    }
+  },
+  "uiLabels.ui.reviewConsoleSummary": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "隐藏绝对资金，专注单局质量、近期动量和坏习惯是否改善",
+      "en": "Hide absolute capital. Focus on session quality, recent momentum, and habit repair",
+      "ja": "絶対資金を隠し、セッション品質、直近の勢い、癖の改善に集中します",
+      "ko": "절대 자본을 숨기고 세션 품질, 최근 흐름, 습관 개선에 집중합니다",
+      "es": "Oculta capital absoluto. Mira calidad, impulso reciente y mejora de hábitos"
+    }
+  },
+  "uiLabels.ui.reviewConsoleTabArchive": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "推演归档",
+      "en": "Archive",
+      "ja": "アーカイブと再生",
+      "ko": "아카이브 및 리플레이",
+      "es": "Archivos y Reproducción"
+    }
+  },
+  "uiLabels.ui.reviewConsoleTabBehavior": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "行为诊断",
+      "en": "Behavior",
+      "ja": "行動と習慣",
+      "ko": "행동 및 습관",
+      "es": "Comportamientos y Hábitos"
+    }
+  },
+  "uiLabels.ui.reviewConsoleTabOverview": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "综合体检",
+      "en": "Overview",
+      "ja": "概要とインサイト",
+      "ko": "개요 및 인사이트",
+      "es": "Resumen y Perspectivas"
+    }
+  },
+  "uiLabels.ui.reviewCriticalFailureRate": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "致命失误率",
+      "en": "Critical Failure Rate",
+      "ja": "重大失敗率",
+      "ko": "치명적 실패율",
+      "es": "Tasa de fallo crítico"
+    }
+  },
+  "uiLabels.ui.reviewDetailAction": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "查看明细",
+      "en": "View Details",
+      "ja": "詳細を見る",
+      "ko": "자세히 보기",
+      "es": "Ver detalles"
+    }
+  },
+  "uiLabels.ui.reviewEnvironmentColumn": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "交易环境",
+      "en": "Environment",
+      "ja": "環境",
+      "ko": "환경",
+      "es": "Entorno"
+    }
+  },
+  "uiLabels.ui.reviewFeeAndTaxCostLabel": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "手续费税费",
+      "en": "Fees and Taxes",
+      "ja": "手数料と税金",
+      "ko": "수수료 및 세금",
+      "es": "Comisiones e impuestos"
+    }
+  },
+  "uiLabels.ui.reviewFinancialBreakdownTitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "财务流水",
+      "en": "Financial Breakdown",
+      "ja": "損益内訳",
+      "ko": "손익 세부 구성",
+      "es": "Desglose financiero"
+    }
+  },
+  "uiLabels.ui.reviewFundingOrBorrowCostLabel": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "资金 / 借券费",
+      "en": "Funding / Borrow Cost",
+      "ja": "資金調達 / 借株コスト",
+      "ko": "펀딩 / 차입 비용",
+      "es": "Coste de financiación / préstamo"
+    }
+  },
+  "uiLabels.ui.reviewGrowthSubtitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "用四个核心指标概览当前表现，并和上一个窗口做对比",
+      "en": "Review four core metrics and compare with the previous window",
+      "ja": "4つの主要指標を前の期間と比較します",
+      "ko": "4개 핵심 지표를 이전 구간과 비교합니다",
+      "es": "Revisa cuatro métricas clave y compáralas con la ventana anterior"
+    }
+  },
+  "uiLabels.ui.reviewGrowthTitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "北极星体检卡",
+      "en": "North-Star Cards",
+      "ja": "成長とモメンタム",
+      "ko": "성장과 모멘텀",
+      "es": "Crecimiento e impulso"
+    }
+  },
+  "uiLabels.ui.reviewHistoricalAverage": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "历史均值",
+      "en": "Historical Avg",
+      "ja": "過去平均",
+      "ko": "장기 평균",
+      "es": "Media histórica"
+    }
+  },
+  "uiLabels.ui.reviewHistoryAssetPeriod": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "标的与环境",
+      "en": "Instrument & Setup",
+      "ja": "資産 / 期間",
+      "ko": "자산 / 기간",
+      "es": "Activo / período"
+    }
+  },
+  "uiLabels.ui.reviewHistoryFilterAll": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "全部局",
+      "en": "All Sessions",
+      "ja": "全セッション",
+      "ko": "전체 세션",
+      "es": "Todas las sesiones"
+    }
+  },
+  "uiLabels.ui.reviewHistoryFilterDrawdown": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "致命回撤 > 30%",
+      "en": "Drawdown > 30%",
+      "ja": "ドローダウン > 30%",
+      "ko": "낙폭 > 30%",
+      "es": "Drawdown > 30 %"
+    }
+  },
+  "uiLabels.ui.reviewHistoryFilterHighlight": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "高光时刻 > 10%",
+      "en": "Highlight > 10%",
+      "ja": "ハイライト > 10%",
+      "ko": "강조 > 10%",
+      "es": "Destacar > 10 %"
+    }
+  },
+  "uiLabels.ui.reviewHistoryInitialCapital": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "初始资金",
+      "en": "Initial Capital",
+      "ja": "初期資金",
+      "ko": "초기 자본",
+      "es": "Capital inicial"
+    }
+  },
+  "uiLabels.ui.reviewHistoryProfitFactor": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "盈利因子",
+      "en": "Profit Factor",
+      "ja": "セッション・プロフィットファクター",
+      "ko": "세션 손익계수",
+      "es": "Factor de beneficio de la sesión"
+    }
+  },
+  "uiLabels.ui.reviewHistorySubtitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "快速筛出高光场次和高回撤场次，再进入回放",
+      "en": "Filter highlights and deep drawdowns, then replay the exact moment",
+      "ja": "好調回と深いドローダウンを絞り、該当場面を再生します",
+      "ko": "하이라이트와 큰 낙폭을 걸러 정확한 순간을 다시 봅니다",
+      "es": "Filtra aciertos y drawdowns, luego reproduce el momento exacto"
+    }
+  },
+  "uiLabels.ui.reviewHistoryTitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "战斗归档",
+      "en": "Battle Archive",
+      "ja": "トレーニング履歴",
+      "ko": "훈련 기록",
+      "es": "Historial de entrenamiento"
+    }
+  },
+  "uiLabels.ui.reviewHistoryTrainingDate": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "场次 / 时间",
+      "en": "Session / Time",
+      "ja": "トレーニング日時",
+      "ko": "훈련 날짜",
+      "es": "Fecha de entrenamiento"
+    }
+  },
+  "uiLabels.ui.reviewIssueExitDisciplineDrill": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "优先回放止损延迟最高的 3 局，把首条失效条件前置",
+      "en": "Replay the three latest loss exits and move the first invalidation rule forward",
+      "ja": "直近の損失退出 3 件を再生し、最初の無効化ルールをより早く適用してください",
+      "ko": "가장 최근 손실 청산 3건을 리플레이하고, 첫 무효화 규칙을 더 앞당기세요",
+      "es": "Reproduce las tres salidas en pérdida más recientes y adelanta la primera regla de invalidación"
+    }
+  },
+  "uiLabels.ui.reviewIssueFrictionControlDrill": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "先检查成本侵蚀最大的 3 局，压低低质量换手",
+      "en": "Review the three most expensive sessions first and cut low-quality turnover",
+      "ja": "コストが最も重い 3 セッションから確認し、質の低い回転売買を減らしてください",
+      "ko": "비용이 가장 컸던 3개 세션부터 검토하고, 품질 낮은 회전 거래를 줄이세요",
+      "es": "Revisa primero las tres sesiones más costosas y recorta la rotación de baja calidad"
+    }
+  },
+  "uiLabels.ui.reviewIssuePositionDisciplineDrill": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "下一轮先限制满仓和冲动加仓，只复盘仓位最失控的 3 局",
+      "en": "Cap full-size exposure next round and replay the three worst sizing sessions first",
+      "ja": "次回はフルサイズ露出に上限をかけ、サイズ判断が最悪だった 3 セッションから再生してください",
+      "ko": "다음 라운드에서는 풀사이즈 익스포저를 제한하고, 최악의 사이징 세션 3개를 먼저 리플레이하세요",
+      "es": "Limita la exposición a tamaño completo en la próxima ronda y reproduce primero las tres peores sesiones de sizing"
+    }
+  },
+  "uiLabels.ui.reviewIssueProfitabilityDrill": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "先冻结低质量环境，再回放期望值最低的 3 局",
+      "en": "Freeze weak environments and replay the three lowest-expectancy sessions first",
+      "ja": "弱い環境は一旦止め、期待値が最も低い 3 セッションから先に再生してください",
+      "ko": "약한 환경은 일단 동결하고, 기대값이 가장 낮은 3개 세션부터 리플레이하세요",
+      "es": "Congela los entornos débiles y vuelve a reproducir primero las tres sesiones con menor esperanza matemática"
+    }
+  },
+  "uiLabels.ui.reviewIssueRiskControlDrill": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "先复盘高回撤与高资金压力的 3 局，再重写风险上限",
+      "en": "Replay the three highest-drawdown sessions and tighten the risk cap before sizing up",
+      "ja": "ドローダウンが最も大きい 3 セッションを再生し、サイズを増やす前にリスク上限を厳しくしてください",
+      "ko": "낙폭이 가장 컸던 3개 세션을 리플레이하고, 규모를 키우기 전에 리스크 한도를 먼저 조이세요",
+      "es": "Reproduce las tres sesiones con mayor drawdown y ajusta el tope de riesgo antes de aumentar tamaño"
+    }
+  },
+  "uiLabels.ui.reviewMarginBreachLabel": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "触线局数",
+      "en": "Breach Sessions",
+      "ja": "破綻セッション数",
+      "ko": "이탈 세션",
+      "es": "Sesiones con ruptura"
+    }
+  },
+  "uiLabels.ui.reviewMarginBreachTooltip": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "统计最低安全边际小于或等于 0% 的训练局数量",
+      "en": "Number of sessions whose lowest safety buffer fell to 0% or below",
+      "ja": "最低安全余力が 0% 以下に落ちたセッション数です",
+      "ko": "최저 안전 버퍼가 0% 이하로 떨어진 세션 수입니다",
+      "es": "Número de sesiones cuyo colchón de seguridad mínimo cayó al 0 % o menos"
+    }
+  },
+  "uiLabels.ui.reviewMarginChartHint": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "按训练排序；每根柱显示该局最高风险时的安全垫",
+      "en": "Sorted by session. Each bar shows the buffer at peak risk",
+      "ja": "セッション順。各バーは最大リスク時の安全余裕を示します",
+      "ko": "세션 순서입니다. 각 막대는 최대 위험 시점의 버퍼를 보여줍니다",
+      "es": "Ordenado por sesión. Cada barra muestra el buffer en riesgo máximo"
+    }
+  },
+  "uiLabels.ui.reviewMarginPeakPressureLabel": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "峰值保证金压力",
+      "en": "Peak Margin Pressure",
+      "ja": "最大証拠金圧力",
+      "ko": "최대 증거금 압박",
+      "es": "Presión máxima de margen"
+    }
+  },
+  "uiLabels.ui.reviewMarginPeakPressureTooltip": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "最大保证金压力 = 1 - 安全垫。越高越接近维持线",
+      "en": "Peak margin pressure = 1 - safety buffer. Higher means closer to maintenance",
+      "ja": "最大証拠金圧力 = 1 - 安全余裕。高いほど維持ラインに近いです",
+      "ko": "최대 마진 압력 = 1 - 안전 버퍼. 높을수록 유지선에 가깝습니다",
+      "es": "Presión máxima = 1 - buffer. Más alta = más cerca de mantenimiento"
+    }
+  },
+  "uiLabels.ui.reviewMarginReplayActionLabel": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "回放",
+      "en": "Replay",
+      "ja": "再生",
+      "ko": "리플레이",
+      "es": "Reproducir"
+    }
+  },
+  "uiLabels.ui.reviewMarginRiskZoneLabel": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "风险分区",
+      "en": "Risk Zone",
+      "ja": "リスクゾーン",
+      "ko": "위험 구간",
+      "es": "Zona de riesgo"
+    }
+  },
+  "uiLabels.ui.reviewMarginSafetyBufferLabel": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "安全边际",
+      "en": "Safety Buffer",
+      "ja": "安全余力",
+      "ko": "안전 버퍼",
+      "es": "Colchón de seguridad"
+    }
+  },
+  "uiLabels.ui.reviewMarginSafetyBufferTooltip": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "安全边际 = (权益 - 维持保证金要求) / 权益",
+      "en": "Safety buffer = (equity - maintenance requirement) / equity",
+      "ja": "安全余力 = (純資産 - 維持証拠金) / 純資産",
+      "ko": "안전 버퍼 = (자산 - 유지증거금 요구치) / 자산입니다",
+      "es": "Colchón de seguridad = (equity - requisito de mantenimiento) / equity"
+    }
+  },
+  "uiLabels.ui.reviewMarginSafetySummaryTemplate": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "最近 {totalCount} 局里，{dangerCount} 局逼近强平，{breachCount} 局触线；最危险一局只剩 {minBuffer} 安全边际",
+      "en": "Last {totalCount}: {dangerCount} near liquidation, {breachCount} breached; worst buffer {minBuffer}",
+      "ja": "直近 {totalCount}: 清算接近 {dangerCount}、触線 {breachCount}。最小余力 {minBuffer}",
+      "ko": "최근 {totalCount}: 청산 근접 {dangerCount}, 이탈 {breachCount}; 최저 버퍼 {minBuffer}",
+      "es": "Últimas {totalCount}: {dangerCount} cerca de liquidación, {breachCount} rompieron; colchón mínimo {minBuffer}"
+    }
+  },
+  "uiLabels.ui.reviewMarginSessionSequenceLabel": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "训练局顺序",
+      "en": "Session Order",
+      "ja": "セッション順",
+      "ko": "세션 순서",
+      "es": "Orden de sesión"
+    }
+  },
+  "uiLabels.ui.reviewMarginUtilizationSubtitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "看每一局最危险时刻，离维持保证金线还剩多少缓冲",
+      "en": "See the safety buffer at each session's riskiest moment",
+      "ja": "各回の最も危険な瞬間の安全余力を確認します",
+      "ko": "각 세션의 가장 위험한 순간의 안전 버퍼를 봅니다",
+      "es": "Ve el colchón en el momento más riesgoso de cada sesión"
+    }
+  },
+  "uiLabels.ui.reviewMarginUtilizationTitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "强平距离",
+      "en": "Liquidation Distance",
+      "ja": "清算余地",
+      "ko": "청산 거리",
+      "es": "Distancia a liquidación"
+    }
+  },
+  "uiLabels.ui.reviewMarginWarnLabel": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "最小安全边际",
+      "en": "Lowest Safety Buffer",
+      "ja": "最低安全余力",
+      "ko": "최저 안전 버퍼",
+      "es": "Colchón de seguridad mínimo"
+    }
+  },
+  "uiLabels.ui.reviewMarginWarnTooltip": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "安全垫 = (权益 - 维持保证金) / 权益。越低越接近爆仓",
+      "en": "Safety buffer = (equity - maintenance) / equity. Lower means closer to liquidation",
+      "ja": "安全余裕 = (資産 - 維持証拠金) / 資産。低いほど清算に近づきます",
+      "ko": "안전 버퍼 = (자산 - 유지 증거금) / 자산. 낮을수록 청산에 가깝습니다",
+      "es": "Buffer = (equity - mantenimiento) / equity. Menor = más cerca de liquidación"
+    }
+  },
+  "uiLabels.ui.reviewMarginWorstSessionsTitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "最危险 3 局",
+      "en": "Worst 3 Sessions",
+      "ja": "最悪 3 セッション",
+      "ko": "최악의 3개 세션",
+      "es": "3 peores sesiones"
+    }
+  },
+  "uiLabels.ui.reviewMarginZoneBreach": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "触线",
+      "en": "Breach",
+      "ja": "破綻",
+      "ko": "이탈",
+      "es": "Ruptura"
+    }
+  },
+  "uiLabels.ui.reviewMarginZoneBreachLegend": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "触线 <= 0%",
+      "en": "Breach <= 0%",
+      "ja": "破綻 <= 0%",
+      "ko": "이탈 <= 0%",
+      "es": "Ruptura <= 0 %"
+    }
+  },
+  "uiLabels.ui.reviewMarginZoneCrowded": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "拥挤",
+      "en": "Crowded",
+      "ja": "逼迫",
+      "ko": "경계",
+      "es": "Ajustado"
+    }
+  },
+  "uiLabels.ui.reviewMarginZoneCrowdedLegend": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "拥挤 15% - 30%",
+      "en": "Crowded 15% - 30%",
+      "ja": "逼迫 15% - 30%",
+      "ko": "경계 15% - 30%",
+      "es": "Ajustado 15 % - 30 %"
+    }
+  },
+  "uiLabels.ui.reviewMarginZoneDanger": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "危险",
+      "en": "Danger",
+      "ja": "危険",
+      "ko": "위험",
+      "es": "Peligro"
+    }
+  },
+  "uiLabels.ui.reviewMarginZoneDangerLegend": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "危险 0% - 15%",
+      "en": "Danger 0% - 15%",
+      "ja": "危険 0% - 15%",
+      "ko": "위험 0% - 15%",
+      "es": "Peligro 0 % - 15 %"
+    }
+  },
+  "uiLabels.ui.reviewMarginZoneSafe": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "安全",
+      "en": "Safe",
+      "ja": "安全",
+      "ko": "안전",
+      "es": "Seguro"
+    }
+  },
+  "uiLabels.ui.reviewMarginZoneSafeLegend": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "安全 > 30%",
+      "en": "Safe > 30%",
+      "ja": "安全 > 30%",
+      "ko": "안전 > 30%",
+      "es": "Seguro > 30 %"
+    }
+  },
+  "uiLabels.ui.reviewNetProfitContribution": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "净利润贡献",
+      "en": "Net Contribution",
+      "ja": "純寄与",
+      "ko": "순기여도",
+      "es": "Contribución neta"
+    }
+  },
+  "uiLabels.ui.reviewNoComparison": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "暂无同期样本",
+      "en": "No comparable baseline yet",
+      "ja": "比較できる基準がまだありません",
+      "ko": "아직 비교 가능한 기준선이 없습니다",
+      "es": "Aún no hay una referencia comparable"
+    }
+  },
+  "uiLabels.ui.reviewPositionDisciplineSubtitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "当当前窗口没有杠杆压力时，改看满仓冲动和加仓行为是否拖累结果",
+      "en": "When leverage is calm, check full-size impulses and adding to losers",
+      "ja": "レバレッジ圧力が低い時は、全力投入とナンピンを確認します",
+      "ko": "레버리지 압박이 낮을 때 풀사이즈 충동과 손실 추가를 봅니다",
+      "es": "Sin presión de margen, revisa tamaño completo y añadir a pérdidas"
+    }
+  },
+  "uiLabels.ui.reviewPositionDisciplineTitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "仓位纪律",
+      "en": "Position Discipline",
+      "ja": "ポジション規律",
+      "ko": "포지션 규율",
+      "es": "Disciplina de posición"
+    }
+  },
+  "uiLabels.ui.reviewRadarFrictionControl": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "摩擦控制",
+      "en": "Friction Control",
+      "ja": "摩擦コスト管理",
+      "ko": "마찰 비용 관리",
+      "es": "Control de fricción"
+    }
+  },
+  "uiLabels.ui.reviewRadarHoldingPatience": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "持仓耐心",
+      "en": "Holding Patience",
+      "ja": "保有の忍耐",
+      "ko": "보유 인내",
+      "es": "Paciencia en la posición"
+    }
+  },
+  "uiLabels.ui.reviewRadarProfitability": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "盈利效能",
+      "en": "Profitability",
+      "ja": "収益性",
+      "ko": "수익성",
+      "es": "Rentabilidad"
+    }
+  },
+  "uiLabels.ui.reviewRadarRiskControl": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "风控能力",
+      "en": "Risk Control",
+      "ja": "リスク管理",
+      "ko": "리스크 관리",
+      "es": "Control de riesgo"
+    }
+  },
+  "uiLabels.ui.reviewRadarTrendFollowing": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "顺势动能",
+      "en": "Trend Following",
+      "ja": "トレンド追随",
+      "ko": "추세 추종",
+      "es": "Seguimiento de tendencia"
+    }
+  },
+  "uiLabels.ui.reviewRecent10Sessions": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "最近10场",
+      "en": "Last 10",
+      "ja": "直近 10 件",
+      "ko": "최근 10회",
+      "es": "Últimas 10"
+    }
+  },
+  "uiLabels.ui.reviewRecent50Sessions": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "最近50场",
+      "en": "Last 50",
+      "ja": "直近 50 件",
+      "ko": "최근 50회",
+      "es": "Últimas 50"
+    }
+  },
+  "uiLabels.ui.reviewRepresentativeBadge": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "代表局",
+      "en": "Representative",
+      "ja": "代表",
+      "ko": "대표",
+      "es": "Representativa"
+    }
+  },
+  "uiLabels.ui.reviewRuleCanShort": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "可做空",
+      "en": "Can Short",
+      "ja": "ショート可",
+      "ko": "숏 가능",
+      "es": "Permite cortos"
+    }
+  },
+  "uiLabels.ui.reviewRuleFunding": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "资金费",
+      "en": "Funding",
+      "ja": "資金調達",
+      "ko": "펀딩",
+      "es": "Financiación"
+    }
+  },
+  "uiLabels.ui.reviewRuleMakerTaker": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "Maker/Taker",
+      "en": "Maker/Taker",
+      "ja": "メイカー / テイカー",
+      "ko": "메이커/테이커",
+      "es": "Esquema maker/taker"
+    }
+  },
+  "uiLabels.ui.reviewRuleOnlyLong": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "仅做多",
+      "en": "Only Long",
+      "ja": "ロングのみ",
+      "ko": "롱만",
+      "es": "Solo largos"
+    }
+  },
+  "uiLabels.ui.reviewRulesContextTitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "环境规则",
+      "en": "Environment Rules",
+      "ja": "環境ルール",
+      "ko": "환경 규칙",
+      "es": "Reglas del entorno"
+    }
+  },
+  "uiLabels.ui.reviewScoreSuffix": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "/100",
+      "en": "/100",
+      "ja": "/100",
+      "ko": "/100",
+      "es": "/100"
+    }
+  },
+  "uiLabels.ui.reviewSlippageCostLabel": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "滑点成本",
+      "en": "Slippage Cost",
+      "ja": "スリッページコスト",
+      "ko": "슬리피지 비용",
+      "es": "Coste de slippage"
+    }
+  },
+  "uiLabels.ui.reviewStrategyLoss": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "策略亏损",
+      "en": "Strategy Loss",
+      "ja": "戦略損失",
+      "ko": "전략 손실",
+      "es": "Pérdida de estrategia"
+    }
+  },
+  "uiLabels.ui.reviewTimelineAnomalyCount": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "异常场次",
+      "en": "Anomalies",
+      "ja": "異常件数",
+      "ko": "이상 징후",
+      "es": "Anomalías"
+    }
+  },
+  "uiLabels.ui.reviewTimelineMovingAverage": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "近10场平均收益率",
+      "en": "Recent 10-Session Avg Return",
+      "ja": "直近 10 セッション平均リターン",
+      "ko": "최근 10세션 평균 수익률",
+      "es": "Retorno medio de las últimas 10 sesiones"
+    }
+  },
+  "uiLabels.ui.reviewTimelineNeedMoreData": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "暂无可用训练数据，完成至少 1 场后这里会显示近期表现趋势",
+      "en": "Complete at least 1 session to see the recent trend",
+      "ja": "直近トレンドを見るには1回以上完了してください",
+      "ko": "최근 추세를 보려면 최소 1회 완료하세요",
+      "es": "Completa al menos 1 sesión para ver tendencia"
+    }
+  },
+  "uiLabels.ui.reviewTimelinePositiveShareTemplate": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "近{count}场正收益占比",
+      "en": "Positive-return share over last {count}",
+      "ja": "直近 {count} のプラスリターン比率",
+      "ko": "최근 {count}세션 수익 세션 비중",
+      "es": "Proporción de retornos positivos en las últimas {count}"
+    }
+  },
+  "uiLabels.ui.reviewTimelineReasonCriticalFailure": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "关键失败",
+      "en": "Critical failure",
+      "ja": "重大失敗",
+      "ko": "치명적 실패",
+      "es": "Fallo crítico"
+    }
+  },
+  "uiLabels.ui.reviewTimelineReasonDeepDrawdown": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "回撤过深",
+      "en": "Deep drawdown",
+      "ja": "深いドローダウン",
+      "ko": "깊은 낙폭",
+      "es": "Drawdown profundo"
+    }
+  },
+  "uiLabels.ui.reviewTimelineReasonLabel": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "关注原因",
+      "en": "Why it matters",
+      "ja": "注目理由",
+      "ko": "핵심 이유",
+      "es": "Por qué importa"
+    }
+  },
+  "uiLabels.ui.reviewTimelineReasonRepresentative": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "代表场次",
+      "en": "Representative sample",
+      "ja": "代表的サンプル",
+      "ko": "대표 표본",
+      "es": "Muestra representativa"
+    }
+  },
+  "uiLabels.ui.reviewTimelineReasonWeakReturn": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "近期表现偏弱",
+      "en": "Weak recent result",
+      "ja": "直近成績が弱い",
+      "ko": "최근 성과 부진",
+      "es": "Resultado reciente débil"
+    }
+  },
+  "uiLabels.ui.reviewTimelineRecentAverageTemplate": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "近{count}场平均收益率",
+      "en": "Recent {count}-session avg return",
+      "ja": "直近 {count} セッション平均リターン",
+      "ko": "최근 {count}세션 평균 수익률",
+      "es": "Retorno medio de las últimas {count} sesiones"
+    }
+  },
+  "uiLabels.ui.reviewTimelineSingleSessionReturn": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "单场收益率",
+      "en": "Single-session return",
+      "ja": "単一セッションリターン",
+      "ko": "단일 세션 수익률",
+      "es": "Retorno por sesión"
+    }
+  },
+  "uiLabels.ui.reviewTimelineSubtitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "柱状序列展示每场独立训练的收益率；蓝色均线展示最近 10 场的滚动平均收益率，样本不足时按实际样本数计算；0% 为盈亏平衡基准，本图不表示连续资金曲线",
+      "en": "Bars show session return; blue line is the latest 10-run average. 0% is breakeven, not an equity curve",
+      "ja": "棒は各回の収益率、青線は直近10回平均。0%は損益分岐で、資金曲線ではありません",
+      "ko": "막대는 세션 수익률, 파란 선은 최근 10회 평균입니다. 0%는 손익분기이며 자산 곡선이 아닙니다",
+      "es": "Barras: retorno por sesión. Azul: media de últimas 10. 0 % es equilibrio, no curva de capital"
+    }
+  },
+  "uiLabels.ui.reviewTimelineTitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "近期表现趋势",
+      "en": "Recent Performance Trend",
+      "ja": "直近パフォーマンス推移",
+      "ko": "최근 성과 추이",
+      "es": "Tendencia reciente del rendimiento"
+    }
+  },
+  "uiLabels.ui.reviewTimelineViewRoi": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "ROI 均线",
+      "en": "ROI Moving Average",
+      "ja": "ROI 移動平均",
+      "ko": "ROI 이동 평균",
+      "es": "Media móvil del ROI"
+    }
+  },
+  "uiLabels.ui.reviewTimelineViewScissors": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "盈利因子 vs 胜率",
+      "en": "Profit Factor vs Win Rate",
+      "ja": "プロフィットファクター vs 勝率",
+      "ko": "손익계수 대비 승률",
+      "es": "Factor de beneficio vs. tasa de acierto"
+    }
+  },
+  "uiLabels.ui.reviewUnitSeconds": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "s",
+      "en": "s",
+      "ja": "秒",
+      "ko": "초",
+      "es": "s"
+    }
+  }
+}

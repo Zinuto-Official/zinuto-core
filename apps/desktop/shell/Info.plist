@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>CFBundleIdentifier</key>
+  <string>org.zinuto.core</string>
+  <key>CFBundleDisplayName</key>
+  <string>Zinuto Core</string>
+  <key>CFBundleExecutable</key>
+  <string>open-trading-practice</string>
+  <key>CFBundleIconFile</key>
+  <string>icon</string>
+  <key>CFBundleName</key>
+  <string>Zinuto Core</string>
+  <key>ITSAppUsesNonExemptEncryption</key>
+  <false/>
+  <key>LSRequiresCarbon</key>
+  <false/>
+  <key>NSQuitAlwaysKeepsWindows</key>
+  <false/>
+</dict>
+</plist>

@@ -1,0 +1,72 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.app-root {
+  --workspace-frame-shell-max-width: 100%;
+  --workspace-frame-shell-radius: calc(
+    var(--workspace-surface-radius, var(--radius-panel)) + 2px
+  );
+  --workspace-frame-shell-border: color-mix(
+    in srgb,
+    var(--surface-line, var(--line)) 82%,
+    transparent
+  );
+  --workspace-frame-shell-bg: color-mix(
+    in srgb,
+    var(--surface-panel-bg, var(--theme-panel, var(--panel))) 95%,
+    var(--theme-canvas, var(--window-bg)) 5%
+  );
+  --workspace-frame-shell-shadow: none;
+}
+
+.app-root :is(
+  .workspace-page.training-command-center-page,
+  .workspace-page.training-stats-page,
+  .workspace-page.diagnostic-center-page,
+  .workspace-page.history-page,
+  .workspace-page.notes-page,
+  .workspace-page.settings-page,
+  .workspace-page.custom-indicator-page,
+  .workspace-page.challenge-fusion-page
+) {
+  gap: var(--workspace-frame-gap);
+  padding:
+    var(--workspace-frame-pad-top)
+    var(--workspace-frame-pad-inline)
+    var(--workspace-frame-pad-bottom);
+  box-sizing: border-box;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.app-root .workspace-frame-shell {
+  width: 100%;
+  max-width: 100%;
+  margin-inline: 0;
+  border: 1px solid var(--workspace-frame-shell-border);
+  border-radius: var(--workspace-frame-shell-radius);
+  background: var(--workspace-frame-shell-bg);
+  box-shadow: var(--workspace-frame-shell-shadow);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.app-root .workspace-frame-shell[data-workspace-frame-fit="stretch"] {
+  height: 100%;
+  align-self: stretch;
+}
+
+.app-root .workspace-frame-shell[data-workspace-frame-fit="content"] {
+  height: auto;
+  align-self: start;
+}
+
+.app-root .desktop-main.is-trainer .trainer-prep-config-dialog {
+  width: min(var(--workspace-frame-shell-max-width), calc(100% - 24px));
+  max-width: calc(100% - 24px);
+  border: 1px solid var(--workspace-frame-shell-border);
+  border-radius: var(--workspace-frame-shell-radius);
+  background: var(--workspace-frame-shell-bg);
+  box-shadow: var(--workspace-frame-shell-shadow);
+}

@@ -1,0 +1,34 @@
+# SPDX-License-Identifier: GPL-3.0-only
+
+title = "Zinuto Core secret scanning policy"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Ignored generated and dependency directories"
+paths = [
+  '''^apps/desktop/shell/runtime/node/''',
+  '''^apps/desktop/shell/target/''',
+  '''^apps/desktop/web/dist/''',
+  '''(^|/)node_modules(/|$)''',
+  '''(^|/)coverage(/|$)''',
+  '''(^|/)\.cache(/|$)''',
+]
+
+# `openapiSha256` is a deterministic integrity fingerprint generated from the
+# public local OpenAPI contract. Keep this exception tied to the exact current
+# value and rule so future contract changes require a fresh secret-scan review.
+[[rules]]
+id = "generic-api-key"
+
+  [[rules.allowlists]]
+  description = "Current public OpenAPI integrity fingerprint"
+  condition = "AND"
+  regexTarget = "line"
+  regexes = [
+    '''^\s*"openapiSha256":\s*"ac4db969d5ddc4fbf6ea5d25fafee3d3037b7dca1b8d3ccadb5ba0ef7a9bb914",?\s*$''',
+  ]
+  paths = [
+    '''^contracts/endpoint-effects\.v1\.json$''',
+  ]

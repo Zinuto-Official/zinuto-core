@@ -1,0 +1,97 @@
+# SPDX-License-Identifier: GPL-3.0-only
+
+name: Core Change CI
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/ci.yml"
+      - ".nvmrc"
+      - "apps/desktop/**"
+      - "config/**"
+      - "contracts/**"
+      - "docs/registry/**"
+      - "package.json"
+      - "package-lock.json"
+      - "packages/shared/**"
+      - "tools/**"
+      - "tsconfig.base.json"
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/ci.yml"
+      - ".nvmrc"
+      - "apps/desktop/**"
+      - "config/**"
+      - "contracts/**"
+      - "docs/registry/**"
+      - "package.json"
+      - "package-lock.json"
+      - "packages/shared/**"
+      - "tools/**"
+      - "tsconfig.base.json"
+
+permissions:
+  contents: read
+
+jobs:
+  affected:
+    name: Affected checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      BASE_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
+      HEAD_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - name: Setup uv
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.11.8"
+          enable-cache: false
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Resolve changed range
+        id: range
+        shell: bash
+        run: |
+          if [[ -z "$BASE_SHA" || "$BASE_SHA" =~ ^0+$ ]]; then
+            BASE_SHA="$(git mktree </dev/null)"
+          fi
+          echo "base=$BASE_SHA" >> "$GITHUB_OUTPUT"
+          echo "head=$HEAD_SHA" >> "$GITHUB_OUTPUT"
+
+      - name: Plan affected checks
+        id: affected-plan
+        shell: bash
+        run: |
+          npm run check:affected -- \
+            --base "${{ steps.range.outputs.base }}" \
+            --head "${{ steps.range.outputs.head }}" \
+            --dry-run | tee .affected-quality-plan.txt
+          if grep -Eq 'quality:desktop-app|test:hot-interaction:perf|test:i18n:smoke' .affected-quality-plan.txt; then
+            echo "playwright=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install Playwright Chromium when selected
+        if: steps.affected-plan.outputs.playwright == 'true'
+        run: npx playwright install --with-deps chromium
+
+      - name: Run affected checks
+        run: >-
+          npm run check:affected --
+          --base "${{ steps.range.outputs.base }}"
+          --head "${{ steps.range.outputs.head }}"

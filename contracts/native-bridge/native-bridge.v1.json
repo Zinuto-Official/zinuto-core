@@ -1,0 +1,397 @@
+{
+  "schemaVersion": "zinuto-native-bridge-v1",
+  "description": "Canonical v1 contract for the local native/Tauri commands and desktop events exposed by Zinuto Core.",
+  "limits": {
+    "stringChars": {
+      "requestId": 128,
+      "httpPath": 8192,
+      "httpBody": 33554432,
+      "headerName": 128,
+      "headerValue": 512,
+      "fileName": 255,
+      "filePath": 4096,
+      "customIndicatorAiGuideContent": 65536,
+      "relativePath": 1024,
+      "securityBookmark": 16384
+    },
+    "import": {
+      "maxFiles": 20000,
+      "maxSingleFileBytes": 21474836480,
+      "maxTotalBytes": 214748364800,
+      "maxDepth": 16,
+      "maxPathChars": 4096,
+      "maxRelativePathChars": 1024,
+      "maxFileNameChars": 255,
+      "maxSecurityBookmarkChars": 16384
+    },
+    "marketDataAcquisition": {
+      "maxFiles": 21,
+      "maxDataFiles": 20,
+      "maxSingleFileBytes": 536870912,
+      "maxTotalBytes": 2147483648,
+      "maxPathChars": 4096,
+      "maxRelativePathChars": 1024,
+      "maxFileNameChars": 255,
+      "maxJobIdChars": 128,
+      "maxGrantIdChars": 128
+    },
+    "arrays": {
+      "dragDropPaths": 5000
+    }
+  },
+  "commands": [
+    {
+      "name": "backend_http_request",
+      "request": {
+        "method": "string",
+        "path": "/api/v1/*",
+        "body": "string | null",
+        "headers": "Record<string,string> | null",
+        "timeoutMs": "number | null",
+        "requestId": "string | null",
+        "cancelRequestId": "string | null"
+      },
+      "constraints": {
+        "path": {
+          "pattern": "^/api/v1(?:/|$)",
+          "maxLength": 8192
+        },
+        "body": {
+          "maxLength": 33554432
+        },
+        "headers": {
+          "maxProperties": 64,
+          "keyMaxLength": 128,
+          "valueMaxLength": 512
+        },
+        "timeoutMs": {
+          "minimum": 1,
+          "maximum": 120000
+        },
+        "requestId": {
+          "maxLength": 128
+        },
+        "cancelRequestId": {
+          "maxLength": 128
+        }
+      },
+      "response": {
+        "status": "number",
+        "body": "string",
+        "headers": "Record<string,string>"
+      }
+    },
+    {
+      "name": "backend_startup_preflight_status",
+      "request": {},
+      "response": {
+        "state": "PENDING | READY | FAILED",
+        "stage": "manifest | nodeRuntime | bridgeSecret | spawn | health | runtimeState | transport | startupLease | orphanReconciliation | startup | startupTask | bootstrap | ready | state | dataUpgrade:core-schema | dataUpgrade:market-probing | dataUpgrade:market-copying | dataUpgrade:market-validating | dataUpgrade:market-switching | dataUpgrade:reset-recovery | dataUpgrade:seed-reconcile | dataUpgrade:runtime-bootstrap",
+        "errorCode": "string | null",
+        "errorMessage": "string | null",
+        "checkedAtMs": "number"
+      }
+    },
+    {
+      "name": "desktop_release_channel",
+      "request": {},
+      "response": "community"
+    },
+    {
+      "name": "desktop_app_quit",
+      "request": {},
+      "response": "null"
+    },
+    {
+      "name": "desktop_app_restart",
+      "request": {},
+      "response": "null"
+    },
+    {
+      "name": "save_custom_indicator_ai_conversion_guide",
+      "request": {
+        "language": "en | zh-CN | ja | ko | es",
+        "content": "string"
+      },
+      "constraints": {
+        "language": {
+          "enum": ["en", "zh-CN", "ja", "ko", "es"]
+        },
+        "content": {
+          "minLength": 1,
+          "maxLength": 65536,
+          "encoding": "UTF-8"
+        },
+        "defaultFileName": "zinuto-indicator-ai-guide-<language>.txt",
+        "access": "opens a native Save dialog and writes only the file selected during that invocation"
+      },
+      "response": "SAVED | CANCELLED"
+    },
+    {
+      "name": "main_window_ready_to_show",
+      "request": {},
+      "response": "null"
+    },
+    {
+      "name": "stage_csv_folder_for_import",
+      "request": {
+        "folderPath": "string",
+        "sourceFolderBookmarkId": "string | null",
+        "stageMode": "FULL_COPY | METADATA_ONLY | SELECTIVE_DIGEST | SELECTIVE_COPY",
+        "relativePaths": "string[] | null",
+        "progressRequestId": "string | null",
+        "cancellationRequestId": "string | null"
+      },
+      "constraints": {
+        "folderPath": {
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "sourceFolderBookmarkId": {
+          "maxLength": 16384
+        },
+        "stageMode": {
+          "enum": [
+            "FULL_COPY",
+            "METADATA_ONLY",
+            "SELECTIVE_DIGEST",
+            "SELECTIVE_COPY"
+          ]
+        },
+        "relativePaths": {
+          "maxItems": 20000,
+          "itemMaxLength": 1024
+        },
+        "progressRequestId": {
+          "maxLength": 128
+        },
+        "cancellationRequestId": {
+          "pattern": "^csv-stage-[a-z0-9]+-[a-z0-9]+$",
+          "maxLength": 128
+        },
+        "supportedFiles": {
+          "maxItems": 20000,
+          "maxSingleFileBytes": 21474836480,
+          "maxTotalBytes": 214748364800,
+          "maxDepth": 16,
+          "fileNameMaxLength": 255,
+          "relativePathMaxLength": 1024,
+          "absolutePathMaxLength": 4096
+        }
+      },
+      "response": {
+        "stagedFolderPath": "string",
+        "sourceFolderPath": "string",
+        "sourceFolderName": "string",
+        "copiedFiles": "number",
+        "copiedBytes": "number",
+        "metadataManifest": "object | null",
+        "sourceFolderBookmarkId": "string | null"
+      }
+    },
+    {
+      "name": "cancel_csv_folder_staging",
+      "request": {
+        "cancellationRequestId": "string"
+      },
+      "constraints": {
+        "cancellationRequestId": {
+          "pattern": "^csv-stage-[a-z0-9]+-[a-z0-9]+$",
+          "minLength": 13,
+          "maxLength": 128
+        },
+        "scope": "only a stage_csv_folder_for_import request that explicitly supplies the same cancellationRequestId; cancellation received before registration creates an already-cancelled bounded pending entry so command scheduling cannot lose the abort",
+        "registryBound": "at most 128 active or pending entries; when full, an inactive pending entry is evicted before another pending entry is accepted; completed active registrations remove their entry",
+        "effect": "directory and selected-path discovery check between entries and recursion, digest workers stop dequeuing and SHA-256 reads check each 64 KiB chunk, copy workers stop dequeuing and file copies check each 1 MiB chunk, and incomplete managed staging directories are removed before the staging command settles"
+      },
+      "response": "null"
+    },
+    {
+      "name": "discard_csv_folder_staging",
+      "request": {
+        "stagedFolderPath": "string"
+      },
+      "constraints": {
+        "stagedFolderPath": {
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "access": "only an existing or already removed direct staged-<nanos>-<pid>-<sequence> child directory of the managed zinuto-csv-upload temp root"
+      },
+      "response": "null"
+    },
+    {
+      "name": "authorize_market_data_acquisition_folder",
+      "request": {
+        "folderPath": "string",
+        "existingGrantId": "string | null"
+      },
+      "constraints": {
+        "folderPath": {
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "existingGrantId": {
+          "pattern": "^acquisition-grant-[A-Za-z0-9_-]{8,96}$",
+          "maxLength": 128
+        },
+        "access": "user-selected directory, write-capable on macOS",
+        "persistence": "opaque grant only; the local sidecar must not receive folderPath"
+      },
+      "response": {
+        "grantId": "string",
+        "displayPath": "string"
+      }
+    },
+    {
+      "name": "commit_market_data_acquisition_output",
+      "request": {
+        "grantId": "string",
+        "jobId": "string",
+        "manifestSha256": "string"
+      },
+      "constraints": {
+        "grantId": {
+          "pattern": "^acquisition-grant-[A-Za-z0-9_-]{8,96}$",
+          "maxLength": 128
+        },
+        "jobId": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{7,127}$",
+          "maxLength": 128
+        },
+        "manifestSha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "length": 64
+        },
+        "stagingLayout": "<desktopDataDir>/temp/market-data-acquisition/<jobId>/{manifest.json,payload/}",
+        "stagingPathInput": "forbidden",
+        "manifest": {
+          "schemaVersion": 1,
+          "connectorId": [
+            "akshare",
+            "ccxt"
+          ],
+          "outputFolderNamePattern": "^Zinuto-Data-(akshare|ccxt)-[0-9]{8}-[0-9]{6}-[A-Za-z0-9]{8}$",
+          "fileKinds": [
+            "DATA",
+            "SOURCE_NOTICE"
+          ],
+          "relativePaths": "single-level regular files only",
+          "maxItems": 21,
+          "maxDataFiles": 20,
+          "maxSingleFileBytes": 536870912,
+          "maxTotalBytes": 2147483648,
+          "relativePathMaxLength": 1024,
+          "fileNameMaxLength": 255,
+          "sha256Pattern": "^[a-f0-9]{64}$"
+        },
+        "publication": "hidden partial directory followed by an atomic rename; no final directory on validation or copy failure"
+      },
+      "response": {
+        "finalPath": "string",
+        "sourceFolderBookmarkId": "string | null",
+        "copiedFiles": "number",
+        "copiedBytes": "number"
+      }
+    }
+  ],
+  "types": {},
+  "events": [
+    {
+      "name": "zinuto://v1/backend-startup-preflight-status",
+      "payload": {
+        "state": "PENDING | READY | FAILED",
+        "stage": "manifest | nodeRuntime | bridgeSecret | spawn | health | runtimeState | transport | startupLease | orphanReconciliation | startup | startupTask | bootstrap | ready | state | dataUpgrade:core-schema | dataUpgrade:market-probing | dataUpgrade:market-copying | dataUpgrade:market-validating | dataUpgrade:market-switching | dataUpgrade:reset-recovery | dataUpgrade:seed-reconcile | dataUpgrade:runtime-bootstrap",
+        "errorCode": "string | null",
+        "errorMessage": "string | null",
+        "checkedAtMs": "number"
+      }
+    },
+    {
+      "name": "zinuto://csv-folder-staging-progress",
+      "payload": {
+        "progressRequestId": "string",
+        "stageMode": "FULL_COPY | METADATA_ONLY | SELECTIVE_DIGEST | SELECTIVE_COPY",
+        "phase": "DISCOVERING | COPYING | DIGESTING | DONE",
+        "processedFiles": "number",
+        "totalFiles": "number | null",
+        "processedBytes": "number",
+        "totalBytes": "number | null",
+        "progressPercent": "number | null"
+      },
+      "constraints": {
+        "progressRequestId": {
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "stageMode": {
+          "enum": [
+            "FULL_COPY",
+            "METADATA_ONLY",
+            "SELECTIVE_DIGEST",
+            "SELECTIVE_COPY"
+          ]
+        },
+        "phase": {
+          "enum": [
+            "DISCOVERING",
+            "COPYING",
+            "DIGESTING",
+            "DONE"
+          ]
+        },
+        "processedFiles": {
+          "minimum": 0
+        },
+        "totalFiles": {
+          "minimum": 0
+        },
+        "processedBytes": {
+          "minimum": 0
+        },
+        "totalBytes": {
+          "minimum": 0
+        },
+        "progressPercent": {
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
+    {
+      "name": "zinuto://desktop-menu-command",
+      "payload": {
+        "command": "string"
+      },
+      "constraints": {
+        "command": {
+          "minLength": 1,
+          "maxLength": 128
+        }
+      }
+    },
+    {
+      "name": "zinuto-native-drag-drop",
+      "payload": {
+        "paths": "string[]"
+      },
+      "constraints": {
+        "paths": {
+          "maxItems": 5000,
+          "itemMaxLength": 4096
+        }
+      }
+    },
+    {
+      "name": "zinuto://desktop-ui-language",
+      "payload": {
+        "language": "string | { language: string }"
+      },
+      "constraints": {
+        "language": {
+          "enum": ["en", "zh-CN", "ja", "ko", "es"]
+        }
+      }
+    }
+  ]
+}

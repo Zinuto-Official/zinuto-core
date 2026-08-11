@@ -1,0 +1,614 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.desktop-secondary-window-root .training-note-modal.note-editor-modal-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-rect);
+  background: var(--surface-s1);
+  color: var(--text-t1);
+}
+
+.desktop-secondary-window-root .training-note-modal .note-editor-modal-header,
+.desktop-secondary-window-root .training-note-modal .note-editor-modal-content,
+.desktop-secondary-window-root .training-note-modal .note-editor-modal-footer {
+  width: min(100%, 1120px);
+  min-width: 0;
+  margin-inline: auto;
+}
+
+.desktop-secondary-window-root .training-note-modal .note-editor-modal-header {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.desktop-secondary-window-root .training-note-modal .note-editor-modal-title,
+.desktop-secondary-window-root .training-note-modal .note-editor-modal-meta {
+  width: 100%;
+  max-width: 800px;
+  min-width: 0;
+  margin: 0;
+}
+
+.desktop-secondary-window-root .training-note-modal .note-editor-modal-meta {
+  margin-top: 4px;
+  color: var(--text-t3);
+  font-size: var(--ty-r1);
+  line-height: 1.3;
+}
+
+.desktop-secondary-window-root .training-note-modal .training-note-title-head-input {
+  width: 100%;
+  min-width: 0;
+  height: auto;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--text-t1);
+  font-family: var(--ff-ui);
+  font-size: var(--ty-r7);
+  font-weight: 760;
+  line-height: 1.2;
+  text-align: left;
+}
+
+.desktop-secondary-window-root .training-note-modal .training-note-title-head-input:focus,
+.desktop-secondary-window-root .training-note-modal .training-note-title-head-input:focus-visible {
+  border-color: transparent;
+  box-shadow: none;
+  outline: none;
+}
+
+.desktop-secondary-window-root .training-note-editor-meta-block {
+  display: grid;
+  gap: 8px;
+}
+
+.desktop-secondary-window-root .training-note-editor-meta-row {
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0;
+  color: var(--text-t3);
+  font-size: var(--ty-r1);
+  line-height: 1.3;
+  text-align: left;
+}
+
+.desktop-secondary-window-root .training-note-summary-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.desktop-secondary-window-root .training-note-summary-chip {
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
+  border: 1px solid color-mix(in srgb, var(--line) 48%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface-s2) 74%, var(--panel));
+  color: var(--text-t3);
+  font-size: var(--ty-r1);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.desktop-secondary-window-root .training-note-summary-chip > strong {
+  color: var(--text-t1);
+  font-size: var(--ty-r1);
+  font-weight: 760;
+}
+
+.desktop-secondary-window-root .training-note-summary-chip.is-positive {
+  border-color: color-mix(in srgb, var(--price-up-color) 34%, var(--line));
+  color: color-mix(in srgb, var(--price-up-color) 84%, var(--text-t1));
+}
+
+.desktop-secondary-window-root .training-note-summary-chip.is-accent {
+  border-color: color-mix(in srgb, var(--primary) 34%, var(--line));
+  color: color-mix(in srgb, var(--primary) 88%, var(--text-t1));
+}
+
+.desktop-secondary-window-root .training-note-summary-chip.is-buy {
+  border-color: color-mix(in srgb, var(--trade-buy-color) 34%, var(--line));
+  background: color-mix(in srgb, var(--trade-buy-color) 12%, var(--panel));
+  color: color-mix(in srgb, var(--trade-buy-color) 88%, var(--text-t1));
+}
+
+.desktop-secondary-window-root .training-note-summary-chip.is-sell {
+  border-color: color-mix(in srgb, var(--trade-sell-color) 34%, var(--line));
+  background: color-mix(in srgb, var(--trade-sell-color) 12%, var(--panel));
+  color: color-mix(in srgb, var(--trade-sell-color) 88%, var(--text-t1));
+}
+
+.desktop-secondary-window-root .training-note-summary-chip.is-warning {
+  border-color: color-mix(in srgb, var(--warning) 40%, var(--line));
+  color: color-mix(in srgb, var(--warning) 84%, var(--text-t1));
+}
+
+.desktop-secondary-window-root .training-note-summary-chip.is-danger {
+  border-color: color-mix(in srgb, var(--price-down-color) 40%, var(--line));
+  color: color-mix(in srgb, var(--price-down-color) 84%, var(--text-t1));
+}
+
+.desktop-secondary-window-root .notes-color-toggle-row {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.desktop-secondary-window-root .notes-color-toggle {
+  position: relative;
+  flex: 0 0 32px;
+  width: 32px;
+  min-width: 32px;
+  height: 32px;
+  min-height: 32px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  box-shadow: none;
+}
+
+.desktop-secondary-window-root .notes-color-toggle:hover {
+  background: color-mix(in srgb, var(--notes-color-accent, var(--primary)) 8%, transparent);
+}
+
+.desktop-secondary-window-root .notes-color-toggle[data-active="true"] {
+  border-color: color-mix(in srgb, var(--notes-color-accent, var(--primary)) 72%, var(--line));
+  background: color-mix(in srgb, var(--notes-color-accent, var(--primary)) 14%, var(--panel));
+  box-shadow:
+    0 0 0 2px color-mix(in srgb, var(--notes-color-accent, var(--primary)) 18%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--notes-color-accent, var(--primary)) 28%, transparent);
+}
+
+.desktop-secondary-window-root .notes-color-dot {
+  display: inline-block;
+  position: relative;
+  flex: 0 0 12px;
+  width: 12px;
+  min-width: 12px;
+  height: 12px;
+  min-height: 12px;
+  border-radius: 999px;
+  background: var(--notes-color-accent);
+  overflow: hidden;
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--text-strong) 10%, transparent);
+}
+
+.desktop-secondary-window-root .notes-color-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    linear-gradient(
+      color-mix(in srgb, var(--panel) 56%, transparent),
+      color-mix(in srgb, var(--panel) 56%, transparent)
+    );
+  opacity: 0;
+  pointer-events: none;
+}
+
+.desktop-secondary-window-root .notes-color-toggle:not([data-active="true"]) .notes-color-dot {
+  filter: saturate(0.88);
+}
+
+.desktop-secondary-window-root .notes-color-toggle:not([data-active="true"]) .notes-color-dot::after {
+  opacity: 1;
+}
+
+.desktop-secondary-window-root .notes-color-toggle .notes-color-dot {
+  width: 16px;
+  min-width: 16px;
+  height: 16px;
+  min-height: 16px;
+}
+
+.desktop-secondary-window-root .training-note-modal .note-editor-modal-content {
+  flex: 1 1 auto;
+  min-height: 0;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.desktop-secondary-window-root .training-note-modal-body {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: stretch;
+  margin: 0;
+  overflow: hidden;
+}
+
+.desktop-secondary-window-root .training-note-modal-main,
+.desktop-secondary-window-root .training-note-editor-layout {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+}
+
+.desktop-secondary-window-root .training-note-modal-main {
+  display: flex;
+  flex-direction: column;
+  max-width: none;
+}
+
+.desktop-secondary-window-root .training-note-editor-body {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  gap: 12px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  padding: 0;
+}
+
+.desktop-secondary-window-root .training-note-editor-body.has-training-snapshot {
+  grid-template-rows: minmax(clamp(210px, 33vh, 380px), 1.15fr) minmax(0, 1fr);
+}
+
+.desktop-secondary-window-root .training-note-editor-body.no-training-snapshot {
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.desktop-secondary-window-root .training-note-editor-snapshot-wrap {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+}
+
+.desktop-secondary-window-root .training-note-editor-snapshot-wrap > .replay-note-training-snapshot-node {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--surface-s4) 72%, transparent);
+  border-radius: 8px;
+  background: var(--surface-s2);
+}
+
+.desktop-secondary-window-root .replay-note-training-snapshot-node,
+.desktop-secondary-window-root .replay-note-training-snapshot-node-inner,
+.desktop-secondary-window-root .training-note-snapshot-chart-block {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.desktop-secondary-window-root .training-note-editor-wrap {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.desktop-secondary-window-root .replay-note-editor-host,
+.desktop-secondary-window-root .training-note-editor-host {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  margin-top: 0;
+  overflow: hidden;
+  border-radius: 0;
+  background: transparent;
+  position: relative;
+  z-index: 0;
+  --replay-note-editor-content-max-width: 100%;
+  --replay-note-editor-pad-block-start: 12px;
+  --replay-note-editor-pad-block-end: 28px;
+  --replay-note-editor-pad-inline-start: 28px;
+  --replay-note-editor-pad-inline-end: 28px;
+}
+
+.desktop-secondary-window-root .training-note-editor-body.no-training-snapshot .replay-note-editor-host {
+  --replay-note-editor-content-max-width: 860px;
+  --replay-note-editor-pad-block-start: 22px;
+}
+
+.desktop-secondary-window-root .replay-note-editor-toolbar {
+  --replay-note-toolbar-button-fg: color-mix(in srgb, var(--text-t1) 90%, var(--primary));
+  --replay-note-toolbar-button-hover-bg: color-mix(in srgb, var(--primary) 12%, transparent);
+  --replay-note-toolbar-button-hover-fg: color-mix(in srgb, var(--primary) 32%, var(--text-t1));
+  --replay-note-toolbar-button-active-border: color-mix(in srgb, var(--primary) 74%, var(--line));
+  --replay-note-toolbar-button-active-bg: color-mix(in srgb, var(--primary) 24%, var(--surface-s2));
+  --replay-note-toolbar-button-active-fg: color-mix(in srgb, var(--primary) 78%, var(--text-t1));
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+  padding: 8px 12px 12px;
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid color-mix(in srgb, var(--line) 42%, transparent);
+  background: color-mix(in srgb, var(--surface-s1) 98%, var(--surface-s2));
+}
+
+.desktop-secondary-window-root .replay-note-editor-toolbar-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid color-mix(in srgb, var(--line) 42%, transparent);
+  border-radius: var(--ui-radius-control);
+  background: transparent;
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--surface-s3) 34%, transparent);
+}
+
+.desktop-secondary-window-root .replay-note-editor-toolbar .replay-note-editor-toolbar-button {
+  width: 34px;
+  min-width: 34px;
+  height: 34px;
+  min-height: 34px;
+  border: 1px solid transparent;
+  border-radius: calc(var(--ui-radius-control) - 2px);
+  background: transparent;
+  color: var(--replay-note-toolbar-button-fg);
+  box-shadow: none;
+}
+
+.desktop-secondary-window-root .replay-note-editor-toolbar .replay-note-editor-toolbar-button:hover:not(:disabled),
+.desktop-secondary-window-root .replay-note-editor-toolbar .replay-note-editor-toolbar-button:focus-visible {
+  border-color: transparent;
+  background: var(--replay-note-toolbar-button-hover-bg);
+  color: var(--replay-note-toolbar-button-hover-fg);
+  box-shadow: none;
+}
+
+.desktop-secondary-window-root .replay-note-editor-toolbar .replay-note-editor-toolbar-button[data-active="true"],
+.desktop-secondary-window-root .replay-note-editor-toolbar .replay-note-editor-toolbar-button[aria-pressed="true"] {
+  border-color: var(--replay-note-toolbar-button-active-border);
+  background: var(--replay-note-toolbar-button-active-bg);
+  color: var(--replay-note-toolbar-button-active-fg);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--primary) 28%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--surface-s4) 24%, transparent);
+}
+
+.desktop-secondary-window-root .replay-note-editor-toolbar-button svg {
+  width: 17px;
+  height: 17px;
+}
+
+.desktop-secondary-window-root .replay-note-editor-toolbar-end {
+  min-width: 0;
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.desktop-secondary-window-root .replay-note-editor-toolbar-end .notes-color-toggle-row {
+  justify-content: flex-end;
+}
+
+.desktop-secondary-window-root .replay-note-editor-host .replay-note-lexical-content {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  max-width: var(--replay-note-editor-content-max-width);
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding:
+    var(--replay-note-editor-pad-block-start)
+    var(--replay-note-editor-pad-inline-end)
+    var(--replay-note-editor-pad-block-end)
+    var(--replay-note-editor-pad-inline-start);
+  overflow: auto;
+  overscroll-behavior: contain;
+  border: 0;
+  outline: none;
+  background: transparent;
+  box-shadow: none;
+  caret-color: color-mix(in srgb, var(--primary) 86%, var(--text-t1));
+  text-align: left;
+  text-rendering: optimizeLegibility;
+}
+
+.desktop-secondary-window-root .replay-note-editor-host .replay-note-lexical-content:focus,
+.desktop-secondary-window-root .replay-note-editor-host .replay-note-lexical-content:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.desktop-secondary-window-root .replay-note-lexical-text-bold {
+  font-weight: 720;
+}
+
+.desktop-secondary-window-root .replay-note-lexical-text-italic {
+  font-style: italic;
+}
+
+.desktop-secondary-window-root .replay-note-lexical-text-underline {
+  text-decoration-line: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.16em;
+}
+
+.desktop-secondary-window-root .replay-note-lexical-content mark,
+.desktop-secondary-window-root .replay-note-lexical-text-highlight {
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  padding: 0 0.1em;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--visual-warning-accent) 32%, var(--surface-s2));
+  color: var(--text-t1);
+  text-shadow: none;
+}
+
+.desktop-secondary-window-root .replay-note-lexical-content h1,
+.desktop-secondary-window-root .replay-note-lexical-content h2,
+.desktop-secondary-window-root .replay-note-lexical-content h3 {
+  margin: 0 0 12px;
+  color: var(--text-t1);
+  font-weight: 760;
+  line-height: 1.24;
+}
+
+.desktop-secondary-window-root .replay-note-lexical-content h1 {
+  font-size: var(--ty-r7);
+  letter-spacing: 0;
+}
+
+.desktop-secondary-window-root .replay-note-lexical-content h2 {
+  font-size: var(--ty-r6);
+}
+
+.desktop-secondary-window-root .replay-note-lexical-content h3 {
+  font-size: var(--ty-r4);
+  font-weight: 720;
+  line-height: 1.34;
+}
+
+.desktop-secondary-window-root .replay-note-lexical-content p {
+  margin: 0 0 12px;
+}
+
+.desktop-secondary-window-root .replay-note-lexical-content ul,
+.desktop-secondary-window-root .replay-note-lexical-content ol {
+  margin: 0 0 12px;
+  padding-left: 28px;
+}
+
+.desktop-secondary-window-root .replay-note-lexical-content ul {
+  list-style: disc outside;
+}
+
+.desktop-secondary-window-root .replay-note-lexical-content ol {
+  list-style: decimal outside;
+}
+
+.desktop-secondary-window-root .replay-note-lexical-content li {
+  margin: 4px 0;
+  padding-left: 4px;
+  display: list-item;
+}
+
+.desktop-secondary-window-root .replay-note-lexical-content li::marker {
+  color: color-mix(in srgb, var(--text-t3) 78%, var(--primary));
+  font-weight: 680;
+}
+
+.desktop-secondary-window-root .replay-note-lexical-content .replay-note-lexical-check-list {
+  list-style: none;
+  padding-left: 4px;
+}
+
+.desktop-secondary-window-root .replay-note-lexical-content .replay-note-lexical-check-list-item {
+  position: relative;
+  display: block;
+  min-height: 1.45em;
+  list-style: none;
+  padding-left: 30px;
+}
+
+.desktop-secondary-window-root .replay-note-lexical-content .replay-note-lexical-check-list-item::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.34em;
+  width: 14px;
+  height: 14px;
+  border: 1px solid color-mix(in srgb, var(--line) 86%, var(--text-t3));
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--surface-s1) 88%, var(--surface-s2));
+}
+
+.desktop-secondary-window-root .replay-note-lexical-content .replay-note-lexical-check-list-item-checked::before {
+  border-color: color-mix(in srgb, var(--primary) 74%, var(--line));
+  background: color-mix(in srgb, var(--primary) 86%, var(--text-t1));
+}
+
+.desktop-secondary-window-root .replay-note-lexical-content .replay-note-lexical-check-list-item-checked::after {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: calc(0.34em + 2px);
+  width: 4px;
+  height: 8px;
+  border: solid var(--surface-s1);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.desktop-secondary-window-root .replay-note-lexical-content blockquote {
+  margin: 4px 0 14px;
+  padding: 8px 14px;
+  border-left: 3px solid color-mix(in srgb, var(--primary) 48%, var(--line));
+  border-radius: 0 8px 8px 0;
+  background: color-mix(in srgb, var(--surface-s2) 54%, transparent);
+  color: color-mix(in srgb, var(--text-t1) 88%, var(--text-t3));
+}
+
+.desktop-secondary-window-root .replay-note-lexical-content hr,
+.desktop-secondary-window-root .replay-note-lexical-divider {
+  height: 1px;
+  margin: 18px 0;
+  border: none;
+  background: color-mix(in srgb, var(--line) 78%, transparent);
+}
+
+.desktop-secondary-window-root .replay-note-editor-host .replay-note-lexical-content::selection,
+.desktop-secondary-window-root .replay-note-editor-host .replay-note-lexical-content *::selection {
+  background: color-mix(in srgb, var(--primary) 18%, transparent);
+}
+
+.desktop-secondary-window-root .training-note-modal .note-editor-modal-footer {
+  flex: 0 0 auto;
+  margin-top: 10px;
+}
+
+.desktop-secondary-window-root .training-note-modal-actions {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.desktop-secondary-window-root .training-note-modal-actions-left,
+.desktop-secondary-window-root .training-note-modal-actions-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}

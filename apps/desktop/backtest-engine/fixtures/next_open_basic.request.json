@@ -1,0 +1,34 @@
+{
+  "config": {
+    "initialCapital": 1000,
+    "orderSizing": {
+      "mode": "ALL_IN"
+    },
+    "tradingSettings": {
+      "minTradeStep": 1,
+      "contractMultiplier": 1,
+      "allowShortSelling": false,
+      "allowLongMarginTrading": false,
+      "commissionRate": 0,
+      "stampDutyRate": 0,
+      "slippageRate": 0
+    }
+  },
+  "instrument": {
+    "instrumentId": "fixture:AAA",
+    "symbol": "AAA",
+    "baseTimeframe": "1d",
+    "barCount": 4
+  },
+  "bars": [
+    { "ts": "2026-01-01T00:00:00.000Z", "open": 10, "high": 10, "low": 10, "close": 10, "volume": 1 },
+    { "ts": "2026-01-02T00:00:00.000Z", "open": 10, "high": 11, "low": 10, "close": 10.1, "volume": 1 },
+    { "ts": "2026-01-03T00:00:00.000Z", "open": 10.3, "high": 10.4, "low": 10.2, "close": 10.3, "volume": 1 },
+    { "ts": "2026-01-04T00:00:00.000Z", "open": 10.4, "high": 10.4, "low": 10.3, "close": 10.4, "volume": 1 }
+  ],
+  "signals": [
+    { "barIndex": 0, "buy": true, "sell": false, "short": false, "cover": false },
+    { "barIndex": 2, "buy": false, "sell": true, "short": false, "cover": false }
+  ],
+  "priceMode": "NEXT_OPEN"
+}

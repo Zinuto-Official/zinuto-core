@@ -1,0 +1,499 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.modal-section {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-rect);
+  background: var(--panel-soft);
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.replay-trainer-settings-modal .modal-section {
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  padding: 0;
+  gap: 8px;
+}
+
+.replay-trainer-settings-modal .modal-section + .modal-section {
+  margin-top: 10px;
+  padding-top: 0;
+  border-top: none;
+}
+
+.indicator-param-item {
+  flex-wrap: nowrap;
+}
+
+.modal-section .settings-modern-row.modal-settings-row {
+  grid-template-columns: minmax(136px, 188px) minmax(0, 1fr);
+  min-height: 56px;
+  padding: 8px 0;
+  gap: 10px;
+}
+
+.modal-section .settings-modern-row.modal-settings-row + .settings-modern-row.modal-settings-row {
+  border-top: 1px solid color-mix(in srgb, var(--line) 62%, transparent);
+}
+
+.modal-section .modal-settings-row .settings-row-title {
+  font-size: var(--ty-r2);
+}
+
+.modal-section .modal-settings-row .settings-row-control.is-fill .settings-row-control-inner {
+  width: min(460px, 100%);
+}
+
+.modal-settings-seg {
+  width: fit-content;
+  max-width: 100%;
+}
+
+.modal-settings-input-sm {
+  width: min(180px, 100%);
+}
+
+.modal-settings-select {
+  width: min(248px, 100%);
+}
+
+.indicator-select-control {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--ui-size-control-default);
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.indicator-select-control-field {
+  min-width: 0;
+}
+
+.indicator-select-control .modal-settings-select {
+  width: 100%;
+}
+
+.indicator-config-trigger {
+  color: color-mix(in srgb, var(--muted) 84%, var(--text-subtle));
+}
+
+.indicator-config-trigger:not(:disabled):hover {
+  color: var(--text-strong);
+}
+
+.chart-settings-modal .chart-settings-modal-body {
+  display: grid;
+  gap: 8px;
+}
+
+.chart-settings-modal .ui-standard-modal-body {
+  padding-right: 8px;
+  scrollbar-gutter: stable both-edges;
+}
+
+.chart-settings-modal .indicator-box {
+  padding: 0;
+}
+
+.chart-settings-modal .indicator-box > [data-slot="card-content"] {
+  display: grid;
+  grid-template-columns: minmax(144px, 0.38fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+}
+
+.chart-settings-modal .indicator-panel-title {
+  margin: 0;
+  font-size: var(--ty-r2);
+  line-height: 1.35;
+  color: var(--text-t2);
+}
+
+.chart-settings-modal .indicator-box .settings-modern-row.modal-settings-row {
+  grid-template-columns: minmax(56px, 84px) minmax(0, 1fr);
+  align-items: center;
+  min-height: 0;
+  gap: 10px;
+  padding: 0;
+}
+
+.chart-settings-modal .indicator-box .modal-settings-row .settings-row-title {
+  font-size: var(--ty-r2);
+}
+
+.chart-settings-modal
+  .indicator-box
+  .settings-row-control.is-fill
+  .settings-row-control-inner {
+  width: 100%;
+}
+
+.chart-indicator-config-modal .indicator-config-box {
+  padding: 8px 10px;
+}
+
+.chart-indicator-config-modal-body {
+  gap: 10px;
+}
+
+.indicator-param-list {
+  display: grid;
+  gap: 0;
+}
+
+.indicator-param-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+}
+
+
+.indicator-param-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  align-items: center;
+}
+
+.modal-settings-ratio-list {
+  width: min(460px, 100%);
+}
+
+.indicator-param-input {
+  width: 100%;
+  min-width: 0;
+}
+
+.training-summary-dialog .ui-standard-modal-description {
+  white-space: pre-line;
+}
+
+.training-summary-dialog {
+  --training-summary-r1: var(--ty-r1);
+  --training-summary-r2: var(--ty-r1);
+  --training-summary-r3: var(--ty-r1);
+  --training-summary-r4: var(--ty-r2);
+  --training-summary-r5: var(--ty-r3);
+  --training-summary-r6: var(--ty-r4);
+  --training-summary-r7: var(--ty-r5);
+  --training-summary-r8: var(--ty-r6);
+  gap: 10px;
+}
+
+.training-summary-dialog .ui-standard-modal-title {
+  font-size: var(--training-summary-r5);
+  line-height: 1.18;
+}
+
+.training-summary-title-with-help {
+  display: inline-flex;
+  max-width: 100%;
+  min-width: 0;
+  align-items: center;
+  gap: 6px;
+}
+
+.training-summary-title-text {
+  min-width: 0;
+}
+
+.training-summary-title-help-trigger {
+  width: 20px;
+  min-width: 20px;
+  height: 20px;
+  min-height: 20px;
+  border: none;
+  background: transparent;
+  color: var(--icon-i2);
+  padding: 0;
+  box-shadow: none;
+}
+
+.training-summary-title-help-trigger:hover:not(:disabled),
+.training-summary-title-help-trigger:focus-visible {
+  border-color: transparent;
+  background: transparent;
+  color: var(--icon-i1);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--action-a1) 18%, transparent);
+}
+
+.training-summary-title-help-icon {
+  width: 14px;
+  height: 14px;
+}
+
+.training-summary-description-tooltip {
+  display: block;
+  max-width: min(420px, calc(100vw - 32px));
+  padding: 12px 14px;
+  white-space: pre-line;
+  line-height: 1.55;
+}
+
+.training-summary-dialog .ui-standard-modal-description {
+  font-size: var(--training-summary-r4);
+  line-height: 1.5;
+}
+
+.modal-no-remind-check {
+  user-select: none;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.summary-grid.summary-grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.summary-section {
+  display: grid;
+  gap: 10px;
+}
+
+.summary-section-title {
+  font-size: var(--ty-r4);
+  font-weight: 700;
+  color: var(--text-subtle);
+}
+
+.summary-section-subtitle {
+  font-size: var(--ty-r2);
+  color: var(--muted);
+}
+
+.summary-item {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-rect);
+  padding: 9px 10px;
+  background: var(--panel-soft);
+  display: grid;
+  gap: 5px;
+}
+
+.summary-item span {
+  font-size: var(--ty-r2);
+  color: var(--muted);
+}
+
+.summary-item strong {
+  font-size: var(--ty-r5);
+  color: var(--text-strong);
+}
+
+.summary-item strong.up {
+  color: var(--price-up-color);
+}
+
+.summary-item strong.down {
+  color: var(--price-down-color);
+}
+
+.summary-item strong.flat {
+  color: var(--visual-flat-value);
+}
+
+.summary-item.curve-item {
+  gap: 8px;
+  padding-top: 10px;
+}
+
+.summary-curves {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.summary-curve-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-rect);
+  background: color-mix(in srgb, var(--panel-soft) 88%, var(--panel));
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.summary-curve-title {
+  font-size: var(--ty-r4);
+  font-weight: 760;
+  color: var(--text-subtle);
+}
+
+.curve-wrap {
+  display: grid;
+  gap: 7px;
+}
+
+.curve-meta-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 10px;
+  align-items: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.curve-meta-date {
+  font-size: var(--ty-r2);
+  color: var(--muted);
+}
+
+.curve-meta-total {
+  justify-self: end;
+  font-size: var(--ty-r3);
+  color: var(--text-subtle);
+  font-weight: 620;
+}
+
+.curve-meta-amount {
+  justify-self: start;
+  font-size: var(--ty-r3);
+  font-weight: 700;
+}
+
+.curve-kline-canvas {
+  width: 100%;
+  height: 128px;
+  border-radius: calc(var(--radius-rect) - 4px);
+  overflow: hidden;
+  background: color-mix(in srgb, var(--panel) 78%, var(--window-bg));
+}
+
+.curve-kline-surface {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.curve-empty {
+  height: 96px;
+  border-radius: var(--radius-rect);
+  border: 1px dashed var(--line);
+  color: var(--muted);
+  font-size: var(--ty-r2);
+  display: grid;
+  place-items: center;
+}
+
+.summary-item.span-2 {
+  grid-column: span 2;
+}
+
+.training-summary-dialog .ui-standard-modal-actions {
+  gap: 8px;
+  padding-top: 10px;
+}
+
+.training-summary-dialog .ui-standard-modal-action-group {
+  gap: 8px;
+}
+
+.training-summary-dialog .ui-standard-modal-actions [data-slot="button"] {
+  font-size: var(--training-summary-r2);
+}
+
+.training-summary-dialog .summary-section {
+  gap: 8px;
+}
+
+.training-summary-dialog .summary-section-title {
+  font-size: var(--training-summary-r4);
+}
+
+.training-summary-dialog .summary-section-subtitle {
+  font-size: var(--training-summary-r2);
+  line-height: 1.45;
+}
+
+.training-summary-dialog .summary-grid {
+  gap: 8px;
+}
+
+.training-summary-dialog .summary-item {
+  padding: 8px 10px;
+  gap: 4px;
+}
+
+.training-summary-dialog .summary-item span {
+  font-size: var(--training-summary-r2);
+}
+
+.training-summary-dialog .summary-item strong {
+  font-size: var(--training-summary-r5);
+  line-height: 1.12;
+}
+
+.training-summary-dialog .summary-item.curve-item {
+  gap: 6px;
+  padding-top: 8px;
+}
+
+.training-summary-dialog .summary-curves {
+  gap: 10px;
+}
+
+.training-summary-dialog .summary-curve-card {
+  padding: 10px;
+  gap: 8px;
+}
+
+.training-summary-dialog .summary-curve-title {
+  font-size: var(--training-summary-r4);
+}
+
+.training-summary-dialog .curve-wrap {
+  gap: 6px;
+}
+
+.training-summary-dialog .curve-meta-row {
+  gap: 8px;
+}
+
+.training-summary-dialog .curve-meta-date {
+  font-size: var(--training-summary-r2);
+}
+
+.training-summary-dialog .curve-meta-total,
+.training-summary-dialog .curve-meta-amount {
+  font-size: var(--training-summary-r3);
+}
+
+.training-summary-dialog .curve-kline-canvas {
+  height: 104px;
+}
+
+.training-summary-dialog .curve-empty {
+  height: 84px;
+  font-size: var(--training-summary-r2);
+}
+
+.training-summary-dialog .ui-standard-modal-actions > [data-slot="button"]:first-child {
+  gap: 6px;
+}
+
+@media (max-width: 1280px) {
+  .summary-grid.summary-grid-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .summary-item.span-2 {
+    grid-column: span 1;
+  }
+}
+
+.training-summary-dialog .summary-grid.summary-grid-3.training-summary-core-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 720px) {
+  .training-summary-dialog .summary-grid.summary-grid-3.training-summary-core-grid {
+    grid-template-columns: 1fr;
+  }
+}

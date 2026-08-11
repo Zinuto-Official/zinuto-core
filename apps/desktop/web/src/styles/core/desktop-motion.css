@@ -1,0 +1,390 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.sidebar-nav-motion-track,
+.plain-tab-bar,
+.segmented-control {
+  position: relative;
+  isolation: isolate;
+}
+
+.sidebar-nav-selection-indicator,
+.plain-tab-bar-selection-indicator,
+.segmented-control-selection-indicator {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform, width, height, opacity;
+}
+
+[data-theme-transition-snapshot] {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483646;
+  overflow: hidden;
+  pointer-events: none;
+  isolation: isolate;
+  will-change: mask-image, -webkit-mask-image, opacity;
+}
+
+[data-theme-transition-snapshot] > .app-root {
+  min-height: 100vh;
+}
+
+[data-theme-transition-snapshot],
+[data-theme-transition-snapshot] *,
+[data-theme-transition-snapshot] *::before,
+[data-theme-transition-snapshot] *::after {
+  animation: none !important;
+  transition: none !important;
+  caret-color: transparent !important;
+}
+
+.sidebar-nav-selection-indicator {
+  left: 0;
+  top: 0;
+  z-index: 2;
+  width: var(--sidebar-nav-indicator-width, 3px);
+  height: var(--sidebar-nav-indicator-height, 18px);
+  border-radius: 999px;
+  background: var(--sidebar-group-active-rail-color, var(--action-a1));
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--action-a1) 20%, transparent),
+    1px 0 10px color-mix(in srgb, var(--action-a1) 22%, transparent);
+  transform: translate3d(
+    var(--sidebar-nav-indicator-x, 0),
+    var(--sidebar-nav-indicator-y, 0),
+    0
+  );
+  transition:
+    transform var(--motion-nav-indicator),
+    height var(--motion-nav-indicator),
+    opacity var(--motion-fast),
+    background-color var(--motion-fast);
+}
+
+.sidebar-nav-motion-track[data-motion-ready="true"] .sidebar-nav-selection-indicator {
+  opacity: 1;
+}
+
+.sidebar-nav-item {
+  position: relative;
+  z-index: 1;
+}
+
+.plain-tab-bar-item {
+  z-index: 1;
+}
+
+.sidebar-nav-item-main,
+.plain-tab-bar-item-copy,
+.segmented-option {
+  transition:
+    transform var(--motion-list-selection),
+    color var(--motion-list-selection),
+    opacity var(--motion-list-selection),
+    box-shadow var(--motion-list-selection),
+    border-color var(--motion-list-selection),
+    background-color var(--motion-list-selection);
+}
+
+.sidebar-nav-item-right,
+.sidebar-nav-item-icon {
+  position: relative;
+  z-index: 1;
+}
+
+.sidebar-nav-item[data-active="true"] .sidebar-nav-item-main {
+  transform: translateX(4px);
+}
+
+.sidebar-nav-item[data-active="true"] .sidebar-nav-item-icon {
+  transform: scale(1.04);
+}
+
+.plain-tab-bar-selection-indicator {
+  left: 0;
+  top: 0;
+  z-index: 2;
+  width: var(--plain-tab-bar-indicator-width, 0);
+  height: var(--plain-tab-bar-indicator-height, 0);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--action-a1) 88%, var(--visual-white));
+  transform: translate3d(
+    var(--plain-tab-bar-indicator-x, 0),
+    var(--plain-tab-bar-indicator-y, 0),
+    0
+  );
+  transition:
+    transform var(--motion-list-selection),
+    width var(--motion-list-selection),
+    height var(--motion-list-selection),
+    opacity var(--motion-fast),
+    background-color var(--motion-fast);
+}
+
+.plain-tab-bar[data-motion-ready="true"] .plain-tab-bar-selection-indicator {
+  opacity: 1;
+}
+
+.plain-tab-bar[data-motion-ready="true"][data-orientation="horizontal"]
+  .plain-tab-bar-item.is-active::after,
+.plain-tab-bar[data-motion-ready="true"][data-orientation="vertical"]
+  .plain-tab-bar-item.is-active::before {
+  background: transparent;
+}
+
+.plain-tab-bar[data-orientation="horizontal"] .plain-tab-bar-item[data-active="true"] .plain-tab-bar-item-copy {
+  transform: translateY(-0.5px);
+}
+
+.plain-tab-bar[data-orientation="vertical"] .plain-tab-bar-item[data-active="true"] .plain-tab-bar-item-copy {
+  transform: translateX(4px);
+}
+
+.segmented-control-selection-indicator {
+  left: 0;
+  top: 0;
+  z-index: 0;
+  width: var(--segmented-control-indicator-width, 0);
+  height: var(--segmented-control-indicator-height, 0);
+  transform: translate3d(
+    var(--segmented-control-indicator-x, 0),
+    var(--segmented-control-indicator-y, 0),
+    0
+  );
+  transition:
+    transform var(--motion-list-selection),
+    width var(--motion-list-selection),
+    height var(--motion-list-selection),
+    opacity var(--motion-fast),
+    background-color var(--motion-fast),
+    border-color var(--motion-fast),
+    box-shadow var(--motion-fast);
+}
+
+.segmented-control[data-motion-ready="true"] .segmented-control-selection-indicator {
+  opacity: 1;
+}
+
+.segmented-control[data-motion-ready="true"] .segmented-option {
+  position: relative;
+  z-index: 1;
+}
+
+.segmented-control[data-motion-ready="true"][data-selection-style="pill"]
+  .segmented-control-selection-indicator {
+  border: 1px solid color-mix(in srgb, var(--ui-surface-border-strong) 88%, transparent);
+  border-radius: calc(var(--ui-control-radius) - 1px);
+  background: var(--ui-segment-active-bg);
+  box-shadow: 0 6px 14px color-mix(in srgb, var(--window-shadow) 12%, transparent);
+}
+
+.segmented-control[data-motion-ready="true"][data-selection-style="outline"]
+  .segmented-control-selection-indicator {
+  border: 1px solid var(--ui-segment-outline-active-border);
+  border-radius: calc(var(--ui-control-radius) - 1px);
+  background: var(--ui-segment-active-bg);
+  box-shadow: var(--shadow-soft);
+}
+
+.segmented-control[data-motion-ready="true"][data-selection-style="outline"]
+  .segmented-option[data-active="true"] {
+  border-color: transparent;
+  background: transparent;
+}
+
+.segmented-control[data-motion-ready="true"][data-selection-style="pill"]
+  .segmented-option[data-active="true"] {
+  border-color: transparent;
+  background: transparent;
+}
+
+.segmented-control[data-selection-style="underline"] {
+  overflow: visible;
+}
+
+.segmented-control[data-motion-ready="true"][data-selection-style="underline"]
+  .segmented-control-selection-indicator {
+  z-index: 2;
+  border-radius: 999px 999px 0 0;
+  background: color-mix(in srgb, var(--action-a1) 88%, var(--visual-white));
+  box-shadow: none;
+}
+
+.segmented-control[data-motion-ready="true"][data-selection-style="underline"]
+  .segmented-option[data-active="true"]::after {
+  background: transparent !important;
+  opacity: 0 !important;
+}
+
+.desktop-main > .workspace-page-cache-slot.is-active {
+  animation: none;
+}
+
+.desktop-main > .workspace-page-cache-slot.is-active[data-motion-enabled="true"] {
+  background: var(--window-bg);
+  overflow: hidden;
+  isolation: isolate;
+  opacity: 1;
+}
+
+.desktop-main
+  > .workspace-page-cache-slot.is-active[data-motion-enabled="true"]
+  > .workspace-page-cache-slot-content {
+  will-change: opacity;
+}
+
+.desktop-main
+  > .workspace-page-cache-slot.is-active[data-motion-enabled="true"][data-motion-surface="standard"][data-motion-direction="forward"]
+  > .workspace-page-cache-slot-content {
+  animation: workspace-page-enter-forward var(--motion-page-switch) both;
+}
+
+.desktop-main
+  > .workspace-page-cache-slot.is-active[data-motion-enabled="true"][data-motion-surface="standard"][data-motion-direction="backward"]
+  > .workspace-page-cache-slot-content {
+  animation: workspace-page-enter-backward var(--motion-page-switch) both;
+}
+
+.desktop-main
+  > .workspace-page-cache-slot.is-active[data-motion-enabled="true"][data-motion-surface="immersive"]
+  > .workspace-page-cache-slot-content {
+  animation: workspace-page-enter-immersive var(--motion-page-switch) both;
+}
+
+@keyframes workspace-page-enter-forward {
+  from {
+    opacity: 0.985;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes workspace-page-enter-backward {
+  from {
+    opacity: 0.985;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes workspace-page-enter-immersive {
+  from {
+    opacity: 0.985;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.history-side-item,
+.notes-note-row {
+  transition:
+    background-color var(--motion-list-selection),
+    border-color var(--motion-list-selection),
+    box-shadow var(--motion-list-selection),
+    color var(--motion-list-selection),
+    opacity var(--motion-list-selection),
+    transform var(--motion-list-selection);
+}
+
+.history-side-item {
+  position: relative;
+  isolation: isolate;
+}
+
+.history-side-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  bottom: 10px;
+  width: 3px;
+  z-index: 1;
+  border-radius: 999px;
+  background: var(--ui-list-row-rail, color-mix(in srgb, var(--action-a1) 84%, var(--visual-white)));
+  opacity: 0;
+  transform: scaleY(0.64);
+  transform-origin: center;
+  transition:
+    opacity var(--motion-list-selection),
+    transform var(--motion-list-selection),
+    background-color var(--motion-list-selection);
+}
+
+.history-side-item:hover::before,
+.history-side-item.active::before,
+.history-side-item:focus-visible::before {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+.history-side-item > *,
+.history-side-item [data-slot='card-content'],
+.history-side-item .list-item-card-body {
+  position: relative;
+  z-index: 2;
+}
+
+.history-side-item-actions,
+.notes-note-row-actions {
+  transition:
+    opacity var(--motion-list-selection),
+    transform var(--motion-list-selection);
+}
+
+.history-side-item-actions {
+  transform: translateX(4px);
+}
+
+.history-side-item:hover .history-side-item-actions,
+.history-side-item.active .history-side-item-actions,
+.history-side-item:focus-within .history-side-item-actions {
+  transform: translateX(0);
+}
+
+.notes-note-row::before {
+  z-index: 1;
+  transition:
+    opacity var(--motion-list-selection),
+    transform var(--motion-list-selection),
+    background-color var(--motion-list-selection);
+}
+
+.notes-note-row:hover,
+.notes-note-row.is-active,
+.notes-note-row:focus-visible {
+  transform: none;
+}
+
+.notes-note-row {
+  isolation: isolate;
+}
+
+.notes-note-row-main,
+.notes-note-row-trailing,
+.notes-note-row-actions {
+  position: relative;
+  z-index: 2;
+}
+
+.notes-note-row-actions {
+  transform: translateX(4px);
+}
+
+.notes-note-row:hover .notes-note-row-actions,
+.notes-note-row.is-active .notes-note-row-actions,
+.notes-note-row:focus-within .notes-note-row-actions {
+  transform: translateX(0);
+}
+
+.ui-standard-sheet-content,
+.diagnostic-console-archive-drawer {
+  --tw-animation-duration: var(--motion-overlay-duration);
+  --tw-ease: var(--motion-overlay-ease);
+}

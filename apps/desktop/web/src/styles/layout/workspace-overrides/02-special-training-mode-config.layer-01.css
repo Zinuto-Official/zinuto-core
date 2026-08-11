@@ -1,0 +1,766 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.special-training-mode-parameter-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  align-content: start;
+  border-top: 1px solid color-mix(in srgb, var(--line) 42%, transparent);
+  padding-top: 10px;
+}
+
+@media (max-width: 1320px) {
+  .special-training-mode-parameter-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.special-training-mode-parameter-grid.is-fast-decision {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  border: 1px solid color-mix(in srgb, var(--line) 62%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--surface-s1) 96%, var(--panel));
+  box-shadow: inset 0 1px 0
+    color-mix(in srgb, var(--visual-white) 6%, transparent);
+  padding-top: 0;
+}
+
+.special-training-mode-parameter-grid > * {
+  min-width: 0;
+}
+
+.special-training-mode-parameter-grid.is-fast-decision
+  > .special-training-mode-parameter-card {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  min-height: 136px;
+  padding: 16px 18px;
+}
+
+.special-training-mode-parameter-grid.is-fast-decision > :nth-child(2),
+.special-training-mode-parameter-grid.is-fast-decision > :nth-child(3) {
+  border-left: 1px solid color-mix(in srgb, var(--line) 56%, transparent);
+}
+
+.special-training-mode-parameter-grid.is-fast-decision
+  > .special-training-mode-parameter-card-full-row {
+  min-height: 88px;
+  border-top: 1px solid color-mix(in srgb, var(--line) 56%, transparent);
+  padding: 12px 16px;
+}
+
+.special-training-mode-parameter-grid.is-fast-decision
+  > .special-training-mode-parameter-card-metric {
+  align-content: stretch;
+  gap: 10px;
+}
+
+.special-training-mode-parameter-card {
+  width: 100%;
+  min-width: 0;
+  min-height: 118px;
+  border: 1px solid color-mix(in srgb, var(--line) 52%, transparent);
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: color-mix(in srgb, var(--surface-s1) 96%, var(--panel));
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  align-content: space-between;
+  gap: 10px;
+  text-align: left;
+  white-space: normal;
+  overflow: hidden;
+  transition:
+    background var(--motion-fast),
+    box-shadow var(--motion-fast);
+}
+
+button.special-training-mode-parameter-card {
+  display: grid;
+  align-items: stretch;
+  justify-content: initial;
+  white-space: normal;
+}
+
+.special-training-mode-parameter-card-metric {
+  position: relative;
+  grid-template-rows: auto minmax(0, 1fr);
+  align-content: stretch;
+}
+
+.special-training-mode-parameter-card-metric
+  .special-training-mode-parameter-card-label {
+  justify-self: center;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.special-training-mode-parameter-card-metric
+  .special-training-mode-parameter-card-value-row {
+  position: relative;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  min-height: 0;
+  gap: 10px;
+}
+
+.special-training-mode-parameter-card-metric
+  .special-training-mode-parameter-card-value-stack {
+  position: relative;
+  display: inline-block;
+  min-width: max-content;
+  white-space: nowrap;
+}
+
+.special-training-mode-parameter-card-metric
+  .special-training-mode-parameter-card-value-stack
+  .special-training-mode-parameter-card-value {
+  display: block;
+  text-align: center;
+}
+
+.special-training-mode-parameter-card-metric
+  .special-training-mode-parameter-card-value-stack
+  .special-training-mode-parameter-card-unit {
+  position: absolute;
+  left: calc(100% + 8px);
+  bottom: 0;
+  white-space: nowrap;
+}
+
+.special-training-mode-parameter-card-metric
+  .special-training-mode-parameter-card-icon {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.special-training-mode-parameter-card:hover,
+.special-training-mode-parameter-card:focus-visible {
+  background: color-mix(in srgb, var(--btn-bg-hover) 82%, var(--panel));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--line) 44%, transparent);
+}
+
+.special-training-mode-parameter-card-label {
+  color: var(--text-subtle);
+  font-size: var(--ty-r2);
+  line-height: 1.3;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.special-training-mode-parameter-card-value-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 6px;
+  min-width: 0;
+}
+
+.special-training-mode-parameter-card-value-stack {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.special-training-mode-parameter-card-value {
+  color: var(--text-strong);
+  font-size: var(--ty-r8);
+  line-height: 0.9;
+  font-weight: 820;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+  transition: color var(--motion-fast);
+}
+
+.special-training-mode-parameter-card-unit {
+  color: var(--text-subtle);
+  font-size: var(--ty-r3);
+  line-height: 1;
+  font-weight: 620;
+}
+
+.special-training-mode-parameter-card-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--text-subtle);
+  transition:
+    color var(--motion-fast),
+    transform var(--motion-fast);
+}
+
+.special-training-mode-parameter-card-copy {
+  display: grid;
+  gap: 6px;
+  align-content: end;
+  width: 100%;
+  min-width: 0;
+}
+
+.special-training-mode-parameter-card-copy-title {
+  margin: 0;
+  color: var(--text-strong);
+  font-size: var(--ty-r4);
+  line-height: 1.26;
+  font-weight: 700;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.special-training-mode-parameter-card-copy-note {
+  color: var(--text-subtle);
+  font-size: var(--ty-r2);
+  line-height: 1.35;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.special-training-mode-parameter-card:hover
+  .special-training-mode-parameter-card-value,
+.special-training-mode-parameter-card:focus-visible
+  .special-training-mode-parameter-card-value {
+  color: color-mix(in srgb, var(--primary) 88%, var(--text-strong));
+}
+
+.special-training-mode-parameter-card:hover
+  .special-training-mode-parameter-card-icon,
+.special-training-mode-parameter-card:focus-visible
+  .special-training-mode-parameter-card-icon {
+  color: color-mix(in srgb, var(--primary) 76%, var(--text-strong));
+  transform: translateY(1px);
+}
+
+.special-training-mode-parameter-card-metric:hover
+  .special-training-mode-parameter-card-icon,
+.special-training-mode-parameter-card-metric:focus-visible
+  .special-training-mode-parameter-card-icon {
+  transform: translateY(calc(-50% + 1px));
+}
+
+.special-training-mode-parameter-card-static {
+  cursor: default;
+}
+
+.special-training-mode-parameter-card-static:hover,
+.special-training-mode-parameter-card-static:focus-visible {
+  background: color-mix(in srgb, var(--panel-soft) 72%, transparent);
+  box-shadow: none;
+}
+
+.special-training-mode-parameter-card-full-row {
+  grid-column: 1 / -1;
+}
+
+.special-training-fast-strictness-card {
+  min-height: 90px;
+  display: grid;
+  grid-template-columns: 146px minmax(0, 1fr) auto;
+  grid-template-rows: minmax(0, 1fr);
+  align-items: center;
+  align-content: stretch;
+  gap: 20px;
+}
+
+.special-training-fast-strictness-card
+  .special-training-mode-parameter-card-label {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  min-height: 100%;
+  font-size: var(--ty-r3);
+  line-height: 1.35;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.special-training-fast-strictness-card
+  .special-training-mode-parameter-card-copy {
+  flex: 1 1 auto;
+  align-self: center;
+  align-content: center;
+  gap: 4px;
+}
+
+.special-training-fast-strictness-card
+  .special-training-mode-parameter-card-copy-title {
+  font-size: var(--ty-r4);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.special-training-fast-strictness-card
+  .special-training-mode-parameter-card-copy-note {
+  font-size: var(--ty-r3);
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.special-training-fast-strictness-card
+  .special-training-mode-parameter-card-icon {
+  justify-self: end;
+}
+
+.special-training-mode-parameter-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.special-training-mode-parameter-input {
+  width: min(180px, 100%);
+  min-width: 0;
+  font-size: var(--ty-r4);
+  font-weight: 700;
+}
+
+.special-training-mode-parameter-input-unit {
+  color: var(--text-subtle);
+  font-size: var(--ty-r4);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-mode-parameter-menu {
+  min-width: 132px;
+}
+
+.special-training-mode-parameter-menu-rich {
+  min-width: 320px;
+  width: min(560px, calc(100vw - 40px));
+  max-width: min(560px, calc(100vw - 40px));
+}
+
+.special-training-mode-parameter-option {
+  min-height: 32px;
+  justify-content: center;
+  font-size: var(--ty-r3);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.special-training-mode-parameter-option-rich {
+  min-height: 64px;
+  justify-content: flex-start;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.special-training-mode-parameter-option-copy {
+  width: 100%;
+  display: grid;
+  gap: 2px;
+}
+
+.special-training-mode-parameter-option-title {
+  color: var(--text-strong);
+  font-size: var(--ty-r3);
+  line-height: 1.28;
+  font-weight: 700;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.special-training-mode-parameter-option-note {
+  color: var(--text-subtle);
+  font-size: var(--ty-r2);
+  line-height: 1.34;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.special-training-mode-parameter-option.is-active {
+  color: color-mix(in srgb, var(--primary) 86%, var(--text-strong));
+  background: color-mix(in srgb, var(--primary-soft) 56%, var(--panel));
+}
+
+.special-training-mode-detail-body {
+  min-height: 0;
+  overflow: auto;
+  padding: 4px 2px 8px;
+  border-top: 1px solid color-mix(in srgb, var(--line) 34%, transparent);
+}
+
+.special-training-mode-guide-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.special-training-mode-challenge-description-card {
+  border: 1px solid color-mix(in srgb, var(--line) 66%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--panel-soft) 88%, var(--surface-s1));
+  box-shadow: 0 8px 18px
+    color-mix(in srgb, var(--visual-black) 20%, transparent);
+  padding: 16px;
+  display: grid;
+  gap: 8px;
+}
+
+.special-training-mode-challenge-description-card > h4 {
+  margin: 0;
+  color: var(--text-strong);
+  font-size: var(--ty-r3);
+  line-height: 1.4;
+  font-weight: 720;
+}
+
+.special-training-mode-challenge-description-card > p {
+  margin: 0;
+  color: var(--text-subtle);
+  font-size: var(--ty-r3);
+  line-height: 1.62;
+}
+
+.special-training-mode-critical-rule {
+  margin: 10px 0 0;
+  border: 1px solid color-mix(in srgb, var(--danger) 52%, var(--line));
+  border-radius: 8px;
+  padding: 8px 10px;
+  color: color-mix(in srgb, var(--danger) 82%, var(--text-strong));
+  background: color-mix(in srgb, var(--danger) 12%, var(--panel));
+  font-size: var(--ty-r2);
+  line-height: 1.45;
+}
+
+.special-training-pool-config-dialog {
+  max-width: min(760px, calc(100vw - 24px));
+}
+
+.special-training-pool-config-panel {
+  min-height: 0;
+  max-height: min(56vh, 560px);
+  overflow: auto;
+  border: 1px solid color-mix(in srgb, var(--line) 54%, transparent);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--panel-soft) 80%, transparent);
+  padding: 10px;
+  display: grid;
+  gap: 10px;
+}
+
+.special-training-pool-config-group {
+  display: grid;
+  gap: 8px;
+}
+
+.special-training-pool-config-group + .special-training-pool-config-group {
+  border-top: 1px solid color-mix(in srgb, var(--line) 42%, transparent);
+  padding-top: 10px;
+}
+
+.special-training-pool-config-group > h4 {
+  margin: 0;
+  color: var(--text-subtle);
+  font-size: var(--ty-r2);
+  line-height: 1.35;
+  font-weight: 620;
+}
+
+.special-training-pool-config-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.special-training-mode-detail-actions {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-top: 12px;
+  border-top: 1px solid color-mix(in srgb, var(--line) 34%, transparent);
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    color-mix(in srgb, var(--panel-soft) 90%, transparent) 36%
+  );
+}
+
+.special-training-mode-start-btn {
+  min-width: 196px;
+  height: 44px;
+  font-size: var(--ty-r4);
+  border: 1px solid color-mix(in srgb, var(--primary) 62%, var(--line));
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--primary) 88%, var(--panel)) 0%,
+    color-mix(in srgb, var(--primary) 72%, var(--panel)) 100%
+  );
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--primary) 24%, transparent),
+    0 10px 24px color-mix(in srgb, var(--primary) 22%, transparent);
+}
+
+.special-training-mode-start-btn:hover:not(:disabled) {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--primary) 94%, var(--panel)) 0%,
+    color-mix(in srgb, var(--primary) 78%, var(--panel)) 100%
+  );
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--primary) 28%, transparent),
+    0 12px 28px color-mix(in srgb, var(--primary) 28%, transparent);
+}
+
+.special-training-mode-grid {
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-content: stretch;
+  gap: 8px;
+}
+
+.special-training-mode-card {
+  border: 1px solid color-mix(in srgb, var(--line) 54%, transparent);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--panel-soft) 82%, transparent);
+  color: var(--text-subtle);
+  text-align: left;
+  padding: 10px 12px;
+  display: grid;
+  grid-template-columns: clamp(88px, 6.4vw, 108px) minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  transition:
+    border-color var(--motion-fast),
+    background var(--motion-fast);
+}
+
+.special-training-mode-card:hover {
+  border-color: color-mix(in srgb, var(--line) 68%, transparent);
+  background: color-mix(in srgb, var(--btn-bg-hover) 68%, transparent);
+}
+
+.special-training-mode-card.is-active {
+  border-color: color-mix(in srgb, var(--primary) 44%, var(--line));
+  background: color-mix(in srgb, var(--primary-soft) 62%, var(--panel));
+}
+
+.special-training-mode-card-icon-wrap {
+  width: 100%;
+  min-height: clamp(68px, 5vw, 84px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  overflow: visible;
+}
+
+.special-training-mode-card-icon {
+  width: clamp(64px, 4.9vw, 78px);
+  height: clamp(64px, 4.9vw, 78px);
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+.special-training-mode-card-body {
+  min-width: 0;
+  display: grid;
+  gap: 6px;
+  align-content: center;
+}
+
+.special-training-mode-card-head {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.special-training-mode-card-head > strong {
+  color: var(--text-strong);
+  font-size: var(--ty-r3);
+  line-height: 1.35;
+  font-weight: 620;
+}
+
+.special-training-mode-card-head > span {
+  color: var(--text-subtle);
+  font-size: var(--ty-r2);
+  line-height: 1.42;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: clip;
+}
+
+.special-training-mode-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.special-training-mode-card-meta > span {
+  min-height: 20px;
+  border: 1px solid color-mix(in srgb, var(--line) 54%, transparent);
+  border-radius: 999px;
+  padding: 0 8px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--text-subtle);
+  font-size: var(--ty-r1);
+  line-height: 1;
+}
+
+.special-training-stage-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.special-training-task-card {
+  border: 1px solid color-mix(in srgb, var(--line) 56%, transparent);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--panel-soft) 84%, transparent);
+  padding: 10px 11px;
+  min-height: 0;
+  overflow: auto;
+  display: grid;
+  gap: 8px;
+}
+
+.special-training-task-card > h4 {
+  margin: 0;
+  color: var(--text-strong);
+  font-size: var(--ty-r4);
+  line-height: 1.35;
+  font-weight: 680;
+}
+
+.special-training-task-card > p {
+  margin: 0;
+  color: var(--text-subtle);
+  font-size: var(--ty-r3);
+  line-height: 1.45;
+}
+
+.special-training-task-card dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.special-training-task-card dl > div {
+  border: 1px solid color-mix(in srgb, var(--line) 52%, transparent);
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--panel) 92%, transparent);
+  display: grid;
+  gap: 4px;
+  padding: 8px 9px;
+}
+
+.special-training-task-card dt {
+  margin: 0;
+  color: var(--text-subtle);
+  font-size: var(--ty-r2);
+  line-height: 1.35;
+}
+
+.special-training-task-card dd {
+  margin: 0;
+  color: var(--text-strong);
+  font-size: var(--ty-r3);
+  line-height: 1.42;
+}
+
+.special-training-trainer-shell {
+  min-height: 0;
+  height: 100%;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  position: relative;
+  isolation: isolate;
+}
+
+.special-training-trainer-app-shell {
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.special-training-trainer-left-panel,
+.special-training-trainer-right-panel {
+  min-width: 0;
+  min-height: 0;
+}
+
+.special-training-trainer-right-panel {
+  container-type: inline-size;
+  container-name: rightpanel;
+}
+
+.special-training-floating-overlay-slot {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+}
+
+.special-training-trainer-left-panel {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.special-training-trainer-left-panel-body {
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  gap: 8px;
+}
+
+.special-training-trainer-left-panel-body.has-top {
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.special-training-trainer-left-panel-top {
+  min-width: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.special-training-risk-left-panel-body {
+  gap: 10px;
+}
+
+.special-training-risk-left-top-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) repeat(2, minmax(0, 0.78fr));
+  gap: 8px;
+  min-width: 0;
+  align-items: stretch;
+}
+
+.special-training-risk-left-top-module {
+  min-width: 0;
+}

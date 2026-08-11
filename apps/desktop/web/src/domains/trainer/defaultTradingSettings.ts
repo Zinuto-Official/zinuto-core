@@ -1,0 +1,37 @@
+// SPDX-License-Identifier: GPL-3.0-only
+
+import type { TradingSettings } from "@/domains/training/types";
+
+export const DEFAULT_TRADING_SETTINGS: TradingSettings = {
+  initialSecuritiesBalance: 50000,
+  assetClass: "STOCK",
+  marketPresetId: "A_SHARE",
+  minTradeStep: 100,
+  commissionRate: 0.03,
+  makerFeeRate: 0,
+  takerFeeRate: 0,
+  fundingRate: 0,
+  contractMultiplier: 1,
+  transferFeeRate: 0.001,
+  regulatoryFeeRate: 0.00341,
+  platformFeeRate: 0,
+  transactionLevyRate: 0,
+  slippageRate: 0.01,
+  stampDutyRate: 0.05,
+  commissionMinimumFee: 5,
+  platformFeeMinimumFee: 0,
+  transactionLevyMinimumFee: 0,
+  longFinancingAnnualRate: 0,
+  longInitialMarginRatio: 100,
+  longMaintenanceMarginRatio: 100,
+  shortBorrowAnnualRate: 6,
+  shortInitialMarginRatio: 150,
+  shortMaintenanceMarginRatio: 130,
+  stampDutyMode: "SELL",
+  positionCostMode: "DILUTED",
+  tradeSettlementMode: "T1",
+  freeReplayEndSettlementMode: "FORCE_CLOSE",
+  tradeAmountIncludesFees: false,
+  allowLongMarginTrading: false,
+  allowShortSelling: false,
+};

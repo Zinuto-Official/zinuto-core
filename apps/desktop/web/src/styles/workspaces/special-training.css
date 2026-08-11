@@ -1,0 +1,33 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+@import "../layout/chart-workspace.css";
+@import "../components/trainer-and-indicators.css";
+@import "../components/anchor-navigator.css";
+@import "../components/draw-toolbar.css";
+@import "../components/replay-settings-modal.css";
+@import "../components/summary-modal.css";
+@import "../components/trading-settings-sheet.css";
+@import "../components/special-training-bank-editor.css";
+@import "../components/special-training-bank-delete-confirm-window.css";
+@import "../layout/workspace-overrides.css";
+
+.special-training-mode-runtime-stack,
+.special-training-mode-runtime-slot {
+  display: flex;
+  flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+}
+
+.special-training-mode-runtime-slot[hidden] {
+  display: none;
+}
+
+.special-training-mode-runtime-slot > .workspace-page {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+}

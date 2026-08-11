@@ -1,0 +1,260 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.desktop-main.is-trainer .trainer-ai-guide-code-block {
+  margin: 0;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid var(--ui-control-border);
+  background: var(--ui-control-bg);
+  color: var(--text-strong);
+  font-size: var(--ty-r1);
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.desktop-main.is-trainer .trainer-ai-guide-troubleshooting-item {
+  padding: 12px 14px;
+  color: var(--text-strong);
+  font-size: var(--ty-r2);
+  line-height: 1.55;
+}
+
+@media (max-width: 900px) {
+  .desktop-main.is-trainer .trainer-ai-guide-status-grid,
+  .desktop-main.is-trainer .trainer-ai-guide-meta-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .desktop-main.is-trainer .trainer-ai-guide-inline-copy,
+  .desktop-main.is-trainer .trainer-ai-guide-env-head,
+  .desktop-main.is-trainer .trainer-ai-guide-section-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+.desktop-main.is-trainer :is(
+  .toolbar-title,
+  .top-toolbar .toolbar-control,
+  .top-toolbar-form-label,
+  .position-label,
+  .position-buying-power-label,
+  .estimate-warning-text,
+  .estimate-header,
+  .estimate-row,
+  .estimate-dl-row dt,
+  .estimate-dl-row dd,
+  .trade-log-side-stats,
+  .trainer-free-replay-empty-text,
+  .log-row,
+  .log-side-text,
+  .error-text,
+  .trade-side-card .trade-live-segment [data-slot="segmented-option"]
+) {
+  font-size: var(--trainer-workspace-r2);
+}
+
+.desktop-main.is-trainer :is(
+  .top-toolbar-readonly-stream-item,
+  .next-focus-btn,
+  .position-value,
+  .position-value.position-value-summary,
+  .position-buying-power-value,
+  .radio-item,
+  .trainer-current-position-card [data-slot="card-title"],
+  .trade-box [data-slot="card-title"],
+  .trainer-free-replay-asset-btn,
+  .trainer-free-replay-segment .segmented-option,
+  .trainer-free-replay-select [data-slot="select-value"],
+  .trainer-free-replay-blindbox-toggle-label
+) {
+  font-size: var(--trainer-workspace-r3);
+}
+
+.desktop-main.is-trainer :is(
+  .trade-next-action,
+  .trade-side-action,
+  .trainer-free-replay-resume-btn-main
+) {
+  font-size: var(--trainer-workspace-r4);
+}
+
+.desktop-main.is-trainer :is(
+  .trainer-free-replay-blindbox-pill,
+  .trainer-free-replay-section-label,
+  .position-market-preset-trigger-label,
+  .position-leverage-badge,
+  .trade-action-reason-label,
+  .trade-action-reason-text,
+  .estimate-header-mode,
+  .estimate-dl-meta,
+  .trade-log-side-stats-text,
+  .trade-log-strip-summary-text,
+  .trade-log-pill-side,
+  .trade-log-pill-seq,
+  .trade-log-pill-time,
+  .trade-log-pill-metric
+) {
+  font-size: var(--trainer-workspace-r1);
+  font-weight: 400;
+}
+
+.desktop-main.is-trainer .trainer-market-layout-chart,
+.desktop-main.is-trainer .trainer-market-layout-chart .chart-panel,
+.desktop-main.is-trainer .trainer-market-layout-chart .trainer-chart-info-bar {
+  font-size: var(--ty-r2);
+}
+
+.desktop-main.is-trainer :is(
+  .indicator-name-btn,
+  .tool-section-title,
+  .chart-period-btn,
+  .chart-period-indicator,
+  .chart-change-inline
+) {
+  font-size: var(--ty-r2);
+}
+
+.desktop-main.is-trainer :is(
+  .top-toolbar-readonly-stream-item,
+  .top-toolbar-readonly-stream-divider,
+  .top-toolbar-speed-unit,
+  .anchor-nav-trigger
+) {
+  font-size: var(--ty-r1);
+}
+
+.desktop-main.is-trainer :is(
+  .anchor-nav-trigger-symbol,
+  .anchor-nav-trigger-date
+) {
+  font-size: var(--ty-r2);
+}
+
+.desktop-main.is-trainer :is(
+  .chart-change-float,
+  .selected-change-tag
+) {
+  font-size: var(--ty-r4);
+}
+
+.desktop-main.is-single-page > .workspace-page,
+.desktop-main.is-single-page
+  > .workspace-page-cache-slot
+  > .workspace-page-cache-slot-content
+  > .workspace-page,
+.desktop-main.is-single-page > .workspace-page-cache-slot > .workspace-page {
+  gap: var(--workspace-frame-gap);
+  padding: var(--workspace-frame-pad-top) var(--workspace-frame-pad-inline)
+    var(--workspace-frame-pad-bottom);
+  box-sizing: border-box;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+}
+
+.desktop-main.is-single-page > .workspace-page.training-stats-page,
+.desktop-main.is-single-page > .workspace-page.custom-indicator-page,
+.desktop-main.is-single-page > .workspace-page.history-page,
+.desktop-main.is-single-page > .workspace-page.settings-page,
+.desktop-main.is-single-page
+  > .workspace-page-cache-slot
+  > .workspace-page-cache-slot-content
+  > .workspace-page.training-stats-page,
+.desktop-main.is-single-page
+  > .workspace-page-cache-slot
+  > .workspace-page-cache-slot-content
+  > .workspace-page.custom-indicator-page,
+.desktop-main.is-single-page
+  > .workspace-page-cache-slot
+  > .workspace-page-cache-slot-content
+  > .workspace-page.history-page,
+.desktop-main.is-single-page
+  > .workspace-page-cache-slot
+  > .workspace-page-cache-slot-content
+  > .workspace-page.settings-page,
+.desktop-main.is-single-page
+  > .workspace-page-cache-slot
+  > .workspace-page.training-stats-page,
+.desktop-main.is-single-page
+  > .workspace-page-cache-slot
+  > .workspace-page.custom-indicator-page,
+.desktop-main.is-single-page
+  > .workspace-page-cache-slot
+  > .workspace-page.history-page,
+.desktop-main.is-single-page
+  > .workspace-page-cache-slot
+  > .workspace-page.settings-page {
+  padding: var(--workspace-frame-pad-top) var(--workspace-frame-pad-inline)
+    var(--workspace-frame-pad-bottom);
+}
+
+.workspace-page-header,
+.history-workspace,
+.notes-workspace,
+.settings-modern-panel,
+.settings-storage-panel,
+.training-stats-filters,
+.training-stats-panel,
+.training-stats-card,
+.training-stats-subtable,
+.training-stats-compare-card,
+.training-stats-month-card,
+.custom-indicator-context-bar,
+.custom-indicator-chart-panel,
+.custom-indicator-config-panel,
+.special-training-mode-card,
+.special-training-task-card,
+.special-training-settlement-card,
+.special-training-mode-modal {
+  border-radius: var(--workspace-surface-radius);
+}
+
+@media (max-width: 1180px) {
+  .history-workspace,
+  .notes-workspace {
+    grid-template-columns: minmax(280px, 34vw) minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 980px) {
+  .desktop-main:is(.is-trainer, .is-special-training) .app-shell {
+    grid-template-columns: minmax(0, 1fr);
+    grid-auto-rows: max-content;
+    overflow-x: hidden;
+  }
+
+  .desktop-main.is-special-training .special-training-trainer-app-shell {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
+    grid-auto-rows: minmax(0, 1fr);
+  }
+
+  .desktop-main:is(.is-trainer, .is-special-training) .left-panel,
+  .desktop-main:is(.is-trainer, .is-special-training) .right-panel {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .history-workspace,
+  .notes-workspace {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(240px, 42vh) minmax(0, 1fr);
+  }
+
+  .history-side-panel,
+  .notes-side-panel {
+    border-right: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--line) 72%, transparent);
+  }
+
+  .settings-modern-row {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    gap: 10px;
+  }
+
+  .settings-row-control.is-fill .settings-row-control-inner > * {
+    width: 100%;
+  }
+}

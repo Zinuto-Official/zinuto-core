@@ -1,0 +1,777 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.data-config-page-toolbar {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 0 10px;
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--ui-divider-soft) 84%, transparent);
+}
+
+.data-config-page-toolbar-copy {
+  min-width: 0;
+  display: grid;
+  gap: 7px;
+}
+
+.data-config-page-toolbar-copy > h1 {
+  margin: 0;
+  color: var(--text-t1);
+  font-size: var(--ty-r5);
+  font-weight: 760;
+  line-height: 1.2;
+}
+
+.data-config-page .data-config-source-group-title {
+  margin: 0;
+}
+
+.data-config-page-toolbar-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+
+.data-config-page-toolbar-actions [data-slot="button"] svg {
+  width: 16px;
+  height: 16px;
+}
+
+.data-config-management-scroll {
+  min-width: 0;
+  min-height: 0;
+  flex: 1 1 auto;
+  display: grid;
+  align-content: start;
+  gap: 14px;
+  padding: 0 2px 2px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.data-config-add-decision,
+.data-config-task-section,
+.data-config-page .data-config-source-group {
+  min-width: 0;
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  overflow: visible;
+  border: 1px solid color-mix(in srgb, var(--surface-s4) 62%, transparent);
+  border-radius: var(--radius-rect);
+  background: color-mix(in srgb, var(--surface-s2) 90%, var(--surface-s1));
+  padding: 14px;
+}
+
+.data-config-add-decision {
+  gap: 16px;
+  padding: clamp(16px, 2.2vw, 24px);
+}
+
+.data-config-add-decision.is-drop-active {
+  border-color: color-mix(
+    in srgb,
+    var(--visual-accent-base) 54%,
+    var(--ui-surface-border-strong)
+  );
+  box-shadow: 0 0 0 3px var(--visual-accent-ring);
+}
+
+.data-config-add-decision-head {
+  max-width: 720px;
+  display: grid;
+  gap: 6px;
+}
+
+.data-config-add-decision-head h2,
+.data-config-add-decision-head p {
+  margin: 0;
+}
+
+.data-config-add-decision-head h2 {
+  color: var(--text-t1);
+  font-size: var(--ty-r6);
+  font-weight: 780;
+  line-height: 1.15;
+}
+
+.data-config-add-decision-head p {
+  color: var(--text-t2);
+  font-size: var(--ty-r2);
+  line-height: 1.5;
+}
+
+.data-config-add-decision-options {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.data-config-page [data-slot="button"].data-config-add-choice,
+.data-config-page [data-slot="button"].data-config-acquisition-choice {
+  min-width: 0;
+  min-height: 172px;
+  height: auto;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  justify-content: stretch;
+  justify-items: stretch;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid var(--ui-surface-border);
+  background: var(--ui-surface-bg);
+  color: var(--text-t1);
+  text-align: left;
+  white-space: normal;
+}
+
+.data-config-page
+  [data-slot="button"].data-config-add-choice:hover:not(:disabled),
+.data-config-page
+  [data-slot="button"].data-config-acquisition-choice:hover:not(:disabled) {
+  border-color: color-mix(
+    in srgb,
+    var(--visual-accent-base) 42%,
+    var(--ui-surface-border-strong)
+  );
+  background: var(--ui-surface-hover-bg);
+}
+
+.data-config-add-choice-icon,
+.data-config-acquisition-choice-icon {
+  width: 48px;
+  height: 48px;
+  display: inline-grid;
+  place-items: center;
+  line-height: 0;
+  border-radius: 14px;
+  background: color-mix(
+    in srgb,
+    var(--visual-accent-base) 12%,
+    var(--ui-surface-bg-soft)
+  );
+  color: var(--visual-accent-base);
+}
+
+.data-config-add-choice-icon svg,
+.data-config-acquisition-choice-icon svg {
+  width: 30px;
+  height: 30px;
+}
+
+.data-config-add-choice-icon svg {
+  transform: translateY(-1px);
+}
+
+.data-config-add-choice-copy,
+.data-config-acquisition-choice-copy {
+  min-width: 0;
+  display: grid;
+  justify-items: start;
+  gap: 6px;
+}
+
+.data-config-add-choice-copy strong,
+.data-config-acquisition-choice-copy strong {
+  color: var(--text-t1);
+  font-size: var(--ty-r3);
+  font-weight: 740;
+  line-height: 1.3;
+}
+
+.data-config-add-choice-copy > span:not(.data-config-add-choice-action),
+.data-config-acquisition-choice-copy
+  > span:not(.data-config-acquisition-choice-action) {
+  color: var(--text-t2);
+  font-size: var(--ty-r1);
+  line-height: 1.45;
+}
+
+.data-config-add-choice-action,
+.data-config-acquisition-choice-action {
+  margin-top: 4px;
+  color: var(--visual-accent-base);
+  font-size: var(--ty-r1);
+  font-weight: 720;
+}
+
+.data-config-add-decision
+  .data-config-add-choice-local
+  .data-config-import-drop-progress {
+  align-self: center;
+}
+
+.data-config-task-section {
+  border-color: color-mix(
+    in srgb,
+    var(--visual-accent-base) 24%,
+    var(--surface-s4)
+  );
+  background: color-mix(
+    in srgb,
+    var(--visual-accent-base) 4%,
+    var(--surface-s2)
+  );
+}
+
+.data-config-task-section-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.data-config-task-count {
+  min-width: 22px;
+  min-height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 7px;
+  border-radius: 999px;
+  background: var(--ui-surface-bg-soft);
+  color: var(--text-t2);
+  font-size: var(--ty-r1);
+  font-variant-numeric: tabular-nums;
+}
+
+.data-config-task-list,
+.data-config-source-list {
+  min-width: 0;
+  display: grid;
+  align-content: start;
+  gap: 8px;
+}
+
+.data-config-task-row-source {
+  min-width: 0;
+  min-height: 72px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--ui-surface-border);
+  border-radius: calc(var(--radius-rect) - 2px);
+  background: var(--ui-surface-bg);
+}
+
+.data-config-task-row-icon {
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--visual-accent-base);
+}
+
+.data-config-task-row-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.data-config-task-row-copy {
+  min-width: 0;
+  display: grid;
+  gap: 7px;
+}
+
+.data-config-task-row-heading {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.data-config-task-row-heading strong {
+  min-width: 0;
+  color: var(--text-t1);
+  font-size: var(--ty-r2);
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.data-config-task-row-hint {
+  min-width: 0;
+  color: var(--text-t2);
+  font-size: var(--ty-r1);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-root .data-config-page .data-config-task-row-import {
+  min-width: 0;
+  min-height: 94px;
+  display: grid;
+  grid-template-columns:
+    minmax(180px, 0.8fr) auto minmax(220px, 1.2fr)
+    minmax(220px, 1fr);
+  grid-template-rows: auto;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--ui-surface-border);
+  border-radius: calc(var(--radius-rect) - 2px);
+  background: var(--ui-surface-bg);
+  overflow: hidden;
+  transform: none;
+}
+
+.app-root .data-config-page .data-config-task-row-import::before,
+.app-root .data-config-page .data-config-task-row-import::after {
+  content: none;
+}
+
+.data-config-task-row-import .data-asset-card-folder-tab {
+  position: static;
+  width: auto;
+  min-width: 0;
+}
+
+.data-config-task-row-import .data-asset-card-head,
+.data-config-task-row-import .data-asset-card-content,
+.data-config-task-row-import .data-asset-card-foot {
+  min-width: 0;
+  margin: 0;
+}
+
+.data-config-task-row-import .data-asset-card-summary {
+  gap: 3px;
+}
+
+.data-config-task-row-import .data-asset-card-summary-value {
+  font-size: var(--ty-r4);
+  line-height: 1.15;
+}
+
+.data-config-task-row-import .data-asset-card-summary-lines {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.data-config-task-row-import .data-asset-card-foot-import {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.data-config-page .data-config-source-group {
+  flex: none;
+}
+
+/* Keep hall copy and grouped surfaces clear of the enclosing workspace frame. */
+
+.data-config-page .data-asset-panel-hall {
+  padding: var(--workspace-major-surface-pad-unified);
+}
+
+.data-config-page .data-config-source-group-head {
+  align-items: center;
+}
+
+.data-config-page .data-config-source-group-copy {
+  gap: 4px;
+}
+
+.app-root .data-config-page .data-config-source-row {
+  min-width: 0;
+  min-height: 78px;
+  display: grid;
+  grid-template-columns: minmax(180px, 0.9fr) minmax(320px, 1.6fr) auto;
+  grid-template-rows: auto;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 12px;
+  border: 1px solid var(--ui-surface-border);
+  border-radius: calc(var(--radius-rect) - 2px);
+  background: var(--ui-surface-bg);
+  overflow: hidden;
+  transform: none;
+  user-select: none;
+}
+
+.app-root .data-config-page .data-config-source-row:hover {
+  border-color: var(--ui-surface-border-strong);
+  background: var(--ui-surface-hover-bg);
+  transform: none;
+}
+
+.app-root .data-config-page .data-config-source-row::before,
+.app-root .data-config-page .data-config-source-row::after {
+  content: none;
+}
+
+.data-config-source-row .data-asset-card-folder-tab {
+  position: static;
+  width: auto;
+  min-height: 0;
+  min-width: 0;
+}
+
+.data-config-source-row .data-asset-card-title-wrap {
+  min-width: 0;
+}
+
+.data-config-source-row .data-asset-card-title {
+  font-size: var(--ty-r2);
+}
+
+.data-config-source-row .data-asset-card-content.is-stacked {
+  min-width: 0;
+  display: block;
+}
+
+.data-config-source-row .data-asset-card-file-stack {
+  display: none;
+}
+
+.data-config-source-row .data-asset-card-summary {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: auto auto minmax(120px, auto) minmax(0, 1fr);
+  align-items: center;
+  gap: 5px 10px;
+}
+
+.data-config-source-row .data-asset-card-summary-head {
+  margin: 0;
+}
+
+.data-config-source-row .data-asset-card-summary-label {
+  font-size: var(--ty-r1);
+  letter-spacing: 0;
+}
+
+.data-config-source-row .data-asset-card-summary-value {
+  font-size: var(--ty-r3);
+  line-height: 1.2;
+}
+
+.data-config-source-row .data-asset-card-summary-scope {
+  font-size: var(--ty-r1);
+}
+
+.data-config-source-row .data-asset-card-summary-meta {
+  grid-column: 1 / -1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px 14px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.data-config-source-row .data-asset-card-meta-line {
+  min-width: 0;
+  flex: 1 1 160px;
+}
+
+.data-config-source-row .data-asset-card-foot-ready {
+  min-width: 0;
+  margin: 0;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.data-config-source-row .data-asset-card-progress-panel-inline {
+  display: none;
+}
+
+.data-config-source-row .data-asset-card-actions {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.data-config-source-row.is-draggable {
+  cursor: grab;
+}
+
+.data-config-source-row.is-draggable:active {
+  cursor: grabbing;
+}
+
+.data-config-source-row.is-dragging {
+  opacity: 0.72;
+  transform: scale(0.995);
+}
+
+.data-config-source-row.is-drag-over {
+  border-color: color-mix(
+    in srgb,
+    var(--visual-accent-base) 50%,
+    var(--ui-surface-border-strong)
+  );
+  box-shadow: 0 0 0 2px var(--visual-accent-ring);
+}
+
+.data-config-source-group-system {
+  background: color-mix(in srgb, var(--surface-s2) 72%, transparent);
+}
+
+.data-config-source-group-system.is-collapsed {
+  gap: 0;
+  padding-block: 12px;
+}
+
+.data-config-source-list-system .data-config-source-row {
+  background: color-mix(in srgb, var(--ui-surface-bg) 82%, transparent);
+}
+
+@media (max-width: 1040px) {
+  .app-root .data-config-page .data-config-task-row-import {
+    grid-template-columns: minmax(180px, 0.8fr) auto minmax(0, 1.2fr);
+  }
+
+  .data-config-task-row-import .data-asset-card-foot-import {
+    grid-column: 1 / -1;
+  }
+
+  .app-root .data-config-page .data-config-source-row {
+    grid-template-columns: minmax(170px, 0.8fr) minmax(260px, 1.3fr) auto;
+  }
+}
+
+@media (max-width: 860px) {
+  .data-config-page-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .data-config-page-toolbar-actions {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .data-config-add-decision-options {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .data-config-page [data-slot="button"].data-config-add-choice,
+  .data-config-page [data-slot="button"].data-config-acquisition-choice {
+    min-height: 142px;
+  }
+
+  .app-root .data-config-page .data-config-task-row-import,
+  .app-root .data-config-page .data-config-source-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .data-config-task-row-import .data-asset-card-content,
+  .data-config-source-row .data-asset-card-content {
+    grid-column: 1 / -1;
+  }
+
+  .data-config-task-row-import .data-asset-card-foot-import {
+    grid-column: 1 / -1;
+  }
+
+  .data-config-source-row .data-asset-card-foot-ready {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .data-config-source-row .data-asset-card-summary {
+    grid-template-columns: auto auto minmax(0, 1fr);
+  }
+
+  .data-config-source-row .data-asset-card-summary-scope {
+    grid-column: 1 / -1;
+  }
+
+  .data-config-task-row-source {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .data-config-task-row-source > [data-slot="button"] {
+    grid-column: 2;
+    justify-self: start;
+  }
+}
+
+/* Source cards retain their footprint while operational state changes. */
+
+.data-config-precheck-inline {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid color-mix(in srgb, var(--visual-accent-base) 28%, var(--ui-surface-border));
+  border-radius: calc(var(--radius-rect) - 2px);
+  background: color-mix(in srgb, var(--visual-accent-base) 4%, var(--ui-surface-bg));
+}
+
+.data-config-precheck-inline > span:last-child {
+  min-width: 0;
+  display: grid;
+  gap: 7px;
+}
+
+.app-root .data-config-page .data-config-source-row {
+  min-height: 168px;
+  grid-template-columns: minmax(220px, 0.85fr) minmax(420px, 1.65fr);
+  grid-template-rows: minmax(84px, auto) minmax(52px, auto);
+  align-items: stretch;
+  gap: 14px 20px;
+  padding: 16px 18px;
+}
+
+.data-config-source-row .data-asset-card-folder-tab {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-content: start;
+  gap: 10px;
+}
+
+.data-config-source-row .data-asset-card-title-wrap {
+  grid-column: 1;
+  grid-row: 1;
+  display: grid;
+  align-content: start;
+  gap: 5px;
+}
+
+.data-config-source-row .data-asset-card-menu-trigger {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: start;
+}
+
+.data-config-source-row .data-asset-card-title {
+  font-size: var(--ty-r3);
+  font-weight: 720;
+}
+
+.data-config-source-card-identity-meta {
+  min-width: 0;
+  grid-column: 1 / -1;
+  display: grid;
+  justify-items: start;
+  gap: 8px;
+}
+
+.data-config-source-card-path {
+  min-width: 0;
+  max-width: 100%;
+  color: var(--text-t3);
+  font-size: var(--ty-r1);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.data-config-source-row .data-config-source-card-content {
+  min-width: 0;
+  display: block;
+}
+
+.data-config-source-card-metrics {
+  min-width: 0;
+  min-height: 84px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.data-config-source-card-metric {
+  min-width: 0;
+  display: grid;
+  align-content: center;
+  gap: 5px;
+  padding: 10px 11px;
+  border: 1px solid color-mix(in srgb, var(--ui-surface-border) 82%, transparent);
+  border-radius: calc(var(--radius-rect) - 4px);
+  background: color-mix(in srgb, var(--ui-surface-bg-soft) 70%, transparent);
+}
+
+.data-config-source-card-metric > span {
+  color: var(--text-t3);
+  font-size: var(--ty-r1);
+  line-height: 1.2;
+}
+
+.data-config-source-card-metric > strong {
+  min-width: 0;
+  color: var(--text-t1);
+  font-size: var(--ty-r2);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.data-config-source-row .data-asset-card-foot-ready {
+  grid-column: 1 / -1;
+  min-height: 52px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  margin: 0;
+  padding-top: 12px;
+  border-top: 1px solid color-mix(in srgb, var(--ui-surface-border) 80%, transparent);
+}
+
+.data-config-source-card-operation {
+  min-width: 0;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+}
+
+.data-config-source-card-operation .data-asset-card-progress-panel,
+.data-config-source-card-operation .data-asset-card-progress-panel-inline {
+  width: min(100%, 560px);
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.data-config-source-card-operation-summary {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px 14px;
+  color: var(--text-t3);
+  font-size: var(--ty-r1);
+  line-height: 1.35;
+}
+
+.data-config-source-card-operation-summary > span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.data-config-source-card-operation-summary > span:first-child {
+  color: var(--text-t2);
+}
+
+.data-config-source-row .data-asset-card-actions {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

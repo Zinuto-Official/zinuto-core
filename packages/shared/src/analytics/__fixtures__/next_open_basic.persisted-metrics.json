@@ -1,0 +1,169 @@
+{
+  "periodsPerYear": 365.2424999999999,
+  "sampled": false,
+  "returns": {
+    "totalReturn": 0.040000000000000036,
+    "CAGR": 117.5131321929932,
+    "annualizedReturn": 4.810331147265213
+  },
+  "risk": {
+    "annualVolatility": 0.10979647721912543,
+    "sharpe": 43.811343215183804,
+    "sortino": 0,
+    "calmar": 0,
+    "downsideDeviation": 0,
+    "VaR95": 0.009708737864077666,
+    "maxDrawdown": 0,
+    "avgDrawdown": 0,
+    "maxDrawdownDuration": 0,
+    "ulcerIndex": 0,
+    "sampled": false
+  },
+  "trades": {
+    "totalTrades": 1,
+    "winRate": 1,
+    "profitFactor": null,
+    "profitFactorState": "POSITIVE_INFINITY",
+    "payoffRatio": null,
+    "payoffRatioState": "POSITIVE_INFINITY",
+    "grossProfit": 40.000000000000036,
+    "grossLoss": 0,
+    "expectancy": 40.000000000000036,
+    "avgWin": 40.000000000000036,
+    "avgLoss": 0,
+    "largestWin": 40.000000000000036,
+    "largestLoss": 0,
+    "maxConsecutiveWins": 1,
+    "maxConsecutiveLosses": 0,
+    "exposure": 0.6666666666666666,
+    "totalCost": 0,
+    "totalFee": 0,
+    "totalTax": 0,
+    "totalSlippage": 0,
+    "realizedPnl": 40
+  },
+  "distribution": {
+    "histogram": [
+      {
+        "min": 0.009708737864077666,
+        "max": 0.012232048447563204,
+        "mid": 0.010970393155820435,
+        "count": 2
+      },
+      {
+        "min": 0.012232048447563204,
+        "max": 0.014755359031048743,
+        "mid": 0.013493703739305973,
+        "count": 0
+      },
+      {
+        "min": 0.014755359031048743,
+        "max": 0.01727866961453428,
+        "mid": 0.016017014322791512,
+        "count": 0
+      },
+      {
+        "min": 0.01727866961453428,
+        "max": 0.01980198019801982,
+        "mid": 0.01854032490627705,
+        "count": 1
+      }
+    ],
+    "skewness": 0.7050627205669917,
+    "kurtosis": -1.5000000000000007,
+    "bestPeriod": {
+      "barIndex": 2,
+      "barTime": "2026-01-03T00:00:00.000Z",
+      "value": 0.01980198019801982
+    },
+    "worstPeriod": {
+      "barIndex": 3,
+      "barTime": "2026-01-04T00:00:00.000Z",
+      "value": 0.009708737864077666
+    }
+  },
+  "series": {
+    "returns": [
+      {
+        "barIndex": 1,
+        "barTime": "2026-01-02T00:00:00.000Z",
+        "value": 0.010000000000000009
+      },
+      {
+        "barIndex": 2,
+        "barTime": "2026-01-03T00:00:00.000Z",
+        "value": 0.01980198019801982
+      },
+      {
+        "barIndex": 3,
+        "barTime": "2026-01-04T00:00:00.000Z",
+        "value": 0.009708737864077666
+      }
+    ],
+    "drawdown": [
+      {
+        "barIndex": 0,
+        "barTime": "2026-01-01T00:00:00.000Z",
+        "value": 0
+      },
+      {
+        "barIndex": 1,
+        "barTime": "2026-01-02T00:00:00.000Z",
+        "value": 0
+      },
+      {
+        "barIndex": 2,
+        "barTime": "2026-01-03T00:00:00.000Z",
+        "value": 0
+      },
+      {
+        "barIndex": 3,
+        "barTime": "2026-01-04T00:00:00.000Z",
+        "value": 0
+      }
+    ],
+    "rollingSharpe": [
+      {
+        "barIndex": 1,
+        "barTime": "2026-01-02T00:00:00.000Z",
+        "value": null
+      },
+      {
+        "barIndex": 2,
+        "barTime": "2026-01-03T00:00:00.000Z",
+        "value": 41.0872388328004
+      },
+      {
+        "barIndex": 3,
+        "barTime": "2026-01-04T00:00:00.000Z",
+        "value": 43.811343215183804
+      }
+    ],
+    "rollingVolatility": [
+      {
+        "barIndex": 1,
+        "barTime": "2026-01-02T00:00:00.000Z",
+        "value": null
+      },
+      {
+        "barIndex": 2,
+        "barTime": "2026-01-03T00:00:00.000Z",
+        "value": 0.13246144133425777
+      },
+      {
+        "barIndex": 3,
+        "barTime": "2026-01-04T00:00:00.000Z",
+        "value": 0.10979647721912543
+      }
+    ],
+    "monthly": [
+      {
+        "year": 2026,
+        "month": 1,
+        "value": 0.040000000000000036
+      }
+    ]
+  },
+  "exact": true,
+  "seriesSampled": false
+}

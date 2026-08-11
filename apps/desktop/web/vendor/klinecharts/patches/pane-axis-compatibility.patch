@@ -1,0 +1,14 @@
+--- a/dist/index.d.ts
++++ b/dist/index.d.ts
+@@ -591,6 +591,8 @@ export interface PaneOptions {
+ 	order?: number;
+ 	state?: PaneState;
++	/** @deprecated Use overrideYAxis() for new integrations. */
++	axis?: Partial<AxisCreate>;
+ }
+@@ -950,6 +952,7 @@ export interface Axis {
+ 	convertToPixel: (value: number) => number;
+ 	convertFromPixel: (px: number) => number;
+ }
++export type AxisCreate = Omit<AxisTemplate, "displayValueToText" | "valueToRealValue" | "realValueToDisplayValue" | "displayValueToRealValue" | "realValueToValue">;
+ export type XAxisOverride = Pick<AxisOverride, "name" | "scrollZoomEnabled" | "createTicks">;

@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "generatedFrom": "zinuto-release/config/documentation-policy.json",
+  "repository": "zinuto-core",
+  "documents": [
+    {
+      "path": ".github/pull_request_template.md",
+      "role": "contribution"
+    },
+    {
+      "path": "AGENTS.md",
+      "role": "rules"
+    },
+    {
+      "path": "BRANDING.md",
+      "role": "legal"
+    },
+    {
+      "path": "CLA.md",
+      "role": "legal"
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md",
+      "role": "governance"
+    },
+    {
+      "path": "COMMERCIAL-LICENSE.md",
+      "role": "legal"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "role": "contribution"
+    },
+    {
+      "path": "GOVERNANCE.md",
+      "role": "governance"
+    },
+    {
+      "path": "README.md",
+      "role": "entry"
+    },
+    {
+      "path": "README.es.md",
+      "role": "entry"
+    },
+    {
+      "path": "README.ja.md",
+      "role": "entry"
+    },
+    {
+      "path": "README.ko.md",
+      "role": "entry"
+    },
+    {
+      "path": "README.zh-CN.md",
+      "role": "entry"
+    },
+    {
+      "path": "SECURITY.md",
+      "role": "security"
+    },
+    {
+      "path": "THIRD_PARTY_DATA.md",
+      "role": "legal"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "role": "generated"
+    },
+    {
+      "path": "TRADEMARKS.md",
+      "role": "legal"
+    },
+    {
+      "path": "apps/desktop/web/vendor/klinecharts/CHANGELOG-v10.0.0-beta2.md",
+      "role": "vendor"
+    },
+    {
+      "path": "apps/desktop/web/vendor/klinecharts/README.md",
+      "role": "vendor"
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "role": "architecture"
+    },
+    {
+      "path": "docs/legal/CCLA.md",
+      "role": "legal"
+    },
+    {
+      "path": "docs/legal/ICLA.md",
+      "role": "legal"
+    }
+  ]
+}

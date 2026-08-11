@@ -1,0 +1,130 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+:root {
+  --motion-duration-instant: 80ms;
+  --motion-duration-fast: 140ms;
+  --motion-duration-base: 200ms;
+  --motion-duration-slow: 280ms;
+  --motion-duration-celebrate: 360ms;
+
+  --motion-ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --motion-ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --motion-ease-inout: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --motion-delay-none: 0ms;
+  --motion-reduced-duration: 1ms;
+  --motion-stagger-unit: 32ms;
+
+  --motion-instant-duration: var(--motion-duration-instant);
+  --motion-fast-duration: var(--motion-duration-fast);
+  --motion-normal-duration: var(--motion-duration-base);
+  --motion-slow-duration: var(--motion-duration-slow);
+  --motion-celebrate-duration: var(--motion-duration-celebrate);
+
+  --motion-standard-ease: var(--motion-ease-standard);
+  --motion-emphasized-ease: var(--motion-ease-emphasized);
+  --motion-inout-ease: var(--motion-ease-inout);
+
+  --motion-instant: var(--motion-instant-duration) var(--motion-standard-ease);
+  --motion-fast: var(--motion-fast-duration) var(--motion-standard-ease);
+  --motion-normal: var(--motion-normal-duration) var(--motion-standard-ease);
+  --motion-slow: var(--motion-slow-duration) var(--motion-emphasized-ease);
+  --motion-celebrate: var(--motion-celebrate-duration) var(--motion-emphasized-ease);
+
+  --motion-nav-indicator-duration: var(--motion-duration-fast);
+  --motion-nav-indicator-ease: var(--motion-ease-inout);
+  --motion-nav-indicator: var(--motion-nav-indicator-duration) var(--motion-nav-indicator-ease);
+
+  --motion-list-selection-duration: var(--motion-duration-fast);
+  --motion-list-selection-ease: var(--motion-ease-inout);
+  --motion-list-selection: var(--motion-list-selection-duration) var(--motion-list-selection-ease);
+
+  --motion-page-switch-duration: var(--motion-duration-base);
+  --motion-page-switch-ease: var(--motion-ease-emphasized);
+  --motion-page-switch: var(--motion-page-switch-duration) var(--motion-page-switch-ease);
+
+  --motion-overlay-duration: var(--motion-duration-base);
+  --motion-overlay-ease: var(--motion-ease-standard);
+  --motion-overlay: var(--motion-overlay-duration) var(--motion-overlay-ease);
+
+  --motion-exit-duration: var(--motion-duration-fast);
+  --motion-exit-ease: var(--motion-ease-exit);
+  --motion-exit: var(--motion-exit-duration) var(--motion-exit-ease);
+
+  --motion-anchored-float-duration: var(--motion-duration-instant);
+  --motion-anchored-float-ease: var(--motion-ease-standard);
+  --motion-anchored-float: var(--motion-anchored-float-duration) var(--motion-anchored-float-ease);
+
+  --motion-content-reveal-duration: var(--motion-duration-slow);
+  --motion-content-reveal-ease: var(--motion-ease-emphasized);
+  --motion-content-reveal: var(--motion-content-reveal-duration) var(--motion-content-reveal-ease);
+
+  --motion-theme-reveal-duration: 480ms;
+  --motion-theme-reveal-ease: var(--motion-ease-inout);
+  --motion-theme-reveal: var(--motion-theme-reveal-duration) var(--motion-theme-reveal-ease);
+
+  --motion-progress-tick: var(--motion-duration-instant) linear;
+  --motion-loop-iteration-count: infinite;
+  --motion-loop-spinner: 1000ms linear;
+  --motion-loop-loader: 900ms linear;
+  --motion-loop-shimmer: 1350ms var(--motion-ease-inout);
+  --motion-loop-hydration-shimmer: 1150ms var(--motion-ease-inout);
+  --motion-loop-storage-progress: 950ms var(--motion-ease-inout);
+  --motion-loop-question-progress: 1060ms var(--motion-ease-inout);
+  --motion-loop-lightning-pulse: 840ms var(--motion-ease-inout);
+  --motion-loop-identity-notice: 2400ms var(--motion-ease-inout);
+  --motion-loop-identity-ring: 2400ms ease-out;
+
+  --motion-startup-progress: 1400ms linear;
+  --motion-startup-copy-reveal: 180ms var(--motion-ease-standard);
+  --motion-startup-exit: 180ms var(--motion-ease-exit);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-duration-instant: var(--motion-reduced-duration);
+    --motion-duration-fast: var(--motion-reduced-duration);
+    --motion-duration-base: var(--motion-reduced-duration);
+    --motion-duration-slow: var(--motion-reduced-duration);
+    --motion-duration-celebrate: var(--motion-reduced-duration);
+    --motion-theme-reveal-duration: var(--motion-reduced-duration);
+    --motion-stagger-unit: var(--motion-reduced-duration);
+    --motion-loop-iteration-count: 1;
+    --motion-loop-spinner: var(--motion-reduced-duration) linear;
+    --motion-loop-loader: var(--motion-reduced-duration) linear;
+    --motion-loop-shimmer: var(--motion-reduced-duration) var(--motion-ease-inout);
+    --motion-loop-hydration-shimmer: var(--motion-reduced-duration) var(--motion-ease-inout);
+    --motion-loop-storage-progress: var(--motion-reduced-duration) var(--motion-ease-inout);
+    --motion-loop-question-progress: var(--motion-reduced-duration) var(--motion-ease-inout);
+    --motion-loop-lightning-pulse: var(--motion-reduced-duration) var(--motion-ease-inout);
+    --motion-loop-identity-notice: var(--motion-reduced-duration) var(--motion-ease-inout);
+    --motion-loop-identity-ring: var(--motion-reduced-duration) ease-out;
+    --motion-startup-progress: var(--motion-reduced-duration) linear;
+    --motion-startup-copy-reveal: var(--motion-reduced-duration) linear;
+    --motion-startup-exit: var(--motion-reduced-duration) linear;
+  }
+}
+
+:root[data-motion="reduced"] {
+  --motion-duration-instant: var(--motion-reduced-duration);
+  --motion-duration-fast: var(--motion-reduced-duration);
+  --motion-duration-base: var(--motion-reduced-duration);
+  --motion-duration-slow: var(--motion-reduced-duration);
+  --motion-duration-celebrate: var(--motion-reduced-duration);
+  --motion-theme-reveal-duration: var(--motion-reduced-duration);
+  --motion-stagger-unit: var(--motion-reduced-duration);
+  --motion-loop-iteration-count: 1;
+  --motion-loop-spinner: var(--motion-reduced-duration) linear;
+  --motion-loop-loader: var(--motion-reduced-duration) linear;
+  --motion-loop-shimmer: var(--motion-reduced-duration) var(--motion-ease-inout);
+  --motion-loop-hydration-shimmer: var(--motion-reduced-duration) var(--motion-ease-inout);
+  --motion-loop-storage-progress: var(--motion-reduced-duration) var(--motion-ease-inout);
+  --motion-loop-question-progress: var(--motion-reduced-duration) var(--motion-ease-inout);
+  --motion-loop-lightning-pulse: var(--motion-reduced-duration) var(--motion-ease-inout);
+  --motion-loop-identity-notice: var(--motion-reduced-duration) var(--motion-ease-inout);
+  --motion-loop-identity-ring: var(--motion-reduced-duration) ease-out;
+  --motion-startup-progress: var(--motion-reduced-duration) linear;
+  --motion-startup-copy-reveal: var(--motion-reduced-duration) linear;
+  --motion-startup-exit: var(--motion-reduced-duration) linear;
+}

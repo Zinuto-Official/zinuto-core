@@ -1,0 +1,546 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.draw-toolbar {
+  --dt-gap: clamp(4px, 0.58vh, 9px);
+  --dt-pad-y: clamp(6px, 0.8vh, 10px);
+  --dt-pad-x: clamp(4px, 0.55vh, 8px);
+  --dt-toolbar-width: clamp(56px, 4.15vw, 72px);
+  --dt-control-width: clamp(38px, 3vw, 46px);
+  --dt-icon: clamp(16px, 1.35vw, 20px);
+  --dt-color-dot: clamp(14px, 1.72vh, 18px);
+  min-width: 0;
+  width: 100%;
+  min-height: 0;
+  height: 100%;
+  padding: var(--dt-pad-y) var(--dt-pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--dt-gap);
+  overflow: hidden;
+}
+
+.draw-toolbar[data-density="compact"] {
+  --dt-gap: clamp(3px, 0.46vh, 6px);
+  --dt-pad-y: clamp(4px, 0.52vh, 7px);
+  --dt-pad-x: clamp(2px, 0.38vh, 4px);
+  --dt-toolbar-width: clamp(44px, 3.4vw, 56px);
+  --dt-control-width: clamp(34px, 2.65vw, 40px);
+  --dt-icon: clamp(15px, 1.08vw, 18px);
+}
+
+.draw-toolbar[data-density="slim"] {
+  --dt-gap: clamp(3px, 0.42vh, 5px);
+  --dt-pad-y: clamp(4px, 0.52vh, 7px);
+  --dt-pad-x: clamp(2px, 0.3vh, 3px);
+  --dt-toolbar-width: clamp(38px, 2.55vw, 44px);
+  --dt-control-width: clamp(32px, 2.05vw, 36px);
+  --dt-icon: clamp(14px, 0.95vw, 16px);
+  --dt-color-dot: clamp(13px, 1.42vh, 15px);
+}
+
+.draw-toolbar .tool-divider {
+  margin: 0;
+}
+
+.draw-toolbar .tool-divider.controls-divider {
+  display: none;
+}
+
+.draw-toolbar-section {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--dt-gap);
+  overflow: hidden;
+}
+
+.draw-toolbar-section-tools {
+  flex: 60 1 0;
+}
+
+.draw-toolbar-section-config {
+  flex: 20 1 0;
+}
+
+.draw-toolbar-section-actions {
+  flex: 10 1 0;
+}
+
+.draw-toolbar-section-note {
+  flex: 10 1 0;
+}
+
+.draw-toolbar.no-note .draw-toolbar-section-tools {
+  flex: 63.333 1 0;
+}
+
+.draw-toolbar.no-note .draw-toolbar-section-config {
+  flex: 23.333 1 0;
+}
+
+.draw-toolbar.no-note .draw-toolbar-section-actions {
+  flex: 13.333 1 0;
+}
+
+.draw-toolbar.no-note .draw-toolbar-section-tools {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.draw-toolbar .draw-tool-cursor-row,
+.draw-toolbar .draw-tool-primary-grid {
+  width: var(--dt-control-width);
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.draw-toolbar .draw-toolbar-section-config,
+.draw-toolbar .draw-toolbar-danger-actions,
+.draw-toolbar .draw-toolbar-bottom {
+  width: var(--dt-control-width);
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.draw-tool-cursor-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  flex: 1 1 0;
+  min-height: 0;
+  align-items: stretch;
+}
+
+.draw-tool-cursor-row .draw-tool-icon-btn {
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  min-height: 0;
+  justify-self: center;
+  margin-inline: auto;
+}
+
+.draw-tool-primary-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-auto-rows: minmax(0, 1fr);
+  align-content: stretch;
+  justify-items: center;
+  gap: var(--dt-gap);
+  min-height: 0;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  flex: var(--dt-tool-primary-count, 5) 1 0;
+}
+
+.draw-tool-primary-grid .draw-tool-icon-btn {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  justify-self: center;
+  margin-inline: auto;
+}
+
+.draw-toolbar .draw-tool-icon-btn {
+  border-radius: 6px;
+  border: 1px solid color-mix(in srgb, var(--line) 42%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--text-subtle) 90%, var(--muted));
+  box-shadow: none;
+}
+
+.draw-toolbar .draw-tool-icon-btn:hover {
+  border-color: color-mix(in srgb, var(--line-strong) 58%, transparent);
+  background: color-mix(in srgb, var(--btn-bg-hover) 46%, transparent);
+  color: var(--text-strong);
+}
+
+.draw-toolbar .draw-tool-icon-btn.active {
+  border-color: color-mix(in srgb, var(--primary) 30%, var(--line));
+  border-left-width: 2px;
+  background: color-mix(in srgb, var(--primary-soft) 30%, transparent);
+  color: color-mix(in srgb, var(--primary) 86%, var(--text-strong));
+}
+
+.draw-toolbar[data-surface="flush"] .draw-tool-icon-btn {
+  border: none;
+  background: transparent;
+  color: color-mix(in srgb, var(--text-subtle) 88%, var(--muted));
+}
+
+.draw-toolbar[data-surface="flush"] .draw-tool-icon-btn:hover {
+  border-color: transparent;
+  background: color-mix(in srgb, var(--surface-s2) 46%, transparent);
+}
+
+.draw-toolbar[data-surface="flush"] .draw-tool-icon-btn.active {
+  border-left-width: 0;
+  background: color-mix(in srgb, var(--primary-soft) 28%, transparent);
+  box-shadow: inset 2px 0 0 color-mix(in srgb, var(--primary) 72%, transparent);
+}
+
+.draw-toolbar .tool-icon-svg {
+  width: var(--dt-icon);
+  height: var(--dt-icon);
+  stroke-width: 1.9;
+}
+
+.draw-toolbar .draw-toolbar-section-config {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: clamp(3px, 0.48vh, 6px);
+  overflow: hidden;
+}
+
+.draw-toolbar .draw-toolbar-section-config > .controls-divider {
+  display: none;
+}
+
+.draw-toolbar .draw-toolbar-section-config > .tool-cell {
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: clamp(2px, 0.42vh, 5px);
+  margin-inline: auto;
+}
+
+.draw-toolbar .draw-toolbar-section-config > .tool-cell-color {
+  flex: 1.6 1 0;
+}
+
+.draw-toolbar .draw-toolbar-section-config > .tool-cell-line-type {
+  flex: 1.15 1 0;
+}
+
+.draw-toolbar .draw-toolbar-section-config > .tool-cell-thickness {
+  flex: 0 0 clamp(22px, 2.1vh, 28px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 0;
+}
+
+.draw-toolbar .draw-toolbar-section-config > .tool-cell-magnet {
+  flex: 1.25 1 0;
+}
+
+.draw-toolbar .tool-label {
+  display: none;
+}
+
+.draw-toolbar .draw-toolbar-section-config > .tool-cell-color > .color-row {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: minmax(0, 1fr);
+  justify-items: center;
+  align-items: center;
+  align-content: space-evenly;
+  gap: clamp(5px, 0.66vh, 8px);
+  padding: 2px;
+}
+
+.draw-toolbar .color-dot {
+  inline-size: var(--dt-color-dot);
+  block-size: var(--dt-color-dot);
+  min-inline-size: var(--dt-color-dot);
+  min-block-size: var(--dt-color-dot);
+  max-inline-size: var(--dt-color-dot);
+  max-block-size: var(--dt-color-dot);
+  padding: 0 !important;
+  margin: 0;
+  display: block;
+  flex: 0 0 auto;
+  font-size: var(--ty-r1);
+  line-height: 0;
+  box-sizing: border-box;
+  aspect-ratio: 1 / 1;
+  border-radius: 50% !important;
+  border-width: 1.5px;
+}
+
+.draw-toolbar .color-dot.active {
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--panel) 90%, transparent);
+}
+
+.draw-toolbar .draw-seg-switch {
+  width: 100%;
+  max-width: 100%;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  border: 1px solid color-mix(in srgb, var(--line) 72%, transparent);
+  border-radius: 6px;
+  background: transparent;
+  padding: 1px;
+}
+
+.draw-toolbar[data-surface="flush"] .draw-seg-switch {
+  border-color: transparent;
+  background: color-mix(in srgb, var(--surface-s2) 44%, transparent);
+}
+
+.draw-toolbar .draw-seg-switch .ui-option-strip-item {
+  height: clamp(24px, 2.85vh, 30px);
+  min-height: clamp(24px, 2.85vh, 30px);
+  border-radius: 5px;
+  font-size: var(--ty-r1);
+  font-weight: 620;
+  min-width: 0;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: color-mix(in srgb, var(--text-subtle) 88%, var(--muted));
+}
+
+.draw-toolbar .draw-seg-switch .ui-option-strip-item:hover:not(:disabled),
+.draw-toolbar .draw-seg-switch .ui-option-strip-item:disabled {
+  background: transparent;
+}
+
+.draw-toolbar .draw-seg-switch .ui-option-strip-item.is-active {
+  border-color: color-mix(in srgb, var(--primary) 36%, transparent);
+  background: transparent;
+  color: var(--primary);
+}
+
+.draw-toolbar .draw-magnet-switch {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.draw-toolbar .draw-magnet-switch .draw-magnet-toggle-btn {
+  width: 100%;
+  padding: 0;
+}
+
+.draw-toolbar .line-type-icon {
+  width: calc(var(--dt-icon) - 2px);
+  height: calc(var(--dt-icon) - 2px);
+  max-width: calc(100% - 2px);
+  stroke-width: 2.1;
+  flex-shrink: 0;
+  display: block;
+}
+
+.draw-toolbar .draw-magnet-icon {
+  width: clamp(18px, 2vh, 24px);
+  height: clamp(18px, 2vh, 24px);
+  stroke-width: 2.25;
+  flex-shrink: 0;
+  display: block;
+}
+
+.draw-toolbar .draw-toolbar-section-config > .tool-cell-line-type > .draw-seg-switch,
+.draw-toolbar .draw-toolbar-section-config > .tool-cell-magnet > .draw-seg-switch {
+  flex: 1 1 auto;
+  align-self: stretch;
+  height: auto;
+  min-height: clamp(30px, 3vh, 38px);
+  max-height: none;
+}
+
+.draw-toolbar .draw-toolbar-section-config > .tool-cell-line-type > .draw-seg-switch .ui-option-strip-item,
+.draw-toolbar .draw-toolbar-section-config > .tool-cell-magnet > .draw-seg-switch .ui-option-strip-item {
+  height: 100%;
+}
+
+.draw-toolbar .draw-toolbar-section-config > .tool-cell-thickness > input[type='range'] {
+  width: 100%;
+  max-width: calc(100% - 4px);
+  min-width: 0;
+  margin-inline: auto;
+}
+
+.draw-toolbar input[type='range'] {
+  --draw-range-fill: 20%;
+  --draw-range-fill-color: color-mix(in srgb, var(--primary) 54%, var(--line-strong));
+  --draw-range-rest-color: color-mix(in srgb, var(--line-strong) 66%, var(--panel-soft));
+  display: block;
+  height: clamp(12px, 1.2vh, 14px);
+  margin: 0;
+  padding: 0;
+  border: none !important;
+  border-radius: 0;
+  box-shadow: none !important;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+}
+
+.draw-toolbar input[type='range']::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 999px;
+  background:
+    linear-gradient(
+      to right,
+      var(--draw-range-fill-color) 0,
+      var(--draw-range-fill-color) var(--draw-range-fill),
+      var(--draw-range-rest-color) var(--draw-range-fill),
+      var(--draw-range-rest-color) 100%
+    );
+}
+
+.draw-toolbar input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  margin-top: -4px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--line-strong) 82%, transparent);
+  background: color-mix(in srgb, var(--panel) 94%, var(--visual-white));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--window-bg) 82%, transparent);
+}
+
+.draw-toolbar input[type='range']::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--line-strong) 82%, transparent);
+  background: color-mix(in srgb, var(--panel) 94%, var(--visual-white));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--window-bg) 82%, transparent);
+}
+
+.draw-toolbar input[type='range']::-moz-range-track {
+  height: 4px;
+  border-radius: 999px;
+  background: var(--draw-range-rest-color);
+}
+
+.draw-toolbar input[type='range']::-moz-range-progress {
+  height: 4px;
+  border-radius: 999px;
+  background: var(--draw-range-fill-color);
+}
+
+.draw-toolbar-danger-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  gap: clamp(4px, 0.62vh, 8px);
+  min-height: 0;
+  height: 100%;
+  width: 100%;
+  flex: 1 1 auto;
+}
+
+.draw-toolbar .draw-toolbar-action-btn {
+  width: 100%;
+  flex: 1 1 0;
+  min-height: 0;
+  border-radius: 6px;
+  border: 1px solid color-mix(in srgb, var(--line) 54%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--text-subtle) 92%, var(--muted));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6px;
+  margin-inline: auto;
+}
+
+.draw-toolbar .draw-toolbar-action-btn:hover:not(:disabled):not(.is-disabled) {
+  border-color: color-mix(in srgb, var(--line-strong) 62%, transparent);
+  background: transparent;
+  color: var(--text-strong);
+}
+
+.draw-toolbar .draw-toolbar-action-btn.danger {
+  border-color: color-mix(in srgb, var(--red) 30%, var(--line));
+  background: transparent;
+  color: color-mix(in srgb, var(--red) 82%, var(--text-subtle));
+}
+
+.draw-toolbar .draw-toolbar-action-btn.danger:hover:not(:disabled):not(.is-disabled) {
+  background: transparent;
+}
+
+.draw-toolbar .draw-toolbar-action-btn.is-disabled,
+.draw-toolbar .draw-toolbar-action-btn:disabled {
+  border-color: color-mix(in srgb, var(--line) 50%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--muted) 84%, var(--text-subtle));
+  cursor: not-allowed;
+}
+
+.draw-toolbar .draw-toolbar-action-btn > svg,
+.draw-toolbar .draw-toolbar-action-btn .tool-icon-svg {
+  width: var(--dt-icon);
+  height: var(--dt-icon);
+  flex-shrink: 0;
+}
+
+.draw-toolbar-bottom {
+  min-height: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--dt-gap);
+  justify-content: stretch;
+  overflow: hidden;
+  flex: 1 1 auto;
+  width: 100%;
+}
+
+.draw-note-create-btn {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 0;
+  height: 100%;
+  border-radius: 6px;
+  margin-inline: auto;
+}
+
+.desktop-main:is(.is-trainer, .is-special-training) .draw-toolbar {
+  width: var(--dt-toolbar-width);
+  min-width: var(--dt-toolbar-width);
+  max-width: var(--dt-toolbar-width);
+  height: 100%;
+  min-height: 0;
+  border: none;
+  border-right: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  display: grid;
+  grid-template-rows:
+    minmax(0, var(--dt-tools-rows, 11fr))
+    minmax(0, var(--dt-config-rows, 4fr))
+    minmax(0, var(--dt-actions-rows, 2fr))
+    minmax(0, var(--dt-note-rows, 1fr));
+  gap: var(--dt-gap);
+}
+
+.desktop-main:is(.is-trainer, .is-special-training) .draw-toolbar.no-note {
+  grid-template-rows:
+    minmax(0, var(--dt-tools-rows, 11fr))
+    minmax(0, var(--dt-config-rows, 4fr))
+    minmax(0, var(--dt-actions-rows, 2fr));
+}
+
+.desktop-main:is(.is-trainer, .is-special-training) .draw-toolbar .draw-toolbar-section {
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--dt-gap);
+}
+
+.desktop-main:is(.is-trainer, .is-special-training) .draw-toolbar .draw-toolbar-section + .draw-toolbar-section {
+  border-top: 1px solid color-mix(in srgb, var(--line) 68%, transparent);
+  padding-top: clamp(4px, 0.58vh, 7px);
+}

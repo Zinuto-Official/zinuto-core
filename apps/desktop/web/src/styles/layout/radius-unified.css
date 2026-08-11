@@ -1,0 +1,103 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.app-root {
+  --app-rect-radius: 6px;
+  --radius: var(--app-rect-radius);
+  --workspace-surface-radius: var(--app-rect-radius);
+  --radius-card-lg: var(--app-rect-radius);
+  --radius-card: var(--app-rect-radius);
+  --radius-card-sm: var(--app-rect-radius);
+  --radius-control: var(--app-rect-radius);
+  --radius-panel: var(--app-rect-radius);
+  --radius-rect: var(--app-rect-radius);
+  --radius-shell: var(--app-rect-radius);
+  --sidebar-nav-item-radius: var(--app-rect-radius);
+}
+
+.app-root .desktop-shell-surface,
+.app-root .workspace-page-header,
+.app-root .workspace-page.settings-page .workspace-page-header,
+.app-root .history-side-panel,
+.app-root .notes-detail-panel.notes-preview-panel,
+.app-root .custom-indicator-context-bar,
+.app-root .settings-modern-panel,
+.app-root .settings-storage-panel,
+.app-root .special-training-stage,
+.app-root .special-training-trainer-shell,
+.app-root .settings-modern-row,
+.app-root .history-side-item,
+.app-root .notes-side-item,
+.app-root .sample-pool-card-item,
+.app-root .training-stats-filter-item,
+.app-root .settings-storage-item,
+.app-root .summary-item,
+.app-root .training-stats-card,
+.app-root .training-stats-filters.card,
+.app-root .training-stats-loading,
+.app-root .training-stats-empty,
+.app-root .training-stats-panel,
+.app-root .training-stats-compare-card,
+.app-root .training-stats-table-wrap,
+.app-root .training-stats-month-card,
+.app-root .utility-modal-body,
+.app-root .special-training-mode-modal,
+.app-root .special-training-mode-modal-card,
+.app-root .special-training-mode-card,
+.app-root .special-training-task-card,
+.app-root .special-training-settlement-card,
+.app-root .custom-indicator-chart-panel,
+.app-root .custom-indicator-config-panel,
+.app-root .custom-indicator-library-panel,
+.app-root .custom-indicator-feedback-item > code,
+.app-root .custom-indicator-feedback-list,
+.app-root .custom-indicator-feedback-link,
+.app-root .training-note-editor-body,
+.app-root .shortcut-modal-list,
+.app-root .shortcut-modal-section,
+.app-root .shortcut-modal-item,
+.app-root .modal-section,
+.app-root .replay-settings-v2-sidebar,
+.app-root .replay-settings-v2-tab,
+.app-root .replay-settings-v2-card,
+.app-root .draw-toolbar .draw-tool-icon-btn,
+.app-root .draw-toolbar .draw-seg-switch,
+.app-root .draw-toolbar .draw-toolbar-action-btn {
+  border-radius: var(--app-rect-radius);
+}
+
+.app-root [data-slot='input'],
+.app-root [data-slot='select-trigger'],
+.app-root [data-slot='select-content'],
+.app-root [data-slot='select-item'],
+.app-root textarea,
+.app-root .notes-title-inline-input,
+.app-root .toolbar-search-input,
+.app-root .notes-type-filter-search-input,
+.app-root .segmented-control,
+.app-root .segmented-option,
+.app-root .history-filter-seg,
+.app-root .history-item-icon-btn,
+.app-root .history-side-compact-btn,
+.app-root .history-sort-order-btn,
+.app-root .history-delete-all-btn,
+.app-root .notes-add-btn,
+.app-root .csv-top-btn,
+.app-root .shortcut-help-btn,
+.app-root .theme-mode-btn,
+.app-root .toolbar-setting-btn,
+.app-root .sidebar-nav-item-side-action,
+.app-root .notes-side-panel .history-delete-all-btn,
+.app-root .draw-toolbar .draw-seg-switch .ui-option-strip-item,
+.app-root .panel-progress-inline.panel-progress-remaining,
+.app-root .history-side-item-meta-pool,
+.app-root .notes-side-item-type,
+.app-root .special-training-header-pill,
+.app-root .special-training-mode-card-meta > span,
+.app-root .special-training-settlement-badge,
+.app-root .special-training-settlement-meta > span,
+.app-root .custom-indicator-context-status,
+.app-root .custom-indicator-period-switch,
+.app-root .custom-indicator-period-btn,
+.app-root .training-stats-compare-legend > span {
+  border-radius: var(--app-rect-radius);
+}

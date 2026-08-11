@@ -1,0 +1,81 @@
+{
+  "$schema": "../../../node_modules/@tauri-apps/cli/config.schema.json",
+  "productName": "Zinuto Core",
+  "version": "2.0.1",
+  "identifier": "org.zinuto.core",
+  "build": {
+    "beforeDevCommand": "node ../../tools/release/run-frontend-tauri-dev.mjs",
+    "devUrl": "http://127.0.0.1:5173",
+    "beforeBuildCommand": "node ../../tools/release/prepare-tauri-build.mjs",
+    "frontendDist": "../web/dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "Zinuto Core",
+        "width": 1560,
+        "height": 980,
+        "minWidth": 960,
+        "minHeight": 640,
+        "dragDropEnabled": true,
+        "devtools": true,
+        "resizable": true,
+        "visible": false,
+        "decorations": true,
+        "titleBarStyle": "Overlay",
+        "hiddenTitle": true,
+        "trafficLightPosition": {
+          "x": 16,
+          "y": 30
+        }
+      }
+    ],
+    "security": {
+      "capabilities": ["default"],
+      "csp": "default-src 'none'; script-src 'self' 'nonce-{nonce}'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; frame-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "category": "Finance",
+    "resources": {
+      "gen/backend-runtime/apps/desktop/local-api/": "apps/desktop/local-api/",
+      "gen/backend-runtime/node_modules/": "node_modules/",
+      "gen/backtest-engine/": "backtest-engine/",
+      "gen/market-data-acquisition/": "market-data-acquisition/",
+      "gen/runtime-manifest.json": "runtime-manifest.json"
+    },
+    "macOS": {
+      "dmg": {
+        "background": "dmg/install-background.png",
+        "windowSize": {
+          "width": 660,
+          "height": 400
+        },
+        "appPosition": {
+          "x": 180,
+          "y": 170
+        },
+        "applicationFolderPosition": {
+          "x": 480,
+          "y": 170
+        }
+      },
+      "files": {
+        "MacOS/open-trading-practice-node": "runtime/node/bin/node",
+        "lib/": "gen/node-runtime-libs/"
+      },
+      "infoPlist": "Info.plist",
+      "entitlements": "Entitlements.plist"
+    },
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
+  }
+}

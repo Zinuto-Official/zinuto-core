@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!-- generated-from-color-center: apps/desktop/web/scripts/sync-color-assets.mjs -->
+  <color name="ic_launcher_background">#FFFFFF</color>
+</resources>

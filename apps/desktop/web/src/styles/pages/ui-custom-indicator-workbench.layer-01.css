@@ -1,0 +1,778 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+
+.custom-indicator-page {
+  --custom-indicator-grid-line: color-mix(
+    in srgb,
+    var(--line) 72%,
+    transparent
+  );
+  --custom-indicator-grid-line-strong: color-mix(
+    in srgb,
+    var(--line-strong) 76%,
+    transparent
+  );
+  --custom-indicator-grid-line-hard: color-mix(
+    in srgb,
+    var(--line-strong) 88%,
+    transparent
+  );
+  --custom-indicator-canvas-bg: color-mix(
+    in srgb,
+    var(--surface-s1) 92%,
+    var(--surface-s2)
+  );
+  --custom-indicator-canvas-bg-lift: color-mix(
+    in srgb,
+    var(--surface-s1) 82%,
+    var(--surface-s2)
+  );
+  --custom-indicator-panel-bg: color-mix(
+    in srgb,
+    var(--surface-s2) 94%,
+    var(--custom-indicator-canvas-bg)
+  );
+  --custom-indicator-card-bg: color-mix(
+    in srgb,
+    var(--surface-s2) 90%,
+    var(--custom-indicator-canvas-bg)
+  );
+  --custom-indicator-card-bg-strong: color-mix(
+    in srgb,
+    var(--visual-accent-surface) 28%,
+    var(--surface-s2)
+  );
+  --custom-indicator-card-border: color-mix(
+    in srgb,
+    var(--line) 72%,
+    transparent
+  );
+  --custom-indicator-link: color-mix(
+    in srgb,
+    var(--visual-accent-base) 88%,
+    var(--text-t1)
+  );
+  --custom-indicator-link-hover: color-mix(
+    in srgb,
+    var(--visual-accent-hover) 92%,
+    var(--text-t1)
+  );
+  --custom-indicator-warning: color-mix(
+    in srgb,
+    var(--warning) 78%,
+    var(--text-t1)
+  );
+  --custom-indicator-shell-padding-inline: 5px;
+  --custom-indicator-shell-padding-block: 5px;
+  --custom-indicator-shell-surface: var(--surface-s2);
+  --custom-indicator-shell-border: color-mix(in srgb, var(--line) 72%, transparent);
+  --custom-indicator-manager-width: 252px;
+  --custom-indicator-inspector-expanded-width: 324px;
+  --custom-indicator-inspector-collapsed-width: 56px;
+  --custom-indicator-ide-side-width: var(--custom-indicator-inspector-expanded-width);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  margin-inline: 0;
+  padding: 12px;
+  box-sizing: border-box;
+  background: var(--surface-s1);
+  overflow: hidden;
+}
+
+.app-root.theme-dark .custom-indicator-page {
+  --custom-indicator-grid-line: color-mix(in srgb, var(--line) 84%, transparent);
+  --custom-indicator-grid-line-strong: color-mix(in srgb, var(--line-strong) 88%, transparent);
+  --custom-indicator-grid-line-hard: color-mix(in srgb, var(--line-strong) 94%, transparent);
+  --custom-indicator-canvas-bg: color-mix(in srgb, var(--surface-s1) 72%, var(--visual-black));
+  --custom-indicator-canvas-bg-lift: color-mix(in srgb, var(--surface-s1) 68%, var(--surface-s2));
+  --custom-indicator-panel-bg: color-mix(in srgb, var(--surface-s2) 86%, var(--custom-indicator-canvas-bg));
+  --custom-indicator-card-bg: color-mix(in srgb, var(--surface-s2) 78%, var(--custom-indicator-canvas-bg));
+  --custom-indicator-card-bg-strong: color-mix(in srgb, var(--visual-accent-surface) 22%, var(--surface-s2));
+  --custom-indicator-card-border: color-mix(in srgb, var(--line) 58%, transparent);
+}
+
+.custom-indicator-page-body {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  width: 100%;
+  overflow: hidden;
+}
+
+.custom-indicator-body {
+  --workspace-frame-shell-bg: var(--custom-indicator-shell-surface);
+  --workspace-frame-shell-border: var(--custom-indicator-shell-border);
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  padding: var(--custom-indicator-shell-padding-block)
+    var(--custom-indicator-shell-padding-inline);
+  box-sizing: border-box;
+}
+
+.custom-indicator-ide-layout {
+  width: 100%;
+  min-height: 0;
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  grid-template-columns:
+    var(--custom-indicator-manager-width)
+    minmax(0, 1fr)
+    var(--custom-indicator-ide-side-width);
+  border: 1px solid var(--custom-indicator-grid-line-hard);
+  border-radius: calc(var(--radius-panel) - 2px);
+  background: var(--custom-indicator-canvas-bg);
+  box-shadow: none;
+  overflow: hidden;
+  position: relative;
+}
+
+.custom-indicator-ide-layout[data-inspector-collapsed="true"] {
+  --custom-indicator-ide-side-width: var(--custom-indicator-inspector-collapsed-width);
+}
+
+.app-root .custom-indicator-page :is(
+  .custom-indicator-manager-panel,
+  .custom-indicator-viewport-panel,
+  .custom-indicator-engine-panel,
+  .custom-indicator-source-tab,
+  .custom-indicator-side-panel,
+  .custom-indicator-side-block
+) {
+  border-radius: 0;
+  background: var(--custom-indicator-canvas-bg);
+  box-shadow: none;
+}
+
+.custom-indicator-manager-panel {
+  width: var(--custom-indicator-manager-width);
+  min-width: var(--custom-indicator-manager-width);
+  max-width: var(--custom-indicator-manager-width);
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px 12px 14px 14px;
+  border-right: 1px solid var(--custom-indicator-grid-line-hard);
+  background: var(--custom-indicator-panel-bg);
+  overflow: hidden;
+}
+
+.custom-indicator-manager-rail {
+  display: grid;
+  gap: 0;
+}
+
+.custom-indicator-manager-create-btn {
+  width: 100%;
+  min-height: 38px;
+  height: auto;
+  border: 1px solid
+    color-mix(in srgb, var(--ui-action-bg) 54%, var(--custom-indicator-grid-line-hard));
+  border-radius: calc(var(--radius-rect) - 2px);
+  background: var(--ui-action-bg);
+  color: var(--ui-action-text);
+  justify-content: flex-start;
+  gap: 8px;
+  padding: 0 12px;
+  box-shadow: none;
+  font-size: var(--ty-r2);
+  font-weight: 700;
+}
+
+.custom-indicator-manager-create-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.custom-indicator-manager-create-label > span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.custom-indicator-manager-create-btn[data-slot="button"] {
+  border-color: color-mix(
+    in srgb,
+    var(--ui-action-bg) 54%,
+    var(--custom-indicator-grid-line-hard)
+  );
+  background: var(--ui-action-bg);
+  color: var(--ui-action-text);
+  justify-content: flex-start;
+}
+
+.custom-indicator-manager-create-btn:hover,
+.custom-indicator-manager-create-btn[data-slot="button"]:hover {
+  background: var(--ui-action-bg-hover);
+  color: var(--ui-action-text);
+}
+
+.custom-indicator-manager-create-btn svg {
+  width: 12px;
+  height: 12px;
+}
+
+.custom-indicator-locked-tooltip-trigger {
+  min-width: 0;
+  display: block;
+}
+
+.custom-indicator-manager-groups {
+  --custom-indicator-manager-groups-gap: 12px;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: var(--custom-indicator-manager-groups-gap);
+  padding-right: 4px;
+}
+
+.custom-indicator-manager-group {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  gap: 8px;
+}
+
+.custom-indicator-manager-group[data-collapsed="false"] {
+  max-height: calc((100% - var(--custom-indicator-manager-groups-gap)) / 2);
+  overflow: hidden;
+}
+
+.custom-indicator-manager-group[data-collapsed="true"] {
+  max-height: none;
+  overflow: visible;
+}
+
+.custom-indicator-manager-group-toggle {
+  width: 100%;
+  min-height: 40px;
+  height: auto;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid var(--custom-indicator-grid-line-hard);
+  background: transparent;
+  color: color-mix(in srgb, var(--muted) 84%, var(--text-t2));
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  column-gap: 8px;
+  padding: 8px 2px 8px 4px;
+  text-align: left;
+  letter-spacing: 0.22px;
+}
+
+.custom-indicator-manager-group-toggle[data-slot="button"] {
+  justify-content: flex-start;
+  white-space: normal;
+}
+
+.custom-indicator-manager-group-toggle:hover {
+  color: var(--text-t1);
+}
+
+.custom-indicator-manager-group-toggle svg {
+  width: 12px;
+  height: 12px;
+  color: color-mix(in srgb, var(--muted) 84%, var(--text-t3));
+}
+
+.custom-indicator-manager-group-label {
+  display: block;
+  min-width: 0;
+  font-size: var(--ty-r1);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--text-t1);
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.custom-indicator-manager-group-meta {
+  display: inline-flex;
+  align-items: center;
+  min-width: 2ch;
+  padding: 0;
+  color: var(--text-t1);
+  font-size: var(--ty-r1);
+  font-family: var(--ff-mono);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  text-align: right;
+  justify-self: end;
+}
+
+.custom-indicator-manager-group-caret {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 12px;
+  color: color-mix(in srgb, var(--muted) 88%, var(--text-t3));
+}
+
+.custom-indicator-manager-list {
+  display: grid;
+  flex: 1 1 auto;
+  gap: 8px;
+  min-height: 0;
+  overflow: auto;
+  max-height: none;
+  padding: 2px 0 0;
+}
+
+.custom-indicator-manager-item {
+  position: relative;
+  min-width: 0;
+}
+
+.custom-indicator-manager-system-item::before {
+  content: "";
+  position: absolute;
+  left: 14px;
+  top: 11px;
+  bottom: 11px;
+  width: 4px;
+  border-radius: 999px;
+  background: transparent;
+  transition: background-color var(--motion-fast);
+}
+
+.custom-indicator-manager-system-item {
+  --custom-indicator-manager-content-inset: 34px;
+}
+
+.custom-indicator-manager-item-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  font-size: var(--ty-r2);
+  font-weight: 700;
+  line-height: 1.15;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.custom-indicator-manager-item-label > span:not(.feature-lock-indicator) {
+  display: block;
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.custom-indicator-manager-system-item:hover {
+  border-color: var(--ui-list-row-hover-border);
+  background: var(--ui-list-row-hover-bg);
+  color: var(--text-t1);
+}
+
+.custom-indicator-manager-system-item.is-active {
+  border-color: var(--ui-list-row-active-border);
+  background: var(--ui-list-row-active-bg);
+  color: var(--text-t1);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ui-list-row-rail) 18%, transparent);
+}
+
+.custom-indicator-manager-system-item:hover::before {
+  background: color-mix(in srgb, var(--ui-list-row-rail) 38%, transparent);
+}
+
+.custom-indicator-manager-system-item.is-active::before {
+  background: var(--ui-list-row-rail);
+}
+
+.custom-indicator-manager-system-item.is-active {
+  color: var(--text-t1);
+}
+
+.custom-indicator-manager-item-actions {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transform: translateY(-50%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--motion-fast);
+}
+
+.custom-indicator-manager-item:hover .custom-indicator-manager-item-actions,
+.custom-indicator-manager-item.is-active
+  .custom-indicator-manager-item-actions,
+.custom-indicator-manager-item-actions:focus-within {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.custom-indicator-manager-item-icon {
+  min-height: 24px;
+  min-width: 24px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: calc(var(--radius-card-sm) - 1px);
+  background: transparent;
+  color: color-mix(in srgb, var(--muted) 84%, var(--text-t3));
+}
+
+.custom-indicator-manager-item-icon svg {
+  width: 11px;
+  height: 11px;
+}
+
+.custom-indicator-manager-item-icon:hover {
+  border-color: transparent;
+  background: color-mix(in srgb, var(--panel-soft) 64%, var(--panel));
+  color: var(--text-t1);
+}
+
+.custom-indicator-manager-item-icon.danger:hover {
+  color: var(--action-a3);
+}
+
+.custom-indicator-manager-system-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  justify-items: center;
+  min-height: 50px;
+  width: 100%;
+  min-width: 0;
+  opacity: 1;
+  justify-content: stretch;
+  padding-right: var(--custom-indicator-manager-content-inset);
+  padding-left: var(--custom-indicator-manager-content-inset);
+  border: 1px solid color-mix(in srgb, var(--line) 52%, transparent);
+  border-radius: calc(var(--ui-surface-radius-sm) + 1px);
+  background: color-mix(in srgb, var(--ui-surface-bg) 94%, transparent);
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.custom-indicator-manager-system-item.custom-indicator-manager-custom-item {
+  --custom-indicator-manager-content-inset: 44px;
+  width: 100%;
+}
+
+.custom-indicator-manager-system-item:focus-visible {
+  outline: none;
+  border-color: var(--ui-list-row-active-border);
+  box-shadow: 0 0 0 3px var(--ui-control-focus-ring);
+}
+
+.custom-indicator-manager-empty {
+  border: none;
+  border-top: 1px dashed color-mix(in srgb, var(--line) 42%, transparent);
+  padding: 16px 12px 0 16px;
+  color: color-mix(in srgb, var(--muted) 84%, var(--text-t3));
+  font-size: var(--ty-r2);
+  background: transparent;
+}
+
+.custom-indicator-main-panel {
+  --custom-indicator-workbench-ratio: 0.44;
+  min-width: 0;
+  min-height: 0;
+  flex: 1;
+  display: grid;
+  grid-template-rows:
+    minmax(280px, calc((1 - var(--custom-indicator-workbench-ratio)) * 100%))
+    10px
+    minmax(300px, calc(var(--custom-indicator-workbench-ratio) * 100%));
+  background: var(--custom-indicator-canvas-bg);
+  overflow: hidden;
+}
+
+.custom-indicator-viewport-panel {
+  min-width: 0;
+  min-height: 0;
+  container: custom-indicator-viewport / inline-size;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  position: relative;
+  background: var(--custom-indicator-panel-bg);
+  overflow: hidden;
+}
+
+.custom-indicator-viewport-head {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid var(--custom-indicator-grid-line-hard);
+  background: var(--custom-indicator-panel-bg);
+}
+
+.custom-indicator-viewport-title {
+  margin: 0;
+  min-width: 0;
+  flex: 0 0 auto;
+  color: var(--text-t1);
+  font-size: var(--ty-r5);
+  font-weight: 700;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+.custom-indicator-toolbar-name-input {
+  width: min(100%, 380px);
+  max-width: min(100%, 380px);
+  text-align: left;
+  font-size: var(--ty-r5);
+  font-weight: 720;
+}
+
+.custom-indicator-workbench-title-main
+  > .custom-indicator-toolbar-name-input[data-slot="input"] {
+  text-align: left;
+}
+
+.custom-indicator-workbench-name-button {
+  max-width: min(100%, 420px);
+  justify-content: flex-start;
+  color: var(--text-t1);
+  font-size: var(--ty-r5);
+  font-weight: 740;
+  line-height: 1.2;
+  text-align: left;
+}
+
+.custom-indicator-workbench-name-button .ui-button-content {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.custom-indicator-viewport-controls {
+  --top-toolbar-control-h: 32px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.custom-indicator-viewport-pool-select,
+.custom-indicator-viewport-symbol-select,
+.custom-indicator-viewport-period-select {
+  flex: 0 0 auto;
+  min-width: 0;
+  max-width: none;
+}
+
+.custom-indicator-viewport-pool-select {
+  width: clamp(154px, 18vw, 248px) !important;
+  min-width: 0 !important;
+}
+
+.custom-indicator-viewport-symbol-select {
+  width: clamp(88px, 9vw, 140px) !important;
+  min-width: 0 !important;
+}
+
+.custom-indicator-viewport-period-select {
+  width: clamp(86px, 7vw, 104px) !important;
+  min-width: 0 !important;
+}
+
+.custom-indicator-workbench-action {
+  max-width: 100%;
+  overflow: hidden;
+  justify-content: center;
+  text-align: center;
+  transform: none;
+}
+
+.custom-indicator-workbench-action-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  line-height: var(--ty-leading-label);
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.custom-indicator-workbench-action-save.is-dirty {
+  border-color: color-mix(
+    in srgb,
+    var(--warning) 54%,
+    var(--ui-action-quiet-border)
+  );
+  color: color-mix(in srgb, var(--warning) 82%, var(--text-t1));
+}
+
+.custom-indicator-workbench-action-save.is-dirty:hover {
+  border-color: color-mix(
+    in srgb,
+    var(--warning) 62%,
+    var(--ui-action-quiet-border-hover)
+  );
+  color: color-mix(in srgb, var(--warning) 88%, var(--text-t1));
+}
+
+.custom-indicator-reference-action-btn {
+  min-height: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  font-size: var(--ty-r2);
+  font-weight: 680;
+  letter-spacing: 0.24px;
+  padding: 0 4px;
+  box-shadow: none;
+}
+
+.custom-indicator-reference-action-btn {
+  justify-content: flex-start;
+  padding-inline: 0;
+  color: var(--custom-indicator-link);
+}
+
+.custom-indicator-reference-action-btn:hover {
+  background: color-mix(in srgb, var(--visual-white) 4%, transparent);
+  color: var(--custom-indicator-link-hover);
+}
+
+.custom-indicator-context-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+  min-height: 24px;
+  padding: 2px 8px;
+  border: 1px solid var(--custom-indicator-card-border);
+  border-radius: calc(var(--radius-pill) - 2px);
+  font-size: var(--ty-r1);
+  font-weight: 680;
+  background: color-mix(in srgb, var(--surface-s2) 74%, transparent);
+}
+
+.custom-indicator-context-status-dot {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.custom-indicator-context-status-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.custom-indicator-context-status.is-ready {
+  color: color-mix(in srgb, var(--success) 60%, var(--text-t1));
+  border-color: color-mix(in srgb, var(--success) 26%, var(--custom-indicator-card-border));
+}
+
+.custom-indicator-context-status.is-error {
+  color: color-mix(in srgb, var(--action-a3) 86%, var(--text-t1));
+  border-color: color-mix(in srgb, var(--action-a3) 34%, var(--custom-indicator-card-border));
+}
+
+.custom-indicator-context-status.is-warning {
+  color: var(--custom-indicator-warning);
+  border-color: color-mix(in srgb, var(--warning) 36%, var(--custom-indicator-card-border));
+}
+
+.custom-indicator-workbench-group-meta {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  min-height: 24px;
+  padding: 2px 8px;
+  border: 1px solid var(--custom-indicator-card-border);
+  border-radius: calc(var(--radius-pill) - 2px);
+  background: color-mix(in srgb, var(--surface-s2) 64%, transparent);
+  color: color-mix(in srgb, var(--muted) 84%, var(--text-t3));
+  font-size: var(--ty-r1);
+  font-weight: 660;
+  letter-spacing: 0.14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.custom-indicator-chart-stage {
+  min-width: 0;
+  min-height: 240px;
+  width: 100%;
+  height: 100%;
+  background: var(--custom-indicator-canvas-bg);
+  overflow: hidden;
+  position: relative;
+}
+
+.custom-indicator-chart-canvas {
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.custom-indicator-chart-state {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: color-mix(
+    in srgb,
+    var(--custom-indicator-canvas-bg) 92%,
+    transparent
+  );
+  color: var(--text-t2);
+  text-align: center;
+  pointer-events: none;
+}
+
+.custom-indicator-chart-state.is-error {
+  color: var(--danger);
+}
+
+.custom-indicator-run-feedback {
+  min-width: 0;
+  max-width: 220px;
+  color: var(--text-t2);
+  font-size: var(--ty-r1);
+  line-height: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
