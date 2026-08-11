@@ -201,6 +201,38 @@ test('verified archive rejects a malicious same-version cache before runtime exe
   assert.equal(fs.existsSync(path.join(root, 'node')), false);
 }));
 
+test('installer creates a missing parent but never follows a symbolic parent', () => withTemp((root) => {
+  const archive = buildTarGz();
+  const descriptor = descriptorFor(archive);
+  const archivePath = writeArchive(root, 'runtime.tar.gz', archive);
+  const runtimeParent = path.join(root, 'runtime');
+  const runtimeRoot = path.join(runtimeParent, 'node');
+
+  installVerifiedRuntimeArchive({
+    archivePath,
+    descriptor,
+    runtimeRoot,
+    runVersion: () => '24.18.0',
+  });
+  assert.equal(fs.lstatSync(runtimeParent).isDirectory(), true);
+  assert.equal(validateRuntimeDirectory({ runtimeRoot, descriptor, runVersion: () => '24.18.0' }).identity.releaseVersion, '24.18.0');
+
+  const external = path.join(root, 'external');
+  const symbolicParent = path.join(root, 'symbolic-runtime');
+  fs.mkdirSync(external, { mode: 0o700 });
+  fs.symlinkSync(external, symbolicParent);
+  assert.throws(
+    () => installVerifiedRuntimeArchive({
+      archivePath,
+      descriptor,
+      runtimeRoot: path.join(symbolicParent, 'node'),
+      runVersion: () => '24.18.0',
+    }),
+    /native runtime parent must be a no-follow directory/u,
+  );
+  assert.deepEqual(fs.readdirSync(external), []);
+}));
+
 test('archive input itself must be a no-follow regular file', () => withTemp((root) => {
   const archive = buildTarGz();
   const descriptor = descriptorFor(archive);

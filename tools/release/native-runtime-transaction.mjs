@@ -287,6 +287,25 @@ const pathExistsNoFollow = (targetPath) => {
   }
 };
 
+const ensureNoFollowDirectory = (directory) => {
+  const resolved = path.resolve(directory);
+  try {
+    const metadata = fs.lstatSync(resolved);
+    if (metadata.isSymbolicLink() || !metadata.isDirectory()) {
+      throw new Error('native runtime parent must be a no-follow directory');
+    }
+    return resolved;
+  } catch (error) {
+    if (error?.code !== 'ENOENT') throw error;
+  }
+  fs.mkdirSync(resolved, { recursive: true, mode: 0o700 });
+  const metadata = fs.lstatSync(resolved);
+  if (metadata.isSymbolicLink() || !metadata.isDirectory()) {
+    throw new Error('native runtime parent must be a no-follow directory');
+  }
+  return resolved;
+};
+
 const removeManagedPath = (parent, targetPath, prefix) => {
   const managed = assertManagedPath(parent, targetPath, prefix);
   if (pathExistsNoFollow(managed)) fs.rmSync(managed, { recursive: true, force: false });
@@ -300,12 +319,8 @@ export const installVerifiedRuntimeArchive = ({
   onFault = () => {},
 }) => {
   const target = path.resolve(runtimeRoot);
-  const parent = path.dirname(target);
+  const parent = ensureNoFollowDirectory(path.dirname(target));
   const baseName = path.basename(target);
-  const parentMetadata = fs.lstatSync(parent);
-  if (parentMetadata.isSymbolicLink() || !parentMetadata.isDirectory()) {
-    throw new Error('native runtime parent must be a no-follow directory');
-  }
   const nonce = randomUUID();
   const staging = assertManagedPath(parent, path.join(parent, `.${baseName}-staging-${nonce}`), `.${baseName}-staging-`);
   const previous = assertManagedPath(parent, path.join(parent, `.${baseName}-previous-${nonce}`), `.${baseName}-previous-`);
