@@ -40,7 +40,7 @@ test("bundled release notes remain complete for every desktop locale", () => {
 });
 
 test("future release timestamps are scheduled until their publication instant", () => {
-  assert.equal(desktopLocalReleaseManifest.version, "2.0.1");
+  assert.equal(desktopLocalReleaseManifest.version, "2.0.3");
   assert.equal(
     resolveDesktopReleasePublicationState(
       desktopLocalReleaseManifest.publishedAt,
