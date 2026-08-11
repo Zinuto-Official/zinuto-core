@@ -56,6 +56,10 @@
       "role": "entry"
     },
     {
+      "path": "REPOSITORY_PROVENANCE.md",
+      "role": "evidence"
+    },
+    {
       "path": "SECURITY.md",
       "role": "security"
     },
