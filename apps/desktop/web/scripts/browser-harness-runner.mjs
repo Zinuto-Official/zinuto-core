@@ -16,12 +16,12 @@ const playwrightCliPath = path.resolve(
   "cli.js",
 );
 
-export const HOT_INTERACTION_SUITE = {
-  label: "hot interaction performance",
-  readyPath: "/hot-interaction-perf.html",
+export const WORKSPACE_NAVIGATION_SUITE = {
+  label: "workspace navigation",
+  readyPath: "/workspace-navigation-continuity.html",
   playwrightConfig: "./playwright.hot-interaction.config.ts",
-  externalServerEnv: "ZINUTO_HOT_INTERACTION_PERF_EXTERNAL_SERVER",
-  portEnv: "ZINUTO_HOT_INTERACTION_PERF_PORT",
+  externalServerEnv: "ZINUTO_WORKSPACE_NAVIGATION_EXTERNAL_SERVER",
+  portEnv: "ZINUTO_WORKSPACE_NAVIGATION_PORT",
 };
 
 export const I18N_SMOKE_SUITE = {

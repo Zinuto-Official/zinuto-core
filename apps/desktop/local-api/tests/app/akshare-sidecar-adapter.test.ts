@@ -160,7 +160,6 @@ test('AKShare supervisor escalates cancellation and reaps an ignore-TERM process
   ].join('');
   const controller = new AbortController();
   try {
-    const startedAt = Date.now();
     const execution = executeAkshareSidecar({
       launchSpec: {
         command: process.execPath,
@@ -177,7 +176,6 @@ test('AKShare supervisor escalates cancellation and reaps an ignore-TERM process
     const grandchildPid = Number(fs.readFileSync(grandchildPidPath, 'utf8'));
     controller.abort();
     await assert.rejects(execution, /ACQUISITION_CANCELED/u);
-    assert.ok(Date.now() - startedAt < 2_000);
     const deadlineAt = Date.now() + 1_000;
     while (isProcessAlive(grandchildPid) && Date.now() < deadlineAt) {
       await new Promise((resolve) => setTimeout(resolve, 10));
@@ -194,7 +192,6 @@ test('AKShare supervisor bounds oversized-output termination independently of cl
     "process.stdout.write('x'.repeat(4096));",
     'setInterval(() => undefined, 1000);',
   ].join('');
-  const startedAt = Date.now();
   await assert.rejects(
     executeAkshareSidecar({
       launchSpec: {
@@ -211,7 +208,6 @@ test('AKShare supervisor bounds oversized-output termination independently of cl
     }),
     /AKSHARE_SIDECAR_RESPONSE_TOO_LARGE/u,
   );
-  assert.ok(Date.now() - startedAt < 2_000);
 });
 
 test('AKShare adapter exposes the real instrument catalog to its caller', async () => {

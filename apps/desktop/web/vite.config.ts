@@ -371,7 +371,6 @@ export default defineConfig(({ mode }) => ({
         ...(mode === 'test-harness' ? {
           'i18n-pages': path.resolve(__dirname, 'i18n-pages.html'),
           'i18n-harness': path.resolve(__dirname, 'i18n-harness.html'),
-          'hot-interaction-perf': path.resolve(__dirname, 'hot-interaction-perf.html'),
           'workspace-navigation-continuity': path.resolve(__dirname, 'workspace-navigation-continuity.html'),
           'ui-catalog': path.resolve(__dirname, 'ui-catalog.html'),
         } : {}),

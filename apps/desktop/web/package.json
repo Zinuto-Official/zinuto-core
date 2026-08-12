@@ -27,7 +27,6 @@
     "test:trainer": "tsx --test ./tests/trainer/*.test.ts",
     "test:history-console": "tsx --test ./tests/history-console/*.test.ts",
     "serve:i18n:smoke": "node ./scripts/serve-i18n-smoke.mjs",
-    "test:hot-interaction:perf": "npm run build:test-harness && node ./scripts/run-hot-interaction-perf.mjs",
     "test:i18n:smoke": "npm run build:test-harness && node ./scripts/run-i18n-smoke.mjs",
     "test:data-import:ui": "tsx --test ./tests/data-import/*.test.ts",
     "test:custom-indicator": "tsx --test ./tests/custom-indicator/*.test.ts",

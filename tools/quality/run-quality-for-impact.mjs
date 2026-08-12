@@ -689,7 +689,7 @@ const resolveFastCommands = (files, impact) => {
       );
     }
     if (hotInteractionTestFiles.length > 0) {
-      commands.push(npmRun("test:hot-interaction:perf", ["--workspace=@zinuto/desktop-web"]));
+      commands.push(npmRun("test:browser:workspace", ["--workspace=@zinuto/desktop-web"]));
     }
   }
 

@@ -24,7 +24,6 @@
     "typecheck:incremental": "node ../../../tools/release/check-node-version.mjs && npm run check:error-text && tsc --noEmit --incremental --tsBuildInfoFile ../../../.cache/tsbuildinfo/desktop-local-api.tsbuildinfo",
     "akshare-sidecar:sync": "node ./scripts/build-akshare-sidecar.mjs --sync-only",
     "akshare-sidecar:build": "node ./scripts/build-akshare-sidecar.mjs",
-    "bench:backtest-engine": "node ./scripts/bench-backtest-engine.mjs",
     "check:user-text": "node ./scripts/check-user-text-literals.mjs",
     "check:error-text": "node ./scripts/check-error-literals.mjs && npm run check:user-text"
   },

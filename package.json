@@ -108,14 +108,10 @@
     "desktop:shell:check": "npm run desktop:shell:format && cargo clippy --manifest-path apps/desktop/shell/Cargo.toml --all-targets --all-features -- -D warnings && cargo check --manifest-path apps/desktop/shell/Cargo.toml",
     "desktop:shell:backend-runtime:test": "cargo test --manifest-path apps/desktop/shell/Cargo.toml backend_runtime",
     "desktop:shell:test": "npm run desktop:shell:check && cargo test --manifest-path apps/desktop/shell/Cargo.toml",
-    "bench:backtest-engine": "npm run check:node-version && npm run bench:backtest-engine --workspace=@zinuto/desktop-local-api",
     "desktop:compliance:check": "npm run check:node-version && npm run typecheck && npm run check:text && npm run check:architecture && npm run desktop:runtime:check:build",
     "desktop:dev": "node ./tools/release/run-tauri-desktop.mjs dev",
     "desktop:build": "node ./tools/release/build-community-desktop.mjs",
-    "desktop:build:raw": "node ./tools/release/run-tauri-desktop.mjs build",
-    "stress:market-window": "npm run check:node-version && npm run build --workspace=@zinuto/shared && tsx ./tools/dev/stress-market-window-10m.mts",
-    "bench:market-storage": "npm run check:node-version && tsx ./tools/dev/bench-market-storage.mts",
-    "perf:market-10m": "npm run stress:market-window -- --bars=10000000 --range-limit=5000"
+    "desktop:build:raw": "node ./tools/release/run-tauri-desktop.mjs build"
   },
   "devDependencies": {
     "@tauri-apps/cli": "2.10.1",

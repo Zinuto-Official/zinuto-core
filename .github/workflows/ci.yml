@@ -82,7 +82,7 @@ jobs:
             --base "${{ steps.range.outputs.base }}" \
             --head "${{ steps.range.outputs.head }}" \
             --dry-run | tee .affected-quality-plan.txt
-          if grep -Eq 'quality:desktop-app|test:hot-interaction:perf|test:i18n:smoke' .affected-quality-plan.txt; then
+          if grep -Eq 'quality:desktop-app|test:browser:workspace|test:i18n:smoke' .affected-quality-plan.txt; then
             echo "playwright=true" >> "$GITHUB_OUTPUT"
           fi
 

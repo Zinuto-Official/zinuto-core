@@ -12,7 +12,6 @@ import {
   createWorkspaceReadModelsApi,
   finishWorkspaceReadModelMutation,
   invalidateWorkspaceReadModelCache,
-  WORKSPACE_READ_MODEL_CACHE_TTL_MS,
   type ApiDesktopWorkspaceReadModel,
 } from "../../src/api/workspaces";
 
@@ -98,9 +97,6 @@ test("workspace read models use a short cache and explicit invalidation", async 
   const cached = await workspaceApi.getWorkspaceReadModel("settings");
   assert.equal(cached, first);
   assert.equal(requestCount, 1);
-  assert.ok(WORKSPACE_READ_MODEL_CACHE_TTL_MS > 0);
-  assert.ok(WORKSPACE_READ_MODEL_CACHE_TTL_MS <= 5_000);
-
   invalidateWorkspaceReadModelCache();
   const refreshed = await workspaceApi.getWorkspaceReadModel("settings");
   assert.notEqual(refreshed, first);

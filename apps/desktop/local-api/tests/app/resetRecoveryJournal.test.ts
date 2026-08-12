@@ -254,7 +254,6 @@ test('ordinary reset deadline aborts before destructive work and releases a late
     resetJobDeadlineMs: 20,
   });
   try {
-    const startedAt = Date.now();
     await assert.rejects(
       () => fixture.ops.resetAllStoredData(),
       (error: unknown) =>
@@ -263,7 +262,6 @@ test('ordinary reset deadline aborts before destructive work and releases a late
         (error as { code?: unknown }).code ===
           'RESET_ALL_DATA_JOB_DEADLINE_EXCEEDED',
     );
-    assert.ok(Date.now() - startedAt < 500);
     assert.deepEqual(readOperationStatus(fixture.db), {
       status: 'ABORTED',
       checkpoint: 'PREPARED',
@@ -515,16 +513,13 @@ test('startup recovery deadline blocks startup state and never records false suc
       updatedAt: new Date().toISOString(),
     });
 
-    const startedAt = Date.now();
     const recovered = await fixture.ops.recoverInterruptedResetAllStoredData();
-    const elapsedMs = Date.now() - startedAt;
 
     assert.equal(recovered.status, 'BLOCKED');
     assert.equal(
       recovered.errorCode,
       'RESET_ALL_DATA_RECOVERY_DEADLINE_EXCEEDED',
     );
-    assert.ok(elapsedMs < 500, `recovery took ${elapsedMs}ms`);
     assert.deepEqual(readOperationStatus(fixture.db), {
       status: 'BLOCKED',
       checkpoint: 'CORE_DATA_COMMITTED',

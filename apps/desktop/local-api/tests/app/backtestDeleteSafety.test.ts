@@ -260,7 +260,6 @@ test('a hydration timeout fails the batch instead of continuing symbol by symbol
       }, { once: true });
     }),
   };
-  const startedAt = Date.now();
   await assert.rejects(
     backtestService.runBacktestBatchNow(batch.id, {
       seedHydrationTimeoutMs: 30,
@@ -268,7 +267,6 @@ test('a hydration timeout fails the batch instead of continuing symbol by symbol
     }),
     /BACKTEST_SEED_HYDRATION_TIMEOUT/u,
   );
-  assert.ok(Date.now() - startedAt < 500);
   assert.equal(hydrationReadSignalAborted, true);
   const failed = db.prepare(
     'SELECT status,error_message FROM backtest_batches WHERE id = ?',

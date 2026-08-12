@@ -5,16 +5,13 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const perfPort = Number.parseInt(
-  process.env.ZINUTO_HOT_INTERACTION_PERF_PORT ??
-    (process.env.npm_lifecycle_event === "test:hot-interaction:perf"
-      ? "4275"
-      : "4175"),
+const navigationPort = Number.parseInt(
+  process.env.ZINUTO_WORKSPACE_NAVIGATION_PORT ?? "4175",
   10,
 );
-const perfBaseUrl = `http://127.0.0.1:${perfPort}`;
+const navigationBaseUrl = `http://127.0.0.1:${navigationPort}`;
 const useExternalServer =
-  process.env.ZINUTO_HOT_INTERACTION_PERF_EXTERNAL_SERVER === "1";
+  process.env.ZINUTO_WORKSPACE_NAVIGATION_EXTERNAL_SERVER === "1";
 
 export default defineConfig({
   testDir: path.join(__dirname, "tests", "hot-interaction"),
@@ -23,7 +20,7 @@ export default defineConfig({
   reporter: "dot",
   workers: 1,
   use: {
-    baseURL: perfBaseUrl,
+    baseURL: navigationBaseUrl,
     trace: "on-first-retry",
   },
   webServer: useExternalServer
@@ -32,10 +29,10 @@ export default defineConfig({
         command: "node ./scripts/serve-i18n-smoke.mjs",
         cwd: __dirname,
         env: {
-          ZINUTO_I18N_SMOKE_PORT: String(perfPort),
+          ZINUTO_I18N_SMOKE_PORT: String(navigationPort),
         },
         reuseExistingServer: false,
         timeout: 180_000,
-        url: `${perfBaseUrl}/hot-interaction-perf.html`,
+        url: `${navigationBaseUrl}/workspace-navigation-continuity.html`,
       },
 });

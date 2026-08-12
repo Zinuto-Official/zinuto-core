@@ -6,14 +6,6 @@ const TRAINER_PERF_TRACE_PREFIX = "zinuto:trainer-perf";
 const AUTO_SHRINK_FLUSH_DELAY_MS = 160;
 const HOT_INPUT_STALE_MS = 250;
 
-export const TRAINER_HOT_INTERACTION_BUDGETS = {
-  localFeedbackP95Ms: 16,
-  visibleAdvanceP95Ms: 100,
-  backendActionP95Ms: 80,
-  maxLongTaskMs: 50,
-  continuousStepSampleCount: 200,
-} as const;
-
 export type TrainerHotInteractionAction = "STEP" | "BUY" | "SELL" | "UNDO";
 
 export type TrainerHotInteractionMetricName =
@@ -236,68 +228,6 @@ export const markTrainerHotInteractionChartPaint = (
     source: "chart",
     durationMs,
   });
-};
-
-const percentile = (values: number[], percentileValue: number): number => {
-  if (!values.length) {
-    return 0;
-  }
-  const sorted = [...values].sort((left, right) => left - right);
-  const index = Math.min(
-    sorted.length - 1,
-    Math.max(0, Math.ceil((percentileValue / 100) * sorted.length) - 1),
-  );
-  return roundDurationMs(sorted[index] ?? 0);
-};
-
-export const summarizeTrainerHotInteractionMetrics = (
-  samples: readonly TrainerHotInteractionMetricSample[],
-) => {
-  const valuesByName = (name: TrainerHotInteractionMetricName) =>
-    samples
-      .filter((sample) => sample.name === name)
-      .map((sample) => Math.max(0, Number(sample.durationMs) || 0));
-  const longTaskDurations = valuesByName("long-task");
-  return {
-    localFeedbackP95Ms: percentile(valuesByName("local-feedback"), 95),
-    visibleAdvanceP95Ms: percentile(valuesByName("visible-advance"), 95),
-    backendActionP95Ms: percentile(valuesByName("backend-action"), 95),
-    maxLongTaskMs: roundDurationMs(Math.max(0, ...longTaskDurations)),
-    longTaskCount: longTaskDurations.length,
-    sampleCount: samples.length,
-  };
-};
-
-export const evaluateTrainerHotInteractionBudgets = (
-  samples: readonly TrainerHotInteractionMetricSample[],
-) => {
-  const summary = summarizeTrainerHotInteractionMetrics(samples);
-  return {
-    ...summary,
-    passes:
-      summary.localFeedbackP95Ms <=
-        TRAINER_HOT_INTERACTION_BUDGETS.localFeedbackP95Ms &&
-      summary.visibleAdvanceP95Ms <=
-        TRAINER_HOT_INTERACTION_BUDGETS.visibleAdvanceP95Ms &&
-      summary.backendActionP95Ms <=
-        TRAINER_HOT_INTERACTION_BUDGETS.backendActionP95Ms &&
-      summary.maxLongTaskMs <= TRAINER_HOT_INTERACTION_BUDGETS.maxLongTaskMs,
-  };
-};
-
-export const readTrainerHotInteractionMetrics =
-  (): TrainerHotInteractionMetricSample[] => {
-    const state = getHotInteractionState();
-    return state ? [...state.samples] : [];
-  };
-
-export const resetTrainerHotInteractionMetrics = (): void => {
-  const state = getHotInteractionState();
-  if (!state) {
-    return;
-  }
-  state.samples = [];
-  state.inputStartedAtByAction = {};
 };
 
 export const installTrainerHotInteractionLongTaskObserver = (): void => {

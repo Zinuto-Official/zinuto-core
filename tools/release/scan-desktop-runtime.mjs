@@ -41,7 +41,6 @@ export const FORBIDDEN_DESKTOP_RUNTIME_MARKERS = Object.freeze([
   'VITE_DESKTOP_FEEDBACK_EMAIL',
   'i18n-pages.html',
   'i18n-harness.html',
-  'hot-interaction-perf.html',
   'workspace-navigation-continuity.html',
   'ui-catalog.html',
 ]);

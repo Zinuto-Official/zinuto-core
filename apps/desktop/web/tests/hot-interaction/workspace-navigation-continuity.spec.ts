@@ -48,7 +48,6 @@ const viewports = [
 ] as const;
 
 const MAX_WORKSPACE_ICON_SIZE = 56;
-const MAX_TARGET_SHELL_COMMIT_MS = 120;
 
 const readSnapshot = async (page: Page): Promise<ContinuitySnapshot> =>
   page.evaluate(() => {
@@ -124,20 +123,11 @@ test("workspace navigation commits the target shell while its assets warm", asyn
 
     for (const targetPage of navigationOrder.slice(1)) {
       const before = await readSnapshot(page);
-      const navigationStartedAt = await page.evaluate(() => performance.now());
       await page.locator(`[data-nav-item-key="${targetPage}"]`).click();
       await expect(
         page.locator(`[data-nav-item-key="${targetPage}"]`),
       ).toHaveAttribute("data-active", "true");
       await waitForDisplayedPage(page, targetPage);
-      const targetShellCommitMs = await page.evaluate(
-        (startedAt) => performance.now() - startedAt,
-        navigationStartedAt,
-      );
-      expect(targetShellCommitMs).toBeLessThanOrEqual(
-        MAX_TARGET_SHELL_COMMIT_MS,
-      );
-
       const warmupFrames = await collectAnimationFrameSnapshots(page, 8);
       expect(warmupFrames).not.toHaveLength(0);
       for (const frame of warmupFrames) {

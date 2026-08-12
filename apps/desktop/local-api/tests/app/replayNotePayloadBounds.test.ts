@@ -21,7 +21,7 @@ test.after(async () => {
   await fs.promises.rm(tempDataDir, { recursive: true, force: true });
 });
 
-test('a legacy replay-note gzip bomb fails quickly at the real DB read boundary', async () => {
+test('a legacy replay-note gzip bomb is rejected at the real DB read boundary', async () => {
   await replayNoteService.createReplayNote({
     id: 'bounded-note',
     title: 'Bounded note',
@@ -36,10 +36,8 @@ test('a legacy replay-note gzip bomb fails quickly at the real DB read boundary'
       WHERE note_id = ?`,
   ).run(bomb, bomb.byteLength, 'bounded-note');
 
-  const startedAt = performance.now();
   await assert.rejects(
     replayNoteService.getReplayNoteById('bounded-note'),
     (error: unknown) => (error as { code?: unknown })?.code === 'REPLAY_NOTE_CONTENT_TOO_LARGE',
   );
-  assert.ok(performance.now() - startedAt < 1_000);
 });

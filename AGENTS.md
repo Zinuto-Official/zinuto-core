@@ -105,5 +105,6 @@ During editing, run `npm run check:fast -- --files <changed-files...>`. Before h
 - Owns: local desktop UI and runtime; local HTTP and native bridge contracts; internal `community` composition and public-source governance.
 - Does not own: official accounts, payments, support, notices, presence, and updater code; official branding, signing, Store submission, deployment, and production secrets.
 - Cross-repository authority registry: `zinuto-release/config/documentation-policy.json`. This is a documentation reference, never a build dependency.
+- Test discipline: Test observable product or domain behavior only. Do not add benchmarks, load or stress tests, or assertions based on elapsed wall-clock time, local hardware, runner speed, arbitrary sleeps, or implementation timings. Keep time tests only for modeled business, security, or user-visible lifecycle rules, using a controlled clock or state boundary.
 - Do not copy live release state into stable documentation. Run the authority command when current state matters.
 <!-- WORKSPACE-BOUNDARY:END -->

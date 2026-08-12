@@ -13,7 +13,6 @@ const requiredFiles = ['index.html', 'secondary-window.html'];
 const forbiddenHarnessFiles = [
   'i18n-pages.html',
   'i18n-harness.html',
-  'hot-interaction-perf.html',
   'workspace-navigation-continuity.html',
   'ui-catalog.html',
 ];
