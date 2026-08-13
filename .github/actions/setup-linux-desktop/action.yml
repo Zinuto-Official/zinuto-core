@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: GPL-3.0-only
+
+name: Set up Linux desktop build dependencies
+description: Install the Ubuntu development libraries required by the Tauri 2 shell
+
+runs:
+  using: composite
+  steps:
+    - name: Install Tauri 2 Linux development libraries
+      shell: bash
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          build-essential \
+          file \
+          libayatana-appindicator3-dev \
+          libgtk-3-dev \
+          librsvg2-dev \
+          libssl-dev \
+          libwebkit2gtk-4.1-dev \
+          libxdo-dev

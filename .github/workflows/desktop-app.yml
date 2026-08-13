@@ -39,6 +39,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install Linux desktop build dependencies
+        uses: ./.github/actions/setup-linux-desktop
+
       - name: Install pinned Rust audit tool
         run: cargo install cargo-audit --version 0.22.2 --locked
 

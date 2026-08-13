@@ -5,6 +5,7 @@ name: Core Change CI
 on:
   pull_request:
     paths:
+      - ".github/actions/setup-linux-desktop/action.yml"
       - ".github/workflows/ci.yml"
       - ".nvmrc"
       - "apps/desktop/**"
@@ -20,6 +21,7 @@ on:
     branches:
       - main
     paths:
+      - ".github/actions/setup-linux-desktop/action.yml"
       - ".github/workflows/ci.yml"
       - ".nvmrc"
       - "apps/desktop/**"
@@ -63,6 +65,9 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Install Linux desktop build dependencies
+        uses: ./.github/actions/setup-linux-desktop
 
       - name: Resolve changed range
         id: range

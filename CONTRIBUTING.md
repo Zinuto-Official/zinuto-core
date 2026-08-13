@@ -33,6 +33,10 @@ Update that document or its JSON registry instead.
 Use the Node.js version pinned in `.nvmrc`, Rust stable, uv `0.11.8`, the
 checked npm lockfile, and the [Tauri 2 platform
 prerequisites](https://v2.tauri.app/start/prerequisites/).
+The Ubuntu `Core Change CI` and `Full Desktop Gate` jobs must install the same
+Tauri 2 Linux development libraries before any affected or full gate can
+compile the shell; Playwright's browser dependencies do not replace the GTK,
+WebKitGTK, AppIndicator, XDo, SVG, and OpenSSL development packages.
 
 ```sh
 git clone https://github.com/<your-github-name>/zinuto-core.git
