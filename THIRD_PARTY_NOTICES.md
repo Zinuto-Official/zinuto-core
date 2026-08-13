@@ -5,7 +5,7 @@ an inventory, not a substitute for the license texts shipped by each package.
 The source distribution retains dependency license files through the normal
 package, Cargo, and Python registries.
 
-- Snapshot SHA-256: `349545a04ccce00220cc9238fb64f435b993f4a000712effb155a20845053ade`
+- Snapshot SHA-256: `c2f2fb10c4f012b7eb0d74abae1c4ed6f5775953c60553d43b95426d16d1bea8`
 - Components: 1238
 - Python sidecar lock SHA-256: `829c5ffc7942462a91657ec8523e78e4c75fbdfdae6d2003b7902f277f6fad51`
 - Python sidecar build: CPython 3.11.15, uv 0.11.8
@@ -1056,7 +1056,7 @@ authorization from the provider.
 | npm | mkdirp-classic | 0.5.3 | MIT |  | runtime |
 | npm | ms | 2.1.3 | MIT |  | runtime |
 | npm | mz | 2.7.0 | MIT |  | development |
-| npm | nanoid | 3.3.17 | MIT |  | development |
+| npm | nanoid | 3.3.18 | MIT |  | development |
 | npm | napi-build-utils | 2.0.0 | MIT |  | runtime |
 | npm | negotiator | 1.0.0 | MIT |  | runtime |
 | npm | node-abi | 3.90.0 | MIT |  | runtime |

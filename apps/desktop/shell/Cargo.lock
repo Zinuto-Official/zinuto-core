@@ -2327,7 +2327,7 @@ dependencies = [
 
 [[package]]
 name = "open-trading-practice"
-version = "2.0.4"
+version = "2.0.5"
 dependencies = [
  "block2",
  "libc",

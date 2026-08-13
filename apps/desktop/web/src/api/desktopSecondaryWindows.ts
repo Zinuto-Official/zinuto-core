@@ -37,7 +37,6 @@ export {
   type DesktopSecondaryWindowSyncMode,
   type DesktopSecondaryWindowSyncPolicy,
 } from "@/frontend-kernel/secondary-windows/desktopSecondaryWindowActionProtocol";
-import { GLOBAL_COLOR_ARCHITECTURE } from "@/ui/theme/visualColors";
 import {
   isTauriRuntime,
   loadTauriCoreModule,
@@ -54,6 +53,11 @@ import {
 } from "@/api/desktopSecondaryWindowGeometry";
 import { createDesktopSecondaryWindowFocusRuntime } from "@/api/desktopSecondaryWindowFocusRuntime";
 import { createDesktopSecondaryWindowListenerRuntime } from "@/api/desktopSecondaryWindowListeners";
+import {
+  clearDesktopSecondaryWindowNativeChrome,
+  DESKTOP_SECONDARY_WINDOW_NATIVE_TITLE,
+  resolveDesktopSecondaryWindowBackgroundColor,
+} from "@/api/desktopSecondaryWindowNativeChrome";
 import { buildDesktopSecondaryWindowUrl } from "@/api/desktopSecondaryWindowUrl";
 import { readDesktopWindowChromePlatform } from "@/api/desktopWindowChrome";
 
@@ -89,36 +93,6 @@ const DESKTOP_SECONDARY_WINDOW_ACTION_ACK_EVENT =
   "zinuto://desktop-secondary-window-action-ack";
 
 const DESKTOP_SECONDARY_WINDOW_ACTION_ACK_TIMEOUT_MS = 5_000;
-
-const DESKTOP_SECONDARY_WINDOW_BACKGROUND_COLOR = {
-  light: GLOBAL_COLOR_ARCHITECTURE.light.surfaces.s1,
-  dark: GLOBAL_COLOR_ARCHITECTURE.dark.surfaces.s1,
-} as const;
-const DESKTOP_SECONDARY_WINDOW_NATIVE_TITLE = "";
-
-type DesktopSecondaryWindowNativeChromeTarget = {
-  setTitle: (title: string) => Promise<void>;
-};
-
-const resolveDesktopSecondaryWindowInitialTheme = (
-  visualContext: DesktopSecondaryWindowVisualContext | null | undefined,
-): DesktopSecondaryWindowVisualContext["resolvedThemeMode"] =>
-  visualContext?.resolvedThemeMode === "dark" ? "dark" : "light";
-
-const resolveDesktopSecondaryWindowBackgroundColor = (
-  visualContext: DesktopSecondaryWindowVisualContext | null | undefined,
-): string =>
-  DESKTOP_SECONDARY_WINDOW_BACKGROUND_COLOR[
-    resolveDesktopSecondaryWindowInitialTheme(visualContext)
-  ];
-
-const clearDesktopSecondaryWindowNativeChrome = async (
-  windowRef: DesktopSecondaryWindowNativeChromeTarget,
-): Promise<void> => {
-  await windowRef
-    .setTitle(DESKTOP_SECONDARY_WINDOW_NATIVE_TITLE)
-    .catch(() => undefined);
-};
 
 const desktopSecondaryWindowStateStore = createDesktopSecondaryWindowStateStore<
   DesktopSecondaryWindowKind,

@@ -1,9 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
-import type { ArchivedReplayData } from "@/domains/history/replayArchiveTypes";
-import type { DisplayPeriodKey } from "@/domains/chart/chartPeriods";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { api } from "@/api";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { HISTORY_PROJECT_PAGE_SIZE } from "@/frontend-kernel/runtimeConstants";
 import { Button } from "@/ui/primitives/button";
 import { InlineFeedback } from "@/ui/primitives/inline-feedback";
@@ -12,13 +9,9 @@ import { SurfaceCard } from "@/ui/primitives/surface-card";
 import { formatMessage } from "@zinuto/shared/i18n";
 import { getTradingSettingsText } from "@/ui/config/uiConfig";
 import { AppIcon } from "@/assets/graphics";
-import { formatDotJoinedText } from "@/ui/formatting/i18nDisplay";
-import { type HistoryReplayChartViewProps } from "@/domains/chart/HistoryReplayChart";
-import { resolveReplayDisplayPeriod } from "@/domains/chart/replayDisplayPeriod";
 import { EChartSurface } from "@/workspaces/challenge-stats/charts/echartSurface";
 import {
   ReplayReviewArchiveSection,
-  type ReplayReviewArchiveRow,
 } from "@/workspaces/history/history-console/ReplayReviewArchiveSection";
 import { ReplayReviewTrendCard } from "@/workspaces/history/history-console/ReplayReviewTrendCard";
 import { PlainTabBar } from "@/ui/components/PlainTabBar";
@@ -29,6 +22,7 @@ import {
 } from "@/ui/components";
 import { useReplayReviewConsoleModel } from "@/workspaces/history/history-console/useReplayReviewConsoleModel";
 import { useReplayReviewArchiveRows } from "@/workspaces/history/history-console/useReplayReviewArchiveRows";
+import { useReplayReviewArchiveDetailWindow } from "@/workspaces/history/history-console/useReplayReviewArchiveDetailWindow";
 import { useReplayReviewWindowState } from "@/workspaces/history/history-console/useReplayReviewWindowState";
 import { useReplayReviewConsoleBundle } from "@/workspaces/history/history-console/useReplayReviewConsoleBundle";
 import { useHistoryReviewReadModelActions } from "@/workspaces/history/history-console/useHistoryReviewReadModelActions";
@@ -40,7 +34,6 @@ import type {
 import { useDesktopHelpContextReporter } from "@/domains/desktop-help/DesktopHelpContext";
 
 import {
-  ArchiveReplayDrawerPreview,
   BehaviorCompactMetric,
   DiagnosticPendingIndicator,
   MarginWorstSessionList,
@@ -103,9 +96,6 @@ export const ReplayReviewConsolePage = ({
   const [linkedRepresentativeIds, setLinkedRepresentativeIds] = useState<
     string[]
   >([]);
-  const archiveDetailWindowOpenedRef = useRef(false);
-  const archiveDetailWindowRevisionRef = useRef(0);
-
   const model = useReplayReviewConsoleModel({
     language,
     ui,
@@ -337,164 +327,14 @@ export const ReplayReviewConsolePage = ({
       tradingSettingsText,
       ui,
     });
-
-  const renderArchiveDetailPreview = useCallback(
-    (row: ReplayReviewArchiveRow) => {
-      const session = archiveSessionById.get(row.id);
-      if (!session) {
-        return null;
-      }
-      return (
-        <ArchiveReplayDrawerPreview
-          session={session}
-          history={history}
-          ui={ui}
-          language={language}
-        />
-      );
-    },
-    [archiveSessionById, history, language, ui],
-  );
-
-  const openArchiveDetailWindow = useCallback(
-    async (row: ReplayReviewArchiveRow) => {
-      const session = archiveSessionById.get(row.id);
-      if (!session) {
-        return;
-      }
-      let resolvedReplay =
-        session.detail?.replay ?? session.project.replay ?? null;
-      if (!resolvedReplay) {
-        try {
-          const detail = await api.getTrainingProject(session.project.id);
-          if (
-            detail.detailExpiredAt ||
-            detail.replayHydrationStatus === "EXPIRED"
-          ) {
-            onError?.(formatMessage(language, "appText.historyDetailExpired"));
-            return;
-          }
-          resolvedReplay = detail.replay ?? null;
-        } catch {
-          resolvedReplay = null;
-        }
-      }
-      if (!resolvedReplay) {
-        onError?.(
-          session.project.detailExpiredAt ||
-            session.project.replayHydrationStatus === "EXPIRED"
-            ? formatMessage(language, "appText.historyDetailExpired")
-            : ui.statsNoData,
-        );
-        return;
-      }
-      const replayDisplayPeriod = resolveReplayDisplayPeriod({
-        replay: resolvedReplay as ArchivedReplayData,
-        baseTimeframe: session.project.baseTimeframe,
-      });
-      archiveDetailWindowOpenedRef.current = true;
-      void api
-        .openDesktopSecondaryWindow({
-          kind: "FREE_REPLAY_ARCHIVE_DETAIL",
-          title: row.projectName || row.sequenceText,
-          payload: {
-            title: row.projectName || row.sequenceText,
-            meta: formatDotJoinedText(language, [
-              row.sequenceText,
-              row.symbol,
-              row.createdAtText,
-            ]),
-            project: {
-              id: session.project.id,
-              symbol: session.project.symbol,
-              replay: resolvedReplay as NonNullable<
-                HistoryReplayChartViewProps["project"]
-              >["replay"],
-            },
-            displayPeriod: replayDisplayPeriod,
-            trainerPeriodOptionsByBase: history.trainerPeriodOptionsByBase,
-            initialDisplayPeriod: replayDisplayPeriod,
-            chartRenderMode: history.chartRenderMode,
-            showVolumePane: true,
-            badges: row.ruleBadges.length
-              ? row.ruleBadges.map((badge) => ({
-                  label: badge.label,
-                  tone: badge.tone,
-                }))
-              : [
-                  {
-                    label: row.environmentLabel,
-                    tone: "outline" as const,
-                  },
-                ],
-            metrics: row.financialItems.map((item) => ({
-              label: item.label,
-              value: item.value,
-              tone: item.tone ?? "flat",
-            })),
-          },
-        })
-        .then((state) => {
-          archiveDetailWindowRevisionRef.current = state.revision;
-        })
-        .catch(() => {
-          archiveDetailWindowOpenedRef.current = false;
-          archiveDetailWindowRevisionRef.current = 0;
-        });
-    },
-    [
+  const { openArchiveDetailWindow, renderArchiveDetailPreview } =
+    useReplayReviewArchiveDetailWindow({
       archiveSessionById,
-      history.chartRenderMode,
-      history.trainerPeriodOptionsByBase,
+      history,
       language,
       onError,
-      ui.statsNoData,
-    ],
-  );
-
-  useEffect(
-    () =>
-      api.subscribeDesktopSecondaryWindowActions((message) => {
-        if (message.kind !== "FREE_REPLAY_ARCHIVE_DETAIL") {
-          return;
-        }
-        if (
-          !api.isCurrentDesktopSecondaryWindowAction(
-            message,
-            archiveDetailWindowRevisionRef.current,
-          )
-        ) {
-          return;
-        }
-        if (message.action === "WINDOW_CLOSED") {
-          archiveDetailWindowOpenedRef.current = false;
-          archiveDetailWindowRevisionRef.current = 0;
-          return;
-        }
-        const payload =
-          message.payload &&
-          typeof message.payload === "object" &&
-          !Array.isArray(message.payload)
-            ? (message.payload as Record<string, unknown>)
-            : {};
-        if (message.action === "SET_DISPLAY_PERIOD") {
-          const period = String(payload.period || "").trim();
-          if (period) {
-            history.setTrainerDisplayPeriod(period as DisplayPeriodKey);
-          }
-          return;
-        }
-        if (message.action === "SET_CHART_RENDER_MODE") {
-          const mode = String(payload.mode || "").trim();
-          if (mode) {
-            history.setChartRenderMode(
-              mode as Parameters<typeof history.setChartRenderMode>[0],
-            );
-          }
-        }
-      }),
-    [history],
-  );
+      ui,
+    });
 
   const archiveSessionsDesc = linkedSessionsDesc;
   const historyReadModelActions = useHistoryReviewReadModelActions(

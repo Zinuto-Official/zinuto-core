@@ -1,13 +1,13 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.5",
-  "serialNumber": "urn:uuid:349545a0-4ccc-5002-a0cc-9238fb64f435",
+  "serialNumber": "urn:uuid:c2f2fb10-c4f0-52b7-ab0d-74abae1c4ed6",
   "version": 1,
   "metadata": {
     "component": {
       "type": "application",
       "name": "Zinuto Core",
-      "version": "2.0.4",
+      "version": "2.0.5",
       "licenses": [
         {
           "license": {
@@ -19,7 +19,7 @@
     "properties": [
       {
         "name": "zinuto:dependencySnapshotSha256",
-        "value": "349545a04ccce00220cc9238fb64f435b993f4a000712effb155a20845053ade"
+        "value": "c2f2fb10c4f012b7eb0d74abae1c4ed6f5775953c60553d43b95426d16d1bea8"
       },
       {
         "name": "zinuto:pythonSidecarLockSha256",
@@ -13264,14 +13264,14 @@
       "type": "library",
       "group": "npm",
       "name": "nanoid",
-      "version": "3.3.17",
+      "version": "3.3.18",
       "scope": "excluded",
       "licenses": [
         {
           "expression": "MIT"
         }
       ],
-      "purl": "pkg:npm/nanoid@3.3.17"
+      "purl": "pkg:npm/nanoid@3.3.18"
     },
     {
       "type": "library",

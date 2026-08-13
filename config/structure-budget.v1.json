@@ -942,6 +942,12 @@
           "lineCeiling": 1000
         },
         {
+          "path": "apps/desktop/web/src/api/desktopSecondaryWindowNativeChrome.ts",
+          "kind": "extracted-owner",
+          "role": "extracted-responsibility-owner",
+          "lineCeiling": 1000
+        },
+        {
           "path": "apps/desktop/web/src/api/desktopSecondaryWindowFocusRuntime.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
@@ -3016,6 +3022,12 @@
           "lineCeiling": 1000
         },
         {
+          "path": "apps/desktop/web/src/workspaces/history/history-console/useReplayReviewArchiveDetailWindow.tsx",
+          "kind": "extracted-owner",
+          "role": "extracted-responsibility-owner",
+          "lineCeiling": 1000
+        },
+        {
           "path": "apps/desktop/web/src/workspaces/history/history-console/useReplayReviewWindowState.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
@@ -3663,11 +3675,12 @@
         "apps/desktop/web/src/api/desktopSecondaryWindows.ts",
         "apps/desktop/web/src/frontend-kernel/secondary-windows/desktopSecondaryWindowActionProtocol.ts",
         "apps/desktop/web/src/api/desktopSecondaryWindowGeometry.ts",
+        "apps/desktop/web/src/api/desktopSecondaryWindowNativeChrome.ts",
         "apps/desktop/web/src/api/desktopSecondaryWindowFocusRuntime.ts",
         "apps/desktop/web/src/api/desktopSecondaryWindowListeners.ts",
         "apps/desktop/web/src/api/desktopSecondaryWindowUrl.ts"
       ],
-      "scope": "Restore apps/desktop/web/src/api/desktopSecondaryWindows.ts; remove only these extracted owner paths: apps/desktop/web/src/frontend-kernel/secondary-windows/desktopSecondaryWindowActionProtocol.ts, apps/desktop/web/src/api/desktopSecondaryWindowGeometry.ts, apps/desktop/web/src/api/desktopSecondaryWindowFocusRuntime.ts, apps/desktop/web/src/api/desktopSecondaryWindowListeners.ts, apps/desktop/web/src/api/desktopSecondaryWindowUrl.ts."
+      "scope": "Restore apps/desktop/web/src/api/desktopSecondaryWindows.ts; remove only these extracted owner paths: apps/desktop/web/src/frontend-kernel/secondary-windows/desktopSecondaryWindowActionProtocol.ts, apps/desktop/web/src/api/desktopSecondaryWindowGeometry.ts, apps/desktop/web/src/api/desktopSecondaryWindowNativeChrome.ts, apps/desktop/web/src/api/desktopSecondaryWindowFocusRuntime.ts, apps/desktop/web/src/api/desktopSecondaryWindowListeners.ts, apps/desktop/web/src/api/desktopSecondaryWindowUrl.ts."
     },
     {
       "id": "RB-HS-CORE-022",
@@ -4139,9 +4152,10 @@
       "paths": [
         "apps/desktop/web/src/workspaces/history/history-console/ReplayReviewConsoleWorkspace.tsx",
         "apps/desktop/web/src/workspaces/history/history-console/useReplayReviewArchiveRows.ts",
+        "apps/desktop/web/src/workspaces/history/history-console/useReplayReviewArchiveDetailWindow.tsx",
         "apps/desktop/web/src/workspaces/history/history-console/useReplayReviewWindowState.ts"
       ],
-      "scope": "Restore apps/desktop/web/src/workspaces/history/history-console/ReplayReviewConsoleWorkspace.tsx; remove only these extracted owner paths: apps/desktop/web/src/workspaces/history/history-console/useReplayReviewArchiveRows.ts, apps/desktop/web/src/workspaces/history/history-console/useReplayReviewWindowState.ts."
+      "scope": "Restore apps/desktop/web/src/workspaces/history/history-console/ReplayReviewConsoleWorkspace.tsx; remove only these extracted owner paths: apps/desktop/web/src/workspaces/history/history-console/useReplayReviewArchiveRows.ts, apps/desktop/web/src/workspaces/history/history-console/useReplayReviewArchiveDetailWindow.tsx, apps/desktop/web/src/workspaces/history/history-console/useReplayReviewWindowState.ts."
     },
     {
       "id": "RB-HS-CORE-068",

@@ -1,6 +1,6 @@
 {
   "name": "zinuto",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "license": "GPL-3.0-only",
   "private": true,
   "engines": {
@@ -24,6 +24,7 @@
     "react-dom": "19.2.5",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
+    "nanoid": "3.3.18",
     "react-remove-scroll": "2.7.2",
     "qs": "6.15.2"
   },
