@@ -6,7 +6,7 @@ import { Button } from "@/ui/primitives/button";
 import { Checkbox } from "@/ui/primitives/checkbox";
 import { Input } from "@/ui/primitives/input";
 import { SegmentedControl } from "@/ui/primitives/segmented-control";
-import { PlainTabBar, SettingRow, WorkspaceSection } from "@/ui/components";
+import { PlainTabBar, WorkspaceSection } from "@/ui/components";
 import type { useSystemDevSimulationControl } from "@/workspaces/settings/useSystemDevSimulationControl";
 
 type SystemDevSimulationTargets = {
@@ -132,99 +132,101 @@ export function SystemSettingsDeveloperSimulationSection({
     ["fastDecisionTarget", tt("appText.fastDecision")],
     ["riskDisciplineTarget", tt("appText.riskDiscipline")],
     ["independentCustomNotes", t("settings.devSimulation.targets.customNotes")],
-    ["customIndicatorProfiles", t("settings.devSimulation.targets.customIndicators")],
+    [
+      "customIndicatorProfiles",
+      t("settings.devSimulation.targets.customIndicators"),
+    ],
     ["realBacktestBatches", t("settings.devSimulation.targets.realBacktests")],
   ];
+  const activeProfile = visibleSimulationProfileOptions.find(
+    (option) => option.key === simulationProfileId,
+  );
+  const startDisabled =
+    disabled ||
+    devSimulation.isStarting ||
+    devSimulation.isCleaning ||
+    !devSimulation.canStart ||
+    !hasSimulationTargets ||
+    !simulationSeed.trim();
 
   return (
     <WorkspaceSection
-      title={tt("appText.simulationSeedData")}
-      className="settings-flow-group"
-      bodyClassName="settings-flow-row-list"
+      className="settings-flow-group settings-simulation-section"
+      bodyClassName="settings-simulation-workbench"
     >
-      <div className="settings-action-panel settings-simulation-panel">
-        <SettingRow
-          title={tt("appText.generateData")}
-          description={t("settings.storage.devSimulation.description")}
-          control={
-            <div className="settings-action-panel-actions">
-              <Button
-                variant="ghost"
-                size="xs"
-                onClick={() => void devSimulation.cleanup()}
-                disabled={
-                  disabled ||
-                  devSimulation.isStarting ||
-                  devSimulation.isCleaning ||
-                  !devSimulation.cleanupAction.enabled
-                }
-                loading={devSimulation.isCleaning}
-                loadingLabel={tt("appText.clearSimulationData")}
-              >
-                {tt("appText.clearSimulationData")}
-              </Button>
-              <Button
-                variant="ghost"
-                size="xs"
-                onClick={() => void devSimulation.start()}
-                disabled={
-                  disabled ||
-                  devSimulation.isStarting ||
-                  devSimulation.isCleaning ||
-                  !devSimulation.canStart ||
-                  !hasSimulationTargets ||
-                  !simulationSeed.trim()
-                }
-                loading={devSimulation.isStarting}
-                loadingLabel={tt("appText.generateData")}
-              >
-                {tt("appText.generateData")}
-              </Button>
-              {devSimulation.cancelAction.enabled ? (
-                <Button
-                  variant="ghost"
-                  size="xs"
-                  onClick={() => void devSimulation.cancel()}
-                  disabled={
-                    disabled ||
-                    devSimulation.isCleaning ||
-                    !devSimulation.cancelAction.enabled
-                  }
-                >
-                  <span className="settings-storage-refresh-btn-content">
-                    <span>{tt("appText.cancel")}</span>
-                  </span>
-                </Button>
-              ) : null}
-            </div>
-          }
-        />
-        <SettingRow
-          title={t("settings.devSimulation.dataSelection.title")}
-          description={t("settings.devSimulation.dataSelection.description")}
-          control={
-            <span className="settings-action-panel-hint">
-              {t("settings.devSimulation.dataSelection.action")}
+      <header className="settings-simulation-hero">
+        <div className="settings-simulation-hero-copy">
+          <span className="settings-simulation-eyebrow">
+            {t("settings.devSimulation.dataSelection.title")}
+          </span>
+          <h3>{tt("appText.simulationSeedData")}</h3>
+          <p>{t("settings.storage.devSimulation.description")}</p>
+          <div className="settings-simulation-source-note">
+            <span
+              className="settings-simulation-source-dot"
+              aria-hidden="true"
+            />
+            <span>
+              <strong>
+                {t("settings.devSimulation.dataSelection.action")}
+              </strong>
+              <small>
+                {t("settings.devSimulation.dataSelection.description")}
+              </small>
             </span>
-          }
-        />
-        <SettingRow
-          title={t("settings.devSimulation.profile.title")}
-          description={
-            <>
-              <span>
-                {visibleSimulationProfileOptions.find(
-                  (option) => option.key === simulationProfileId,
-                )?.description ?? ""}
+          </div>
+        </div>
+        <div className="settings-simulation-hero-actions">
+          <Button
+            variant="default"
+            onClick={() => void devSimulation.start()}
+            disabled={startDisabled}
+            loading={devSimulation.isStarting}
+            loadingLabel={tt("appText.generateData")}
+          >
+            {tt("appText.generateData")}
+          </Button>
+          <Button
+            variant="secondary"
+            onClick={() => void devSimulation.cleanup()}
+            disabled={
+              disabled ||
+              devSimulation.isStarting ||
+              devSimulation.isCleaning ||
+              !devSimulation.cleanupAction.enabled
+            }
+            loading={devSimulation.isCleaning}
+            loadingLabel={tt("appText.clearSimulationData")}
+          >
+            {tt("appText.clearSimulationData")}
+          </Button>
+          {devSimulation.cancelAction.enabled ? (
+            <Button
+              variant="outline"
+              onClick={() => void devSimulation.cancel()}
+              disabled={
+                disabled ||
+                devSimulation.isCleaning ||
+                !devSimulation.cancelAction.enabled
+              }
+            >
+              {tt("appText.cancel")}
+            </Button>
+          ) : null}
+        </div>
+      </header>
+
+      <div className="settings-simulation-config-grid">
+        <section className="settings-simulation-card settings-simulation-profile-card">
+          <div className="settings-simulation-card-head">
+            <div>
+              <span className="settings-simulation-card-kicker">
+                {t("settings.devSimulation.profile.title")}
               </span>
-              {simulationProfileId === "STRESS" ? (
-                <span className="settings-action-panel-hint">
-                  {t("settings.devSimulation.profile.stressWarning")}
-                </span>
-              ) : null}
-            </>
-          }
-          control={
+              <strong>{activeProfile?.label ?? ""}</strong>
+            </div>
+          </div>
+          <div className="settings-simulation-profile-body">
             <PlainTabBar
               value={simulationProfileId}
               items={visibleSimulationProfileOptions.map((option) => ({
@@ -235,19 +237,23 @@ export function SystemSettingsDeveloperSimulationSection({
                 onSimulationProfileChange(value as "REALISTIC" | "STRESS")
               }
               ariaLabel={t("settings.devSimulation.profile.title")}
-              className="settings-dev-simulation-profile-tabbar"
-              itemClassName="settings-dev-simulation-profile-tab"
+              className="settings-simulation-profile-tabbar"
+              itemClassName="settings-simulation-profile-tab"
             />
-          }
-        />
-        <SettingRow
-          title={t("settings.devSimulation.controls.repeatMode")}
-          description={
-            simulationRepeatMode === "REPLACE"
-              ? t("settings.devSimulation.controls.replace")
-              : t("settings.devSimulation.controls.append")
-          }
-          control={
+            <p>{activeProfile?.description ?? ""}</p>
+            {simulationProfileId === "STRESS" ? (
+              <span className="settings-simulation-warning">
+                {t("settings.devSimulation.profile.stressWarning")}
+              </span>
+            ) : null}
+          </div>
+        </section>
+
+        <section className="settings-simulation-card settings-simulation-controls-card">
+          <div className="settings-simulation-field">
+            <span className="settings-simulation-field-label">
+              {t("settings.devSimulation.controls.repeatMode")}
+            </span>
             <SegmentedControl
               value={simulationRepeatMode}
               options={[
@@ -257,52 +263,80 @@ export function SystemSettingsDeveloperSimulationSection({
               onChange={(value) =>
                 onSimulationRepeatModeChange(value as "REPLACE" | "APPEND")
               }
-              className="settings-dev-simulation-repeat-mode"
+              className="settings-simulation-repeat-mode"
             />
-          }
-        />
-        <SettingRow
-          title={t("settings.devSimulation.controls.seed")}
-          control={
+            <small>
+              {simulationRepeatMode === "REPLACE"
+                ? t("settings.devSimulation.controls.replace")
+                : t("settings.devSimulation.controls.append")}
+            </small>
+          </div>
+          <label
+            className="settings-simulation-field"
+            htmlFor="settings-simulation-seed"
+          >
+            <span className="settings-simulation-field-label">
+              {t("settings.devSimulation.controls.seed")}
+            </span>
             <Input
-              className="settings-dev-simulation-seed"
+              id="settings-simulation-seed"
+              className="settings-simulation-seed"
               value={simulationSeed}
               maxLength={128}
               onChange={(event) => onSimulationSeedChange(event.target.value)}
               aria-label={t("settings.devSimulation.controls.seed")}
             />
-          }
-        />
-        <div className="settings-dev-simulation-targets">
-          <div className="settings-action-panel-actions">
-            <Button variant="ghost" size="xs" onClick={onRestoreSimulationPreset}>
-              {t("settings.devSimulation.controls.selectAll")}
-            </Button>
-            <Button variant="ghost" size="xs" onClick={onClearSimulationTargets}>
+          </label>
+        </section>
+      </div>
+
+      <section className="settings-simulation-card settings-simulation-targets-card">
+        <div className="settings-simulation-card-head settings-simulation-targets-head">
+          <div>
+            <span className="settings-simulation-card-kicker">
+              {t("settings.devSimulation.targets.title")}
+            </span>
+            <strong>{activeProfile?.label ?? ""}</strong>
+          </div>
+          <div className="settings-simulation-target-actions">
+            <Button
+              variant="ghost"
+              size="xs"
+              onClick={onClearSimulationTargets}
+            >
               {t("settings.devSimulation.controls.clearAll")}
             </Button>
-            <Button variant="ghost" size="xs" onClick={onRestoreSimulationPreset}>
+            <Button
+              variant="secondary"
+              size="xs"
+              onClick={onRestoreSimulationPreset}
+            >
               {t("settings.devSimulation.controls.restorePreset")}
             </Button>
           </div>
-          <span className="settings-action-panel-hint">
-            {t("settings.devSimulation.targets.title")}
-          </span>
+        </div>
+        <div className="settings-simulation-target-grid">
           {targetEntries.map(([key, label]) => (
-            <label className="settings-dev-simulation-target" key={key}>
-              <Checkbox
-                checked={simulationTargets[key] > 0}
-                onChange={(event) =>
-                  onSimulationTargetChange(
-                    key,
-                    event.target.checked
-                      ? simulationPresetTargets[simulationProfileId][key]
-                      : 0,
-                  )
-                }
-              />
-              <span>{label}</span>
+            <label
+              className={`settings-simulation-target ${simulationTargets[key] > 0 ? "is-selected" : ""}`}
+              key={key}
+            >
+              <span className="settings-simulation-target-label">
+                <Checkbox
+                  checked={simulationTargets[key] > 0}
+                  onChange={(event) =>
+                    onSimulationTargetChange(
+                      key,
+                      event.target.checked
+                        ? simulationPresetTargets[simulationProfileId][key]
+                        : 0,
+                    )
+                  }
+                />
+                <span>{label}</span>
+              </span>
               <Input
+                className="settings-simulation-target-input"
                 type="number"
                 min={0}
                 value={simulationTargets[key]}
@@ -314,106 +348,130 @@ export function SystemSettingsDeveloperSimulationSection({
             </label>
           ))}
         </div>
-        {devSimulation.disabledReason ? (
-          <span className="settings-action-panel-hint">
-            {devSimulation.disabledReason}
+      </section>
+
+      {devSimulation.disabledReason || devSimulation.feedbackText ? (
+        <div
+          className={`settings-simulation-feedback ${devSimulation.feedbackTone === "error" ? "is-error" : devSimulation.feedbackTone === "success" ? "is-success" : ""}`}
+          role={devSimulation.feedbackTone === "error" ? "alert" : "status"}
+        >
+          {devSimulation.disabledReason ? (
+            <span>{devSimulation.disabledReason}</span>
+          ) : null}
+          {devSimulation.feedbackText ? (
+            <span>{devSimulation.feedbackText}</span>
+          ) : null}
+        </div>
+      ) : null}
+
+      {devSimulation.visibleCleanupJob ? (
+        <section className="settings-simulation-status" aria-live="polite">
+          <div className="settings-simulation-status-head">
+            <span>{tt("appText.latestCleanupJob")}</span>
+            <strong>
+              {formatPercent(
+                devSimulation.visibleCleanupJob.progressPercent,
+                tt,
+              )}
+            </strong>
+          </div>
+          <span className="settings-simulation-phase">
+            {tt("appText.cleanupJobProgress")}
           </span>
-        ) : null}
-        {devSimulation.feedbackText ? (
-          <span
-            className={`settings-action-panel-hint ${devSimulation.feedbackTone === "error" ? "is-error" : devSimulation.feedbackTone === "success" ? "is-success" : ""}`}
+          <div
+            className="settings-simulation-track"
+            role="progressbar"
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-valuenow={Math.max(
+              0,
+              Math.min(
+                100,
+                devSimulation.visibleCleanupJob.progressPercent,
+              ),
+            )}
           >
-            {devSimulation.feedbackText}
+            <span
+              style={{
+                width: `${Math.max(0, Math.min(100, devSimulation.visibleCleanupJob.progressPercent))}%`,
+              }}
+            />
+          </div>
+          <div className="settings-simulation-stats">
+            <span>
+              {resolveSimulationCleanupStageText(
+                devSimulation.visibleCleanupJob.stage,
+                tt,
+              )}
+            </span>
+          </div>
+        </section>
+      ) : devSimulation.visibleJob ? (
+        <section className="settings-simulation-status" aria-live="polite">
+          <div className="settings-simulation-status-head">
+            <span>{tt("appText.latestSimulationJob")}</span>
+            <strong>
+              {formatPercent(devSimulation.visibleJob.progressPercent, tt)}
+            </strong>
+          </div>
+          <span className="settings-simulation-phase">
+            {resolveSimulationJobStatusText(devSimulation.visibleJob, tt)}
           </span>
-        ) : null}
-        {devSimulation.visibleCleanupJob ? (
-          <div className="settings-action-panel-status">
-            <div className="settings-action-panel-status-head">
-              <span>{tt("appText.latestCleanupJob")}</span>
-              <strong>
-                {formatPercent(devSimulation.visibleCleanupJob.progressPercent, tt)}
-              </strong>
-            </div>
-            <span className="settings-action-panel-phase">
-              {tt("appText.cleanupJobProgress")}
-            </span>
-            <div className="settings-action-panel-track">
-              <span
-                style={{
-                  width: `${Math.max(0, Math.min(100, devSimulation.visibleCleanupJob.progressPercent))}%`,
-                }}
-              />
-            </div>
-            <div className="settings-action-panel-stats">
-              <span>
-                {resolveSimulationCleanupStageText(
-                  devSimulation.visibleCleanupJob.stage,
-                  tt,
-                )}
-              </span>
-            </div>
+          <div
+            className="settings-simulation-track"
+            role="progressbar"
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-valuenow={Math.max(
+              0,
+              Math.min(100, devSimulation.visibleJob.progressPercent),
+            )}
+          >
+            <span
+              style={{
+                width: `${Math.max(0, Math.min(100, devSimulation.visibleJob.progressPercent))}%`,
+              }}
+            />
           </div>
-        ) : devSimulation.visibleJob ? (
-          <div className="settings-action-panel-status">
-            <div className="settings-action-panel-status-head">
-              <span>{tt("appText.latestSimulationJob")}</span>
-              <strong>{formatPercent(devSimulation.visibleJob.progressPercent, tt)}</strong>
-            </div>
-            <span className="settings-action-panel-phase">
-              {resolveSimulationJobStatusText(devSimulation.visibleJob, tt)}
+          <div className="settings-simulation-stats">
+            {devSimulation.visibleJobDiagnosticText ? (
+              <span>{devSimulation.visibleJobDiagnosticText}</span>
+            ) : null}
+            {devSimulation.visibleJobCurrentWorkloadText ? (
+              <span>{devSimulation.visibleJobCurrentWorkloadText}</span>
+            ) : null}
+            <span>
+              {`${tt("appText.freeReplay")} ${devSimulation.visibleJob.freeReplayCompleted}/${devSimulation.visibleJobDisplayTargets?.freeReplayTarget ?? devSimulation.visibleJob.freeReplayTarget}`}
             </span>
-            <div className="settings-action-panel-track">
-              <span
-                style={{
-                  width: `${Math.max(0, Math.min(100, devSimulation.visibleJob.progressPercent))}%`,
-                }}
-              />
-            </div>
-            <div className="settings-action-panel-stats">
-              {devSimulation.visibleJobDiagnosticText ? (
-                <span>{devSimulation.visibleJobDiagnosticText}</span>
-              ) : null}
-              {devSimulation.visibleJobCurrentWorkloadText ? (
-                <span>{devSimulation.visibleJobCurrentWorkloadText}</span>
-              ) : null}
-              <span>
-                {`${tt("appText.freeReplay")} ${devSimulation.visibleJob.freeReplayCompleted}/${devSimulation.visibleJobDisplayTargets?.freeReplayTarget ?? devSimulation.visibleJob.freeReplayTarget}`}
-              </span>
-              <span>
-                {`${tt("appText.fastDecision")} ${devSimulation.visibleJob.fastDecisionCompleted}/${devSimulation.visibleJobDisplayTargets?.fastDecisionTarget ?? devSimulation.visibleJob.fastDecisionTarget}`}
-              </span>
-              <span>
-                {`${tt("appText.riskDiscipline")} ${devSimulation.visibleJob.riskDisciplineCompleted}/${devSimulation.visibleJobDisplayTargets?.riskDisciplineTarget ?? devSimulation.visibleJob.riskDisciplineTarget}`}
-              </span>
-              <span>
-                {`${t("settings.devSimulation.status.customNotes")} ${devSimulation.visibleJob.createdCounts.independentCustomNotes}/${devSimulation.visibleJobDisplayTargets?.independentCustomNotesTarget ?? devSimulation.visibleJob.effectivePlan?.targets.independentCustomNotes ?? 0}`}
-              </span>
-              <span>
-                {`${t("settings.devSimulation.targets.customIndicators")} ${devSimulation.visibleJob.createdCounts.customIndicatorProfiles}/${devSimulation.visibleJob.effectivePlan?.targets.customIndicatorProfiles ?? 0}`}
-              </span>
-              <span>
-                {`${t("settings.devSimulation.targets.realBacktests")} ${devSimulation.visibleJob.createdCounts.realBacktestBatches}/${devSimulation.visibleJob.effectivePlan?.targets.realBacktestBatches ?? 0}`}
-              </span>
-              <span>
-                {`${t("settings.devSimulation.status.throughput")} ${Math.round(devSimulation.visibleJob.throughput.itemsPerMinute)} ${t("settings.devSimulation.status.perMinute")}`}
-              </span>
-              <span>
-                {`${t("settings.devSimulation.status.remaining")} ${devSimulation.visibleJobRemainingText}`}
-              </span>
-              {(devSimulation.visibleJob.status === "FAILED" ||
-                devSimulation.visibleJob.status === "INTERRUPTED") &&
-              devSimulation.visibleJob.errorCode ? (
-                <span>{devSimulation.visibleJob.errorCode}</span>
-              ) : null}
-              {(devSimulation.visibleJob.status === "FAILED" ||
-                devSimulation.visibleJob.status === "INTERRUPTED") &&
-              devSimulation.feedbackText ? (
-                <span>{devSimulation.feedbackText}</span>
-              ) : null}
-            </div>
+            <span>
+              {`${tt("appText.fastDecision")} ${devSimulation.visibleJob.fastDecisionCompleted}/${devSimulation.visibleJobDisplayTargets?.fastDecisionTarget ?? devSimulation.visibleJob.fastDecisionTarget}`}
+            </span>
+            <span>
+              {`${tt("appText.riskDiscipline")} ${devSimulation.visibleJob.riskDisciplineCompleted}/${devSimulation.visibleJobDisplayTargets?.riskDisciplineTarget ?? devSimulation.visibleJob.riskDisciplineTarget}`}
+            </span>
+            <span>
+              {`${t("settings.devSimulation.status.customNotes")} ${devSimulation.visibleJob.createdCounts.independentCustomNotes}/${devSimulation.visibleJobDisplayTargets?.independentCustomNotesTarget ?? devSimulation.visibleJob.effectivePlan?.targets.independentCustomNotes ?? 0}`}
+            </span>
+            <span>
+              {`${t("settings.devSimulation.targets.customIndicators")} ${devSimulation.visibleJob.createdCounts.customIndicatorProfiles}/${devSimulation.visibleJob.effectivePlan?.targets.customIndicatorProfiles ?? 0}`}
+            </span>
+            <span>
+              {`${t("settings.devSimulation.targets.realBacktests")} ${devSimulation.visibleJob.createdCounts.realBacktestBatches}/${devSimulation.visibleJob.effectivePlan?.targets.realBacktestBatches ?? 0}`}
+            </span>
+            <span>
+              {`${t("settings.devSimulation.status.throughput")} ${Math.round(devSimulation.visibleJob.throughput.itemsPerMinute)} ${t("settings.devSimulation.status.perMinute")}`}
+            </span>
+            <span>
+              {`${t("settings.devSimulation.status.remaining")} ${devSimulation.visibleJobRemainingText}`}
+            </span>
+            {(devSimulation.visibleJob.status === "FAILED" ||
+              devSimulation.visibleJob.status === "INTERRUPTED") &&
+            devSimulation.visibleJob.errorCode ? (
+              <span>{devSimulation.visibleJob.errorCode}</span>
+            ) : null}
           </div>
-        ) : null}
-      </div>
+        </section>
+      ) : null}
     </WorkspaceSection>
   );
 }

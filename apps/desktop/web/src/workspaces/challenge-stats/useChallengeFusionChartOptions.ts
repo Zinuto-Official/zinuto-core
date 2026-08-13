@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
-import { useMemo } from "react";
+import { useLayoutEffect, useMemo, useState } from "react";
 import type { EChartsOption } from "echarts";
+import type { HistoryReplayChartViewProps } from "@/domains/chart/HistoryReplayChart";
 import { formatMoney } from "@/ui/formatting/format";
 import { formatDotJoinedText } from "@/ui/formatting/i18nDisplay";
 import {
@@ -44,6 +45,7 @@ type ChallengeFusionChartOptionsInput = {
   fastSessions: FastSessionMetric[];
   isRiskMode: boolean;
   language: AppUiLanguage;
+  themeMode: HistoryReplayChartViewProps["themeMode"];
   percentSymbol: string;
   rangePreset: SessionWindowPreset;
   riskSessions: RiskSessionMetric[];
@@ -65,6 +67,7 @@ export const useChallengeFusionChartOptions = ({
   fastSessions,
   isRiskMode,
   language,
+  themeMode,
   percentSymbol,
   rangePreset,
   riskSessions,
@@ -75,6 +78,13 @@ export const useChallengeFusionChartOptions = ({
   riskBehaviorOption: EChartsOption;
   riskCurveOption: EChartsOption;
 } => {
+  const [, refreshPalette] = useState(0);
+  useLayoutEffect(() => {
+    // Theme CSS variables are applied during the layout phase. Resolve chart
+    // colors once more afterwards so ECharts never keeps a previous theme's
+    // canvas-only palette.
+    refreshPalette((revision) => revision + 1);
+  }, [themeMode]);
   const pricePositiveColor = resolveCssTokenColor("--price-up-color");
   const priceNegativeColor = resolveCssTokenColor("--price-down-color");
   const activeAccentColor = isRiskMode

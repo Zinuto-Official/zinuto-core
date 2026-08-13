@@ -176,6 +176,11 @@ export const ReplayReviewConsolePage = ({
     };
   const marginSafetyViewModel =
     diagnostics?.marginSafety ?? EMPTY_MARGIN_SAFETY_VIEW_MODEL;
+  const exitDiscipline = diagnostics?.exitDiscipline ?? {
+    avgLossCutDelayBars: 0,
+    dangerDelaySessionRate: 0,
+    representativeProjectIds: [],
+  };
   const currentSessionIdSet = useMemo(
     () => new Set(currentSessionsDesc.map((session) => session.id)),
     [currentSessionsDesc],
@@ -319,6 +324,8 @@ export const ReplayReviewConsolePage = ({
   const hasMarginSafetyData =
     capitalDiscipline.enabled &&
     marginSafetyViewModel.sessionSafetyPoints.length > 0;
+  const hasExitDisciplineData =
+    diagnostics !== null && currentSessionsDesc.length > 0;
 
   const { archiveRows, archiveSectionLabels, archiveSessionById } =
     useReplayReviewArchiveRows({
@@ -832,7 +839,9 @@ export const ReplayReviewConsolePage = ({
                       />
                       <div>
                         <h3 data-i18n-critical="true">
-                          {ui.reviewMarginUtilizationTitle}
+                          {hasMarginSafetyData
+                            ? ui.reviewMarginUtilizationTitle
+                            : ui.reviewBehaviorExitDiscipline}
                         </h3>
                       </div>
                     </div>
@@ -915,6 +924,40 @@ export const ReplayReviewConsolePage = ({
                             model.openReplayProject(point.sessionId);
                           }}
                         />
+                      </div>
+                    </div>
+                  ) : hasExitDisciplineData ? (
+                    <div className="diagnostic-console-margin-layout">
+                      <div className="diagnostic-console-margin-insight-panel">
+                        <div className="diagnostic-console-inline-metric-strip diagnostic-console-inline-metric-strip--margin-full">
+                          <BehaviorCompactMetric
+                            label={ui.reviewBehaviorAvgLossDelayLabel}
+                            value={`${formatDiagnosticNumber(
+                              language,
+                              exitDiscipline.avgLossCutDelayBars,
+                              1,
+                            )} ${ui.statsUnitBars}`}
+                            tone={
+                              exitDiscipline.avgLossCutDelayBars >= 3
+                                ? "down"
+                                : "flat"
+                            }
+                          />
+                          <BehaviorCompactMetric
+                            label={ui.reviewBehaviorDangerDelayRateLabel}
+                            value={history.formatRatio(
+                              exitDiscipline.dangerDelaySessionRate,
+                            )}
+                            tone={
+                              exitDiscipline.dangerDelaySessionRate >= 0.25
+                                ? "down"
+                                : "flat"
+                            }
+                          />
+                        </div>
+                        <div className="diagnostic-console-margin-summary">
+                          <p>{ui.reviewBehaviorExitDisciplineSubtitle}</p>
+                        </div>
                       </div>
                     </div>
                   ) : (

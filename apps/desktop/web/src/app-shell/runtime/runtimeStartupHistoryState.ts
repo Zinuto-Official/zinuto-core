@@ -42,6 +42,7 @@ import {
   SAMPLE_POOL_ALL_ID,
 } from "@/domains/trainer/samplePools";
 import { useCsvImportController } from "@/domains/data-import/useCsvImportController";
+import { hydrateSavedIndicatorProfilesFromDatabase } from "@/domains/custom-indicator/indicator/profileStore";
 import type { useRuntimeStartupState } from "@/app-shell/runtime/runtimeStartupState";
 type RuntimeHookScope = AppRootRuntimeProps & ReturnType<typeof useRuntimeStartupState> & Record<string, unknown>;
 
@@ -181,7 +182,11 @@ useEffect(() => {
         setSelectedReplayNoteId("");
         setActiveTrainingRecordNoteId("");
       }
-      await Promise.allSettled([loadTrainingProjectsPage(false, null), loadReplayNotesPage(false, null)]);
+      await Promise.allSettled([
+        loadTrainingProjectsPage(false, null),
+        loadReplayNotesPage(false, null),
+        hydrateSavedIndicatorProfilesFromDatabase(true),
+      ]);
     },
     [
       clearAllReplayNotePendingState,

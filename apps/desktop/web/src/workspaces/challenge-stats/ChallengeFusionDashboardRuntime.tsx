@@ -494,6 +494,7 @@ export const ChallengeFusionDashboard = ({
     fastSessions,
     isRiskMode,
     language,
+    themeMode: chartBindings?.themeMode ?? "light",
     percentSymbol,
     rangePreset,
     riskSessions,
