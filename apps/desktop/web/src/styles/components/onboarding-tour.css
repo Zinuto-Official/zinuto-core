@@ -282,25 +282,22 @@
 
 .desktop-onboarding-highlight-frame {
   --desktop-onboarding-highlight-accent: var(--visual-link-accent);
-  --desktop-onboarding-highlight-label-bg: color-mix(
-    in srgb,
-    var(--desktop-onboarding-highlight-accent) 32%,
-    var(--text-t1)
-  );
+  /*
+   * This label is rendered above the main window, including during boot when
+   * a WebView can reject a nested color-mix() custom property. Keep its
+   * contrast surface directly token-backed so it never becomes transparent
+   * against a light workspace.
+   */
+  --desktop-onboarding-highlight-label-bg: var(--text-t1);
   --desktop-onboarding-highlight-label-fg: var(--surface-s1);
   position: fixed;
   z-index: 860;
   pointer-events: none;
-  border: 2px solid var(--desktop-onboarding-highlight-accent);
+  border: 3px solid var(--desktop-onboarding-highlight-accent);
   border-radius: 10px;
   box-shadow:
-    0 0 0 1px
-      color-mix(
-        in srgb,
-        var(--desktop-onboarding-highlight-accent) 24%,
-        transparent
-      ),
-    0 16px 36px rgb(var(--color-overlay-backdrop) / 0.26);
+    0 0 0 2px var(--desktop-onboarding-highlight-accent),
+    0 18px 40px rgb(var(--color-overlay-backdrop) / 0.3);
   transition:
     width var(--motion-normal),
     height var(--motion-normal);
@@ -324,12 +321,7 @@
   left: -2px;
   max-width: min(260px, calc(100vw - 32px));
   padding: 5px 9px;
-  border: 1px solid
-    color-mix(
-      in srgb,
-      var(--desktop-onboarding-highlight-accent) 52%,
-      var(--text-t1)
-    );
+  border: 1px solid var(--desktop-onboarding-highlight-accent);
   border-radius: 8px 0 8px 0;
   color: var(--desktop-onboarding-highlight-label-fg);
   -webkit-text-fill-color: var(--desktop-onboarding-highlight-label-fg);

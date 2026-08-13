@@ -478,7 +478,7 @@ export const openDesktopSecondaryWindow = async ({
   const label = getDesktopSecondaryWindowLabel(kind);
   const intentIsCurrent =
     desktopSecondaryWindowStateStore.isCurrentIntent(intent);
-  const state = intentIsCurrent
+  let state = intentIsCurrent
     ? openedState
     : desktopSecondaryWindowStateStore.get(kind);
   if (!state) {
@@ -492,7 +492,7 @@ export const openDesktopSecondaryWindow = async ({
     state.visualContext,
     { payload: state.payload },
   );
-  const [existingWindow, geometry] = await Promise.all([
+  const [existingWindow, initialGeometry] = await Promise.all([
     settleTauriTaskWithinDeadline(
       webviewWindowModule.WebviewWindow.getByLabel(label),
       "SECONDARY_WINDOW_LOOKUP",
@@ -503,8 +503,25 @@ export const openDesktopSecondaryWindow = async ({
       requestedGeometry,
     ),
   ]);
-  if (!desktopSecondaryWindowStateStore.isCurrentState(state)) {
-    return desktopSecondaryWindowStateStore.get(kind) ?? state;
+  let geometry = initialGeometry;
+  const currentState = desktopSecondaryWindowStateStore.get(kind);
+  if (!currentState) {
+    throw new Error("DESKTOP_SECONDARY_WINDOW_INTENT_REPLACED");
+  }
+  if (currentState.instanceId !== openedState.instanceId) {
+    return currentState;
+  }
+  // Visual context may advance the revision while the native window host is
+  // loading. That is the same opening instance, so continue creating it with
+  // the current state instead of leaving the caller with no secondary window.
+  if (currentState.revision !== state.revision) {
+    state = currentState;
+    geometry = await resolveDesktopSecondaryWindowGeometryForCurrentMonitor(
+      windowModule,
+      resolveDesktopSecondaryWindowGeometry(kind, state.visualContext, {
+        payload: state.payload,
+      }),
+    );
   }
   if (existingWindow) {
     const wasVisible = await existingWindow.isVisible().catch(() => false);

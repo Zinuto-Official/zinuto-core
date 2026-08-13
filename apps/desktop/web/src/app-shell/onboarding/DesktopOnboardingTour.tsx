@@ -79,6 +79,8 @@ export const DesktopOnboardingTour = ({
     useState<DesktopOnboardingTargetId | null>(null);
   const [highlightRect, setHighlightRect] =
     useState<OnboardingHighlightRect | null>(null);
+  const [isOnboardingSidecarVisible, setIsOnboardingSidecarVisible] =
+    useState(false);
   const onboardingWindowOpenedRef = useRef(false);
   const onboardingWindowRevisionRef = useRef(0);
   const ignoreNextOnboardingWindowCloseRef = useRef(false);
@@ -690,6 +692,7 @@ export const DesktopOnboardingTour = ({
 
   useEffect(() => {
     if (status !== "ACTIVE") {
+      setIsOnboardingSidecarVisible(false);
       void closeOnboardingWindow();
       clearSelectedTarget();
       return;
@@ -704,6 +707,7 @@ export const DesktopOnboardingTour = ({
     const shouldOpenWindow = !onboardingWindowOpenedRef.current;
     if (shouldOpenWindow) {
       onboardingWindowOpenedRef.current = true;
+      setIsOnboardingSidecarVisible(false);
     }
     const windowStateTask = shouldOpenWindow
       ? api.openDesktopSecondaryWindow(input)
@@ -727,6 +731,7 @@ export const DesktopOnboardingTour = ({
           return;
         }
         onboardingWindowRevisionRef.current = visibleRevision;
+        setIsOnboardingSidecarVisible(true);
         await api.positionDesktopOnboardingSidecar();
       })
       .catch((error) => {
@@ -738,6 +743,7 @@ export const DesktopOnboardingTour = ({
         }
         onboardingWindowOpenedRef.current = false;
         onboardingWindowRevisionRef.current = 0;
+        setIsOnboardingSidecarVisible(false);
         console.error("[desktop-onboarding] secondary window unavailable", error);
       });
     return () => {
@@ -756,17 +762,25 @@ export const DesktopOnboardingTour = ({
         if (message.kind !== "ONBOARDING_TOUR") {
           return;
         }
+        // A theme (or other visual-context) update advances the window state
+        // revision without changing this tour's intent. Resolve the revision
+        // at action time so the sidecar remains actionable after that update.
+        const currentRevision = api.getDesktopSecondaryWindowCurrentRevision(
+          "ONBOARDING_TOUR",
+        );
         if (
           !api.isCurrentDesktopSecondaryWindowAction(
             message,
-            onboardingWindowRevisionRef.current,
+            currentRevision,
           )
         ) {
           return;
         }
+        onboardingWindowRevisionRef.current = currentRevision;
         if (message.action === "WINDOW_CLOSED") {
           onboardingWindowOpenedRef.current = false;
           onboardingWindowRevisionRef.current = 0;
+          setIsOnboardingSidecarVisible(false);
           if (ignoreNextOnboardingWindowCloseRef.current) {
             ignoreNextOnboardingWindowCloseRef.current = false;
             return;
@@ -785,7 +799,7 @@ export const DesktopOnboardingTour = ({
 
   return (
     <>
-      {highlightRect ? (
+      {isOnboardingSidecarVisible && highlightRect ? (
         <div
           className="desktop-onboarding-highlight-frame"
           style={{

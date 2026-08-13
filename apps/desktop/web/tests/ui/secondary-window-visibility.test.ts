@@ -17,6 +17,9 @@ const listenerRuntimeSource = readSource(
 const rootSource = readSource(
   "src/app-shell/secondaryWindows/DesktopSecondaryWindowRoot.tsx",
 );
+const onboardingTourSource = readSource(
+  "src/app-shell/onboarding/DesktopOnboardingTour.tsx",
+);
 
 test("secondary shell readiness never exposes normal loading", () => {
   const shellListenerStart = listenerRuntimeSource.indexOf(
@@ -115,6 +118,63 @@ test("new and hidden reusable windows wait for matching content revision", () =>
   );
   assert.ok(createdHidden >= 0);
   assert.ok(contentDeadline > createdHidden);
+});
+
+test("a same-instance state revision cannot cancel secondary-window creation", () => {
+  const openWindowStart = hostSource.indexOf(
+    "export const openDesktopSecondaryWindow",
+  );
+  const existingWindowStart = hostSource.indexOf(
+    "if (existingWindow) {",
+    openWindowStart,
+  );
+  assert.ok(openWindowStart >= 0);
+  assert.ok(existingWindowStart > openWindowStart);
+
+  const openingSource = hostSource.slice(
+    openWindowStart,
+    existingWindowStart,
+  );
+  assert.match(
+    openingSource,
+    /currentState\.instanceId !== openedState\.instanceId/u,
+  );
+  assert.match(
+    openingSource,
+    /currentState\.revision !== state\.revision[\s\S]*state = currentState/u,
+  );
+  assert.doesNotMatch(
+    openingSource,
+    /if \(!desktopSecondaryWindowStateStore\.isCurrentState\(state\)\) \{\s*return/u,
+  );
+});
+
+test("onboarding actions follow the current visual-context revision", () => {
+  const actionSubscriptionStart = onboardingTourSource.indexOf(
+    "api.subscribeDesktopSecondaryWindowActions",
+  );
+  assert.ok(actionSubscriptionStart >= 0);
+  const renderStart = onboardingTourSource.indexOf(
+    "if (status !== \"ACTIVE\")",
+    actionSubscriptionStart,
+  );
+  assert.ok(renderStart > actionSubscriptionStart);
+  const actionSubscriptionSource = onboardingTourSource.slice(
+    actionSubscriptionStart,
+    renderStart,
+  );
+  assert.match(
+    actionSubscriptionSource,
+    /const currentRevision = api\.getDesktopSecondaryWindowCurrentRevision\(\s*"ONBOARDING_TOUR",?\s*\);/u,
+  );
+  assert.match(
+    actionSubscriptionSource,
+    /api\.isCurrentDesktopSecondaryWindowAction\(\s*message,\s*currentRevision,?\s*\)/u,
+  );
+  assert.match(
+    actionSubscriptionSource,
+    /onboardingWindowRevisionRef\.current = currentRevision;/u,
+  );
 });
 
 test("content readiness is emitted after commit without hidden-window scheduling", () => {
