@@ -24,7 +24,7 @@ const UNINSTALL_REGISTRY_KEY = String.raw`HKCU\Software\Microsoft\Windows\Curren
 const SMOKE_INSTALL_PREFIX = 'open-trading-practice-install-smoke-';
 
 const REQUIRED_INSTALLED_FILES = [
-  'Zinuto Core.exe',
+  'open-trading-practice.exe',
   'runtime-manifest.json',
   'apps/desktop/local-api/package.json',
   'apps/desktop/local-api/dist/runtime/index.js',
@@ -35,6 +35,9 @@ const REQUIRED_INSTALLED_FILES = [
   'node_modules/@duckdb/node-bindings-win32-x64/duckdb.node',
   'backtest-engine/open-trading-practice-backtest-engine.exe',
   'backtest-engine/deps/duckdb.dll',
+  'market-data-acquisition/akshare-sidecar/win32-x64/zinuto-akshare-sidecar.exe',
+  'market-data-acquisition/akshare-sidecar/win32-x64/_internal/base_library.zip',
+  'market-data-acquisition/akshare-sidecar/win32-x64/_internal/akshare/file_fold/calendar.json',
   'node-runtime/node.exe',
 ];
 
@@ -45,6 +48,7 @@ const REQUIRED_HOOK_FRAGMENTS = [
   'gen\\backend-runtime\\apps',
   'gen\\backend-runtime\\node_modules',
   'gen\\backtest-engine',
+  'gen\\market-data-acquisition',
   'runtime\\node\\bin\\node.exe',
 ];
 

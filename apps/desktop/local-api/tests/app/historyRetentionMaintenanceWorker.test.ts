@@ -5,6 +5,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
+import { DuckDBInstance } from '@duckdb/node-api';
 
 const tempDataDir = await fs.promises.mkdtemp(
   path.join(os.tmpdir(), 'zinuto-retention-worker-'),
@@ -12,7 +13,7 @@ const tempDataDir = await fs.promises.mkdtemp(
 process.env.ZINUTO_DATA_DIR = tempDataDir;
 
 const [
-  { db },
+  { db, MARKET_DB_FILE_PATH },
   { DB_SCHEMA_VERSION },
   historyRetentionWorkerClient,
   historyRetentionService,
@@ -80,6 +81,18 @@ test('manual history retention start returns a queued HTTP-safe snapshot', async
   assert.equal(job.status, 'QUEUED');
   await waitForJobTerminal(job.id);
   assert.equal(historyRetentionService.getHistoryRetentionJob(job.id).status, 'SUCCESS');
+});
+
+test('isolated retention worker runs while the main runtime holds the market database', async () => {
+  const marketInstance = await DuckDBInstance.create(MARKET_DB_FILE_PATH);
+  const marketConnection = await marketInstance.connect();
+  try {
+    const result = await runManualHistoryRetentionInWorker({ timeoutMs: 60_000 });
+    assert.equal(typeof result.appliedAt, 'string');
+  } finally {
+    marketConnection.closeSync();
+    marketInstance.closeSync();
+  }
 });
 
 test('system reset blocks both manual and automatic retention starts', async () => {

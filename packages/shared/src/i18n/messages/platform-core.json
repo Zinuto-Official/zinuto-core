@@ -119,6 +119,46 @@
       "es": "¿Cerrar Zinuto Core?"
     }
   },
+  "desktop.windowChrome.minimize": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "最小化",
+      "en": "Minimize",
+      "ja": "最小化",
+      "ko": "최소화",
+      "es": "Minimizar"
+    }
+  },
+  "desktop.windowChrome.maximize": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "最大化",
+      "en": "Maximize",
+      "ja": "最大化",
+      "ko": "최대화",
+      "es": "Maximizar"
+    }
+  },
+  "desktop.windowChrome.restore": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "还原",
+      "en": "Restore",
+      "ja": "元のサイズに戻す",
+      "ko": "이전 크기로 복원",
+      "es": "Restaurar"
+    }
+  },
+  "desktop.windowChrome.close": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "关闭",
+      "en": "Close",
+      "ja": "閉じる",
+      "ko": "닫기",
+      "es": "Cerrar"
+    }
+  },
   "desktopNotice.severity.MAINTENANCE": {
     "kind": "text",
     "locales": {

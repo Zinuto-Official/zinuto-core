@@ -241,7 +241,16 @@ fn restore_main_window_if_display_fallback_needed(app: &tauri::AppHandle) {
 fn prepare_main_window_for_display(window: &tauri::WebviewWindow) {
     let _ = window.set_title(DESKTOP_PRODUCT_NAME);
     #[cfg(windows)]
-    fit_main_window_to_current_monitor(window);
+    {
+        // Windows cannot theme its native title bar with the application's
+        // user-selected palette. The hidden main window becomes borderless
+        // before its first show so the WebView-owned chrome never flashes over
+        // a native title bar; the native shadow preserves resize affordances
+        // and Windows 11 corner treatment.
+        let _ = window.set_decorations(false);
+        let _ = window.set_shadow(true);
+        fit_main_window_to_current_monitor(window);
+    }
 }
 
 fn schedule_main_window_display_fallback(app: &tauri::AppHandle) {

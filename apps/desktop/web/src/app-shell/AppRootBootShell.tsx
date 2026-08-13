@@ -21,6 +21,9 @@ import {
   buildGlobalVisualCssVariables,
 } from "@/ui/theme/visualColors";
 import { Button } from "@/ui/primitives/button";
+import { DesktopWindowChrome } from "@/ui/components/DesktopWindowChrome";
+import { shouldUseCustomDesktopWindowChrome } from "@/api";
+import { GRAPHIC_IMAGE_ASSET_URLS } from "@/assets/graphics";
 import {
   readStartupNowMs,
   readStartupSurfaceVisibleAtMs,
@@ -178,6 +181,9 @@ export const AppRootBootShell = ({
   const isFailure = failure !== null;
   const statusVisible = useStartupStatusVisible(isFailure);
   const [actionPending, setActionPending] = useState(false);
+  const customWindowChromeEnabled = shouldUseCustomDesktopWindowChrome();
+  const showCustomWindowChrome =
+    presentationMode === "root" && customWindowChromeEnabled;
   const classNames = [
     presentationMode === "root" ? "app-root" : "",
     "zinuto-startup",
@@ -208,8 +214,20 @@ export const AppRootBootShell = ({
       data-zinuto-startup-copy-visible={statusVisible ? "true" : "false"}
       data-zinuto-startup-state={isFailure ? "failed" : "loading"}
       data-zinuto-startup-surface
+      data-zinuto-window-chrome={
+        showCustomWindowChrome ? "windows" : undefined
+      }
       style={buildBootLoadingStyle(bootVisualState)}
     >
+      {showCustomWindowChrome ? (
+        <DesktopWindowChrome
+          logoAlt={productName}
+          logoSrc={GRAPHIC_IMAGE_ASSET_URLS.brandLogoRounded}
+          theme={theme}
+          title={productName}
+          variant="main"
+        />
+      ) : null}
       <div className="zinuto-startup__content">
         <div aria-hidden="true" className="zinuto-startup__logo-frame">
           <span className="zinuto-startup__logo-image" />

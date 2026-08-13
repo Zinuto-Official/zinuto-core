@@ -17,7 +17,7 @@ test("every tracked test belongs to exactly one execution suite", () => {
     ),
     true,
   );
-  assert.equal(suites["web-browser"].length, 6);
+  assert.equal(suites["web-browser"].length, 5);
   assert.equal(suites["rust-integration"].includes("apps/desktop/backtest-engine/tests/golden.rs"), true);
   assert.equal(suites["rust-integration"].includes("apps/desktop/shell/tests/hs_core_017.rs"), true);
   assert.equal(suites["rust-integration"].includes("apps/desktop/shell/tests/hs_core_019.rs"), true);

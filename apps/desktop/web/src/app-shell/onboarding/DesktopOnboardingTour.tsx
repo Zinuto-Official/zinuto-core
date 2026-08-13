@@ -26,7 +26,9 @@ import type {
   DesktopOnboardingCardTone,
   DesktopOnboardingWindowPayload,
 } from "@/app-shell/onboarding/desktopOnboardingWindowPayload";
+import { DesktopOnboardingGuideFrame } from "@/app-shell/onboarding/DesktopOnboardingGuideFrame";
 import type { VendorIconName } from "@/assets/graphics";
+import { AppModal } from "@/ui/components/AppModal";
 
 type OnboardingTaskRow = {
   targetId: DesktopOnboardingTargetId;
@@ -51,6 +53,12 @@ const isExpectedDesktopSecondaryWindowUnavailableError = (
 ): boolean =>
   error instanceof Error &&
   error.message === "DESKTOP_SECONDARY_WINDOW_TAURI_REQUIRED";
+
+const ONBOARDING_SIDECAR_READY_TIMEOUT_MS = 1_500;
+
+const isDesktopSecondaryWindowVisibilityAbortError = (
+  error: unknown,
+): boolean => error instanceof Error && error.name === "AbortError";
 
 export type DesktopOnboardingTourProps = {
   status: DesktopOnboardingTourStatus;
@@ -80,8 +88,11 @@ export const DesktopOnboardingTour = ({
     useState<DesktopOnboardingTargetId | null>(null);
   const [highlightRect, setHighlightRect] =
     useState<OnboardingHighlightRect | null>(null);
+  const [showInlineGuideFallback, setShowInlineGuideFallback] =
+    useState(false);
   const onboardingWindowOpenedRef = useRef(false);
   const onboardingWindowRevisionRef = useRef(0);
+  const onboardingInlineFallbackActiveRef = useRef(false);
   const ignoreNextOnboardingWindowCloseRef = useRef(false);
   const defaultSelectionStepRef =
     useRef<DesktopOnboardingTourStep | null>(null);
@@ -302,6 +313,16 @@ export const DesktopOnboardingTour = ({
     }
   }, []);
 
+  const activateInlineGuideFallback = useCallback(() => {
+    if (onboardingInlineFallbackActiveRef.current) {
+      return;
+    }
+    onboardingInlineFallbackActiveRef.current = true;
+    setShowInlineGuideFallback(true);
+    ignoreNextOnboardingWindowCloseRef.current = true;
+    void closeOnboardingWindow().catch(() => undefined);
+  }, [closeOnboardingWindow]);
+
   const moveToStep = useCallback(
     (nextStep: DesktopOnboardingTourStep) => {
       onStepChange(nextStep);
@@ -449,6 +470,49 @@ export const DesktopOnboardingTour = ({
       selectOnboardingTarget(targetId);
     },
     [selectOnboardingTarget],
+  );
+
+  const handleGuideAction = useCallback(
+    (action: string, payload?: unknown) => {
+      switch (action) {
+        case "SELECT_TARGET": {
+          const targetPayload =
+            payload && typeof payload === "object" && !Array.isArray(payload)
+              ? (payload as { targetId?: unknown })
+              : {};
+          if (isDesktopOnboardingTargetId(targetPayload.targetId)) {
+            handleSelectTarget(targetPayload.targetId);
+          }
+          return;
+        }
+        case "NEXT":
+        case "PRIMARY":
+          handlePrimaryAction();
+          return;
+        case "BACK":
+          handleBack();
+          return;
+        case "SKIP":
+          handleSkip();
+          return;
+        case "DEFER":
+          handleDefer();
+          return;
+        case "COMPLETE":
+          handleComplete();
+          return;
+        default:
+          return;
+      }
+    },
+    [
+      handleBack,
+      handleComplete,
+      handleDefer,
+      handlePrimaryAction,
+      handleSelectTarget,
+      handleSkip,
+    ],
   );
 
   const updateHighlightForTarget = useCallback(
@@ -648,45 +712,81 @@ export const DesktopOnboardingTour = ({
 
   useEffect(() => {
     if (status !== "ACTIVE") {
+      onboardingInlineFallbackActiveRef.current = false;
+      setShowInlineGuideFallback(false);
       void closeOnboardingWindow();
       clearSelectedTarget();
       return;
     }
+    if (onboardingInlineFallbackActiveRef.current) {
+      return;
+    }
     ignoreNextOnboardingWindowCloseRef.current = false;
+    const visibilityAbortController = new AbortController();
     const input = {
       kind: "ONBOARDING_TOUR" as const,
       title: windowPayload.title,
       payload: windowPayload,
     };
-    if (!onboardingWindowOpenedRef.current) {
+    const shouldOpenWindow = !onboardingWindowOpenedRef.current;
+    if (shouldOpenWindow) {
       onboardingWindowOpenedRef.current = true;
-      void api
-        .openDesktopSecondaryWindow(input)
-        .then((state) => {
-          onboardingWindowRevisionRef.current = state.revision;
-          void api.positionDesktopOnboardingSidecar();
-        })
-        .catch((error) => {
-          onboardingWindowOpenedRef.current = false;
-          onboardingWindowRevisionRef.current = 0;
-          if (isExpectedDesktopSecondaryWindowUnavailableError(error)) {
-            return;
-          }
-          console.error("[desktop-onboarding] open secondary window failed", error);
-        });
-      return;
     }
-    void api
-      .publishDesktopSecondaryWindowState(input)
-      .then((state) => {
+    const windowStateTask = shouldOpenWindow
+      ? api.openDesktopSecondaryWindow(input)
+      : api.publishDesktopSecondaryWindowState(input);
+    void windowStateTask
+      .then(async (state) => {
+        if (
+          visibilityAbortController.signal.aborted ||
+          onboardingInlineFallbackActiveRef.current
+        ) {
+          return;
+        }
         onboardingWindowRevisionRef.current = state.revision;
+        const visibleRevision =
+          await api.waitForDesktopSecondaryWindowVisibleReady(
+            "ONBOARDING_TOUR",
+            state.revision,
+            {
+              followLatestRevision: true,
+              signal: visibilityAbortController.signal,
+              timeoutMs: ONBOARDING_SIDECAR_READY_TIMEOUT_MS,
+            },
+          );
+        if (
+          visibilityAbortController.signal.aborted ||
+          onboardingInlineFallbackActiveRef.current
+        ) {
+          return;
+        }
+        onboardingWindowRevisionRef.current = visibleRevision;
+        await api.positionDesktopOnboardingSidecar();
       })
       .catch((error) => {
+        if (
+          visibilityAbortController.signal.aborted ||
+          isDesktopSecondaryWindowVisibilityAbortError(error)
+        ) {
+          return;
+        }
         onboardingWindowOpenedRef.current = false;
         onboardingWindowRevisionRef.current = 0;
-        console.error("[desktop-onboarding] sync secondary window failed", error);
+        if (!isExpectedDesktopSecondaryWindowUnavailableError(error)) {
+          console.error("[desktop-onboarding] sidecar unavailable", error);
+        }
+        activateInlineGuideFallback();
       });
-  }, [clearSelectedTarget, closeOnboardingWindow, status, windowPayload]);
+    return () => {
+      visibilityAbortController.abort();
+    };
+  }, [
+    activateInlineGuideFallback,
+    clearSelectedTarget,
+    closeOnboardingWindow,
+    status,
+    windowPayload,
+  ]);
 
   useEffect(
     () =>
@@ -712,49 +812,9 @@ export const DesktopOnboardingTour = ({
           handleDefer();
           return;
         }
-        switch (message.action) {
-          case "SELECT_TARGET": {
-            const payload =
-              message.payload &&
-              typeof message.payload === "object" &&
-              !Array.isArray(message.payload)
-                ? (message.payload as { targetId?: unknown })
-                : {};
-            if (isDesktopOnboardingTargetId(payload.targetId)) {
-              handleSelectTarget(payload.targetId);
-            }
-            return;
-          }
-          case "NEXT":
-            handlePrimaryAction();
-            return;
-          case "BACK":
-            handleBack();
-            return;
-          case "SKIP":
-            handleSkip();
-            return;
-          case "DEFER":
-            handleDefer();
-            return;
-          case "COMPLETE":
-            handleComplete();
-            return;
-          case "PRIMARY":
-            handlePrimaryAction();
-            return;
-          default:
-            return;
-        }
+        handleGuideAction(message.action, message.payload);
       }),
-    [
-      handleBack,
-      handleComplete,
-      handleDefer,
-      handlePrimaryAction,
-      handleSelectTarget,
-      handleSkip,
-    ],
+    [handleDefer, handleGuideAction],
   );
 
   if (status !== "ACTIVE") {
@@ -781,6 +841,22 @@ export const DesktopOnboardingTour = ({
             </span>
           ) : null}
         </div>
+      ) : null}
+      {showInlineGuideFallback ? (
+        <AppModal
+          open
+          onClose={handleDefer}
+          preset="workflow"
+          className="desktop-onboarding-dialog"
+          overlayClassName="desktop-onboarding-dialog-backdrop"
+          accessibilityTitle={windowPayload.title}
+          accessibilityDescription={windowPayload.body}
+        >
+          <DesktopOnboardingGuideFrame
+            payload={windowPayload}
+            onAction={handleGuideAction}
+          />
+        </AppModal>
       ) : null}
     </>
   );

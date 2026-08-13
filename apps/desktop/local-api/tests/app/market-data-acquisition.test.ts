@@ -19,7 +19,11 @@ import {
 } from '../../src/application/market-data-acquisition/akshareSidecarAdapter.js';
 import { validateAcquisitionStagingWithImportPreview } from '../../src/application/market-data-acquisition/acquisitionImportValidation.js';
 import { normalizeAndValidateAcquisitionBars } from '../../src/application/market-data-acquisition/acquisitionStaging.js';
-import { createCcxtAcquisitionAdapter } from '../../src/application/market-data-acquisition/ccxtAcquisitionAdapter.js';
+import {
+  applyMarketDataHttpsProxy,
+  createCcxtAcquisitionAdapter,
+  resolveMarketDataHttpsProxy,
+} from '../../src/application/market-data-acquisition/ccxtAcquisitionAdapter.js';
 import { createMarketDataAcquisitionService } from '../../src/application/market-data-acquisition/marketDataAcquisitionService.js';
 import {
   AcquisitionRuntimeError,
@@ -36,6 +40,32 @@ const ccxtRequest = {
   startAt: '2026-07-18T00:00:00Z',
   endAt: '2026-07-18T00:05:00Z',
 };
+
+test('CCXT uses a validated proxy supplied by the Windows desktop shell', () => {
+  assert.equal(
+    resolveMarketDataHttpsProxy({
+      env: { ZINUTO_MARKET_DATA_HTTPS_PROXY: 'http://127.0.0.1:7897' },
+    }),
+    'http://127.0.0.1:7897/',
+  );
+  assert.equal(
+    resolveMarketDataHttpsProxy({
+      env: { ZINUTO_MARKET_DATA_HTTPS_PROXY: 'ftp://proxy.example.test:21' },
+    }),
+    null,
+  );
+
+  const exchange = {
+    has: {},
+    loadMarkets: async () => ({}),
+    market: () => ({}),
+    fetchOHLCV: async () => [],
+  };
+  applyMarketDataHttpsProxy(exchange, {
+    env: { ZINUTO_MARKET_DATA_HTTPS_PROXY: 'https://proxy.example.test:8443' },
+  });
+  assert.equal(exchange.httpsProxy, 'https://proxy.example.test:8443/');
+});
 
 const waitForStatus = async (
   service: ReturnType<typeof createMarketDataAcquisitionService>,

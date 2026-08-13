@@ -66,7 +66,11 @@ npm run package -- --output-dir /absolute/path/to/output
 ```
 
 The result is a self-built Core package. It accepts no company signing input
-and is not an official Zinuto release.
+and is not an official Zinuto release. The packager uses ad-hoc signatures on
+macOS only to make the local native closure runnable; Windows output must stay
+Authenticode `NotSigned`. Build on the target operating system and keep the
+Node.js, local API, npm dependencies, backtest engine, and AKShare sidecar in
+the validated installer closure.
 
 ## Keep the change focused
 

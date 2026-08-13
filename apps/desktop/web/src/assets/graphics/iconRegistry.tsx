@@ -65,7 +65,11 @@ export type AppIconName =
   | "statusTarget"
   | "statusTimer"
   | "statusBolt"
-  | "statusFlame";
+  | "statusFlame"
+  | "windowMinimize"
+  | "windowMaximize"
+  | "windowRestore"
+  | "windowClose";
 
 export const APP_ICON_CONFIG: Record<AppIconName, SvgIconConfig> = {
   navCommandCenter: {
@@ -584,6 +588,28 @@ export const APP_ICON_CONFIG: Record<AppIconName, SvgIconConfig> = {
       <>
         <path d="M12.1 4.2C13.8 6.2 15.9 8.2 15.9 11.2C15.9 13.6 14.2 15.8 12 17.2C9.8 15.9 8.1 13.7 8.1 11.2C8.1 9.4 8.9 8 10 6.7C10.9 7.6 11.5 8.6 11.8 9.8C12.5 8.2 12.7 6.4 12.1 4.2Z" />
         <path d="M12 10.1C12.8 11 13.4 11.9 13.4 13C13.4 14.1 12.8 15 12 15.6C11.2 15 10.6 14.1 10.6 13C10.6 12.2 11 11.4 11.6 10.7" />
+      </>
+    ),
+  },
+  windowMinimize: {
+    paths: <path d="M5 16H19" />,
+  },
+  windowMaximize: {
+    paths: <rect x="5" y="5" width="14" height="14" />,
+  },
+  windowRestore: {
+    paths: (
+      <>
+        <path d="M8 7V5H19V16H17" />
+        <rect x="5" y="8" width="11" height="11" />
+      </>
+    ),
+  },
+  windowClose: {
+    paths: (
+      <>
+        <path d="M6 6L18 18" />
+        <path d="M18 6L6 18" />
       </>
     ),
   },

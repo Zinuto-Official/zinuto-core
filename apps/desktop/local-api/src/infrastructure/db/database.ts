@@ -141,7 +141,17 @@ export const STORAGE_LAYOUT = DESKTOP_STORAGE_LAYOUT;
 export const MARKET_DB_FILE_PATH = STORAGE_LAYOUT.marketDbPath;
 export const DUCKDB_TEMP_DIR = STORAGE_LAYOUT.duckdbTempDir;
 export const BACKEND_STARTUP_PROGRESS = startStartupSchemaUpgradeProgress();
+const isolatedCoreMaintenanceRuntime =
+  process.env.ZINUTO_SKIP_DATABASE_AUTO_INIT === "1";
 const startupSchemaUpgradeResults = await (async () => {
+  if (isolatedCoreMaintenanceRuntime) {
+    // Retention workers need one isolated SQLite connection to the already
+    // validated core schema. They must not replay schema repair, seed writes,
+    // or probe the DuckDB file that the main runtime legitimately keeps open.
+    BACKEND_STARTUP_PROGRESS.update("RUNTIME_BOOTSTRAP");
+    BACKEND_STARTUP_PROGRESS.heartbeat();
+    return { core: undefined, market: undefined };
+  }
   BACKEND_STARTUP_PROGRESS.update("CORE_SCHEMA");
   const core = upgradeSupportedCoreSchema(STORAGE_LAYOUT);
   const market = await probeAndUpgradeMarketSchema(STORAGE_LAYOUT, {
@@ -160,6 +170,8 @@ export const MARKET_SCHEMA_UPGRADE_RESULT = startupSchemaUpgradeResults.market;
 export const STARTUP_PREFLIGHT_STATUS = runStartupPreflight(STORAGE_LAYOUT, {
   core: CORE_SCHEMA_UPGRADE_RESULT,
   market: MARKET_SCHEMA_UPGRADE_RESULT,
+}, {
+  requireMarketData: !isolatedCoreMaintenanceRuntime,
 });
 
 export const db = STARTUP_PREFLIGHT_STATUS.startupAllowed

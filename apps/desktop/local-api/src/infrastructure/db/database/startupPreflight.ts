@@ -207,9 +207,15 @@ const inspectMarketData = (
   };
 };
 
-const computeRequiredHeadroomBytes = (): number =>
+const computeRequiredHeadroomBytes = ({
+  requireMarketData = true,
+}: {
+  requireMarketData?: boolean;
+} = {}): number =>
   GLOBAL_STARTUP_MIN_FREE_BYTES +
-  Math.max(CORE_SCHEMA_STARTUP_SCRATCH_BYTES, MARKET_STARTUP_SCRATCH_BYTES);
+  (requireMarketData
+    ? Math.max(CORE_SCHEMA_STARTUP_SCRATCH_BYTES, MARKET_STARTUP_SCRATCH_BYTES)
+    : CORE_SCHEMA_STARTUP_SCRATCH_BYTES);
 
 export const runStartupPreflight = (
   storageLayout: DesktopStorageLayout,
@@ -217,13 +223,28 @@ export const runStartupPreflight = (
     core?: CoreSchemaUpgradeResult;
     market?: MarketSchemaUpgradeResult;
   } = {},
+  options: {
+    requireMarketData?: boolean;
+  } = {},
 ): BackendStartupStatus => {
   const channel = resolveDesktopReleaseChannel();
   const coreData = inspectCoreData(storageLayout, upgrades.core);
-  const marketData = inspectMarketData(storageLayout, upgrades.market);
+  const marketData = options.requireMarketData === false
+    ? {
+        schemaVersion: null,
+        isCurrent: true,
+        issueReason: null,
+        missingSchemaRequirements: [],
+        upgradeStatus: "NOT_PROBED" as const,
+        requiredHeadroomBytes: null,
+        availableHeadroomBytes: null,
+      }
+    : inspectMarketData(storageLayout, upgrades.market);
   const measuredAvailableHeadroomBytes = readAvailableBytes(storageLayout.appRootDir);
   const requiredHeadroomBytes = Math.max(
-    computeRequiredHeadroomBytes(),
+    computeRequiredHeadroomBytes({
+      requireMarketData: options.requireMarketData !== false,
+    }),
     upgrades.core?.requiredHeadroomBytes ?? 0,
     marketData.requiredHeadroomBytes ?? 0,
   );

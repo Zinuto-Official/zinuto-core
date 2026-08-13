@@ -8,6 +8,7 @@
 @import "./components/history-replay-chart-structure.css";
 @import "./layout/page-layout-system.css";
 @import "./components/desktop-secondary-windows.css";
+@import "./components/desktop-window-chrome.css";
 @import "./core/desktop-interaction-policy.css";
 
 .secondary-window-fatal {

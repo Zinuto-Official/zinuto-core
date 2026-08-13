@@ -19,6 +19,7 @@
 @import "./styles/components/inline-feedback.css";
 @import "./styles/components/feature-lock-indicator.css";
 @import "./styles/components/desktop-help-center.css";
+@import "./styles/components/desktop-window-chrome.css";
 @import "./styles/layout/ui-refresh.css";
 @import "./styles/layout/workspace-overrides/01-visual-polish.css";
 @import "./styles/layout/workspace-overrides/02-unified-flat-layout.css";

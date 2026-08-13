@@ -15,6 +15,7 @@ const MAX_ROWS_PER_SYMBOL = 250_000;
 const REQUEST_TIMEOUT_MS = 20_000;
 const MARKET_CACHE_TTL_MS = 15 * 60_000;
 const MAX_MARKET_RESULTS = 500;
+const MARKET_DATA_HTTPS_PROXY_ENV = 'ZINUTO_MARKET_DATA_HTTPS_PROXY';
 const RETRY_DELAYS_MS = [250, 750, 2_000] as const;
 const POPULAR_MARKET_ORDER = [
   'BTC/USDT',
@@ -41,6 +42,7 @@ type CcxtMarket = {
 type CcxtExchange = {
   has: Record<string, unknown>;
   timeframes?: Record<string, unknown>;
+  httpsProxy?: string;
   loadMarkets(): Promise<Record<string, CcxtMarket>>;
   market(symbol: string): CcxtMarket;
   fetchOHLCV(
@@ -70,17 +72,48 @@ const timeframeMilliseconds = {
   '1d': 86_400_000,
 } as const;
 
+export const resolveMarketDataHttpsProxy = ({
+  env = process.env,
+}: {
+  env?: NodeJS.ProcessEnv;
+} = {}): string | null => {
+  const candidate = env[MARKET_DATA_HTTPS_PROXY_ENV]?.trim();
+  if (!candidate) return null;
+  try {
+    const proxy = new URL(candidate);
+    if (
+      !['http:', 'https:'].includes(proxy.protocol) ||
+      proxy.hostname.trim().length === 0
+    ) {
+      return null;
+    }
+    return proxy.toString();
+  } catch {
+    return null;
+  }
+};
+
+export const applyMarketDataHttpsProxy = (
+  exchange: CcxtExchange,
+  options: { env?: NodeJS.ProcessEnv } = {},
+): CcxtExchange => {
+  const proxy = resolveMarketDataHttpsProxy(options);
+  if (proxy) exchange.httpsProxy = proxy;
+  return exchange;
+};
+
 const defaultExchangeFactory: CcxtExchangeFactory = async (exchangeId) => {
   const module = await import('ccxt');
   const Constructor = module[exchangeId] as unknown as CcxtExchangeConstructor;
   if (typeof Constructor !== 'function') {
     throw new AcquisitionRuntimeError('CCXT_EXCHANGE_UNAVAILABLE', { exchangeId });
   }
-  return new Constructor({
+  const exchange = new Constructor({
     enableRateLimit: true,
     timeout: REQUEST_TIMEOUT_MS,
     options: { defaultType: 'spot' },
   });
+  return applyMarketDataHttpsProxy(exchange);
 };
 
 const isTransientError = (error: unknown): boolean => {

@@ -252,6 +252,22 @@ export {
 } from "@/api/desktopViewport";
 export { getDesktopAppVersion } from "@/api/desktopAppVersion";
 export {
+  closeCurrentDesktopWindow,
+  createDesktopWindowChromeAdapter,
+  minimizeCurrentDesktopWindow,
+  readCurrentDesktopWindowMaximized,
+  readDesktopWindowChromePlatform,
+  resolveDesktopWindowChromePlatform,
+  shouldUseCustomDesktopWindowChrome,
+  subscribeCurrentDesktopWindowMaximized,
+  syncCurrentDesktopWindowTheme,
+  toggleCurrentDesktopWindowMaximized,
+  type DesktopWindowChromePlatform,
+  type DesktopWindowChromeAdapter,
+  type DesktopWindowPlatformSnapshot,
+  type DesktopWindowTheme,
+} from "@/api/desktopWindowChrome";
+export {
   DESKTOP_SECONDARY_WINDOW_SYNC_POLICIES,
   closeCurrentDesktopSecondaryWindow,
   closeDesktopSecondaryWindow,

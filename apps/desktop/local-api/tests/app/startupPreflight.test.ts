@@ -105,6 +105,36 @@ test("startup preflight stays ready for a current core schema", () => {
   }
 });
 
+test("isolated core maintenance does not require the market database probe", () => {
+  const { cleanup, layout } = createTempLayout();
+  try {
+    const db = new Database(layout.dbPath);
+    createCurrentCoreSchema(db);
+    db.close();
+    fs.writeFileSync(layout.marketDbPath, "held-by-main-runtime");
+
+    const normalResult = runStartupPreflight(layout);
+    assert.equal(normalResult.startupAllowed, false);
+    assert.equal(normalResult.localDataIssueReason, "SCHEMA_MISMATCH");
+
+    const isolatedResult = runStartupPreflight(
+      layout,
+      {},
+      { requireMarketData: false },
+    );
+    assert.equal(isolatedResult.mode, "READY");
+    assert.equal(isolatedResult.startupAllowed, true);
+    assert.equal(isolatedResult.localDataStatus, "CURRENT");
+    assert.equal(isolatedResult.localDataIssueReason, null);
+    assert.equal(
+      isolatedResult.blockDetails.marketSchemaUpgradeStatus,
+      "NOT_PROBED",
+    );
+  } finally {
+    cleanup();
+  }
+});
+
 test("startup preflight blocks a current-version database without the reset recovery journal", () => {
   const { cleanup, layout } = createTempLayout();
   try {

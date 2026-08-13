@@ -8,11 +8,18 @@ use std::process::Command;
 use rand::{rngs::OsRng, RngCore};
 use sha2::{Digest, Sha256};
 use tauri::Manager;
+#[cfg(windows)]
+use winreg::enums::HKEY_CURRENT_USER;
+#[cfg(windows)]
+use winreg::RegKey;
 
 use super::{
     BackendRuntimeStateRecord, BackendTransport, AKSHARE_DEVELOPMENT_SIDECAR_PATH_ENV,
     AKSHARE_TRUSTED_SIDECAR_PATH_ENV, BACKTEST_ENGINE_BIN_ENV, BACKTEST_NATIVE_BATCH_ENV,
 };
+
+#[cfg(windows)]
+const MARKET_DATA_HTTPS_PROXY_ENV: &str = "ZINUTO_MARKET_DATA_HTTPS_PROXY";
 
 #[derive(Clone)]
 pub(super) struct BackendLaunchCandidate {
@@ -569,12 +576,95 @@ pub(super) fn configure_akshare_sidecar_env(cmd: &mut Command, app: &tauri::AppH
     }
 }
 
+#[cfg(any(windows, test))]
+fn normalize_windows_system_proxy_endpoint(value: &str) -> Option<String> {
+    let endpoint = value.trim();
+    if endpoint.is_empty()
+        || endpoint
+            .chars()
+            .any(|character| character.is_control() || character.is_whitespace())
+    {
+        return None;
+    }
+
+    let normalized = if endpoint.contains("://") {
+        endpoint.to_string()
+    } else {
+        format!("http://{endpoint}")
+    };
+    let (scheme, authority) = normalized.split_once("://")?;
+    if !matches!(scheme.to_ascii_lowercase().as_str(), "http" | "https")
+        || authority.trim_matches('/').is_empty()
+    {
+        return None;
+    }
+    Some(normalized)
+}
+
+#[cfg(any(windows, test))]
+fn resolve_windows_https_proxy(proxy_server: &str) -> Option<String> {
+    let mut https_proxy = None;
+    let mut http_proxy = None;
+    let mut unqualified_proxy = None;
+
+    for value in proxy_server
+        .split(';')
+        .map(str::trim)
+        .filter(|value| !value.is_empty())
+    {
+        if let Some((protocol, endpoint)) = value.split_once('=') {
+            match protocol.trim().to_ascii_lowercase().as_str() {
+                "https" if https_proxy.is_none() => https_proxy = Some(endpoint),
+                "http" if http_proxy.is_none() => http_proxy = Some(endpoint),
+                _ => {}
+            }
+        } else if unqualified_proxy.is_none() {
+            unqualified_proxy = Some(value);
+        }
+    }
+
+    [https_proxy, http_proxy, unqualified_proxy]
+        .into_iter()
+        .flatten()
+        .find_map(normalize_windows_system_proxy_endpoint)
+}
+
+#[cfg(windows)]
+fn configure_windows_market_data_proxy_env(cmd: &mut Command) {
+    cmd.env_remove(MARKET_DATA_HTTPS_PROXY_ENV);
+
+    let settings = match RegKey::predef(HKEY_CURRENT_USER)
+        .open_subkey("Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings")
+    {
+        Ok(settings) => settings,
+        Err(_) => return,
+    };
+    let proxy_enabled = match settings.get_value::<u32, _>("ProxyEnable") {
+        Ok(value) => value != 0,
+        Err(_) => false,
+    };
+    if !proxy_enabled {
+        return;
+    }
+    let proxy_server = match settings.get_value::<String, _>("ProxyServer") {
+        Ok(value) => value,
+        Err(_) => return,
+    };
+    if let Some(proxy_url) = resolve_windows_https_proxy(&proxy_server) {
+        cmd.env(MARKET_DATA_HTTPS_PROXY_ENV, proxy_url);
+    }
+}
+
+#[cfg(not(windows))]
+fn configure_windows_market_data_proxy_env(_cmd: &mut Command) {}
+
 pub(crate) fn desktop_release_channel() -> &'static str {
     "community"
 }
 
-pub(super) fn configure_backend_release_channel_env(cmd: &mut Command) {
+pub(super) fn configure_backend_launch_environment(cmd: &mut Command) {
     cmd.env("ZINUTO_DESKTOP_RELEASE_CHANNEL", desktop_release_channel());
+    configure_windows_market_data_proxy_env(cmd);
 }
 
 pub(super) fn backend_runtime_state_release_channel_matches_current(
@@ -760,5 +850,32 @@ mod tests {
                 configured_key == std::ffi::OsStr::new(key) && value.is_none()
             }));
         }
+    }
+
+    #[test]
+    fn windows_proxy_parser_prefers_https_and_accepts_a_single_proxy_server() {
+        assert_eq!(
+            resolve_windows_https_proxy("http=127.0.0.1:7890;https=127.0.0.1:7897"),
+            Some("http://127.0.0.1:7897".to_string()),
+        );
+        assert_eq!(
+            resolve_windows_https_proxy("127.0.0.1:7897"),
+            Some("http://127.0.0.1:7897".to_string()),
+        );
+    }
+
+    #[test]
+    fn windows_proxy_parser_falls_back_to_http_and_rejects_unsafe_values() {
+        assert_eq!(
+            resolve_windows_https_proxy(
+                "socks=127.0.0.1:1080;http=https://proxy.example.test:8443"
+            ),
+            Some("https://proxy.example.test:8443".to_string()),
+        );
+        assert_eq!(resolve_windows_https_proxy("https= bad proxy"), None);
+        assert_eq!(
+            resolve_windows_https_proxy("ftp://proxy.example.test:21"),
+            None
+        );
     }
 }

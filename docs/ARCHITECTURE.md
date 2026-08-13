@@ -26,6 +26,26 @@ macOS uses an application-private Unix socket. Windows uses a random loopback
 port. The native `backend_http_request` command is the only WebView transport;
 the local HTTP listener is not a public integration surface.
 
+Window integration is intentionally platform-specific. macOS keeps the native
+overlay title bar and traffic lights. On Windows the shell removes native
+decorations before the first show, keeps the native shadow and resize behavior,
+and lets the WebView render the themed chrome for main and secondary windows.
+The WebView can only invoke the checked window-command allowlist.
+
+The main local runtime owns normal SQLite schema startup and the DuckDB market
+database. The history-retention worker is the narrow exception: it sets
+`ZINUTO_SKIP_DATABASE_AUTO_INIT=1` before importing the database graph, opens
+an isolated connection to an already-current Core schema, skips schema and seed
+writes, does not probe the DuckDB file held by the main runtime, and computes
+startup headroom without the market-data scratch allowance. Do not reuse this
+maintenance-only mode as a general startup path.
+
+On Windows, the native shell reads an enabled user-scoped WinINet proxy and
+passes a validated HTTP or HTTPS endpoint to the local runtime as
+`ZINUTO_MARKET_DATA_HTTPS_PROXY`. Only the explicit CCXT market-data acquisition
+path consumes that value. It does not create an automatic network task or a
+general application proxy surface.
+
 Build-time Node acquisition has one checked authority at
 `config/open-source/node-runtime-authority.json`. It binds `.nvmrc`, target
 platform, exact archive bytes and SHA-256 to an upstream Node.js release
@@ -36,6 +56,21 @@ wrapper-link set is ignored and regenerated as regular files, while every other
 link or special entry is rejected. The complete tree is validated before
 execution, a verified last-known-good runtime is preserved, and the validated
 staging directory is swapped into place without deleting the current runtime.
+
+## Local package closure
+
+`npm start` is the development runner. `npm run package -- --output-dir <path>`
+is the target-OS Core packaging path; it stages and validates the local Node.js
+runtime, compiled local API, npm runtime dependencies, Rust backtest engine,
+and pinned AKShare sidecar before producing the installer. The Windows NSIS
+resource hook must copy that complete closure into the installed layout because
+declaring a Tauri resource is not by itself installed-layout evidence.
+
+The packaging path rejects company signing and release credentials. It uses
+recursive ad-hoc code signatures on macOS only to make the self-built native
+closure runnable, and requires both the Windows application and installer to
+remain Authenticode `NotSigned`. Neither state is a Zinuto distribution
+signature, notarization, publication, or installed-artifact acceptance result.
 
 ## Ownership
 

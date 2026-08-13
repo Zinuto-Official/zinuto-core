@@ -29,6 +29,11 @@
   --secondary-window-titlebar-safe-left: 84px;
 }
 
+.desktop-secondary-window-root[data-zinuto-window-chrome="windows"] {
+  --desktop-window-chrome-height: 40px;
+  --secondary-window-titlebar-safe-top: var(--desktop-window-chrome-height);
+}
+
 .secondary-window-loading-skeleton {
   --secondary-loading-line: color-mix(in srgb, var(--surface-s3) 64%, var(--surface-s2));
   --secondary-loading-line-strong: color-mix(in srgb, var(--surface-s4) 70%, var(--surface-s2));

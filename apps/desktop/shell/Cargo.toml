@@ -2,7 +2,7 @@
 
 [package]
 name = "open-trading-practice"
-version = "2.0.3"
+version = "2.0.4"
 edition = "2021"
 license = "GPL-3.0-only"
 
@@ -34,6 +34,7 @@ objc2-web-kit = { version = "0.3", default-features = false, features = ["std", 
 
 [target.'cfg(windows)'.dependencies]
 windows-sys = { version = "0.60", features = ["Win32_Foundation", "Win32_Security_Cryptography", "Win32_Storage_FileSystem", "Win32_System_Memory", "Win32_System_Threading"] }
+winreg = "=0.55.0"
 
 [features]
 default = ["custom-protocol"]

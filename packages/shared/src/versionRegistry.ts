@@ -4,7 +4,7 @@ import { REPLAY_NOTE_DOCUMENT_SCHEMA_VERSION } from "./replayNoteDocument.js";
 import { SYSTEM_DEV_SIMULATION_PROFILE_SPEC_VERSION } from "./systemDevSimulationProfiles.js";
 import { TRADING_RULE_PRESET_CATALOG_VERSION } from "./trading.js";
 
-export const ZINUTO_SOFTWARE_VERSION = "2.0.3";
+export const ZINUTO_SOFTWARE_VERSION = "2.0.4";
 
 export const ZINUTO_VERSION_MATRIX_SCHEMA_VERSION = 1 as const;
 
@@ -20,11 +20,11 @@ export const ZINUTO_VERSION_DOMAINS = [
 export type ZinutoVersionDomain = (typeof ZINUTO_VERSION_DOMAINS)[number];
 
 export const ZINUTO_SEMANTIC_VERSION_CODES = Object.freeze({
-  app: "APP 2026Q3.1",
+  app: "APP 2026Q3.2",
   data: "DATA 2026Q3.1",
-  market: "MARKET 2026Q3.1",
+  market: "MARKET 2026Q3.2",
   rules: "RULES 2026Q3.1",
-  runtime: "RUNTIME 2026Q3.1",
+  runtime: "RUNTIME 2026Q3.2",
   api: "API v1",
 });
 

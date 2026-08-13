@@ -41,7 +41,7 @@ use health::{
 pub(crate) use launch::desktop_release_channel;
 use launch::{
     backend_runtime_state_release_channel_matches_current, backend_working_dir_from_entry,
-    configure_akshare_sidecar_env, configure_backend_release_channel_env,
+    configure_akshare_sidecar_env, configure_backend_launch_environment,
     configure_backend_transport_env, configure_backtest_engine_env, generate_backend_bridge_secret,
     resolve_backend_launch_candidates, resolve_node_runtime_path, BackendLaunchCandidate,
 };
@@ -422,7 +422,7 @@ fn spawn_backend_node(
         .stderr(Stdio::inherit());
 
     cmd.env("ZINUTO_DATA_DIR", context.data_dir);
-    configure_backend_release_channel_env(&mut cmd);
+    configure_backend_launch_environment(&mut cmd);
     configure_backend_transport_env(&mut cmd, context.transport);
     configure_backtest_engine_env(&mut cmd, context.app);
     configure_akshare_sidecar_env(&mut cmd, context.app);

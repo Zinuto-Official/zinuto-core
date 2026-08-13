@@ -92,6 +92,55 @@ test('Tauri build preparation stages the sidecar before validating declared reso
       'market-data-acquisition/',
     );
   }
+
+  const windowsNsisHook = fs.readFileSync(new URL(
+    '../../apps/desktop/shell/nsis/windows-runtime-resources.nsh',
+    import.meta.url,
+  ), 'utf8');
+  for (const fragment of [
+    'RMDir /r "$INSTDIR\\market-data-acquisition"',
+    'SetOutPath "$INSTDIR\\market-data-acquisition"',
+    'gen\\market-data-acquisition\\*',
+  ]) {
+    assert.equal(
+      windowsNsisHook.includes(fragment),
+      true,
+      `Windows NSIS hook must preserve the AKShare sidecar resource: ${fragment}`,
+    );
+  }
+
+  const windowsInstallerValidator = fs.readFileSync(new URL(
+    './validate-windows-nsis-installer.mjs',
+    import.meta.url,
+  ), 'utf8');
+  assert.match(windowsInstallerValidator, /'open-trading-practice\.exe'/u);
+  assert.match(
+    windowsInstallerValidator,
+    /market-data-acquisition\/akshare-sidecar\/win32-x64\/zinuto-akshare-sidecar\.exe/u,
+  );
+
+  const backendRuntimeBundler = fs.readFileSync(new URL(
+    './prepare-backend-runtime-bundle.mjs',
+    import.meta.url,
+  ), 'utf8');
+  const freshnessCheckStart = backendRuntimeBundler.indexOf(
+    "label: 'backend dist output'",
+  );
+  const acquireBuildLockStart = backendRuntimeBundler.indexOf(
+    'acquireBuildLock();',
+    freshnessCheckStart,
+  );
+  const backendFreshnessCheck = backendRuntimeBundler.slice(
+    freshnessCheckStart,
+    acquireBuildLockStart,
+  );
+  assert.match(backendFreshnessCheck, /path\.join\(BACKEND_DIR, 'src'\)/u);
+  assert.doesNotMatch(backendFreshnessCheck, /BACKEND_PACKAGE_JSON/u);
+  assert.match(backendRuntimeBundler, /copyPath\(BACKEND_PACKAGE_JSON/u);
+  assert.match(
+    backendRuntimeBundler,
+    /schemaVersion: FRESHNESS_FINGERPRINT_SCHEMA_VERSION/u,
+  );
 });
 
 test('AKShare onedir validation requires the target executable and critical runtime data', (t) => {

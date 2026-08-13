@@ -55,6 +55,7 @@ import {
 import { createDesktopSecondaryWindowFocusRuntime } from "@/api/desktopSecondaryWindowFocusRuntime";
 import { createDesktopSecondaryWindowListenerRuntime } from "@/api/desktopSecondaryWindowListeners";
 import { buildDesktopSecondaryWindowUrl } from "@/api/desktopSecondaryWindowUrl";
+import { readDesktopWindowChromePlatform } from "@/api/desktopWindowChrome";
 
 export {
   resizeCurrentDesktopSecondaryWindowToGeometry,
@@ -577,6 +578,8 @@ export const openDesktopSecondaryWindow = async ({
   desktopSecondaryWindowContentReadyKinds.delete(kind);
   desktopSecondaryWindowContentReadyRevisionByKind.delete(kind);
   desktopSecondaryWindowFocusRuntime.markPending(kind);
+  const useCustomWindowChrome =
+    readDesktopWindowChromePlatform() === "windows";
   const webviewWindow = new webviewWindowModule.WebviewWindow(label, {
     url: buildDesktopSecondaryWindowUrl(kind, state.visualContext),
     title: DESKTOP_SECONDARY_WINDOW_NATIVE_TITLE,
@@ -591,11 +594,15 @@ export const openDesktopSecondaryWindow = async ({
     parent: "main",
     preventOverflow: { width: 24, height: 24 },
     skipTaskbar: true,
-    decorations: true,
+    decorations: !useCustomWindowChrome,
     shadow: true,
-    titleBarStyle: "overlay" as const,
-    hiddenTitle: true,
-    trafficLightPosition: new windowModule.LogicalPosition(16, 30),
+    ...(useCustomWindowChrome
+      ? {}
+      : {
+          titleBarStyle: "overlay" as const,
+          hiddenTitle: true,
+          trafficLightPosition: new windowModule.LogicalPosition(16, 30),
+        }),
     backgroundColor: resolveDesktopSecondaryWindowBackgroundColor(
       state.visualContext,
     ),

@@ -1,37 +1,37 @@
 {
   "schemaVersion": 1,
-  "version": "2.0.3",
-  "publishedAt": "2026-08-12T02:00:00.000Z",
+  "version": "2.0.4",
+  "publishedAt": "2026-08-13T02:00:00.000Z",
   "releaseHighlights": {
     "en": [
-      "Free Replay and Challenge screens now keep setup, timers, and resumed activity consistent when you move between workspaces.",
-      "Custom Indicator now has clearer local validation, safer profile saving, and an expanded reference center.",
-      "Device Transfer restores selected local market data and related records more reliably while retaining integrity checks.",
-      "Startup presentation and the desktop close confirmation have been refined."
+      "Windows now uses a consistent themed title bar for the main window, startup screens, and secondary windows.",
+      "Onboarding falls back to an in-app guide if its companion window cannot become ready.",
+      "User-started CCXT downloads on Windows can use the enabled system HTTP or HTTPS proxy without changing other network traffic.",
+      "History cleanup no longer competes with the live market database, and Windows packages retain the complete local runtime and AKShare sidecar."
     ],
     "zh-CN": [
-      "在工作区之间切换时，自由推演与挑战页面会更稳定地保持准备配置、计时器和进行中的训练。",
-      "自定义指标新增更清晰的本地校验、更稳妥的配置保存，并扩充了参考中心。",
-      "设备迁移会更可靠地恢复已选本地行情及其关联记录，并继续执行完整性校验。",
-      "优化启动展示与桌面端关闭确认。"
+      "Windows 的主窗口、启动界面和辅助窗口现在使用一致的主题标题栏。",
+      "如果引导辅助窗口未能就绪，首次使用引导会自动改为应用内显示。",
+      "Windows 上由用户主动发起的 CCXT 下载可以使用已启用的系统 HTTP 或 HTTPS 代理，不影响其他网络流量。",
+      "历史数据清理不再与正在使用的行情数据库争用，Windows 安装包也会保留完整的本地运行时和 AKShare 辅助程序。"
     ],
     "ja": [
-      "ワークスペースを移動しても、フリーリプレイとチャレンジの準備設定、タイマー、進行中の内容が安定して維持されます。",
-      "カスタム指標のローカル検証とプロファイル保存を改善し、リファレンスセンターを拡充しました。",
-      "デバイス移行で、選択したローカル相場データと関連記録をより確実に復元し、整合性検証も引き続き行います。",
-      "起動画面とデスクトップ終了時の確認表示を調整しました。"
+      "Windows のメインウィンドウ、起動画面、補助ウィンドウで、テーマに合った統一タイトルバーを使用するようになりました。",
+      "ガイド用の補助ウィンドウを準備できない場合は、オンボーディングをアプリ内表示へ自動的に切り替えます。",
+      "Windows でユーザーが開始した CCXT ダウンロードは、ほかの通信を変更せず、有効なシステム HTTP または HTTPS プロキシを利用できます。",
+      "履歴クリーンアップが使用中の相場データベースと競合しなくなり、Windows パッケージにはローカルランタイムと AKShare サイドカーが完全に保持されます。"
     ],
     "ko": [
-      "작업 공간을 이동해도 자유 리플레이와 챌린지의 준비 설정, 타이머와 진행 중인 내용이 더 안정적으로 유지됩니다.",
-      "사용자 지표의 로컬 검증과 프로필 저장을 개선하고 참고 센터를 확장했습니다.",
-      "기기 이전에서 선택한 로컬 시세 데이터와 관련 기록을 더 안정적으로 복원하며 무결성 검사도 계속 수행합니다.",
-      "시작 화면과 데스크톱 종료 확인 화면을 다듬었습니다."
+      "Windows의 기본 창, 시작 화면, 보조 창에 테마와 일치하는 제목 표시줄을 일관되게 적용했습니다.",
+      "안내용 보조 창이 준비되지 않으면 온보딩이 앱 내부 안내 화면으로 자동 전환됩니다.",
+      "Windows에서 사용자가 시작한 CCXT 다운로드는 다른 네트워크 트래픽을 바꾸지 않고 활성화된 시스템 HTTP 또는 HTTPS 프록시를 사용할 수 있습니다.",
+      "기록 정리가 사용 중인 시세 데이터베이스와 충돌하지 않으며, Windows 패키지에 전체 로컬 런타임과 AKShare 사이드카가 유지됩니다."
     ],
     "es": [
-      "Replay libre y los desafíos mantienen de forma más fiable la configuración, los temporizadores y la actividad al cambiar de espacio.",
-      "Indicadores personalizados mejora la validación local y el guardado de perfiles, y amplía el centro de referencia.",
-      "Transferencia de dispositivos restaura con más fiabilidad los datos locales seleccionados y sus registros, manteniendo la comprobación de integridad.",
-      "Se han ajustado la presentación de inicio y la confirmación al cerrar la aplicación."
+      "Windows ahora usa una barra de título coherente con el tema en la ventana principal, el inicio y las ventanas secundarias.",
+      "Si la ventana auxiliar no llega a estar lista, la guía inicial se muestra automáticamente dentro de la aplicación.",
+      "Las descargas de CCXT iniciadas por el usuario en Windows pueden usar el proxy HTTP o HTTPS habilitado en el sistema sin modificar el resto del tráfico.",
+      "La limpieza del historial ya no compite con la base de datos de mercado en uso, y los paquetes de Windows conservan el entorno local completo y el componente auxiliar de AKShare."
     ]
   }
 }

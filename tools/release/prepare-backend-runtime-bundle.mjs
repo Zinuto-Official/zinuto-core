@@ -188,6 +188,7 @@ const computeRootContentFingerprint = (rootPaths, includeFile) => {
 };
 
 const FRESHNESS_FINGERPRINT_PATH = path.join(GEN_ROOT, 'backend-runtime-freshness.json');
+const FRESHNESS_FINGERPRINT_SCHEMA_VERSION = 2;
 
 const readRecordedFreshnessFingerprint = (label) => {
   try {
@@ -196,6 +197,9 @@ const readRecordedFreshnessFingerprint = (label) => {
       return null;
     }
     const parsed = JSON.parse(raw);
+    if (parsed?.schemaVersion !== FRESHNESS_FINGERPRINT_SCHEMA_VERSION) {
+      return null;
+    }
     const entry = parsed?.[label];
     if (
       entry &&
@@ -830,10 +834,11 @@ assertBuildOutputFresh({
 assertBuildOutputFresh({
   label: 'backend dist output',
   outputDir: BACKEND_DIST_DIR,
-  sourceRoots: [
-    path.join(BACKEND_DIR, 'src'),
-    BACKEND_PACKAGE_JSON
-  ]
+  // package.json is copied into the runtime bundle, but TypeScript does not
+  // compile it into dist. A release-only package version change may therefore
+  // leave the correctly rebuilt dist byte-identical and must not be diagnosed
+  // as a stale compiler output.
+  sourceRoots: [path.join(BACKEND_DIR, 'src')]
 });
 
 acquireBuildLock();
@@ -866,6 +871,7 @@ try {
 
   fs.mkdirSync(GEN_ROOT, { recursive: true });
   const freshnessFingerprints = {
+    schemaVersion: FRESHNESS_FINGERPRINT_SCHEMA_VERSION,
     'shared dist output': {
       sourceFingerprint: computeRootContentFingerprint(
         [SHARED_SRC_DIR, path.join(SHARED_SRC_DIR, 'i18n', 'messages')],
@@ -878,7 +884,7 @@ try {
     },
     'backend dist output': {
       sourceFingerprint: computeRootContentFingerprint(
-        [path.join(BACKEND_DIR, 'src'), BACKEND_PACKAGE_JSON],
+        [path.join(BACKEND_DIR, 'src')],
         isBuildSourceFile,
       ),
       outputFingerprint: computeRootContentFingerprint(

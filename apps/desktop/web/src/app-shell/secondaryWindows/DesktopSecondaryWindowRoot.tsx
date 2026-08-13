@@ -54,6 +54,9 @@ import { APP_PORTAL_ROOT_ID } from "@/ui/primitives/portalContainer";
 import { setGlobalPriceColorMode } from "@/domains/chart/priceColorModeState";
 import { useWindowChromeDrag } from "@/app-shell/useWindowChromeDrag";
 import { I18nProvider } from "@/frontend-kernel/i18n";
+import { DesktopWindowChrome } from "@/ui/components/DesktopWindowChrome";
+import { GRAPHIC_IMAGE_ASSET_URLS } from "@/assets/graphics";
+import { readDesktopWindowChromePlatform } from "@/api";
 import {
   ensureLocaleCatalog,
   isLocaleCatalogLoaded,
@@ -179,29 +182,7 @@ const normalizeResolvedThemeMode = (
 };
 
 const resolveSecondaryWindowPlatform = (): SecondaryWindowPlatform => {
-  if (typeof navigator === "undefined") {
-    return "unknown";
-  }
-  const navigatorWithUserAgentData = navigator as Navigator & {
-    userAgentData?: {
-      platform?: string;
-    };
-  };
-  const platformSnapshot = [
-    navigator.platform,
-    navigator.userAgent,
-    navigatorWithUserAgentData.userAgentData?.platform,
-  ]
-    .filter((value): value is string => typeof value === "string")
-    .join(" ")
-    .toLowerCase();
-  if (/mac|darwin/.test(platformSnapshot)) {
-    return "macos";
-  }
-  if (/win/.test(platformSnapshot)) {
-    return "windows";
-  }
-  return "unknown";
+  return readDesktopWindowChromePlatform();
 };
 
 const resolveSecondaryLocaleWidthProfile = (
@@ -633,6 +614,11 @@ export const DesktopSecondaryWindowRoot = ({
   ]
     .filter(Boolean)
     .join(" ");
+  const customWindowChromeEnabled = platform === "windows";
+  const windowTitle =
+    state?.title?.trim() ||
+    document.documentElement.dataset.zinutoDesktopProductName?.trim() ||
+    "Zinuto Core";
 
   return (
     <ThemeProvider
@@ -649,12 +635,39 @@ export const DesktopSecondaryWindowRoot = ({
           data-locale-width-profile={visualState.localeWidthProfile}
           data-zinuto-secondary-window-platform={platform}
           data-zinuto-secondary-window-route-status={routeStatus}
-          onMouseDownCapture={startWindowDrag}
-          onMouseMoveCapture={continueWindowDrag}
-          onMouseUpCapture={clearPendingWindowDrag}
-          onMouseLeave={clearPendingWindowDrag}
-          onDoubleClickCapture={toggleWindowMaximize}
+          data-zinuto-window-chrome={
+            customWindowChromeEnabled ? "windows" : undefined
+          }
+          onMouseDownCapture={
+            customWindowChromeEnabled ? undefined : startWindowDrag
+          }
+          onMouseMoveCapture={
+            customWindowChromeEnabled ? undefined : continueWindowDrag
+          }
+          onMouseUpCapture={
+            customWindowChromeEnabled ? undefined : clearPendingWindowDrag
+          }
+          onMouseLeave={
+            customWindowChromeEnabled ? undefined : clearPendingWindowDrag
+          }
+          onDoubleClickCapture={
+            customWindowChromeEnabled ? undefined : toggleWindowMaximize
+          }
         >
+          <DesktopWindowChrome
+            dragHandlers={{
+              onMouseDownCapture: startWindowDrag,
+              onMouseMoveCapture: continueWindowDrag,
+              onMouseUpCapture: clearPendingWindowDrag,
+              onMouseLeave: clearPendingWindowDrag,
+              onDoubleClickCapture: toggleWindowMaximize,
+            }}
+            logoAlt={windowTitle}
+            logoSrc={GRAPHIC_IMAGE_ASSET_URLS.brandLogoRounded}
+            theme={visualState.resolvedThemeMode}
+            title={windowTitle}
+            variant="secondary"
+          />
           {!state || !RouteComponent || !isLocaleReady ? (
             contentFallback
           ) : (

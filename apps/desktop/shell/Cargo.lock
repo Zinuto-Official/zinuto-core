@@ -2327,7 +2327,7 @@ dependencies = [
 
 [[package]]
 name = "open-trading-practice"
-version = "2.0.3"
+version = "2.0.4"
 dependencies = [
  "block2",
  "libc",
@@ -2346,6 +2346,7 @@ dependencies = [
  "tauri-plugin-opener",
  "tauri-plugin-single-instance",
  "windows-sys 0.60.2",
+ "winreg",
 ]
 
 [[package]]

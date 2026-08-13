@@ -38,6 +38,9 @@ import {
   startNativeBackendStartupStatusWatcher,
 } from '@/app-shell/nativeBackendStartupGate';
 import { markStartupSurfaceVisible } from '@/app-shell/boot/startupPresentation';
+import { DesktopWindowChrome } from '@/ui/components/DesktopWindowChrome';
+import { shouldUseCustomDesktopWindowChrome } from '@/api';
+import { GRAPHIC_IMAGE_ASSET_URLS } from '@/assets/graphics';
 
 type MainAppBootProps = Record<string, never>;
 
@@ -246,14 +249,28 @@ class RootErrorBoundary extends Component<
     }
     const fallbackThemeMode = resolveFallbackThemeMode();
     const fallbackTheme = GLOBAL_COLOR_ARCHITECTURE[fallbackThemeMode];
+    const productName =
+      document.documentElement.dataset.zinutoDesktopProductName?.trim() ||
+      'Zinuto Core';
+    const customWindowChromeEnabled = shouldUseCustomDesktopWindowChrome();
     return createElement(
       'div',
       {
         className: `app-root theme-${fallbackThemeMode}`,
+        'data-zinuto-window-chrome': customWindowChromeEnabled
+          ? 'windows'
+          : undefined,
         style: {
           ...buildFatalFallbackStyle(),
         },
       },
+      createElement(DesktopWindowChrome, {
+        logoAlt: productName,
+        logoSrc: GRAPHIC_IMAGE_ASSET_URLS.brandLogoRounded,
+        theme: fallbackThemeMode,
+        title: productName,
+        variant: 'main',
+      }),
       createElement(
         'strong',
         {

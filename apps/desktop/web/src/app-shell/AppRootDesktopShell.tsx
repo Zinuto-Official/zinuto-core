@@ -35,6 +35,8 @@ import { RetryableLazyModuleSurface } from "@/frontend-kernel/RetryableLazyModul
 import { Button } from "@/ui/primitives/button";
 import { DesktopHelpContextProvider } from "@/domains/desktop-help/DesktopHelpContext";
 import { DesktopHelpFloatingHost } from "@/domains/desktop-help/DesktopHelpFloatingHost";
+import { DesktopWindowChrome } from "@/ui/components/DesktopWindowChrome";
+import { shouldUseCustomDesktopWindowChrome } from "@/api";
 import type {
   DesktopHelpNavigationTarget,
 } from "@/domains/desktop-help/desktopHelpTypes";
@@ -80,7 +82,9 @@ const buildDesktopMainClassName = (page: string): string =>
 
 export type AppRootDesktopShellProps = {
   themeMode: ComponentProps<typeof ThemeProvider>["mode"];
-  resolvedThemeMode: ComponentProps<typeof ThemeProvider>["resolvedMode"];
+  resolvedThemeMode: NonNullable<
+    ComponentProps<typeof ThemeProvider>["resolvedMode"]
+  >;
   rootClassName: string;
   rootStyle: CSSProperties;
   rootLang: string;
@@ -191,6 +195,7 @@ export const AppRootDesktopShell = memo(({
     displayedWorkspacePage
       ? buildDesktopMainClassName(displayedWorkspacePage)
       : mainClassName;
+  const customWindowChromeEnabled = shouldUseCustomDesktopWindowChrome();
 
   return (
     <ThemeProvider mode={themeMode} resolvedMode={resolvedThemeMode}>
@@ -201,12 +206,37 @@ export const AppRootDesktopShell = memo(({
         data-ui-language={rootUiLanguage}
         data-script-group={rootScriptGroup}
         data-locale-width-profile={rootLocaleWidthProfile}
-        onMouseDownCapture={onMouseDownCapture}
-        onMouseMoveCapture={onMouseMoveCapture}
-        onMouseUpCapture={onMouseUpCapture}
-        onMouseLeave={onMouseLeave}
-        onDoubleClickCapture={onDoubleClickCapture}
+        data-zinuto-window-chrome={
+          customWindowChromeEnabled ? "windows" : undefined
+        }
+        onMouseDownCapture={
+          customWindowChromeEnabled ? undefined : onMouseDownCapture
+        }
+        onMouseMoveCapture={
+          customWindowChromeEnabled ? undefined : onMouseMoveCapture
+        }
+        onMouseUpCapture={
+          customWindowChromeEnabled ? undefined : onMouseUpCapture
+        }
+        onMouseLeave={customWindowChromeEnabled ? undefined : onMouseLeave}
+        onDoubleClickCapture={
+          customWindowChromeEnabled ? undefined : onDoubleClickCapture
+        }
       >
+        <DesktopWindowChrome
+          dragHandlers={{
+            onMouseDownCapture,
+            onMouseMoveCapture,
+            onMouseUpCapture,
+            onMouseLeave,
+            onDoubleClickCapture,
+          }}
+          logoAlt={brandLogoAlt}
+          logoSrc={GRAPHIC_IMAGE_ASSET_URLS.brandLogoRounded}
+          theme={resolvedThemeMode}
+          title={brandName}
+          variant="main"
+        />
         <DesktopHelpContextProvider
           activeWorkspace={workspaceSwitcherProps.activePage}
           onNavigateToTarget={onNavigateToDesktopHelpTarget}

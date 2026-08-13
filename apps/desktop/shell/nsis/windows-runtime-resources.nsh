@@ -11,6 +11,7 @@
   RMDir /r "$INSTDIR\apps"
   RMDir /r "$INSTDIR\node_modules"
   RMDir /r "$INSTDIR\backtest-engine"
+  RMDir /r "$INSTDIR\market-data-acquisition"
   RMDir /r "$INSTDIR\node-runtime"
 
   SetOutPath "$INSTDIR"
@@ -25,6 +26,9 @@
   SetOutPath "$INSTDIR\backtest-engine"
   File /r "${OPEN_TRADING_PRACTICE_SHELL_DIR}\gen\backtest-engine\*"
 
+  SetOutPath "$INSTDIR\market-data-acquisition"
+  File /r "${OPEN_TRADING_PRACTICE_SHELL_DIR}\gen\market-data-acquisition\*"
+
   SetOutPath "$INSTDIR\node-runtime"
   File /oname=node.exe "${OPEN_TRADING_PRACTICE_SHELL_DIR}\runtime\node\bin\node.exe"
   File /nonfatal /r "${OPEN_TRADING_PRACTICE_SHELL_DIR}\gen\node-runtime-libs\*"
@@ -37,5 +41,6 @@
   RMDir /r "$INSTDIR\apps"
   RMDir /r "$INSTDIR\node_modules"
   RMDir /r "$INSTDIR\backtest-engine"
+  RMDir /r "$INSTDIR\market-data-acquisition"
   RMDir /r "$INSTDIR\node-runtime"
 !macroend
