@@ -105,6 +105,7 @@ During editing, run `npm run check:fast -- --files <changed-files...>`. Before h
 - Owns: local desktop UI and runtime; local HTTP and native bridge contracts; internal `community` composition and public-source governance.
 - Does not own: official accounts, payments, support, notices, presence, and updater code; official branding, signing, Store submission, deployment, and production secrets.
 - Cross-repository authority registry: `zinuto-release/config/documentation-policy.json`. This is a documentation reference, never a build dependency.
+- Workspace execution rule: GitHub Actions must remain disabled in repository settings. Do not enable, dispatch, or watch workflows; use local or designated-host gates unless a later explicit user instruction changes this.
 - Execution rule: `npm start` and `npm run desktop:dev` are development diagnostics. The formal local-source installer entrypoint is `npm run package -- --output-dir <path>`; it accepts only the output directory and builds only for the current host OS.
 - Execution rule: A Core macOS local package may use only platform-required ad-hoc signatures and must have no company certificate, notarization ticket, or official updater. Core Windows application and NSIS installer outputs must remain Authenticode `NotSigned`.
 - Execution rule: Windows NSIS installed-artifact acceptance must prove the packaged backend runtime, bundled Node runtime, Rust backtest engine, and AKShare onedir sidecar; compilation or installer creation alone is not installed-runtime proof.
