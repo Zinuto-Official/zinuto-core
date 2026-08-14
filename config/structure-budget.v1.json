@@ -3,7 +3,6 @@
   "repository": "zinuto-core",
   "authority": "zinuto-core/config/structure-budget.v1.json",
   "policy": {
-    "asOf": "2026-08-09",
     "maximumExceptionDays": 90,
     "budgetsMayIncrease": false,
     "catchAllUnitsAllowed": false,
@@ -44,8 +43,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1176,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-001: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-001: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -81,8 +78,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1021,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-002: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-002: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -130,8 +125,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; apps/desktop/local-api/tests/structure/hs-core-003.test.ts binds the extraction and parity seam.",
       "previousCeiling": 1727,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-003: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-003: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "apps/desktop/local-api/tests/structure/hs-core-003.test.ts",
@@ -179,8 +172,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1191,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-004: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-004: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -222,8 +213,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1126,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-005: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-005: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -277,8 +266,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1183,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-006: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-006: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -326,8 +313,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; apps/desktop/local-api/tests/structure/hs-core-007.test.ts binds the extraction and parity seam.",
       "previousCeiling": 2067,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-007: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-007: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "apps/desktop/local-api/tests/structure/hs-core-007.test.ts",
@@ -381,8 +366,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; apps/desktop/local-api/tests/structure/hs-core-008.test.ts binds the extraction and parity seam.",
       "previousCeiling": 1524,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-008: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-008: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "apps/desktop/local-api/tests/structure/hs-core-008.test.ts",
@@ -442,8 +425,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; apps/desktop/local-api/tests/structure/hs-core-009.test.ts binds the extraction and parity seam.",
       "previousCeiling": 2199,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-009: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-009: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "apps/desktop/local-api/tests/structure/hs-core-009.test.ts",
@@ -485,8 +466,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1264,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-010: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-010: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -528,8 +507,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; apps/desktop/local-api/tests/structure/hs-core-011.test.ts binds the extraction and parity seam.",
       "previousCeiling": 1746,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-011: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-011: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "apps/desktop/local-api/tests/structure/hs-core-011.test.ts",
@@ -565,8 +542,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1109,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-012: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-012: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -602,8 +577,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; apps/desktop/local-api/tests/structure/hs-core-013.test.ts binds the extraction and parity seam.",
       "previousCeiling": 1269,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-013: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-013: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "apps/desktop/local-api/tests/structure/hs-core-013.test.ts",
@@ -657,8 +630,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; apps/desktop/local-api/tests/structure/hs-core-014.test.ts binds the extraction and parity seam.",
       "previousCeiling": 2154,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-014: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-014: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "apps/desktop/local-api/tests/structure/hs-core-014.test.ts",
@@ -700,8 +671,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1058,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-015: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-015: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -737,8 +706,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1028,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-016: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-016: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -780,8 +747,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; apps/desktop/shell/tests/hs_core_017.rs binds the extraction and parity seam.",
       "previousCeiling": 1397,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-017: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-017: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "apps/desktop/shell/tests/hs_core_017.rs",
@@ -823,8 +788,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1131,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-018: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-018: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -866,8 +829,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; apps/desktop/shell/tests/hs_core_019.rs binds the extraction and parity seam.",
       "previousCeiling": 1754,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-019: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-019: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "apps/desktop/shell/tests/hs_core_019.rs",
@@ -903,8 +864,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1206,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-020: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-020: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -970,8 +929,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1815,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-021: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-021: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1007,8 +964,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1145,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-022: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-022: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1068,8 +1023,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; apps/desktop/web/tests/ui/structure/hs-core-023.test.ts binds the extraction and parity seam.",
       "previousCeiling": 1730,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-023: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-023: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "apps/desktop/web/tests/ui/structure/hs-core-023.test.ts",
@@ -1117,8 +1070,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; apps/desktop/web/tests/ui/structure/hs-core-024.test.ts binds the extraction and parity seam.",
       "previousCeiling": 1475,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-024: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-024: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "apps/desktop/web/tests/ui/structure/hs-core-024.test.ts",
@@ -1166,8 +1117,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1512,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-025: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-025: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1203,8 +1152,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1023,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-026: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-026: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1246,8 +1193,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1058,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-027: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-027: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1295,8 +1240,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1077,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-028: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-028: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1344,8 +1287,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1973,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-029: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-029: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1381,8 +1322,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1164,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-030: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-030: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1424,8 +1363,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1430,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-031: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-031: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1467,8 +1404,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1093,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-032: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-032: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1510,8 +1445,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1408,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-033: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-033: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1559,8 +1492,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1710,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-034: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-034: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1602,8 +1533,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1267,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-035: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-035: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1645,8 +1574,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1221,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-036: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-036: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1688,8 +1615,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1508,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-037: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-037: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1731,8 +1656,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1068,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-038: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-038: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1774,8 +1697,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1338,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-039: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-039: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1817,8 +1738,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1150,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-040: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-040: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1860,8 +1779,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1255,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-041: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-041: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1903,8 +1820,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1020,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-042: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-042: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1952,8 +1867,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1567,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-043: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-043: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1995,8 +1908,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1227,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-044: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-044: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2038,8 +1949,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1039,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-045: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-045: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2087,8 +1996,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1764,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-046: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-046: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2130,8 +2037,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1084,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-047: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-047: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2173,8 +2078,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1372,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-048: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-048: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2216,8 +2119,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1164,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-049: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-049: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2259,8 +2160,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1257,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-050: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-050: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2308,8 +2207,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1874,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-051: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-051: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2357,8 +2254,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 2059,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-052: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-052: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2406,8 +2301,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 2141,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-053: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-053: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2449,8 +2342,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1427,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-054: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-054: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2492,8 +2383,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1139,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-055: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-055: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2541,8 +2430,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1701,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-056: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-056: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2584,8 +2471,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1284,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-057: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-057: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2627,8 +2512,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1106,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-058: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-058: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2670,8 +2553,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1413,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-059: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-059: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2725,8 +2606,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1857,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-060: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-060: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2780,8 +2659,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1146,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-061: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-061: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2817,8 +2694,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1069,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-062: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-062: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2854,8 +2729,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1010,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-063: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-063: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2897,8 +2770,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1440,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-064: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-064: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2940,8 +2811,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1119,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-065: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-065: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2989,8 +2858,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1622,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-066: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-066: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -3038,8 +2905,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1160,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-067: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-067: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -3081,8 +2946,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1317,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-068: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-068: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -3130,8 +2993,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1013,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-069: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-069: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -3179,8 +3040,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1079,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-070: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-070: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -3222,8 +3081,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1029,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-071: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-071: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -3259,8 +3116,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1134,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-072: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-072: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -3338,8 +3193,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 4390,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-073: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-073: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -3375,8 +3228,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1091,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-074: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-074: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -3412,8 +3263,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1212,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-075: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-075: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -3449,8 +3298,6 @@
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
       "previousCeiling": 1319,
       "targetCeiling": 1000,
-      "deadline": "2026-10-31",
-      "expiry": "2026-11-07",
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-076: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-076: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",

@@ -57,8 +57,35 @@ const parseDate = (value, label) => {
     fail(`${label} must use YYYY-MM-DD`);
   }
   const date = new Date(`${value}T00:00:00.000Z`);
-  if (Number.isNaN(date.valueOf())) fail(`${label} is invalid`);
+  if (Number.isNaN(date.valueOf()) || date.toISOString().slice(0, 10) !== value) fail(`${label} is invalid`);
   return date;
+};
+
+const TEMPORARY_SCHEDULE_FIELDS = ['grantedOn', 'deadline', 'expiry'];
+const hasOwn = (value, key) => Object.prototype.hasOwnProperty.call(value, key);
+
+const validateBudgetLifecycle = (unit, today, maximumExceptionDays) => {
+  const presentScheduleFields = TEMPORARY_SCHEDULE_FIELDS.filter((field) => hasOwn(unit, field));
+  if (unit.status === 'remediated-budget-enforced') {
+    if (presentScheduleFields.length > 0) {
+      fail(`${unit.id} permanent budget cannot carry temporary schedule fields: ${presentScheduleFields.join(', ')}`);
+    }
+    return;
+  }
+  if (unit.status !== 'temporary-budget-exception') {
+    fail(`${unit.id} status must be remediated-budget-enforced or temporary-budget-exception`);
+  }
+  if (presentScheduleFields.length !== TEMPORARY_SCHEDULE_FIELDS.length) {
+    fail(`${unit.id} temporary budget exception requires grantedOn, deadline, and expiry`);
+  }
+  const grantedOn = parseDate(unit.grantedOn, `${unit.id} grantedOn`);
+  const deadline = parseDate(unit.deadline, `${unit.id} deadline`);
+  const expiry = parseDate(unit.expiry, `${unit.id} expiry`);
+  if (grantedOn > deadline) fail(`${unit.id} deadline precedes its grant`);
+  if (deadline > expiry) fail(`${unit.id} deadline exceeds expiry`);
+  const maximumExpiry = new Date(grantedOn.valueOf() + (maximumExceptionDays * 86_400_000));
+  if (expiry > maximumExpiry) fail(`${unit.id} expiry exceeds the 90-day exception maximum`);
+  if (expiry < today) fail(`${unit.id} structure budget is expired`);
 };
 
 const unique = (values, label) => {
@@ -93,6 +120,9 @@ export const validateStructureBudget = (
   ) {
     fail('policy must forbid raised budgets, catch-all units, and cross-repository numeric ownership');
   }
+  if (hasOwn(document.policy ?? {}, 'asOf')) {
+    fail('policy.asOf is obsolete; temporary exceptions must declare unit.grantedOn');
+  }
   if (!Array.isArray(document.units) || !Array.isArray(document.rollbacks)) fail('units and rollbacks must be arrays');
   if (document.expectedUnitCount !== expectedUnitIds.length || document.units.length !== expectedUnitIds.length) {
     fail(`expected exactly ${expectedUnitIds.length} units`);
@@ -115,8 +145,6 @@ export const validateStructureBudget = (
     rollbackByUnit.set(rollback.unitId, rollback);
   }
 
-  const asOf = parseDate(document.policy?.asOf, 'policy.asOf');
-  const maximumExpiry = new Date(asOf.valueOf() + (document.policy.maximumExceptionDays * 86_400_000));
   const today = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
   const originalPaths = [];
   const currentOwnerPaths = [];
@@ -139,11 +167,7 @@ export const validateStructureBudget = (
     }
     if (unit.targetCeiling > unit.previousCeiling) fail(`${unit.id} raises its structure budget`);
 
-    const deadline = parseDate(unit.deadline, `${unit.id} deadline`);
-    const expiry = parseDate(unit.expiry, `${unit.id} expiry`);
-    if (deadline > expiry) fail(`${unit.id} deadline exceeds expiry`);
-    if (expiry > maximumExpiry) fail(`${unit.id} expiry exceeds the 90-day exception maximum`);
-    if (expiry < today) fail(`${unit.id} structure budget is expired`);
+    validateBudgetLifecycle(unit, today, document.policy.maximumExceptionDays);
 
     if (!Array.isArray(unit.currentOwners) || unit.currentOwners.length === 0) {
       fail(`${unit.id} must bind every current owner; string-only absence policies are not accepted`);

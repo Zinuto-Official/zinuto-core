@@ -23,11 +23,47 @@ test('the repository-local structure budget closes every exact unit and rollback
   });
 });
 
-test('expired structure exceptions fail closed', () => {
+test('permanent structure budgets cannot retain temporary schedules', () => {
   const document = valid();
   document.units[0].deadline = '2026-08-08';
-  document.units[0].expiry = '2026-08-08';
-  assert.throws(() => validate(document), /expired/u);
+  assert.throws(() => validate(document), /permanent budget cannot carry temporary schedule fields/u);
+
+  const legacyPolicy = valid();
+  legacyPolicy.policy.asOf = '2026-08-09';
+  assert.throws(() => validate(legacyPolicy), /policy\.asOf is obsolete/u);
+});
+
+test('temporary structure exceptions are bounded and expire', () => {
+  const temporary = valid();
+  Object.assign(temporary.units[0], {
+    status: 'temporary-budget-exception',
+    grantedOn: '2026-08-01',
+    deadline: '2026-08-02',
+    expiry: '2026-08-10',
+  });
+  assert.deepEqual(validate(temporary), {
+    repository: temporary.repository,
+    units: temporary.expectedUnitCount,
+    rollbacks: temporary.expectedUnitCount,
+  });
+
+  const expired = valid();
+  Object.assign(expired.units[0], {
+    status: 'temporary-budget-exception',
+    grantedOn: '2026-08-01',
+    deadline: '2026-08-08',
+    expiry: '2026-08-08',
+  });
+  assert.throws(() => validate(expired), /expired/u);
+
+  const tooLong = valid();
+  Object.assign(tooLong.units[0], {
+    status: 'temporary-budget-exception',
+    grantedOn: '2026-08-01',
+    deadline: '2026-08-01',
+    expiry: '2026-11-01',
+  });
+  assert.throws(() => validate(tooLong), /90-day exception maximum/u);
 });
 
 test('raised line budgets fail closed', () => {
