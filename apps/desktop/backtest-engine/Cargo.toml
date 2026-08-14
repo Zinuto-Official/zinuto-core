@@ -2,7 +2,7 @@
 
 [package]
 name = "zinuto-core-backtest-engine"
-version = "2.0.5"
+version = "2.0.6"
 edition = "2021"
 license = "GPL-3.0-only"
 

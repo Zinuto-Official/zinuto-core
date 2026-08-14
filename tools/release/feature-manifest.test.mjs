@@ -36,7 +36,7 @@ test('feature manifest keeps user-triggered local market-data acquisition availa
 
 test('feature manifest version must match the released desktop package', () => {
   assert.throws(
-    () => validateDesktopFeatureManifest(validManifest(), { expectedProductVersion: '2.0.5' }),
+    () => validateDesktopFeatureManifest(validManifest(), { expectedProductVersion: '2.0.6' }),
     /must match/u,
   );
 });

@@ -1,6 +1,6 @@
 {
   "name": "@zinuto/desktop-local-api",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "license": "GPL-3.0-only",
   "private": true,
   "type": "module",
@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@duckdb/node-api": "^1.4.4-r.3",
-    "@zinuto/shared": "2.0.5",
+    "@zinuto/shared": "2.0.6",
     "better-sqlite3": "^12.2.0",
     "ccxt": "4.5.71",
     "express": "^5.1.0",
