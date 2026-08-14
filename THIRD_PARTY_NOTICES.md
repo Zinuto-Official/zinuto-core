@@ -5,7 +5,7 @@ an inventory, not a substitute for the license texts shipped by each package.
 The source distribution retains dependency license files through the normal
 package, Cargo, and Python registries.
 
-- Snapshot SHA-256: `06baa7d7e2d988ff4d048b1e4371bfed75ca0530be4f5e5f9ff8e43ff1a695d3`
+- Snapshot SHA-256: `06e4f43590aebacbe52b7a7516f51edaa185da0fbc5510d3769532c8c261339f`
 - Components: 1238
 - Python sidecar lock SHA-256: `98f766385e00fa5bd8d5f0c0e8ed7e5eae13f83f003e45554a4b1880bd38c7b8`
 - Python sidecar build: CPython 3.11.15, uv 0.11.8
@@ -21,7 +21,7 @@ market data returned by a third-party provider.
 | --- | --- | --- | --- |
 | AKTools | 0.0.91 | MIT | [Project](https://github.com/akfamily/aktools) |
 | AKShare | 1.18.91 | MIT | [Project](https://github.com/akfamily/akshare) |
-| CCXT | 4.5.71 | MIT | [Project](https://github.com/ccxt/ccxt) |
+| CCXT | 4.5.73 | MIT | [Project](https://github.com/ccxt/ccxt) |
 
 ## Market-data provider terms (not software licenses)
 
@@ -911,7 +911,7 @@ authorization from the provider.
 | npm | camelcase-css | 2.0.1 | MIT |  | development |
 | npm | caniuse-lite | 1.0.30001791 | CC-BY-4.0 |  | development |
 | npm | canvg | 3.0.11 | MIT |  | runtime |
-| npm | ccxt | 4.5.71 | MIT |  | runtime |
+| npm | ccxt | 4.5.73 | MIT |  | runtime |
 | npm | chokidar | 3.6.0 | MIT |  | development |
 | npm | chownr | 1.1.4 | ISC |  | runtime |
 | npm | class-variance-authority | 0.7.1 | Apache-2.0 |  | runtime |

@@ -106,7 +106,7 @@ const connectorCatalog = (
     },
     {
       id: 'ccxt',
-      version: '4.5.71',
+      version: '4.5.73',
       market: 'CRYPTO_SPOT',
       available: ccxtAvailable,
       unavailabilityCode: ccxtAvailable ? null : 'CCXT_RUNTIME_UNAVAILABLE',
@@ -120,7 +120,7 @@ const connectorCatalog = (
             name: 'CCXT',
             url: 'https://github.com/ccxt/ccxt',
             infoUrl: 'https://github.com/ccxt/ccxt/wiki/manual',
-            version: '4.5.71',
+            version: '4.5.73',
             license: 'MIT',
           },
         ],

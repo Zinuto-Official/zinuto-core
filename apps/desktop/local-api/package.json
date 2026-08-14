@@ -31,7 +31,7 @@
     "@duckdb/node-api": "^1.4.4-r.3",
     "@zinuto/shared": "2.0.6",
     "better-sqlite3": "^12.2.0",
-    "ccxt": "4.5.71",
+    "ccxt": "4.5.73",
     "express": "^5.1.0",
     "read-excel-file": "^9.0.9",
     "unzipper": "^0.12.3",

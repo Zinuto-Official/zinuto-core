@@ -1,7 +1,7 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.5",
-  "serialNumber": "urn:uuid:06baa7d7-e2d9-58ff-ad04-8b1e4371bfed",
+  "serialNumber": "urn:uuid:06e4f435-90ae-5acb-a52b-7a7516f51eda",
   "version": 1,
   "metadata": {
     "component": {
@@ -19,7 +19,7 @@
     "properties": [
       {
         "name": "zinuto:dependencySnapshotSha256",
-        "value": "06baa7d7e2d988ff4d048b1e4371bfed75ca0530be4f5e5f9ff8e43ff1a695d3"
+        "value": "06e4f43590aebacbe52b7a7516f51edaa185da0fbc5510d3769532c8c261339f"
       },
       {
         "name": "zinuto:pythonSidecarLockSha256",
@@ -11379,14 +11379,14 @@
       "type": "library",
       "group": "npm",
       "name": "ccxt",
-      "version": "4.5.71",
+      "version": "4.5.73",
       "scope": "required",
       "licenses": [
         {
           "expression": "MIT"
         }
       ],
-      "purl": "pkg:npm/ccxt@4.5.71"
+      "purl": "pkg:npm/ccxt@4.5.73"
     },
     {
       "type": "library",

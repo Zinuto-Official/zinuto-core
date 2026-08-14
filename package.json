@@ -9,7 +9,7 @@
   "allowScripts": {
     "better-sqlite3": true,
     "bufferutil@4.1.0": true,
-    "ccxt@4.5.71": false,
+    "ccxt@4.5.73": false,
     "core-js": false,
     "esbuild@0.28.1": true
   },

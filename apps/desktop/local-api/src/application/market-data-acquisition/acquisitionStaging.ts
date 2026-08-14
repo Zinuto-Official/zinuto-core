@@ -201,17 +201,17 @@ const connectorSourceDetails = (request: AcquisitionRequest) => {
   }
   if (request.exchangeId === 'binance') {
     return {
-      connector: 'CCXT 4.5.71',
+      connector: 'CCXT 4.5.73',
       upstream: 'Binance Spot public market data',
-      projects: ['CCXT 4.5.71 — https://github.com/ccxt/ccxt'],
+      projects: ['CCXT 4.5.73 — https://github.com/ccxt/ccxt'],
       termsUrl: 'https://www.binance.com/en/terms',
       docsUrl: 'https://developers.binance.com/en/docs/products/spot/rest-api',
     };
   }
   return {
-    connector: 'CCXT 4.5.71',
+    connector: 'CCXT 4.5.73',
     upstream: 'OKX Spot public market data',
-    projects: ['CCXT 4.5.71 — https://github.com/ccxt/ccxt'],
+    projects: ['CCXT 4.5.73 — https://github.com/ccxt/ccxt'],
     termsUrl: 'https://www.okx.com/help/terms-of-service',
     docsUrl: 'https://www.okx.com/docs-v5/en/',
   };

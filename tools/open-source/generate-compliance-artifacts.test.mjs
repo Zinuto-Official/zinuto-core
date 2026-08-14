@@ -41,7 +41,7 @@ test('generated compliance artifacts include the complete pinned Python sidecar'
     ['pypi', 'aktools', '0.0.91'],
     ['pypi', 'akshare', '1.18.91'],
     ['pypi', 'pyinstaller', '6.16.0'],
-    ['npm', 'ccxt', '4.5.71'],
+    ['npm', 'ccxt', '4.5.73'],
     ['runtime', 'CPython', '3.11.15'],
     ['build-tool', 'uv', '0.11.8'],
   ];

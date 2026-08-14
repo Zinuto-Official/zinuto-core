@@ -483,7 +483,7 @@
       "ecosystem": "npm",
       "name": "ccxt",
       "label": "CCXT",
-      "version": "4.5.71",
+      "version": "4.5.73",
       "spdxExpression": "MIT",
       "projectUrl": "https://github.com/ccxt/ccxt"
     }
