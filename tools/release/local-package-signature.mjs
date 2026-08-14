@@ -240,7 +240,7 @@ const inspectWindowsPackage = ({ bundleDir, releaseTargetDir }) => {
     (name) => name.endsWith('-setup.exe'),
     'NSIS installer',
   );
-  const application = path.join(releaseTargetDir, 'open-trading-practice.exe');
+  const application = path.join(releaseTargetDir, 'zinuto-core.exe');
   if (!fs.lstatSync(application, { throwIfNoEntry: false })?.isFile()) {
     throw new Error('[local-package] packaged Windows application is missing');
   }

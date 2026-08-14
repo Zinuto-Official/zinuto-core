@@ -4,7 +4,7 @@ use std::process::{Command, Stdio};
 
 #[test]
 fn cli_matches_next_open_golden_fixture() {
-    let bin = env!("CARGO_BIN_EXE_open-trading-practice-backtest-engine");
+    let bin = env!("CARGO_BIN_EXE_zinuto-core-backtest-engine");
     let input = include_str!("../fixtures/next_open_basic.request.json");
     let mut child = Command::new(bin)
         .stdin(Stdio::piped())

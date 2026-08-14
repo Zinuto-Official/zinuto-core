@@ -1,13 +1,13 @@
 # SPDX-License-Identifier: GPL-3.0-only
 
 [package]
-name = "open-trading-practice"
+name = "zinuto-core"
 version = "2.0.5"
 edition = "2021"
 license = "GPL-3.0-only"
 
 [[bin]]
-name = "open-trading-practice"
+name = "zinuto-core"
 path = "src/main.rs"
 
 [build-dependencies]

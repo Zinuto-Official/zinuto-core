@@ -64,7 +64,7 @@
         }
       },
       "files": {
-        "MacOS/open-trading-practice-node": "runtime/node/bin/node",
+        "MacOS/zinuto-core-node": "runtime/node/bin/node",
         "lib/": "gen/node-runtime-libs/"
       },
       "infoPlist": "Info.plist",

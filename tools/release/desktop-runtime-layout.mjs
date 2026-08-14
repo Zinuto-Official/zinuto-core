@@ -43,7 +43,7 @@ export const buildRuntimeManifestPathSets = (
         nodeRuntimeEntryRelativePath: "../runtime/node/bin/node",
       },
       packaged: createPackagedPathSet({
-        nodeRuntimeEntryRelativePath: "../MacOS/open-trading-practice-node",
+        nodeRuntimeEntryRelativePath: "../MacOS/zinuto-core-node",
         runtimeLibDirRelativePath: "../lib",
       }),
     };

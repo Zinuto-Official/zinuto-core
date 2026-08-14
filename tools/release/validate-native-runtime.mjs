@@ -27,8 +27,8 @@ const rootDir = path.resolve(scriptDir, '../..');
 const shellDir = path.join(rootDir, 'apps', 'desktop', 'shell');
 const generatedDir = path.join(shellDir, 'gen');
 const binaryName = process.platform === 'win32'
-  ? 'open-trading-practice-backtest-engine.exe'
-  : 'open-trading-practice-backtest-engine';
+  ? 'zinuto-core-backtest-engine.exe'
+  : 'zinuto-core-backtest-engine';
 const nodeName = process.platform === 'win32' ? 'node.exe' : 'node';
 
 const isRegularFileWithoutSymlink = (filePath) => {

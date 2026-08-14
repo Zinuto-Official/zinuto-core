@@ -441,9 +441,9 @@ pub(super) fn configure_backend_transport_env(cmd: &mut Command, transport: &Bac
 
 fn backtest_engine_binary_name() -> &'static str {
     if cfg!(windows) {
-        "open-trading-practice-backtest-engine.exe"
+        "zinuto-core-backtest-engine.exe"
     } else {
-        "open-trading-practice-backtest-engine"
+        "zinuto-core-backtest-engine"
     }
 }
 
@@ -711,7 +711,7 @@ pub(super) fn resolve_node_runtime_path(app: &tauri::AppHandle) -> Option<PathBu
     }
     if let Ok(exe_path) = std::env::current_exe() {
         if let Some(exe_dir) = exe_path.parent() {
-            candidates.push(exe_dir.join("open-trading-practice-node"));
+            candidates.push(exe_dir.join("zinuto-core-node"));
         }
     }
     if cfg!(debug_assertions) {
@@ -792,7 +792,7 @@ mod tests {
             "packaged": {
                 "backendEntryRelativePath": "apps/desktop/local-api/dist/runtime/index.js",
                 "backendWorkingDirRelativePath": ".",
-                "nodeRuntimeEntryRelativePath": "../MacOS/open-trading-practice-node",
+                "nodeRuntimeEntryRelativePath": "../MacOS/zinuto-core-node",
                 "runtimeLibDirRelativePath": "../lib"
             }
         });
@@ -812,7 +812,7 @@ mod tests {
         assert_eq!(path_set.backend_working_dir_relative_path, ".");
         assert_eq!(
             path_set.node_runtime_entry_relative_path,
-            "../MacOS/open-trading-practice-node"
+            "../MacOS/zinuto-core-node"
         );
 
         fs::remove_dir_all(&temp_root).expect("remove isolated runtime manifest directory");

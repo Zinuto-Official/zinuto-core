@@ -2326,30 +2326,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "open-trading-practice"
-version = "2.0.5"
-dependencies = [
- "block2",
- "libc",
- "objc2",
- "objc2-core-foundation",
- "objc2-foundation",
- "objc2-web-kit",
- "rand",
- "serde",
- "serde_json",
- "sha2",
- "socket2",
- "tauri",
- "tauri-build",
- "tauri-plugin-dialog",
- "tauri-plugin-opener",
- "tauri-plugin-single-instance",
- "windows-sys 0.60.2",
- "winreg",
-]
-
-[[package]]
 name = "option-ext"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -5172,6 +5148,30 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn 2.0.117",
+]
+
+[[package]]
+name = "zinuto-core"
+version = "2.0.5"
+dependencies = [
+ "block2",
+ "libc",
+ "objc2",
+ "objc2-core-foundation",
+ "objc2-foundation",
+ "objc2-web-kit",
+ "rand",
+ "serde",
+ "serde_json",
+ "sha2",
+ "socket2",
+ "tauri",
+ "tauri-build",
+ "tauri-plugin-dialog",
+ "tauri-plugin-opener",
+ "tauri-plugin-single-instance",
+ "windows-sys 0.60.2",
+ "winreg",
 ]
 
 [[package]]

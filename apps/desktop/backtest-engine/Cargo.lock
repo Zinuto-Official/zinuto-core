@@ -1251,20 +1251,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9f7c3e4beb33f85d45ae3e3a1792185706c8e16d043238c593331cc7cd313b50"
 
 [[package]]
-name = "open-trading-practice-backtest-engine"
-version = "2.0.5"
-dependencies = [
- "assert_cmd",
- "chrono",
- "duckdb",
- "rayon",
- "serde",
- "serde_json",
- "tempfile",
- "thiserror",
-]
-
-[[package]]
 name = "parking_lot"
 version = "0.12.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2893,6 +2879,20 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn 2.0.117",
+]
+
+[[package]]
+name = "zinuto-core-backtest-engine"
+version = "2.0.5"
+dependencies = [
+ "assert_cmd",
+ "chrono",
+ "duckdb",
+ "rayon",
+ "serde",
+ "serde_json",
+ "tempfile",
+ "thiserror",
 ]
 
 [[package]]

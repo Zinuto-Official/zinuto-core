@@ -44,8 +44,8 @@ const enginePath = path.join(
   engineDir,
   'target/debug',
   process.platform === 'win32'
-    ? 'open-trading-practice-backtest-engine.exe'
-    : 'open-trading-practice-backtest-engine',
+    ? 'zinuto-core-backtest-engine.exe'
+    : 'zinuto-core-backtest-engine',
 );
 const corpus = JSON.parse(
   readFileSync(

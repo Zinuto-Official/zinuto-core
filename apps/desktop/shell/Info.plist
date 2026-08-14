@@ -7,7 +7,7 @@
   <key>CFBundleDisplayName</key>
   <string>Zinuto Core</string>
   <key>CFBundleExecutable</key>
-  <string>open-trading-practice</string>
+  <string>zinuto-core</string>
   <key>CFBundleIconFile</key>
   <string>icon</string>
   <key>CFBundleName</key>

@@ -54,8 +54,8 @@ export const collectMissingTauriBuildInputs = ({
 } = {}) => {
   const generatedDir = path.join(rootDir, 'apps', 'desktop', 'shell', 'gen');
   const backtestBinary = nodePlatform === 'win32'
-    ? 'open-trading-practice-backtest-engine.exe'
-    : 'open-trading-practice-backtest-engine';
+    ? 'zinuto-core-backtest-engine.exe'
+    : 'zinuto-core-backtest-engine';
   const nodeBinary = nodePlatform === 'win32' ? 'node.exe' : 'node';
   const sidecarBundle = inspectAkshareSidecarBundle({
     generatedRoot: generatedDir,

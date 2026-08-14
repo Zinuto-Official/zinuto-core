@@ -113,7 +113,7 @@ test('Tauri build preparation stages the sidecar before validating declared reso
     './validate-windows-nsis-installer.mjs',
     import.meta.url,
   ), 'utf8');
-  assert.match(windowsInstallerValidator, /'open-trading-practice\.exe'/u);
+  assert.match(windowsInstallerValidator, /'zinuto-core\.exe'/u);
   assert.match(
     windowsInstallerValidator,
     /market-data-acquisition\/akshare-sidecar\/win32-x64\/zinuto-akshare-sidecar\.exe/u,

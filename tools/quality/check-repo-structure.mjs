@@ -119,7 +119,7 @@ const FORBIDDEN_TRACKED_ARTIFACT_PATHS = [
   },
   {
     pattern:
-      /^apps\/desktop\/shell\/gen\/backtest-engine\/(?:deps\/|open-trading-practice-backtest-engine(?:\.exe)?$)/u,
+      /^apps\/desktop\/shell\/gen\/backtest-engine\/(?:deps\/|zinuto-core-backtest-engine(?:\.exe)?$)/u,
     reason: "Generated backtest sidecar payload is a packaging output, not source.",
   },
   {

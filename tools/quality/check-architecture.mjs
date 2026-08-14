@@ -1255,8 +1255,8 @@ if (fs.existsSync(tauriMainRsPath)) {
       transportText.includes("is_allowed_backend_api_path")
     ) ||
     !(
-      mainRsText.includes('join("open-trading-practice-node")') ||
-      backendRuntimeText.includes('join("open-trading-practice-node")')
+      mainRsText.includes('join("zinuto-core-node")') ||
+      backendRuntimeText.includes('join("zinuto-core-node")')
     )
   ) {
     violations.push({

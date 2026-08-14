@@ -3,11 +3,11 @@
 use std::fs;
 use std::io::{self, Read};
 
-use open_trading_practice_backtest_engine::{
+use serde::{Deserialize, Serialize};
+use zinuto_core_backtest_engine::{
     evaluate_compiled_signal_plan, run_batch_engine, run_engine, BacktestBatchEngineRequest,
     BacktestConflict, BacktestSignal, CompiledBacktestSignalPlan, EngineRequest, OhlcvBar,
 };
-use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 enum CliMode {

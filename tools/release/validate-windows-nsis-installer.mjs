@@ -21,10 +21,10 @@ const GENERATED_NSIS_SCRIPT_PATH = path.join(RELEASE_DIR, 'nsis', 'x64', 'instal
 const WINDOWS_NSIS_HOOK_PATH = path.join(SHELL_DIR, REQUIRED_WINDOWS_NSIS_INSTALLER_HOOK);
 const GENERATED_RUNTIME_LIBS_DIR = path.join(SHELL_DIR, 'gen', 'node-runtime-libs');
 const UNINSTALL_REGISTRY_KEY = String.raw`HKCU\Software\Microsoft\Windows\CurrentVersion\Uninstall\Zinuto Core`;
-const SMOKE_INSTALL_PREFIX = 'open-trading-practice-install-smoke-';
+const SMOKE_INSTALL_PREFIX = 'zinuto-core-install-smoke-';
 
 const REQUIRED_INSTALLED_FILES = [
-  'open-trading-practice.exe',
+  'zinuto-core.exe',
   'runtime-manifest.json',
   'apps/desktop/local-api/package.json',
   'apps/desktop/local-api/dist/runtime/index.js',
@@ -33,7 +33,7 @@ const REQUIRED_INSTALLED_FILES = [
   'node_modules/better-sqlite3/build/Release/better_sqlite3.node',
   'node_modules/@duckdb/node-api/package.json',
   'node_modules/@duckdb/node-bindings-win32-x64/duckdb.node',
-  'backtest-engine/open-trading-practice-backtest-engine.exe',
+  'backtest-engine/zinuto-core-backtest-engine.exe',
   'backtest-engine/deps/duckdb.dll',
   'market-data-acquisition/akshare-sidecar/win32-x64/zinuto-akshare-sidecar.exe',
   'market-data-acquisition/akshare-sidecar/win32-x64/_internal/base_library.zip',

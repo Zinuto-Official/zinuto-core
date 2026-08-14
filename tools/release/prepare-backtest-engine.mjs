@@ -11,8 +11,8 @@ import { fileURLToPath } from 'node:url';
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
 const ROOT_DIR = path.resolve(SCRIPT_DIR, '../..');
 const ENGINE_NAME = process.platform === 'win32'
-  ? 'open-trading-practice-backtest-engine.exe'
-  : 'open-trading-practice-backtest-engine';
+  ? 'zinuto-core-backtest-engine.exe'
+  : 'zinuto-core-backtest-engine';
 const ENGINE_MANIFEST_PATH = path.join(
   ROOT_DIR,
   'apps',
@@ -34,7 +34,7 @@ const SOURCE_BIN_PATH = path.join(TARGET_DIR, 'release', ENGINE_NAME);
 const OUTPUT_DIR = path.join(ROOT_DIR, 'apps', 'desktop', 'shell', 'gen', 'backtest-engine');
 const OUTPUT_BIN_PATH = path.join(OUTPUT_DIR, ENGINE_NAME);
 const OUTPUT_DEPS_DIR = path.join(OUTPUT_DIR, 'deps');
-const GENERATED_ENGINE_NAMES = ['open-trading-practice-backtest-engine', 'open-trading-practice-backtest-engine.exe'];
+const GENERATED_ENGINE_NAMES = ['zinuto-core-backtest-engine', 'zinuto-core-backtest-engine.exe'];
 const DUCKDB_LIBRARY_NAMES = process.platform === 'win32'
   ? ['duckdb.dll', 'libduckdb.dll']
   : process.platform === 'darwin'

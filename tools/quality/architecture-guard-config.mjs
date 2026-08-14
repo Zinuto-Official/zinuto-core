@@ -38,7 +38,7 @@ export const REQUIRED_DESKTOP_BUNDLE_RESOURCES = {
 };
 
 export const REQUIRED_MACOS_BUNDLE_FILES = {
-  "MacOS/open-trading-practice-node": "runtime/node/bin/node",
+  "MacOS/zinuto-core-node": "runtime/node/bin/node",
   "lib/": "gen/node-runtime-libs/",
 };
 

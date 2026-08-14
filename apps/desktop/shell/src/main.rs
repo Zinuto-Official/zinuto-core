@@ -590,8 +590,7 @@ mod tests {
 
     #[test]
     fn macos_app_bundle_path_resolves_from_executable_path() {
-        let executable_path =
-            Path::new("Applications/Zinuto Core.app/Contents/MacOS/open-trading-practice");
+        let executable_path = Path::new("Applications/Zinuto Core.app/Contents/MacOS/zinuto-core");
 
         assert_eq!(
             platform::resolve_macos_app_bundle_path_from_executable(executable_path),
@@ -601,7 +600,7 @@ mod tests {
 
     #[test]
     fn macos_app_bundle_path_rejects_non_bundle_executable_paths() {
-        let executable_path = Path::new("bin/open-trading-practice");
+        let executable_path = Path::new("bin/zinuto-core");
 
         assert_eq!(
             platform::resolve_macos_app_bundle_path_from_executable(executable_path),
