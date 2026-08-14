@@ -16,7 +16,7 @@ import {
   parseAkshareSidecarResponse,
 } from '../../src/application/market-data-acquisition/akshareSidecarAdapter.js';
 
-const runtime = { aktools: '0.0.91', akshare: '1.18.64' } as const;
+const runtime = { aktools: '0.0.91', akshare: '1.18.91' } as const;
 
 test('AKShare instrument catalog uses a fixed parameter-free operation', () => {
   const request = buildAkshareInstrumentCatalogRequest();

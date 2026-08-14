@@ -5,9 +5,9 @@ an inventory, not a substitute for the license texts shipped by each package.
 The source distribution retains dependency license files through the normal
 package, Cargo, and Python registries.
 
-- Snapshot SHA-256: `c2f2fb10c4f012b7eb0d74abae1c4ed6f5775953c60553d43b95426d16d1bea8`
+- Snapshot SHA-256: `06baa7d7e2d988ff4d048b1e4371bfed75ca0530be4f5e5f9ff8e43ff1a695d3`
 - Components: 1238
-- Python sidecar lock SHA-256: `829c5ffc7942462a91657ec8523e78e4c75fbdfdae6d2003b7902f277f6fad51`
+- Python sidecar lock SHA-256: `98f766385e00fa5bd8d5f0c0e8ed7e5eae13f83f003e45554a4b1880bd38c7b8`
 - Python sidecar build: CPython 3.11.15, uv 0.11.8
 - Audit rule: missing, proprietary, unlicensed, `SEE LICENSE`, and
   `LicenseRef` declarations fail generation.
@@ -20,7 +20,7 @@ market data returned by a third-party provider.
 | Connector software | Version | Software license | Project |
 | --- | --- | --- | --- |
 | AKTools | 0.0.91 | MIT | [Project](https://github.com/akfamily/aktools) |
-| AKShare | 1.18.64 | MIT | [Project](https://github.com/akfamily/akshare) |
+| AKShare | 1.18.91 | MIT | [Project](https://github.com/akfamily/akshare) |
 | CCXT | 4.5.71 | MIT | [Project](https://github.com/ccxt/ccxt) |
 
 ## Market-data provider terms (not software licenses)
@@ -1218,7 +1218,7 @@ authorization from the provider.
 | npm | zod | 4.4.3 | MIT |  | runtime |
 | npm | zrender | 6.1.0 | BSD-3-Clause |  | runtime |
 | pypi | akracer | 0.0.14 | MIT | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/akracer/0.0.14/ | platform-conditional-sidecar-lock |
-| pypi | akshare | 1.18.64 | MIT | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/akshare/1.18.64/ | sidecar-lock |
+| pypi | akshare | 1.18.91 | MIT | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/akshare/1.18.91/ | sidecar-lock |
 | pypi | aktools | 0.0.91 | MIT | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/aktools/0.0.91/ | sidecar-lock |
 | pypi | altgraph | 0.17.5 | MIT | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/altgraph/0.17.5/ | sidecar-lock |
 | pypi | annotated-doc | 0.0.4 | MIT | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/annotated-doc/0.0.4/ | sidecar-lock |

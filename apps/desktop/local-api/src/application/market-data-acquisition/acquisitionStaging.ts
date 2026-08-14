@@ -184,13 +184,13 @@ const connectorSourceDetails = (request: AcquisitionRequest) => {
   if (request.connectorId === 'akshare') {
     const isIndex = request.dataset === 'index_zh_a_hist';
     return {
-      connector: 'Zinuto whitelist NDJSON adapter for AKTools 0.0.91 bridge semantics / AKShare 1.18.64',
+      connector: 'Zinuto whitelist NDJSON adapter for AKTools 0.0.91 bridge semantics / AKShare 1.18.91',
       upstream: isIndex
         ? 'AKShare China index interface (Eastmoney source)'
         : 'AKShare A-share interface (Eastmoney source)',
       projects: [
         'AKTools 0.0.91 — https://github.com/akfamily/aktools',
-        'AKShare 1.18.64 — https://github.com/akfamily/akshare',
+        'AKShare 1.18.91 — https://github.com/akfamily/akshare',
         'AKShare introduction — https://akshare.akfamily.xyz/introduction.html',
       ],
       termsUrl: 'https://about.eastmoney.com/home/protocol',

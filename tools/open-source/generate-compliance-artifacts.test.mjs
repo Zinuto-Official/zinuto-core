@@ -39,7 +39,7 @@ test('generated compliance artifacts include the complete pinned Python sidecar'
 
   const requiredComponents = [
     ['pypi', 'aktools', '0.0.91'],
-    ['pypi', 'akshare', '1.18.64'],
+    ['pypi', 'akshare', '1.18.91'],
     ['pypi', 'pyinstaller', '6.16.0'],
     ['npm', 'ccxt', '4.5.71'],
     ['runtime', 'CPython', '3.11.15'],

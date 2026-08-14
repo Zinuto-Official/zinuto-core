@@ -63,7 +63,7 @@ const connectorCatalog = (
   connectors: [
     {
       id: 'akshare',
-      version: 'aktools-0.0.91+akshare-1.18.64',
+      version: 'aktools-0.0.91+akshare-1.18.91',
       market: 'A_SHARE',
       available: akshareAvailable,
       unavailabilityCode: akshareAvailable ? null : 'AKSHARE_RUNTIME_UNAVAILABLE',
@@ -89,7 +89,7 @@ const connectorCatalog = (
             name: 'AKShare',
             url: 'https://github.com/akfamily/akshare',
             infoUrl: 'https://akshare.akfamily.xyz/introduction.html',
-            version: '1.18.64',
+            version: '1.18.91',
             license: 'MIT',
           },
         ],

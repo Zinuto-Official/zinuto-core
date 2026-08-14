@@ -183,6 +183,8 @@ execFileSync(
     "akshare.stock_feature.stock_hist_tx",
     "--hidden-import",
     "akshare.stock.stock_zh_a_sina",
+    "--hidden-import",
+    "akshare.stock.stock_zh_a_tx",
     "--collect-all",
     "py_mini_racer",
     path.join(projectDir, "main.py"),

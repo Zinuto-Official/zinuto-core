@@ -389,7 +389,7 @@ test('AKShare output passes the production import preview with Shanghai time and
     'utf8',
   );
   assert.match(source, /AKTools 0\.0\.91.*github\.com\/akfamily\/aktools/u);
-  assert.match(source, /AKShare 1\.18\.64.*github\.com\/akfamily\/akshare/u);
+  assert.match(source, /AKShare 1\.18\.91.*github\.com\/akfamily\/akshare/u);
   assert.match(source, /akshare\.akfamily\.xyz\/introduction\.html/u);
   assert.match(source, /Adjustment: qfq/u);
   assert.match(source, /Asia\/Shanghai \(\+08:00\)/u);
@@ -920,7 +920,7 @@ test('AKShare sidecar protocol is fixed, versioned, and validates runtime versio
       protocol: AKSHARE_SIDECAR_PROTOCOL,
       requestId: request.requestId,
       ok: true,
-      runtime: { aktools: '0.0.91', akshare: '1.18.64' },
+      runtime: { aktools: '0.0.91', akshare: '1.18.91' },
       kind: 'bars',
       rows: [
         {
@@ -943,7 +943,7 @@ test('AKShare sidecar protocol is fixed, versioned, and validates runtime versio
           protocol: AKSHARE_SIDECAR_PROTOCOL,
           requestId: request.requestId,
           ok: true,
-          runtime: { aktools: '0.0.90', akshare: '1.18.64' },
+          runtime: { aktools: '0.0.90', akshare: '1.18.91' },
           kind: 'bars',
           rows: [],
         }),
@@ -1011,7 +1011,7 @@ test('AKShare retries only retryable upstream responses and reports wait progres
         protocol: AKSHARE_SIDECAR_PROTOCOL,
         requestId: request.requestId,
         ok: true,
-        runtime: { aktools: '0.0.91', akshare: '1.18.64' },
+        runtime: { aktools: '0.0.91', akshare: '1.18.91' },
         kind: 'bars',
         rows: [
           {

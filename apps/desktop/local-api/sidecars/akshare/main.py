@@ -22,6 +22,7 @@ import akshare as ak
 import aktools
 import requests
 from akshare.stock.stock_zh_a_sina import stock_zh_a_daily, stock_zh_a_minute
+from akshare.stock.stock_zh_a_tx import stock_zh_a_spot_tx
 from akshare.stock_feature.stock_hist_tx import stock_zh_a_hist_tx
 
 PROTOCOL = "zinuto.akshare.v1"
@@ -36,6 +37,8 @@ ALLOWED_ADJUSTMENTS = {"none", "qfq", "hfq"}
 MAX_REQUEST_BYTES = 64 * 1024
 MAX_ROWS = 250_000
 MAX_INSTRUMENT_ROWS = 20_000
+MIN_INSTRUMENT_CATALOG_ROWS = 4_000
+REQUIRED_INSTRUMENT_EXCHANGES = {"SH", "SZ", "BJ"}
 SHANGHAI_OFFSET = timezone(timedelta(hours=8))
 DAILY_OPERATIONS = {
     "stock_zh_a_hist",
@@ -186,6 +189,21 @@ def _a_share_exchange_id(symbol: str) -> str | None:
     return None
 
 
+def _normalize_a_share_symbol(value: Any) -> str | None:
+    if not isinstance(value, str):
+        return None
+    match = re.fullmatch(r"(?:(sh|sz|bj))?([0-9]{6})", value.strip(), re.IGNORECASE)
+    if match is None:
+        return None
+    prefix, symbol = match.groups()
+    exchange_id = _a_share_exchange_id(symbol)
+    if exchange_id is None or (
+        prefix is not None and prefix.upper() != exchange_id
+    ):
+        return None
+    return symbol
+
+
 def _canonical_instrument_rows(frame: Any) -> list[dict[str, Any]]:
     if frame is None or not hasattr(frame, "to_dict"):
         raise WorkerError("AKSHARE_UPSTREAM_SCHEMA_INVALID")
@@ -200,12 +218,14 @@ def _canonical_instrument_rows(frame: Any) -> list[dict[str, Any]]:
             continue
         symbol_value = record.get("code")
         name_value = record.get("name")
-        if not isinstance(symbol_value, str) or not isinstance(name_value, str):
+        if not isinstance(name_value, str):
             continue
-        symbol = symbol_value.strip()
+        symbol = _normalize_a_share_symbol(symbol_value)
         name = name_value.strip()
+        if symbol is None or not name or len(name) > 256:
+            continue
         exchange_id = _a_share_exchange_id(symbol)
-        if exchange_id is None or not name or len(name) > 256:
+        if exchange_id is None:
             continue
         rows_by_symbol.setdefault(
             symbol,
@@ -221,6 +241,32 @@ def _canonical_instrument_rows(frame: Any) -> list[dict[str, Any]]:
         rows_by_symbol.values(),
         key=lambda row: (exchange_order[row["exchangeId"]], row["symbol"]),
     )
+
+
+def _require_complete_instrument_catalog(
+    rows: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    exchanges = {row["exchangeId"] for row in rows}
+    if (
+        len(rows) < MIN_INSTRUMENT_CATALOG_ROWS
+        or exchanges != REQUIRED_INSTRUMENT_EXCHANGES
+    ):
+        raise WorkerError("AKSHARE_UPSTREAM_SCHEMA_INVALID")
+    return rows
+
+
+def _fetch_a_share_instrument_catalog() -> list[dict[str, Any]]:
+    try:
+        return _require_complete_instrument_catalog(
+            _canonical_instrument_rows(ak.stock_info_a_code_name())
+        )
+    except Exception as primary_error:
+        try:
+            return _require_complete_instrument_catalog(
+                _canonical_instrument_rows(stock_zh_a_spot_tx())
+            )
+        except Exception:
+            raise primary_error
 
 
 def _a_share_tencent_symbol(symbol: str) -> str | None:
@@ -338,7 +384,7 @@ def _fetch_a_share_minute(
 def _fetch(request: dict[str, Any]) -> tuple[str, list[dict[str, Any]]]:
     operation = request["operation"]
     if operation == "stock_info_a_code_name":
-        return "instruments", _canonical_instrument_rows(ak.stock_info_a_code_name())
+        return "instruments", _fetch_a_share_instrument_catalog()
     params = request["params"]
     start_at = datetime.fromisoformat(params["startAt"].replace("Z", "+00:00"))
     end_at = datetime.fromisoformat(params["endAt"].replace("Z", "+00:00"))

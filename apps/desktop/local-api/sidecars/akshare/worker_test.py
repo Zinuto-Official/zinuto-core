@@ -64,15 +64,16 @@ class WorkerMappingTest(unittest.TestCase):
         rows = main._canonical_instrument_rows(
             FakeFrame(
                 [
-                    {"code": "600000", "name": "浦发银行"},
-                    {"code": "000001", "name": " 平安银行 "},
+                    {"code": "sh600000", "name": "浦发银行"},
+                    {"code": "SZ000001", "name": " 平安银行 "},
                     {"code": "301001", "name": "凯淳股份"},
                     {"code": "688981", "name": "中芯国际"},
                     {"code": "871396", "name": "常辅股份"},
-                    {"code": "920000", "name": "安徽凤凰"},
+                    {"code": "bj920000", "name": "安徽凤凰"},
                     {"code": "SH", "name": "forbidden token"},
                     {"code": "SZ", "name": "forbidden token"},
                     {"code": "BJ", "name": "forbidden token"},
+                    {"code": "sh000001", "name": "mismatched market"},
                     {"code": "399001", "name": "深证成指"},
                     {"code": "900901", "name": "上证 B 股"},
                     {"code": "200002", "name": "深证 B 股"},
@@ -122,6 +123,114 @@ class WorkerMappingTest(unittest.TestCase):
                 },
             ],
         )
+
+    def test_catalog_uses_tencent_when_exchange_directory_fails(self):
+        request = main._parse_request(
+            json.dumps(
+                {
+                    "protocol": main.PROTOCOL,
+                    "requestId": "catalog-fallback",
+                    "operation": "stock_info_a_code_name",
+                    "params": {},
+                }
+            ).encode("utf-8")
+        )
+
+        def stock_info_a_code_name():
+            raise main.requests.exceptions.ConnectionError("connection reset")
+
+        def stock_zh_a_spot_tx():
+            return FakeFrame(
+                [
+                    {"code": "sh600000", "name": "浦发银行"},
+                    {"code": "sz000001", "name": "平安银行"},
+                    {"code": "bj920000", "name": "安徽凤凰"},
+                ]
+            )
+
+        with patch.object(
+            main,
+            "ak",
+            SimpleNamespace(stock_info_a_code_name=stock_info_a_code_name),
+        ), patch.object(main, "stock_zh_a_spot_tx", stock_zh_a_spot_tx), patch.object(
+            main, "MIN_INSTRUMENT_CATALOG_ROWS", 3
+        ):
+            kind, rows = main._fetch(request)
+        self.assertEqual(kind, "instruments")
+        self.assertEqual([row["symbol"] for row in rows], ["600000", "000001", "920000"])
+
+    def test_catalog_uses_tencent_when_exchange_directory_is_incomplete(self):
+        request = main._parse_request(
+            json.dumps(
+                {
+                    "protocol": main.PROTOCOL,
+                    "requestId": "catalog-incomplete-primary",
+                    "operation": "stock_info_a_code_name",
+                    "params": {},
+                }
+            ).encode("utf-8")
+        )
+
+        def stock_info_a_code_name():
+            return FakeFrame(
+                [
+                    {"code": "600000", "name": "浦发银行"},
+                    {"code": "000001", "name": "平安银行"},
+                ]
+            )
+
+        def stock_zh_a_spot_tx():
+            return FakeFrame(
+                [
+                    {"code": "sh600000", "name": "浦发银行"},
+                    {"code": "sz000001", "name": "平安银行"},
+                    {"code": "bj920000", "name": "安徽凤凰"},
+                ]
+            )
+
+        with patch.object(
+            main,
+            "ak",
+            SimpleNamespace(stock_info_a_code_name=stock_info_a_code_name),
+        ), patch.object(main, "stock_zh_a_spot_tx", stock_zh_a_spot_tx), patch.object(
+            main, "MIN_INSTRUMENT_CATALOG_ROWS", 3
+        ):
+            kind, rows = main._fetch(request)
+        self.assertEqual(kind, "instruments")
+        self.assertEqual([row["symbol"] for row in rows], ["600000", "000001", "920000"])
+
+    def test_catalog_rejects_an_incomplete_tencent_fallback(self):
+        request = main._parse_request(
+            json.dumps(
+                {
+                    "protocol": main.PROTOCOL,
+                    "requestId": "catalog-incomplete-fallback",
+                    "operation": "stock_info_a_code_name",
+                    "params": {},
+                }
+            ).encode("utf-8")
+        )
+
+        def stock_info_a_code_name():
+            raise main.requests.exceptions.ConnectionError("connection reset")
+
+        def stock_zh_a_spot_tx():
+            return FakeFrame(
+                [
+                    {"code": "600000", "name": "浦发银行"},
+                    {"code": "000001", "name": "平安银行"},
+                ]
+            )
+
+        with patch.object(
+            main,
+            "ak",
+            SimpleNamespace(stock_info_a_code_name=stock_info_a_code_name),
+        ), patch.object(main, "stock_zh_a_spot_tx", stock_zh_a_spot_tx), patch.object(
+            main, "MIN_INSTRUMENT_CATALOG_ROWS", 1
+        ):
+            with self.assertRaises(main.requests.exceptions.ConnectionError):
+                main._fetch(request)
 
     def test_catalog_request_is_whitelisted_with_no_caller_parameters(self):
         request = main._parse_request(

@@ -158,7 +158,7 @@ test('AKShare onedir validation requires the target executable and critical runt
     ['zinuto-akshare-sidecar'],
     ['_internal', 'base_library.zip'],
     ['_internal', 'akshare', 'file_fold', 'calendar.json'],
-    ['_internal', 'akshare-1.18.64.dist-info', 'METADATA'],
+    ['_internal', 'akshare-1.18.91.dist-info', 'METADATA'],
     ['_internal', 'aktools-0.0.91.dist-info', 'METADATA'],
   ];
   for (const segments of requiredFiles) {
@@ -174,7 +174,7 @@ test('AKShare onedir validation requires the target executable and critical runt
       generatedRoot,
       nodePlatform: 'darwin',
       nodeArch: 'arm64',
-      akshareVersion: '1.18.64',
+      akshareVersion: '1.18.91',
       aktoolsVersion: '0.0.91',
     }).invalidPaths,
     [],
@@ -186,7 +186,7 @@ test('AKShare onedir validation requires the target executable and critical runt
     generatedRoot,
     nodePlatform: 'darwin',
     nodeArch: 'arm64',
-    akshareVersion: '1.18.64',
+    akshareVersion: '1.18.91',
     aktoolsVersion: '0.0.91',
   }).invalidPaths;
   assert.equal(
@@ -259,7 +259,7 @@ test('AKShare package validation rejects stale targets and unexpected packaged f
     generatedRoot,
     nodePlatform: 'darwin',
     nodeArch: 'arm64',
-    akshareVersion: '1.18.64',
+    akshareVersion: '1.18.91',
     aktoolsVersion: '0.0.91',
   });
   assert.equal(inspected.invalidPaths.includes(staleTarget), true);
@@ -278,7 +278,7 @@ test('direct Tauri input checks require the executable for the selected platform
   fs.mkdirSync(path.dirname(manifestPath), { recursive: true });
   fs.writeFileSync(manifestPath, JSON.stringify({
     requiredRootPackages: [
-      { name: 'akshare', version: '1.18.64' },
+      { name: 'akshare', version: '1.18.91' },
       { name: 'aktools', version: '0.0.91' },
     ],
   }));

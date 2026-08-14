@@ -3,15 +3,15 @@
   "id": "aktools-akshare-market-data-sidecar",
   "policy": "This manifest is an offline, exact-version license review of every registry package in the sidecar uv.lock. Any lock, interpreter, build-tool, root-package, or license declaration change requires explicit review and regeneration.",
   "lockFile": "apps/desktop/local-api/sidecars/akshare/uv.lock",
-  "lockSha256": "829c5ffc7942462a91657ec8523e78e4c75fbdfdae6d2003b7902f277f6fad51",
+  "lockSha256": "98f766385e00fa5bd8d5f0c0e8ed7e5eae13f83f003e45554a4b1880bd38c7b8",
   "projectFile": "apps/desktop/local-api/sidecars/akshare/pyproject.toml",
-  "projectSha256": "4e8298c1203f9dcce9fd1602ebec320d11e52bc42342cb9a3e983a144de6f18d",
+  "projectSha256": "120b6bf9b4c232bbefd77514af2548d6008c7b4b06cf80868529d2756c2dccb0",
   "pythonVersionFile": "apps/desktop/local-api/sidecars/akshare/.python-version",
   "pythonVersionFileSha256": "db82937e1f1830581a9553c7814f5c5fcacb6dfdef8310b43e9a812c887acaf5",
   "requiredRootPackages": [
     {
       "name": "akshare",
-      "version": "1.18.64"
+      "version": "1.18.91"
     },
     {
       "name": "aktools",
@@ -50,9 +50,9 @@
     },
     {
       "name": "akshare",
-      "version": "1.18.64",
+      "version": "1.18.91",
       "spdxExpression": "MIT",
-      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/akshare/1.18.64/",
+      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/akshare/1.18.91/",
       "role": "sidecar-lock"
     },
     {
@@ -475,7 +475,7 @@
       "ecosystem": "pypi",
       "name": "akshare",
       "label": "AKShare",
-      "version": "1.18.64",
+      "version": "1.18.91",
       "spdxExpression": "MIT",
       "projectUrl": "https://github.com/akfamily/akshare"
     },

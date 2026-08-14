@@ -18,7 +18,7 @@ import {
 
 export const AKSHARE_SIDECAR_PROTOCOL = 'zinuto.akshare.v1';
 export const AKTOOLS_VERSION = '0.0.91';
-export const AKSHARE_VERSION = '1.18.64';
+export const AKSHARE_VERSION = '1.18.91';
 
 const RESPONSE_LIMIT_BYTES = 128 * 1024 * 1024;
 const WORKER_TIMEOUT_MS = 120_000;
