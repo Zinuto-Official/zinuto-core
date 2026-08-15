@@ -99,6 +99,7 @@ export const RuntimeAppHost = ({ scope }: { scope: RuntimeAppHostScope }) => {
             signalBottomParamsRef: scope.signalBottomParamsRef,
             showTrainerVolumePaneRef: scope.showTrainerVolumePaneRef,
             drawingOverlayIdRef: scope.drawingOverlayIdRef,
+            syncDrawingStoreFromChart: scope.syncDrawingStoreFromChart,
             rearmTimerRef: scope.rearmTimerRef,
             chartDataRenderSignatureRef: scope.chartDataRenderSignatureRef,
             chartMarkerHeavyRenderSignatureRef:

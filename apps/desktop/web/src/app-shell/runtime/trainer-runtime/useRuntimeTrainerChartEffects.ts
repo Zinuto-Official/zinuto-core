@@ -22,6 +22,7 @@ type UseRuntimeTrainerDrawingSyncEffectArgs = {
   chartReady: boolean;
   chartRef: MutableRefObject<Chart | null>;
   currentDisplayPeriodRef: MutableRefObject<DisplayPeriodKey>;
+  pendingDrawingRebuildPeriodRef: MutableRefObject<DisplayPeriodKey | null>;
   syncDrawingStoreFromChart: (period: DisplayPeriodKey) => void;
   rebuildDrawingsByPeriod: (period: DisplayPeriodKey) => boolean;
   refreshDrawingMeta: () => void;
@@ -32,6 +33,7 @@ export const useRuntimeTrainerDrawingSyncEffect = ({
   chartReady,
   chartRef,
   currentDisplayPeriodRef,
+  pendingDrawingRebuildPeriodRef,
   syncDrawingStoreFromChart,
   rebuildDrawingsByPeriod,
   refreshDrawingMeta,
@@ -45,13 +47,20 @@ export const useRuntimeTrainerDrawingSyncEffect = ({
       return;
     }
     const activePeriod = currentDisplayPeriodRef.current;
+    // The chart was just re-created (page re-entry or surface switch), so it
+    // holds no drawing overlays yet. Flag the rebuild so the store sync keeps
+    // existing drawings instead of treating them as user deletions.
+    pendingDrawingRebuildPeriodRef.current = activePeriod;
     syncDrawingStoreFromChart(activePeriod);
-    rebuildDrawingsByPeriod(activePeriod);
+    if (rebuildDrawingsByPeriod(activePeriod)) {
+      pendingDrawingRebuildPeriodRef.current = null;
+    }
     refreshDrawingMeta();
   }, [
     activePage,
     chartReady,
     currentDisplayPeriodRef,
+    pendingDrawingRebuildPeriodRef,
     rebuildDrawingsByPeriod,
     refreshDrawingMeta,
     syncDrawingStoreFromChart,

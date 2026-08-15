@@ -635,6 +635,7 @@ const resolveCurrentPeriodAdvance = useCallback(
     chartReady,
     chartRef,
     currentDisplayPeriodRef,
+    pendingDrawingRebuildPeriodRef,
     syncDrawingStoreFromChart,
     rebuildDrawingsByPeriod,
     refreshDrawingMeta,

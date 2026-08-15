@@ -76,6 +76,7 @@ type UseTrainerChartLifecycleArgs = {
   signalBottomParamsRef: MutableRefObject<number[]>;
   showTrainerVolumePaneRef: MutableRefObject<boolean>;
   drawingOverlayIdRef: MutableRefObject<string>;
+  syncDrawingStoreFromChart?: (period: DisplayPeriodKey) => void;
   rearmTimerRef: MutableRefObject<number | null>;
   chartDataRenderSignatureRef: MutableRefObject<string>;
   chartMarkerHeavyRenderSignatureRef: MutableRefObject<string>;
@@ -126,6 +127,7 @@ export const useTrainerChartLifecycle = ({
   signalBottomParamsRef,
   showTrainerVolumePaneRef,
   drawingOverlayIdRef,
+  syncDrawingStoreFromChart,
   rearmTimerRef,
   chartDataRenderSignatureRef,
   chartMarkerHeavyRenderSignatureRef,
@@ -150,6 +152,7 @@ export const useTrainerChartLifecycle = ({
 }: UseTrainerChartLifecycleArgs) => {
   const onOpenChartSettingsModalRef = useRef(onOpenChartSettingsModal);
   const onOpenIndicatorQuickMenuRef = useRef(onOpenIndicatorQuickMenu);
+  const syncDrawingStoreFromChartRef = useRef(syncDrawingStoreFromChart);
 
   useEffect(() => {
     onOpenChartSettingsModalRef.current = onOpenChartSettingsModal;
@@ -158,6 +161,10 @@ export const useTrainerChartLifecycle = ({
   useEffect(() => {
     onOpenIndicatorQuickMenuRef.current = onOpenIndicatorQuickMenu;
   }, [onOpenIndicatorQuickMenu]);
+
+  useEffect(() => {
+    syncDrawingStoreFromChartRef.current = syncDrawingStoreFromChart;
+  }, [syncDrawingStoreFromChart]);
 
   useEffect(() => {
     if (activePage !== 'TRAINER' && activePage !== 'SPECIAL_TRAINING') {
@@ -658,6 +665,9 @@ export const useTrainerChartLifecycle = ({
       liveBarSubscriberRef.current = null;
       lastMainIndicatorMountKeyRef.current = '';
       lastSignalIndicatorMountKeyRef.current = '';
+      // Snapshot committed drawing overlays into the store before the chart
+      // instance dies, so a page re-entry can rebuild them from the store.
+      syncDrawingStoreFromChartRef.current?.(currentDisplayPeriodRef.current);
       dispose(chart);
       chartRef.current = null;
       if (chartDomRef.current === dom) {
