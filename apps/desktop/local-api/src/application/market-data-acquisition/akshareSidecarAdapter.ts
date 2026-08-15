@@ -20,11 +20,10 @@ import {
 } from './pythonSidecarRuntime.js';
 import {
   AKSHARE_VERSION,
-  AKTOOLS_VERSION,
 } from './marketDataConnectorVersions.generated.js';
 
 export const AKSHARE_SIDECAR_PROTOCOL = 'zinuto.akshare.v1';
-export { AKTOOLS_VERSION, AKSHARE_VERSION };
+export { AKSHARE_VERSION };
 
 const RETRY_DELAYS_MS = [750, 2_000, 5_000] as const;
 const backendDir = path.resolve(
@@ -93,7 +92,6 @@ const canonicalInstrumentSchema = z
   .strict();
 const runtimeSchema = z
   .object({
-    aktools: z.literal(AKTOOLS_VERSION),
     akshare: z.literal(AKSHARE_VERSION),
   })
   .strict();

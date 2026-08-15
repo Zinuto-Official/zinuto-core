@@ -139,7 +139,6 @@ components:
         id:
           type: string
           enum:
-            - aktools
             - akshare
             - ccxt
         name:

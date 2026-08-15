@@ -217,6 +217,7 @@ export const CustomIndicatorSystemPage = ({
       return;
     }
     let detachViewportChanges = () => {};
+    let viewportFrameId = 0;
     const applyWorkbenchLayout = () => {
       editor.codeEditorViewRef.current?.requestMeasure();
       requestValidationChartLayoutRef.current(true);
@@ -226,7 +227,16 @@ export const CustomIndicatorSystemPage = ({
       applyWorkbenchLayout,
     );
     let disposed = false;
-    void subscribeDesktopViewportChanges(applyWorkbenchLayout).then((detach) => {
+    const handleViewportChange = () => {
+      if (viewportFrameId) {
+        return;
+      }
+      viewportFrameId = window.requestAnimationFrame(() => {
+        viewportFrameId = 0;
+        applyWorkbenchLayout();
+      });
+    };
+    void subscribeDesktopViewportChanges(handleViewportChange).then((detach) => {
       if (disposed) {
         detach();
         return;
@@ -236,6 +246,9 @@ export const CustomIndicatorSystemPage = ({
     applyWorkbenchLayout();
     return () => {
       disposed = true;
+      if (viewportFrameId) {
+        window.cancelAnimationFrame(viewportFrameId);
+      }
       detachPanelResizeMeasurement();
       detachViewportChanges();
     };
@@ -298,7 +311,7 @@ export const CustomIndicatorSystemPage = ({
 
   useEffect(() => {
     const container = chartContainerRef.current;
-    if (!container) {
+    if (!container || !isActive) {
       return;
     }
     const runValidationChartInit = (container: HTMLDivElement): (() => void) | undefined => {
@@ -459,6 +472,7 @@ export const CustomIndicatorSystemPage = ({
     };
     return whenElementRenderable(container, () => runValidationChartInit(container));
   }, [
+    isActive,
     language,
     market.chartDataRef,
     market.loadMoreValidationBarsRef,

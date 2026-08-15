@@ -359,10 +359,6 @@
   }
 }
 
-.app-root.theme-light .chart-period-origin-wrap {
-  gap: 6px;
-}
-
 .notes-workspace {
   grid-template-columns: clamp(184px, 13vw, 216px) minmax(0, 1fr);
 }

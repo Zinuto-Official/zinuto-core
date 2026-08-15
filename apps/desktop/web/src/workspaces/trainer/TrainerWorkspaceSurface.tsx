@@ -536,6 +536,9 @@ export const TrainerWorkspacePage = (props: TrainerWorkspacePageProps) => {
   useEffect(
     () =>
       api.subscribeDesktopSecondaryWindowActions((message) => {
+        if (!(props.isActive ?? true)) {
+          return;
+        }
         if (message.kind !== "TRAINER_TRADING_ENVIRONMENT") {
           return;
         }

@@ -460,17 +460,14 @@
 @keyframes special-training-lightning-critical-pulse {
   0% {
     opacity: 0.76;
-    filter: saturate(0.95);
     box-shadow: 0 0 0 color-mix(in srgb, var(--action-a3) 0%, transparent);
   }
   50% {
     opacity: 1;
-    filter: saturate(1.14);
     box-shadow: 0 0 12px color-mix(in srgb, var(--action-a3) 56%, transparent);
   }
   100% {
     opacity: 0.82;
-    filter: saturate(1);
     box-shadow: 0 0 0 color-mix(in srgb, var(--action-a3) 0%, transparent);
   }
 }

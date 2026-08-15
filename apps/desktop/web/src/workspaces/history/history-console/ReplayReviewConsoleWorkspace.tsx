@@ -331,6 +331,7 @@ export const ReplayReviewConsolePage = ({
     useReplayReviewArchiveDetailWindow({
       archiveSessionById,
       history,
+      isActive,
       language,
       onError,
       ui,

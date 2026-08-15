@@ -267,6 +267,8 @@ export {
   type DesktopWindowPlatformSnapshot,
   type DesktopWindowTheme,
 } from "@/api/desktopWindowChrome";
+export { reportMainWebviewBusy } from "@/api/desktopMainWebviewBusy";
+export { syncDesktopWindowBackgroundColor } from "@/api/desktopWindowBackground";
 export {
   DESKTOP_SECONDARY_WINDOW_SYNC_POLICIES,
   closeCurrentDesktopSecondaryWindow,

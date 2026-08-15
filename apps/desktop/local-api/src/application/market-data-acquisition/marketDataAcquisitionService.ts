@@ -31,7 +31,6 @@ import { createCcxtAcquisitionAdapter } from './ccxtAcquisitionAdapter.js';
 import { createFinanceDataReaderSidecarAdapter } from './financeDataReaderSidecarAdapter.js';
 import {
   AKSHARE_VERSION,
-  AKTOOLS_VERSION,
   CCXT_VERSION,
 } from './marketDataConnectorVersions.generated.js';
 import {
@@ -104,7 +103,7 @@ const connectorCatalog = (
   connectors: [
     {
       id: 'akshare',
-      version: `aktools-${AKTOOLS_VERSION}+akshare-${AKSHARE_VERSION}`,
+      version: AKSHARE_VERSION,
       market: 'A_SHARE',
       available: akshareAvailable,
       unavailabilityCode: akshareAvailable
@@ -119,14 +118,6 @@ const connectorCatalog = (
       exchanges: [],
       terms: {
         projects: [
-          {
-            id: 'aktools',
-            name: 'AKTools',
-            url: 'https://github.com/akfamily/aktools',
-            infoUrl: 'https://github.com/akfamily/aktools',
-            version: AKTOOLS_VERSION,
-            license: 'MIT',
-          },
           {
             id: 'akshare',
             name: 'AKShare',

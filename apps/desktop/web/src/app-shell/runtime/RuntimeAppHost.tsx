@@ -1,9 +1,11 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
+import { useCallback } from "react";
 import { DesktopCloseBehaviorController } from "@/app-shell/DesktopCloseBehaviorController";
 import { I18nProvider } from "@/frontend-kernel/i18n";
 import { renderRuntimeDesktopShell } from "@/app-shell/runtime/workspace-shell/runtimeDesktopShellRenderer";
 import type { UiSettings } from "@/frontend-kernel/appTypes";
+import type { DesktopHelpNavigationTarget } from "@/domains/desktop-help/desktopHelpTypes";
 import type { useRuntimeDataResetNavigation } from "@/app-shell/runtime/runtimeDataResetNavigation";
 import type { useRuntimeFreeReplayExecution } from "@/app-shell/runtime/runtimeFreeReplayExecution";
 import type { useRuntimeFreeReplaySetup } from "@/app-shell/runtime/runtimeFreeReplaySetup";
@@ -65,6 +67,15 @@ export const RuntimeAppHost = ({ scope }: { scope: RuntimeAppHostScope }) => {
     trainerChartSurfacePage === "SPECIAL_TRAINING"
       ? scope.specialTrainingChartDomAttachVersion
       : scope.trainerChartDomAttachVersion;
+  const handleNavigateToDesktopHelpTarget = useCallback(
+    (target: DesktopHelpNavigationTarget) => {
+      if (target.workspace === "SETTINGS" && target.settingsTab) {
+        scope.setRequestedSystemSettingsTab(target.settingsTab);
+      }
+      scope.workspaceSwitcherProps.onSelectPage(target.workspace);
+    },
+    [scope.setRequestedSystemSettingsTab, scope.workspaceSwitcherProps.onSelectPage],
+  );
 
   return (
     <I18nProvider locale={scope.language}>
@@ -146,12 +157,7 @@ export const RuntimeAppHost = ({ scope }: { scope: RuntimeAppHostScope }) => {
         activePage: scope.activePage,
         showDesktopHelpLauncher: scope.showDesktopHelpLauncher,
         setShowDesktopHelpLauncher: scope.setShowDesktopHelpLauncher,
-        onNavigateToDesktopHelpTarget: (target) => {
-          if (target.workspace === "SETTINGS" && target.settingsTab) {
-            scope.setRequestedSystemSettingsTab(target.settingsTab);
-          }
-          scope.workspaceSwitcherProps.onSelectPage(target.workspace);
-        },
+        onNavigateToDesktopHelpTarget: handleNavigateToDesktopHelpTarget,
         rootStyle: scope.appRootStyle,
         rootLocaleWidthProfile: scope.localeWidthProfile,
         onMouseDownCapture: scope.startWindowDrag,
@@ -165,7 +171,6 @@ export const RuntimeAppHost = ({ scope }: { scope: RuntimeAppHostScope }) => {
         onboardingTourStep: scope.onboardingTourStep,
         onOnboardingTourStatusChange: scope.setOnboardingTourStatus,
         onOnboardingTourStepChange: scope.setOnboardingTourStep,
-        chartNoteHover: scope.chartNoteHover,
         trainerModalHostProps: scope.trainerModalHostProps,
         utilityDialogsProps: scope.utilityDialogsProps,
         actionDialogNode: scope.actionDialogNode,

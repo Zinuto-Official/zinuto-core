@@ -36,7 +36,7 @@ run(
 run(
   npmCommand,
   ['run', 'akshare-sidecar:build', '--workspace=@zinuto/desktop-local-api'],
-  'Building locked AKTools/AKShare sidecar',
+  'Building locked AKShare sidecar',
 );
 run(
   npmCommand,

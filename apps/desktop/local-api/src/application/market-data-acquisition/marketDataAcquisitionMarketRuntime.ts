@@ -16,7 +16,6 @@ import {
 } from './acquisitionStaging.js';
 import {
   AKSHARE_VERSION,
-  AKTOOLS_VERSION,
   CCXT_VERSION,
   FINANCE_DATA_READER_VERSION,
 } from './marketDataConnectorVersions.generated.js';
@@ -288,14 +287,14 @@ export const createMarketAcquisitionJobRunner = ({
         });
         attempts.push(sourceSuccess(
           'akshare',
-          `aktools-${AKTOOLS_VERSION}+akshare-${AKSHARE_VERSION}`,
+          `akshare-${AKSHARE_VERSION}`,
           akshareResult.upstreamId,
         ));
         return succeeded(normalizedRows.rows, normalizedRows.mergedDuplicates);
       } catch (akshareError) {
         attempts.push(sourceFailure(
           'akshare',
-          `aktools-${AKTOOLS_VERSION}+akshare-${AKSHARE_VERSION}`,
+          `akshare-${AKSHARE_VERSION}`,
           'eastmoney',
           akshareError,
         ));

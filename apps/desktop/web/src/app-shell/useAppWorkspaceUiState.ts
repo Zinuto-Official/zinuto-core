@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 import type { PendingCsvFolderImport } from "@/domains/data-import/dataSourceTypes";
-import { useCallback, useState, type Dispatch, type SetStateAction } from 'react';
+import { useCallback, useEffect, useState, type Dispatch, type SetStateAction } from 'react';
+import { reportMainWebviewBusy } from "@/api";
 import {
   readMainDesktopViewportState,
   type ApiResetAllStoredDataJob,
@@ -51,8 +52,6 @@ type UseAppWorkspaceUiStateResult = {
   setReplayNotesKeyword: Dispatch<SetStateAction<string>>;
   activeTrainingRecordNoteId: string;
   setActiveTrainingRecordNoteId: Dispatch<SetStateAction<string>>;
-  chartNoteHover: null | { title: string; pageX: number; pageY: number };
-  setChartNoteHover: Dispatch<SetStateAction<null | { title: string; pageX: number; pageY: number }>>;
   editingProjectId: string;
   setEditingProjectId: Dispatch<SetStateAction<string>>;
   editingProjectName: string;
@@ -122,7 +121,6 @@ export const useAppWorkspaceUiState = ({ persistedUi }: UseAppWorkspaceUiStateAr
   const [selectedReplayNoteId, setSelectedReplayNoteId] = useState('');
   const [replayNotesKeyword, setReplayNotesKeyword] = useState('');
   const [activeTrainingRecordNoteId, setActiveTrainingRecordNoteId] = useState('');
-  const [chartNoteHover, setChartNoteHover] = useState<null | { title: string; pageX: number; pageY: number }>(null);
   const [editingProjectId, setEditingProjectId] = useState('');
   const [editingProjectName, setEditingProjectName] = useState('');
   const [editingSamplePoolId, setEditingSamplePoolId] = useState('');
@@ -144,6 +142,15 @@ export const useAppWorkspaceUiState = ({ persistedUi }: UseAppWorkspaceUiStateAr
   const [clearingLocalDataSourcesProgressTargetPercent, setClearingLocalDataSourcesProgressTargetPercent] = useState(0);
   const [replayUnavailableMessage, setReplayUnavailableMessage] = useState('');
   const [isBusy, setIsBusy] = useState(false);
+
+  const isKnownLongOperationActive =
+    isBusy ||
+    isGlobalResetProgressVisible ||
+    isClearingLocalDataSources ||
+    deletingSamplePoolProgressPercent > 0;
+  useEffect(() => {
+    reportMainWebviewBusy(isKnownLongOperationActive);
+  }, [isKnownLongOperationActive]);
 
   return {
     activePage,
@@ -171,8 +178,6 @@ export const useAppWorkspaceUiState = ({ persistedUi }: UseAppWorkspaceUiStateAr
     setReplayNotesKeyword,
     activeTrainingRecordNoteId,
     setActiveTrainingRecordNoteId,
-    chartNoteHover,
-    setChartNoteHover,
     editingProjectId,
     setEditingProjectId,
     editingProjectName,

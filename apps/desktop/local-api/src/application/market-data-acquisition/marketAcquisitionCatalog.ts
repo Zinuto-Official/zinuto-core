@@ -11,7 +11,6 @@ import type {
 import { AcquisitionRuntimeError } from './marketDataAcquisitionTypes.js';
 import {
   AKSHARE_VERSION,
-  AKTOOLS_VERSION,
   CCXT_VERSION,
   FINANCE_DATA_READER_VERSION,
 } from './marketDataConnectorVersions.generated.js';
@@ -194,7 +193,7 @@ export const buildMarketAcquisitionCatalog = (
       {
         id: 'akshare',
         name: 'AKShare',
-        version: `aktools-${AKTOOLS_VERSION}+akshare-${AKSHARE_VERSION}`,
+        version: AKSHARE_VERSION,
         license: 'MIT',
         projectUrl: 'https://github.com/akfamily/akshare',
         docsUrl: 'https://akshare.akfamily.xyz/introduction.html',
@@ -449,7 +448,7 @@ export const marketAcquisitionConnectorFingerprint = (
   providerChain
     .map((providerId) => {
       if (providerId === 'akshare') {
-        return `akshare:aktools-${AKTOOLS_VERSION}+akshare-${AKSHARE_VERSION}`;
+        return `akshare:${AKSHARE_VERSION}`;
       }
       if (providerId === 'ccxt') return `ccxt:${CCXT_VERSION}`;
       return `financedatareader:${FINANCE_DATA_READER_VERSION}`;

@@ -148,7 +148,6 @@ export const useRuntimeTrainerChartSession = (scope: RuntimeHookScope) => {
     setBarsOffset,
     setBarsTimeZone,
     setBarsTotal,
-    setChartNoteHover,
     setCommissionMinimumFeeInput,
     setCommissionRateInput,
     setContractMultiplierInput,
@@ -259,7 +258,6 @@ export const useRuntimeTrainerChartSession = (scope: RuntimeHookScope) => {
 
   const openReplayNoteFromMarker = useReplayNoteMarkerNavigation({
     replayNotes,
-    setChartNoteHover,
     setSelectedReplayNoteId,
     setActiveTrainingRecordNoteId,
     setActivePage,
@@ -270,7 +268,6 @@ export const useRuntimeTrainerChartSession = (scope: RuntimeHookScope) => {
       tradeAmountIncludesFees,
       replayNotes,
       openReplayNoteFromMarker,
-      setChartNoteHover,
       formatMoney,
       tt,
       ttf,

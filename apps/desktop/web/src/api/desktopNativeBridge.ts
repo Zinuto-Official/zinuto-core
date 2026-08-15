@@ -143,3 +143,13 @@ export const invokeBackendBridge = async (
     );
   });
 };
+
+export const invokeMainWebviewBusySignal = async (
+  busy: boolean,
+): Promise<void> => {
+  if (!isTauriRuntime()) {
+    return;
+  }
+  const coreModule = await loadTauriCoreModule();
+  await coreModule.invoke("main_webview_busy_signal", { busy });
+};

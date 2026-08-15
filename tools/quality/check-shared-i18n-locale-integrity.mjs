@@ -114,7 +114,6 @@ const SAME_AS_ENGLISH_PRODUCT_KEYS = new Set([
 const DESKTOP_HELP_VENDOR_KEY_RE =
   /^uiConfig\.desktopHelp\.bundle\.articles\.(?:data-acquire|data-source-by-market)\.keywords\[\d+\]$/u;
 const DESKTOP_HELP_VENDOR_NAMES = new Set([
-  "AKTools",
   "AKShare",
   "CCXT",
   "Binance Spot",

@@ -352,18 +352,24 @@ export const EChartSurface = ({
     };
   }, [isActive]);
 
+  const pendingOptionRef = useRef<EChartsOption | null>(null);
+
   useEffect(() => {
     const chart = chartRef.current;
     if (!chart) {
       return;
     }
-    chart.setOption(normalizeChartOption(option), {
+    if (!isActive) {
+      pendingOptionRef.current = option;
+      return;
+    }
+    const nextOption = pendingOptionRef.current ?? option;
+    pendingOptionRef.current = null;
+    chart.setOption(normalizeChartOption(nextOption), {
       notMerge: true,
       lazyUpdate: true,
     });
-    if (isActive) {
-      scheduleResizeRef.current();
-    }
+    scheduleResizeRef.current();
   }, [isActive, option]);
 
   return <div className={className} ref={hostRef} />;

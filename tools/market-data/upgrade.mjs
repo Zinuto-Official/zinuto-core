@@ -140,7 +140,7 @@ const sidecarReviewPathFor = (provider) => {
       'finance-datareader-sidecar-dependencies.json',
     );
   }
-  if (provider.id === 'akshare' || provider.id === 'aktools') {
+  if (provider.id === 'akshare') {
     return path.join(ROOT_DIR, 'config', 'open-source', 'python-sidecar-dependencies.json');
   }
   return null;

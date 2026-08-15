@@ -276,11 +276,13 @@ export const ArchiveReplayDrawerPreview = ({
   history,
   ui,
   language,
+  isActive,
 }: {
   session: ReplayReviewSessionMetric;
   history: ReplayReviewConsoleHistoryDeps;
   ui: UiLabelEntry;
   language: AppUiLanguage;
+  isActive: boolean;
 }) => {
   const projectId = session.project.id;
   const [resolvedDetail, setResolvedDetail] = useState<ApiTrainingProject | null>(
@@ -389,6 +391,7 @@ export const ArchiveReplayDrawerPreview = ({
         <HistoryReplayChartView
           project={replayProject}
           themeMode={history.effectiveThemeMode}
+          isActive={isActive}
           showGlobalDecimals={history.showGlobalDecimals}
           priceColorMode={history.priceColorMode}
           tradeColorTheme={history.tradeColorTheme}

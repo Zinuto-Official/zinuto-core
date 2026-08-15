@@ -95,6 +95,9 @@ fn should_pause_main_webview_watchdog(window: &tauri::WebviewWindow) -> bool {
     if window.is_minimized().ok() == Some(true) {
         return true;
     }
+    if crate::runtime::main_webview_busy::is_main_webview_busy() {
+        return true;
+    }
     // A visible, non-minimized window must keep its webview watchdog active even
     // when another application has focus.  App blur is not evidence that the
     // webview is unavailable, and pausing here would erase the failure streak.

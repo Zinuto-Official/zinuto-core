@@ -1,7 +1,7 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.5",
-  "serialNumber": "urn:uuid:ea92df7c-097c-5fcb-a6c5-cea497b3d678",
+  "serialNumber": "urn:uuid:ba7d8d39-745b-51a6-a507-7f0424984bb6",
   "version": 1,
   "metadata": {
     "component": {
@@ -19,11 +19,11 @@
     "properties": [
       {
         "name": "zinuto:dependencySnapshotSha256",
-        "value": "ea92df7c097cafcb06c5cea497b3d6782905ffc29ef1cc8d9e0f557b96f2f94d"
+        "value": "ba7d8d39745b91a645077f0424984bb6c4a3db6ea16ea6bdd562dd7e01727852"
       },
       {
         "name": "zinuto:pythonSidecarLockSha256",
-        "value": "98f766385e00fa5bd8d5f0c0e8ed7e5eae13f83f003e45554a4b1880bd38c7b8"
+        "value": "ca65c3aef624355c50f54c55d03082c1f906562181d8d964fcb408bed99f7437"
       },
       {
         "name": "zinuto:pythonSidecarVersion",
@@ -15245,31 +15245,6 @@
     {
       "type": "library",
       "group": "pypi",
-      "name": "aktools",
-      "version": "0.0.91",
-      "scope": "required",
-      "licenses": [
-        {
-          "expression": "MIT"
-        }
-      ],
-      "purl": "pkg:pypi/aktools@0.0.91",
-      "externalReferences": [
-        {
-          "type": "website",
-          "url": "https://pypi.org/project/aktools/0.0.91/"
-        }
-      ],
-      "properties": [
-        {
-          "name": "zinuto:dependencyRole",
-          "value": "sidecar-lock"
-        }
-      ]
-    },
-    {
-      "type": "library",
-      "group": "pypi",
       "name": "altgraph",
       "version": "0.17.5",
       "scope": "required",
@@ -15283,81 +15258,6 @@
         {
           "type": "website",
           "url": "https://pypi.org/project/altgraph/0.17.5/"
-        }
-      ],
-      "properties": [
-        {
-          "name": "zinuto:dependencyRole",
-          "value": "sidecar-lock"
-        }
-      ]
-    },
-    {
-      "type": "library",
-      "group": "pypi",
-      "name": "annotated-doc",
-      "version": "0.0.4",
-      "scope": "required",
-      "licenses": [
-        {
-          "expression": "MIT"
-        }
-      ],
-      "purl": "pkg:pypi/annotated-doc@0.0.4",
-      "externalReferences": [
-        {
-          "type": "website",
-          "url": "https://pypi.org/project/annotated-doc/0.0.4/"
-        }
-      ],
-      "properties": [
-        {
-          "name": "zinuto:dependencyRole",
-          "value": "sidecar-lock"
-        }
-      ]
-    },
-    {
-      "type": "library",
-      "group": "pypi",
-      "name": "annotated-types",
-      "version": "0.7.0",
-      "scope": "required",
-      "licenses": [
-        {
-          "expression": "MIT"
-        }
-      ],
-      "purl": "pkg:pypi/annotated-types@0.7.0",
-      "externalReferences": [
-        {
-          "type": "website",
-          "url": "https://pypi.org/project/annotated-types/0.7.0/"
-        }
-      ],
-      "properties": [
-        {
-          "name": "zinuto:dependencyRole",
-          "value": "sidecar-lock"
-        }
-      ]
-    },
-    {
-      "type": "library",
-      "group": "pypi",
-      "name": "anyio",
-      "version": "4.14.2",
-      "scope": "required",
-      "licenses": [
-        {
-          "expression": "MIT"
-        }
-      ],
-      "purl": "pkg:pypi/anyio@4.14.2",
-      "externalReferences": [
-        {
-          "type": "website",
-          "url": "https://pypi.org/project/anyio/4.14.2/"
         }
       ],
       "properties": [
@@ -15520,31 +15420,6 @@
     {
       "type": "library",
       "group": "pypi",
-      "name": "click",
-      "version": "8.4.2",
-      "scope": "required",
-      "licenses": [
-        {
-          "expression": "BSD-3-Clause"
-        }
-      ],
-      "purl": "pkg:pypi/click@8.4.2",
-      "externalReferences": [
-        {
-          "type": "website",
-          "url": "https://pypi.org/project/click/8.4.2/"
-        }
-      ],
-      "properties": [
-        {
-          "name": "zinuto:dependencyRole",
-          "value": "sidecar-lock"
-        }
-      ]
-    },
-    {
-      "type": "library",
-      "group": "pypi",
       "name": "colorama",
       "version": "0.4.6",
       "scope": "required",
@@ -15645,31 +15520,6 @@
     {
       "type": "library",
       "group": "pypi",
-      "name": "fastapi",
-      "version": "0.139.2",
-      "scope": "required",
-      "licenses": [
-        {
-          "expression": "MIT"
-        }
-      ],
-      "purl": "pkg:pypi/fastapi@0.139.2",
-      "externalReferences": [
-        {
-          "type": "website",
-          "url": "https://pypi.org/project/fastapi/0.139.2/"
-        }
-      ],
-      "properties": [
-        {
-          "name": "zinuto:dependencyRole",
-          "value": "sidecar-lock"
-        }
-      ]
-    },
-    {
-      "type": "library",
-      "group": "pypi",
       "name": "finance-datareader",
       "version": "0.9.202",
       "scope": "required",
@@ -15683,31 +15533,6 @@
         {
           "type": "website",
           "url": "https://pypi.org/project/finance-datareader/0.9.202/"
-        }
-      ],
-      "properties": [
-        {
-          "name": "zinuto:dependencyRole",
-          "value": "sidecar-lock"
-        }
-      ]
-    },
-    {
-      "type": "library",
-      "group": "pypi",
-      "name": "h11",
-      "version": "0.16.0",
-      "scope": "required",
-      "licenses": [
-        {
-          "expression": "MIT"
-        }
-      ],
-      "purl": "pkg:pypi/h11@0.16.0",
-      "externalReferences": [
-        {
-          "type": "website",
-          "url": "https://pypi.org/project/h11/0.16.0/"
         }
       ],
       "properties": [
@@ -15758,31 +15583,6 @@
         {
           "type": "website",
           "url": "https://pypi.org/project/idna/3.18/"
-        }
-      ],
-      "properties": [
-        {
-          "name": "zinuto:dependencyRole",
-          "value": "sidecar-lock"
-        }
-      ]
-    },
-    {
-      "type": "library",
-      "group": "pypi",
-      "name": "jinja2",
-      "version": "3.1.6",
-      "scope": "required",
-      "licenses": [
-        {
-          "expression": "BSD-3-Clause"
-        }
-      ],
-      "purl": "pkg:pypi/jinja2@3.1.6",
-      "externalReferences": [
-        {
-          "type": "website",
-          "url": "https://pypi.org/project/jinja2/3.1.6/"
         }
       ],
       "properties": [
@@ -15883,31 +15683,6 @@
         {
           "type": "website",
           "url": "https://pypi.org/project/markdown-it-py/4.2.0/"
-        }
-      ],
-      "properties": [
-        {
-          "name": "zinuto:dependencyRole",
-          "value": "sidecar-lock"
-        }
-      ]
-    },
-    {
-      "type": "library",
-      "group": "pypi",
-      "name": "markupsafe",
-      "version": "3.0.3",
-      "scope": "required",
-      "licenses": [
-        {
-          "expression": "BSD-3-Clause"
-        }
-      ],
-      "purl": "pkg:pypi/markupsafe@3.0.3",
-      "externalReferences": [
-        {
-          "type": "website",
-          "url": "https://pypi.org/project/markupsafe/3.0.3/"
         }
       ],
       "properties": [
@@ -16245,56 +16020,6 @@
     {
       "type": "library",
       "group": "pypi",
-      "name": "pydantic-core",
-      "version": "2.46.4",
-      "scope": "required",
-      "licenses": [
-        {
-          "expression": "MIT"
-        }
-      ],
-      "purl": "pkg:pypi/pydantic-core@2.46.4",
-      "externalReferences": [
-        {
-          "type": "website",
-          "url": "https://pypi.org/project/pydantic-core/2.46.4/"
-        }
-      ],
-      "properties": [
-        {
-          "name": "zinuto:dependencyRole",
-          "value": "sidecar-lock"
-        }
-      ]
-    },
-    {
-      "type": "library",
-      "group": "pypi",
-      "name": "pydantic",
-      "version": "2.13.4",
-      "scope": "required",
-      "licenses": [
-        {
-          "expression": "MIT"
-        }
-      ],
-      "purl": "pkg:pypi/pydantic@2.13.4",
-      "externalReferences": [
-        {
-          "type": "website",
-          "url": "https://pypi.org/project/pydantic/2.13.4/"
-        }
-      ],
-      "properties": [
-        {
-          "name": "zinuto:dependencyRole",
-          "value": "sidecar-lock"
-        }
-      ]
-    },
-    {
-      "type": "library",
-      "group": "pypi",
       "name": "pygments",
       "version": "2.20.0",
       "scope": "required",
@@ -16383,31 +16108,6 @@
         {
           "type": "website",
           "url": "https://pypi.org/project/python-dateutil/2.9.0.post0/"
-        }
-      ],
-      "properties": [
-        {
-          "name": "zinuto:dependencyRole",
-          "value": "sidecar-lock"
-        }
-      ]
-    },
-    {
-      "type": "library",
-      "group": "pypi",
-      "name": "python-multipart",
-      "version": "0.0.32",
-      "scope": "required",
-      "licenses": [
-        {
-          "expression": "Apache-2.0"
-        }
-      ],
-      "purl": "pkg:pypi/python-multipart@0.0.32",
-      "externalReferences": [
-        {
-          "type": "website",
-          "url": "https://pypi.org/project/python-multipart/0.0.32/"
         }
       ],
       "properties": [
@@ -16570,31 +16270,6 @@
     {
       "type": "library",
       "group": "pypi",
-      "name": "shellingham",
-      "version": "1.5.4",
-      "scope": "required",
-      "licenses": [
-        {
-          "expression": "ISC"
-        }
-      ],
-      "purl": "pkg:pypi/shellingham@1.5.4",
-      "externalReferences": [
-        {
-          "type": "website",
-          "url": "https://pypi.org/project/shellingham/1.5.4/"
-        }
-      ],
-      "properties": [
-        {
-          "name": "zinuto:dependencyRole",
-          "value": "sidecar-lock"
-        }
-      ]
-    },
-    {
-      "type": "library",
-      "group": "pypi",
       "name": "six",
       "version": "1.17.0",
       "scope": "required",
@@ -16658,31 +16333,6 @@
         {
           "type": "website",
           "url": "https://pypi.org/project/soupsieve/2.9.2/"
-        }
-      ],
-      "properties": [
-        {
-          "name": "zinuto:dependencyRole",
-          "value": "sidecar-lock"
-        }
-      ]
-    },
-    {
-      "type": "library",
-      "group": "pypi",
-      "name": "starlette",
-      "version": "1.3.1",
-      "scope": "required",
-      "licenses": [
-        {
-          "expression": "BSD-3-Clause"
-        }
-      ],
-      "purl": "pkg:pypi/starlette@1.3.1",
-      "externalReferences": [
-        {
-          "type": "website",
-          "url": "https://pypi.org/project/starlette/1.3.1/"
         }
       ],
       "properties": [
@@ -16770,31 +16420,6 @@
     {
       "type": "library",
       "group": "pypi",
-      "name": "typer",
-      "version": "0.27.0",
-      "scope": "required",
-      "licenses": [
-        {
-          "expression": "MIT"
-        }
-      ],
-      "purl": "pkg:pypi/typer@0.27.0",
-      "externalReferences": [
-        {
-          "type": "website",
-          "url": "https://pypi.org/project/typer/0.27.0/"
-        }
-      ],
-      "properties": [
-        {
-          "name": "zinuto:dependencyRole",
-          "value": "sidecar-lock"
-        }
-      ]
-    },
-    {
-      "type": "library",
-      "group": "pypi",
       "name": "typing-extensions",
       "version": "4.16.0",
       "scope": "required",
@@ -16808,31 +16433,6 @@
         {
           "type": "website",
           "url": "https://pypi.org/project/typing-extensions/4.16.0/"
-        }
-      ],
-      "properties": [
-        {
-          "name": "zinuto:dependencyRole",
-          "value": "sidecar-lock"
-        }
-      ]
-    },
-    {
-      "type": "library",
-      "group": "pypi",
-      "name": "typing-inspection",
-      "version": "0.4.2",
-      "scope": "required",
-      "licenses": [
-        {
-          "expression": "MIT"
-        }
-      ],
-      "purl": "pkg:pypi/typing-inspection@0.4.2",
-      "externalReferences": [
-        {
-          "type": "website",
-          "url": "https://pypi.org/project/typing-inspection/0.4.2/"
         }
       ],
       "properties": [
@@ -16883,31 +16483,6 @@
         {
           "type": "website",
           "url": "https://pypi.org/project/urllib3/2.7.0/"
-        }
-      ],
-      "properties": [
-        {
-          "name": "zinuto:dependencyRole",
-          "value": "sidecar-lock"
-        }
-      ]
-    },
-    {
-      "type": "library",
-      "group": "pypi",
-      "name": "uvicorn",
-      "version": "0.51.0",
-      "scope": "required",
-      "licenses": [
-        {
-          "expression": "BSD-3-Clause"
-        }
-      ],
-      "purl": "pkg:pypi/uvicorn@0.51.0",
-      "externalReferences": [
-        {
-          "type": "website",
-          "url": "https://pypi.org/project/uvicorn/0.51.0/"
         }
       ],
       "properties": [

@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useLayoutEffect, useMemo, type ReactNode } from 'react';
 import { FALLBACK_THEME, THEME_ATTRIBUTE, type ResolvedTheme, type ThemeMode } from '@/ui/theme/themeTokens';
+import { syncDesktopWindowBackgroundColor } from '@/api';
 
 type ThemeProviderProps = {
   mode?: ThemeMode;
@@ -29,6 +30,7 @@ const setDocumentTheme = (resolvedMode: ResolvedTheme) => {
   root.classList.remove('theme-light', 'theme-dark');
   root.classList.add(`theme-${resolvedMode}`);
   root.style.colorScheme = resolvedMode;
+  syncDesktopWindowBackgroundColor(resolvedMode);
 };
 
 export const ThemeProvider = ({ mode = FALLBACK_THEME, resolvedMode = 'light', children }: ThemeProviderProps) => {

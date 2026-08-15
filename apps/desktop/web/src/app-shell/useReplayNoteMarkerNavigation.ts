@@ -4,16 +4,10 @@ import type { ReplayNote } from "@/domains/notes/replayNoteModel";
 import { useCallback, type Dispatch, type SetStateAction } from 'react';
 import { isReplaySnapshotNoteType } from '@/workspaces/notes/useReplayNotes';
 import type { WorkspacePage } from '@/frontend-kernel/workspacePageModel';
-
-type ChartNoteHover = {
-  title: string;
-  pageX: number;
-  pageY: number;
-} | null;
+import { clearChartNoteHover } from '@/frontend-kernel/chartNoteHoverStore';
 
 type UseReplayNoteMarkerNavigationArgs = {
   replayNotes: ReplayNote[];
-  setChartNoteHover: Dispatch<SetStateAction<ChartNoteHover>>;
   setSelectedReplayNoteId: Dispatch<SetStateAction<string>>;
   setActiveTrainingRecordNoteId: Dispatch<SetStateAction<string>>;
   setActivePage: Dispatch<SetStateAction<WorkspacePage>>;
@@ -21,7 +15,6 @@ type UseReplayNoteMarkerNavigationArgs = {
 
 export const useReplayNoteMarkerNavigation = ({
   replayNotes,
-  setChartNoteHover,
   setSelectedReplayNoteId,
   setActiveTrainingRecordNoteId,
   setActivePage
@@ -35,7 +28,7 @@ export const useReplayNoteMarkerNavigation = ({
       if (!target) {
         return;
       }
-      setChartNoteHover((current) => (current ? null : current));
+      clearChartNoteHover();
       setSelectedReplayNoteId(noteId);
       if (isReplaySnapshotNoteType(target.type)) {
         setActiveTrainingRecordNoteId(noteId);
@@ -43,5 +36,5 @@ export const useReplayNoteMarkerNavigation = ({
       }
       setActivePage('NOTES');
     },
-    [replayNotes, setActivePage, setActiveTrainingRecordNoteId, setChartNoteHover, setSelectedReplayNoteId]
+    [replayNotes, setActivePage, setActiveTrainingRecordNoteId, setSelectedReplayNoteId]
   );

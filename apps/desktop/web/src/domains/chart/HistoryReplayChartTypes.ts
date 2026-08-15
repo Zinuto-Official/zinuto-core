@@ -159,6 +159,7 @@ export type HistoryReplayChartBindings = {
 export type HistoryReplayChartViewProps = {
   project: HistoryReplayProject | null;
   themeMode: "light" | "dark";
+  isActive?: boolean;
   showGlobalDecimals?: boolean;
   priceColorMode: PriceColorMode;
   tradeColorTheme?: TradeColorThemeToken;

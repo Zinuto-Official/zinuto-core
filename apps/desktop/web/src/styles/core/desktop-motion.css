@@ -16,27 +16,19 @@
   will-change: transform, width, height, opacity;
 }
 
-[data-theme-transition-snapshot] {
+[data-theme-transition-overlay] {
   position: fixed;
   inset: 0;
   z-index: 2147483646;
   overflow: hidden;
   pointer-events: none;
-  isolation: isolate;
-  will-change: mask-image, -webkit-mask-image, opacity;
+  background: var(--window-bg);
+  opacity: 0;
+  will-change: opacity;
 }
 
-[data-theme-transition-snapshot] > .app-root {
-  min-height: 100vh;
-}
-
-[data-theme-transition-snapshot],
-[data-theme-transition-snapshot] *,
-[data-theme-transition-snapshot] *::before,
-[data-theme-transition-snapshot] *::after {
-  animation: none !important;
-  transition: none !important;
-  caret-color: transparent !important;
+html[data-theme-transition="active"] .app-root {
+  transition: none;
 }
 
 .sidebar-nav-selection-indicator {
@@ -250,6 +242,22 @@
   > .workspace-page-cache-slot.is-active[data-motion-enabled="true"][data-motion-surface="immersive"]
   > .workspace-page-cache-slot-content {
   animation: workspace-page-enter-immersive var(--motion-page-switch) both;
+}
+
+.desktop-main
+  > .workspace-page-cache-slot[data-motion-enabled="true"][data-motion-exit="true"]
+  > .workspace-page-cache-slot-content {
+  animation: workspace-page-exit var(--motion-page-switch) both;
+}
+
+@keyframes workspace-page-exit {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
 }
 
 @keyframes workspace-page-enter-forward {

@@ -10,6 +10,7 @@ export const ALLOWED_TAURI_CUSTOM_COMMANDS = [
   "desktop_app_restart",
   "desktop_release_channel",
   "discard_csv_folder_staging",
+  "main_webview_busy_signal",
   "main_window_ready_to_show",
   "save_custom_indicator_ai_conversion_guide",
   "stage_csv_folder_for_import",

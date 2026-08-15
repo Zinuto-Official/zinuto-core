@@ -11,11 +11,11 @@
       "projectUrl": "https://github.com/akfamily/akshare",
       "dependencyLock": {
         "file": "apps/desktop/local-api/sidecars/akshare/uv.lock",
-        "sha256": "98f766385e00fa5bd8d5f0c0e8ed7e5eae13f83f003e45554a4b1880bd38c7b8"
+        "sha256": "ca65c3aef624355c50f54c55d03082c1f906562181d8d964fcb408bed99f7437"
       },
       "projectFile": {
         "file": "apps/desktop/local-api/sidecars/akshare/pyproject.toml",
-        "sha256": "120b6bf9b4c232bbefd77514af2548d6008c7b4b06cf80868529d2756c2dccb0"
+        "sha256": "277d60fdcfef6f0113936210ca513691e30a325e88df7ef80f9062f2714be99d"
       },
       "sidecar": {
         "id": "akshare",
@@ -44,37 +44,6 @@
         }
       ],
       "capabilityFingerprint": "a-share-ohlcv-eastmoney-tencent-sina-v1"
-    },
-    {
-      "id": "aktools",
-      "displayName": "AKTools",
-      "ecosystem": "pypi",
-      "version": "0.0.91",
-      "license": "MIT",
-      "projectUrl": "https://github.com/akfamily/aktools",
-      "dependencyLock": {
-        "file": "apps/desktop/local-api/sidecars/akshare/uv.lock",
-        "sha256": "98f766385e00fa5bd8d5f0c0e8ed7e5eae13f83f003e45554a4b1880bd38c7b8"
-      },
-      "projectFile": {
-        "file": "apps/desktop/local-api/sidecars/akshare/pyproject.toml",
-        "sha256": "120b6bf9b4c232bbefd77514af2548d6008c7b4b06cf80868529d2756c2dccb0"
-      },
-      "sidecar": {
-        "id": "akshare",
-        "protocol": "zinuto.akshare.v1",
-        "python": "3.11.15",
-        "buildScript": "apps/desktop/local-api/scripts/build-akshare-sidecar.mjs"
-      },
-      "upstreamTerms": [
-        {
-          "id": "aktools-bridge",
-          "termsUrl": "https://github.com/akfamily/aktools",
-          "docsUrl": "https://github.com/akfamily/aktools",
-          "reviewedRevision": "aktools-0.0.91-review"
-        }
-      ],
-      "capabilityFingerprint": "whitelist-bridge-akshare-v1"
     },
     {
       "id": "ccxt",

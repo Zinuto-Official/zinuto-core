@@ -69,7 +69,6 @@ const inspectFrozenSidecar = (provider, registry) => {
     ? inspectAkshareSidecarBundle({
       generatedRoot,
       akshareVersion: version('akshare'),
-      aktoolsVersion: version('aktools'),
     })
     : inspectFinanceDataReaderSidecarBundle({
       generatedRoot,

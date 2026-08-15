@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 import type { UiLanguage } from "@/frontend-kernel/typography";
-import type { ComponentProps } from "react";
+import { memo, type ComponentProps } from "react";
 import { AppRootDesktopShell } from "@/app-shell/AppRootDesktopShell";
 import { resolveTypographyScriptGroup } from "@/frontend-kernel/typography";
 import { I18nProvider } from "@/frontend-kernel/i18n";
@@ -35,11 +35,12 @@ export type RuntimeDesktopShellRendererArgs = {
   onboardingTourStep: AppRootDesktopShellProps["onboardingTourStep"];
   onOnboardingTourStatusChange: AppRootDesktopShellProps["onOnboardingTourStatusChange"];
   onOnboardingTourStepChange: AppRootDesktopShellProps["onOnboardingTourStepChange"];
-  chartNoteHover: AppRootDesktopShellProps["chartNoteHover"];
   trainerModalHostProps: AppRootDesktopShellProps["trainerModalHostProps"];
   utilityDialogsProps: AppRootDesktopShellProps["utilityDialogsProps"];
   actionDialogNode: AppRootDesktopShellProps["actionDialogNode"];
 };
+
+const MemoDesktopBrandEntry = memo(DesktopBrandEntry);
 
 const buildRootClassName = ({
   resolvedThemeMode,
@@ -85,7 +86,6 @@ export const renderRuntimeDesktopShell = ({
   onboardingTourStep,
   onOnboardingTourStatusChange,
   onOnboardingTourStepChange,
-  chartNoteHover,
   trainerModalHostProps,
   utilityDialogsProps,
   actionDialogNode,
@@ -131,12 +131,11 @@ export const renderRuntimeDesktopShell = ({
         onboardingTourStep={onboardingTourStep}
         onOnboardingTourStatusChange={onOnboardingTourStatusChange}
         onOnboardingTourStepChange={onOnboardingTourStepChange}
-        chartNoteHover={chartNoteHover}
         trainerModalHostProps={trainerModalHostProps}
         utilityDialogsProps={utilityDialogsProps}
         actionDialogNode={actionDialogNode}
         brandNode={
-          <DesktopBrandEntry
+          <MemoDesktopBrandEntry
             brandName={brandName}
             brandLogo={GRAPHIC_IMAGE_ASSET_URLS.brandLogoRounded}
             brandLogoAlt={brandLogoAlt}

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
-import { useCallback } from "react";
+import { useCallback, useRef } from "react";
 import type { NativeWindowDragDropEvent } from "@/app-shell/useWindowChromeDrag";
 import { normalizeDroppedImportFolderPath } from "@/domains/data-import/nativeImportHelpers";
 import type { WorkspacePage } from "@/frontend-kernel/workspacePageModel";
@@ -16,6 +16,16 @@ type UseWorkspaceNavigationAccessArgs = {
   openCsvFolderPathAndPrepareImport: (folderPath: string) => void;
 };
 
+type NativeWindowDragDropContext = {
+  activePage: WorkspacePage;
+  deletingSamplePoolId: string;
+  isClearingLocalDataSources: boolean;
+  isPreparingCsvImportPreview: boolean;
+  openCsvFolderPathAndPrepareImport: (folderPath: string) => void;
+  openCsvFolderPickerAndPrepareImport: () => void;
+  setIsNativeImportDragActive: (value: boolean) => void;
+};
+
 export const useWorkspaceNavigationAccess = ({
   activePage,
   setActivePage,
@@ -26,30 +36,50 @@ export const useWorkspaceNavigationAccess = ({
   openCsvFolderPickerAndPrepareImport,
   openCsvFolderPathAndPrepareImport,
 }: UseWorkspaceNavigationAccessArgs) => {
+  const dragDropContextRef = useRef<NativeWindowDragDropContext>({
+    activePage,
+    deletingSamplePoolId,
+    isClearingLocalDataSources,
+    isPreparingCsvImportPreview,
+    openCsvFolderPathAndPrepareImport,
+    openCsvFolderPickerAndPrepareImport,
+    setIsNativeImportDragActive,
+  });
+  dragDropContextRef.current = {
+    activePage,
+    deletingSamplePoolId,
+    isClearingLocalDataSources,
+    isPreparingCsvImportPreview,
+    openCsvFolderPathAndPrepareImport,
+    openCsvFolderPickerAndPrepareImport,
+    setIsNativeImportDragActive,
+  };
+
   const handleNativeWindowDragDropEvent = useCallback(
     (event: NativeWindowDragDropEvent) => {
-      if (activePage !== "DATA") {
+      const context = dragDropContextRef.current;
+      if (context.activePage !== "DATA") {
         if (event.type === "leave" || event.type === "drop") {
-          setIsNativeImportDragActive(false);
+          context.setIsNativeImportDragActive(false);
         }
         return;
       }
       const isImportEntryBlocked =
-        isPreparingCsvImportPreview ||
-        isClearingLocalDataSources ||
-        Boolean(deletingSamplePoolId);
+        context.isPreparingCsvImportPreview ||
+        context.isClearingLocalDataSources ||
+        Boolean(context.deletingSamplePoolId);
       if (event.type === "enter" || event.type === "over") {
-        setIsNativeImportDragActive(!isImportEntryBlocked);
+        context.setIsNativeImportDragActive(!isImportEntryBlocked);
         return;
       }
       if (event.type === "leave") {
-        setIsNativeImportDragActive(false);
+        context.setIsNativeImportDragActive(false);
         return;
       }
       if (event.type !== "drop") {
         return;
       }
-      setIsNativeImportDragActive(false);
+      context.setIsNativeImportDragActive(false);
       if (isImportEntryBlocked) {
         return;
       }
@@ -58,20 +88,12 @@ export const useWorkspaceNavigationAccess = ({
           .map((rawPath) => normalizeDroppedImportFolderPath(rawPath))
           .find((path) => Boolean(path)) ?? "";
       if (!droppedFolderPath) {
-        openCsvFolderPickerAndPrepareImport();
+        context.openCsvFolderPickerAndPrepareImport();
         return;
       }
-      openCsvFolderPathAndPrepareImport(droppedFolderPath);
+      context.openCsvFolderPathAndPrepareImport(droppedFolderPath);
     },
-    [
-      activePage,
-      deletingSamplePoolId,
-      isClearingLocalDataSources,
-      isPreparingCsvImportPreview,
-      openCsvFolderPickerAndPrepareImport,
-      openCsvFolderPathAndPrepareImport,
-      setIsNativeImportDragActive,
-    ],
+    [],
   );
 
   const handleSelectWorkspacePage = useCallback(

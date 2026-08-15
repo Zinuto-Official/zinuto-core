@@ -15,7 +15,7 @@ export const REGISTRY_PATH = path.join(
   'open-source',
   'market-data-connectors.v1.json',
 );
-export const PROVIDER_IDS = ['akshare', 'aktools', 'ccxt', 'financedatareader'];
+export const PROVIDER_IDS = ['akshare', 'ccxt', 'financedatareader'];
 
 export const sha256 = (value) =>
   crypto.createHash('sha256').update(value).digest('hex');

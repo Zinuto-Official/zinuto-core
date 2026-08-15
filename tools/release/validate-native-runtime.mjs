@@ -97,7 +97,6 @@ export const inspectAkshareSidecarBundle = ({
   nodePlatform = process.platform,
   nodeArch = process.arch,
   akshareVersion,
-  aktoolsVersion,
 }) => {
   const layout = resolveAkshareSidecarPackageLayout({
     generatedRoot,
@@ -111,7 +110,6 @@ export const inspectAkshareSidecarBundle = ({
     path.join(internalRoot, 'base_library.zip'),
     path.join(internalRoot, 'akshare', 'file_fold', 'calendar.json'),
     path.join(internalRoot, `akshare-${akshareVersion}.dist-info`, 'METADATA'),
-    path.join(internalRoot, `aktools-${aktoolsVersion}.dist-info`, 'METADATA'),
   ];
   const requiredDirectories = [bundleRoot, internalRoot];
   const invalidPaths = [
@@ -240,7 +238,6 @@ export const validateNativeRuntime = ({ args = process.argv.slice(2) } = {}) => 
         inspectAkshareSidecarBundle({
           generatedRoot: generatedDir,
           akshareVersion: connectorVersion('akshare'),
-          aktoolsVersion: connectorVersion('aktools'),
         }),
         inspectFinanceDataReaderSidecarBundle({
           generatedRoot: generatedDir,

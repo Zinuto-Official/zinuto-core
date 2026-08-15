@@ -1,10 +1,9 @@
 # SPDX-License-Identifier: GPL-3.0-only
 
-"""Closed AKTools/AKShare adapter used by the Zinuto desktop runtime.
+"""Closed AKShare adapter used by the Zinuto desktop runtime.
 
-This worker is a whitelist NDJSON replacement for AKTools' generic HTTP bridge
-semantics. It deliberately imports only the safe AKTools package root, exposes
-no HTTP listener, and never dispatches a caller-supplied function name.
+This worker exposes a whitelist NDJSON request contract over AKShare. It starts
+no HTTP listener and never dispatches a caller-supplied function name.
 """
 
 from __future__ import annotations
@@ -19,7 +18,6 @@ from multiprocessing import freeze_support
 from typing import Any
 
 import akshare as ak
-import aktools
 import requests
 from akshare.stock.stock_zh_a_sina import stock_zh_a_daily, stock_zh_a_minute
 from akshare.stock.stock_zh_a_tx import stock_zh_a_spot_tx
@@ -466,7 +464,6 @@ def main() -> int:
             "requestId": request_id,
             "ok": True,
             "runtime": {
-                "aktools": aktools.__version__,
                 "akshare": version("akshare"),
             },
             "kind": response_kind,

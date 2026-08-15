@@ -682,11 +682,8 @@ export const useTrainerChartLifecycle = ({
     barsRef,
     currentDisplayPeriodRef,
     drawingOverlayIdRef,
-    effectiveThemeMode,
-    language,
     lastMainIndicatorMountKeyRef,
     lastSignalIndicatorMountKeyRef,
-    priceColorMode,
     rearmTimerRef,
     resolveChartDomForPage,
     setChartReady,
@@ -699,8 +696,6 @@ export const useTrainerChartLifecycle = ({
     showTrainerVolumePaneRef,
     snapshotRef,
     syncTradeMarkerCompactMode,
-    trainerResponsiveChartEdgeConfig,
     visibleAggregatedBarsRef,
-    chartInitErrorText
   ]);
 };

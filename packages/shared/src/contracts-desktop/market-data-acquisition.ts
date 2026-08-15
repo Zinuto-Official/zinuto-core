@@ -84,7 +84,7 @@ export const desktopMarketDataAcquisitionUpstreamTermsSchema = z
   .strict();
 export const desktopMarketDataAcquisitionProjectSchema = z
   .object({
-    id: z.enum(["aktools", "akshare", "ccxt"]),
+    id: z.enum(["akshare", "ccxt"]),
     name: nonEmptyTrimmedStringSchema.max(INPUT_LIMITS.generalNameChars),
     url: nonEmptyTrimmedStringSchema.max(INPUT_LIMITS.urlChars),
     infoUrl: nonEmptyTrimmedStringSchema.max(INPUT_LIMITS.urlChars),

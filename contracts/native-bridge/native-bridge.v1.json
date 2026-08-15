@@ -108,6 +108,13 @@
       "response": "null"
     },
     {
+      "name": "main_webview_busy_signal",
+      "request": {
+        "busy": "boolean"
+      },
+      "response": "null"
+    },
+    {
       "name": "save_custom_indicator_ai_conversion_guide",
       "request": {
         "language": "en | zh-CN | ja | ko | es",

@@ -391,6 +391,21 @@ export const useRuntimeWorkspaceBundles = (
     withCountUnit,
     withLabelValue,
   } = scope;
+  const handleSaveTradingSettings = useCallback(() => {
+    void saveTradingSettings();
+  }, [saveTradingSettings]);
+  const handleResumeLatestTrainerSessionStable = useCallback(async () => {
+    await handleResumeLatestTrainerSession();
+  }, [handleResumeLatestTrainerSession]);
+  const handleStepNext = useCallback(async () => {
+    await stepNext();
+  }, [stepNext]);
+  const handleClearLocalPools = useCallback(() => {
+    void clearSelectedFolder();
+  }, [clearSelectedFolder]);
+  const handleHistoryRetentionApplied = useCallback(async () => {
+    await handleSystemDevSimulationDataChanged({ reason: "cleanup" });
+  }, [handleSystemDevSimulationDataChanged]);
   const languageOptions = useMemo(
     () => getLanguageOptions(language),
     [language],
@@ -509,7 +524,7 @@ export const useRuntimeWorkspaceBundles = (
       tradeAmountIncludesFees,
       setTradeAmountIncludesFees,
       percentSymbol: ui.percentSymbol,
-      onSave: () => saveTradingSettings(),
+      onSave: handleSaveTradingSettings,
       isSavingTradingSettings,
       isBusy,
       isSaveDisabled: isReplaySettingsSaveDisabled,
@@ -623,9 +638,7 @@ export const useRuntimeWorkspaceBundles = (
       freeReplayStartButtonIconName,
       startPreparedFreeReplay,
       resetTrainerToPrepView,
-      onResumeLatestTrainerSession: async () => {
-        await handleResumeLatestTrainerSession();
-      },
+      onResumeLatestTrainerSession: handleResumeLatestTrainerSessionStable,
       handleFreeReplayPrepModeChange,
       handleFreeReplayPrepEnvironmentAssetClassChange,
       handleFreeReplayPrepEnvironmentPresetChange,
@@ -702,7 +715,7 @@ export const useRuntimeWorkspaceBundles = (
       setBuyAmountInput,
       setBuyRatioInput,
       setBuyPriceMode,
-      onStepNext: () => stepNext(),
+      onStepNext: handleStepNext,
       isStepNextDisabled: !sessionId || !snapshot,
       undo,
       placeOrder,
@@ -829,9 +842,7 @@ export const useRuntimeWorkspaceBundles = (
       trainerDisplayPeriod,
       trainerPeriodOptionsByBase,
       historyReplayChartBindings,
-      onClearLocalPools: () => {
-        void clearSelectedFolder();
-      },
+      onClearLocalPools: handleClearLocalPools,
       openCsvFolderPickerAndPrepareImport,
       openCsvFolderPathAndPrepareImport,
       controlCsvImportCardJob,
@@ -915,9 +926,7 @@ export const useRuntimeWorkspaceBundles = (
       setTradeColorTheme,
       setShowGlobalDecimals,
       refreshSystemStorageUsage,
-      onHistoryRetentionApplied: async () => {
-        await handleSystemDevSimulationDataChanged({ reason: "cleanup" });
-      },
+      onHistoryRetentionApplied: handleHistoryRetentionApplied,
       onRequestGlobalReset: requestGlobalResetConfirmation,
       onEnableDeveloperMode: enableDeveloperMode,
       globalResetStorageTotalText,

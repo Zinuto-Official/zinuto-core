@@ -184,7 +184,6 @@ test('AKShare onedir validation requires the target executable and critical runt
     ['_internal', 'base_library.zip'],
     ['_internal', 'akshare', 'file_fold', 'calendar.json'],
     ['_internal', 'akshare-1.18.91.dist-info', 'METADATA'],
-    ['_internal', 'aktools-0.0.91.dist-info', 'METADATA'],
   ];
   for (const segments of requiredFiles) {
     const filePath = path.join(bundleRoot, ...segments);
@@ -200,7 +199,6 @@ test('AKShare onedir validation requires the target executable and critical runt
       nodePlatform: 'darwin',
       nodeArch: 'arm64',
       akshareVersion: '1.18.91',
-      aktoolsVersion: '0.0.91',
     }).invalidPaths,
     [],
   );
@@ -212,7 +210,6 @@ test('AKShare onedir validation requires the target executable and critical runt
     nodePlatform: 'darwin',
     nodeArch: 'arm64',
     akshareVersion: '1.18.91',
-    aktoolsVersion: '0.0.91',
   }).invalidPaths;
   assert.equal(
     invalid.includes(
@@ -381,7 +378,6 @@ test('AKShare package validation rejects stale targets and unexpected packaged f
     nodePlatform: 'darwin',
     nodeArch: 'arm64',
     akshareVersion: '1.18.91',
-    aktoolsVersion: '0.0.91',
   });
   assert.equal(inspected.invalidPaths.includes(staleTarget), true);
   assert.equal(inspected.invalidPaths.includes(unexpectedFile), true);
@@ -432,7 +428,6 @@ test('direct Tauri input checks require the executable for the selected platform
   fs.writeFileSync(manifestPath, JSON.stringify({
     providers: [
       { id: 'akshare', version: '1.18.91' },
-      { id: 'aktools', version: '0.0.91' },
       { id: 'financedatareader', version: '0.9.202' },
     ],
   }));

@@ -84,6 +84,7 @@ export const useCustomIndicatorCodeEditorRuntime = ({
 
     let measureFrameId = 0;
     let measureTimerId = 0;
+    let viewportFrameId = 0;
     let detachViewportChanges = () => {};
     const requestEditorMeasure = () => {
       if (measureFrameId) {
@@ -109,7 +110,16 @@ export const useCustomIndicatorCodeEditorRuntime = ({
       host,
       requestEditorMeasure,
     );
-    void subscribeDesktopViewportChanges(requestEditorMeasure).then(
+    const handleViewportChange = () => {
+      if (viewportFrameId) {
+        return;
+      }
+      viewportFrameId = window.requestAnimationFrame(() => {
+        viewportFrameId = 0;
+        requestEditorMeasure();
+      });
+    };
+    void subscribeDesktopViewportChanges(handleViewportChange).then(
       (detach) => {
         if (codeEditorViewRef.current !== view) {
           detach();
@@ -126,6 +136,9 @@ export const useCustomIndicatorCodeEditorRuntime = ({
       }
       if (measureTimerId) {
         window.clearTimeout(measureTimerId);
+      }
+      if (viewportFrameId) {
+        window.cancelAnimationFrame(viewportFrameId);
       }
       detachHostResizeMeasurement();
       detachViewportChanges();

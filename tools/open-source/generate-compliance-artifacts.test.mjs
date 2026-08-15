@@ -53,7 +53,6 @@ test('generated compliance artifacts include the complete pinned Python sidecar'
   }
 
   const requiredComponents = [
-    ['pypi', 'aktools', '0.0.91'],
     ['pypi', 'akshare', '1.18.91'],
     ['pypi', 'finance-datareader', '0.9.202'],
     ['pypi', 'pyinstaller', '6.16.0'],

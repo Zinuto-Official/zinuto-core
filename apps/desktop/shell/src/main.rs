@@ -140,6 +140,11 @@ fn desktop_app_restart(app: tauri::AppHandle) {
 }
 
 #[tauri::command(rename_all = "camelCase")]
+fn main_webview_busy_signal(busy: bool) {
+    crate::runtime::main_webview_busy::set_main_webview_busy(busy);
+}
+
+#[tauri::command(rename_all = "camelCase")]
 async fn save_custom_indicator_ai_conversion_guide(
     window: tauri::WebviewWindow,
     language: String,
@@ -454,6 +459,7 @@ fn main() {
         desktop_release_channel,
         desktop_app_quit,
         desktop_app_restart,
+        main_webview_busy_signal,
         save_custom_indicator_ai_conversion_guide,
         main_window_ready_to_show,
         bridge::backend_http_request

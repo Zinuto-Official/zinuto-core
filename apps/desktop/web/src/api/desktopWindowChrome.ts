@@ -50,6 +50,7 @@ export const createDesktopWindowChromeAdapter = (
     const currentWindow = await loadWindow();
     let disposed = false;
     let latestValue: boolean | null = null;
+    let pendingPublish: Promise<void> | null = null;
     const publish = async () => {
       const maximized = await currentWindow.isMaximized().catch(() => false);
       if (!disposed && maximized !== latestValue) {
@@ -57,9 +58,17 @@ export const createDesktopWindowChromeAdapter = (
         listener(maximized);
       }
     };
+    const schedulePublish = () => {
+      if (pendingPublish || disposed) {
+        return;
+      }
+      pendingPublish = publish().finally(() => {
+        pendingPublish = null;
+      });
+    };
     await publish();
     const unlisten = await currentWindow.onResized(() => {
-      void publish();
+      schedulePublish();
     });
     return createTauriUnlistenCleanup(() => {
       disposed = true;

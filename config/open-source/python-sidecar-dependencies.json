@@ -1,21 +1,17 @@
 {
   "schemaVersion": 1,
-  "id": "aktools-akshare-market-data-sidecar",
+  "id": "akshare-market-data-sidecar",
   "policy": "This manifest is an offline, exact-version license review of every registry package in the sidecar uv.lock. Any lock, interpreter, build-tool, root-package, or license declaration change requires explicit review and regeneration.",
   "lockFile": "apps/desktop/local-api/sidecars/akshare/uv.lock",
-  "lockSha256": "98f766385e00fa5bd8d5f0c0e8ed7e5eae13f83f003e45554a4b1880bd38c7b8",
+  "lockSha256": "ca65c3aef624355c50f54c55d03082c1f906562181d8d964fcb408bed99f7437",
   "projectFile": "apps/desktop/local-api/sidecars/akshare/pyproject.toml",
-  "projectSha256": "120b6bf9b4c232bbefd77514af2548d6008c7b4b06cf80868529d2756c2dccb0",
+  "projectSha256": "277d60fdcfef6f0113936210ca513691e30a325e88df7ef80f9062f2714be99d",
   "pythonVersionFile": "apps/desktop/local-api/sidecars/akshare/.python-version",
   "pythonVersionFileSha256": "db82937e1f1830581a9553c7814f5c5fcacb6dfdef8310b43e9a812c887acaf5",
   "requiredRootPackages": [
     {
       "name": "akshare",
       "version": "1.18.91"
-    },
-    {
-      "name": "aktools",
-      "version": "0.0.91"
     },
     {
       "name": "pyinstaller",
@@ -56,38 +52,10 @@
       "role": "sidecar-lock"
     },
     {
-      "name": "aktools",
-      "version": "0.0.91",
-      "spdxExpression": "MIT",
-      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/aktools/0.0.91/",
-      "role": "sidecar-lock"
-    },
-    {
       "name": "altgraph",
       "version": "0.17.5",
       "spdxExpression": "MIT",
       "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/altgraph/0.17.5/",
-      "role": "sidecar-lock"
-    },
-    {
-      "name": "annotated-doc",
-      "version": "0.0.4",
-      "spdxExpression": "MIT",
-      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/annotated-doc/0.0.4/",
-      "role": "sidecar-lock"
-    },
-    {
-      "name": "annotated-types",
-      "version": "0.7.0",
-      "spdxExpression": "MIT",
-      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/annotated-types/0.7.0/",
-      "role": "sidecar-lock"
-    },
-    {
-      "name": "anyio",
-      "version": "4.14.2",
-      "spdxExpression": "MIT",
-      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/anyio/4.14.2/",
       "role": "sidecar-lock"
     },
     {
@@ -119,13 +87,6 @@
       "role": "sidecar-lock"
     },
     {
-      "name": "click",
-      "version": "8.4.2",
-      "spdxExpression": "BSD-3-Clause",
-      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/click/8.4.2/",
-      "role": "sidecar-lock"
-    },
-    {
       "name": "colorama",
       "version": "0.4.6",
       "spdxExpression": "BSD-3-Clause",
@@ -154,20 +115,6 @@
       "role": "sidecar-lock"
     },
     {
-      "name": "fastapi",
-      "version": "0.139.2",
-      "spdxExpression": "MIT",
-      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/fastapi/0.139.2/",
-      "role": "sidecar-lock"
-    },
-    {
-      "name": "h11",
-      "version": "0.16.0",
-      "spdxExpression": "MIT",
-      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/h11/0.16.0/",
-      "role": "sidecar-lock"
-    },
-    {
       "name": "html5lib",
       "version": "1.1",
       "spdxExpression": "MIT",
@@ -179,13 +126,6 @@
       "version": "3.18",
       "spdxExpression": "BSD-3-Clause",
       "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/idna/3.18/",
-      "role": "sidecar-lock"
-    },
-    {
-      "name": "jinja2",
-      "version": "3.1.6",
-      "spdxExpression": "BSD-3-Clause",
-      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/jinja2/3.1.6/",
       "role": "sidecar-lock"
     },
     {
@@ -214,13 +154,6 @@
       "version": "4.2.0",
       "spdxExpression": "MIT",
       "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/markdown-it-py/4.2.0/",
-      "role": "sidecar-lock"
-    },
-    {
-      "name": "markupsafe",
-      "version": "3.0.3",
-      "spdxExpression": "BSD-3-Clause",
-      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/markupsafe/3.0.3/",
       "role": "sidecar-lock"
     },
     {
@@ -287,20 +220,6 @@
       "role": "sidecar-lock"
     },
     {
-      "name": "pydantic",
-      "version": "2.13.4",
-      "spdxExpression": "MIT",
-      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/pydantic/2.13.4/",
-      "role": "sidecar-lock"
-    },
-    {
-      "name": "pydantic-core",
-      "version": "2.46.4",
-      "spdxExpression": "MIT",
-      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/pydantic-core/2.46.4/",
-      "role": "sidecar-lock"
-    },
-    {
       "name": "pygments",
       "version": "2.20.0",
       "spdxExpression": "BSD-2-Clause",
@@ -326,13 +245,6 @@
       "version": "2.9.0.post0",
       "spdxExpression": "BSD-3-Clause OR Apache-2.0",
       "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/python-dateutil/2.9.0.post0/",
-      "role": "sidecar-lock"
-    },
-    {
-      "name": "python-multipart",
-      "version": "0.0.32",
-      "spdxExpression": "Apache-2.0",
-      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/python-multipart/0.0.32/",
       "role": "sidecar-lock"
     },
     {
@@ -364,13 +276,6 @@
       "role": "sidecar-lock"
     },
     {
-      "name": "shellingham",
-      "version": "1.5.4",
-      "spdxExpression": "ISC",
-      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/shellingham/1.5.4/",
-      "role": "sidecar-lock"
-    },
-    {
       "name": "six",
       "version": "1.17.0",
       "spdxExpression": "MIT",
@@ -382,13 +287,6 @@
       "version": "2.9",
       "spdxExpression": "MIT",
       "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/soupsieve/2.9/",
-      "role": "sidecar-lock"
-    },
-    {
-      "name": "starlette",
-      "version": "1.3.1",
-      "spdxExpression": "BSD-3-Clause",
-      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/starlette/1.3.1/",
       "role": "sidecar-lock"
     },
     {
@@ -406,24 +304,10 @@
       "role": "sidecar-lock"
     },
     {
-      "name": "typer",
-      "version": "0.27.0",
-      "spdxExpression": "MIT",
-      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/typer/0.27.0/",
-      "role": "sidecar-lock"
-    },
-    {
       "name": "typing-extensions",
       "version": "4.16.0",
       "spdxExpression": "PSF-2.0",
       "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/typing-extensions/4.16.0/",
-      "role": "sidecar-lock"
-    },
-    {
-      "name": "typing-inspection",
-      "version": "0.4.2",
-      "spdxExpression": "MIT",
-      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/typing-inspection/0.4.2/",
       "role": "sidecar-lock"
     },
     {
@@ -438,13 +322,6 @@
       "version": "2.7.0",
       "spdxExpression": "MIT",
       "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/urllib3/2.7.0/",
-      "role": "sidecar-lock"
-    },
-    {
-      "name": "uvicorn",
-      "version": "0.51.0",
-      "spdxExpression": "BSD-3-Clause",
-      "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/uvicorn/0.51.0/",
       "role": "sidecar-lock"
     },
     {
@@ -463,14 +340,6 @@
     }
   ],
   "connectorSoftware": [
-    {
-      "ecosystem": "pypi",
-      "name": "aktools",
-      "label": "AKTools",
-      "version": "0.0.91",
-      "spdxExpression": "MIT",
-      "projectUrl": "https://github.com/akfamily/aktools"
-    },
     {
       "ecosystem": "pypi",
       "name": "akshare",

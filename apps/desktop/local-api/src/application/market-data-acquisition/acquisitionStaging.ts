@@ -19,7 +19,6 @@ import {
 } from './marketDataAcquisitionTypes.js';
 import {
   AKSHARE_VERSION,
-  AKTOOLS_VERSION,
   CCXT_VERSION,
   FINANCE_DATA_READER_VERSION,
 } from './marketDataConnectorVersions.generated.js';
@@ -198,12 +197,11 @@ const connectorSourceDetails = (request: AcquisitionRequest) => {
   if (request.connectorId === 'akshare') {
     const isIndex = request.dataset === 'index_zh_a_hist';
     return {
-      connector: `Zinuto whitelist NDJSON adapter for AKTools ${AKTOOLS_VERSION} bridge semantics / AKShare ${AKSHARE_VERSION}`,
+      connector: `Zinuto whitelist NDJSON adapter for AKShare ${AKSHARE_VERSION}`,
       upstream: isIndex
         ? 'AKShare China index interface (Eastmoney source)'
         : 'AKShare A-share interface (Eastmoney source)',
       projects: [
-        `AKTools ${AKTOOLS_VERSION} — https://github.com/akfamily/aktools`,
         `AKShare ${AKSHARE_VERSION} — https://github.com/akfamily/akshare`,
         'AKShare introduction — https://akshare.akfamily.xyz/introduction.html',
       ],
@@ -568,7 +566,7 @@ const marketOutputFolderName = (
 const marketSourceDetails = (providerId: string, upstreamId: string) => {
   if (providerId === 'akshare') {
     return {
-      connector: `AKTools ${AKTOOLS_VERSION} / AKShare ${AKSHARE_VERSION}`,
+      connector: `AKShare ${AKSHARE_VERSION}`,
       project: 'https://github.com/akfamily/akshare',
       terms: upstreamId === 'tencent'
         ? 'https://www.tencent.com/term-of-service/'

@@ -90,6 +90,7 @@ export type {
 export const HistoryReplayChartView = ({
   project,
   themeMode,
+  isActive = true,
   showGlobalDecimals = true,
   priceColorMode,
   tradeColorTheme,
@@ -544,7 +545,7 @@ export const HistoryReplayChartView = ({
     registerCustomIndicators();
 
     const dom = chartDomRef.current;
-    if (!dom) {
+    if (!dom || !isActive) {
       return;
     }
 
@@ -701,7 +702,7 @@ export const HistoryReplayChartView = ({
     };
 
     return whenElementRenderable(dom, () => runHistoryChartInit(dom));
-  }, []);
+  }, [isActive]);
 
   useEffect(() => {
     const chart = chartRef.current;

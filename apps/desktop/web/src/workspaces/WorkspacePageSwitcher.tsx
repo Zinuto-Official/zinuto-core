@@ -334,7 +334,8 @@ const loadMemoizedWorkspacePageAfterAssets = <Props extends object>(
   }));
 
 const WORKSPACE_PAGE_MODULE_LOADERS = {
-  TRAINER: () => loadWorkspacePageAfterAssets("TRAINER", loadTrainerPage),
+  TRAINER: () =>
+    loadMemoizedWorkspacePageAfterAssets("TRAINER", loadTrainerPage),
   SPECIAL_TRAINING: () =>
     loadMemoizedWorkspacePageAfterAssets(
       "SPECIAL_TRAINING",
@@ -355,14 +356,23 @@ const WORKSPACE_PAGE_MODULE_LOADERS = {
   NOTES: () =>
     loadMemoizedWorkspacePageAfterAssets("NOTES", loadNotesPage),
   CUSTOM_INDICATOR: () =>
-    loadWorkspacePageAfterAssets(
+    loadMemoizedWorkspacePageAfterAssets(
       "CUSTOM_INDICATOR",
       loadCustomIndicatorSystemPage,
     ),
-  DATA: () => loadWorkspacePageAfterAssets("DATA", loadDataConfigPage),
+  DATA: () =>
+    loadMemoizedWorkspacePageAfterAssets("DATA", loadDataConfigPage),
   SETTINGS: () =>
     loadMemoizedWorkspacePageAfterAssets("SETTINGS", loadSystemSettingsPage),
 } as const;
+
+type WorkspacePageComponentProps = {
+  [Page in keyof typeof WORKSPACE_PAGE_MODULE_LOADERS]: Awaited<
+    ReturnType<(typeof WORKSPACE_PAGE_MODULE_LOADERS)[Page]>
+  >["default"] extends ComponentType<infer PageProps>
+    ? PageProps
+    : never;
+};
 
 type RetryableWorkspacePageSurfaceProps<Props extends object> = {
   componentProps: Props;
@@ -520,7 +530,7 @@ type WorkspacePageSwitcherProps = {
   onDisplayedPageChange?: (page: WorkspacePage) => void;
 };
 
-export const WorkspacePageSwitcher = ({
+export const WorkspacePageSwitcher = memo(({
   activePage,
   onSelectPage,
   canResumeTrainerSession,
@@ -554,6 +564,15 @@ export const WorkspacePageSwitcher = ({
   const navigationMotionEpochRef = useRef(0);
   const [navigationMotion, setNavigationMotion] =
     useState<WorkspacePageNavigationMotion | null>(null);
+  const exitMotionEpochRef = useRef(0);
+  const [exitMotion, setExitMotion] = useState<{
+    direction: Exclude<
+      ReturnType<typeof getWorkspaceMotionDirection>,
+      "none"
+    >;
+    epoch: number;
+    page: CachedWorkspacePage;
+  } | null>(null);
   const [cachedPages, setCachedPages] = useState<CachedWorkspacePage[]>(() =>
     WORKSPACE_KEEP_ALIVE_PAGES.has(normalizedActivePage)
       ? [normalizedActivePage]
@@ -646,7 +665,21 @@ export const WorkspacePageSwitcher = ({
       page: displayedPage,
       surface: getWorkspaceMotionSurface(displayedPage),
     });
+    if (WORKSPACE_KEEP_ALIVE_PAGES.has(fromPage)) {
+      exitMotionEpochRef.current += 1;
+      setExitMotion({
+        direction,
+        epoch: exitMotionEpochRef.current,
+        page: fromPage,
+      });
+    }
   }, [displayedPage]);
+
+  useEffect(() => {
+    if (exitMotion && exitMotion.page === displayedPage) {
+      setExitMotion(null);
+    }
+  }, [displayedPage, exitMotion]);
 
   const handlePageMotionEnd = useCallback(
     (event: AnimationEvent<HTMLDivElement>) => {
@@ -668,6 +701,26 @@ export const WorkspacePageSwitcher = ({
     [],
   );
 
+  const handlePageExitMotionEnd = useCallback(
+    (event: AnimationEvent<HTMLDivElement>) => {
+      const animationTarget = event.target as HTMLElement;
+      if (
+        event.currentTarget !== animationTarget &&
+        !animationTarget.classList.contains("workspace-page-cache-slot-content")
+      ) {
+        return;
+      }
+      const completedEpoch = Number(event.currentTarget.dataset.motionEpoch);
+      if (!Number.isFinite(completedEpoch)) {
+        return;
+      }
+      setExitMotion((current) =>
+        current?.epoch === completedEpoch ? null : current,
+      );
+    },
+    [],
+  );
+
   useEffect(() => {
     if (!navigationMotion || typeof window === "undefined") {
       return;
@@ -682,6 +735,21 @@ export const WorkspacePageSwitcher = ({
       window.clearTimeout(timerId);
     };
   }, [navigationMotion]);
+
+  useEffect(() => {
+    if (!exitMotion || typeof window === "undefined") {
+      return;
+    }
+    const motionEpoch = exitMotion.epoch;
+    const timerId = window.setTimeout(() => {
+      setExitMotion((current) =>
+        current?.epoch === motionEpoch ? null : current,
+      );
+    }, WORKSPACE_PAGE_NAVIGATION_MOTION_FAILSAFE_MS);
+    return () => {
+      window.clearTimeout(timerId);
+    };
+  }, [exitMotion]);
 
   useEffect(() => {
     if (!nextIdlePreloadPage || typeof window === "undefined") {
@@ -741,6 +809,89 @@ export const WorkspacePageSwitcher = ({
   const loadFailedLabel = tt("common.status.loadFailed");
   const retryLabel = tt("appText.retry");
 
+  const trainerSurfaceProps = useMemo<WorkspacePageComponentProps["TRAINER"]>(
+    () => ({
+      ...trainerWorkspacePageProps,
+      isActive: normalizedActivePage === "TRAINER",
+      onboardingTargetId,
+    }),
+    [normalizedActivePage, onboardingTargetId, trainerWorkspacePageProps],
+  );
+  const specialTrainingSurfaceProps =
+    useMemo<WorkspacePageComponentProps["SPECIAL_TRAINING"]>(
+      () => ({
+        ...specialTrainingEntryProps,
+        onboardingTargetId,
+        isPageActive: normalizedActivePage === "SPECIAL_TRAINING",
+      }),
+      [normalizedActivePage, onboardingTargetId, specialTrainingEntryProps],
+    );
+  const historySurfaceProps = useMemo<WorkspacePageComponentProps["HISTORY"]>(
+    () => ({
+      history: diagnosticHistoryDeps,
+      ui,
+      language,
+      isActive: normalizedActivePage === "HISTORY",
+      onError: onStatsError,
+    }),
+    [diagnosticHistoryDeps, language, normalizedActivePage, onStatsError, ui],
+  );
+  const challengeStatsSurfaceProps =
+    useMemo<WorkspacePageComponentProps["CHALLENGE_STATS"]>(
+      () => ({
+        ...challengeStatsEntryProps,
+        isActive: normalizedActivePage === "CHALLENGE_STATS",
+      }),
+      [challengeStatsEntryProps, normalizedActivePage],
+    );
+  const strategyBacktestSurfaceProps =
+    useMemo<WorkspacePageComponentProps["STRATEGY_BACKTEST"]>(
+      () => ({
+        isActive: normalizedActivePage === "STRATEGY_BACKTEST",
+        enabledSamplePools: enabledSamplePools as StrategyBacktestSamplePool[],
+        tradingPresetEditor: trainerWorkspacePageProps.tradingPresetEditor,
+        trainerDisplayPeriod: historyWorkspacePageProps.trainerDisplayPeriod,
+        trainerPeriodOptionsByBase:
+          historyWorkspacePageProps.trainerPeriodOptionsByBase,
+        chartRenderMode: historyWorkspacePageProps.chartRenderMode,
+      }),
+      [
+        enabledSamplePools,
+        historyWorkspacePageProps.chartRenderMode,
+        historyWorkspacePageProps.trainerDisplayPeriod,
+        historyWorkspacePageProps.trainerPeriodOptionsByBase,
+        normalizedActivePage,
+        trainerWorkspacePageProps.tradingPresetEditor,
+      ],
+    );
+  const notesSurfaceProps = useMemo<WorkspacePageComponentProps["NOTES"]>(
+    () => ({ ...notesPageProps, isActive: normalizedActivePage === "NOTES" }),
+    [normalizedActivePage, notesPageProps],
+  );
+  const customIndicatorSurfaceProps =
+    useMemo<WorkspacePageComponentProps["CUSTOM_INDICATOR"]>(
+      () => ({
+        language,
+        ui,
+        isActive: normalizedActivePage === "CUSTOM_INDICATOR",
+        priceColorMode,
+        resolveSamplePoolDisplayName,
+      }),
+      [language, normalizedActivePage, priceColorMode, resolveSamplePoolDisplayName, ui],
+    );
+  const dataSurfaceProps = useMemo<WorkspacePageComponentProps["DATA"]>(
+    () => ({ ...dataConfigPageProps, isActive: normalizedActivePage === "DATA" }),
+    [dataConfigPageProps, normalizedActivePage],
+  );
+  const settingsSurfaceProps =
+    useMemo<WorkspacePageComponentProps["SETTINGS"]>(
+      () => ({
+        ...systemSettingsPageProps,
+        isActive: normalizedActivePage === "SETTINGS",
+      }),
+      [normalizedActivePage, systemSettingsPageProps],
+    );
+
   const renderWorkspacePage = (page: CachedWorkspacePage): ReactNode => {
     if (page === "COMMAND_CENTER") {
       return (
@@ -761,14 +912,9 @@ export const WorkspacePageSwitcher = ({
     }
 
     if (page === "TRAINER") {
-      const isPageActive = page === normalizedActivePage;
       return (
         <RetryableWorkspacePageSurface
-          componentProps={{
-            ...trainerWorkspacePageProps,
-            isActive: isPageActive,
-            onboardingTargetId,
-          }}
+          componentProps={trainerSurfaceProps}
           fallback={renderPageFallback(page)}
           loadFailedLabel={loadFailedLabel}
           loader={WORKSPACE_PAGE_MODULE_LOADERS.TRAINER}
@@ -779,14 +925,9 @@ export const WorkspacePageSwitcher = ({
     }
 
     if (page === "SPECIAL_TRAINING") {
-      const isPageActive = page === normalizedActivePage;
       return (
         <RetryableWorkspacePageSurface
-          componentProps={{
-            ...specialTrainingEntryProps,
-            onboardingTargetId,
-            isPageActive,
-          }}
+          componentProps={specialTrainingSurfaceProps}
           fallback={renderPageFallback(page)}
           loadFailedLabel={loadFailedLabel}
           loader={WORKSPACE_PAGE_MODULE_LOADERS.SPECIAL_TRAINING}
@@ -797,16 +938,9 @@ export const WorkspacePageSwitcher = ({
     }
 
     if (page === "HISTORY") {
-      const isPageActive = page === normalizedActivePage;
       return (
         <RetryableWorkspacePageSurface
-          componentProps={{
-            history: diagnosticHistoryDeps,
-            ui,
-            language,
-            isActive: isPageActive,
-            onError: onStatsError,
-          }}
+          componentProps={historySurfaceProps}
           fallback={renderPageFallback(page)}
           loadFailedLabel={loadFailedLabel}
           loader={WORKSPACE_PAGE_MODULE_LOADERS.HISTORY}
@@ -817,13 +951,9 @@ export const WorkspacePageSwitcher = ({
     }
 
     if (page === "CHALLENGE_STATS") {
-      const isPageActive = page === normalizedActivePage;
       return (
         <RetryableWorkspacePageSurface
-          componentProps={{
-            ...challengeStatsEntryProps,
-            isActive: isPageActive,
-          }}
+          componentProps={challengeStatsSurfaceProps}
           fallback={renderPageFallback(page, ui.statsLoading)}
           loadFailedLabel={loadFailedLabel}
           loader={WORKSPACE_PAGE_MODULE_LOADERS.CHALLENGE_STATS}
@@ -834,19 +964,9 @@ export const WorkspacePageSwitcher = ({
     }
 
     if (page === "STRATEGY_BACKTEST") {
-      const isPageActive = page === normalizedActivePage;
       return (
         <RetryableWorkspacePageSurface
-          componentProps={{
-            isActive: isPageActive,
-            enabledSamplePools: enabledSamplePools as StrategyBacktestSamplePool[],
-            tradingPresetEditor: trainerWorkspacePageProps.tradingPresetEditor,
-            trainerDisplayPeriod:
-              historyWorkspacePageProps.trainerDisplayPeriod,
-            trainerPeriodOptionsByBase:
-              historyWorkspacePageProps.trainerPeriodOptionsByBase,
-            chartRenderMode: historyWorkspacePageProps.chartRenderMode,
-          }}
+          componentProps={strategyBacktestSurfaceProps}
           fallback={renderPageFallback(page)}
           loadFailedLabel={loadFailedLabel}
           loader={WORKSPACE_PAGE_MODULE_LOADERS.STRATEGY_BACKTEST}
@@ -857,10 +977,9 @@ export const WorkspacePageSwitcher = ({
     }
 
     if (page === "NOTES") {
-      const isPageActive = page === normalizedActivePage;
       return (
         <RetryableWorkspacePageSurface
-          componentProps={{ ...notesPageProps, isActive: isPageActive }}
+          componentProps={notesSurfaceProps}
           fallback={renderPageFallback(page, tt("appText.loading3"))}
           loadFailedLabel={loadFailedLabel}
           loader={WORKSPACE_PAGE_MODULE_LOADERS.NOTES}
@@ -871,16 +990,9 @@ export const WorkspacePageSwitcher = ({
     }
 
     if (page === "CUSTOM_INDICATOR") {
-      const isPageActive = page === normalizedActivePage;
       return (
         <RetryableWorkspacePageSurface
-          componentProps={{
-            language,
-            ui,
-            isActive: isPageActive,
-            priceColorMode,
-            resolveSamplePoolDisplayName,
-          }}
+          componentProps={customIndicatorSurfaceProps}
           fallback={renderPageFallback(page)}
           loadFailedLabel={loadFailedLabel}
           loader={WORKSPACE_PAGE_MODULE_LOADERS.CUSTOM_INDICATOR}
@@ -891,10 +1003,9 @@ export const WorkspacePageSwitcher = ({
     }
 
     if (page === "DATA") {
-      const isPageActive = page === normalizedActivePage;
       return (
         <RetryableWorkspacePageSurface
-          componentProps={{ ...dataConfigPageProps, isActive: isPageActive }}
+          componentProps={dataSurfaceProps}
           fallback={renderPageFallback(page)}
           loadFailedLabel={loadFailedLabel}
           loader={WORKSPACE_PAGE_MODULE_LOADERS.DATA}
@@ -904,10 +1015,9 @@ export const WorkspacePageSwitcher = ({
       );
     }
 
-    const isPageActive = page === normalizedActivePage;
     return (
       <RetryableWorkspacePageSurface
-        componentProps={{ ...systemSettingsPageProps, isActive: isPageActive }}
+        componentProps={settingsSurfaceProps}
         fallback={renderPageFallback(page)}
         loadFailedLabel={loadFailedLabel}
         loader={WORKSPACE_PAGE_MODULE_LOADERS.SETTINGS}
@@ -920,33 +1030,55 @@ export const WorkspacePageSwitcher = ({
   return renderedPages.map((page) => {
     const isActive = page === normalizedActivePage;
     const isDisplayed = page === displayedPage;
-    const isPreparing = isActive && !isDisplayed;
+    const isExitingSlot = exitMotion?.page === page && page !== displayedPage;
+    const isSlotVisible = isDisplayed || isExitingSlot;
+    const isPreparing = isActive && !isSlotVisible;
     const isExiting = isDisplayed && normalizedActivePage !== displayedPage;
     const pageNavigationMotion =
       isDisplayed && navigationMotion?.page === page ? navigationMotion : null;
+    const pageExitMotion = isExitingSlot ? exitMotion : null;
     return (
       <div
         key={page}
         className={`workspace-page-cache-slot ${
           isActive ? "is-active" : "is-cached"
-        } ${isDisplayed ? "is-visible" : "is-hidden-ready"} ${
+        } ${isSlotVisible ? "is-visible" : "is-hidden-ready"} ${
           isPreparing ? "is-preparing" : ""
-        } ${isExiting ? "is-exiting" : ""}`.trim()}
-        aria-hidden={isDisplayed ? undefined : true}
-        inert={isDisplayed ? undefined : true}
+        } ${isExiting || isExitingSlot ? "is-exiting" : ""}`.trim()}
+        aria-hidden={isSlotVisible ? undefined : true}
+        inert={isSlotVisible ? undefined : true}
         data-active-page={isActive ? "true" : undefined}
         data-displayed-page={isDisplayed ? "true" : undefined}
         data-page-state={
-          isDisplayed ? (isExiting ? "exiting" : "visible") : isPreparing ? "preparing" : "hidden-ready"
+          isDisplayed
+            ? isExiting
+              ? "exiting"
+              : "visible"
+            : isExitingSlot
+              ? "exiting"
+              : isPreparing
+                ? "preparing"
+                : "hidden-ready"
         }
         data-motion-direction={pageNavigationMotion?.direction}
-        data-motion-enabled={pageNavigationMotion ? "true" : undefined}
+        data-motion-enabled={
+          pageNavigationMotion || pageExitMotion ? "true" : undefined
+        }
+        data-motion-exit={pageExitMotion ? "true" : undefined}
         data-motion-epoch={
-          pageNavigationMotion ? String(pageNavigationMotion.epoch) : undefined
+          pageNavigationMotion
+            ? String(pageNavigationMotion.epoch)
+            : pageExitMotion
+              ? String(pageExitMotion.epoch)
+              : undefined
         }
         data-motion-surface={pageNavigationMotion?.surface}
         onAnimationEnd={
-          pageNavigationMotion ? handlePageMotionEnd : undefined
+          pageExitMotion
+            ? handlePageExitMotionEnd
+            : pageNavigationMotion
+              ? handlePageMotionEnd
+              : undefined
         }
       >
         <div className="workspace-page-cache-slot-content">
@@ -967,4 +1099,4 @@ export const WorkspacePageSwitcher = ({
       </div>
     );
   });
-};
+});

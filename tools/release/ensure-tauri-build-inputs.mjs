@@ -43,16 +43,14 @@ const loadSidecarVersions = (rootDir) => {
     (entry) => entry?.id === providerId,
   )?.version;
   const akshareVersion = version('akshare');
-  const aktoolsVersion = version('aktools');
   const financeDataReaderVersion = version('financedatareader');
   if (
     typeof akshareVersion !== 'string' ||
-    typeof aktoolsVersion !== 'string' ||
     typeof financeDataReaderVersion !== 'string'
   ) {
     throw new Error('Market-data sidecar dependency versions are not pinned.');
   }
-  return { akshareVersion, aktoolsVersion, financeDataReaderVersion };
+  return { akshareVersion, financeDataReaderVersion };
 };
 
 export const collectMissingTauriBuildInputs = ({
@@ -72,7 +70,6 @@ export const collectMissingTauriBuildInputs = ({
       nodePlatform,
       nodeArch,
       akshareVersion: sidecarVersions.akshareVersion,
-      aktoolsVersion: sidecarVersions.aktoolsVersion,
     }),
     inspectFinanceDataReaderSidecarBundle({
       generatedRoot: generatedDir,

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "openapiSha256": "83879e034450909fb31f7441f278dde4a57b34693967b634c55808eb4211cae7",
+  "openapiSha256": "637c8b758a2d0ee7d2649b8bf336340d62a9f777b53ea0a5c07838fa2c133923",
   "endpoints": [
     {
       "method": "DELETE",

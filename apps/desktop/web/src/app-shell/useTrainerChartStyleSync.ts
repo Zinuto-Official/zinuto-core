@@ -3,6 +3,7 @@
 import type { UiLanguage } from "@/frontend-kernel/typography";
 import { useEffect, type MutableRefObject } from 'react';
 import type { Chart } from 'klinecharts';
+import { resolveKlineLocale } from "@/ui/config/frameworkKlineI18n";
 import {
   createMainChartStyles,
   type ChartDisplayEdgeConfig,
@@ -95,6 +96,7 @@ export const useTrainerChartStyleSync = ({
       };
     }
     chart.setStyles(nextStyles as Parameters<Chart['setStyles']>[0]);
+    chart.setLocale(resolveKlineLocale(language));
     chart.setRightMinVisibleBarCount(trainerResponsiveChartEdgeConfig.minRightVisibleBars);
     applyTrainerMaxOffsetRightDistance(chart);
     adjustPaneHeights();

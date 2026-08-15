@@ -31,6 +31,7 @@ import type { AppTrainerModalHostProps } from "@/app-shell/AppTrainerModalHost";
 import type { AppUtilityDialogsProps } from "@/app-shell/AppUtilityDialogs";
 import type { WorkspacePage } from "@/frontend-kernel/workspacePageModel";
 import { tt } from "@/frontend-kernel/i18n/messageRuntime";
+import { ChartNoteHoverTooltip } from "@/app-shell/ChartNoteHoverTooltip";
 import { RetryableLazyModuleSurface } from "@/frontend-kernel/RetryableLazyModuleSurface";
 import { Button } from "@/ui/primitives/button";
 import { DesktopHelpContextProvider } from "@/domains/desktop-help/DesktopHelpContext";
@@ -69,12 +70,6 @@ const OptionalModuleRecovery = ({
   </div>
 );
 
-type AppRootChartNoteHover = {
-  pageX: number;
-  pageY: number;
-  title: string;
-};
-
 const buildDesktopMainClassName = (page: string): string =>
   `desktop-main ${page === "TRAINER" ? "is-trainer" : "is-single-page"} ${
     page === "SPECIAL_TRAINING" ? "is-special-training" : ""
@@ -109,7 +104,6 @@ export type AppRootDesktopShellProps = {
   onboardingTourStep: DesktopOnboardingTourStep;
   onOnboardingTourStatusChange: (status: DesktopOnboardingTourStatus) => void;
   onOnboardingTourStepChange: (step: DesktopOnboardingTourStep) => void;
-  chartNoteHover: AppRootChartNoteHover | null;
   trainerModalHostProps: AppTrainerModalHostProps;
   utilityDialogsProps: AppUtilityDialogsProps;
   actionDialogNode: ReactNode;
@@ -143,7 +137,6 @@ export const AppRootDesktopShell = memo(({
   onboardingTourStep,
   onOnboardingTourStatusChange,
   onOnboardingTourStepChange,
-  chartNoteHover,
   trainerModalHostProps,
   utilityDialogsProps,
   actionDialogNode,
@@ -282,17 +275,7 @@ export const AppRootDesktopShell = memo(({
           onTargetChange={setActiveOnboardingTargetId}
         />
 
-        {chartNoteHover ? (
-          <div
-            className="chart-note-hover-tooltip"
-            style={{
-              left: `${chartNoteHover.pageX + 10}px`,
-              top: `${chartNoteHover.pageY + 10}px`,
-            }}
-          >
-            {chartNoteHover.title}
-          </div>
-        ) : null}
+        <ChartNoteHoverTooltip />
 
         <RetryableLazyModuleSurface
           componentProps={trainerModalHostProps}

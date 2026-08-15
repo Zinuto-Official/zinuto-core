@@ -6,6 +6,7 @@ import type { DisplayPeriodKey } from "@/domains/chart/chartPeriods";
 import type { ReplayBar } from "@/domains/trainer/trainerTypes";
 import { DRAW_GROUP_ID } from "@/domains/chart/overlays/constants";
 import { isReplaySnapshotNoteType } from "@/workspaces/notes/useReplayNotes";
+import { clearChartNoteHover } from "@/frontend-kernel/chartNoteHoverStore";
 import {
   resolveDrawToolScopePage,
   type DrawToolScopePage,
@@ -59,9 +60,6 @@ type UseRuntimeTrainerRefSyncEffectsArgs = {
   setSelectedReplayNoteId: Dispatch<SetStateAction<string>>;
   activeTrainingRecordNoteId: string;
   setActiveTrainingRecordNoteId: Dispatch<SetStateAction<string>>;
-  setChartNoteHover: Dispatch<
-    SetStateAction<null | { title: string; pageX: number; pageY: number }>
-  >;
   sessionId: string;
   sessionIdRef: MutableRefObject<string | null>;
   setSelectedDataIndex: Dispatch<SetStateAction<number | null>>;
@@ -115,7 +113,6 @@ export const useRuntimeTrainerRefSyncEffects = ({
   setSelectedReplayNoteId,
   activeTrainingRecordNoteId,
   setActiveTrainingRecordNoteId,
-  setChartNoteHover,
   sessionId,
   sessionIdRef,
   setSelectedDataIndex,
@@ -264,9 +261,9 @@ export const useRuntimeTrainerRefSyncEffects = ({
       activePage !== "SPECIAL_TRAINING" &&
       activePage !== "HISTORY"
     ) {
-      setChartNoteHover((current) => (current ? null : current));
+      clearChartNoteHover();
     }
-  }, [activePage, setChartNoteHover]);
+  }, [activePage]);
 
   useEffect(() => {
     setSelectedDataIndex(null);

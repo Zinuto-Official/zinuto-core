@@ -429,7 +429,7 @@ fn prepare_v3_job(
     let total_bytes = data_contents.len() as u64 + source_notice.len() as u64;
     let attempts = json!([{
         "providerId": "akshare",
-        "providerVersion": "aktools-0.0.13+akshare-1.17.51",
+        "providerVersion": "akshare-1.17.51",
         "upstreamId": "eastmoney",
         "status": "SUCCEEDED",
         "errorCode": null

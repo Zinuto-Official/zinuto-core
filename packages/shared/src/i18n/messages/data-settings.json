@@ -6232,11 +6232,11 @@
   "appText.marketDataAcquisitionProviderAkshare": {
     "kind": "text",
     "locales": {
-      "zh-CN": "AKTools / AKShare 本地连接器",
-      "en": "Local AKTools / AKShare connector",
-      "ja": "ローカル AKTools / AKShare 接続機能",
-      "ko": "로컬 AKTools / AKShare 연결기",
-      "es": "Conector local AKTools / AKShare"
+      "zh-CN": "AKShare 本地连接器",
+      "en": "Local AKShare connector",
+      "ja": "ローカル AKShare 接続機能",
+      "ko": "로컬 AKShare 연결기",
+      "es": "Conector local AKShare"
     }
   },
   "appText.marketDataAcquisitionProviderCcxt": {

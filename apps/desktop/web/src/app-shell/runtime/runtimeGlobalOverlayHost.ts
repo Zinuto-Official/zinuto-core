@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
-import { useEffect, useMemo, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import {
   api,
 } from "@/api";
@@ -62,6 +62,25 @@ export type AppRootRuntimeProps = {
 export const useRuntimeGlobalOverlayHost = (scope: RuntimeHookScope) => {
   const { actionDialog, actionDialogDesc, actionDialogReplayMetrics, actionDialogTitle, activePage, activeTrainingRecordNote, bars, bottomIndicatorParamChanged, buildCurrentReplayContext, buyAmountInput, buyLotInput, buyPriceMode, buyRatioInput, buyRatioPresetOptions, buyTradeInputMode, canResumeTrainerSession, cancelActiveTrainingRecordNote, chartSettingsModalFocusTarget, closeActiveTrainingRecordNote, combinedEnabledPoolSymbols, commitReplayNoteTitle, compactScriptLanguage, confirmActionDialog, createHistoryReviewReplayNote, csvMappingModalArgs, drawShortcutItems, effectiveThemeMode, effectiveTrainingBaseTimeframe, enabledSpecialTrainingSamplePools, groupedSignalIndicatorSelectOptions, handleCreateSpecialTrainingChallengeReviewNote, handleResumeLatestTrainerSession, handleSpecialTrainingShortcutBindingsChange, isActiveTrainingRecordNoteNewlyCreated, isBusy, isPreparingAction, isSavingTradingSettings, language, mainIndicatorParamChanged, mainIndicatorSelectOptions, mainNativeIndicator, mainNativeIndicatorParams, notesPageController, noticeCountdownSec, noticeDialog, openResetAllDialog, orderEndPrompt, priceColorMode, renderTrainingNoteSnapshot, resetBottomIndicatorParams, resetMainIndicatorParams, resetTopIndicatorParams, resolveSamplePoolDisplayName, saveTradingSettings, sessionId, setActionDialog, setActivePage, setBuyAmountInput, setBuyLotInput, setBuyPriceMode, setBuyRatioInput, setBuyTradeInputMode, setChartSettingsModalFocusTarget, setError, setMainNativeIndicator, setNoticeDialog, setOrderEndPrompt, setShowChartSettingsModal, setShowShortcutModal, setShowTradingSettingsModal, setSignalBottomIndicator, setSignalTopIndicator, sharedTrainerChartWorkspaceProps, showChartSettingsModal, showNotice, showShortcutModal, showTradingSettingsModal, signalBottomIndicator, signalBottomIndicatorParams, signalTopIndicator, signalTopIndicatorParams, snapshot, supportedIndicatorNameSet, syncSpecialTrainingChartState, topIndicatorParamChanged, trainerDisplayPeriod, trainerTradingAssetUi, tt, ttf, ui, updateBottomIndicatorParamAt, updateMainIndicatorParamAt, updateReplayNoteColorTokens, updateReplayNoteContent, updateReplayNoteTitle, updateTopIndicatorParamAt, withLabelValue, workspacePageBundleArgs } = scope;
   const globalResetRevision = Number(scope.globalResetRevision ?? 0) || 0;
+  const handleSaveChartSettings = useCallback(() => {
+    void saveTradingSettings({
+      closeChartSettingsModal: true,
+      quietHint: true,
+    });
+  }, [saveTradingSettings]);
+  const handleConfirmOrderEndPrompt = useCallback(() => {
+    setOrderEndPrompt(null);
+    void openResetAllDialog();
+  }, [openResetAllDialog, setOrderEndPrompt]);
+  const handleCloseActionDialog = useCallback(() => {
+    setActionDialog(null);
+  }, [setActionDialog]);
+  const handleConfirmActionDialog = useCallback(() => {
+    void confirmActionDialog();
+  }, [confirmActionDialog]);
+  const handleResumeLatestTrainerSessionStable = useCallback(() => {
+    void handleResumeLatestTrainerSession();
+  }, [handleResumeLatestTrainerSession]);
   const trainerModalHostArgs = buildRuntimeTrainerModalHostProps({
     tt,
     ttf,
@@ -106,11 +125,7 @@ export const useRuntimeGlobalOverlayHost = (scope: RuntimeHookScope) => {
     onResetBottomIndicatorParams: resetBottomIndicatorParams,
     onUpdateBottomIndicatorParamAt: updateBottomIndicatorParamAt,
     signalIndicatorOptions: groupedSignalIndicatorSelectOptions,
-    onSaveChartSettings: () =>
-      void saveTradingSettings({
-        closeChartSettingsModal: true,
-        quietHint: true,
-      }),
+    onSaveChartSettings: handleSaveChartSettings,
     isSavingTradingSettings,
     isBusy,
     showTradingSettingsModal,
@@ -549,10 +564,7 @@ export const useRuntimeGlobalOverlayHost = (scope: RuntimeHookScope) => {
     setNoticeDialog,
     orderEndPrompt,
     setOrderEndPrompt,
-    onConfirmOrderEndPrompt: () => {
-      setOrderEndPrompt(null);
-      void openResetAllDialog();
-    },
+    onConfirmOrderEndPrompt: handleConfirmOrderEndPrompt,
     compactScriptLanguage,
     tt,
     ttf,
@@ -588,8 +600,8 @@ export const useRuntimeGlobalOverlayHost = (scope: RuntimeHookScope) => {
     language,
     themeMode: effectiveThemeMode,
     isActionBlocked: isPreparingAction,
-    onClose: () => setActionDialog(null),
-    onConfirm: () => void confirmActionDialog(),
+    onClose: handleCloseActionDialog,
+    onConfirm: handleConfirmActionDialog,
     createHistoryReviewNoteLabel: tt("appText.addPostSimulationReviewNote"),
   });
 
@@ -597,9 +609,7 @@ export const useRuntimeGlobalOverlayHost = (scope: RuntimeHookScope) => {
     activePage,
     onDisplayedPageChange: scope.setDisplayedWorkspacePage,
     canResumeTrainerSession,
-    onResumeTrainerSession: () => {
-      void handleResumeLatestTrainerSession();
-    },
+    onResumeTrainerSession: handleResumeLatestTrainerSessionStable,
     tt,
     ui,
     language,

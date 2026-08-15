@@ -724,7 +724,7 @@ const desktopOpenApiBacktestDirectionSignalRuleSchema = z.object({
 const desktopOpenApiCsvHeaderNameSchema = z.string().min(1).max(120).regex(new RegExp("\\S"));
 
 const desktopOpenApiDesktopMarketDataAcquisitionProjectSchema = z.object({
-  "id": z.enum(["aktools", "akshare", "ccxt"]),
+  "id": z.enum(["akshare", "ccxt"]),
   "name": z.string().min(1).max(128),
   "url": z.string().min(1).max(2048),
   "infoUrl": z.string().min(1).max(2048),

@@ -949,15 +949,6 @@
   line-height: 1.45;
 }
 
-.app-root.theme-light .data-config-page .data-header-stats,
-.app-root.theme-light .data-config-page .sample-pool-card-item-title {
-  font-size: var(--ty-r3);
-}
-
-.app-root.theme-light .sample-pool-card-grid {
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-}
-
 .app-root.theme-light .sample-pool-card-item.disabled {
   opacity: 0.86;
 }

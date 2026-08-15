@@ -3,18 +3,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import {
-  parseThemeTransitionDuration,
-  resolveThemeRevealGeometry,
-} from "../../src/ui/theme/themeTransition";
-
-test("theme reveal starts at the page center and covers each corner", () => {
-  const geometry = resolveThemeRevealGeometry({ width: 1280, height: 720 });
-
-  assert.equal(geometry.centerX, 640);
-  assert.equal(geometry.centerY, 360);
-  assert.ok(geometry.radius > Math.hypot(640, 360));
-});
+import { parseThemeTransitionDuration } from "../../src/ui/theme/themeTransition";
 
 test("theme reveal duration accepts CSS time tokens only", () => {
   assert.equal(parseThemeTransitionDuration("480ms"), 480);

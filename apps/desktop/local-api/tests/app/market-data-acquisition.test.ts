@@ -338,7 +338,7 @@ test("single local acquisition job writes canonical CSV, source notice, and nati
   assert.equal(catalog.connectors[0].available, false);
   assert.deepEqual(
     catalog.connectors[0].terms.projects.map((project) => project.id),
-    ["aktools", "akshare"],
+    ["akshare"],
   );
   assert.deepEqual(
     catalog.connectors[1].terms.upstreams.map((upstream) => upstream.id),
@@ -485,7 +485,6 @@ test("AKShare output passes the production import preview with Shanghai time and
     path.join(stagingRoot, created.id, "payload", "SOURCE.md"),
     "utf8",
   );
-  assert.match(source, /AKTools 0\.0\.91.*github\.com\/akfamily\/aktools/u);
   assert.match(source, /AKShare 1\.18\.91.*github\.com\/akfamily\/akshare/u);
   assert.match(source, /akshare\.akfamily\.xyz\/introduction\.html/u);
   assert.match(source, /Adjustment: qfq/u);
@@ -1076,7 +1075,7 @@ test("AKShare sidecar protocol is fixed, versioned, and validates runtime versio
       protocol: AKSHARE_SIDECAR_PROTOCOL,
       requestId: request.requestId,
       ok: true,
-      runtime: { aktools: "0.0.91", akshare: "1.18.91" },
+      runtime: { akshare: "1.18.91" },
       kind: "bars",
       rows: [
         {
@@ -1099,7 +1098,7 @@ test("AKShare sidecar protocol is fixed, versioned, and validates runtime versio
           protocol: AKSHARE_SIDECAR_PROTOCOL,
           requestId: request.requestId,
           ok: true,
-          runtime: { aktools: "0.0.90", akshare: "1.18.91" },
+          runtime: { akshare: "1.18.90" },
           kind: "bars",
           rows: [],
         }),
@@ -1173,7 +1172,7 @@ test("AKShare retries only retryable upstream responses and reports wait progres
         protocol: AKSHARE_SIDECAR_PROTOCOL,
         requestId: request.requestId,
         ok: true,
-        runtime: { aktools: "0.0.91", akshare: "1.18.91" },
+        runtime: { akshare: "1.18.91" },
         kind: "bars",
         rows: [
           {
@@ -1229,9 +1228,7 @@ test("AKShare worker and build entry contain no generic HTTP or dynamic dispatch
   );
   assert.doesNotMatch(worker, /\beval\s*\(/u);
   assert.doesNotMatch(worker, /FastAPI|uvicorn|CORSMiddleware|listen\s*\(/u);
-  assert.doesNotMatch(worker, /aktools\.(?:core|main|api|cli)/u);
-  assert.match(worker, /^import aktools$/mu);
-  assert.match(worker, /aktools\.__version__/u);
+  assert.doesNotMatch(worker, /aktools/u);
   assert.match(worker, /from multiprocessing import freeze_support/u);
   assert.match(
     worker,

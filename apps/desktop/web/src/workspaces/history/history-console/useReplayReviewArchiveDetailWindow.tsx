@@ -20,6 +20,7 @@ type ReplayReviewSession = ReturnType<
 type ReplayReviewArchiveDetailWindowOptions = {
   archiveSessionById: ReadonlyMap<string, ReplayReviewSession>;
   history: ReplayReviewConsolePageProps["history"];
+  isActive: boolean;
   language: ReplayReviewConsolePageProps["language"];
   onError: ReplayReviewConsolePageProps["onError"];
   ui: ReplayReviewConsolePageProps["ui"];
@@ -28,6 +29,7 @@ type ReplayReviewArchiveDetailWindowOptions = {
 export const useReplayReviewArchiveDetailWindow = ({
   archiveSessionById,
   history,
+  isActive,
   language,
   onError,
   ui,
@@ -46,6 +48,7 @@ export const useReplayReviewArchiveDetailWindow = ({
           history={history}
           ui={ui}
           language={language}
+          isActive
         />
       );
     },
@@ -149,6 +152,9 @@ export const useReplayReviewArchiveDetailWindow = ({
   useEffect(
     () =>
       api.subscribeDesktopSecondaryWindowActions((message) => {
+        if (!isActive) {
+          return;
+        }
         if (message.kind !== "FREE_REPLAY_ARCHIVE_DETAIL") {
           return;
         }

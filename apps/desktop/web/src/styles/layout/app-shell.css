@@ -379,6 +379,10 @@
 }
 
 .desktop-main > .workspace-page-cache-slot.is-exiting {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 1;
   pointer-events: none;
 }
 
