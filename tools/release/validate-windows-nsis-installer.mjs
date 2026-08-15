@@ -38,6 +38,9 @@ const REQUIRED_INSTALLED_FILES = [
   'market-data-acquisition/akshare-sidecar/win32-x64/zinuto-akshare-sidecar.exe',
   'market-data-acquisition/akshare-sidecar/win32-x64/_internal/base_library.zip',
   'market-data-acquisition/akshare-sidecar/win32-x64/_internal/akshare/file_fold/calendar.json',
+  'market-data-acquisition/finance-datareader-sidecar/win32-x64/zinuto-finance-datareader-sidecar.exe',
+  'market-data-acquisition/finance-datareader-sidecar/win32-x64/_internal/base_library.zip',
+  'market-data-acquisition/finance-datareader-sidecar/win32-x64/_internal/finance_datareader-0.9.202.dist-info/METADATA',
   'node-runtime/node.exe',
 ];
 

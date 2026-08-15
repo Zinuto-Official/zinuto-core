@@ -24,6 +24,8 @@
     "typecheck:incremental": "node ../../../tools/release/check-node-version.mjs && npm run check:error-text && tsc --noEmit --incremental --tsBuildInfoFile ../../../.cache/tsbuildinfo/desktop-local-api.tsbuildinfo",
     "akshare-sidecar:sync": "node ./scripts/build-akshare-sidecar.mjs --sync-only",
     "akshare-sidecar:build": "node ./scripts/build-akshare-sidecar.mjs",
+    "finance-datareader-sidecar:sync": "node ./scripts/build-finance-datareader-sidecar.mjs --sync-only",
+    "finance-datareader-sidecar:build": "node ./scripts/build-finance-datareader-sidecar.mjs",
     "check:user-text": "node ./scripts/check-user-text-literals.mjs",
     "check:error-text": "node ./scripts/check-error-literals.mjs && npm run check:user-text"
   },

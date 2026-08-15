@@ -149,7 +149,7 @@ const currentFingerprint = fingerprintCoreSchemaManifest(currentManifest);
 
 export const PINNED_CORE_SCHEMA_MANIFEST_SHA256 = Object.freeze({
   [DB_SCHEMA_VERSION]:
-    "c0461126285db52bf510ad86c0f7a231bda0670b11c873ea0075ec84c35a735e",
+    "037b6ea254f019b3c80deec7ac753c58aa8477ffcd8c5cf030038aa0fc1534bf",
 });
 
 export const computeCoreSchemaManifestFingerprint = (

@@ -44,10 +44,15 @@ export const optionalSymbolStringSchema = trimmedStringSchema
 export const optionalNameStringSchema = trimmedStringSchema
   .max(INPUT_LIMITS.generalNameChars)
   .optional();
+// Pool display names flow through read models and client echoes at the full
+// source-name width (data sources and system seed datasets may exceed 20
+// characters), while values persisted into the training tables are truncated
+// to samplePoolNameChars by their write paths. These schemas therefore only
+// bound the echo/read-model side.
 export const samplePoolNameStringSchema = nonEmptyTrimmedStringSchema
-  .max(INPUT_LIMITS.samplePoolNameChars);
+  .max(INPUT_LIMITS.generalNameChars);
 export const optionalSamplePoolNameStringSchema = trimmedStringSchema
-  .max(INPUT_LIMITS.samplePoolNameChars)
+  .max(INPUT_LIMITS.generalNameChars)
   .optional();
 export const tradingPresetNameStringSchema = nonEmptyTrimmedStringSchema
   .max(INPUT_LIMITS.tradingPresetNameChars);

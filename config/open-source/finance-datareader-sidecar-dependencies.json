@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "id": "finance-datareader-market-data-sidecar",
+  "policy": "This manifest is an offline, exact-version license review of every registry package in the FinanceDataReader sidecar uv.lock. Any lock, interpreter, build-tool, root-package, or license declaration change requires explicit review and regeneration.",
+  "lockFile": "apps/desktop/local-api/sidecars/finance-datareader/uv.lock",
+  "lockSha256": "2683a9389e744f96445559509abb0981e661a6a1f4b7b367d0f3544c96178aee",
+  "projectFile": "apps/desktop/local-api/sidecars/finance-datareader/pyproject.toml",
+  "projectSha256": "0e4d9385d8b62046da1b9735d4aac00a7cb0471040e2e3dd3f3e1f26710ca3e5",
+  "pythonVersionFile": "apps/desktop/local-api/sidecars/finance-datareader/.python-version",
+  "pythonVersionFileSha256": "db82937e1f1830581a9553c7814f5c5fcacb6dfdef8310b43e9a812c887acaf5",
+  "requiredRootPackages": [
+    { "name": "finance-datareader", "version": "0.9.202" },
+    { "name": "pyinstaller", "version": "6.16.0" }
+  ],
+  "pythonRuntime": {
+    "name": "CPython",
+    "version": "3.11.15",
+    "declaredLicense": "Python Software Foundation License Version 2",
+    "spdxExpression": "PSF-2.0",
+    "evidence": "CPython 3.11.15 LICENSE and PSF license history: https://docs.python.org/3.11/license.html",
+    "purl": "pkg:generic/cpython@3.11.15",
+    "sourceUrl": "https://www.python.org/downloads/release/python-31115/"
+  },
+  "buildTool": {
+    "name": "uv",
+    "version": "0.11.8",
+    "declaredLicense": "Apache-2.0 OR MIT",
+    "spdxExpression": "Apache-2.0 OR MIT",
+    "evidence": "uv 0.11.8 source licenses: https://github.com/astral-sh/uv/tree/0.11.8",
+    "purl": "pkg:github/astral-sh/uv@0.11.8",
+    "sourceUrl": "https://github.com/astral-sh/uv/tree/0.11.8"
+  },
+  "packages": [
+    { "name": "altgraph", "version": "0.17.5", "spdxExpression": "MIT", "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/altgraph/0.17.5/", "role": "sidecar-lock" },
+    { "name": "beautifulsoup4", "version": "4.15.0", "spdxExpression": "MIT", "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/beautifulsoup4/4.15.0/", "role": "sidecar-lock" },
+    { "name": "certifi", "version": "2026.7.22", "spdxExpression": "MPL-2.0", "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/certifi/2026.7.22/", "role": "sidecar-lock" },
+    { "name": "charset-normalizer", "version": "3.5.0", "spdxExpression": "MIT", "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/charset-normalizer/3.5.0/", "role": "sidecar-lock" },
+    { "name": "colorama", "version": "0.4.6", "spdxExpression": "BSD-3-Clause", "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/colorama/0.4.6/", "role": "platform-conditional-sidecar-lock" },
+    { "name": "finance-datareader", "version": "0.9.202", "spdxExpression": "MIT", "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/finance-datareader/0.9.202/", "role": "sidecar-lock" },
+    { "name": "idna", "version": "3.18", "spdxExpression": "BSD-3-Clause", "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/idna/3.18/", "role": "sidecar-lock" },
+    { "name": "lxml", "version": "6.1.1", "spdxExpression": "BSD-3-Clause", "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/lxml/6.1.1/", "role": "sidecar-lock" },
+    { "name": "macholib", "version": "1.16.4", "spdxExpression": "MIT", "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/macholib/1.16.4/", "role": "platform-conditional-sidecar-lock" },
+    { "name": "narwhals", "version": "2.24.0", "spdxExpression": "MIT", "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/narwhals/2.24.0/", "role": "sidecar-lock" },
+    { "name": "numpy", "version": "2.4.6", "spdxExpression": "BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0", "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/numpy/2.4.6/", "role": "sidecar-lock" },
+    { "name": "packaging", "version": "26.3", "spdxExpression": "Apache-2.0 OR BSD-2-Clause", "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/packaging/26.3/", "role": "sidecar-lock" },
+    { "name": "pandas", "version": "3.0.5", "spdxExpression": "BSD-3-Clause", "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/pandas/3.0.5/", "role": "sidecar-lock" },
+    { "name": "pefile", "version": "2023.2.7", "spdxExpression": "MIT", "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/pefile/2023.2.7/", "role": "platform-conditional-sidecar-lock" },
+    { "name": "plotly", "version": "6.9.0", "spdxExpression": "MIT", "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/plotly/6.9.0/", "role": "sidecar-lock" },
+    { "name": "pyinstaller", "version": "6.16.0", "spdxExpression": "(GPL-2.0-or-later WITH Bootloader-exception) AND Apache-2.0 AND MIT", "evidence": "Exact-release COPYING.txt: GPL-2.0-or-later with Bootloader exception, Apache-2.0 runtime hooks, and MIT isolated module.", "role": "bundled-build-runtime" },
+    { "name": "pyinstaller-hooks-contrib", "version": "2026.6", "spdxExpression": "GPL-2.0-or-later AND Apache-2.0", "evidence": "Exact-release LICENSE: GPL-2.0-or-later standard hooks and Apache-2.0 runtime hooks.", "role": "sidecar-lock" },
+    { "name": "python-dateutil", "version": "2.9.0.post0", "spdxExpression": "BSD-3-Clause OR Apache-2.0", "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/python-dateutil/2.9.0.post0/", "role": "sidecar-lock" },
+    { "name": "pywin32-ctypes", "version": "0.2.3", "spdxExpression": "BSD-3-Clause", "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/pywin32-ctypes/0.2.3/", "role": "platform-conditional-sidecar-lock" },
+    { "name": "requests", "version": "2.34.2", "spdxExpression": "Apache-2.0", "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/requests/2.34.2/", "role": "sidecar-lock" },
+    { "name": "requests-file", "version": "3.0.1", "spdxExpression": "Apache-2.0", "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/requests-file/3.0.1/", "role": "sidecar-lock" },
+    { "name": "setuptools", "version": "84.0.0", "spdxExpression": "MIT", "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/setuptools/84.0.0/", "role": "sidecar-lock" },
+    { "name": "six", "version": "1.17.0", "spdxExpression": "MIT", "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/six/1.17.0/", "role": "sidecar-lock" },
+    { "name": "soupsieve", "version": "2.9.2", "spdxExpression": "MIT", "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/soupsieve/2.9.2/", "role": "sidecar-lock" },
+    { "name": "tabulate", "version": "0.10.0", "spdxExpression": "MIT", "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/tabulate/0.10.0/", "role": "sidecar-lock" },
+    { "name": "tqdm", "version": "4.70.0", "spdxExpression": "MPL-2.0 AND MIT", "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/tqdm/4.70.0/", "role": "sidecar-lock" },
+    { "name": "typing-extensions", "version": "4.16.0", "spdxExpression": "PSF-2.0", "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/typing-extensions/4.16.0/", "role": "sidecar-lock" },
+    { "name": "tzdata", "version": "2026.3", "spdxExpression": "Apache-2.0", "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/tzdata/2026.3/", "role": "platform-conditional-sidecar-lock" },
+    { "name": "urllib3", "version": "2.7.0", "spdxExpression": "MIT", "evidence": "Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/urllib3/2.7.0/", "role": "sidecar-lock" }
+  ],
+  "connectorSoftware": [
+    {
+      "ecosystem": "pypi",
+      "name": "finance-datareader",
+      "label": "FinanceDataReader",
+      "version": "0.9.202",
+      "spdxExpression": "MIT",
+      "projectUrl": "https://github.com/FinanceData/FinanceDataReader"
+    }
+  ],
+  "marketDataProviderTerms": [
+    {
+      "id": "yahoo-finance",
+      "name": "Yahoo Finance",
+      "termsRevision": "finance-datareader-upstream-review-2026-08-14",
+      "termsUrl": "https://finance.yahoo.com/legal/terms.html"
+    },
+    {
+      "id": "naver-finance",
+      "name": "Naver Finance",
+      "termsRevision": "finance-datareader-upstream-review-2026-08-14",
+      "termsUrl": "https://policy.naver.com/rules/service.html"
+    },
+    {
+      "id": "investing-com",
+      "name": "Investing.com",
+      "termsRevision": "finance-datareader-upstream-review-2026-08-14",
+      "termsUrl": "https://www.investing.com/about-us/terms-and-conditions"
+    }
+  ]
+}

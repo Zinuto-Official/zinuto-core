@@ -6219,16 +6219,6 @@
       "es": "Descargar datos históricos"
     }
   },
-  "appText.marketDataAcquisitionDialogDescription": {
-    "kind": "text",
-    "locales": {
-      "zh-CN": "选择市场、标的和日期，下载后再决定是否导入",
-      "en": "Choose the market, instruments, and dates. Decide whether to import after downloading",
-      "ja": "市場、銘柄、期間を選び、ダウンロード後に取り込むか決めます",
-      "ko": "시장, 종목, 날짜를 선택하고 다운로드 후 가져올지 결정하세요",
-      "es": "Elige el mercado, los instrumentos y las fechas. Después decide si quieres importarlos"
-    }
-  },
   "appText.marketDataAcquisitionSourceLabel": {
     "kind": "text",
     "locales": {
@@ -6442,21 +6432,21 @@
   "appText.marketDataAcquisitionTechnicalDisclosure": {
     "kind": "text",
     "locales": {
-      "zh-CN": "数据来源与开源许可",
-      "en": "Data sources and open-source licenses",
-      "ja": "データ提供元とオープンソースライセンス",
-      "ko": "데이터 출처 및 오픈소스 라이선스",
-      "es": "Fuentes de datos y licencias abiertas"
+      "zh-CN": "数据来源说明",
+      "en": "About data sources",
+      "ja": "データ提供元について",
+      "ko": "데이터 출처 안내",
+      "es": "Sobre las fuentes de datos"
     }
   },
   "appText.marketDataAcquisitionSourceBoundaryNotice": {
     "kind": "text",
     "locales": {
-      "zh-CN": "数据来自第三方，可用性和质量以数据源为准",
-      "en": "Data comes from third parties. Availability and quality depend on the source",
-      "ja": "データは第三者が提供します。利用可否と品質は提供元に依存します",
-      "ko": "데이터는 제3자가 제공합니다. 가용성과 품질은 제공처에 따라 달라집니다",
-      "es": "Los datos proceden de terceros. La disponibilidad y la calidad dependen de la fuente"
+      "zh-CN": "Zinuto 不提供数据，只在本机使用开源连接器完成连接与导入。连接器直接向原始提供方请求数据；使用协议、许可和规则以原始提供方为准",
+      "en": "Zinuto does not provide this data. It uses open-source connectors on your device to connect and import it. Connectors request data directly from the original provider; its terms, licences, and rules apply",
+      "ja": "Zinuto はデータを提供せず、端末上でオープンソースのコネクタを使って接続・取り込みを行います。コネクタは元の提供元へ直接リクエストし、利用条件・ライセンス・規則はその提供元に従います",
+      "ko": "Zinuto는 데이터를 제공하지 않으며, 기기에서 오픈 소스 커넥터로 연결 및 가져오기만 수행합니다. 커넥터는 원래 제공처에 직접 데이터를 요청하며 이용 조건, 라이선스 및 규칙은 해당 제공처를 따릅니다",
+      "es": "Zinuto no proporciona estos datos; solo usa conectores de código abierto en tu dispositivo para conectarlos e importarlos. Los conectores solicitan los datos directamente al proveedor original; se aplican sus condiciones, licencias y normas"
     }
   },
   "appText.marketDataAcquisitionConnectorVersionValue0": {
@@ -6482,11 +6472,11 @@
   "appText.marketDataAcquisitionStepInstrumentsDescription": {
     "kind": "text",
     "locales": {
-      "zh-CN": "搜索后勾选，最多 20 个",
-      "en": "Search and select up to 20",
-      "ja": "検索して最大20件を選択します",
-      "ko": "검색 후 최대 20개를 선택하세요",
-      "es": "Busca y selecciona hasta 20"
+      "zh-CN": "按代码或名称搜索并勾选，最多 20 个",
+      "en": "Search by code or name and select up to 20",
+      "ja": "コードまたは名称で検索して最大20件を選択します",
+      "ko": "코드 또는 이름으로 검색해 최대 20개를 선택하세요",
+      "es": "Busca por código o nombre y selecciona hasta 20"
     }
   },
   "appText.marketDataAcquisitionAvailableInstruments": {
@@ -7319,6 +7309,26 @@
       "es": "La descarga falló ({0})"
     }
   },
+  "appText.marketDataAcquisitionErrorJobActive": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "已有下载任务正在进行，请等待其完成后重试",
+      "en": "Another download is already in progress. Wait for it to finish and try again",
+      "ja": "別のダウンロードが実行中です。完了を待ってから再試行してください",
+      "ko": "이미 다운로드 작업이 진행 중입니다. 완료될 때까지 기다린 후 다시 시도하세요",
+      "es": "Ya hay una descarga en curso. Espera a que termine e inténtalo de nuevo"
+    }
+  },
+  "appText.marketDataAcquisitionErrorJobNotFound": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "下载任务已不存在，请重新开始下载",
+      "en": "The download task no longer exists. Please start the download again",
+      "ja": "ダウンロードタスクが既に存在しません。最初からやり直してください",
+      "ko": "다운로드 작업이 더 이상 존재하지 않습니다. 다운로드를 다시 시작하세요",
+      "es": "La tarea de descarga ya no existe. Vuelve a iniciar la descarga"
+    }
+  },
   "appText.marketDataAcquisitionSaveFailed": {
     "kind": "text",
     "locales": {
@@ -7327,6 +7337,66 @@
       "ja": "保存に失敗しました。再ダウンロードせず、フォルダを選び直して保存できます",
       "ko": "저장에 실패했습니다. 다시 다운로드하지 않고 폴더를 다시 선택해 저장할 수 있습니다",
       "es": "No se pudo guardar. Vuelve a elegir la carpeta y reintenta sin descargar otra vez"
+    }
+  },
+  "appText.marketDataAcquisitionSaveFailedFileMismatch": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "保存失败：下载文件校验不一致，请重新下载",
+      "en": "Save failed: the downloaded files do not match their checksums. Please download again",
+      "ja": "保存に失敗しました。ダウンロードしたファイルの検証が一致しません。再ダウンロードしてください",
+      "ko": "저장에 실패했습니다. 다운로드한 파일 검증이 일치하지 않습니다. 다시 다운로드하세요",
+      "es": "No se pudo guardar: los archivos descargados no coinciden con sus sumas de verificación. Descárgalos de nuevo"
+    }
+  },
+  "appText.marketDataAcquisitionSaveFailedFolderUnavailable": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "保存失败：无法写入所选文件夹，请重新选择文件夹",
+      "en": "Save failed: the selected folder cannot be written to. Choose another folder",
+      "ja": "保存に失敗しました。選択したフォルダに書き込めません。別のフォルダを選んでください",
+      "ko": "저장에 실패했습니다. 선택한 폴더에 쓸 수 없습니다. 다른 폴더를 선택하세요",
+      "es": "No se pudo guardar: no se puede escribir en la carpeta seleccionada. Elige otra carpeta"
+    }
+  },
+  "appText.marketDataAcquisitionSaveFailedManifestInvalid": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "保存失败：下载数据的校验清单无法识别，请重新下载",
+      "en": "Save failed: the download manifest could not be verified. Please download again",
+      "ja": "保存に失敗しました。ダウンロードの検証マニフェストを確認できません。再ダウンロードしてください",
+      "ko": "저장에 실패했습니다. 다운로드 검증 매니페스트를 확인할 수 없습니다. 다시 다운로드하세요",
+      "es": "No se pudo guardar: no se pudo verificar el manifiesto de la descarga. Descárgalo de nuevo"
+    }
+  },
+  "appText.marketDataAcquisitionSaveFailedOutputExists": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "保存失败：目标文件夹中已存在同名数据，请更换文件夹",
+      "en": "Save failed: data with the same name already exists in the folder. Choose another folder",
+      "ja": "保存に失敗しました。保存先に同じ名前のデータが既にあります。別のフォルダを選んでください",
+      "ko": "저장에 실패했습니다. 대상 폴더에 같은 이름의 데이터가 이미 있습니다. 다른 폴더를 선택하세요",
+      "es": "No se pudo guardar: ya existen datos con ese nombre en la carpeta. Elige otra carpeta"
+    }
+  },
+  "appText.marketDataAcquisitionSaveFailedPathTooLong": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "保存失败：目标路径过长，请选择其他文件夹",
+      "en": "Save failed: the destination path is too long. Choose another folder",
+      "ja": "保存に失敗しました。保存先のパスが長すぎます。別のフォルダを選んでください",
+      "ko": "저장에 실패했습니다. 대상 경로가 너무 깁니다. 다른 폴더를 선택하세요",
+      "es": "No se pudo guardar: la ruta de destino es demasiado larga. Elige otra carpeta"
+    }
+  },
+  "appText.marketDataAcquisitionSaveFailedStagingMissing": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "保存失败：临时下载文件已失效，请重新下载",
+      "en": "Save failed: the temporary download files are no longer available. Please download again",
+      "ja": "保存に失敗しました。一時ダウンロードファイルが利用できません。再ダウンロードしてください",
+      "ko": "저장에 실패했습니다. 임시 다운로드 파일을 더 이상 사용할 수 없습니다. 다시 다운로드하세요",
+      "es": "No se pudo guardar: los archivos temporales de descarga ya no están disponibles. Descárgalos de nuevo"
     }
   },
   "appText.marketDataAcquisitionOpenTermsFailed": {
@@ -7422,21 +7492,21 @@
   "appText.marketDataAcquisitionInstrumentSearchLabel": {
     "kind": "text",
     "locales": {
-      "zh-CN": "搜索 A 股或指数",
-      "en": "Search A-shares or indices",
-      "ja": "A株または指数を検索",
-      "ko": "A주 또는 지수 검색",
-      "es": "Buscar acciones A o índices"
+      "zh-CN": "搜索标的",
+      "en": "Search instruments",
+      "ja": "銘柄を検索",
+      "ko": "종목 검색",
+      "es": "Buscar instrumentos"
     }
   },
   "appText.marketDataAcquisitionInstrumentSearchPlaceholder": {
     "kind": "text",
     "locales": {
-      "zh-CN": "可选：搜索名称或代码",
-      "en": "Optional: search by name or code",
-      "ja": "任意：名称またはコードで検索",
-      "ko": "선택 사항: 이름 또는 코드 검색",
-      "es": "Opcional: buscar por nombre o código"
+      "zh-CN": "输入代码或名称",
+      "en": "Enter a code or name",
+      "ja": "コードまたは名称を入力",
+      "ko": "코드 또는 이름 입력",
+      "es": "Introduce un código o nombre"
     }
   },
   "appText.marketDataAcquisitionInstrumentsLoadFailed": {
@@ -7449,14 +7519,64 @@
       "es": "No se pudo cargar la lista de instrumentos. Comprueba la red e inténtalo de nuevo"
     }
   },
+  "appText.marketDataAcquisitionCatalogSearching": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "正在搜索标的…",
+      "en": "Searching instruments…",
+      "ja": "銘柄を検索しています…",
+      "ko": "종목을 검색하는 중…",
+      "es": "Buscando instrumentos…"
+    }
+  },
   "appText.marketDataAcquisitionCatalogLoading": {
     "kind": "text",
     "locales": {
-      "zh-CN": "首次使用，正在获取标的列表…",
-      "en": "First use: loading the instrument list…",
-      "ja": "初回の銘柄一覧を取得しています…",
-      "ko": "처음 사용: 종목 목록을 불러오는 중…",
-      "es": "Primer uso: cargando la lista de instrumentos…"
+      "zh-CN": "正在加载市场目录…",
+      "en": "Loading the market directory…",
+      "ja": "市場ディレクトリを読み込んでいます…",
+      "ko": "시장 디렉터리를 불러오는 중…",
+      "es": "Cargando el directorio de mercados…"
+    }
+  },
+  "appText.marketDataAcquisitionInstrumentCatalogLoading": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "正在加载标的列表…",
+      "en": "Loading the instrument list…",
+      "ja": "銘柄一覧を読み込んでいます…",
+      "ko": "종목 목록을 불러오는 중…",
+      "es": "Cargando la lista de instrumentos…"
+    }
+  },
+  "appText.marketDataAcquisitionInstrumentCatalogLoadingCountdownValue0": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "正在加载标的目录，最多还需 {0} 秒…",
+      "en": "Loading the instrument directory — up to {0} seconds remaining…",
+      "ja": "銘柄一覧を読み込んでいます。完了まで最大あと {0} 秒…",
+      "ko": "종목 목록을 불러오는 중이며, 최대 {0}초 남았습니다…",
+      "es": "Cargando la lista de instrumentos; quedan como máximo {0} s…"
+    }
+  },
+  "appText.marketDataAcquisitionCatalogLoadTimedOut": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "目录加载超过 60 秒，请重试",
+      "en": "The directory took longer than 60 seconds to load. Try again",
+      "ja": "一覧の読み込みが 60 秒を超えました。もう一度試してください",
+      "ko": "목록을 불러오는 데 60초가 넘게 걸렸습니다. 다시 시도하세요",
+      "es": "La carga del directorio superó los 60 segundos. Inténtalo de nuevo"
+    }
+  },
+  "appText.marketDataAcquisitionCatalogLoadTimedOutUsingPrevious": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "目录加载超过 60 秒，当前保留上次列表",
+      "en": "The directory took longer than 60 seconds to load. The previous list is kept",
+      "ja": "一覧の読み込みが 60 秒を超えたため、前回の一覧を表示しています",
+      "ko": "목록을 불러오는 데 60초가 넘겨 이전 목록을 유지합니다",
+      "es": "La carga del directorio superó los 60 segundos. Se conserva la lista anterior"
     }
   },
   "appText.marketDataAcquisitionCatalogRefreshing": {
@@ -7472,31 +7592,31 @@
   "appText.marketDataAcquisitionCatalogCachedAtValue0": {
     "kind": "text",
     "locales": {
-      "zh-CN": "已使用本机缓存 · 更新于 {0}",
-      "en": "Using the local cache · Updated {0}",
-      "ja": "端末のキャッシュを使用 · 更新 {0}",
-      "ko": "로컬 캐시 사용 중 · 업데이트 {0}",
-      "es": "Usando la caché local · Actualizada {0}"
+      "zh-CN": "标的列表更新于 {0}",
+      "en": "Instrument list updated {0}",
+      "ja": "銘柄一覧の更新 {0}",
+      "ko": "종목 목록 업데이트 {0}",
+      "es": "Lista de instrumentos actualizada {0}"
     }
   },
   "appText.marketDataAcquisitionCatalogRefreshFailedUsingCache": {
     "kind": "text",
     "locales": {
-      "zh-CN": "刷新失败，已继续使用本机缓存",
-      "en": "Refresh failed. The local cache is still in use",
-      "ja": "更新できなかったため、端末のキャッシュを引き続き使用します",
-      "ko": "새로 고치지 못해 로컬 캐시를 계속 사용합니다",
-      "es": "No se pudo actualizar. Se seguirá usando la caché local"
+      "zh-CN": "目录刷新失败，当前显示上次列表",
+      "en": "The directory could not refresh. The previous list is shown",
+      "ja": "一覧を更新できなかったため、前回の一覧を表示しています",
+      "ko": "목록을 새로 고치지 못해 이전 목록을 표시하고 있습니다",
+      "es": "No se pudo actualizar el directorio. Se muestra la lista anterior"
     }
   },
   "appText.marketDataAcquisitionCatalogRefresh": {
     "kind": "text",
     "locales": {
-      "zh-CN": "刷新列表",
-      "en": "Refresh list",
+      "zh-CN": "刷新目录",
+      "en": "Refresh directory",
       "ja": "一覧を更新",
       "ko": "목록 새로 고침",
-      "es": "Actualizar lista"
+      "es": "Actualizar directorio"
     }
   },
   "appText.marketDataAcquisitionCatalogRetry": {
@@ -7719,6 +7839,216 @@
       "es": "El formato de la fuente cambió y no se puede guardar con seguridad"
     }
   },
+  "appText.marketDataAcquisitionErrorLocalValidation": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "下载结果未通过本地校验，未保存。请重试",
+      "en": "The download did not pass local validation and was not saved. Please retry",
+      "ja": "ダウンロード結果がローカル検証を通過しなかったため保存されませんでした。再試行してください",
+      "ko": "다운로드 결과가 로컬 검증을 통과하지 못해 저장되지 않았습니다. 다시 시도하세요",
+      "es": "La descarga no superó la validación local y no se guardó. Inténtalo de nuevo"
+    }
+  },
+  "appText.marketDataAcquisitionErrorInterrupted": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "下载任务因应用重启而中断，请重新下载",
+      "en": "The download was interrupted by an app restart. Please download again",
+      "ja": "アプリの再起動によりダウンロードが中断されました。再ダウンロードしてください",
+      "ko": "앱 재시작으로 다운로드가 중단되었습니다. 다시 다운로드하세요",
+      "es": "La descarga se interrumpió por un reinicio de la aplicación. Descárgala de nuevo"
+    }
+  },
+  "appText.marketDataAcquisitionCancelFailed": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "取消失败，任务仍在后台运行，可在下载历史中查看",
+      "en": "Cancellation failed. The task is still running in the background and can be seen in the download history",
+      "ja": "キャンセルに失敗しました。タスクはバックグラウンドで続行中で、ダウンロード履歴で確認できます",
+      "ko": "취소에 실패했습니다. 작업은 백그라운드에서 계속 실행 중이며 다운로드 기록에서 확인할 수 있습니다",
+      "es": "No se pudo cancelar. La tarea sigue ejecutándose en segundo plano y puede verse en el historial de descargas"
+    }
+  },
+  "appText.marketDataAcquisitionHistoryTitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "下载历史",
+      "en": "Download history",
+      "ja": "ダウンロード履歴",
+      "ko": "다운로드 기록",
+      "es": "Historial de descargas"
+    }
+  },
+  "appText.marketDataAcquisitionHistoryEmpty": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "暂无下载记录",
+      "en": "No download records yet",
+      "ja": "ダウンロード記録はまだありません",
+      "ko": "아직 다운로드 기록이 없습니다",
+      "es": "Aún no hay registros de descarga"
+    }
+  },
+  "appText.marketDataAcquisitionHistoryBack": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "返回下载",
+      "en": "Back to download",
+      "ja": "ダウンロードに戻る",
+      "ko": "다운로드로 돌아가기",
+      "es": "Volver a la descarga"
+    }
+  },
+  "appText.marketDataAcquisitionHistoryResume": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "继续查看",
+      "en": "Resume",
+      "ja": "続きを表示",
+      "ko": "계속 보기",
+      "es": "Reanudar"
+    }
+  },
+  "appText.marketDataAcquisitionHistoryResumeSave": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "继续保存",
+      "en": "Continue saving",
+      "ja": "保存を続行",
+      "ko": "계속 저장",
+      "es": "Continuar guardando"
+    }
+  },
+  "appText.marketDataAcquisitionHistoryRemove": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "删除记录",
+      "en": "Remove record",
+      "ja": "記録を削除",
+      "ko": "기록 삭제",
+      "es": "Eliminar registro"
+    }
+  },
+  "appText.marketDataAcquisitionHistorySymbolsLabel": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "标的数：{0}",
+      "en": "Instruments: {0}",
+      "ja": "銘柄数：{0}",
+      "ko": "종목 수: {0}",
+      "es": "Instrumentos: {0}"
+    }
+  },
+  "appText.marketDataAcquisitionHistoryUpdatedLabel": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "更新于 {0}",
+      "en": "Updated {0}",
+      "ja": "更新：{0}",
+      "ko": "업데이트: {0}",
+      "es": "Actualizado: {0}"
+    }
+  },
+  "appText.marketDataAcquisitionValidationDetailSymbol": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "涉及标的：{0}",
+      "en": "Involved instrument: {0}",
+      "ja": "対象銘柄：{0}",
+      "ko": "관련 종목: {0}",
+      "es": "Instrumento implicado: {0}"
+    }
+  },
+  "appText.marketDataAcquisitionValidationDetailTimeframe": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "检测到数据周期为 {1}，与所选周期 {0} 不一致",
+      "en": "The data interval is {1}, which differs from the selected interval {0}",
+      "ja": "データの足種は {1} で、選択した足種 {0} と一致しません",
+      "ko": "데이터 주기가 {1}이며 선택한 주기 {0}과(와) 일치하지 않습니다",
+      "es": "El intervalo de los datos es {1}, distinto del intervalo seleccionado {0}"
+    }
+  },
+  "appText.marketDataAcquisitionValidationDetailTimezone": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "数据时间戳的时区为 {1}，与所选市场时区 {0} 不一致",
+      "en": "The data timestamps use timezone {1}, which differs from the market timezone {0}",
+      "ja": "データのタイムスタンプのタイムゾーンは {1} で、市場のタイムゾーン {0} と一致しません",
+      "ko": "데이터 타임스탬프의 시간대가 {1}이며 선택한 시장 시간대 {0}과(와) 일치하지 않습니다",
+      "es": "Las marcas de tiempo usan la zona {1}, distinta de la zona del mercado {0}"
+    }
+  },
+  "appText.marketDataAcquisitionValidationDetailSymbols": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "数据文件中的标的与所选标的集合不一致",
+      "en": "The instruments in the data files do not match the selected set",
+      "ja": "データファイル内の銘柄が選択した銘柄の集合と一致しません",
+      "ko": "데이터 파일의 종목이 선택한 종목 집합과 일치하지 않습니다",
+      "es": "Los instrumentos de los archivos no coinciden con el conjunto seleccionado"
+    }
+  },
+  "appText.marketDataAcquisitionValidationDetailFiles": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "数据文件数量与所选标的不符（应有 {0} 个文件，实际 {1} 个，其中 {2} 个无效）",
+      "en": "The number of data files does not match the selected instruments (expected {0}, got {1}, {2} invalid)",
+      "ja": "データファイル数が選択した銘柄と一致しません（想定 {0}、実際 {1}、無効 {2}）",
+      "ko": "데이터 파일 수가 선택한 종목과 일치하지 않습니다(예상 {0}개, 실제 {1}개, 무효 {2}개)",
+      "es": "El número de archivos no coincide con los instrumentos seleccionados (esperados {0}, obtenidos {1}, {2} inválidos)"
+    }
+  },
+  "appText.marketDataAcquisitionValidationDetailHeaders": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "数据文件表头与规范格式不一致",
+      "en": "The data file headers do not match the canonical format",
+      "ja": "データファイルのヘッダーが標準形式と一致しません",
+      "ko": "데이터 파일 헤더가 표준 형식과 일치하지 않습니다",
+      "es": "Las cabeceras de los archivos no coinciden con el formato canónico"
+    }
+  },
+  "appText.marketDataAcquisitionValidationDetailMetadata": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "数据来源说明校验失败，请重新下载",
+      "en": "The data source notice failed validation. Please download again",
+      "ja": "データソース説明の検証に失敗しました。再ダウンロードしてください",
+      "ko": "데이터 소스 설명 검증에 실패했습니다. 다시 다운로드하세요",
+      "es": "La nota de origen de los datos no superó la validación. Descárgalos de nuevo"
+    }
+  },
+  "appText.marketDataAcquisitionValidationDetailSourceResults": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "标的 {0} 的数据来源记录异常",
+      "en": "The source record for instrument {0} is invalid",
+      "ja": "銘柄 {0} のデータソース記録が不正です",
+      "ko": "종목 {0}의 데이터 소스 기록이 올바르지 않습니다",
+      "es": "El registro de origen del instrumento {0} no es válido"
+    }
+  },
+  "appText.marketDataAcquisitionRangeEstimateWarning": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "预计数据量约 {0} 行，可能超过单次下载上限，建议缩短日期范围或选择更长周期",
+      "en": "Estimated size is about {0} rows, which may exceed the per-download limit. Shorten the range or pick a longer interval",
+      "ja": "推定データ量は約 {0} 行で、1回の上限を超える可能性があります。期間を短くするか長い足種を選んでください",
+      "ko": "예상 데이터량이 약 {0}행으로 1회 다운로드 한도를 초과할 수 있습니다. 기간을 줄이거나 더 긴 주기를 선택하세요",
+      "es": "El tamaño estimado es de unas {0} filas y puede superar el límite por descarga. Acorta el rango o elige un intervalo mayor"
+    }
+  },
+  "appText.marketDataAcquisitionMergedDuplicates": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "已合并 {0} 条重复记录",
+      "en": "Merged {0} duplicate record(s)",
+      "ja": "重複レコード {0} 件を統合しました",
+      "ko": "중복 레코드 {0}개를 병합했습니다",
+      "es": "Se fusionaron {0} registros duplicados"
+    }
+  },
   "appText.marketDataAcquisitionErrorRuntimeUnavailable": {
     "kind": "text",
     "locales": {
@@ -7757,6 +8087,416 @@
       "ja": "ダウンロードを中止しました",
       "ko": "다운로드가 취소되었습니다",
       "es": "Descarga cancelada"
+    }
+  },
+  "appText.marketDataAcquisitionStepAssetClass": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "资产类别",
+      "en": "Asset class",
+      "ja": "資産クラス",
+      "ko": "자산 유형",
+      "es": "Clase de activo"
+    }
+  },
+  "appText.marketDataAcquisitionStepMarketAndSource": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "市场与来源",
+      "en": "Market and source",
+      "ja": "市場とデータ元",
+      "ko": "시장 및 소스",
+      "es": "Mercado y fuente"
+    }
+  },
+  "appText.marketDataAcquisitionStepParameters": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "参数",
+      "en": "Parameters",
+      "ja": "パラメーター",
+      "ko": "매개변수",
+      "es": "Parámetros"
+    }
+  },
+  "appText.marketDataAcquisitionStepAssetClassTitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "选择资产类别",
+      "en": "Choose an asset class",
+      "ja": "資産クラスを選択",
+      "ko": "자산 유형 선택",
+      "es": "Elige una clase de activo"
+    }
+  },
+  "appText.marketDataAcquisitionStepAssetClassDescription": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "先选择要下载的数据类型",
+      "en": "First choose the kind of data to download",
+      "ja": "最初にダウンロードするデータの種類を選択します",
+      "ko": "먼저 내려받을 데이터 유형을 선택하세요",
+      "es": "Primero elige el tipo de datos que quieres descargar"
+    }
+  },
+  "appText.marketDataAcquisitionStepMarketAndSourceTitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "选择市场与数据来源",
+      "en": "Choose a market and data source",
+      "ja": "市場とデータ元を選択",
+      "ko": "시장과 데이터 소스 선택",
+      "es": "Elige un mercado y una fuente de datos"
+    }
+  },
+  "appText.marketDataAcquisitionStepMarketAndSourceDescription": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "选择市场，系统会自动使用对应的数据来源",
+      "en": "Choose a market and its data source will be used automatically",
+      "ja": "市場を選ぶと、対応するデータ元が自動的に使われます",
+      "ko": "시장을 선택하면 해당 데이터 소스가 자동으로 사용됩니다",
+      "es": "Elige un mercado y se usará automáticamente su fuente de datos correspondiente"
+    }
+  },
+  "appText.marketDataAcquisitionStepParametersTitle": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "确认下载参数",
+      "en": "Confirm download parameters",
+      "ja": "ダウンロードの設定を確認",
+      "ko": "다운로드 매개변수 확인",
+      "es": "Confirma los parámetros de descarga"
+    }
+  },
+  "appText.marketDataAcquisitionStepParametersDescription": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "选择周期、日期和本机保存位置",
+      "en": "Choose the interval, dates, and a local save location",
+      "ja": "足種、日付、ローカルの保存先を選択します",
+      "ko": "주기, 날짜 및 로컬 저장 위치를 선택하세요",
+      "es": "Elige el intervalo, las fechas y una ubicación local"
+    }
+  },
+  "appText.marketDataAcquisitionAssetStocksAndIndices": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "股票与指数",
+      "en": "Stocks and indices",
+      "ja": "株式と指数",
+      "ko": "주식 및 지수",
+      "es": "Acciones e índices"
+    }
+  },
+  "appText.marketDataAcquisitionAssetStocksAndIndicesDescription": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "A 股（沪深）、港股、韩股、美股（NASDAQ、NYSE、AMEX）、日股、越股和全球指数",
+      "en": "China A shares (Shanghai and Shenzhen), Hong Kong, Korea, US stocks (NASDAQ, NYSE, and AMEX), Japan, Vietnam, and global indices",
+      "ja": "中国A株（上海・深圳）、香港株、韓国株、米国株（NASDAQ、NYSE、AMEX）、日本株、ベトナム株、世界の指数",
+      "ko": "중국 A주(상하이·선전), 홍콩, 한국, 미국 주식(NASDAQ, NYSE, AMEX), 일본, 베트남 및 글로벌 지수",
+      "es": "Acciones A de China (Shanghái y Shenzhen), Hong Kong, Corea, EE. UU. (NASDAQ, NYSE y AMEX), Japón, Vietnam e índices globales"
+    }
+  },
+  "appText.marketDataAcquisitionAssetForex": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "外汇",
+      "en": "Foreign exchange",
+      "ja": "外国為替",
+      "ko": "외환",
+      "es": "Divisas"
+    }
+  },
+  "appText.marketDataAcquisitionAssetForexDescription": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "主流货币对的历史行情",
+      "en": "Historical prices for major currency pairs",
+      "ja": "主要通貨ペアの過去の価格",
+      "ko": "주요 통화쌍의 과거 시세",
+      "es": "Historial de precios de los principales pares de divisas"
+    }
+  },
+  "appText.marketDataAcquisitionAssetCommoditiesAndRates": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "商品与利率",
+      "en": "Commodities and rates",
+      "ja": "商品と金利",
+      "ko": "원자재 및 금리",
+      "es": "Materias primas y tasas"
+    }
+  },
+  "appText.marketDataAcquisitionAssetCommoditiesAndRatesDescription": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "商品期货和利率期货的历史行情",
+      "en": "Historical prices for commodity and interest-rate futures",
+      "ja": "商品先物と金利先物の過去の価格",
+      "ko": "원자재 선물과 금리 선물의 과거 시세",
+      "es": "Historial de precios de futuros de materias primas y tipos de interés"
+    }
+  },
+  "appText.marketDataAcquisitionAssetCrypto": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "加密货币",
+      "en": "Cryptocurrency",
+      "ja": "暗号資産",
+      "ko": "암호자산",
+      "es": "Criptomonedas"
+    }
+  },
+  "appText.marketDataAcquisitionAssetCryptoDescription": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "交易所现货交易对的历史行情",
+      "en": "Historical prices for exchange spot pairs",
+      "ja": "取引所の現物取引ペアの過去の価格",
+      "ko": "거래소 현물 거래쌍의 과거 시세",
+      "es": "Historial de precios de pares al contado de exchanges"
+    }
+  },
+  "appText.marketDataAcquisitionMarketCountValue0": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "{0} 个市场",
+      "en": "{0} markets",
+      "ja": "{0} 市場",
+      "ko": "{0}개 시장",
+      "es": "{0} mercados"
+    }
+  },
+  "appText.marketDataAcquisitionMarketLabel": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "市场",
+      "en": "Market",
+      "ja": "市場",
+      "ko": "시장",
+      "es": "Mercado"
+    }
+  },
+  "appText.marketDataAcquisitionMarketTimeZoneLabel": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "市场时区",
+      "en": "Market time zone",
+      "ja": "市場のタイムゾーン",
+      "ko": "시장 시간대",
+      "es": "Zona horaria del mercado"
+    }
+  },
+  "appText.marketDataAcquisitionMarketTimeZoneValue0": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "时区：{0}",
+      "en": "Time zone: {0}",
+      "ja": "タイムゾーン: {0}",
+      "ko": "시간대: {0}",
+      "es": "Zona horaria: {0}"
+    }
+  },
+  "appText.marketDataAcquisitionSourcePlanLabel": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "数据来源",
+      "en": "Data source",
+      "ja": "データ元",
+      "ko": "데이터 소스",
+      "es": "Fuente de datos"
+    }
+  },
+  "appText.marketDataAcquisitionFallbackPolicyValue0": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "回退规则：{0}",
+      "en": "Fallback rule: {0}",
+      "ja": "フォールバック規則: {0}",
+      "ko": "대체 규칙: {0}",
+      "es": "Regla de respaldo: {0}"
+    }
+  },
+  "appText.marketDataAcquisitionProviderVersionValue0Value1": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "{0} {1}",
+      "en": "{0} {1}",
+      "ja": "{0} {1}",
+      "ko": "{0} {1}",
+      "es": "{0} {1}"
+    }
+  },
+  "appText.marketDataAcquisitionAssetClassRequired": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "请选择资产类别",
+      "en": "Choose an asset class",
+      "ja": "資産クラスを選択してください",
+      "ko": "자산 유형을 선택하세요",
+      "es": "Elige una clase de activo"
+    }
+  },
+  "appText.marketDataAcquisitionCatalogLoadFailed": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "未能加载本机市场目录，请重试",
+      "en": "The local market catalog could not be loaded. Try again",
+      "ja": "ローカルの市場カタログを読み込めません。もう一度試してください",
+      "ko": "로컬 시장 카탈로그를 불러올 수 없습니다. 다시 시도하세요",
+      "es": "No se pudo cargar el catálogo local de mercados. Inténtalo de nuevo"
+    }
+  },
+  "appText.marketDataAcquisitionMarketSelectionRequired": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "请选择市场",
+      "en": "Choose a market",
+      "ja": "市場を選択してください",
+      "ko": "시장을 선택하세요",
+      "es": "Elige un mercado"
+    }
+  },
+  "appText.marketDataAcquisitionAvailablePresets": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "推荐标的",
+      "en": "Available presets",
+      "ja": "利用可能なプリセット",
+      "ko": "사용 가능한 사전 설정",
+      "es": "Preajustes disponibles"
+    }
+  },
+  "appText.marketDataAcquisitionLoadMore": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "加载更多",
+      "en": "Load more",
+      "ja": "さらに読み込む",
+      "ko": "더 불러오기",
+      "es": "Cargar más"
+    }
+  },
+  "appText.marketDataAcquisitionRemoveInstrument": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "移除",
+      "en": "Remove",
+      "ja": "削除",
+      "ko": "제거",
+      "es": "Quitar"
+    }
+  },
+  "appText.marketDataAcquisitionMarketCnAShare": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "A 股（沪深）",
+      "en": "China A shares (Shanghai and Shenzhen)",
+      "ja": "中国A株（上海・深圳）",
+      "ko": "중국 A주(상하이·선전)",
+      "es": "Acciones A de China (Shanghái y Shenzhen)"
+    }
+  },
+  "appText.marketDataAcquisitionMarketHongKong": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "港股",
+      "en": "Hong Kong stocks",
+      "ja": "香港株",
+      "ko": "홍콩 주식",
+      "es": "Acciones de Hong Kong"
+    }
+  },
+  "appText.marketDataAcquisitionMarketKorea": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "韩股",
+      "en": "Korean stocks",
+      "ja": "韓国株",
+      "ko": "한국 주식",
+      "es": "Acciones coreanas"
+    }
+  },
+  "appText.marketDataAcquisitionMarketUsStocks": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "美股（NASDAQ、NYSE、AMEX）",
+      "en": "US stocks (NASDAQ, NYSE, and AMEX)",
+      "ja": "米国株（NASDAQ、NYSE、AMEX）",
+      "ko": "미국 주식(NASDAQ, NYSE, AMEX)",
+      "es": "Acciones de EE. UU. (NASDAQ, NYSE y AMEX)"
+    }
+  },
+  "appText.marketDataAcquisitionMarketJapan": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "日股",
+      "en": "Japanese stocks",
+      "ja": "日本株",
+      "ko": "일본 주식",
+      "es": "Acciones japonesas"
+    }
+  },
+  "appText.marketDataAcquisitionMarketVietnam": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "越南股市",
+      "en": "Vietnamese stocks",
+      "ja": "ベトナム株",
+      "ko": "베트남 주식",
+      "es": "Acciones vietnamitas"
+    }
+  },
+  "appText.marketDataAcquisitionMarketGlobalIndices": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "全球指数",
+      "en": "Global indices",
+      "ja": "世界の指数",
+      "ko": "글로벌 지수",
+      "es": "Índices globales"
+    }
+  },
+  "appText.marketDataAcquisitionMarketForex": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "外汇",
+      "en": "Foreign exchange",
+      "ja": "外国為替",
+      "ko": "외환",
+      "es": "Divisas"
+    }
+  },
+  "appText.marketDataAcquisitionMarketCommodityFutures": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "商品期货",
+      "en": "Commodity futures",
+      "ja": "商品先物",
+      "ko": "원자재 선물",
+      "es": "Futuros de materias primas"
+    }
+  },
+  "appText.marketDataAcquisitionMarketRateFutures": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "利率期货",
+      "en": "Interest-rate futures",
+      "ja": "金利先物",
+      "ko": "금리 선물",
+      "es": "Futuros de tasas de interés"
+    }
+  },
+  "appText.marketDataAcquisitionMarketCryptoSpot": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "加密货币现货",
+      "en": "Crypto spot",
+      "ja": "暗号資産の現物",
+      "ko": "암호자산 현물",
+      "es": "Spot de criptomonedas"
     }
   },
   "settings.tabs.about.label": {

@@ -10,8 +10,11 @@ import { readActiveDesktopCompositionPlan } from './desktop-command-utils.mjs';
 import { resolveDesktopTargetPlatform } from './desktop-runtime-layout.mjs';
 import {
   findUnexpectedAkshareSidecarPackagePaths,
+  findUnexpectedFinanceDataReaderSidecarPackagePaths,
   resolveAkshareSidecarPackageLayout,
   resolveAkshareSidecarTargetId,
+  resolveFinanceDataReaderSidecarPackageLayout,
+  resolveFinanceDataReaderSidecarTargetId,
 } from './market-data-acquisition-runtime.mjs';
 import {
   loadNativeRuntimeAuthority,
@@ -19,7 +22,10 @@ import {
 } from './native-runtime-authority.mjs';
 import { validateRuntimeDirectory } from './native-runtime-transaction.mjs';
 
-export { resolveAkshareSidecarTargetId };
+export {
+  resolveAkshareSidecarTargetId,
+  resolveFinanceDataReaderSidecarTargetId,
+};
 
 const scriptPath = fileURLToPath(import.meta.url);
 const scriptDir = path.dirname(scriptPath);
@@ -40,7 +46,7 @@ const isRegularFileWithoutSymlink = (filePath) => {
   }
 };
 
-export const isRegularAkshareSidecarExecutable = (
+export const isRegularSidecarExecutable = (
   filePath,
   nodePlatform = process.platform,
 ) => {
@@ -53,6 +59,11 @@ export const isRegularAkshareSidecarExecutable = (
     return false;
   }
 };
+
+// Keep connector-specific exports for callers and tests while sharing the
+// executable hardening rules between independently locked Python sidecars.
+export const isRegularAkshareSidecarExecutable = isRegularSidecarExecutable;
+export const isRegularFinanceDataReaderSidecarExecutable = isRegularSidecarExecutable;
 
 const isDirectoryWithoutSymlink = (directoryPath) => {
   try {
@@ -115,7 +126,55 @@ export const inspectAkshareSidecarBundle = ({
     }),
     ...findSymlinks(bundleRoot),
   ];
-  if (!isRegularAkshareSidecarExecutable(executablePath, nodePlatform)) {
+  if (!isRegularSidecarExecutable(executablePath, nodePlatform)) {
+    invalidPaths.push(executablePath);
+  }
+  return {
+    bundleRoot,
+    executablePath,
+    invalidPaths: [...new Set(invalidPaths)],
+    requiredDirectories,
+    requiredFiles,
+    targetId,
+  };
+};
+
+export const inspectFinanceDataReaderSidecarBundle = ({
+  generatedRoot,
+  nodePlatform = process.platform,
+  nodeArch = process.arch,
+  financeDataReaderVersion,
+}) => {
+  const layout = resolveFinanceDataReaderSidecarPackageLayout({
+    generatedRoot,
+    nodePlatform,
+    nodeArch,
+  });
+  const { bundleRoot, executablePath, targetId } = layout;
+  const internalRoot = path.join(bundleRoot, '_internal');
+  const requiredFiles = [
+    executablePath,
+    path.join(internalRoot, 'base_library.zip'),
+    path.join(
+      internalRoot,
+      `finance_datareader-${financeDataReaderVersion}.dist-info`,
+      'METADATA',
+    ),
+  ];
+  const requiredDirectories = [bundleRoot, internalRoot];
+  const invalidPaths = [
+    ...requiredFiles.filter((filePath) => !isRegularFileWithoutSymlink(filePath)),
+    ...requiredDirectories.filter(
+      (directoryPath) => !isDirectoryWithoutSymlink(directoryPath),
+    ),
+    ...findUnexpectedFinanceDataReaderSidecarPackagePaths({
+      generatedRoot,
+      nodePlatform,
+      nodeArch,
+    }),
+    ...findSymlinks(bundleRoot),
+  ];
+  if (!isRegularSidecarExecutable(executablePath, nodePlatform)) {
     invalidPaths.push(executablePath);
   }
   return {
@@ -162,28 +221,32 @@ export const validateNativeRuntime = ({ args = process.argv.slice(2) } = {}) => 
   const compositionPolicy = resolveNativeRuntimeValidationPolicy({
     composition: readActiveDesktopCompositionPlan(),
   });
-  const sidecarCompliance = JSON.parse(
+  const connectorRegistry = JSON.parse(
     fs.readFileSync(
-      path.join(rootDir, 'config', 'open-source', 'python-sidecar-dependencies.json'),
+      path.join(rootDir, 'config', 'open-source', 'market-data-connectors.v1.json'),
       'utf8',
     ),
   );
-  const rootPackageVersion = (packageName) => {
-    const entry = sidecarCompliance.requiredRootPackages?.find(
-      (item) => item?.name === packageName,
-    );
+  const connectorVersion = (providerId) => {
+    const entry = connectorRegistry.providers?.find((item) => item?.id === providerId);
     if (typeof entry?.version !== 'string') {
-      throw new Error(`AKShare sidecar root package is not pinned: ${packageName}`);
+      throw new Error(`Market-data connector is not pinned: ${providerId}`);
     }
     return entry.version;
   };
-  const sidecarBundle = mode === 'runtime'
-    ? null
-    : inspectAkshareSidecarBundle({
-        generatedRoot: generatedDir,
-        akshareVersion: rootPackageVersion('akshare'),
-        aktoolsVersion: rootPackageVersion('aktools'),
-      });
+  const sidecarBundles = mode === 'runtime'
+    ? []
+    : [
+        inspectAkshareSidecarBundle({
+          generatedRoot: generatedDir,
+          akshareVersion: connectorVersion('akshare'),
+          aktoolsVersion: connectorVersion('aktools'),
+        }),
+        inspectFinanceDataReaderSidecarBundle({
+          generatedRoot: generatedDir,
+          financeDataReaderVersion: connectorVersion('financedatareader'),
+        }),
+      ];
   const runtimeBinaryPath = path.join(shellDir, 'runtime', 'node', 'bin', nodeName);
   const nativeRuntimeDescriptor = resolveNativeRuntimeDescriptor({
     authority: loadNativeRuntimeAuthority(),
@@ -214,7 +277,7 @@ export const validateNativeRuntime = ({ args = process.argv.slice(2) } = {}) => 
           ? [path.join(rootDir, 'apps', 'desktop', 'web', 'dist', 'index.html')]
           : []),
         ...preparedRuntimeFiles,
-        ...(sidecarBundle?.requiredFiles ?? []),
+        ...sidecarBundles.flatMap((bundle) => bundle.requiredFiles),
         runtimeBinaryPath,
       ];
 
@@ -223,7 +286,7 @@ export const validateNativeRuntime = ({ args = process.argv.slice(2) } = {}) => 
     : [
         path.join(generatedDir, 'backend-runtime', 'node_modules', 'express'),
         path.join(generatedDir, 'node-runtime-libs'),
-        ...(sidecarBundle?.requiredDirectories ?? []),
+        ...sidecarBundles.flatMap((bundle) => bundle.requiredDirectories),
       ];
 
   const missing = [
@@ -233,7 +296,7 @@ export const validateNativeRuntime = ({ args = process.argv.slice(2) } = {}) => 
     ...requiredDirectories.filter(
       (dirPath) => !fs.existsSync(dirPath) || !fs.statSync(dirPath).isDirectory(),
     ),
-    ...(sidecarBundle?.invalidPaths ?? []),
+    ...sidecarBundles.flatMap((bundle) => bundle.invalidPaths),
   ];
 
   const incomplete = [...new Set(missing)];

@@ -155,7 +155,7 @@ class WorkerMappingTest(unittest.TestCase):
         ), patch.object(main, "stock_zh_a_spot_tx", stock_zh_a_spot_tx), patch.object(
             main, "MIN_INSTRUMENT_CATALOG_ROWS", 3
         ):
-            kind, rows = main._fetch(request)
+            kind, rows, _upstream_id = main._fetch(request)
         self.assertEqual(kind, "instruments")
         self.assertEqual([row["symbol"] for row in rows], ["600000", "000001", "920000"])
 
@@ -195,7 +195,7 @@ class WorkerMappingTest(unittest.TestCase):
         ), patch.object(main, "stock_zh_a_spot_tx", stock_zh_a_spot_tx), patch.object(
             main, "MIN_INSTRUMENT_CATALOG_ROWS", 3
         ):
-            kind, rows = main._fetch(request)
+            kind, rows, _upstream_id = main._fetch(request)
         self.assertEqual(kind, "instruments")
         self.assertEqual([row["symbol"] for row in rows], ["600000", "000001", "920000"])
 
@@ -292,8 +292,9 @@ class WorkerMappingTest(unittest.TestCase):
         with patch.object(
             main, "ak", SimpleNamespace(index_zh_a_hist=index_zh_a_hist)
         ):
-            kind, rows = main._fetch(request)
+            kind, rows, upstream_id = main._fetch(request)
         self.assertEqual(kind, "bars")
+        self.assertEqual(upstream_id, "eastmoney")
         self.assertEqual(rows[0]["timestamp"], "2026-07-18T15:00:00+08:00")
         self.assertEqual(
             calls,
@@ -369,8 +370,9 @@ class WorkerMappingTest(unittest.TestCase):
                 stock_zh_a_hist=stock_zh_a_hist,
             ),
         ), patch.object(main, "stock_zh_a_hist_tx", stock_zh_a_hist_tx):
-            kind, rows = main._fetch(request)
+            kind, rows, upstream_id = main._fetch(request)
         self.assertEqual(kind, "bars")
+        self.assertEqual(upstream_id, "tencent")
         self.assertEqual(rows[0]["timestamp"], "2026-07-24T15:00:00+08:00")
         self.assertEqual(rows[0]["volume"], 100.0)
         self.assertEqual(
@@ -381,6 +383,69 @@ class WorkerMappingTest(unittest.TestCase):
                     "start_date": "20260720",
                     "end_date": "20260724",
                     "adjust": "qfq",
+                }
+            ],
+        )
+
+    def test_daily_filters_rows_outside_the_requested_instant_range(self):
+        request = main._parse_request(
+            json.dumps(
+                {
+                    "protocol": main.PROTOCOL,
+                    "requestId": "daily-boundary",
+                    "operation": "stock_zh_a_hist",
+                    "params": {
+                        "symbol": "000001",
+                        "timeframe": "1d",
+                        "startAt": "2024-01-01T00:00:00.000Z",
+                        "endAt": "2024-01-10T23:59:59.999Z",
+                        "adjustment": "none",
+                    },
+                }
+            ).encode("utf-8")
+        )
+
+        def stock_zh_a_hist(**_kwargs):
+            return FakeFrame(
+                [
+                    {
+                        "日期": "2024-01-10",
+                        "开盘": 10,
+                        "最高": 12,
+                        "最低": 9,
+                        "收盘": 11,
+                        "成交量": 100,
+                    },
+                    {
+                        "日期": "2024-01-11",
+                        "开盘": 11,
+                        "最高": 13,
+                        "最低": 10,
+                        "收盘": 12,
+                        "成交量": 120,
+                    },
+                ]
+            )
+
+        with patch.object(
+            main,
+            "ak",
+            SimpleNamespace(stock_zh_a_hist=stock_zh_a_hist),
+        ):
+            kind, rows, upstream_id = main._fetch(request)
+
+        self.assertEqual(kind, "bars")
+        self.assertEqual(upstream_id, "eastmoney")
+        self.assertEqual(
+            rows,
+            [
+                {
+                    "timestamp": "2024-01-10T15:00:00+08:00",
+                    "open": 10.0,
+                    "high": 12.0,
+                    "low": 9.0,
+                    "close": 11.0,
+                    "volume": 100.0,
                 }
             ],
         )
@@ -439,8 +504,9 @@ class WorkerMappingTest(unittest.TestCase):
                 stock_zh_a_hist_min_em=stock_zh_a_hist_min_em,
             ),
         ), patch.object(main, "stock_zh_a_minute", stock_zh_a_minute):
-            kind, rows = main._fetch(request)
+            kind, rows, upstream_id = main._fetch(request)
         self.assertEqual(kind, "bars")
+        self.assertEqual(upstream_id, "sina")
         self.assertEqual(
             rows,
             [
@@ -505,8 +571,9 @@ class WorkerMappingTest(unittest.TestCase):
                 stock_zh_a_hist=stock_zh_a_hist,
             ),
         ), patch.object(main, "stock_zh_a_daily", stock_zh_a_daily):
-            kind, rows = main._fetch(request)
+            kind, rows, upstream_id = main._fetch(request)
         self.assertEqual(kind, "bars")
+        self.assertEqual(upstream_id, "sina")
         self.assertEqual(rows[0]["timestamp"], "2026-07-24T15:00:00+08:00")
         self.assertEqual(
             calls,

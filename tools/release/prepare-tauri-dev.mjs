@@ -39,6 +39,11 @@ run(
   'Building locked AKTools/AKShare sidecar',
 );
 run(
+  npmCommand,
+  ['run', 'finance-datareader-sidecar:build', '--workspace=@zinuto/desktop-local-api'],
+  'Building locked FinanceDataReader sidecar',
+);
+run(
   nodeCommand,
   ['./tools/release/prepare-backtest-engine.mjs'],
   'Preparing backtest engine',

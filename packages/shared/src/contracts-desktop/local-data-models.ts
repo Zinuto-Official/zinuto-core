@@ -452,7 +452,7 @@ export const desktopLocalDataImportFolderPreviewSchema = z.object({
   folderName: nonEmptyTrimmedStringSchema,
   folderPath: pathStringSchema,
   marketDataAcquisitionMetadata: z
-    .discriminatedUnion("connectorId", [
+    .union([
       z.object({
         schemaVersion: z.literal(1),
         connectorId: z.literal("akshare"),
@@ -466,6 +466,57 @@ export const desktopLocalDataImportFolderPreviewSchema = z.object({
         adjustment: z.null(),
         sourceSymbols: z.array(nonEmptyTrimmedStringSchema).min(1).max(20),
         importSymbols: z.array(nonEmptyTrimmedStringSchema).min(1).max(20),
+      }),
+      z.object({
+        schemaVersion: z.literal(2),
+        connectorId: z.literal("akshare"),
+        adjustment: z.enum(["none", "qfq", "hfq"]),
+        sourceSymbols: z.array(nonEmptyTrimmedStringSchema).min(1).max(20),
+        importSymbols: z.array(nonEmptyTrimmedStringSchema).min(1).max(20),
+        timeframe: baseTimeframeSchema,
+      }),
+      z.object({
+        schemaVersion: z.literal(2),
+        connectorId: z.literal("ccxt"),
+        adjustment: z.null(),
+        sourceSymbols: z.array(nonEmptyTrimmedStringSchema).min(1).max(20),
+        importSymbols: z.array(nonEmptyTrimmedStringSchema).min(1).max(20),
+        timeframe: baseTimeframeSchema,
+      }),
+      z.object({
+        schemaVersion: z.literal(3),
+        connectorId: z.enum(["akshare", "ccxt", "financedatareader", "mixed"]),
+        adjustment: z.enum(["none", "qfq", "hfq"]).nullable(),
+        sourceSymbols: z.array(nonEmptyTrimmedStringSchema).min(1).max(20),
+        importSymbols: z.array(nonEmptyTrimmedStringSchema).min(1).max(20),
+        timeframe: baseTimeframeSchema,
+        marketId: nonEmptyTrimmedStringSchema,
+        timeZone: nonEmptyTrimmedStringSchema,
+        sources: z
+          .array(
+            z.object({
+              sourceSymbol: nonEmptyTrimmedStringSchema,
+              importSymbol: nonEmptyTrimmedStringSchema,
+              finalSource: z.object({
+                providerId: z.enum(["akshare", "ccxt", "financedatareader"]),
+                providerVersion: nonEmptyTrimmedStringSchema,
+                upstreamId: nonEmptyTrimmedStringSchema,
+                status: z.literal("SUCCEEDED"),
+                errorCode: z.null(),
+              }),
+              attempts: z.array(
+                z.object({
+                  providerId: z.enum(["akshare", "ccxt", "financedatareader"]),
+                  providerVersion: nonEmptyTrimmedStringSchema,
+                  upstreamId: nonEmptyTrimmedStringSchema,
+                  status: z.enum(["SUCCEEDED", "FAILED", "SKIPPED"]),
+                  errorCode: nonEmptyTrimmedStringSchema.nullable(),
+                }),
+              ).min(1).max(3),
+            }),
+          )
+          .min(1)
+          .max(20),
       }),
     ])
     .nullable(),

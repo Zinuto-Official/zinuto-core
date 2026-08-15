@@ -14,6 +14,12 @@ const manifestPath = path.join(
   'open-source',
   'python-sidecar-dependencies.json',
 );
+const financeDataReaderManifestPath = path.join(
+  rootDir,
+  'config',
+  'open-source',
+  'finance-datareader-sidecar-dependencies.json',
+);
 
 test('generated compliance artifacts include the complete pinned Python sidecar', () => {
   const audit = spawnSync(
@@ -24,12 +30,21 @@ test('generated compliance artifacts include the complete pinned Python sidecar'
   assert.equal(audit.status, 0, audit.stderr || audit.stdout);
 
   const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+  const financeDataReaderManifest = JSON.parse(
+    fs.readFileSync(financeDataReaderManifestPath, 'utf8'),
+  );
   const sbom = JSON.parse(fs.readFileSync(path.join(rootDir, 'sbom.cdx.json'), 'utf8'));
   const notices = fs.readFileSync(path.join(rootDir, 'THIRD_PARTY_NOTICES.md'), 'utf8');
   const pypiComponents = sbom.components.filter(({ group }) => group === 'pypi');
+  const expectedPythonPackages = new Map(
+    [...manifest.packages, ...financeDataReaderManifest.packages].map((entry) => [
+      `${entry.name}@${entry.version}`,
+      entry,
+    ]),
+  );
 
-  assert.equal(pypiComponents.length, manifest.packages.length);
-  for (const expected of manifest.packages) {
+  assert.equal(pypiComponents.length, expectedPythonPackages.size);
+  for (const expected of expectedPythonPackages.values()) {
     const component = pypiComponents.find(
       ({ name, version }) => name === expected.name && version === expected.version,
     );
@@ -40,6 +55,7 @@ test('generated compliance artifacts include the complete pinned Python sidecar'
   const requiredComponents = [
     ['pypi', 'aktools', '0.0.91'],
     ['pypi', 'akshare', '1.18.91'],
+    ['pypi', 'finance-datareader', '0.9.202'],
     ['pypi', 'pyinstaller', '6.16.0'],
     ['npm', 'ccxt', '4.5.73'],
     ['runtime', 'CPython', '3.11.15'],
@@ -58,12 +74,18 @@ test('generated compliance artifacts include the complete pinned Python sidecar'
 
   assert.match(notices, /## Optional local market-data connector software/u);
   assert.match(notices, /## Market-data provider terms \(not software licenses\)/u);
-  for (const provider of manifest.marketDataProviderTerms) {
+  for (const provider of [
+    ...manifest.marketDataProviderTerms,
+    ...financeDataReaderManifest.marketDataProviderTerms,
+  ]) {
     assert.match(notices, new RegExp(provider.termsUrl.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&'), 'u'));
   }
 
   const sbomText = JSON.stringify(sbom);
-  for (const provider of manifest.marketDataProviderTerms) {
+  for (const provider of [
+    ...manifest.marketDataProviderTerms,
+    ...financeDataReaderManifest.marketDataProviderTerms,
+  ]) {
     assert.doesNotMatch(sbomText, new RegExp(provider.termsUrl.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&'), 'u'));
   }
 });

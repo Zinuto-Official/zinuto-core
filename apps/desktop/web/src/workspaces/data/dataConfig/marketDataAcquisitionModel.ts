@@ -2,7 +2,10 @@
 
 import type {
   MarketDataAcquisitionConnectorId,
+  MarketDataAcquisitionMarketId,
+  MarketDataAcquisitionMarketRequest,
   MarketDataAcquisitionRequest,
+  MarketDataAcquisitionSourcePlanId,
   MarketDataAcquisitionTimeframe,
 } from "@/api";
 import {
@@ -13,52 +16,6 @@ import {
 
 export const MARKET_DATA_ACQUISITION_MAX_SYMBOLS =
   MARKET_DATA_ACQUISITION_LIMITS.maxSymbols;
-
-export type MarketDataAcquisitionSymbolInputIssue =
-  | "EMPTY"
-  | "TOO_MANY"
-  | "INVALID_A_SHARE"
-  | "INVALID_CRYPTO_PAIR"
-  | null;
-
-export const resolveMarketDataAcquisitionSymbolInputIssue = (
-  connectorId: MarketDataAcquisitionConnectorId,
-  symbols: string[],
-  akshareInstrumentKind?: "A_SHARE" | "INDEX",
-): MarketDataAcquisitionSymbolInputIssue => {
-  if (!symbols.length) {
-    return "EMPTY";
-  }
-  if (symbols.length > MARKET_DATA_ACQUISITION_MAX_SYMBOLS) {
-    return "TOO_MANY";
-  }
-  if (connectorId === "akshare") {
-    // Mirror the contract's kind-aware symbol pattern (INDEX requires the
-    // INDEX- prefix; A_SHARE requires the bare exchange code).
-    const symbolPattern =
-      akshareInstrumentKind === "INDEX"
-        ? /^INDEX-\d{6}$/u
-        : akshareInstrumentKind === "A_SHARE"
-          ? /^\d{6}$/u
-          : /^(?:\d{6}|INDEX-\d{6})$/u;
-    if (symbols.some((symbol) => !symbolPattern.test(symbol))) {
-      return "INVALID_A_SHARE";
-    }
-  }
-  if (
-    connectorId === "ccxt" &&
-    symbols.some(
-      (symbol) =>
-        symbol.length > MARKET_DATA_ACQUISITION_LIMITS.ccxtSymbolChars ||
-        !/^[A-Z0-9][A-Z0-9._-]{0,31}\/[A-Z0-9][A-Z0-9._-]{0,31}$/u.test(
-          symbol,
-        ),
-    )
-  ) {
-    return "INVALID_CRYPTO_PAIR";
-  }
-  return null;
-};
 
 const DATE_INPUT_RE = /^\d{4}-\d{2}-\d{2}$/u;
 
@@ -97,8 +54,51 @@ export const resolveMarketDataAcquisitionDateIssues = (
 const toDateTimeWithOffset = (
   date: string,
   endOfDay: boolean,
-  offset: "+08:00" | "Z",
+  offset: string,
 ): string => `${date}T${endOfDay ? "23:59:59" : "00:00:00"}${offset}`;
+
+const timeZoneOffsetForDate = (date: string, timeZone: string): string => {
+  if (timeZone === "UTC") return "Z";
+  const instant = new Date(`${date}T12:00:00Z`);
+  try {
+    const part = new Intl.DateTimeFormat("en-US", {
+      timeZone,
+      timeZoneName: "longOffset",
+    })
+      .formatToParts(instant)
+      .find((entry) => entry.type === "timeZoneName")?.value;
+    if (part && /^GMT[+-]\d{2}:\d{2}$/u.test(part)) {
+      return part.slice(3);
+    }
+  } catch {
+    // The server owns the IANA zone validation. Returning UTC means this
+    // unexpected condition is rejected rather than silently shifted.
+  }
+  return "Z";
+};
+
+export const buildMarketDataAcquisitionMarketRequest = (input: {
+  marketId: MarketDataAcquisitionMarketId;
+  sourcePlanId: MarketDataAcquisitionSourcePlanId;
+  symbols: string[];
+  timeframe: MarketDataAcquisitionTimeframe;
+  startDate: string;
+  endDate: string;
+  timeZone: string;
+  adjustment: "none" | "qfq" | "hfq" | null;
+}): MarketDataAcquisitionMarketRequest => {
+  const offset = timeZoneOffsetForDate(input.startDate, input.timeZone);
+  const endOffset = timeZoneOffsetForDate(input.endDate, input.timeZone);
+  return {
+    marketId: input.marketId,
+    sourcePlanId: input.sourcePlanId,
+    symbols: input.symbols.map((symbol) => symbol.trim().toUpperCase()),
+    timeframe: input.timeframe,
+    startAt: toDateTimeWithOffset(input.startDate, false, offset),
+    endAt: toDateTimeWithOffset(input.endDate, true, endOffset),
+    adjustment: input.adjustment,
+  };
+};
 
 export const buildMarketDataAcquisitionRequest = (input: {
   connectorId: MarketDataAcquisitionConnectorId;
@@ -141,6 +141,10 @@ export type MarketDataAcquisitionErrorMessageKey =
   | "appText.marketDataAcquisitionErrorCanceled"
   | "appText.marketDataAcquisitionErrorConnection"
   | "appText.marketDataAcquisitionErrorFormatChanged"
+  | "appText.marketDataAcquisitionErrorInterrupted"
+  | "appText.marketDataAcquisitionErrorJobActive"
+  | "appText.marketDataAcquisitionErrorJobNotFound"
+  | "appText.marketDataAcquisitionErrorLocalValidation"
   | "appText.marketDataAcquisitionErrorMarketUnavailable"
   | "appText.marketDataAcquisitionErrorNoData"
   | "appText.marketDataAcquisitionErrorRangeTooLarge"
@@ -157,21 +161,30 @@ const ACQUISITION_ERROR_MESSAGE_KEYS: Record<
   MarketDataAcquisitionErrorMessageKey
 > = {
   ACQUISITION_FAILED: "appText.marketDataAcquisitionJobFailed",
-  ACQUISITION_JOB_ACTIVE: "appText.marketDataAcquisitionJobFailed",
-  ACQUISITION_JOB_NOT_FOUND: "appText.marketDataAcquisitionJobFailed",
+  ACQUISITION_JOB_ACTIVE: "appText.marketDataAcquisitionErrorJobActive",
+  ACQUISITION_JOB_NOT_FOUND: "appText.marketDataAcquisitionErrorJobNotFound",
   ACQUISITION_CONNECTOR_UNAVAILABLE:
     "appText.marketDataAcquisitionErrorRuntimeUnavailable",
   ACQUISITION_NO_DATA: "appText.marketDataAcquisitionErrorNoData",
   ACQUISITION_CANCELED: "appText.marketDataAcquisitionErrorCanceled",
   ACQUISITION_IMPORT_VALIDATION_FAILED:
-    "appText.marketDataAcquisitionErrorFormatChanged",
-  ACQUISITION_BAR_INVALID: "appText.marketDataAcquisitionErrorFormatChanged",
+    "appText.marketDataAcquisitionErrorLocalValidation",
+  ACQUISITION_BAR_INVALID:
+    "appText.marketDataAcquisitionErrorLocalValidation",
   ACQUISITION_TIMEZONE_INVALID:
-    "appText.marketDataAcquisitionErrorFormatChanged",
+    "appText.marketDataAcquisitionErrorLocalValidation",
   ACQUISITION_TIMEFRAME_INVALID:
+    "appText.marketDataAcquisitionErrorLocalValidation",
+  ACQUISITION_TIMEFRAME_UNSUPPORTED:
     "appText.marketDataAcquisitionErrorMarketUnavailable",
   ACQUISITION_DUPLICATE_CONFLICT:
-    "appText.marketDataAcquisitionErrorFormatChanged",
+    "appText.marketDataAcquisitionErrorLocalValidation",
+  ACQUISITION_FILE_NAME_CONFLICT:
+    "appText.marketDataAcquisitionErrorLocalValidation",
+  ACQUISITION_SYMBOL_RESULT_MISSING:
+    "appText.marketDataAcquisitionErrorLocalValidation",
+  ACQUISITION_INTERRUPTED:
+    "appText.marketDataAcquisitionErrorInterrupted",
   ACQUISITION_ROW_LIMIT_EXCEEDED:
     "appText.marketDataAcquisitionErrorRangeTooLarge",
   ACQUISITION_PAGE_LIMIT_EXCEEDED:
@@ -204,6 +217,40 @@ const ACQUISITION_ERROR_MESSAGE_KEYS: Record<
     "appText.marketDataAcquisitionErrorMarketUnavailable",
   CCXT_SPOT_SYMBOL_UNAVAILABLE:
     "appText.marketDataAcquisitionErrorMarketUnavailable",
+  FINANCEDATAREADER_RUNTIME_UNAVAILABLE:
+    "appText.marketDataAcquisitionErrorRuntimeUnavailable",
+  FINANCEDATAREADER_SIDECAR_START_FAILED:
+    "appText.marketDataAcquisitionErrorRuntimeUnavailable",
+  FINANCEDATAREADER_SIDECAR_TIMEOUT:
+    "appText.marketDataAcquisitionErrorConnection",
+  FINANCEDATAREADER_SIDECAR_RESPONSE_INVALID:
+    "appText.marketDataAcquisitionErrorFormatChanged",
+  FINANCEDATAREADER_SIDECAR_RESPONSE_TOO_LARGE:
+    "appText.marketDataAcquisitionErrorRangeTooLarge",
+  FINANCEDATAREADER_SIDECAR_REQUEST_INVALID:
+    "appText.marketDataAcquisitionErrorFormatChanged",
+  FINANCEDATAREADER_SIDECAR_PROTOCOL_UNSUPPORTED:
+    "appText.marketDataAcquisitionErrorRuntimeUnavailable",
+  FINANCEDATAREADER_SIDECAR_OPERATION_FORBIDDEN:
+    "appText.marketDataAcquisitionErrorMarketUnavailable",
+  FINANCEDATAREADER_UPSTREAM_FAILED:
+    "appText.marketDataAcquisitionErrorConnection",
+  FINANCEDATAREADER_UPSTREAM_SCHEMA_INVALID:
+    "appText.marketDataAcquisitionErrorFormatChanged",
+  FINANCEDATAREADER_OHLCV_UNAVAILABLE:
+    "appText.marketDataAcquisitionErrorMarketUnavailable",
+  FINANCEDATAREADER_TIMEFRAME_UNAVAILABLE:
+    "appText.marketDataAcquisitionErrorMarketUnavailable",
+  FINANCEDATAREADER_SYMBOL_UNAVAILABLE:
+    "appText.marketDataAcquisitionErrorMarketUnavailable",
+  ACQUISITION_MARKET_UNAVAILABLE:
+    "appText.marketDataAcquisitionErrorMarketUnavailable",
+  ACQUISITION_SOURCE_PLAN_INVALID:
+    "appText.marketDataAcquisitionErrorMarketUnavailable",
+  ACQUISITION_SYMBOL_INVALID:
+    "appText.marketDataAcquisitionErrorMarketUnavailable",
+  ACQUISITION_FALLBACK_EXHAUSTED:
+    "appText.marketDataAcquisitionErrorConnection",
 };
 
 export const resolveMarketDataAcquisitionErrorMessageKey = (
@@ -211,6 +258,19 @@ export const resolveMarketDataAcquisitionErrorMessageKey = (
   rawArgs?: unknown,
 ): MarketDataAcquisitionErrorMessageKey => {
   const code = String(rawCode || "").trim().toUpperCase();
+  if (code === "ACQUISITION_FALLBACK_EXHAUSTED") {
+    const fallbackErrorCode =
+      rawArgs && typeof rawArgs === "object"
+        ? String(
+            (rawArgs as { fallbackErrorCode?: unknown }).fallbackErrorCode ?? "",
+          )
+            .trim()
+            .toUpperCase()
+        : "";
+    if (fallbackErrorCode && fallbackErrorCode !== code) {
+      return resolveMarketDataAcquisitionErrorMessageKey(fallbackErrorCode);
+    }
+  }
   const statusCode = Number(
     rawArgs && typeof rawArgs === "object"
       ? (rawArgs as { statusCode?: unknown }).statusCode
@@ -264,7 +324,7 @@ export const readMarketDataAcquisitionErrorCode = (error: unknown): string => {
     }
     const message = String(record.message || "").trim();
     const embeddedCode = message.match(
-      /(?:ACQUISITION|AKSHARE|CCXT)_[A-Z0-9_]+/u,
+      /(?:ACQUISITION|AKSHARE|CCXT|FINANCEDATAREADER)_[A-Z0-9_]+/u,
     )?.[0];
     if (embeddedCode) {
       return embeddedCode;
@@ -272,4 +332,181 @@ export const readMarketDataAcquisitionErrorCode = (error: unknown): string => {
     return `${String(record.name || "")} ${message}`.trim();
   }
   return String(error || "").trim();
+};
+
+export type MarketDataAcquisitionSaveErrorKey =
+  | "appText.marketDataAcquisitionSaveFailed"
+  | "appText.marketDataAcquisitionSaveFailedManifestInvalid"
+  | "appText.marketDataAcquisitionSaveFailedFileMismatch"
+  | "appText.marketDataAcquisitionSaveFailedStagingMissing"
+  | "appText.marketDataAcquisitionSaveFailedOutputExists"
+  | "appText.marketDataAcquisitionSaveFailedFolderUnavailable"
+  | "appText.marketDataAcquisitionSaveFailedPathTooLong";
+
+export const resolveMarketDataAcquisitionSaveErrorKey = (
+  rawCode: unknown,
+): MarketDataAcquisitionSaveErrorKey => {
+  const code = String(rawCode || "").trim().toUpperCase();
+  if (
+    code === "MARKET_DATA_ACQUISITION_MANIFEST_INVALID" ||
+    code === "MARKET_DATA_ACQUISITION_MANIFEST_HASH_MISMATCH"
+  ) {
+    return "appText.marketDataAcquisitionSaveFailedManifestInvalid";
+  }
+  if (
+    code === "MARKET_DATA_ACQUISITION_FILE_SIZE_MISMATCH" ||
+    code === "MARKET_DATA_ACQUISITION_FILE_HASH_MISMATCH"
+  ) {
+    return "appText.marketDataAcquisitionSaveFailedFileMismatch";
+  }
+  if (
+    code === "MARKET_DATA_ACQUISITION_STAGING_MISSING" ||
+    code === "MARKET_DATA_ACQUISITION_STAGING_UNSAFE" ||
+    code === "MARKET_DATA_ACQUISITION_STAGING_UNEXPECTED_ENTRY"
+  ) {
+    return "appText.marketDataAcquisitionSaveFailedStagingMissing";
+  }
+  if (code === "MARKET_DATA_ACQUISITION_OUTPUT_ALREADY_EXISTS") {
+    return "appText.marketDataAcquisitionSaveFailedOutputExists";
+  }
+  if (
+    code === "MARKET_DATA_ACQUISITION_FOLDER_UNAVAILABLE" ||
+    code === "MARKET_DATA_ACQUISITION_FOLDER_AUTHORIZATION_EXPIRED"
+  ) {
+    return "appText.marketDataAcquisitionSaveFailedFolderUnavailable";
+  }
+  if (code === "MARKET_DATA_ACQUISITION_DESTINATION_PATH_TOO_LONG") {
+    return "appText.marketDataAcquisitionSaveFailedPathTooLong";
+  }
+  return "appText.marketDataAcquisitionSaveFailed";
+};
+
+export type MarketDataAcquisitionValidationDetail = {
+  key:
+    | "appText.marketDataAcquisitionValidationDetailSymbol"
+    | "appText.marketDataAcquisitionValidationDetailTimeframe"
+    | "appText.marketDataAcquisitionValidationDetailTimezone"
+    | "appText.marketDataAcquisitionValidationDetailSymbols"
+    | "appText.marketDataAcquisitionValidationDetailFiles"
+    | "appText.marketDataAcquisitionValidationDetailHeaders"
+    | "appText.marketDataAcquisitionValidationDetailMetadata"
+    | "appText.marketDataAcquisitionValidationDetailSourceResults";
+  params: (string | number)[];
+};
+
+const readErrorArg = (args: unknown, name: string): string => {
+  if (args && typeof args === "object") {
+    const value = (args as Record<string, unknown>)[name];
+    return String(value ?? "").trim();
+  }
+  return "";
+};
+
+export const readMarketDataAcquisitionValidationDetail = (
+  rawCode: unknown,
+  rawArgs?: unknown,
+): MarketDataAcquisitionValidationDetail | null => {
+  const code = String(rawCode || "").trim().toUpperCase();
+  const args =
+    rawArgs && typeof rawArgs === "object"
+      ? (rawArgs as Record<string, unknown>)
+      : {};
+  const check = readErrorArg(args, "validationCheck");
+  if (check === "timeframe") {
+    return {
+      key: "appText.marketDataAcquisitionValidationDetailTimeframe",
+      params: [readErrorArg(args, "expectedTimeframe"), readErrorArg(args, "detectedTimeframe")],
+    };
+  }
+  if (check === "timezone") {
+    return {
+      key: "appText.marketDataAcquisitionValidationDetailTimezone",
+      params: [readErrorArg(args, "expectedTimeZone"), readErrorArg(args, "suggestedTimeZone")],
+    };
+  }
+  if (check === "symbols") {
+    return { key: "appText.marketDataAcquisitionValidationDetailSymbols", params: [] };
+  }
+  if (check === "files") {
+    return {
+      key: "appText.marketDataAcquisitionValidationDetailFiles",
+      params: [
+        readErrorArg(args, "expectedFiles"),
+        readErrorArg(args, "totalFiles"),
+        readErrorArg(args, "invalidFiles"),
+      ],
+    };
+  }
+  if (check === "headers") {
+    return { key: "appText.marketDataAcquisitionValidationDetailHeaders", params: [] };
+  }
+  if (check === "metadata") {
+    return { key: "appText.marketDataAcquisitionValidationDetailMetadata", params: [] };
+  }
+  if (check === "sourceResults") {
+    const symbol = readErrorArg(args, "symbol");
+    return symbol
+      ? {
+          key: "appText.marketDataAcquisitionValidationDetailSourceResults",
+          params: [symbol],
+        }
+      : null;
+  }
+  const symbol = readErrorArg(args, "symbol");
+  if (
+    symbol &&
+    [
+      "ACQUISITION_BAR_INVALID",
+      "ACQUISITION_TIMEZONE_INVALID",
+      "ACQUISITION_TIMEFRAME_INVALID",
+      "ACQUISITION_DUPLICATE_CONFLICT",
+      "ACQUISITION_NO_DATA",
+    ].includes(code)
+  ) {
+    return {
+      key: "appText.marketDataAcquisitionValidationDetailSymbol",
+      params: [symbol],
+    };
+  }
+  return null;
+};
+
+export const MARKET_DATA_ACQUISITION_MAX_ROWS = 250_000;
+
+const EQUITY_DAILY_BARS: Record<MarketDataAcquisitionTimeframe, number> = {
+  "1m": 240,
+  "5m": 48,
+  "1h": 4,
+  "1d": 1,
+};
+const CRYPTO_DAILY_BARS: Record<MarketDataAcquisitionTimeframe, number> = {
+  "1m": 1440,
+  "5m": 288,
+  "1h": 24,
+  "1d": 1,
+};
+
+export const projectMarketDataAcquisitionRowEstimate = (input: {
+  startDate: string;
+  endDate: string;
+  timeframe: MarketDataAcquisitionTimeframe;
+  marketId: MarketDataAcquisitionMarketId | null;
+}): number | null => {
+  const { startDate, endDate, timeframe, marketId } = input;
+  if (
+    !isValidMarketDataAcquisitionDate(startDate) ||
+    !isValidMarketDataAcquisitionDate(endDate)
+  ) {
+    return null;
+  }
+  const [startYear, startMonth, startDay] = startDate.split("-").map(Number);
+  const [endYear, endMonth, endDay] = endDate.split("-").map(Number);
+  const startMs = Date.UTC(startYear!, startMonth! - 1, startDay!);
+  const endMs = Date.UTC(endYear!, endMonth! - 1, endDay!);
+  if (endMs < startMs) return null;
+  const calendarDays = Math.floor((endMs - startMs) / 86_400_000) + 1;
+  const tradingDays = Math.max(1, Math.round(calendarDays * (5 / 7)));
+  const dailyBars =
+    marketId === "CRYPTO_SPOT" ? CRYPTO_DAILY_BARS : EQUITY_DAILY_BARS;
+  return tradingDays * dailyBars[timeframe];
 };

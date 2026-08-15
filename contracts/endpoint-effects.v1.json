@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "openapiSha256": "ac4db969d5ddc4fbf6ea5d25fafee3d3037b7dca1b8d3ccadb5ba0ef7a9bb914",
+  "openapiSha256": "83879e034450909fb31f7441f278dde4a57b34693967b634c55808eb4211cae7",
   "endpoints": [
     {
       "method": "DELETE",
@@ -54,6 +54,31 @@
     {
       "method": "DELETE",
       "path": "/api/v1/data-sources/acquisition-jobs/{jobId}",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:backtest",
+        "resource:data-sources",
+        "resource:market",
+        "resource:training",
+        "workspace:command-center",
+        "workspace:data-management",
+        "workspace:settings",
+        "workspace:special-training",
+        "workspace:strategy-backtest",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "special-training",
+        "data-management",
+        "settings",
+        "strategy-backtest"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/data-sources/acquisition-market-jobs/{jobId}",
       "effect": "write",
       "invalidationScopes": [
         "resource:backtest",
@@ -221,6 +246,13 @@
     },
     {
       "method": "GET",
+      "path": "/api/v1/data-sources/acquisition-catalog",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
       "path": "/api/v1/data-sources/acquisition-connectors",
       "effect": "read",
       "invalidationScopes": [],
@@ -243,6 +275,27 @@
     {
       "method": "GET",
       "path": "/api/v1/data-sources/acquisition-jobs/{jobId}",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/data-sources/acquisition-market-jobs",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/data-sources/acquisition-market-jobs/{jobId}",
+      "effect": "read",
+      "invalidationScopes": [],
+      "workspaceIds": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/data-sources/acquisition-markets/{marketId}/instruments",
       "effect": "read",
       "invalidationScopes": [],
       "workspaceIds": []
@@ -885,6 +938,56 @@
     {
       "method": "POST",
       "path": "/api/v1/data-sources/acquisition-jobs/{jobId}/cancel",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:backtest",
+        "resource:data-sources",
+        "resource:market",
+        "resource:training",
+        "workspace:command-center",
+        "workspace:data-management",
+        "workspace:settings",
+        "workspace:special-training",
+        "workspace:strategy-backtest",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "special-training",
+        "data-management",
+        "settings",
+        "strategy-backtest"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/data-sources/acquisition-market-jobs",
+      "effect": "write",
+      "invalidationScopes": [
+        "resource:backtest",
+        "resource:data-sources",
+        "resource:market",
+        "resource:training",
+        "workspace:command-center",
+        "workspace:data-management",
+        "workspace:settings",
+        "workspace:special-training",
+        "workspace:strategy-backtest",
+        "workspace:trainer"
+      ],
+      "workspaceIds": [
+        "command-center",
+        "trainer",
+        "special-training",
+        "data-management",
+        "settings",
+        "strategy-backtest"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/data-sources/acquisition-market-jobs/{jobId}/cancel",
       "effect": "write",
       "invalidationScopes": [
         "resource:backtest",

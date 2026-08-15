@@ -6,10 +6,10 @@ import test from "node:test";
 import { MARKET_DATA_ACQUISITION_ERROR_CODES } from "@zinuto/shared/contracts-desktop/api";
 
 import {
+  buildMarketDataAcquisitionMarketRequest,
   buildMarketDataAcquisitionRequest,
   resolveMarketDataAcquisitionDateIssues,
   resolveMarketDataAcquisitionErrorMessageKey,
-  resolveMarketDataAcquisitionSymbolInputIssue,
 } from "../../src/workspaces/data/dataConfig/marketDataAcquisitionModel";
 import {
   createDesktopSecondaryWindowActionAckLedger,
@@ -35,6 +35,20 @@ const acquisitionSectionSource = readFileSync(
   ),
   "utf8",
 );
+const acquisitionStatePageSource = readFileSync(
+  new URL(
+    "../../src/workspaces/data/dataConfig/MarketDataAcquisitionStatePage.tsx",
+    import.meta.url,
+  ),
+  "utf8",
+);
+const acquisitionActionBarsSource = readFileSync(
+  new URL(
+    "../../src/workspaces/data/dataConfig/MarketDataAcquisitionActionBars.tsx",
+    import.meta.url,
+  ),
+  "utf8",
+);
 const acquisitionWizardSource = readFileSync(
   new URL(
     "../../src/workspaces/data/dataConfig/MarketDataAcquisitionWizard.tsx",
@@ -42,16 +56,16 @@ const acquisitionWizardSource = readFileSync(
   ),
   "utf8",
 );
-const marketPickerSource = readFileSync(
+const marketAcquisitionPickerSource = readFileSync(
   new URL(
-    "../../src/workspaces/data/dataConfig/CcxtMarketPicker.tsx",
+    "../../src/workspaces/data/dataConfig/MarketAcquisitionInstrumentPicker.tsx",
     import.meta.url,
   ),
   "utf8",
 );
-const aksharePickerSource = readFileSync(
+const marketAcquisitionPresentationSource = readFileSync(
   new URL(
-    "../../src/workspaces/data/dataConfig/AkshareInstrumentPicker.tsx",
+    "../../src/workspaces/data/dataConfig/marketAcquisitionPresentation.ts",
     import.meta.url,
   ),
   "utf8",
@@ -69,7 +83,10 @@ const acquisitionStylesSource = [
 ]
   .map((fileName) =>
     readFileSync(
-      new URL(`../../src/workspaces/data/dataConfig/${fileName}`, import.meta.url),
+      new URL(
+        `../../src/workspaces/data/dataConfig/${fileName}`,
+        import.meta.url,
+      ),
       "utf8",
     ),
   )
@@ -122,28 +139,13 @@ const desktopSecondaryWindowListenersSource = readFileSync(
   new URL("../../src/api/desktopSecondaryWindowListeners.ts", import.meta.url),
   "utf8",
 );
-
-test("catalog symbols are validated against closed inputs", () => {
-  assert.equal(
-    resolveMarketDataAcquisitionSymbolInputIssue("akshare", [
-      "000001",
-      "600000",
-    ]),
-    null,
-  );
-  assert.equal(
-    resolveMarketDataAcquisitionSymbolInputIssue("akshare", ["SZ0001"]),
-    "INVALID_A_SHARE",
-  );
-  assert.equal(
-    resolveMarketDataAcquisitionSymbolInputIssue("akshare", ["INDEX-000300"]),
-    null,
-  );
-  assert.equal(
-    resolveMarketDataAcquisitionSymbolInputIssue("ccxt", ["BTC/USDT"]),
-    null,
-  );
-});
+const prohibitedCatalogPickerTokens = [
+  "manual" + "SymbolPattern",
+  "entryMode: " + '"MANUAL"',
+  "submitted" + "Query",
+  "start" + "Search",
+  "marketDataAcquisition" + "ManualSymbol",
+].join("|");
 
 test("request builder fixes dataset, spot market, and source timezone", () => {
   assert.deepEqual(
@@ -207,6 +209,27 @@ test("request builder fixes dataset, spot market, and source timezone", () => {
       endAt: "2026-01-02T23:59:59Z",
     },
   );
+  assert.deepEqual(
+    buildMarketDataAcquisitionMarketRequest({
+      marketId: "KR_STOCKS",
+      sourcePlanId: "FDR_KRX",
+      symbols: ["005930"],
+      timeframe: "1d",
+      startDate: "2026-01-01",
+      endDate: "2026-01-02",
+      timeZone: "Asia/Seoul",
+      adjustment: null,
+    }),
+    {
+      marketId: "KR_STOCKS",
+      sourcePlanId: "FDR_KRX",
+      symbols: ["005930"],
+      timeframe: "1d",
+      startAt: "2026-01-01T00:00:00+09:00",
+      endAt: "2026-01-02T23:59:59+09:00",
+      adjustment: null,
+    },
+  );
 });
 
 test("date validation reports each field before a download starts", () => {
@@ -243,11 +266,37 @@ test("every acquisition error code resolves to safe localized copy", () => {
     "appText.marketDataAcquisitionErrorAkshareConnection",
   );
   assert.equal(
-    resolveMarketDataAcquisitionErrorMessageKey(
-      "AKSHARE_UPSTREAM_RETRYABLE",
-      { statusCode: 429 },
-    ),
+    resolveMarketDataAcquisitionErrorMessageKey("AKSHARE_UPSTREAM_RETRYABLE", {
+      statusCode: 429,
+    }),
     "appText.marketDataAcquisitionErrorRateLimited",
+  );
+  assert.equal(
+    resolveMarketDataAcquisitionErrorMessageKey(
+      "ACQUISITION_FALLBACK_EXHAUSTED",
+      { fallbackErrorCode: "FINANCEDATAREADER_SYMBOL_UNAVAILABLE" },
+    ),
+    "appText.marketDataAcquisitionErrorMarketUnavailable",
+  );
+  assert.equal(
+    resolveMarketDataAcquisitionErrorMessageKey(
+      "ACQUISITION_FALLBACK_EXHAUSTED",
+      { fallbackErrorCode: "FINANCEDATAREADER_UPSTREAM_FAILED" },
+    ),
+    "appText.marketDataAcquisitionErrorConnection",
+  );
+  assert.equal(
+    resolveMarketDataAcquisitionErrorMessageKey(
+      "ACQUISITION_IMPORT_VALIDATION_FAILED",
+    ),
+    "appText.marketDataAcquisitionErrorLocalValidation",
+  );
+  assert.equal(
+    resolveMarketDataAcquisitionErrorMessageKey(
+      "ACQUISITION_FALLBACK_EXHAUSTED",
+      { fallbackErrorCode: "ACQUISITION_BAR_INVALID" },
+    ),
+    "appText.marketDataAcquisitionErrorLocalValidation",
   );
 });
 
@@ -583,7 +632,7 @@ test("secondary-window revisions remain monotonic after forget and reopen", () =
 
 test("download remains separate from save and explicit import", () => {
   const createIndex = acquisitionSectionSource.indexOf(
-    "const created = await api.createMarketDataAcquisitionJob",
+    "const created = await api.createMarketDataAcquisitionMarketJob",
   );
   const refIndex = acquisitionSectionSource.indexOf(
     "jobRef.current = created",
@@ -615,9 +664,9 @@ test("download remains separate from save and explicit import", () => {
     acquisitionSectionSource.slice(importStart, importEnd),
     /openCsvFolderPathAndPrepareImport/u,
   );
-  assert.match(acquisitionSectionSource, /progress\.stage === "RETRY_WAIT"/u);
-  assert.match(acquisitionSectionSource, /progress\.retryAfterMs/u);
-  assert.match(acquisitionSectionSource, /progress\.retryAttempt/u);
+  assert.match(acquisitionStatePageSource, /progress\.stage === "RETRY_WAIT"/u);
+  assert.match(acquisitionStatePageSource, /progress\.retryAfterMs/u);
+  assert.match(acquisitionStatePageSource, /progress\.retryAttempt/u);
   assert.match(
     importPreviewSource,
     /marketDataAcquisitionMetadata\?\.adjustment/u,
@@ -683,7 +732,7 @@ test("acquisition import handoff waits for a visible current config window", () 
   );
 });
 
-test("download entry is permanent and catalog pickers replace free-form terms-gated inputs", () => {
+test("download entry is permanent and the four-step market catalog replaces connector-specific pickers", () => {
   const acquisitionEntry = hallSource.indexOf(
     "<MarketDataAcquisitionTriggerSection",
   );
@@ -744,38 +793,6 @@ test("download entry is permanent and catalog pickers replace free-form terms-ga
   assert.match(acquisitionSectionSource, /openMarketDataAcquisitionTermsUrl/u);
   assert.match(nativeCommandsSource, /MARKET_DATA_ACQUISITION_TERMS_HOSTS/u);
   assert.match(nativeCommandsSource, /mod\.openUrl\(parsedUrl\.href\)/u);
-  assert.match(aksharePickerSource, /listAkshareAcquisitionInstruments/u);
-  assert.match(aksharePickerSource, /"SH", "SZ", "BJ"/u);
-  assert.match(aksharePickerSource, /"A_SHARE" \| "INDEX"/u);
-  assert.match(aksharePickerSource, /market-data-acquisition-kind-option/u);
-  assert.doesNotMatch(aksharePickerSource, /selectedExchanges|EXCHANGE_IDS/u);
-  assert.match(aksharePickerSource, /useMarketDataCatalog/u);
-  assert.match(
-    aksharePickerSource,
-    /market-data-acquisition-catalog-cache-status/u,
-  );
-  assert.match(
-    acquisitionStylesSource,
-    /market-data-acquisition-kind-option\[data-state="active"\]/u,
-  );
-  assert.match(
-    aksharePickerSource,
-    /aria-controls="market-data-acquisition-instrument-results"/u,
-  );
-  assert.match(aksharePickerSource, /<Checkbox/u);
-  assert.match(aksharePickerSource, /role="group"/u);
-  assert.doesNotMatch(aksharePickerSource, /VISIBLE_RESULTS_LIMIT/u);
-  assert.match(aksharePickerSource, /matchingInstruments\.map\(\(instrument\)/u);
-  assert.match(
-    marketPickerSource,
-    /aria-controls="market-data-acquisition-ccxt-results"/u,
-  );
-  assert.match(marketPickerSource, /<Checkbox/u);
-  assert.match(marketPickerSource, /role="group"/u);
-  assert.doesNotMatch(aksharePickerSource, /setSearchOpen/u);
-  assert.doesNotMatch(marketPickerSource, /setSearchOpen/u);
-  assert.doesNotMatch(marketPickerSource, /defaultedExchangeRef/u);
-  assert.doesNotMatch(marketPickerSource, /onValuesChange\(defaults\)/u);
   assert.match(
     acquisitionStylesSource,
     /\.market-data-acquisition-catalog-columns \{[\s\S]*grid-template-columns:/u,
@@ -786,7 +803,23 @@ test("download entry is permanent and catalog pickers replace free-form terms-ga
   );
   assert.match(
     acquisitionWizardSource,
-    /wizardStep === 2[\s\S]*marketDataAcquisitionExchangeLabel[\s\S]*<CcxtMarketPicker/u,
+    /wizardStep === 1[\s\S]*marketAcquisitionAssetClassLabelKey[\s\S]*wizardStep === 2[\s\S]*marketAcquisitionMarketLabelKey/u,
+  );
+  assert.match(
+    acquisitionWizardSource,
+    /marketDataAcquisitionSourcePlanLabel/u,
+  );
+  assert.match(
+    acquisitionWizardSource,
+    /const sourceLabel[\s\S]*sourcePlan\.providerChain/u,
+  );
+  assert.match(
+    acquisitionWizardSource,
+    /wizardStep === 3[\s\S]*<MarketAcquisitionInstrumentPicker/u,
+  );
+  assert.match(
+    acquisitionWizardSource,
+    /marketDataAcquisitionStepParameters[\s\S]*<DatePicker/u,
   );
   assert.match(
     acquisitionWizardSource,
@@ -794,7 +827,7 @@ test("download entry is permanent and catalog pickers replace free-form terms-ga
   );
   assert.match(
     acquisitionWizardSource,
-    /folderGrant\?\.displayPath \? <strong>\{folderGrant\.displayPath\}<\/strong> : null/u,
+    /folderGrant\?\.displayPath \? \(\s*<strong>\{folderGrant\.displayPath\}<\/strong>\s*\) : null/u,
   );
   assert.doesNotMatch(
     acquisitionWizardSource,
@@ -805,8 +838,8 @@ test("download entry is permanent and catalog pickers replace free-form terms-ga
     /readMarketDataAcquisitionFolderPreference/u,
   );
   assert.match(
-    acquisitionSectionSource,
-    /\{phase === "READY_TO_SAVE" \? \(/u,
+    acquisitionActionBarsSource,
+    /phase === "READY_TO_SAVE"[\s\S]*onChooseFolder[\s\S]*onRetrySave/u,
   );
   assert.doesNotMatch(
     acquisitionSectionSource,
@@ -820,58 +853,148 @@ test("download entry is permanent and catalog pickers replace free-form terms-ga
     nativeCommandsSource,
     /downloadDir\(\)[\s\S]*defaultPath,[\s\S]*directory: true/u,
   );
+  assert.match(acquisitionStylesSource, /market-data-acquisition-source-plan/u);
+  assert.match(
+    marketAcquisitionPickerSource,
+    /listMarketDataAcquisitionMarketInstruments/u,
+  );
+  assert.match(
+    marketAcquisitionPickerSource,
+    /const SEARCH_DEBOUNCE_MS = 200/u,
+  );
+  assert.match(
+    marketAcquisitionPickerSource,
+    /const DIRECTORY_LOAD_TIMEOUT_MS = 60_000/u,
+  );
+  assert.match(
+    marketAcquisitionPickerSource,
+    /timeoutMs: DIRECTORY_LOAD_TIMEOUT_MS/u,
+  );
+  assert.match(
+    marketAcquisitionPickerSource,
+    /setDirectoryLoadSecondsRemaining\([\s\S]*Math\.ceil\(\(deadlineAt - Date\.now\(\)\) \/ 1_000\)/u,
+  );
+  assert.match(
+    marketAcquisitionPickerSource,
+    /hasApiErrorCode\(error, DIRECTORY_LOAD_TIMEOUT_ERROR_CODE\)/u,
+  );
+  assert.match(marketAcquisitionPickerSource, /hasLoadedCatalogRef/u);
+  assert.match(
+    marketAcquisitionPickerSource,
+    /requestedQuery \? SEARCH_DEBOUNCE_MS : 0/u,
+  );
+  assert.match(
+    marketAcquisitionPickerSource,
+    /activeRequestController\.current\?\.abort\(\);[\s\S]*const controller = new AbortController\(\);/u,
+  );
+  assert.match(
+    marketAcquisitionPickerSource,
+    /return \(\) => \{[\s\S]*requestVersion\.current \+= 1;[\s\S]*controller\.abort\(\);/u,
+  );
+  assert.match(
+    marketAcquisitionPickerSource,
+    /const loadMore = \(\) => \{[\s\S]*mode: "MORE",[\s\S]*controller,/u,
+  );
+  assert.match(
+    marketAcquisitionPickerSource,
+    /cursor: "",[\s\S]*requestedQuery,[\s\S]*forceRefresh: loadTrigger\.forceRefresh/u,
+  );
+  assert.match(marketAcquisitionPickerSource, /refresh: forceRefresh/u);
+  assert.match(
+    marketAcquisitionPickerSource,
+    /marketDataAcquisitionCatalogRefresh/u,
+  );
+  assert.match(
+    marketAcquisitionPickerSource,
+    /market-data-acquisition-catalog-load-more/u,
+  );
   assert.match(
     acquisitionStylesSource,
-    /market-data-acquisition-market-filter\[data-state="selected"\]/u,
+    /market-data-acquisition-catalog-cache-status\[data-visible="false"\]/u,
   );
-  assert.match(marketPickerSource, /listCcxtAcquisitionMarkets/u);
   assert.match(
-    marketPickerSource,
-    /listCcxtAcquisitionMarkets\(exchangeId, ""/u,
+    acquisitionStylesSource,
+    /market-data-acquisition-catalog-list,[\s\S]*height: 300px;/u,
   );
-  assert.match(marketPickerSource, /useMarketDataCatalog/u);
-  assert.match(marketPickerSource, /market\.active/u);
-  assert.match(marketPickerSource, /"BTC\/USDT"/u);
-  assert.match(marketPickerSource, /"ETH\/USDT"/u);
-  assert.match(marketPickerSource, /"POPULAR" \| "USDT" \| "USDC" \| "ALL"/u);
-  assert.match(marketPickerSource, /if \(normalizedQuery\) return true/u);
-  assert.doesNotMatch(aksharePickerSource, /selectedExchanges/u);
+  assert.doesNotMatch(
+    marketAcquisitionPickerSource,
+    new RegExp(prohibitedCatalogPickerTokens, "u"),
+  );
+  assert.match(marketAcquisitionPickerSource, /<Checkbox/u);
+  assert.match(marketAcquisitionPickerSource, /role="group"/u);
+  assert.match(marketAcquisitionPresentationSource, /STOCKS_AND_INDICES/u);
   assert.match(
-    aksharePickerSource,
-    /instrument\.kind === kind[\s\S]*instrument\.symbol\.includes\(normalizedQuery\)/u,
+    marketAcquisitionPresentationSource,
+    /CN_A_SHARE[\s\S]*US_STOCKS/u,
   );
-  assert.doesNotMatch(marketPickerSource, /Textarea/u);
+  assert.doesNotMatch(
+    marketAcquisitionPresentationSource,
+    /CN_SSE|CN_SZSE|US_NASDAQ|US_NYSE|US_AMEX/u,
+  );
+  assert.match(marketAcquisitionPresentationSource, /GLOBAL_INDICES/u);
+  assert.match(marketAcquisitionPresentationSource, /CRYPTO_SPOT/u);
+  assert.match(acquisitionWizardSource, /market\.sourcePlans\.length > 1/u);
+  assert.doesNotMatch(
+    acquisitionWizardSource,
+    /marketDataAcquisitionMarketTimeZoneValue0|marketDataAcquisitionFallbackPolicyValue0/u,
+  );
+  assert.doesNotMatch(
+    acquisitionWizardSource,
+    /<CcxtMarketPicker|<AkshareInstrumentPicker/u,
+  );
   assert.doesNotMatch(acquisitionSectionSource, /<Textarea/u);
   assert.doesNotMatch(
     acquisitionSectionSource,
     /marketDataAcquisitionOpenUpstreamTerms|marketDataAcquisitionTermsConfirmation/u,
   );
-  assert.match(
-    acquisitionWizardSource,
-    /providerId === "ccxt" \? \([\s\S]*<CcxtMarketPicker/u,
-  );
   assert.match(acquisitionSectionSource, /<MarketDataAcquisitionWizard/u);
   assert.match(
     acquisitionSectionSource,
-    /title=\{<h1>\{tt\("appText\.marketDataAcquisitionDialogTitle"\)\}<\/h1>\}/u,
+    /market-data-acquisition-header-content[\s\S]*<h1>\{tt\("appText\.marketDataAcquisitionDialogTitle"\)\}<\/h1>[\s\S]*<MarketDataAcquisitionStepper/u,
   );
   assert.doesNotMatch(
     acquisitionSectionSource,
-    /onExchangeChange=\{\(value\) => \{[\s\S]{0,180}moveToStep\(2\)/u,
+    /marketDataAcquisitionDialogDescription/u,
   );
-  assert.match(acquisitionWizardSource, /<DatePicker/u);
+  assert.doesNotMatch(
+    acquisitionSectionSource,
+    /marketDataAcquisitionStepValue0Value1/u,
+  );
+  assert.match(
+    acquisitionWizardSource,
+    /export const MarketDataAcquisitionStepper[\s\S]*className="market-data-acquisition-stepper"/u,
+  );
+  assert.match(
+    acquisitionStylesSource,
+    /\.market-data-acquisition-header-content \{[\s\S]*display: grid;[\s\S]*\.market-data-acquisition-title-row \{[\s\S]*justify-content: space-between;/u,
+  );
+  assert.match(
+    acquisitionStylesSource,
+    /\.market-data-acquisition-stepper \{[\s\S]*width: 60%;[\s\S]*margin-inline: auto;/u,
+  );
+  assert.doesNotMatch(
+    acquisitionSectionSource,
+    /market-data-acquisition-history-toolbar/u,
+  );
+  assert.match(
+    acquisitionSectionSource,
+    /name=\{showHistory \? "chevronLeft" : "clock"\}/u,
+  );
+  assert.doesNotMatch(
+    acquisitionSectionSource,
+    /createMarketDataAcquisitionJob|listCcxtAcquisitionMarkets|listAkshareAcquisitionInstruments/u,
+  );
   assert.match(acquisitionWizardSource, /allowManualInput/u);
   assert.match(acquisitionWizardSource, /aria-invalid/u);
   assert.match(acquisitionWizardSource, /<RadioGroup/u);
   assert.match(
-    acquisitionWizardSource,
-    /marketDataAcquisitionTechnicalDisclosure/u,
-  );
-  assert.match(
     acquisitionSectionSource,
     /phase === "FORM" \? \([\s\S]*<MarketDataAcquisitionWizard/u,
   );
-  assert.match(acquisitionSectionSource, /market-data-acquisition-state-page/u);
+  assert.match(
+    acquisitionStatePageSource,
+    /market-data-acquisition-state-page/u,
+  );
   assert.doesNotMatch(
     acquisitionSectionSource,
     /termsChecked|persistedTermsAccepted/u,
@@ -882,9 +1005,12 @@ test("the saved view stays concise and the secondary frame has no nested border"
   assert.doesNotMatch(acquisitionResultSource, /acquisition-result-steps/u);
   assert.match(acquisitionResultSource, /marketDataAcquisitionSavedSummary/u);
   assert.match(acquisitionResultSource, /marketDataAcquisitionSavedPathLabel/u);
-  assert.match(acquisitionSectionSource, /marketDataAcquisitionImportLater/u);
   assert.match(
-    acquisitionSectionSource,
+    acquisitionActionBarsSource,
+    /marketDataAcquisitionImportLater/u,
+  );
+  assert.match(
+    acquisitionActionBarsSource,
     /marketDataAcquisitionReviewAndImport/u,
   );
   assert.match(

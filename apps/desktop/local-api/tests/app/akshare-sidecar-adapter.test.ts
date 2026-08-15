@@ -14,6 +14,7 @@ import {
   executeAkshareSidecar,
   parseAkshareInstrumentCatalogResponse,
   parseAkshareSidecarResponse,
+  parseAkshareSidecarResponseWithProvenance,
 } from '../../src/application/market-data-acquisition/akshareSidecarAdapter.js';
 
 const runtime = { aktools: '0.0.91', akshare: '1.18.91' } as const;
@@ -86,6 +87,47 @@ test('AKShare response parsers keep bars and instruments separate', () => {
         request.requestId,
       ),
     /AKSHARE_SIDECAR_RESPONSE_INVALID/u,
+  );
+});
+
+test('AKShare bars preserve the actual internal fallback upstream for source provenance', () => {
+  const request = buildAkshareInstrumentCatalogRequest();
+  const response = JSON.stringify({
+    protocol: AKSHARE_SIDECAR_PROTOCOL,
+    requestId: request.requestId,
+    ok: true,
+    runtime,
+    kind: 'bars',
+    upstreamId: 'tencent',
+    rows: [{
+      timestamp: '2026-01-02T15:00:00+08:00',
+      open: 10,
+      high: 12,
+      low: 9,
+      close: 11,
+      volume: 100,
+    }],
+  });
+  assert.deepEqual(
+    parseAkshareSidecarResponseWithProvenance(response, request.requestId),
+    {
+      upstreamId: 'tencent',
+      rows: [{
+        timestamp: '2026-01-02T15:00:00+08:00',
+        open: 10,
+        high: 12,
+        low: 9,
+        close: 11,
+        volume: 100,
+      }],
+    },
+  );
+  assert.equal(
+    parseAkshareSidecarResponse(
+      JSON.stringify({ ...JSON.parse(response), upstreamId: undefined }),
+      request.requestId,
+    ).length,
+    1,
   );
 });
 

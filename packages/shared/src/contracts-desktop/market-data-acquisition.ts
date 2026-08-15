@@ -30,8 +30,12 @@ export const MARKET_DATA_ACQUISITION_ERROR_CODES = [
   "ACQUISITION_BAR_INVALID",
   "ACQUISITION_TIMEZONE_INVALID",
   "ACQUISITION_TIMEFRAME_INVALID",
+  "ACQUISITION_TIMEFRAME_UNSUPPORTED",
   "ACQUISITION_IMPORT_VALIDATION_FAILED",
   "ACQUISITION_DUPLICATE_CONFLICT",
+  "ACQUISITION_FILE_NAME_CONFLICT",
+  "ACQUISITION_SYMBOL_RESULT_MISSING",
+  "ACQUISITION_INTERRUPTED",
   "ACQUISITION_ROW_LIMIT_EXCEEDED",
   "ACQUISITION_PAGE_LIMIT_EXCEEDED",
   "ACQUISITION_FILE_LIMIT_EXCEEDED",
@@ -49,6 +53,23 @@ export const MARKET_DATA_ACQUISITION_ERROR_CODES = [
   "CCXT_TIMEFRAME_UNAVAILABLE",
   "CCXT_SYMBOL_UNAVAILABLE",
   "CCXT_SPOT_SYMBOL_UNAVAILABLE",
+  "FINANCEDATAREADER_RUNTIME_UNAVAILABLE",
+  "FINANCEDATAREADER_SIDECAR_START_FAILED",
+  "FINANCEDATAREADER_SIDECAR_TIMEOUT",
+  "FINANCEDATAREADER_SIDECAR_RESPONSE_INVALID",
+  "FINANCEDATAREADER_SIDECAR_RESPONSE_TOO_LARGE",
+  "FINANCEDATAREADER_SIDECAR_REQUEST_INVALID",
+  "FINANCEDATAREADER_SIDECAR_PROTOCOL_UNSUPPORTED",
+  "FINANCEDATAREADER_SIDECAR_OPERATION_FORBIDDEN",
+  "FINANCEDATAREADER_UPSTREAM_FAILED",
+  "FINANCEDATAREADER_UPSTREAM_SCHEMA_INVALID",
+  "FINANCEDATAREADER_OHLCV_UNAVAILABLE",
+  "FINANCEDATAREADER_TIMEFRAME_UNAVAILABLE",
+  "FINANCEDATAREADER_SYMBOL_UNAVAILABLE",
+  "ACQUISITION_MARKET_UNAVAILABLE",
+  "ACQUISITION_SOURCE_PLAN_INVALID",
+  "ACQUISITION_SYMBOL_INVALID",
+  "ACQUISITION_FALLBACK_EXHAUSTED",
 ] as const;
 export type MarketDataAcquisitionErrorCode =
   (typeof MARKET_DATA_ACQUISITION_ERROR_CODES)[number];
@@ -294,6 +315,7 @@ export const desktopMarketDataAcquisitionStagingSummarySchema = z
     totalBytes: z.number().int().positive(),
     manifestSha256: z.string().regex(/^[0-9a-f]{64}$/u),
     outputFolderName: nonEmptyTrimmedStringSchema.max(INPUT_LIMITS.fileNameChars),
+    mergedDuplicateBars: z.number().int().min(0),
   })
   .strict();
 export const desktopMarketDataAcquisitionJobErrorSchema = z
@@ -342,4 +364,281 @@ export type DesktopAkshareAcquisitionInstrument = z.infer<
 >;
 export type DesktopAkshareAcquisitionInstrumentCatalog = z.infer<
   typeof desktopAkshareAcquisitionInstrumentCatalogSchema
+>;
+
+// The market acquisition catalog is deliberately separate from the legacy
+// connector catalog above. Existing staged downloads continue to use their
+// original v1/v2 request contract, while new downloads are selected by asset
+// class, market and an explicit, audited source plan.
+export const desktopMarketDataAcquisitionAssetClassSchema = z.enum([
+  "STOCKS_AND_INDICES",
+  "FOREX",
+  "COMMODITIES_AND_RATES",
+  "CRYPTO",
+]);
+export const desktopMarketDataAcquisitionMarketIdSchema = z.enum([
+  "CN_A_SHARE",
+  "HK_STOCKS",
+  "KR_STOCKS",
+  "US_STOCKS",
+  "JP_STOCKS",
+  "VN_STOCKS",
+  "GLOBAL_INDICES",
+  "FOREX",
+  "COMMODITY_FUTURES",
+  "RATE_FUTURES",
+  "CRYPTO_SPOT",
+]);
+export const desktopMarketDataAcquisitionProviderIdSchema = z.enum([
+  "akshare",
+  "ccxt",
+  "financedatareader",
+]);
+export const desktopMarketDataAcquisitionSourcePlanIdSchema = z.enum([
+  "CN_A_SHARE_SMART",
+  "FDR_HKEX",
+  "FDR_KRX",
+  "FDR_US_STOCKS",
+  "FDR_TSE",
+  "FDR_HOSE",
+  "FDR_GLOBAL_INDICES",
+  "FDR_FOREX",
+  "FDR_COMMODITY_FUTURES",
+  "FDR_RATE_FUTURES",
+  "CCXT_BINANCE_SMART",
+  "CCXT_OKX_SMART",
+]);
+
+const marketDataAcquisitionProviderVersionSchema = z
+  .object({
+    id: desktopMarketDataAcquisitionProviderIdSchema,
+    name: nonEmptyTrimmedStringSchema.max(INPUT_LIMITS.generalNameChars),
+    version: nonEmptyTrimmedStringSchema.max(INPUT_LIMITS.shortCodeChars),
+    license: nonEmptyTrimmedStringSchema.max(INPUT_LIMITS.shortCodeChars),
+    projectUrl: nonEmptyTrimmedStringSchema.max(INPUT_LIMITS.urlChars),
+    docsUrl: nonEmptyTrimmedStringSchema.max(INPUT_LIMITS.urlChars),
+    termsUrl: nonEmptyTrimmedStringSchema.max(INPUT_LIMITS.urlChars),
+    termsRevision: nonEmptyTrimmedStringSchema.max(INPUT_LIMITS.idChars),
+    available: z.boolean(),
+    unavailabilityCode: nonEmptyTrimmedStringSchema
+      .max(INPUT_LIMITS.idChars)
+      .nullable(),
+  })
+  .strict();
+
+const marketDataAcquisitionSourcePlanSchema = z
+  .object({
+    id: desktopMarketDataAcquisitionSourcePlanIdSchema,
+    providerChain: z
+      .array(desktopMarketDataAcquisitionProviderIdSchema)
+      .min(1)
+      .max(3),
+    fallbackPolicy: z.enum([
+      "NONE",
+      "WHOLE_INSTRUMENT_DAILY_UNADJUSTED_ONLY",
+      "WHOLE_INSTRUMENT_DAILY_ONLY",
+    ]),
+    available: z.boolean(),
+  })
+  .strict();
+
+export const desktopMarketDataAcquisitionMarketSchema = z
+  .object({
+    id: desktopMarketDataAcquisitionMarketIdSchema,
+    assetClassId: desktopMarketDataAcquisitionAssetClassSchema,
+    timeZone: nonEmptyTrimmedStringSchema.max(INPUT_LIMITS.generalNameChars),
+    supportedTimeframes: z
+      .array(desktopMarketDataAcquisitionTimeframeSchema)
+      .min(1)
+      .max(4),
+    adjustmentOptions: z.array(z.enum(["none", "qfq", "hfq"])).max(3),
+    instrumentDiscovery: z.enum(["CATALOG", "PRESET"]),
+    sourcePlans: z.array(marketDataAcquisitionSourcePlanSchema).min(1).max(3),
+  })
+  .strict();
+
+export const desktopMarketDataAcquisitionCatalogSchema = z
+  .object({
+    providers: z
+      .array(marketDataAcquisitionProviderVersionSchema)
+      .min(3)
+      .max(3),
+    assetClasses: z
+      .array(
+        z
+          .object({
+            id: desktopMarketDataAcquisitionAssetClassSchema,
+            marketIds: z
+              .array(desktopMarketDataAcquisitionMarketIdSchema)
+              .min(1)
+              .max(15),
+          })
+          .strict(),
+      )
+      .min(4)
+      .max(4),
+    markets: z.array(desktopMarketDataAcquisitionMarketSchema).min(1).max(15),
+  })
+  .strict();
+
+export const desktopMarketDataAcquisitionInstrumentSchema = z
+  .object({
+    symbol: nonEmptyTrimmedStringSchema.max(64),
+    name: nonEmptyTrimmedStringSchema.max(INPUT_LIMITS.generalNameChars),
+    marketId: desktopMarketDataAcquisitionMarketIdSchema,
+    sourceSymbol: nonEmptyTrimmedStringSchema.max(64),
+    exchangeId: nonEmptyTrimmedStringSchema.max(INPUT_LIMITS.shortCodeChars).nullable(),
+    sourcePlanIds: z
+      .array(desktopMarketDataAcquisitionSourcePlanIdSchema)
+      .min(1)
+      .max(3),
+  })
+  .strict();
+export const desktopMarketDataAcquisitionInstrumentCatalogSchema = z
+  .object({
+    marketId: desktopMarketDataAcquisitionMarketIdSchema,
+    instruments: z
+      .array(desktopMarketDataAcquisitionInstrumentSchema)
+      .max(MARKET_DATA_ACQUISITION_LIMITS.maxMarketResults),
+    nextCursor: nonEmptyTrimmedStringSchema.max(INPUT_LIMITS.idChars).nullable(),
+    cachedAt: desktopMarketDataAcquisitionDateTimeSchema.nullable(),
+    cacheState: z.enum(["FRESH", "STALE", "BUNDLED"]),
+  })
+  .strict();
+
+const desktopMarketDataAcquisitionMarketSymbolsSchema = z
+  .array(nonEmptyTrimmedStringSchema.max(64))
+  .min(1)
+  .max(MARKET_DATA_ACQUISITION_LIMITS.maxSymbols)
+  .refine((symbols) => new Set(symbols).size === symbols.length, {
+    message: "ACQUISITION_SYMBOLS_DUPLICATED",
+  });
+export const desktopMarketDataAcquisitionMarketJobCreateRequestSchema = z
+  .object({
+    marketId: desktopMarketDataAcquisitionMarketIdSchema,
+    sourcePlanId: desktopMarketDataAcquisitionSourcePlanIdSchema,
+    symbols: desktopMarketDataAcquisitionMarketSymbolsSchema,
+    timeframe: desktopMarketDataAcquisitionTimeframeSchema,
+    startAt: desktopMarketDataAcquisitionDateTimeSchema,
+    endAt: desktopMarketDataAcquisitionDateTimeSchema,
+    adjustment: z.enum(["none", "qfq", "hfq"]).nullable(),
+  })
+  .strict()
+  .superRefine((request, context) => {
+    const startAt = Date.parse(request.startAt);
+    const endAt = Date.parse(request.endAt);
+    if (!Number.isFinite(startAt) || !Number.isFinite(endAt) || endAt < startAt) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "ACQUISITION_TIME_RANGE_INVALID",
+        path: ["endAt"],
+      });
+    }
+  });
+
+export const desktopMarketDataAcquisitionSourceAttemptSchema = z
+  .object({
+    providerId: desktopMarketDataAcquisitionProviderIdSchema,
+    providerVersion: nonEmptyTrimmedStringSchema.max(INPUT_LIMITS.shortCodeChars),
+    upstreamId: nonEmptyTrimmedStringSchema.max(INPUT_LIMITS.idChars),
+    status: z.enum(["SUCCEEDED", "FAILED", "SKIPPED"]),
+    errorCode: nonEmptyTrimmedStringSchema.max(INPUT_LIMITS.idChars).nullable(),
+  })
+  .strict();
+export const desktopMarketDataAcquisitionSymbolSourceResultSchema = z
+  .object({
+    symbol: nonEmptyTrimmedStringSchema.max(64),
+    sourceSymbol: nonEmptyTrimmedStringSchema.max(64),
+    finalSource: desktopMarketDataAcquisitionSourceAttemptSchema.nullable(),
+    attempts: z
+      .array(desktopMarketDataAcquisitionSourceAttemptSchema)
+      .min(1)
+      .max(3),
+  })
+  .strict();
+export const desktopMarketDataAcquisitionMarketJobSchema = z
+  .object({
+    id: idStringSchema,
+    status: z.enum(["QUEUED", "RUNNING", "READY_TO_SAVE", "FAILED", "CANCELED"]),
+    request: desktopMarketDataAcquisitionMarketJobCreateRequestSchema,
+    progress: desktopMarketDataAcquisitionJobProgressSchema,
+    sourceResults: z
+      .array(desktopMarketDataAcquisitionSymbolSourceResultSchema)
+      .max(MARKET_DATA_ACQUISITION_LIMITS.maxSymbols),
+    staging: desktopMarketDataAcquisitionStagingSummarySchema.nullable(),
+    error: desktopMarketDataAcquisitionJobErrorSchema.nullable(),
+    createdAt: desktopMarketDataAcquisitionDateTimeSchema,
+    updatedAt: desktopMarketDataAcquisitionDateTimeSchema,
+  })
+  .strict();
+
+export type DesktopMarketDataAcquisitionCatalog = z.infer<
+  typeof desktopMarketDataAcquisitionCatalogSchema
+>;
+export type DesktopMarketDataAcquisitionMarket = z.infer<
+  typeof desktopMarketDataAcquisitionMarketSchema
+>;
+export type DesktopMarketDataAcquisitionMarketId = z.infer<
+  typeof desktopMarketDataAcquisitionMarketIdSchema
+>;
+export type DesktopMarketDataAcquisitionSourcePlanId = z.infer<
+  typeof desktopMarketDataAcquisitionSourcePlanIdSchema
+>;
+export type DesktopMarketDataAcquisitionInstrumentCatalog = z.infer<
+  typeof desktopMarketDataAcquisitionInstrumentCatalogSchema
+>;
+export type DesktopMarketDataAcquisitionInstrument = z.infer<
+  typeof desktopMarketDataAcquisitionInstrumentSchema
+>;
+export type DesktopMarketDataAcquisitionMarketJobCreateRequest = z.infer<
+  typeof desktopMarketDataAcquisitionMarketJobCreateRequestSchema
+>;
+export type DesktopMarketDataAcquisitionSourceAttempt = z.infer<
+  typeof desktopMarketDataAcquisitionSourceAttemptSchema
+>;
+export type DesktopMarketDataAcquisitionMarketJob = z.infer<
+  typeof desktopMarketDataAcquisitionMarketJobSchema
+>;
+
+export const desktopMarketDataAcquisitionJobSummarySchema = z
+  .object({
+    id: idStringSchema,
+    status: z.enum(["QUEUED", "RUNNING", "READY_TO_SAVE", "FAILED", "CANCELED"]),
+    marketId: desktopMarketDataAcquisitionMarketIdSchema,
+    sourcePlanId: desktopMarketDataAcquisitionSourcePlanIdSchema,
+    timeframe: desktopMarketDataAcquisitionTimeframeSchema,
+    symbolCount: z.number().int().min(1).max(MARKET_DATA_ACQUISITION_LIMITS.maxSymbols),
+    completedSymbols: z
+      .number()
+      .int()
+      .min(0)
+      .max(MARKET_DATA_ACQUISITION_LIMITS.maxSymbols),
+    stage: z.enum([
+      "QUEUED",
+      "CONNECTING",
+      "DOWNLOADING",
+      "NORMALIZING",
+      "VALIDATING",
+      "RETRY_WAIT",
+      "READY_TO_SAVE",
+    ]),
+    error: desktopMarketDataAcquisitionJobErrorSchema.nullable(),
+    createdAt: desktopMarketDataAcquisitionDateTimeSchema,
+    updatedAt: desktopMarketDataAcquisitionDateTimeSchema,
+  })
+  .strict();
+
+export const desktopMarketDataAcquisitionJobListSchema = z
+  .object({
+    jobs: z
+      .array(desktopMarketDataAcquisitionJobSummarySchema)
+      .max(MARKET_DATA_ACQUISITION_LIMITS.maxMarketResults),
+  })
+  .strict();
+
+export type DesktopMarketDataAcquisitionJobSummary = z.infer<
+  typeof desktopMarketDataAcquisitionJobSummarySchema
+>;
+export type DesktopMarketDataAcquisitionJobList = z.infer<
+  typeof desktopMarketDataAcquisitionJobListSchema
 >;

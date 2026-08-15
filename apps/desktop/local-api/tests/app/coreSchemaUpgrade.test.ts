@@ -231,6 +231,53 @@ test("repairs the exact current-version sample-pool-name constraint drift with a
   }
 });
 
+test("adds the acquisition history table to a pre-history current-version database with a backup", () => {
+  const { cleanup, layout } = createTempLayout();
+  try {
+    createSchema(layout.dbPath);
+    const db = new Database(layout.dbPath);
+    try {
+      db.exec("DROP TABLE local_data_acquisition_jobs");
+      db.prepare("INSERT INTO users (id, name, created_at) VALUES (?, ?, ?)").run(
+        "user-1",
+        "User",
+        "2026-07-31T00:00:00.000Z",
+      );
+    } finally {
+      db.close();
+    }
+
+    const result = upgradeSupportedCoreSchema(layout);
+    assert.equal(result.status, "UPGRADED");
+    assert.ok(result.backupPath);
+    assert.equal(fs.existsSync(result.backupPath), true);
+
+    const repaired = new Database(layout.dbPath, { readonly: true });
+    try {
+      assert.equal(
+        Number(repaired.prepare("SELECT COUNT(*) FROM users").pluck().get()),
+        1,
+      );
+      assert.equal(
+        Number(
+          repaired
+            .prepare(
+              "SELECT COUNT(*) FROM sqlite_master WHERE type = 'table' AND name = 'local_data_acquisition_jobs'",
+            )
+            .pluck()
+            .get(),
+        ),
+        1,
+      );
+    } finally {
+      repaired.close();
+    }
+    assert.equal(upgradeSupportedCoreSchema(layout).status, "CURRENT");
+  } finally {
+    cleanup();
+  }
+});
+
 test("repairs user-settings default drift without changing stored settings", () => {
   const { cleanup, layout } = createTempLayout();
   try {

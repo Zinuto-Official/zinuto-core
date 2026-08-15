@@ -576,6 +576,7 @@ components:
         - totalBytes
         - manifestSha256
         - outputFolderName
+        - mergedDuplicateBars
       properties:
         fileCount:
           type: integer
@@ -591,6 +592,9 @@ components:
           type: string
           minLength: 1
           maxLength: 128
+        mergedDuplicateBars:
+          type: integer
+          minimum: 0
     DesktopMarketDataAcquisitionJobError:
       type: object
       additionalProperties: false
@@ -661,6 +665,497 @@ components:
       properties:
         discarded:
           type: boolean
+    DesktopMarketDataAcquisitionAssetClass:
+      type: string
+      enum:
+        - STOCKS_AND_INDICES
+        - FOREX
+        - COMMODITIES_AND_RATES
+        - CRYPTO
+    DesktopMarketDataAcquisitionMarketId:
+      type: string
+      enum:
+        - CN_A_SHARE
+        - HK_STOCKS
+        - KR_STOCKS
+        - US_STOCKS
+        - JP_STOCKS
+        - VN_STOCKS
+        - GLOBAL_INDICES
+        - FOREX
+        - COMMODITY_FUTURES
+        - RATE_FUTURES
+        - CRYPTO_SPOT
+    DesktopMarketDataAcquisitionProviderId:
+      type: string
+      enum:
+        - akshare
+        - ccxt
+        - financedatareader
+    DesktopMarketDataAcquisitionSourcePlanId:
+      type: string
+      enum:
+        - CN_A_SHARE_SMART
+        - FDR_HKEX
+        - FDR_KRX
+        - FDR_US_STOCKS
+        - FDR_TSE
+        - FDR_HOSE
+        - FDR_GLOBAL_INDICES
+        - FDR_FOREX
+        - FDR_COMMODITY_FUTURES
+        - FDR_RATE_FUTURES
+        - CCXT_BINANCE_SMART
+        - CCXT_OKX_SMART
+    DesktopMarketDataAcquisitionProvider:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - name
+        - version
+        - license
+        - projectUrl
+        - docsUrl
+        - termsUrl
+        - termsRevision
+        - available
+        - unavailabilityCode
+      properties:
+        id:
+          $ref: "#/components/schemas/DesktopMarketDataAcquisitionProviderId"
+        name:
+          type: string
+          minLength: 1
+          maxLength: 128
+        version:
+          type: string
+          minLength: 1
+          maxLength: 64
+        license:
+          type: string
+          minLength: 1
+          maxLength: 64
+        projectUrl:
+          type: string
+          minLength: 1
+          maxLength: 2048
+        docsUrl:
+          type: string
+          minLength: 1
+          maxLength: 2048
+        termsUrl:
+          type: string
+          minLength: 1
+          maxLength: 2048
+        termsRevision:
+          type: string
+          minLength: 1
+          maxLength: 128
+        available:
+          type: boolean
+        unavailabilityCode:
+          type: string
+          minLength: 1
+          maxLength: 128
+          nullable: true
+    DesktopMarketDataAcquisitionSourcePlan:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - providerChain
+        - fallbackPolicy
+        - available
+      properties:
+        id:
+          $ref: "#/components/schemas/DesktopMarketDataAcquisitionSourcePlanId"
+        providerChain:
+          type: array
+          minItems: 1
+          maxItems: 3
+          items:
+            $ref: "#/components/schemas/DesktopMarketDataAcquisitionProviderId"
+        fallbackPolicy:
+          type: string
+          enum:
+            - NONE
+            - WHOLE_INSTRUMENT_DAILY_UNADJUSTED_ONLY
+            - WHOLE_INSTRUMENT_DAILY_ONLY
+        available:
+          type: boolean
+    DesktopMarketDataAcquisitionMarket:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - assetClassId
+        - timeZone
+        - supportedTimeframes
+        - adjustmentOptions
+        - instrumentDiscovery
+        - sourcePlans
+      properties:
+        id:
+          $ref: "#/components/schemas/DesktopMarketDataAcquisitionMarketId"
+        assetClassId:
+          $ref: "#/components/schemas/DesktopMarketDataAcquisitionAssetClass"
+        timeZone:
+          type: string
+          minLength: 1
+          maxLength: 128
+        supportedTimeframes:
+          type: array
+          minItems: 1
+          maxItems: 4
+          items:
+            $ref: "#/components/schemas/DesktopMarketDataAcquisitionTimeframe"
+        adjustmentOptions:
+          type: array
+          maxItems: 3
+          items:
+            type: string
+            enum:
+              - none
+              - qfq
+              - hfq
+        instrumentDiscovery:
+          type: string
+          enum:
+            - CATALOG
+            - PRESET
+        sourcePlans:
+          type: array
+          minItems: 1
+          maxItems: 3
+          items:
+            $ref: "#/components/schemas/DesktopMarketDataAcquisitionSourcePlan"
+    DesktopMarketDataAcquisitionCatalog:
+      type: object
+      additionalProperties: false
+      required:
+        - providers
+        - assetClasses
+        - markets
+      properties:
+        providers:
+          type: array
+          minItems: 3
+          maxItems: 3
+          items:
+            $ref: "#/components/schemas/DesktopMarketDataAcquisitionProvider"
+        assetClasses:
+          type: array
+          minItems: 4
+          maxItems: 4
+          items:
+            type: object
+            additionalProperties: false
+            required:
+              - id
+              - marketIds
+            properties:
+              id:
+                $ref: "#/components/schemas/DesktopMarketDataAcquisitionAssetClass"
+              marketIds:
+                type: array
+                minItems: 1
+                maxItems: 15
+                items:
+                  $ref: "#/components/schemas/DesktopMarketDataAcquisitionMarketId"
+        markets:
+          type: array
+          minItems: 1
+          maxItems: 15
+          items:
+            $ref: "#/components/schemas/DesktopMarketDataAcquisitionMarket"
+    DesktopMarketDataAcquisitionInstrument:
+      type: object
+      additionalProperties: false
+      required:
+        - symbol
+        - name
+        - marketId
+        - sourceSymbol
+        - exchangeId
+        - sourcePlanIds
+      properties:
+        symbol:
+          type: string
+          minLength: 1
+          maxLength: 64
+        name:
+          type: string
+          minLength: 1
+          maxLength: 128
+        marketId:
+          $ref: "#/components/schemas/DesktopMarketDataAcquisitionMarketId"
+        sourceSymbol:
+          type: string
+          minLength: 1
+          maxLength: 64
+        exchangeId:
+          type: string
+          minLength: 1
+          maxLength: 64
+          nullable: true
+        sourcePlanIds:
+          type: array
+          minItems: 1
+          maxItems: 3
+          items:
+            $ref: "#/components/schemas/DesktopMarketDataAcquisitionSourcePlanId"
+    DesktopMarketDataAcquisitionInstrumentCatalog:
+      type: object
+      additionalProperties: false
+      required:
+        - marketId
+        - instruments
+        - nextCursor
+        - cachedAt
+        - cacheState
+      properties:
+        marketId:
+          $ref: "#/components/schemas/DesktopMarketDataAcquisitionMarketId"
+        instruments:
+          type: array
+          maxItems: 500
+          items:
+            $ref: "#/components/schemas/DesktopMarketDataAcquisitionInstrument"
+        nextCursor:
+          type: string
+          minLength: 1
+          maxLength: 128
+          nullable: true
+        cachedAt:
+          type: string
+          format: date-time
+          maxLength: 64
+          nullable: true
+        cacheState:
+          type: string
+          enum:
+            - FRESH
+            - STALE
+            - BUNDLED
+    DesktopMarketDataAcquisitionMarketJobCreateRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - marketId
+        - sourcePlanId
+        - symbols
+        - timeframe
+        - startAt
+        - endAt
+        - adjustment
+      properties:
+        marketId:
+          $ref: "#/components/schemas/DesktopMarketDataAcquisitionMarketId"
+        sourcePlanId:
+          $ref: "#/components/schemas/DesktopMarketDataAcquisitionSourcePlanId"
+        symbols:
+          type: array
+          minItems: 1
+          maxItems: 20
+          uniqueItems: true
+          items:
+            type: string
+            minLength: 1
+            maxLength: 64
+        timeframe:
+          $ref: "#/components/schemas/DesktopMarketDataAcquisitionTimeframe"
+        startAt:
+          type: string
+          format: date-time
+          maxLength: 64
+        endAt:
+          type: string
+          format: date-time
+          maxLength: 64
+        adjustment:
+          type: string
+          enum:
+            - none
+            - qfq
+            - hfq
+          nullable: true
+    DesktopMarketDataAcquisitionSourceAttempt:
+      type: object
+      additionalProperties: false
+      required:
+        - providerId
+        - providerVersion
+        - upstreamId
+        - status
+        - errorCode
+      properties:
+        providerId:
+          $ref: "#/components/schemas/DesktopMarketDataAcquisitionProviderId"
+        providerVersion:
+          type: string
+          minLength: 1
+          maxLength: 64
+        upstreamId:
+          type: string
+          minLength: 1
+          maxLength: 128
+        status:
+          type: string
+          enum:
+            - SUCCEEDED
+            - FAILED
+            - SKIPPED
+        errorCode:
+          type: string
+          minLength: 1
+          maxLength: 128
+          nullable: true
+    DesktopMarketDataAcquisitionSymbolSourceResult:
+      type: object
+      additionalProperties: false
+      required:
+        - symbol
+        - sourceSymbol
+        - finalSource
+        - attempts
+      properties:
+        symbol:
+          type: string
+          minLength: 1
+          maxLength: 64
+        sourceSymbol:
+          type: string
+          minLength: 1
+          maxLength: 64
+        finalSource:
+          $ref: "#/components/schemas/DesktopMarketDataAcquisitionSourceAttempt"
+          nullable: true
+        attempts:
+          type: array
+          minItems: 1
+          maxItems: 3
+          items:
+            $ref: "#/components/schemas/DesktopMarketDataAcquisitionSourceAttempt"
+    DesktopMarketDataAcquisitionMarketJob:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - status
+        - request
+        - progress
+        - sourceResults
+        - staging
+        - error
+        - createdAt
+        - updatedAt
+      properties:
+        id:
+          $ref: "#/components/schemas/BoundedId"
+        status:
+          type: string
+          enum:
+            - QUEUED
+            - RUNNING
+            - READY_TO_SAVE
+            - FAILED
+            - CANCELED
+        request:
+          $ref: "#/components/schemas/DesktopMarketDataAcquisitionMarketJobCreateRequest"
+        progress:
+          $ref: "#/components/schemas/DesktopMarketDataAcquisitionJobProgress"
+        sourceResults:
+          type: array
+          maxItems: 20
+          items:
+            $ref: "#/components/schemas/DesktopMarketDataAcquisitionSymbolSourceResult"
+        staging:
+          $ref: "#/components/schemas/DesktopMarketDataAcquisitionStagingSummary"
+          nullable: true
+        error:
+          $ref: "#/components/schemas/DesktopMarketDataAcquisitionJobError"
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+          maxLength: 64
+        updatedAt:
+          type: string
+          format: date-time
+          maxLength: 64
+    DesktopMarketDataAcquisitionJobSummary:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - status
+        - marketId
+        - sourcePlanId
+        - timeframe
+        - symbolCount
+        - completedSymbols
+        - stage
+        - error
+        - createdAt
+        - updatedAt
+      properties:
+        id:
+          $ref: "#/components/schemas/BoundedId"
+        status:
+          type: string
+          enum:
+            - QUEUED
+            - RUNNING
+            - READY_TO_SAVE
+            - FAILED
+            - CANCELED
+        marketId:
+          $ref: "#/components/schemas/DesktopMarketDataAcquisitionMarketId"
+        sourcePlanId:
+          $ref: "#/components/schemas/DesktopMarketDataAcquisitionSourcePlanId"
+        timeframe:
+          $ref: "#/components/schemas/DesktopMarketDataAcquisitionTimeframe"
+        symbolCount:
+          type: integer
+          minimum: 1
+          maximum: 20
+        completedSymbols:
+          type: integer
+          minimum: 0
+          maximum: 20
+        stage:
+          type: string
+          enum:
+            - QUEUED
+            - CONNECTING
+            - DOWNLOADING
+            - NORMALIZING
+            - VALIDATING
+            - RETRY_WAIT
+            - READY_TO_SAVE
+        error:
+          $ref: "#/components/schemas/DesktopMarketDataAcquisitionJobError"
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+          maxLength: 64
+        updatedAt:
+          type: string
+          format: date-time
+          maxLength: 64
+    DesktopMarketDataAcquisitionJobList:
+      type: object
+      additionalProperties: false
+      required:
+        - jobs
+      properties:
+        jobs:
+          type: array
+          maxItems: 500
+          items:
+            $ref: "#/components/schemas/DesktopMarketDataAcquisitionJobSummary"
     DesktopWorkspaceId:
       type: string
       enum:
@@ -2118,7 +2613,7 @@ components:
         samplePoolName:
           type: string
           minLength: 1
-          maxLength: 48
+          maxLength: 20
         displayPeriod:
           type: string
           enum:
@@ -2335,7 +2830,7 @@ components:
                     type: boolean
                   poolName:
                     type: string
-                    maxLength: 48
+                    maxLength: 20
                   nameTouched:
                     type: boolean
                 additionalProperties: false
@@ -4684,6 +5179,50 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/data-sources/acquisition-catalog:
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopMarketDataAcquisitionCatalogSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/data-sources/acquisition-markets/{marketId}/instruments":
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopMarketDataAcquisitionInstrumentCatalogSchema
+      parameters:
+        - name: marketId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/DesktopMarketDataAcquisitionMarketId"
+        - name: sourcePlanId
+          in: query
+          required: false
+          schema:
+            $ref: "#/components/schemas/DesktopMarketDataAcquisitionSourcePlanId"
+        - name: query
+          in: query
+          required: false
+          schema:
+            type: string
+            maxLength: 64
+        - name: cursor
+          in: query
+          required: false
+          schema:
+            type: string
+            maxLength: 16
+            pattern: "^[0-9]+$"
+        - name: refresh
+          in: query
+          required: false
+          schema:
+            type: boolean
+            default: false
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
   /api/v1/data-sources/acquisition-connectors/ccxt/markets:
     get:
       x-zinuto-route-kind: json-envelope
@@ -4724,6 +5263,64 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/DesktopMarketDataAcquisitionJobCreateRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  /api/v1/data-sources/acquisition-market-jobs:
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopMarketDataAcquisitionJobListSchema
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopMarketDataAcquisitionMarketJobSchema
+      x-zinuto-runtime-request-schema: desktopMarketDataAcquisitionMarketJobCreateRequestSchema
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DesktopMarketDataAcquisitionMarketJobCreateRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/data-sources/acquisition-market-jobs/{jobId}":
+    get:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopMarketDataAcquisitionMarketJobSchema
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/BoundedId"
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+    delete:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopMarketDataAcquisitionDiscardResultSchema
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/BoundedId"
+      responses:
+        "200":
+          $ref: "#/components/responses/JsonEnvelope"
+  "/api/v1/data-sources/acquisition-market-jobs/{jobId}/cancel":
+    post:
+      x-zinuto-route-kind: json-envelope
+      x-zinuto-runtime-response-schema: desktopMarketDataAcquisitionMarketJobSchema
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/BoundedId"
       responses:
         "200":
           $ref: "#/components/responses/JsonEnvelope"

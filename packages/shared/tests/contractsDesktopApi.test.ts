@@ -27,6 +27,7 @@ import {
   desktopSessionBootstrapSchema,
   desktopFreeReplayStartReadinessRequestSchema,
   desktopFreeReplayStartReadinessSchema,
+  desktopPreparedFreeReplayStartRequestSchema,
   desktopSpecialTrainingStatsSummarySchema,
   desktopSpecialTrainingChallengeActionRequestSchema,
   desktopSpecialTrainingChallengeRuntimeSchema,
@@ -965,6 +966,23 @@ test("desktop request schemas enforce shared input and import limits", () => {
     }).success,
     false,
   );
+});
+
+test("free replay start echoes pool display names at full source-name width", () => {
+  const startRequest = (selectedPoolName: string) =>
+    desktopPreparedFreeReplayStartRequestSchema.safeParse({
+      mode: "FOCUSED",
+      selectedPoolId: "pool_1",
+      selectedPoolName,
+      tradingEnvironment: {
+        marketPresetId: "A_SHARE",
+        assetClass: "STOCK",
+      },
+    }).success;
+  assert.equal(startRequest("p".repeat(INPUT_LIMITS.samplePoolNameChars)), true);
+  assert.equal(startRequest("Nasdaq Data Link WIKI EOD 100"), true);
+  assert.equal(startRequest("p".repeat(INPUT_LIMITS.generalNameChars)), true);
+  assert.equal(startRequest("p".repeat(INPUT_LIMITS.generalNameChars + 1)), false);
 });
 
 test("desktop data source schema keeps storage and source identity typed", () => {

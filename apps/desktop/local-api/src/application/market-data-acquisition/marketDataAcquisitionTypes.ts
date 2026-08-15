@@ -1,14 +1,23 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 import type {
+  DesktopMarketDataAcquisitionCatalog,
   DesktopMarketDataAcquisitionConnectorCatalog,
   DesktopMarketDataAcquisitionJob,
   DesktopMarketDataAcquisitionJobCreateRequest,
+  DesktopMarketDataAcquisitionMarketId,
+  DesktopMarketDataAcquisitionMarketJob,
+  DesktopMarketDataAcquisitionMarketJobCreateRequest,
+  DesktopMarketDataAcquisitionSourcePlanId,
 } from '@zinuto/shared/contracts-desktop/api';
 
 export type AcquisitionRequest = DesktopMarketDataAcquisitionJobCreateRequest;
 export type AcquisitionJob = DesktopMarketDataAcquisitionJob;
 export type AcquisitionConnectorCatalog = DesktopMarketDataAcquisitionConnectorCatalog;
+export type MarketAcquisitionCatalog = DesktopMarketDataAcquisitionCatalog;
+export type MarketAcquisitionRequest =
+  DesktopMarketDataAcquisitionMarketJobCreateRequest;
+export type MarketAcquisitionJob = DesktopMarketDataAcquisitionMarketJob;
 
 export type CanonicalMarketBar = {
   timestamp: string;
@@ -35,6 +44,11 @@ export type AcquisitionConnectorAdapter = {
   finishJob?(jobId: string): Promise<void>;
 };
 
+export type AkshareFetchResult = {
+  rows: CanonicalMarketBar[];
+  upstreamId: 'eastmoney' | 'tencent' | 'sina';
+};
+
 export type CcxtAcquisitionMarket = {
   symbol: string;
   base: string;
@@ -47,7 +61,44 @@ export type CcxtAcquisitionAdapter = AcquisitionConnectorAdapter & {
   listMarkets(
     exchangeId: 'binance' | 'okx',
     query: string,
+    options?: { forceRefresh?: boolean },
   ): Promise<{ markets: CcxtAcquisitionMarket[]; cachedAt: string }>;
+};
+
+export type FinanceDataReaderAcquisitionInstrument = {
+  symbol: string;
+  name: string;
+  exchangeId: string | null;
+};
+
+export type FinanceDataReaderFetchInput = {
+  jobId: string;
+  marketId: DesktopMarketDataAcquisitionMarketId;
+  sourcePlanId: DesktopMarketDataAcquisitionSourcePlanId;
+  symbol: string;
+  sourceSymbol: string;
+  timeframe: '1d';
+  startAt: string;
+  endAt: string;
+  signal: AbortSignal;
+};
+
+export type FinanceDataReaderFetchResult = {
+  rows: CanonicalMarketBar[];
+  upstreamId: string;
+};
+
+export type FinanceDataReaderAcquisitionAdapter = {
+  readonly id: 'financedatareader';
+  isAvailable(): boolean;
+  listInstruments(input: {
+    marketId: DesktopMarketDataAcquisitionMarketId;
+    query: string;
+    signal?: AbortSignal;
+  }): Promise<FinanceDataReaderAcquisitionInstrument[]>;
+  fetchSymbol(
+    input: FinanceDataReaderFetchInput,
+  ): Promise<FinanceDataReaderFetchResult>;
 };
 
 export type AcquisitionManifestFile = {

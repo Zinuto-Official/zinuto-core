@@ -405,3 +405,294 @@ fn never_overwrites_an_existing_final_directory() {
         b"keep"
     );
 }
+
+fn prepare_v3_job(
+    root: &Path,
+    job_id: &str,
+    data_contents: &[u8],
+    data_relative_path: &str,
+    market_id: &str,
+    symbols: &[&str],
+) -> (PathBuf, String, String) {
+    let job_dir = root.join("temp").join(STAGING_DIRECTORY_NAME).join(job_id);
+    let payload_dir = job_dir.join(PAYLOAD_DIRECTORY_NAME);
+    fs::create_dir_all(&payload_dir).expect("payload directory should be created");
+    fs::write(payload_dir.join(data_relative_path), data_contents)
+        .expect("data fixture should be written");
+    let source_notice = b"source notice";
+    fs::write(payload_dir.join("SOURCE.md"), source_notice)
+        .expect("source notice should be written");
+    let output_folder_name = format!(
+        "Zinuto-Data-{market_id}-20260719-120000-{}",
+        acquisition_job_token(job_id)
+    );
+    let total_bytes = data_contents.len() as u64 + source_notice.len() as u64;
+    let attempts = json!([{
+        "providerId": "akshare",
+        "providerVersion": "aktools-0.0.13+akshare-1.17.51",
+        "upstreamId": "eastmoney",
+        "status": "SUCCEEDED",
+        "errorCode": null
+    }]);
+    let source_results: Vec<serde_json::Value> = symbols
+        .iter()
+        .map(|symbol| {
+            json!({
+                "symbol": symbol,
+                "sourceSymbol": symbol,
+                "finalSource": attempts[0],
+                "attempts": attempts
+            })
+        })
+        .collect();
+    let manifest = json!({
+        "schemaVersion": 3,
+        "jobId": job_id,
+        "outputFolderName": output_folder_name,
+        "createdAt": "2026-07-19T12:00:00Z",
+        "request": {
+            "marketId": market_id,
+            "sourcePlanId": "CN_A_SHARE_SMART",
+            "symbols": symbols,
+            "timeframe": "1d",
+            "startAt": "2026-01-01T00:00:00+08:00",
+            "endAt": "2026-07-19T23:59:59+08:00",
+            "adjustment": "none"
+        },
+        "timeZone": "Asia/Shanghai",
+        "sourceResults": source_results,
+        "fileCount": 2,
+        "totalBytes": total_bytes,
+        "files": [
+            {
+                "relativePath": data_relative_path,
+                "kind": "DATA",
+                "bytes": data_contents.len(),
+                "sha256": sha256_hex(data_contents)
+            },
+            {
+                "relativePath": "SOURCE.md",
+                "kind": "SOURCE_NOTICE",
+                "bytes": source_notice.len(),
+                "sha256": sha256_hex(source_notice)
+            }
+        ]
+    });
+    let raw_manifest = serde_json::to_vec(&manifest).expect("manifest should serialize");
+    fs::write(job_dir.join(MANIFEST_FILE_NAME), &raw_manifest).expect("manifest should be written");
+    (payload_dir, sha256_hex(&raw_manifest), output_folder_name)
+}
+
+#[test]
+fn publishes_verified_v3_market_output() {
+    let root = TestDirectory::new("publish-v3");
+    let destination = root.path().join("destination");
+    fs::create_dir(&destination).expect("destination should be created");
+    let job_id = "job-9234567890";
+    let (_, manifest_hash, output_folder_name) = prepare_v3_job(
+        root.path(),
+        job_id,
+        b"datetime,open\n",
+        "000001.csv",
+        "CN_A_SHARE",
+        &["000001"],
+    );
+
+    let published =
+        publish_market_data_output(root.path(), &destination, job_id, &manifest_hash, |_path| {
+            Ok(Some("bookmark-v3".to_string()))
+        })
+        .expect("validated v3 output should publish");
+
+    assert_eq!(published.copied_files, 2);
+    assert_eq!(
+        published.source_folder_bookmark_id.as_deref(),
+        Some("bookmark-v3")
+    );
+    assert_eq!(
+        published.final_path,
+        fs::canonicalize(&destination)
+            .expect("destination should canonicalize")
+            .join(output_folder_name)
+    );
+    assert!(published.final_path.join("000001.csv").is_file());
+    assert!(published.final_path.join("SOURCE.md").is_file());
+}
+
+#[test]
+fn rejects_v3_manifest_with_unknown_fields() {
+    let root = TestDirectory::new("v3-unknown");
+    let job_id = "job-1334567890";
+    let (payload_dir, _, _) = prepare_v3_job(
+        root.path(),
+        job_id,
+        b"valid",
+        "000001.csv",
+        "CN_A_SHARE",
+        &["000001"],
+    );
+    let manifest_hash = rewrite_manifest(&payload_dir, |manifest| {
+        manifest["extraField"] = serde_json::Value::from("unexpected");
+    });
+    let destination = root.path().join("destination");
+    fs::create_dir(&destination).expect("destination should be created");
+
+    assert_eq!(
+        publish_market_data_output(root.path(), &destination, job_id, &manifest_hash, |_path| {
+            Ok(None)
+        },)
+        .err()
+        .as_deref(),
+        Some("MARKET_DATA_ACQUISITION_MANIFEST_INVALID")
+    );
+}
+
+#[test]
+fn rejects_v3_manifest_with_unsupported_schema_version() {
+    let root = TestDirectory::new("v3-schema-version");
+    let job_id = "job-1434567890";
+    let (payload_dir, _, _) = prepare_v3_job(
+        root.path(),
+        job_id,
+        b"valid",
+        "000001.csv",
+        "CN_A_SHARE",
+        &["000001"],
+    );
+    let manifest_hash = rewrite_manifest(&payload_dir, |manifest| {
+        manifest["schemaVersion"] = serde_json::Value::from(2);
+    });
+    let destination = root.path().join("destination");
+    fs::create_dir(&destination).expect("destination should be created");
+
+    assert_eq!(
+        publish_market_data_output(root.path(), &destination, job_id, &manifest_hash, |_path| {
+            Ok(None)
+        },)
+        .err()
+        .as_deref(),
+        Some("MARKET_DATA_ACQUISITION_MANIFEST_INVALID")
+    );
+}
+
+#[test]
+fn rejects_v3_manifest_whose_output_folder_matches_a_different_market() {
+    let root = TestDirectory::new("v3-folder-market");
+    let job_id = "job-1534567890";
+    let (payload_dir, _, _) = prepare_v3_job(
+        root.path(),
+        job_id,
+        b"valid",
+        "000001.csv",
+        "CN_A_SHARE",
+        &["000001"],
+    );
+    let manifest_hash = rewrite_manifest(&payload_dir, |manifest| {
+        manifest["outputFolderName"] = serde_json::Value::from(format!(
+            "Zinuto-Data-HK_STOCKS-20260719-120000-{}",
+            acquisition_job_token(job_id)
+        ));
+    });
+    let destination = root.path().join("destination");
+    fs::create_dir(&destination).expect("destination should be created");
+
+    assert_eq!(
+        publish_market_data_output(root.path(), &destination, job_id, &manifest_hash, |_path| {
+            Ok(None)
+        },)
+        .err()
+        .as_deref(),
+        Some("MARKET_DATA_ACQUISITION_MANIFEST_INVALID")
+    );
+}
+
+#[test]
+fn rejects_v3_manifest_with_a_failed_final_source() {
+    let root = TestDirectory::new("v3-failed-source");
+    let job_id = "job-1634567890";
+    let (payload_dir, _, _) = prepare_v3_job(
+        root.path(),
+        job_id,
+        b"valid",
+        "000001.csv",
+        "CN_A_SHARE",
+        &["000001"],
+    );
+    let manifest_hash = rewrite_manifest(&payload_dir, |manifest| {
+        manifest["sourceResults"][0]["finalSource"]["status"] = serde_json::Value::from("FAILED");
+        manifest["sourceResults"][0]["finalSource"]["errorCode"] =
+            serde_json::Value::from("AKSHARE_UPSTREAM_FAILED");
+    });
+    let destination = root.path().join("destination");
+    fs::create_dir(&destination).expect("destination should be created");
+
+    assert_eq!(
+        publish_market_data_output(root.path(), &destination, job_id, &manifest_hash, |_path| {
+            Ok(None)
+        },)
+        .err()
+        .as_deref(),
+        Some("MARKET_DATA_ACQUISITION_MANIFEST_INVALID")
+    );
+}
+
+#[test]
+fn rejects_v3_manifest_whose_source_results_mismatch_the_symbols() {
+    let root = TestDirectory::new("v3-symbol-mismatch");
+    let job_id = "job-1734567890";
+    let (payload_dir, _, _) = prepare_v3_job(
+        root.path(),
+        job_id,
+        b"valid",
+        "000001.csv",
+        "CN_A_SHARE",
+        &["000001"],
+    );
+    let manifest_hash = rewrite_manifest(&payload_dir, |manifest| {
+        manifest["request"]["symbols"][0] = serde_json::Value::from("000002");
+    });
+    let destination = root.path().join("destination");
+    fs::create_dir(&destination).expect("destination should be created");
+
+    assert_eq!(
+        publish_market_data_output(root.path(), &destination, job_id, &manifest_hash, |_path| {
+            Ok(None)
+        },)
+        .err()
+        .as_deref(),
+        Some("MARKET_DATA_ACQUISITION_MANIFEST_INVALID")
+    );
+}
+
+#[test]
+fn rejects_tampered_v3_file_and_removes_partial_output() {
+    let root = TestDirectory::new("v3-tamper");
+    let destination = root.path().join("destination");
+    fs::create_dir(&destination).expect("destination should be created");
+    let job_id = "job-1834567890";
+    let (payload_dir, manifest_hash, output_folder_name) = prepare_v3_job(
+        root.path(),
+        job_id,
+        b"original",
+        "000001.csv",
+        "CN_A_SHARE",
+        &["000001"],
+    );
+    fs::write(payload_dir.join("000001.csv"), b"tampered").expect("fixture should be tampered");
+
+    assert_eq!(
+        publish_market_data_output(root.path(), &destination, job_id, &manifest_hash, |_path| {
+            Ok(None)
+        },)
+        .err()
+        .as_deref(),
+        Some("MARKET_DATA_ACQUISITION_FILE_HASH_MISMATCH")
+    );
+    assert!(!destination.join(output_folder_name).exists());
+    assert_eq!(
+        fs::read_dir(&destination)
+            .expect("destination should remain readable")
+            .count(),
+        0
+    );
+}

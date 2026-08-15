@@ -5,7 +5,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { inspectAkshareSidecarBundle } from './validate-native-runtime.mjs';
+import {
+  inspectAkshareSidecarBundle,
+  inspectFinanceDataReaderSidecarBundle,
+} from './validate-native-runtime.mjs';
 
 const scriptPath = fileURLToPath(import.meta.url);
 const scriptDir = path.dirname(scriptPath);
@@ -34,17 +37,22 @@ const loadSidecarVersions = (rootDir) => {
     rootDir,
     'config',
     'open-source',
-    'python-sidecar-dependencies.json',
+    'market-data-connectors.v1.json',
   ), 'utf8'));
-  const version = (packageName) => manifest.requiredRootPackages?.find(
-    (entry) => entry?.name === packageName,
+  const version = (providerId) => manifest.providers?.find(
+    (entry) => entry?.id === providerId,
   )?.version;
   const akshareVersion = version('akshare');
   const aktoolsVersion = version('aktools');
-  if (typeof akshareVersion !== 'string' || typeof aktoolsVersion !== 'string') {
-    throw new Error('AKShare sidecar dependency versions are not pinned.');
+  const financeDataReaderVersion = version('financedatareader');
+  if (
+    typeof akshareVersion !== 'string' ||
+    typeof aktoolsVersion !== 'string' ||
+    typeof financeDataReaderVersion !== 'string'
+  ) {
+    throw new Error('Market-data sidecar dependency versions are not pinned.');
   }
-  return { akshareVersion, aktoolsVersion };
+  return { akshareVersion, aktoolsVersion, financeDataReaderVersion };
 };
 
 export const collectMissingTauriBuildInputs = ({
@@ -57,12 +65,22 @@ export const collectMissingTauriBuildInputs = ({
     ? 'zinuto-core-backtest-engine.exe'
     : 'zinuto-core-backtest-engine';
   const nodeBinary = nodePlatform === 'win32' ? 'node.exe' : 'node';
-  const sidecarBundle = inspectAkshareSidecarBundle({
-    generatedRoot: generatedDir,
-    nodePlatform,
-    nodeArch,
-    ...loadSidecarVersions(rootDir),
-  });
+  const sidecarVersions = loadSidecarVersions(rootDir);
+  const sidecarBundles = [
+    inspectAkshareSidecarBundle({
+      generatedRoot: generatedDir,
+      nodePlatform,
+      nodeArch,
+      akshareVersion: sidecarVersions.akshareVersion,
+      aktoolsVersion: sidecarVersions.aktoolsVersion,
+    }),
+    inspectFinanceDataReaderSidecarBundle({
+      generatedRoot: generatedDir,
+      nodePlatform,
+      nodeArch,
+      financeDataReaderVersion: sidecarVersions.financeDataReaderVersion,
+    }),
+  ];
   const requiredFiles = [
     path.join(rootDir, 'apps', 'desktop', 'web', 'dist', 'index.html'),
     path.join(
@@ -78,19 +96,19 @@ export const collectMissingTauriBuildInputs = ({
     path.join(generatedDir, 'runtime-manifest.json'),
     path.join(generatedDir, 'backtest-engine', backtestBinary),
     path.join(rootDir, 'apps', 'desktop', 'shell', 'runtime', 'node', 'bin', nodeBinary),
-    ...sidecarBundle.requiredFiles,
+    ...sidecarBundles.flatMap((bundle) => bundle.requiredFiles),
   ];
   const requiredDirectories = [
     path.join(generatedDir, 'backend-runtime', 'node_modules'),
     path.join(generatedDir, 'node-runtime-libs'),
-    ...sidecarBundle.requiredDirectories,
+    ...sidecarBundles.flatMap((bundle) => bundle.requiredDirectories),
   ];
   return [...new Set([
     ...requiredFiles.filter((filePath) => !isRegularFileWithoutSymlink(filePath)),
     ...requiredDirectories.filter(
       (directoryPath) => !isDirectoryWithoutSymlink(directoryPath),
     ),
-    ...sidecarBundle.invalidPaths,
+    ...sidecarBundles.flatMap((bundle) => bundle.invalidPaths),
   ])];
 };
 

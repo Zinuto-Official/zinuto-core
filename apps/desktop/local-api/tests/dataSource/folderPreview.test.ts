@@ -16,7 +16,10 @@ import {
 } from '../../src/application/dataSource/folderPreview.js';
 import { readTabularPreviewRowsFromPath } from '../../src/application/dataSource/tabularFileUtils.js';
 import { parseSymbolFromFileName } from '../../src/application/dataSource/sourceIdentity.js';
-import { serializeMarketDataAcquisitionSourceMetadata } from '../../src/application/dataSource/marketDataAcquisitionSourceMetadata.js';
+import {
+  parseMarketDataAcquisitionSourceMetadata,
+  serializeMarketDataAcquisitionSourceMetadata,
+} from '../../src/application/dataSource/marketDataAcquisitionSourceMetadata.js';
 
 const CSV_CONTENT = `date,open,high,low,close,volume
 2024-01-01,1,2,0.5,1.5,100
@@ -215,6 +218,147 @@ test('folder preview uses versioned acquisition timeframe provenance for one val
   assert.equal(preview.detectedTimeframe, '1d');
   assert.equal(preview.validFiles, 1);
   assert.equal(preview.invalidFiles, 0);
+});
+
+test('folder preview reads v3 per-file provenance while retaining the legacy v1 and v2 readers', async (t) => {
+  const tempRoot = await fs.mkdtemp(path.join(os.tmpdir(), 'zinuto-folder-preview-acquisition-v3-'));
+  t.after(async () => {
+    await fs.rm(tempRoot, { recursive: true, force: true });
+  });
+  const metadata = {
+    schemaVersion: 3 as const,
+    connectorId: 'financedatareader' as const,
+    adjustment: null,
+    sourceSymbols: ['BTC/USD'],
+    importSymbols: ['BTC-USD-7B4C9651C426'],
+    timeframe: '1d' as const,
+    marketId: 'CRYPTO_SPOT',
+    timeZone: 'UTC',
+    sources: [{
+      sourceSymbol: 'BTC/USD',
+      importSymbol: 'BTC-USD-7B4C9651C426',
+      finalSource: {
+        providerId: 'financedatareader' as const,
+        providerVersion: '0.9.202',
+        upstreamId: 'investing-com',
+        status: 'SUCCEEDED' as const,
+        errorCode: null,
+      },
+      attempts: [
+        {
+          providerId: 'ccxt' as const,
+          providerVersion: '4.5.73',
+          upstreamId: 'binance',
+          status: 'FAILED' as const,
+          errorCode: 'CCXT_UPSTREAM_FAILED',
+        },
+        {
+          providerId: 'financedatareader' as const,
+          providerVersion: '0.9.202',
+          upstreamId: 'investing-com',
+          status: 'SUCCEEDED' as const,
+          errorCode: null,
+        },
+      ],
+    }],
+  };
+  await Promise.all([
+    writeCsvWithContent(
+      path.join(tempRoot, 'BTC-USD-7B4C9651C426.csv'),
+      [
+        'datetime,open,high,low,close,volume',
+        '2025-01-01T16:00:00.000Z,100,103,99,102,10',
+        '',
+      ].join('\n'),
+    ),
+    fs.writeFile(
+      path.join(tempRoot, 'SOURCE.md'),
+      '# Data source\n\n' + serializeMarketDataAcquisitionSourceMetadata(metadata) + '\n',
+      'utf8',
+    ),
+  ]);
+
+  const preview = await previewLocalDataImportFolderCore(tempRoot, createPreviewDeps());
+
+  assert.deepEqual(preview.marketDataAcquisitionMetadata, metadata);
+  assert.equal(preview.detectedTimeframe, '1d');
+  assert.equal(preview.validFiles, 1);
+  assert.equal(preview.suggestedTimeZone, 'Etc/UTC');
+  assert.equal(preview.timeZoneSuggestion.reason, 'EXISTING_SOURCE');
+  assert.equal(
+    parseMarketDataAcquisitionSourceMetadata({
+      ...metadata,
+      connectorId: 'mixed',
+    }),
+    null,
+  );
+  assert.equal(
+    parseMarketDataAcquisitionSourceMetadata({
+      ...metadata,
+      timeZone: 'Not/A_Real_Time_Zone',
+    }),
+    null,
+  );
+});
+
+test('folder preview preserves the verified market timezone for offset daily acquisition data', async (t) => {
+  const tempRoot = await fs.mkdtemp(path.join(os.tmpdir(), 'zinuto-folder-preview-acquisition-zone-'));
+  t.after(async () => {
+    await fs.rm(tempRoot, { recursive: true, force: true });
+  });
+  const metadata = {
+    schemaVersion: 3 as const,
+    connectorId: 'financedatareader' as const,
+    adjustment: null,
+    sourceSymbols: ['7203'],
+    importSymbols: ['7203'],
+    timeframe: '1d' as const,
+    marketId: 'JP_STOCKS',
+    timeZone: 'Asia/Tokyo',
+    sources: [{
+      sourceSymbol: '7203',
+      importSymbol: '7203',
+      finalSource: {
+        providerId: 'financedatareader' as const,
+        providerVersion: '0.9.202',
+        upstreamId: 'yahoo-finance',
+        status: 'SUCCEEDED' as const,
+        errorCode: null,
+      },
+      attempts: [{
+        providerId: 'financedatareader' as const,
+        providerVersion: '0.9.202',
+        upstreamId: 'yahoo-finance',
+        status: 'SUCCEEDED' as const,
+        errorCode: null,
+      }],
+    }],
+  };
+  await Promise.all([
+    writeCsvWithContent(
+      path.join(tempRoot, '7203.csv'),
+      [
+        'datetime,open,high,low,close,volume',
+        '2026-01-02T16:00:00+09:00,10,12,9,11,100',
+        '2026-01-03T16:00:00+09:00,11,13,10,12,120',
+        '2026-01-04T16:00:00+09:00,12,14,11,13,130',
+        '',
+      ].join('\n'),
+    ),
+    fs.writeFile(
+      path.join(tempRoot, 'SOURCE.md'),
+      '# Data source\n\n' + serializeMarketDataAcquisitionSourceMetadata(metadata) + '\n',
+      'utf8',
+    ),
+  ]);
+
+  const preview = await previewLocalDataImportFolderCore(tempRoot, createPreviewDeps());
+
+  assert.deepEqual(preview.marketDataAcquisitionMetadata, metadata);
+  assert.equal(preview.detectedTimeframe, '1d');
+  assert.equal(preview.suggestedTimeZone, 'Asia/Tokyo');
+  assert.equal(preview.timeZoneSuggestion.reason, 'EXISTING_SOURCE');
+  assert.equal(preview.timeZoneSuggestion.confidence, 'HIGH');
 });
 
 test('folder preview ignores malformed acquisition provenance', async (t) => {

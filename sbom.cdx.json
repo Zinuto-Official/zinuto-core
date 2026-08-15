@@ -1,7 +1,7 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.5",
-  "serialNumber": "urn:uuid:06e4f435-90ae-5acb-a52b-7a7516f51eda",
+  "serialNumber": "urn:uuid:ea92df7c-097c-5fcb-a6c5-cea497b3d678",
   "version": 1,
   "metadata": {
     "component": {
@@ -19,7 +19,7 @@
     "properties": [
       {
         "name": "zinuto:dependencySnapshotSha256",
-        "value": "06e4f43590aebacbe52b7a7516f51edaa185da0fbc5510d3769532c8c261339f"
+        "value": "ea92df7c097cafcb06c5cea497b3d6782905ffc29ef1cc8d9e0f557b96f2f94d"
       },
       {
         "name": "zinuto:pythonSidecarLockSha256",
@@ -32,6 +32,14 @@
       {
         "name": "zinuto:pythonSidecarUvVersion",
         "value": "0.11.8"
+      },
+      {
+        "name": "zinuto:financeDataReaderSidecarLockSha256",
+        "value": "2683a9389e744f96445559509abb0981e661a6a1f4b7b367d0f3544c96178aee"
+      },
+      {
+        "name": "zinuto:financeDataReaderSidecarVersion",
+        "value": "3.11.15"
       },
       {
         "name": "zinuto:marketDataTermsAreNotSoftwareLicenses",
@@ -10651,19 +10659,6 @@
       "type": "library",
       "group": "npm",
       "name": "@types/node",
-      "version": "24.13.3",
-      "scope": "excluded",
-      "licenses": [
-        {
-          "expression": "MIT"
-        }
-      ],
-      "purl": "pkg:npm/%40types%2Fnode@24.13.3"
-    },
-    {
-      "type": "library",
-      "group": "npm",
-      "name": "@types/node",
       "version": "25.6.0",
       "scope": "excluded",
       "licenses": [
@@ -10841,19 +10836,6 @@
         }
       ],
       "purl": "pkg:npm/accepts@2.0.0"
-    },
-    {
-      "type": "library",
-      "group": "npm",
-      "name": "ansi-regex",
-      "version": "5.0.1",
-      "scope": "excluded",
-      "licenses": [
-        {
-          "expression": "MIT"
-        }
-      ],
-      "purl": "pkg:npm/ansi-regex@5.0.1"
     },
     {
       "type": "library",
@@ -11543,19 +11525,6 @@
         }
       ],
       "purl": "pkg:npm/content-type@1.0.5"
-    },
-    {
-      "type": "library",
-      "group": "npm",
-      "name": "content-type",
-      "version": "2.0.0",
-      "scope": "required",
-      "licenses": [
-        {
-          "expression": "MIT"
-        }
-      ],
-      "purl": "pkg:npm/content-type@2.0.0"
     },
     {
       "type": "library",
@@ -12414,19 +12383,6 @@
         }
       ],
       "purl": "pkg:npm/github-from-package@0.0.0"
-    },
-    {
-      "type": "library",
-      "group": "npm",
-      "name": "glob-parent",
-      "version": "5.1.2",
-      "scope": "excluded",
-      "licenses": [
-        {
-          "expression": "ISC"
-        }
-      ],
-      "purl": "pkg:npm/glob-parent@5.1.2"
     },
     {
       "type": "library",
@@ -13589,32 +13545,6 @@
       "type": "library",
       "group": "npm",
       "name": "picomatch",
-      "version": "2.3.2",
-      "scope": "excluded",
-      "licenses": [
-        {
-          "expression": "MIT"
-        }
-      ],
-      "purl": "pkg:npm/picomatch@2.3.2"
-    },
-    {
-      "type": "library",
-      "group": "npm",
-      "name": "picomatch",
-      "version": "2.3.2",
-      "scope": "excluded",
-      "licenses": [
-        {
-          "expression": "MIT"
-        }
-      ],
-      "purl": "pkg:npm/picomatch@2.3.2"
-    },
-    {
-      "type": "library",
-      "group": "npm",
-      "name": "picomatch",
       "version": "4.0.4",
       "scope": "excluded",
       "licenses": [
@@ -13727,19 +13657,6 @@
         }
       ],
       "purl": "pkg:npm/postcss-nested@6.2.0"
-    },
-    {
-      "type": "library",
-      "group": "npm",
-      "name": "postcss-selector-parser",
-      "version": "6.1.2",
-      "scope": "excluded",
-      "licenses": [
-        {
-          "expression": "MIT"
-        }
-      ],
-      "purl": "pkg:npm/postcss-selector-parser@6.1.2"
     },
     {
       "type": "library",
@@ -14052,45 +13969,6 @@
         }
       ],
       "purl": "pkg:npm/readable-stream@3.6.2"
-    },
-    {
-      "type": "library",
-      "group": "npm",
-      "name": "readable-stream",
-      "version": "4.7.0",
-      "scope": "excluded",
-      "licenses": [
-        {
-          "expression": "MIT"
-        }
-      ],
-      "purl": "pkg:npm/readable-stream@4.7.0"
-    },
-    {
-      "type": "library",
-      "group": "npm",
-      "name": "readable-stream",
-      "version": "4.7.0",
-      "scope": "excluded",
-      "licenses": [
-        {
-          "expression": "MIT"
-        }
-      ],
-      "purl": "pkg:npm/readable-stream@4.7.0"
-    },
-    {
-      "type": "library",
-      "group": "npm",
-      "name": "readable-stream",
-      "version": "4.7.0",
-      "scope": "excluded",
-      "licenses": [
-        {
-          "expression": "MIT"
-        }
-      ],
-      "purl": "pkg:npm/readable-stream@4.7.0"
     },
     {
       "type": "library",
@@ -14576,19 +14454,6 @@
     {
       "type": "library",
       "group": "npm",
-      "name": "strip-ansi",
-      "version": "6.0.1",
-      "scope": "excluded",
-      "licenses": [
-        {
-          "expression": "MIT"
-        }
-      ],
-      "purl": "pkg:npm/strip-ansi@6.0.1"
-    },
-    {
-      "type": "library",
-      "group": "npm",
       "name": "strip-json-comments",
       "version": "2.0.1",
       "scope": "required",
@@ -14889,19 +14754,6 @@
       "type": "library",
       "group": "npm",
       "name": "tslib",
-      "version": "2.3.0",
-      "scope": "required",
-      "licenses": [
-        {
-          "expression": "0BSD"
-        }
-      ],
-      "purl": "pkg:npm/tslib@2.3.0"
-    },
-    {
-      "type": "library",
-      "group": "npm",
-      "name": "tslib",
       "version": "2.8.1",
       "scope": "required",
       "licenses": [
@@ -14962,19 +14814,6 @@
         }
       ],
       "purl": "pkg:npm/typescript@5.9.3"
-    },
-    {
-      "type": "library",
-      "group": "npm",
-      "name": "undici-types",
-      "version": "7.18.2",
-      "scope": "excluded",
-      "licenses": [
-        {
-          "expression": "MIT"
-        }
-      ],
-      "purl": "pkg:npm/undici-types@7.18.2"
     },
     {
       "type": "library",
@@ -15581,6 +15420,31 @@
     {
       "type": "library",
       "group": "pypi",
+      "name": "certifi",
+      "version": "2026.7.22",
+      "scope": "required",
+      "licenses": [
+        {
+          "expression": "MPL-2.0"
+        }
+      ],
+      "purl": "pkg:pypi/certifi@2026.7.22",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://pypi.org/project/certifi/2026.7.22/"
+        }
+      ],
+      "properties": [
+        {
+          "name": "zinuto:dependencyRole",
+          "value": "sidecar-lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "group": "pypi",
       "name": "cffi",
       "version": "2.1.0",
       "scope": "required",
@@ -15619,6 +15483,31 @@
         {
           "type": "website",
           "url": "https://pypi.org/project/charset-normalizer/3.4.9/"
+        }
+      ],
+      "properties": [
+        {
+          "name": "zinuto:dependencyRole",
+          "value": "sidecar-lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "group": "pypi",
+      "name": "charset-normalizer",
+      "version": "3.5.0",
+      "scope": "required",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "purl": "pkg:pypi/charset-normalizer@3.5.0",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://pypi.org/project/charset-normalizer/3.5.0/"
         }
       ],
       "properties": [
@@ -15769,6 +15658,31 @@
         {
           "type": "website",
           "url": "https://pypi.org/project/fastapi/0.139.2/"
+        }
+      ],
+      "properties": [
+        {
+          "name": "zinuto:dependencyRole",
+          "value": "sidecar-lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "group": "pypi",
+      "name": "finance-datareader",
+      "version": "0.9.202",
+      "scope": "required",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "purl": "pkg:pypi/finance-datareader@0.9.202",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://pypi.org/project/finance-datareader/0.9.202/"
         }
       ],
       "properties": [
@@ -16056,6 +15970,31 @@
     {
       "type": "library",
       "group": "pypi",
+      "name": "narwhals",
+      "version": "2.24.0",
+      "scope": "required",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "purl": "pkg:pypi/narwhals@2.24.0",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://pypi.org/project/narwhals/2.24.0/"
+        }
+      ],
+      "properties": [
+        {
+          "name": "zinuto:dependencyRole",
+          "value": "sidecar-lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "group": "pypi",
       "name": "numpy",
       "version": "2.4.6",
       "scope": "required",
@@ -16131,6 +16070,31 @@
     {
       "type": "library",
       "group": "pypi",
+      "name": "packaging",
+      "version": "26.3",
+      "scope": "required",
+      "licenses": [
+        {
+          "expression": "Apache-2.0 OR BSD-2-Clause"
+        }
+      ],
+      "purl": "pkg:pypi/packaging@26.3",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://pypi.org/project/packaging/26.3/"
+        }
+      ],
+      "properties": [
+        {
+          "name": "zinuto:dependencyRole",
+          "value": "sidecar-lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "group": "pypi",
       "name": "pandas",
       "version": "3.0.3",
       "scope": "required",
@@ -16144,6 +16108,31 @@
         {
           "type": "website",
           "url": "https://pypi.org/project/pandas/3.0.3/"
+        }
+      ],
+      "properties": [
+        {
+          "name": "zinuto:dependencyRole",
+          "value": "sidecar-lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "group": "pypi",
+      "name": "pandas",
+      "version": "3.0.5",
+      "scope": "required",
+      "licenses": [
+        {
+          "expression": "BSD-3-Clause"
+        }
+      ],
+      "purl": "pkg:pypi/pandas@3.0.5",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://pypi.org/project/pandas/3.0.5/"
         }
       ],
       "properties": [
@@ -16175,6 +16164,31 @@
         {
           "name": "zinuto:dependencyRole",
           "value": "platform-conditional-sidecar-lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "group": "pypi",
+      "name": "plotly",
+      "version": "6.9.0",
+      "scope": "required",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "purl": "pkg:pypi/plotly@6.9.0",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://pypi.org/project/plotly/6.9.0/"
+        }
+      ],
+      "properties": [
+        {
+          "name": "zinuto:dependencyRole",
+          "value": "sidecar-lock"
         }
       ]
     },
@@ -16431,6 +16445,31 @@
     {
       "type": "library",
       "group": "pypi",
+      "name": "requests-file",
+      "version": "3.0.1",
+      "scope": "required",
+      "licenses": [
+        {
+          "expression": "Apache-2.0"
+        }
+      ],
+      "purl": "pkg:pypi/requests-file@3.0.1",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://pypi.org/project/requests-file/3.0.1/"
+        }
+      ],
+      "properties": [
+        {
+          "name": "zinuto:dependencyRole",
+          "value": "sidecar-lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "group": "pypi",
       "name": "requests",
       "version": "2.34.2",
       "scope": "required",
@@ -16494,6 +16533,31 @@
         {
           "type": "website",
           "url": "https://pypi.org/project/setuptools/83.0.0/"
+        }
+      ],
+      "properties": [
+        {
+          "name": "zinuto:dependencyRole",
+          "value": "sidecar-lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "group": "pypi",
+      "name": "setuptools",
+      "version": "84.0.0",
+      "scope": "required",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "purl": "pkg:pypi/setuptools@84.0.0",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://pypi.org/project/setuptools/84.0.0/"
         }
       ],
       "properties": [
@@ -16581,6 +16645,31 @@
     {
       "type": "library",
       "group": "pypi",
+      "name": "soupsieve",
+      "version": "2.9.2",
+      "scope": "required",
+      "licenses": [
+        {
+          "expression": "MIT"
+        }
+      ],
+      "purl": "pkg:pypi/soupsieve@2.9.2",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://pypi.org/project/soupsieve/2.9.2/"
+        }
+      ],
+      "properties": [
+        {
+          "name": "zinuto:dependencyRole",
+          "value": "sidecar-lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "group": "pypi",
       "name": "starlette",
       "version": "1.3.1",
       "scope": "required",
@@ -16644,6 +16733,31 @@
         {
           "type": "website",
           "url": "https://pypi.org/project/tqdm/4.69.0/"
+        }
+      ],
+      "properties": [
+        {
+          "name": "zinuto:dependencyRole",
+          "value": "sidecar-lock"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "group": "pypi",
+      "name": "tqdm",
+      "version": "4.70.0",
+      "scope": "required",
+      "licenses": [
+        {
+          "expression": "MPL-2.0 AND MIT"
+        }
+      ],
+      "purl": "pkg:pypi/tqdm@4.70.0",
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://pypi.org/project/tqdm/4.70.0/"
         }
       ],
       "properties": [

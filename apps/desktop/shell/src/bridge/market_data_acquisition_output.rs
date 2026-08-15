@@ -15,9 +15,11 @@ use tauri::AppHandle;
 
 #[cfg(not(target_os = "macos"))]
 mod grant_store;
+mod manifest_v3;
 mod residue;
 #[cfg(not(target_os = "macos"))]
 use grant_store::{authorize_non_macos_folder, resolve_non_macos_folder};
+use manifest_v3::validate_manifest_v3;
 pub(crate) use residue::sweep_stale_acquisition_residue;
 #[cfg(test)]
 use residue::sweep_stale_acquisition_residue_in_destination;
@@ -94,7 +96,7 @@ struct AcquisitionFolderGrantRecord {
 
 #[derive(serde::Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
-struct AcquisitionManifest {
+struct AcquisitionManifestV1 {
     schema_version: u32,
     job_id: String,
     connector_id: AcquisitionConnectorId,
@@ -182,6 +184,12 @@ struct AcquisitionManifestFile {
 enum AcquisitionManifestFileKind {
     Data,
     SourceNotice,
+}
+
+struct ValidatedAcquisitionManifest {
+    output_folder_name: String,
+    files: Vec<AcquisitionManifestFile>,
+    total_bytes: u64,
 }
 
 struct ValidatedAcquisitionJob {
@@ -359,34 +367,23 @@ fn validate_relative_file_path(value: &str) -> bool {
     matches!(components.next(), Some(Component::Normal(_))) && components.next().is_none()
 }
 
-fn validate_manifest(
-    raw_manifest: &[u8],
-    expected_job_id: &str,
-) -> Result<AcquisitionManifest, String> {
-    let manifest: AcquisitionManifest = serde_json::from_slice(raw_manifest)
-        .map_err(|_| "MARKET_DATA_ACQUISITION_MANIFEST_INVALID".to_string())?;
-    if manifest.schema_version != 1
-        || manifest.job_id != expected_job_id
-        || !validate_output_folder_name(
-            &manifest.output_folder_name,
-            manifest.connector_id,
-            expected_job_id,
-        )
-        || !validate_text_field(&manifest.created_at, 64)
-        || manifest.file_count == 0
-        || manifest.file_count > MAX_FILES
-        || manifest.file_count != manifest.files.len()
-        || manifest.total_bytes > MAX_TOTAL_BYTES
+fn validate_manifest_file_list(
+    file_count: usize,
+    total_bytes: u64,
+    files: &[AcquisitionManifestFile],
+) -> Result<(), String> {
+    if file_count == 0
+        || file_count > MAX_FILES
+        || file_count != files.len()
+        || total_bytes > MAX_TOTAL_BYTES
     {
         return Err("MARKET_DATA_ACQUISITION_MANIFEST_INVALID".to_string());
     }
-    validate_manifest_request(manifest.connector_id, &manifest.request)?;
-
-    let mut paths = HashSet::with_capacity(manifest.files.len());
+    let mut paths = HashSet::with_capacity(files.len());
     let mut calculated_total_bytes = 0_u64;
     let mut data_files = 0_usize;
     let mut source_notices = 0_usize;
-    for file in &manifest.files {
+    for file in files {
         if !validate_relative_file_path(&file.relative_path)
             || !is_lower_hex_sha256(&file.sha256)
             || file.bytes == 0
@@ -416,11 +413,59 @@ fn validate_manifest(
     if data_files == 0
         || data_files > MAX_DATA_FILES
         || source_notices != 1
-        || calculated_total_bytes != manifest.total_bytes
+        || calculated_total_bytes != total_bytes
     {
         return Err("MARKET_DATA_ACQUISITION_MANIFEST_INVALID".to_string());
     }
-    Ok(manifest)
+    Ok(())
+}
+
+fn validate_manifest_v1(
+    raw_manifest: &[u8],
+    expected_job_id: &str,
+) -> Result<ValidatedAcquisitionManifest, String> {
+    let manifest: AcquisitionManifestV1 = serde_json::from_slice(raw_manifest)
+        .map_err(|_| "MARKET_DATA_ACQUISITION_MANIFEST_INVALID".to_string())?;
+    if manifest.schema_version != 1
+        || manifest.job_id != expected_job_id
+        || !validate_output_folder_name(
+            &manifest.output_folder_name,
+            manifest.connector_id,
+            expected_job_id,
+        )
+        || !validate_text_field(&manifest.created_at, 64)
+    {
+        return Err("MARKET_DATA_ACQUISITION_MANIFEST_INVALID".to_string());
+    }
+    validate_manifest_request(manifest.connector_id, &manifest.request)?;
+    validate_manifest_file_list(manifest.file_count, manifest.total_bytes, &manifest.files)?;
+    Ok(ValidatedAcquisitionManifest {
+        output_folder_name: manifest.output_folder_name,
+        files: manifest.files,
+        total_bytes: manifest.total_bytes,
+    })
+}
+
+fn manifest_schema_version(raw_manifest: &[u8]) -> Option<u32> {
+    serde_json::from_slice::<serde_json::Value>(raw_manifest)
+        .ok()
+        .and_then(|value| {
+            value
+                .get("schemaVersion")
+                .and_then(serde_json::Value::as_u64)
+        })
+        .and_then(|version| u32::try_from(version).ok())
+}
+
+fn validate_manifest(
+    raw_manifest: &[u8],
+    expected_job_id: &str,
+) -> Result<ValidatedAcquisitionManifest, String> {
+    match manifest_schema_version(raw_manifest) {
+        Some(1) => validate_manifest_v1(raw_manifest, expected_job_id),
+        Some(3) => validate_manifest_v3(raw_manifest, expected_job_id),
+        _ => Err("MARKET_DATA_ACQUISITION_MANIFEST_INVALID".to_string()),
+    }
 }
 
 fn require_real_directory(path: &Path) -> Result<(), String> {

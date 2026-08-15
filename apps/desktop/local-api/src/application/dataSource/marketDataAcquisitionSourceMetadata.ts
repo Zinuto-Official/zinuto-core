@@ -4,13 +4,15 @@ import fs from 'node:fs/promises';
 import type { Stats } from 'node:fs';
 import path from 'node:path';
 
+import { isValidTimeZone } from '@zinuto/shared/timezone';
+
 const SOURCE_NOTICE_FILE_NAME = 'SOURCE.md';
 const SOURCE_NOTICE_MAX_BYTES = 64 * 1024;
 const SOURCE_METADATA_PREFIX = '<!-- zinuto-market-data-acquisition:';
 const SOURCE_METADATA_SUFFIX = ' -->';
 const SOURCE_SYMBOL_LIMIT = 20;
 
-export type MarketDataAcquisitionSourceMetadata = {
+type LegacyMarketDataAcquisitionSourceMetadata = {
   connectorId: 'akshare' | 'ccxt';
   adjustment: 'none' | 'qfq' | 'hfq' | null;
   sourceSymbols: string[];
@@ -24,6 +26,35 @@ export type MarketDataAcquisitionSourceMetadata = {
       timeframe: '1m' | '5m' | '1h' | '1d';
     }
 );
+
+export type MarketDataAcquisitionSourceAttempt = {
+  providerId: 'akshare' | 'ccxt' | 'financedatareader';
+  providerVersion: string;
+  upstreamId: string;
+  status: 'SUCCEEDED' | 'FAILED' | 'SKIPPED';
+  errorCode: string | null;
+};
+
+export type MarketDataAcquisitionSourceMetadataV3 = {
+  schemaVersion: 3;
+  connectorId: 'akshare' | 'ccxt' | 'financedatareader' | 'mixed';
+  adjustment: 'none' | 'qfq' | 'hfq' | null;
+  sourceSymbols: string[];
+  importSymbols: string[];
+  timeframe: '1m' | '5m' | '1h' | '1d';
+  marketId: string;
+  timeZone: string;
+  sources: Array<{
+    sourceSymbol: string;
+    importSymbol: string;
+    finalSource: MarketDataAcquisitionSourceAttempt;
+    attempts: MarketDataAcquisitionSourceAttempt[];
+  }>;
+};
+
+export type MarketDataAcquisitionSourceMetadata =
+  | LegacyMarketDataAcquisitionSourceMetadata
+  | MarketDataAcquisitionSourceMetadataV3;
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   Boolean(value) && typeof value === 'object' && !Array.isArray(value);
@@ -52,10 +83,181 @@ const parseSymbolList = (value: unknown): string[] | null => {
   return symbols;
 };
 
+const isTimeframe = (value: unknown): value is '1m' | '5m' | '1h' | '1d' =>
+  value === '1m' || value === '5m' || value === '1h' || value === '1d';
+
+const parseSourceAttempt = (
+  value: unknown,
+): MarketDataAcquisitionSourceAttempt | null => {
+  if (
+    !isRecord(value) ||
+    !hasExactKeys(value, [
+      'providerId',
+      'providerVersion',
+      'upstreamId',
+      'status',
+      'errorCode',
+    ]) ||
+    (value.providerId !== 'akshare' &&
+      value.providerId !== 'ccxt' &&
+      value.providerId !== 'financedatareader') ||
+    typeof value.providerVersion !== 'string' ||
+    value.providerVersion.length === 0 ||
+    value.providerVersion.length > 64 ||
+    value.providerVersion.trim() !== value.providerVersion ||
+    typeof value.upstreamId !== 'string' ||
+    !/^[A-Za-z0-9._-]{1,128}$/u.test(value.upstreamId) ||
+    (value.status !== 'SUCCEEDED' &&
+      value.status !== 'FAILED' &&
+      value.status !== 'SKIPPED') ||
+    (value.errorCode !== null &&
+      (typeof value.errorCode !== 'string' ||
+        !/^[A-Za-z0-9._-]{1,128}$/u.test(value.errorCode)))
+  ) {
+    return null;
+  }
+  if (
+    (value.status === 'SUCCEEDED' && value.errorCode !== null) ||
+    (value.status !== 'SUCCEEDED' && value.errorCode === null)
+  ) {
+    return null;
+  }
+  return {
+    providerId: value.providerId,
+    providerVersion: value.providerVersion,
+    upstreamId: value.upstreamId,
+    status: value.status,
+    errorCode: value.errorCode,
+  };
+};
+
+const parseV3Metadata = (
+  value: Record<string, unknown>,
+): MarketDataAcquisitionSourceMetadataV3 | null => {
+  if (
+    !hasExactKeys(value, [
+      'schemaVersion',
+      'connectorId',
+      'adjustment',
+      'sourceSymbols',
+      'importSymbols',
+      'timeframe',
+      'marketId',
+      'timeZone',
+      'sources',
+    ]) ||
+    (value.connectorId !== 'akshare' &&
+      value.connectorId !== 'ccxt' &&
+      value.connectorId !== 'financedatareader' &&
+      value.connectorId !== 'mixed') ||
+    (value.adjustment !== null &&
+      value.adjustment !== 'none' &&
+      value.adjustment !== 'qfq' &&
+      value.adjustment !== 'hfq') ||
+    !isTimeframe(value.timeframe) ||
+    typeof value.marketId !== 'string' ||
+    !/^[A-Z_]{2,64}$/u.test(value.marketId) ||
+    typeof value.timeZone !== 'string' ||
+    value.timeZone.length === 0 ||
+    value.timeZone.length > 64 ||
+    value.timeZone.trim() !== value.timeZone ||
+    !isValidTimeZone(value.timeZone)
+  ) {
+    return null;
+  }
+  const sourceSymbols = parseSymbolList(value.sourceSymbols);
+  const importSymbols = parseSymbolList(value.importSymbols);
+  if (!sourceSymbols || !importSymbols || sourceSymbols.length !== importSymbols.length) {
+    return null;
+  }
+  if (
+    sourceSymbols.some((symbol) => !/^[A-Za-z0-9._^=/:-]{1,64}$/u.test(symbol)) ||
+    importSymbols.some((symbol) => !/^[A-Z0-9._-]{1,64}$/u.test(symbol)) ||
+    !Array.isArray(value.sources) ||
+    value.sources.length !== sourceSymbols.length
+  ) {
+    return null;
+  }
+  const sources = value.sources.map((entry) => {
+    if (
+      !isRecord(entry) ||
+      !hasExactKeys(entry, [
+        'sourceSymbol',
+        'importSymbol',
+        'finalSource',
+        'attempts',
+      ]) ||
+      typeof entry.sourceSymbol !== 'string' ||
+      typeof entry.importSymbol !== 'string' ||
+      !Array.isArray(entry.attempts) ||
+      entry.attempts.length === 0 ||
+      entry.attempts.length > 3
+    ) {
+      return null;
+    }
+    const finalSource = parseSourceAttempt(entry.finalSource);
+    const attempts = entry.attempts.map(parseSourceAttempt);
+    if (
+      !finalSource ||
+      finalSource.status !== 'SUCCEEDED' ||
+      attempts.some((attempt) => !attempt) ||
+      !attempts.some(
+        (attempt) =>
+          attempt!.providerId === finalSource.providerId &&
+          attempt!.providerVersion === finalSource.providerVersion &&
+          attempt!.upstreamId === finalSource.upstreamId &&
+          attempt!.status === 'SUCCEEDED',
+      )
+    ) {
+      return null;
+    }
+    return {
+      sourceSymbol: entry.sourceSymbol,
+      importSymbol: entry.importSymbol,
+      finalSource,
+      attempts: attempts as MarketDataAcquisitionSourceAttempt[],
+    };
+  });
+  if (
+    sources.some((entry) => !entry) ||
+    sources.some(
+      (entry, index) =>
+        entry!.sourceSymbol !== sourceSymbols[index] ||
+        entry!.importSymbol !== importSymbols[index],
+    )
+  ) {
+    return null;
+  }
+  const finalConnectorIds = new Set(
+    sources.map((entry) => entry!.finalSource.providerId),
+  );
+  if (
+    (value.connectorId === 'mixed' && finalConnectorIds.size < 2) ||
+    (value.connectorId !== 'mixed' &&
+      (finalConnectorIds.size !== 1 || !finalConnectorIds.has(value.connectorId)))
+  ) {
+    return null;
+  }
+  return {
+    schemaVersion: 3,
+    connectorId: value.connectorId,
+    adjustment: value.adjustment,
+    sourceSymbols,
+    importSymbols,
+    timeframe: value.timeframe,
+    marketId: value.marketId,
+    timeZone: value.timeZone,
+    sources: sources as MarketDataAcquisitionSourceMetadataV3['sources'],
+  };
+};
+
 export const parseMarketDataAcquisitionSourceMetadata = (
   value: unknown,
 ): MarketDataAcquisitionSourceMetadata | null => {
   const schemaVersion = isRecord(value) ? value.schemaVersion : null;
+  if (isRecord(value) && schemaVersion === 3) {
+    return parseV3Metadata(value);
+  }
   const expectedKeys = schemaVersion === 2
     ? [
         'schemaVersion',
@@ -85,7 +287,7 @@ export const parseMarketDataAcquisitionSourceMetadata = (
   if (!sourceSymbols || !importSymbols || sourceSymbols.length !== importSymbols.length) {
     return null;
   }
-  let adjustment: MarketDataAcquisitionSourceMetadata['adjustment'];
+  let adjustment: LegacyMarketDataAcquisitionSourceMetadata['adjustment'];
   if (value.connectorId === 'akshare') {
     if (
       value.adjustment !== 'none' &&

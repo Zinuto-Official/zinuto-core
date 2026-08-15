@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 1,
+  "policy": "Market-data connectors are fixed, reviewed release inputs. A version check is read-only. An explicit upgrade may change only the selected dependency graph and generated compliance artifacts; capability, field, market, license, protocol, or upstream-terms drift requires review and never rewrites an adapter automatically.",
+  "providers": [
+    {
+      "id": "akshare",
+      "displayName": "AKShare",
+      "ecosystem": "pypi",
+      "version": "1.18.91",
+      "license": "MIT",
+      "projectUrl": "https://github.com/akfamily/akshare",
+      "dependencyLock": {
+        "file": "apps/desktop/local-api/sidecars/akshare/uv.lock",
+        "sha256": "98f766385e00fa5bd8d5f0c0e8ed7e5eae13f83f003e45554a4b1880bd38c7b8"
+      },
+      "projectFile": {
+        "file": "apps/desktop/local-api/sidecars/akshare/pyproject.toml",
+        "sha256": "120b6bf9b4c232bbefd77514af2548d6008c7b4b06cf80868529d2756c2dccb0"
+      },
+      "sidecar": {
+        "id": "akshare",
+        "protocol": "zinuto.akshare.v1",
+        "python": "3.11.15",
+        "buildScript": "apps/desktop/local-api/scripts/build-akshare-sidecar.mjs"
+      },
+      "upstreamTerms": [
+        {
+          "id": "eastmoney",
+          "termsUrl": "https://about.eastmoney.com/home/protocol",
+          "docsUrl": "https://akshare.akfamily.xyz/data/stock/stock.html",
+          "reviewedRevision": "eastmoney-terms-2025-07-18"
+        },
+        {
+          "id": "tencent",
+          "termsUrl": "https://www.tencent.com/term-of-service/",
+          "docsUrl": "https://akshare.akfamily.xyz/data/stock/stock.html",
+          "reviewedRevision": "tencent-terms-reviewed-2026-08-15"
+        },
+        {
+          "id": "sina",
+          "termsUrl": "https://finance.sina.com.cn/roll/2021-05-12/doc-ikmxzfmm2033220.shtml",
+          "docsUrl": "https://akshare.akfamily.xyz/data/stock/stock.html",
+          "reviewedRevision": "sina-finance-terms-reviewed-2026-08-15"
+        }
+      ],
+      "capabilityFingerprint": "a-share-ohlcv-eastmoney-tencent-sina-v1"
+    },
+    {
+      "id": "aktools",
+      "displayName": "AKTools",
+      "ecosystem": "pypi",
+      "version": "0.0.91",
+      "license": "MIT",
+      "projectUrl": "https://github.com/akfamily/aktools",
+      "dependencyLock": {
+        "file": "apps/desktop/local-api/sidecars/akshare/uv.lock",
+        "sha256": "98f766385e00fa5bd8d5f0c0e8ed7e5eae13f83f003e45554a4b1880bd38c7b8"
+      },
+      "projectFile": {
+        "file": "apps/desktop/local-api/sidecars/akshare/pyproject.toml",
+        "sha256": "120b6bf9b4c232bbefd77514af2548d6008c7b4b06cf80868529d2756c2dccb0"
+      },
+      "sidecar": {
+        "id": "akshare",
+        "protocol": "zinuto.akshare.v1",
+        "python": "3.11.15",
+        "buildScript": "apps/desktop/local-api/scripts/build-akshare-sidecar.mjs"
+      },
+      "upstreamTerms": [
+        {
+          "id": "aktools-bridge",
+          "termsUrl": "https://github.com/akfamily/aktools",
+          "docsUrl": "https://github.com/akfamily/aktools",
+          "reviewedRevision": "aktools-0.0.91-review"
+        }
+      ],
+      "capabilityFingerprint": "whitelist-bridge-akshare-v1"
+    },
+    {
+      "id": "ccxt",
+      "displayName": "CCXT",
+      "ecosystem": "npm",
+      "version": "4.5.73",
+      "license": "MIT",
+      "projectUrl": "https://github.com/ccxt/ccxt",
+      "dependencyLock": {
+        "file": "package-lock.json",
+        "sha256": "2bc6ba2eb39fbaf59ee6dcc8201f08ea1d198a9eaa0646660d46020bd770265f"
+      },
+      "projectFile": {
+        "file": "apps/desktop/local-api/package.json",
+        "sha256": "502ac7c77b46f1c5561adc89fa41785bba015c9fe96039f75c12c3697a891797"
+      },
+      "sidecar": null,
+      "upstreamTerms": [
+        {
+          "id": "binance",
+          "termsUrl": "https://www.binance.com/en/terms",
+          "docsUrl": "https://developers.binance.com/en/docs/products/spot/rest-api",
+          "reviewedRevision": "binance-terms-reviewed-2026-07-19"
+        },
+        {
+          "id": "okx",
+          "termsUrl": "https://www.okx.com/help/terms-of-service",
+          "docsUrl": "https://www.okx.com/docs-v5/en/",
+          "reviewedRevision": "okx-terms-reviewed-2026-04-21"
+        }
+      ],
+      "capabilityFingerprint": "binance-okx-spot-ohlcv-1m-5m-1h-1d-v1"
+    },
+    {
+      "id": "financedatareader",
+      "displayName": "FinanceDataReader",
+      "ecosystem": "pypi",
+      "version": "0.9.202",
+      "license": "MIT",
+      "projectUrl": "https://github.com/FinanceData/FinanceDataReader",
+      "dependencyLock": {
+        "file": "apps/desktop/local-api/sidecars/finance-datareader/uv.lock",
+        "sha256": "2683a9389e744f96445559509abb0981e661a6a1f4b7b367d0f3544c96178aee"
+      },
+      "projectFile": {
+        "file": "apps/desktop/local-api/sidecars/finance-datareader/pyproject.toml",
+        "sha256": "0e4d9385d8b62046da1b9735d4aac00a7cb0471040e2e3dd3f3e1f26710ca3e5"
+      },
+      "sidecar": {
+        "id": "financedatareader",
+        "protocol": "zinuto.finance-datareader.v1",
+        "python": "3.11.15",
+        "buildScript": "apps/desktop/local-api/scripts/build-finance-datareader-sidecar.mjs"
+      },
+      "upstreamTerms": [
+        {
+          "id": "yahoo-finance",
+          "termsUrl": "https://finance.yahoo.com/legal/terms.html",
+          "docsUrl": "https://github.com/FinanceData/FinanceDataReader",
+          "reviewedRevision": "finance-datareader-upstream-review-2026-08-14"
+        },
+        {
+          "id": "naver-finance",
+          "termsUrl": "https://policy.naver.com/rules/service.html",
+          "docsUrl": "https://github.com/FinanceData/FinanceDataReader",
+          "reviewedRevision": "finance-datareader-upstream-review-2026-08-14"
+        },
+        {
+          "id": "investing-com",
+          "termsUrl": "https://www.investing.com/about-us/terms-and-conditions",
+          "docsUrl": "https://github.com/FinanceData/FinanceDataReader",
+          "reviewedRevision": "finance-datareader-upstream-review-2026-08-14"
+        }
+      ],
+      "capabilityFingerprint": "price-ohlcv-krx-us-cn-hk-jp-vn-index-fx-futures-crypto-no-fred-ecos-v1"
+    }
+  ]
+}

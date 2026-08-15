@@ -2,6 +2,7 @@
 
 import { historyStorageVNextSchemaSql } from "../historyStorageVNext.js";
 import { backtestSchemaSql } from "./backtestSchemaSql.js";
+import { marketDataAcquisitionSchemaSql } from "./marketDataAcquisitionSchemaSql.js";
 import {
   INPUT_LIMITS,
   INPUT_SERIALIZED_LIMITS,
@@ -269,6 +270,8 @@ CREATE INDEX IF NOT EXISTS idx_local_data_import_jobs_source
   ON local_data_import_jobs(source_id, created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_local_data_import_jobs_status
   ON local_data_import_jobs(status, updated_at DESC);
+
+${marketDataAcquisitionSchemaSql}
 
 CREATE TABLE IF NOT EXISTS local_data_source_files (
   id TEXT PRIMARY KEY,

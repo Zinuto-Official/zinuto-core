@@ -8,12 +8,17 @@ import test from 'node:test';
 import { collectMissingTauriBuildInputs } from './ensure-tauri-build-inputs.mjs';
 import {
   findUnexpectedAkshareSidecarPackagePaths,
+  findUnexpectedFinanceDataReaderSidecarPackagePaths,
   stageAkshareSidecarPackageInput,
+  stageFinanceDataReaderSidecarPackageInput,
 } from './market-data-acquisition-runtime.mjs';
 import {
   inspectAkshareSidecarBundle,
+  inspectFinanceDataReaderSidecarBundle,
   isRegularAkshareSidecarExecutable,
+  isRegularFinanceDataReaderSidecarExecutable,
   parseNativeRuntimeValidationArguments,
+  resolveFinanceDataReaderSidecarTargetId,
   resolveNativeRuntimeValidationPolicy,
   resolveAkshareSidecarTargetId,
 } from './validate-native-runtime.mjs';
@@ -55,11 +60,18 @@ test('runtime validation derives behavior from the active resolved composition',
 test('Tauri build preparation stages the sidecar before validating declared resources', () => {
   for (const scriptName of ['prepare-tauri-build.mjs', 'prepare-tauri-dev.mjs']) {
     const source = fs.readFileSync(new URL(`./${scriptName}`, import.meta.url), 'utf8');
-    const sidecarBuildIndex = source.indexOf('akshare-sidecar:build');
+    const akshareBuildIndex = source.indexOf('akshare-sidecar:build');
+    const financeDataReaderBuildIndex = source.indexOf('finance-datareader-sidecar:build');
     const validationIndex = source.indexOf('validate-native-runtime.mjs');
-    assert.notEqual(sidecarBuildIndex, -1, `${scriptName} must build the sidecar`);
+    assert.notEqual(akshareBuildIndex, -1, `${scriptName} must build the AKShare sidecar`);
+    assert.notEqual(
+      financeDataReaderBuildIndex,
+      -1,
+      `${scriptName} must build the FinanceDataReader sidecar`,
+    );
     assert.notEqual(validationIndex, -1, `${scriptName} must validate the staged runtime`);
-    assert.equal(sidecarBuildIndex < validationIndex, true);
+    assert.equal(akshareBuildIndex < validationIndex, true);
+    assert.equal(financeDataReaderBuildIndex < validationIndex, true);
     assert.match(
       source,
       /readActiveDesktopCompositionPlan/u,
@@ -81,6 +93,15 @@ test('Tauri build preparation stages the sidecar before validating declared reso
     import.meta.url,
   ), 'utf8');
   assert.match(sidecarBuilder, /stageAkshareSidecarPackageInput/u);
+
+  const financeDataReaderSidecarBuilder = fs.readFileSync(new URL(
+    '../../apps/desktop/local-api/scripts/build-finance-datareader-sidecar.mjs',
+    import.meta.url,
+  ), 'utf8');
+  assert.match(
+    financeDataReaderSidecarBuilder,
+    /stageFinanceDataReaderSidecarPackageInput/u,
+  );
 
   for (const configName of ['tauri.conf.json', 'tauri.windows.conf.json']) {
     const config = JSON.parse(fs.readFileSync(new URL(
@@ -105,7 +126,7 @@ test('Tauri build preparation stages the sidecar before validating declared reso
     assert.equal(
       windowsNsisHook.includes(fragment),
       true,
-      `Windows NSIS hook must preserve the AKShare sidecar resource: ${fragment}`,
+      `Windows NSIS hook must preserve the market-data sidecar resources: ${fragment}`,
     );
   }
 
@@ -117,6 +138,10 @@ test('Tauri build preparation stages the sidecar before validating declared reso
   assert.match(
     windowsInstallerValidator,
     /market-data-acquisition\/akshare-sidecar\/win32-x64\/zinuto-akshare-sidecar\.exe/u,
+  );
+  assert.match(
+    windowsInstallerValidator,
+    /market-data-acquisition\/finance-datareader-sidecar\/win32-x64\/zinuto-finance-datareader-sidecar\.exe/u,
   );
 
   const backendRuntimeBundler = fs.readFileSync(new URL(
@@ -197,6 +222,60 @@ test('AKShare onedir validation requires the target executable and critical runt
   );
 });
 
+test('FinanceDataReader onedir validation requires the target executable and package metadata', (t) => {
+  const generatedRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'zinuto-native-runtime-'));
+  t.after(() => fs.rmSync(generatedRoot, { recursive: true, force: true }));
+  const targetId = resolveFinanceDataReaderSidecarTargetId('darwin', 'arm64');
+  assert.equal(targetId, 'darwin-arm64');
+  const bundleRoot = path.join(
+    generatedRoot,
+    'market-data-acquisition',
+    'finance-datareader-sidecar',
+    targetId,
+  );
+  const requiredFiles = [
+    ['zinuto-finance-datareader-sidecar'],
+    ['_internal', 'base_library.zip'],
+    ['_internal', 'finance_datareader-0.9.202.dist-info', 'METADATA'],
+  ];
+  for (const segments of requiredFiles) {
+    const filePath = path.join(bundleRoot, ...segments);
+    fs.mkdirSync(path.dirname(filePath), { recursive: true });
+    fs.writeFileSync(filePath, 'fixture');
+  }
+  const executablePath = path.join(bundleRoot, 'zinuto-finance-datareader-sidecar');
+  fs.chmodSync(executablePath, 0o755);
+
+  assert.deepEqual(
+    inspectFinanceDataReaderSidecarBundle({
+      generatedRoot,
+      nodePlatform: 'darwin',
+      nodeArch: 'arm64',
+      financeDataReaderVersion: '0.9.202',
+    }).invalidPaths,
+    [],
+  );
+  assert.equal(
+    isRegularFinanceDataReaderSidecarExecutable(executablePath, 'darwin'),
+    true,
+  );
+
+  const metadataPath = path.join(
+    bundleRoot,
+    '_internal',
+    'finance_datareader-0.9.202.dist-info',
+    'METADATA',
+  );
+  fs.rmSync(metadataPath);
+  const invalid = inspectFinanceDataReaderSidecarBundle({
+    generatedRoot,
+    nodePlatform: 'darwin',
+    nodeArch: 'arm64',
+    financeDataReaderVersion: '0.9.202',
+  }).invalidPaths;
+  assert.equal(invalid.includes(metadataPath), true);
+});
+
 test('AKShare onedir validation rejects a non-executable or symlinked launcher', (t) => {
   const fixtureRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'zinuto-sidecar-exec-'));
   t.after(() => fs.rmSync(fixtureRoot, { recursive: true, force: true }));
@@ -237,6 +316,48 @@ test('AKShare package staging removes every stale target before publishing the c
   assert.deepEqual(fs.readdirSync(staged.connectorRoot), ['darwin-arm64']);
 });
 
+test('FinanceDataReader package staging replaces only its own target tree', (t) => {
+  const fixtureRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'zinuto-sidecar-stage-'));
+  t.after(() => fs.rmSync(fixtureRoot, { recursive: true, force: true }));
+  const generatedRoot = path.join(fixtureRoot, 'gen');
+  const acquisitionRoot = path.join(generatedRoot, 'market-data-acquisition');
+  const akshareTarget = path.join(acquisitionRoot, 'akshare-sidecar', 'darwin-arm64');
+  const staleTarget = path.join(
+    acquisitionRoot,
+    'finance-datareader-sidecar',
+    'win32-x64',
+  );
+  fs.mkdirSync(akshareTarget, { recursive: true });
+  fs.writeFileSync(path.join(akshareTarget, 'zinuto-akshare-sidecar'), 'akshare');
+  fs.mkdirSync(staleTarget, { recursive: true });
+  fs.writeFileSync(path.join(staleTarget, 'zinuto-finance-datareader-sidecar.exe'), 'stale');
+
+  const sourceBundleRoot = path.join(fixtureRoot, 'built-fdr-sidecar');
+  fs.mkdirSync(sourceBundleRoot, { recursive: true });
+  fs.writeFileSync(
+    path.join(sourceBundleRoot, 'zinuto-finance-datareader-sidecar'),
+    'current',
+  );
+  const staged = stageFinanceDataReaderSidecarPackageInput({
+    generatedRoot,
+    sourceBundleRoot,
+    nodePlatform: 'darwin',
+    nodeArch: 'arm64',
+  });
+
+  assert.equal(fs.existsSync(staleTarget), false);
+  assert.equal(
+    fs.readFileSync(path.join(akshareTarget, 'zinuto-akshare-sidecar'), 'utf8'),
+    'akshare',
+  );
+  assert.equal(fs.readFileSync(staged.executablePath, 'utf8'), 'current');
+  assert.deepEqual(
+    fs.readdirSync(acquisitionRoot).sort(),
+    ['akshare-sidecar', 'finance-datareader-sidecar'],
+  );
+  assert.deepEqual(fs.readdirSync(staged.connectorRoot), ['darwin-arm64']);
+});
+
 test('AKShare package validation rejects stale targets and unexpected packaged files', (t) => {
   const generatedRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'zinuto-sidecar-layout-'));
   t.after(() => fs.rmSync(generatedRoot, { recursive: true, force: true }));
@@ -266,6 +387,38 @@ test('AKShare package validation rejects stale targets and unexpected packaged f
   assert.equal(inspected.invalidPaths.includes(unexpectedFile), true);
 });
 
+test('FinanceDataReader package validation rejects stale targets and unexpected packaged files', (t) => {
+  const generatedRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'zinuto-sidecar-layout-'));
+  t.after(() => fs.rmSync(generatedRoot, { recursive: true, force: true }));
+  const acquisitionRoot = path.join(generatedRoot, 'market-data-acquisition');
+  const staleTarget = path.join(
+    acquisitionRoot,
+    'finance-datareader-sidecar',
+    'win32-x64',
+  );
+  const unexpectedFile = path.join(acquisitionRoot, 'unexpected.txt');
+  fs.mkdirSync(staleTarget, { recursive: true });
+  fs.writeFileSync(path.join(staleTarget, 'zinuto-finance-datareader-sidecar.exe'), 'stale');
+  fs.writeFileSync(unexpectedFile, 'stale');
+
+  assert.deepEqual(
+    new Set(findUnexpectedFinanceDataReaderSidecarPackagePaths({
+      generatedRoot,
+      nodePlatform: 'darwin',
+      nodeArch: 'arm64',
+    })),
+    new Set([staleTarget, unexpectedFile]),
+  );
+  const inspected = inspectFinanceDataReaderSidecarBundle({
+    generatedRoot,
+    nodePlatform: 'darwin',
+    nodeArch: 'arm64',
+    financeDataReaderVersion: '0.9.202',
+  });
+  assert.equal(inspected.invalidPaths.includes(staleTarget), true);
+  assert.equal(inspected.invalidPaths.includes(unexpectedFile), true);
+});
+
 test('direct Tauri input checks require the executable for the selected platform', (t) => {
   const rootDir = fs.mkdtempSync(path.join(os.tmpdir(), 'zinuto-tauri-inputs-'));
   t.after(() => fs.rmSync(rootDir, { recursive: true, force: true }));
@@ -273,13 +426,14 @@ test('direct Tauri input checks require the executable for the selected platform
     rootDir,
     'config',
     'open-source',
-    'python-sidecar-dependencies.json',
+    'market-data-connectors.v1.json',
   );
   fs.mkdirSync(path.dirname(manifestPath), { recursive: true });
   fs.writeFileSync(manifestPath, JSON.stringify({
-    requiredRootPackages: [
-      { name: 'akshare', version: '1.18.91' },
-      { name: 'aktools', version: '0.0.91' },
+    providers: [
+      { id: 'akshare', version: '1.18.91' },
+      { id: 'aktools', version: '0.0.91' },
+      { id: 'financedatareader', version: '0.9.202' },
     ],
   }));
 
@@ -299,6 +453,17 @@ test('direct Tauri input checks require the executable for the selected platform
     'darwin-arm64',
     'zinuto-akshare-sidecar',
   )), true);
+  assert.equal(macMissing.includes(path.join(
+    rootDir,
+    'apps',
+    'desktop',
+    'shell',
+    'gen',
+    'market-data-acquisition',
+    'finance-datareader-sidecar',
+    'darwin-arm64',
+    'zinuto-finance-datareader-sidecar',
+  )), true);
 
   const windowsMissing = collectMissingTauriBuildInputs({
     rootDir,
@@ -315,5 +480,16 @@ test('direct Tauri input checks require the executable for the selected platform
     'akshare-sidecar',
     'win32-x64',
     'zinuto-akshare-sidecar.exe',
+  )), true);
+  assert.equal(windowsMissing.includes(path.join(
+    rootDir,
+    'apps',
+    'desktop',
+    'shell',
+    'gen',
+    'market-data-acquisition',
+    'finance-datareader-sidecar',
+    'win32-x64',
+    'zinuto-finance-datareader-sidecar.exe',
   )), true);
 });

@@ -38,6 +38,7 @@ apps/desktop/shell/gen/backtest-engine/*
 apps/desktop/shell/gen/account-config/
 apps/desktop/shell/gen/market-data-acquisition/
 apps/desktop/local-api/sidecars/akshare/.venv/
+apps/desktop/local-api/sidecars/finance-datareader/.venv/
 apps/desktop/shell/gen/schemas/
 apps/desktop/shell/gen/runtime-manifest.json
 apps/desktop/shell/gen/node-runtime-libs.metadata.json

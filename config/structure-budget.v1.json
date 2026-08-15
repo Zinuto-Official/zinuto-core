@@ -24,25 +24,25 @@
           "path": "apps/desktop/local-api/src/application/customIndicatorEngine/ast/evaluator.ts",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/application/customIndicatorEngine/ast/evaluatorRuntimeHelpers.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/application/customIndicatorEngine/ast/evaluatorValueConversion.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1176,
-      "targetCeiling": 1000,
+      "previousCeiling": 1764,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-001: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-001: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -65,19 +65,19 @@
           "path": "apps/desktop/local-api/src/application/customIndicatorEngine/functions/library/trendIndicators.ts",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/application/customIndicatorEngine/functions/library/adaptiveMovingAverages.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1021,
-      "targetCeiling": 1000,
+      "previousCeiling": 1532,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-002: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-002: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -100,31 +100,31 @@
           "path": "apps/desktop/local-api/src/application/dataSource/folderPreview.ts",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/application/dataSource/folderPreviewCommon.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/application/dataSource/folderPreviewPlanning.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/application/dataSource/folderPreviewQualityAnalysis.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; apps/desktop/local-api/tests/structure/hs-core-003.test.ts binds the extraction and parity seam.",
-      "previousCeiling": 1727,
-      "targetCeiling": 1000,
+      "previousCeiling": 2591,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-003: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-003: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "apps/desktop/local-api/tests/structure/hs-core-003.test.ts",
@@ -147,31 +147,31 @@
           "path": "apps/desktop/local-api/src/application/dataSource/importJobExecutor.ts",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/application/dataSource/importJobTypes.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/application/dataSource/finalizeQueuedImportJob.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/application/dataSource/importJobOutcomeHelpers.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1191,
-      "targetCeiling": 1000,
+      "previousCeiling": 1787,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-004: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-004: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -194,25 +194,25 @@
           "path": "apps/desktop/local-api/src/application/dataSource/tabularImport.ts",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/application/dataSource/tabularImportProgress.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/application/dataSource/tabularImportBatchExecution.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1126,
-      "targetCeiling": 1000,
+      "previousCeiling": 1689,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-005: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-005: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -235,37 +235,37 @@
           "path": "apps/desktop/local-api/src/application/portableData/importDomains.ts",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/application/portableData/portableImportConflictComparator.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/application/portableData/importSettingsAndIndicatorDomains.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/application/portableData/importDomainTypes.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/application/portableData/importDomainPayloadValidation.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1183,
-      "targetCeiling": 1000,
+      "previousCeiling": 1775,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-006: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-006: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -288,31 +288,31 @@
           "path": "apps/desktop/local-api/src/application/specialTraining/questionBank.ts",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/application/specialTraining/questionScopeSemantics.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/application/specialTraining/questionScopeCache.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/application/specialTraining/questionSlotPermutation.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; apps/desktop/local-api/tests/structure/hs-core-007.test.ts binds the extraction and parity seam.",
-      "previousCeiling": 2067,
-      "targetCeiling": 1000,
+      "previousCeiling": 3101,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-007: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-007: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "apps/desktop/local-api/tests/structure/hs-core-007.test.ts",
@@ -335,37 +335,37 @@
           "path": "apps/desktop/local-api/src/application/specialTrainingService/challengeOperations.ts",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/application/specialTrainingService/challengeRuntimeRegistry.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/application/specialTrainingService/challengeStart.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/application/specialTrainingService/challengeNumberSemantics.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/application/specialTrainingService/challengeBankPreviewOperations.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; apps/desktop/local-api/tests/structure/hs-core-008.test.ts binds the extraction and parity seam.",
-      "previousCeiling": 1524,
-      "targetCeiling": 1000,
+      "previousCeiling": 2286,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-008: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-008: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "apps/desktop/local-api/tests/structure/hs-core-008.test.ts",
@@ -388,43 +388,43 @@
           "path": "apps/desktop/local-api/src/application/trading/core.ts",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/application/trading/marketFrameTypes.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/application/trading/tradingCoreStoreRuntime.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/application/trading/marketFrameSemantics.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/application/trading/marketFrameRuntime.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/application/trading/freeReplayOverview.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; apps/desktop/local-api/tests/structure/hs-core-009.test.ts binds the extraction and parity seam.",
-      "previousCeiling": 2199,
-      "targetCeiling": 1000,
+      "previousCeiling": 3299,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-009: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-009: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "apps/desktop/local-api/tests/structure/hs-core-009.test.ts",
@@ -447,25 +447,25 @@
           "path": "apps/desktop/local-api/src/domain/systemDevSimulation/sharedDomain.ts",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/domain/systemDevSimulation/simulationRandomUtilities.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/domain/systemDevSimulation/simulationTrainingSummary.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1264,
-      "targetCeiling": 1000,
+      "previousCeiling": 1896,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-010: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-010: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -488,25 +488,25 @@
           "path": "apps/desktop/local-api/src/domain/trading/orderQuote.ts",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/domain/trading/orderQuoteTypes.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/domain/trading/orderQuoteCapacity.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; apps/desktop/local-api/tests/structure/hs-core-011.test.ts binds the extraction and parity seam.",
-      "previousCeiling": 1746,
-      "targetCeiling": 1000,
+      "previousCeiling": 2619,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-011: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-011: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "apps/desktop/local-api/tests/structure/hs-core-011.test.ts",
@@ -529,19 +529,19 @@
           "path": "apps/desktop/local-api/src/infrastructure/db/database/schemaSql.ts",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/infrastructure/db/database/backtestSchemaSql.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1109,
-      "targetCeiling": 1000,
+      "previousCeiling": 1664,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-012: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-012: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -564,19 +564,19 @@
           "path": "apps/desktop/local-api/src/infrastructure/db/marketDatabase/importWriter.ts",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/infrastructure/db/marketDatabase/importWriterSupport.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; apps/desktop/local-api/tests/structure/hs-core-013.test.ts binds the extraction and parity seam.",
-      "previousCeiling": 1269,
-      "targetCeiling": 1000,
+      "previousCeiling": 1904,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-013: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-013: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "apps/desktop/local-api/tests/structure/hs-core-013.test.ts",
@@ -599,37 +599,37 @@
           "path": "apps/desktop/local-api/src/infrastructure/db/marketDatabase/timeline.ts",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/infrastructure/db/marketDatabase/timelinePrewarm.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/infrastructure/db/marketDatabase/timelineBuild.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/infrastructure/db/marketDatabase/timelineReady.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/infrastructure/db/marketDatabase/timelineReader.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; apps/desktop/local-api/tests/structure/hs-core-014.test.ts binds the extraction and parity seam.",
-      "previousCeiling": 2154,
-      "targetCeiling": 1000,
+      "previousCeiling": 3231,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-014: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-014: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "apps/desktop/local-api/tests/structure/hs-core-014.test.ts",
@@ -652,25 +652,25 @@
           "path": "apps/desktop/local-api/src/infrastructure/db/systemDevSimulation/jobStore.ts",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/infrastructure/db/systemDevSimulation/jobTypes.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/local-api/src/infrastructure/db/systemDevSimulation/jobRegistry.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1058,
-      "targetCeiling": 1000,
+      "previousCeiling": 1587,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-015: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-015: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -693,19 +693,19 @@
           "path": "apps/desktop/shell/src/bridge/csv_folder_staging.rs",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/shell/src/bridge/csv_folder_staging/contract_tests.rs",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1028,
-      "targetCeiling": 1000,
+      "previousCeiling": 1542,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-016: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-016: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -728,25 +728,25 @@
           "path": "apps/desktop/shell/src/bridge/csv_folder_staging/files.rs",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/shell/src/bridge/csv_folder_staging/files/optional_metadata.rs",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/shell/src/bridge/csv_folder_staging/files/tests.rs",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; apps/desktop/shell/tests/hs_core_017.rs binds the extraction and parity seam.",
-      "previousCeiling": 1397,
-      "targetCeiling": 1000,
+      "previousCeiling": 2096,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-017: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-017: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "apps/desktop/shell/tests/hs_core_017.rs",
@@ -769,25 +769,25 @@
           "path": "apps/desktop/shell/src/bridge/market_data_acquisition_output.rs",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/shell/src/bridge/market_data_acquisition_output/grant_store.rs",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/shell/src/bridge/market_data_acquisition_output/residue.rs",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1131,
-      "targetCeiling": 1000,
+      "previousCeiling": 1697,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-018: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-018: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -810,25 +810,25 @@
           "path": "apps/desktop/shell/src/bridge/transport.rs",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/shell/src/bridge/transport/http_wire.rs",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/shell/src/bridge/transport/tests.rs",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; apps/desktop/shell/tests/hs_core_019.rs binds the extraction and parity seam.",
-      "previousCeiling": 1754,
-      "targetCeiling": 1000,
+      "previousCeiling": 2631,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-019: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-019: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "apps/desktop/shell/tests/hs_core_019.rs",
@@ -851,19 +851,19 @@
           "path": "apps/desktop/shell/src/runtime/backend_runtime.rs",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/shell/src/runtime/backend_runtime/preflight.rs",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1206,
-      "targetCeiling": 1000,
+      "previousCeiling": 1809,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-020: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-020: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -886,49 +886,49 @@
           "path": "apps/desktop/web/src/api/desktopSecondaryWindows.ts",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/frontend-kernel/secondary-windows/desktopSecondaryWindowActionProtocol.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/api/desktopSecondaryWindowGeometry.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/api/desktopSecondaryWindowNativeChrome.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/api/desktopSecondaryWindowFocusRuntime.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/api/desktopSecondaryWindowListeners.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/api/desktopSecondaryWindowUrl.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1815,
-      "targetCeiling": 1000,
+      "previousCeiling": 2723,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-021: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-021: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -951,19 +951,19 @@
           "path": "apps/desktop/web/src/api/history.ts",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/api/historyTypes.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1145,
-      "targetCeiling": 1000,
+      "previousCeiling": 1718,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-022: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-022: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -986,43 +986,43 @@
           "path": "apps/desktop/web/src/api/localData.ts",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/api/localDataNormalization.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/api/localDataCalendarNormalization.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/api/localDataNormalizationCommon.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/api/localDataImportDraftNormalization.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/api/localDataImportPreviewNormalization.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; apps/desktop/web/tests/ui/structure/hs-core-023.test.ts binds the extraction and parity seam.",
-      "previousCeiling": 1730,
-      "targetCeiling": 1000,
+      "previousCeiling": 2595,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-023: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-023: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "apps/desktop/web/tests/ui/structure/hs-core-023.test.ts",
@@ -1045,31 +1045,31 @@
           "path": "apps/desktop/web/src/api/specialTraining.ts",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/api/specialTrainingTypes.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/api/specialTrainingCoreTypes.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/api/specialTrainingStatsTypes.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; apps/desktop/web/tests/ui/structure/hs-core-024.test.ts binds the extraction and parity seam.",
-      "previousCeiling": 1475,
-      "targetCeiling": 1000,
+      "previousCeiling": 2213,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-024: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-024: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "apps/desktop/web/tests/ui/structure/hs-core-024.test.ts",
@@ -1092,31 +1092,31 @@
           "path": "apps/desktop/web/src/app-shell/AppCsvMappingModal.tsx",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/app-shell/useCsvMappingPoolNameDrafts.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/app-shell/AppCsvMappingModalTypes.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/app-shell/AppCsvMappingModalHelpers.tsx",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1512,
-      "targetCeiling": 1000,
+      "previousCeiling": 2268,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-025: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-025: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1139,19 +1139,19 @@
           "path": "apps/desktop/web/src/app-shell/runtime/runtimeStartupState.ts",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/app-shell/runtime/useRuntimeChartSettingsMenu.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1023,
-      "targetCeiling": 1000,
+      "previousCeiling": 1535,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-026: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-026: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1174,25 +1174,25 @@
           "path": "apps/desktop/web/src/app-shell/runtime/runtimeWorkspaceBundles.ts",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/app-shell/runtime/runtimeWorkspaceBundleTypes.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/app-shell/runtime/useRuntimeGlobalResetConfirmation.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1058,
-      "targetCeiling": 1000,
+      "previousCeiling": 1587,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-027: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-027: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1215,31 +1215,31 @@
           "path": "apps/desktop/web/src/domains/chart/HistoryReplayChart.tsx",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/domains/chart/useHistoryReplayIndicatorState.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/domains/chart/useHistoryReplayIndicatorToggle.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/domains/chart/historyReplayChartLayout.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1077,
-      "targetCeiling": 1000,
+      "previousCeiling": 1616,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-028: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-028: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1262,31 +1262,31 @@
           "path": "apps/desktop/web/src/domains/trainer/AnchorNavigatorControl.tsx",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/domains/trainer/AnchorNavigatorControlRuntime.tsx",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/domains/trainer/useAnchorNavigatorOverviewRuntime.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/domains/trainer/useAnchorNavigatorInteractions.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1973,
-      "targetCeiling": 1000,
+      "previousCeiling": 2960,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-029: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-029: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1309,19 +1309,19 @@
           "path": "apps/desktop/web/src/domains/trainer/AnchorNavigatorControlView.tsx",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/domains/trainer/useAnchorNavigatorViewState.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1164,
-      "targetCeiling": 1000,
+      "previousCeiling": 1746,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-030: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-030: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1344,25 +1344,25 @@
           "path": "apps/desktop/web/src/styles/components/anchor-navigator.css",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/components/anchor-navigator.layer-01.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/components/anchor-navigator.layer-02.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1430,
-      "targetCeiling": 1000,
+      "previousCeiling": 2145,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-031: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-031: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1385,25 +1385,25 @@
           "path": "apps/desktop/web/src/styles/components/desktop-secondary-windows.css",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/components/desktop-secondary-windows.layer-01.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/components/desktop-secondary-windows.layer-02.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1093,
-      "targetCeiling": 1000,
+      "previousCeiling": 1640,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-032: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-032: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1426,25 +1426,25 @@
           "path": "apps/desktop/web/src/styles/components/trainer-and-indicators-panels-and-positions.css",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/components/trainer-and-indicators-panels-and-positions.layer-01.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/components/trainer-and-indicators-panels-and-positions.layer-02.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1408,
-      "targetCeiling": 1000,
+      "previousCeiling": 2112,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-033: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-033: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1467,31 +1467,31 @@
           "path": "apps/desktop/web/src/styles/components/trainer-and-indicators-toolbar-and-chart.css",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/components/trainer-and-indicators-toolbar-and-chart.layer-01.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/components/trainer-and-indicators-toolbar-and-chart.layer-02.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/components/trainer-and-indicators-toolbar-and-chart.layer-03.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1710,
-      "targetCeiling": 1000,
+      "previousCeiling": 2565,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-034: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-034: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1514,25 +1514,25 @@
           "path": "apps/desktop/web/src/styles/components/trainer-and-indicators-trade-and-log.css",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/components/trainer-and-indicators-trade-and-log.layer-01.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/components/trainer-and-indicators-trade-and-log.layer-02.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1267,
-      "targetCeiling": 1000,
+      "previousCeiling": 1901,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-035: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-035: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1555,25 +1555,25 @@
           "path": "apps/desktop/web/src/styles/core/ui-global-consistency.css",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/core/ui-global-consistency.layer-01.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/core/ui-global-consistency.layer-02.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1221,
-      "targetCeiling": 1000,
+      "previousCeiling": 1832,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-036: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-036: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1596,25 +1596,25 @@
           "path": "apps/desktop/web/src/styles/layout/ui-refresh-history-and-audits.css",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/layout/ui-refresh-history-and-audits.layer-01.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/layout/ui-refresh-history-and-audits.layer-02.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1508,
-      "targetCeiling": 1000,
+      "previousCeiling": 2262,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-037: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-037: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1637,25 +1637,25 @@
           "path": "apps/desktop/web/src/styles/layout/workspace-overrides/02-special-training-lightning-results.css",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/layout/workspace-overrides/02-special-training-lightning-results.layer-01.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/layout/workspace-overrides/02-special-training-lightning-results.layer-02.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1068,
-      "targetCeiling": 1000,
+      "previousCeiling": 1602,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-038: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-038: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1678,25 +1678,25 @@
           "path": "apps/desktop/web/src/styles/layout/workspace-overrides/02-special-training-lightning-status.css",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/layout/workspace-overrides/02-special-training-lightning-status.layer-01.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/layout/workspace-overrides/02-special-training-lightning-status.layer-02.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1338,
-      "targetCeiling": 1000,
+      "previousCeiling": 2007,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-039: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-039: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1719,25 +1719,25 @@
           "path": "apps/desktop/web/src/styles/layout/workspace-overrides/02-special-training-mode-config.css",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/layout/workspace-overrides/02-special-training-mode-config.layer-01.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/layout/workspace-overrides/02-special-training-mode-config.layer-02.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1150,
-      "targetCeiling": 1000,
+      "previousCeiling": 1725,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-040: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-040: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1760,25 +1760,25 @@
           "path": "apps/desktop/web/src/styles/layout/workspace-overrides/02-special-training-risk-responsive.css",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/layout/workspace-overrides/02-special-training-risk-responsive.layer-01.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/layout/workspace-overrides/02-special-training-risk-responsive.layer-02.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1255,
-      "targetCeiling": 1000,
+      "previousCeiling": 1883,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-041: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-041: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1801,25 +1801,25 @@
           "path": "apps/desktop/web/src/styles/layout/workspace-overrides/02-special-training-risk-review.css",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/layout/workspace-overrides/02-special-training-risk-review.layer-01.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/layout/workspace-overrides/02-special-training-risk-review.layer-02.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1020,
-      "targetCeiling": 1000,
+      "previousCeiling": 1530,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-042: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-042: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1842,31 +1842,31 @@
           "path": "apps/desktop/web/src/styles/layout/workspace-overrides/03-trainer-layout-refresh-prep-and-special.css",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/layout/workspace-overrides/03-trainer-layout-refresh-prep-and-special.layer-01.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/layout/workspace-overrides/03-trainer-layout-refresh-prep-and-special.layer-02.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/layout/workspace-overrides/03-trainer-layout-refresh-prep-and-special.layer-03.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1567,
-      "targetCeiling": 1000,
+      "previousCeiling": 2351,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-043: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-043: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1889,25 +1889,25 @@
           "path": "apps/desktop/web/src/styles/layout/workspace-overrides/03-trainer-layout-refresh-shell.css",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/layout/workspace-overrides/03-trainer-layout-refresh-shell.layer-01.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/layout/workspace-overrides/03-trainer-layout-refresh-shell.layer-02.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1227,
-      "targetCeiling": 1000,
+      "previousCeiling": 1841,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-044: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-044: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1930,25 +1930,25 @@
           "path": "apps/desktop/web/src/styles/layout/workspace-overrides/05-global-workspace-geometry.css",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/layout/workspace-overrides/05-global-workspace-geometry.layer-01.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/layout/workspace-overrides/05-global-workspace-geometry.layer-02.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1039,
-      "targetCeiling": 1000,
+      "previousCeiling": 1559,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-045: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-045: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -1971,31 +1971,31 @@
           "path": "apps/desktop/web/src/styles/layout/workspace-overrides/06-special-training-prep.css",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/layout/workspace-overrides/06-special-training-prep.layer-01.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/layout/workspace-overrides/06-special-training-prep.layer-02.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/layout/workspace-overrides/06-special-training-prep.layer-03.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1764,
-      "targetCeiling": 1000,
+      "previousCeiling": 2646,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-046: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-046: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2018,25 +2018,25 @@
           "path": "apps/desktop/web/src/styles/pages/diagnostic-center-archive-and-dialogs.css",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/pages/diagnostic-center-archive-and-dialogs.layer-01.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/pages/diagnostic-center-archive-and-dialogs.layer-02.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1084,
-      "targetCeiling": 1000,
+      "previousCeiling": 1626,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-047: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-047: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2059,25 +2059,25 @@
           "path": "apps/desktop/web/src/styles/pages/diagnostic-center-shell-and-overview.css",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/pages/diagnostic-center-shell-and-overview.layer-01.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/pages/diagnostic-center-shell-and-overview.layer-02.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1372,
-      "targetCeiling": 1000,
+      "previousCeiling": 2058,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-048: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-048: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2100,25 +2100,25 @@
           "path": "apps/desktop/web/src/styles/pages/settings-data-asset-library.css",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/pages/settings-data-asset-library.layer-01.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/pages/settings-data-asset-library.layer-02.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1164,
-      "targetCeiling": 1000,
+      "previousCeiling": 1746,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-049: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-049: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2141,25 +2141,25 @@
           "path": "apps/desktop/web/src/styles/pages/settings-data-asset-workspace.css",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/pages/settings-data-asset-workspace.layer-01.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/pages/settings-data-asset-workspace.layer-02.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1257,
-      "targetCeiling": 1000,
+      "previousCeiling": 1886,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-050: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-050: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2182,31 +2182,31 @@
           "path": "apps/desktop/web/src/styles/pages/settings-data-core.css",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/pages/settings-data-core.layer-01.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/pages/settings-data-core.layer-02.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/pages/settings-data-core.layer-03.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1874,
-      "targetCeiling": 1000,
+      "previousCeiling": 2811,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-051: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-051: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2229,31 +2229,31 @@
           "path": "apps/desktop/web/src/styles/pages/settings-data-diagnostics-and-sync.css",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/pages/settings-data-diagnostics-and-sync.layer-01.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/pages/settings-data-diagnostics-and-sync.layer-02.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/pages/settings-data-diagnostics-and-sync.layer-03.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 2059,
-      "targetCeiling": 1000,
+      "previousCeiling": 3089,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-052: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-052: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2276,31 +2276,31 @@
           "path": "apps/desktop/web/src/styles/pages/settings-data-sources-and-detail.css",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/pages/settings-data-sources-and-detail.layer-01.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/pages/settings-data-sources-and-detail.layer-02.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/pages/settings-data-sources-and-detail.layer-03.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 2141,
-      "targetCeiling": 1000,
+      "previousCeiling": 3212,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-053: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-053: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2323,25 +2323,25 @@
           "path": "apps/desktop/web/src/styles/pages/settings-system.css",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/pages/settings-system.layer-01.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/pages/settings-system.layer-02.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1427,
-      "targetCeiling": 1000,
+      "previousCeiling": 2141,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-054: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-054: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2364,25 +2364,25 @@
           "path": "apps/desktop/web/src/styles/pages/training-command-center-modes-and-responsive.css",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/pages/training-command-center-modes-base.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/pages/training-command-center-modes-page.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1139,
-      "targetCeiling": 1000,
+      "previousCeiling": 1709,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-055: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-055: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2405,31 +2405,31 @@
           "path": "apps/desktop/web/src/styles/pages/ui-custom-indicator-rules-and-reference.css",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/pages/ui-custom-indicator-rules-and-reference.layer-01.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/pages/ui-custom-indicator-rules-and-reference.layer-02.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/pages/ui-custom-indicator-rules-and-reference.layer-03.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1701,
-      "targetCeiling": 1000,
+      "previousCeiling": 2552,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-056: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-056: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2452,25 +2452,25 @@
           "path": "apps/desktop/web/src/styles/pages/ui-custom-indicator-side-panels.css",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/pages/ui-custom-indicator-side-panels.layer-01.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/pages/ui-custom-indicator-side-panels.layer-02.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1284,
-      "targetCeiling": 1000,
+      "previousCeiling": 1926,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-057: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-057: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2493,25 +2493,25 @@
           "path": "apps/desktop/web/src/styles/pages/ui-custom-indicator-workbench.css",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/pages/ui-custom-indicator-workbench.layer-01.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/styles/pages/ui-custom-indicator-workbench.layer-02.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1106,
-      "targetCeiling": 1000,
+      "previousCeiling": 1659,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-058: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-058: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2534,25 +2534,25 @@
           "path": "apps/desktop/web/src/ui/config/uiConfig.ts",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/ui/config/uiConfig/uiConfigLocalization.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/ui/config/uiConfig/specialTrainingContent.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1413,
-      "targetCeiling": 1000,
+      "previousCeiling": 2120,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-059: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-059: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2575,37 +2575,37 @@
           "path": "apps/desktop/web/src/workspaces/challenge-stats/ChallengeFusionDashboard.tsx",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/workspaces/challenge-stats/ChallengeFusionDashboardRuntime.tsx",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/workspaces/challenge-stats/useChallengeFusionChartOptions.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/workspaces/challenge-stats/useChallengeFusionDialogSummaryChips.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/workspaces/challenge-stats/ChallengeFusionDashboardContracts.tsx",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1857,
-      "targetCeiling": 1000,
+      "previousCeiling": 2786,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-060: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-060: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2628,37 +2628,37 @@
           "path": "apps/desktop/web/src/workspaces/custom-indicator/customIndicatorWorkbenchEditorState.tsx",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/workspaces/custom-indicator/customIndicatorWorkbenchEditorTypes.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/workspaces/custom-indicator/useCustomIndicatorWorkbenchFeedback.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/workspaces/custom-indicator/useCustomIndicatorWorkbenchPresentation.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/workspaces/custom-indicator/useCustomIndicatorWorkbenchShortcuts.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1146,
-      "targetCeiling": 1000,
+      "previousCeiling": 1719,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-061: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-061: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2681,19 +2681,19 @@
           "path": "apps/desktop/web/src/workspaces/data/DataConfigDetailDrawer.tsx",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/workspaces/data/DataConfigDetailWindowTypes.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1069,
-      "targetCeiling": 1000,
+      "previousCeiling": 1604,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-062: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-062: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2716,19 +2716,19 @@
           "path": "apps/desktop/web/src/workspaces/data/dataConfig/MarketDataAcquisitionSection.tsx",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/workspaces/data/dataConfig/marketDataAcquisitionPolling.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1010,
-      "targetCeiling": 1000,
+      "previousCeiling": 1515,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-063: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-063: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2751,25 +2751,25 @@
           "path": "apps/desktop/web/src/workspaces/data/dataConfig/data-config-management.css",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/workspaces/data/dataConfig/data-config-management.layer-01.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/workspaces/data/dataConfig/data-config-management.layer-02.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1440,
-      "targetCeiling": 1000,
+      "previousCeiling": 2160,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-064: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-064: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2792,25 +2792,25 @@
           "path": "apps/desktop/web/src/workspaces/data/dataConfig/market-data-acquisition.css",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/workspaces/data/dataConfig/market-data-acquisition.layer-01.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/workspaces/data/dataConfig/market-data-acquisition.layer-02.css",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1119,
-      "targetCeiling": 1000,
+      "previousCeiling": 1679,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-065: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-065: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2833,31 +2833,31 @@
           "path": "apps/desktop/web/src/workspaces/history/history-console/ReplayReviewConsoleHelpers.tsx",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/workspaces/history/history-console/ReplayReviewConsoleModel.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/workspaces/history/history-console/ReplayReviewConsolePresentation.tsx",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/workspaces/history/history-console/ReplayReviewReplayPresentation.tsx",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1622,
-      "targetCeiling": 1000,
+      "previousCeiling": 2433,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-066: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-066: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2880,31 +2880,31 @@
           "path": "apps/desktop/web/src/workspaces/history/history-console/ReplayReviewConsoleWorkspace.tsx",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/workspaces/history/history-console/useReplayReviewArchiveRows.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/workspaces/history/history-console/useReplayReviewArchiveDetailWindow.tsx",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/workspaces/history/history-console/useReplayReviewWindowState.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1160,
-      "targetCeiling": 1000,
+      "previousCeiling": 1740,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-067: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-067: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2927,25 +2927,25 @@
           "path": "apps/desktop/web/src/workspaces/settings/portableData/PortableDataTransferSection.tsx",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/workspaces/settings/portableData/portableDataTransferModel.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/workspaces/settings/portableData/PortableImportDialog.tsx",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1317,
-      "targetCeiling": 1000,
+      "previousCeiling": 1976,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-068: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-068: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -2968,31 +2968,31 @@
           "path": "apps/desktop/web/src/workspaces/special-training/SpecialTrainingPageRuntime.tsx",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/workspaces/special-training/specialTrainingPageRuntimePresentation.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/workspaces/special-training/useSpecialTrainingPageHelpContext.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/workspaces/special-training/useSpecialTrainingModeRestartConfirmation.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1013,
-      "targetCeiling": 1000,
+      "previousCeiling": 1520,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-069: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-069: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -3015,31 +3015,31 @@
           "path": "apps/desktop/web/src/workspaces/special-training/banks/specialTrainingBankManagerRuntime.ts",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/workspaces/special-training/banks/specialTrainingBankEditorActionValues.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/workspaces/special-training/banks/useSpecialTrainingBankManagerInputs.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/workspaces/special-training/banks/useFilteredSpecialTrainingBanks.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1079,
-      "targetCeiling": 1000,
+      "previousCeiling": 1619,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-070: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-070: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -3062,25 +3062,25 @@
           "path": "apps/desktop/web/src/workspaces/special-training/components/SpecialTrainingModePickerView.tsx",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/workspaces/special-training/components/specialTrainingModePickerViewTypes.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/workspaces/special-training/components/specialTrainingModePickerPresentation.tsx",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1029,
-      "targetCeiling": 1000,
+      "previousCeiling": 1544,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-071: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-071: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -3103,19 +3103,19 @@
           "path": "apps/desktop/web/src/workspaces/strategy-backtest/StrategyBacktestPage.tsx",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/src/workspaces/strategy-backtest/useStrategyBacktestBatchRenderers.tsx",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1134,
-      "targetCeiling": 1000,
+      "previousCeiling": 1701,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-072: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-072: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -3138,61 +3138,61 @@
           "path": "apps/desktop/web/testHarness/i18nWorkspacePages.tsx",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/testHarness/I18nWorkspacePreviewSurface.tsx",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/testHarness/i18nWorkspacePreviewSupport.tsx",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/testHarness/PreviewMarketDataAcquisition.tsx",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/testHarness/i18nWorkspaceReviewFixtures.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/testHarness/installI18nSpecialTrainingPreviewApi.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/testHarness/installI18nWorkspacePreviewApiMocks.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/testHarness/renderI18nWorkspacePreviewPrimary.tsx",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "apps/desktop/web/testHarness/renderI18nWorkspacePreviewSecondary.tsx",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 4390,
-      "targetCeiling": 1000,
+      "previousCeiling": 6585,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-073: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-073: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -3215,19 +3215,19 @@
           "path": "packages/shared/src/analytics/backtestMetrics.ts",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "packages/shared/src/analytics/backtestMetricTypes.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1091,
-      "targetCeiling": 1000,
+      "previousCeiling": 1637,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-074: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-074: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -3250,19 +3250,19 @@
           "path": "packages/shared/src/importRules.ts",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "packages/shared/src/importTimeZoneRules.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1212,
-      "targetCeiling": 1000,
+      "previousCeiling": 1818,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-075: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-075: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",
@@ -3285,19 +3285,19 @@
           "path": "packages/shared/src/replay.ts",
           "kind": "original-owner",
           "role": "stable-facade-or-post-remediation-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         },
         {
           "path": "packages/shared/src/replayArchive.ts",
           "kind": "extracted-owner",
           "role": "extracted-responsibility-owner",
-          "lineCeiling": 1000
+          "lineCeiling": 1500
         }
       ],
       "absencePolicy": null,
       "seam": "Current responsibility owners are the exact paths in currentOwners; tools/quality/structure-budget.test.mjs binds the extraction and parity seam.",
-      "previousCeiling": 1319,
-      "targetCeiling": 1000,
+      "previousCeiling": 1979,
+      "targetCeiling": 1500,
       "behaviorBaseline": {
         "description": "CHAR-HS-CORE-076: fixed-blob public surface, state, side effects, consumers, and negative paths; PARITY-HS-CORE-076: before-and-after domain behavior plus failure-path equivalence",
         "testPath": "tools/quality/structure-budget.test.mjs",

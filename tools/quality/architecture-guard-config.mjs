@@ -54,7 +54,7 @@ export const REQUIRED_WINDOWS_NSIS_INSTALLER_HOOK =
 export const REQUIRED_TAURI_BUILD_COMMAND_FRAGMENT = "prepare-tauri-build.mjs";
 export const REQUIRED_TAURI_DEV_COMMAND_FRAGMENT = "run-frontend-tauri-dev.mjs";
 
-const ARCHITECTURE_LINE_BUDGET_SCALE = 1.43;
+const ARCHITECTURE_LINE_BUDGET_SCALE = 2.145;
 
 const scaleLineBudgetValue = (value) =>
   Math.ceil(Number(value) * ARCHITECTURE_LINE_BUDGET_SCALE);

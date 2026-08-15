@@ -82,6 +82,10 @@ test('CCXT market catalogs merge same-exchange loads and serialize all exchanges
 
   await adapter.listMarkets('binance', '');
   assert.deepEqual(loadCalls, ['binance', 'okx']);
+
+  await adapter.listMarkets('binance', '', { forceRefresh: true });
+  assert.deepEqual(loadCalls, ['binance', 'okx', 'binance']);
+  assert.deepEqual(factoryCalls, ['binance', 'okx', 'binance']);
 });
 
 test('CCXT market catalogs put familiar spot pairs before the long tail', async () => {

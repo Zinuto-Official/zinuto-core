@@ -6,6 +6,7 @@ import { dynamicAppError } from '../../kernel/appError.js';
 import {
   AcquisitionRuntimeError,
   type AcquisitionRequest,
+  type MarketAcquisitionRequest,
 } from './marketDataAcquisitionTypes.js';
 import {
   createMarketDataAcquisitionService,
@@ -17,9 +18,16 @@ let servicePromise: Promise<MarketDataAcquisitionService> | null = null;
 const resolveService = async (): Promise<MarketDataAcquisitionService> => {
   if (!servicePromise) {
     servicePromise = (async () => {
-      const [{ STORAGE_LAYOUT }, { resolveBackendAppContext }] = await Promise.all([
+      const [
+        { STORAGE_LAYOUT, STARTUP_PREFLIGHT_STATUS },
+        { resolveBackendAppContext },
+        { createMarketDataAcquisitionJobRepository },
+        { createMemoryAcquisitionJobStore },
+      ] = await Promise.all([
         import('../ports/infrastructure/db/database.js'),
         import('../ports/runtime/compositionRoot.js'),
+        import('../ports/infrastructure/db/marketDataAcquisitionJobRepository.js'),
+        import('../ports/infrastructure/db/marketDataAcquisitionJobStore.js'),
       ]);
       const context = resolveBackendAppContext();
       return createMarketDataAcquisitionService({
@@ -27,8 +35,19 @@ const resolveService = async (): Promise<MarketDataAcquisitionService> => {
           STORAGE_LAYOUT.tempDir,
           'market-data-acquisition',
         ),
+        catalogCacheDir: path.join(
+          STORAGE_LAYOUT.cacheDir,
+          'market-data-acquisition',
+          'catalog-v1',
+        ),
         createId: context.ports.idGenerator.createId,
         now: context.ports.clock.now,
+        // The durable history store requires an open database. When startup
+        // preflight blocked the local data store, keep acquisition available
+        // with in-session history instead of failing every acquisition route.
+        jobStore: STARTUP_PREFLIGHT_STATUS.startupAllowed
+          ? createMarketDataAcquisitionJobRepository()
+          : createMemoryAcquisitionJobStore(),
       });
     })();
   }
@@ -52,6 +71,23 @@ const translateRuntimeError = (error: unknown): never => {
 
 export const listMarketDataAcquisitionConnectors = async () =>
   (await resolveService()).listConnectors();
+
+export const listMarketDataAcquisitionCatalog = async () =>
+  (await resolveService()).listAcquisitionCatalog();
+
+export const listMarketDataAcquisitionMarketInstruments = async (input: {
+  marketId: Parameters<MarketDataAcquisitionService['listAcquisitionMarketInstruments']>[0]['marketId'];
+  sourcePlanId: Parameters<MarketDataAcquisitionService['listAcquisitionMarketInstruments']>[0]['sourcePlanId'];
+  query: string;
+  cursor: string;
+  refresh: boolean;
+}) => {
+  try {
+    return await (await resolveService()).listAcquisitionMarketInstruments(input);
+  } catch (error) {
+    return translateRuntimeError(error);
+  }
+};
 
 export const listAkshareAcquisitionInstruments = async () => {
   try {
@@ -80,9 +116,35 @@ export const startMarketDataAcquisitionJob = async (request: AcquisitionRequest)
   }
 };
 
+export const startMarketDataAcquisitionMarketJob = async (
+  request: MarketAcquisitionRequest,
+) => {
+  try {
+    return await (await resolveService()).createMarketJob(request);
+  } catch (error) {
+    return translateRuntimeError(error);
+  }
+};
+
 export const getMarketDataAcquisitionJob = async (jobId: string) => {
   try {
     return (await resolveService()).getJob(jobId);
+  } catch (error) {
+    return translateRuntimeError(error);
+  }
+};
+
+export const getMarketDataAcquisitionMarketJob = async (jobId: string) => {
+  try {
+    return (await resolveService()).getMarketJob(jobId);
+  } catch (error) {
+    return translateRuntimeError(error);
+  }
+};
+
+export const listMarketDataAcquisitionMarketJobs = async () => {
+  try {
+    return { jobs: (await resolveService()).listMarketJobs() };
   } catch (error) {
     return translateRuntimeError(error);
   }
@@ -96,9 +158,25 @@ export const cancelMarketDataAcquisitionJob = async (jobId: string) => {
   }
 };
 
+export const cancelMarketDataAcquisitionMarketJob = async (jobId: string) => {
+  try {
+    return (await resolveService()).cancelMarketJob(jobId);
+  } catch (error) {
+    return translateRuntimeError(error);
+  }
+};
+
 export const discardMarketDataAcquisitionJob = async (jobId: string) => {
   try {
     return await (await resolveService()).discardJob(jobId);
+  } catch (error) {
+    return translateRuntimeError(error);
+  }
+};
+
+export const discardMarketDataAcquisitionMarketJob = async (jobId: string) => {
+  try {
+    return await (await resolveService()).discardMarketJob(jobId);
   } catch (error) {
     return translateRuntimeError(error);
   }

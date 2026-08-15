@@ -56,6 +56,13 @@ const listUnexpectedEntries = (directoryPath, allowedNames) => {
     .map((entry) => path.join(directoryPath, entry.name));
 };
 
+const removeUnexpectedAcquisitionRootEntries = (acquisitionRoot) => {
+  const allowedNames = new Set(['akshare-sidecar', 'finance-datareader-sidecar']);
+  for (const unexpectedPath of listUnexpectedEntries(acquisitionRoot, allowedNames)) {
+    fs.rmSync(unexpectedPath, { recursive: true, force: true });
+  }
+};
+
 export const findUnexpectedAkshareSidecarPackagePaths = ({
   generatedRoot,
   nodePlatform = process.platform,
@@ -67,7 +74,10 @@ export const findUnexpectedAkshareSidecarPackagePaths = ({
     nodeArch,
   });
   return [
-    ...listUnexpectedEntries(layout.acquisitionRoot, new Set(['akshare-sidecar'])),
+    ...listUnexpectedEntries(
+      layout.acquisitionRoot,
+      new Set(['akshare-sidecar', 'finance-datareader-sidecar']),
+    ),
     ...listUnexpectedEntries(layout.connectorRoot, new Set([layout.targetId])),
   ];
 };
@@ -92,9 +102,12 @@ export const stageAkshareSidecarPackageInput = ({
     throw new Error('AKSHARE_SIDECAR_BUILD_OUTPUT_INSIDE_PACKAGE_ROOT');
   }
 
-  // Tauri packages this entire generated root. Clear it before publishing so
-  // stale binaries for another target can never enter the application bundle.
-  fs.rmSync(layout.acquisitionRoot, { recursive: true, force: true });
+  // Multiple independently locked Python workers share this root. Replace
+  // only AKShare's target tree so a FinanceDataReader package built in the
+  // same release cannot be erased by an AKShare rebuild. Unknown generated
+  // entries are not package inputs and are removed deterministically.
+  removeUnexpectedAcquisitionRootEntries(layout.acquisitionRoot);
+  fs.rmSync(layout.connectorRoot, { recursive: true, force: true });
   fs.mkdirSync(layout.connectorRoot, { recursive: true });
   fs.cpSync(sourceBundleRoot, layout.bundleRoot, {
     recursive: true,
@@ -103,6 +116,95 @@ export const stageAkshareSidecarPackageInput = ({
   });
   if (!fs.lstatSync(layout.executablePath, { throwIfNoEntry: false })?.isFile()) {
     throw new Error('AKSHARE_SIDECAR_PACKAGE_INPUT_MISSING');
+  }
+  return layout;
+};
+
+const FINANCE_DATA_READER_SIDECAR_TARGET_IDS = AKSHARE_SIDECAR_TARGET_IDS;
+
+export const resolveFinanceDataReaderSidecarTargetId = (
+  nodePlatform = process.platform,
+  nodeArch = process.arch,
+) => FINANCE_DATA_READER_SIDECAR_TARGET_IDS[`${nodePlatform}:${nodeArch}`] ?? null;
+
+export const resolveFinanceDataReaderSidecarPackageLayout = ({
+  generatedRoot,
+  nodePlatform = process.platform,
+  nodeArch = process.arch,
+}) => {
+  const targetId = resolveFinanceDataReaderSidecarTargetId(nodePlatform, nodeArch);
+  if (!targetId) {
+    throw new Error(
+      `Unsupported FinanceDataReader sidecar target: ${nodePlatform}-${nodeArch}`,
+    );
+  }
+  const acquisitionRoot = path.join(generatedRoot, 'market-data-acquisition');
+  const connectorRoot = path.join(acquisitionRoot, 'finance-datareader-sidecar');
+  const bundleRoot = path.join(connectorRoot, targetId);
+  const executableName = nodePlatform === 'win32'
+    ? 'zinuto-finance-datareader-sidecar.exe'
+    : 'zinuto-finance-datareader-sidecar';
+  return {
+    acquisitionRoot,
+    bundleRoot,
+    connectorRoot,
+    executableName,
+    executablePath: path.join(bundleRoot, executableName),
+    targetId,
+  };
+};
+
+export const findUnexpectedFinanceDataReaderSidecarPackagePaths = ({
+  generatedRoot,
+  nodePlatform = process.platform,
+  nodeArch = process.arch,
+}) => {
+  const layout = resolveFinanceDataReaderSidecarPackageLayout({
+    generatedRoot,
+    nodePlatform,
+    nodeArch,
+  });
+  return [
+    ...listUnexpectedEntries(
+      layout.acquisitionRoot,
+      new Set(['akshare-sidecar', 'finance-datareader-sidecar']),
+    ),
+    ...listUnexpectedEntries(layout.connectorRoot, new Set([layout.targetId])),
+  ];
+};
+
+export const stageFinanceDataReaderSidecarPackageInput = ({
+  generatedRoot,
+  sourceBundleRoot,
+  nodePlatform = process.platform,
+  nodeArch = process.arch,
+}) => {
+  const layout = resolveFinanceDataReaderSidecarPackageLayout({
+    generatedRoot,
+    nodePlatform,
+    nodeArch,
+  });
+  const sourceMetadata = fs.lstatSync(sourceBundleRoot, { throwIfNoEntry: false });
+  if (!sourceMetadata?.isDirectory() || sourceMetadata.isSymbolicLink()) {
+    throw new Error('FINANCEDATAREADER_SIDECAR_BUILD_OUTPUT_INVALID');
+  }
+  const relativeSource = path.relative(layout.acquisitionRoot, sourceBundleRoot);
+  if (
+    relativeSource === '' ||
+    (!relativeSource.startsWith('..') && !path.isAbsolute(relativeSource))
+  ) {
+    throw new Error('FINANCEDATAREADER_SIDECAR_BUILD_OUTPUT_INSIDE_PACKAGE_ROOT');
+  }
+  removeUnexpectedAcquisitionRootEntries(layout.acquisitionRoot);
+  fs.rmSync(layout.connectorRoot, { recursive: true, force: true });
+  fs.mkdirSync(layout.connectorRoot, { recursive: true });
+  fs.cpSync(sourceBundleRoot, layout.bundleRoot, {
+    recursive: true,
+    force: true,
+    dereference: true,
+  });
+  if (!fs.lstatSync(layout.executablePath, { throwIfNoEntry: false })?.isFile()) {
+    throw new Error('FINANCEDATAREADER_SIDECAR_PACKAGE_INPUT_MISSING');
   }
   return layout;
 };

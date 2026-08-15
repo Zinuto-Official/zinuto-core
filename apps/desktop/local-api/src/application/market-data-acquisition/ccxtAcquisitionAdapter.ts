@@ -13,7 +13,7 @@ const FETCH_LIMIT = 500;
 const MAX_PAGES = 500;
 const MAX_ROWS_PER_SYMBOL = 250_000;
 const REQUEST_TIMEOUT_MS = 20_000;
-const MARKET_CACHE_TTL_MS = 15 * 60_000;
+const MARKET_CACHE_TTL_MS = 7 * 24 * 60 * 60 * 1_000;
 const MAX_MARKET_RESULTS = 500;
 const MARKET_DATA_HTTPS_PROXY_ENV = 'ZINUTO_MARKET_DATA_HTTPS_PROXY';
 const RETRY_DELAYS_MS = [250, 750, 2_000] as const;
@@ -208,9 +208,10 @@ export const createCcxtAcquisitionAdapter = ({
 
   const loadMarketCatalog = (
     exchangeId: 'binance' | 'okx',
+    options: { forceRefresh?: boolean } = {},
   ): Promise<CcxtMarketCacheEntry> => {
     const cached = marketCache.get(exchangeId);
-    if (cached && cached.expiresAt > now()) {
+    if (!options.forceRefresh && cached && cached.expiresAt > now()) {
       return Promise.resolve(cached);
     }
     const existingLoad = marketLoadsInFlight.get(exchangeId);
@@ -219,7 +220,7 @@ export const createCcxtAcquisitionAdapter = ({
     const load = marketLoadTail.then(async () => {
       const loadStartedAt = now();
       const refreshed = marketCache.get(exchangeId);
-      if (refreshed && refreshed.expiresAt > loadStartedAt) {
+      if (!options.forceRefresh && refreshed && refreshed.expiresAt > loadStartedAt) {
         return refreshed;
       }
       const exchange = await exchangeFactory(exchangeId);
@@ -291,8 +292,8 @@ export const createCcxtAcquisitionAdapter = ({
   return {
     id: 'ccxt',
     isAvailable: () => true,
-    async listMarkets(exchangeId, query) {
-      const cached = await loadMarketCatalog(exchangeId);
+    async listMarkets(exchangeId, query, options) {
+      const cached = await loadMarketCatalog(exchangeId, options);
       const normalizedQuery = query.trim().toUpperCase();
       return {
         markets: cached.markets

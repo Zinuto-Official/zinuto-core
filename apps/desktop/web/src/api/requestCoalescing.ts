@@ -71,6 +71,15 @@ export const resolveApiInFlightGetCoalescingKey = (
 export const resolveApiGetResponseCacheTtlMs = (path: string): number => {
   const pathname = String(path || "").trim().split("?")[0] ?? "";
 
+  // Acquisition directories own their seven-day cache in the local runtime.
+  // Keep this browser response uncached so refresh=true always reaches it.
+  if (
+    /^\/api\/v1\/data-sources\/acquisition-markets\/[^/]+\/instruments$/u.test(
+      pathname,
+    )
+  ) {
+    return 0;
+  }
   if (
     pathname === "/api/v1/training/stats/summary" ||
     pathname === "/api/v1/training/special/stats/summary"

@@ -29,6 +29,12 @@ const pythonSidecarManifestPath = path.join(
   'open-source',
   'python-sidecar-dependencies.json',
 );
+const financeDataReaderSidecarManifestPath = path.join(
+  rootDir,
+  'config',
+  'open-source',
+  'finance-datareader-sidecar-dependencies.json',
+);
 
 const normalizeLicense = (value) => String(value ?? '').trim();
 const deniedLicensePattern = /(?:UNLICENSED|PROPRIETARY|SEE LICENSE|LicenseRef)/iu;
@@ -287,6 +293,120 @@ const uvBuildToolComponent = auditedStandaloneComponent(
   },
 );
 
+const auditAdditionalPythonSidecarManifest = (manifestPath, label) => {
+  const manifest = readJsonManifest(manifestPath, label);
+  if (
+    !manifest.id ||
+    !manifest.pythonRuntime ||
+    !manifest.buildTool ||
+    !Array.isArray(manifest.packages) ||
+    !Array.isArray(manifest.connectorSoftware) ||
+    !Array.isArray(manifest.marketDataProviderTerms)
+  ) {
+    throw new Error(`[license-audit] ${label} is incomplete`);
+  }
+  const additionalLockPath = resolveRepositoryPath(manifest.lockFile, 'lockFile');
+  const additionalProjectPath = resolveRepositoryPath(manifest.projectFile, 'projectFile');
+  const additionalPythonVersionPath = resolveRepositoryPath(
+    manifest.pythonVersionFile,
+    'pythonVersionFile',
+  );
+  const additionalLockContents = fs.readFileSync(additionalLockPath, 'utf8');
+  const additionalProjectContents = fs.readFileSync(additionalProjectPath, 'utf8');
+  const additionalPythonVersionContents = fs.readFileSync(
+    additionalPythonVersionPath,
+    'utf8',
+  );
+  for (const [fileLabel, contents, expectedDigest] of [
+    ['uv.lock', additionalLockContents, manifest.lockSha256],
+    ['pyproject.toml', additionalProjectContents, manifest.projectSha256],
+    ['.python-version', additionalPythonVersionContents, manifest.pythonVersionFileSha256],
+  ]) {
+    const actual = sha256(contents);
+    if (!/^[a-f0-9]{64}$/u.test(expectedDigest) || actual !== expectedDigest) {
+      throw new Error(`[license-audit] ${label} ${fileLabel} SHA-256 mismatch: ${actual}`);
+    }
+  }
+  const additionalPythonVersion = normalizeLicense(manifest.pythonRuntime.version);
+  if (
+    additionalPythonVersionContents.trim() !== additionalPythonVersion ||
+    !additionalProjectContents.includes(
+      `requires-python = ">=${additionalPythonVersion},<3.12"`,
+    )
+  ) {
+    throw new Error(`[license-audit] ${label} interpreter pin drifted`);
+  }
+  for (const { name, version } of manifest.requiredRootPackages ?? []) {
+    if (!additionalProjectContents.includes(`"${name}==${version}"`)) {
+      throw new Error(`[license-audit] ${label} root dependency drifted: ${name}`);
+    }
+  }
+  const additionalUvVersion = normalizeLicense(manifest.buildTool.version);
+  if (additionalUvVersion !== uvVersion) {
+    throw new Error(`[license-audit] ${label} requires a different uv version`);
+  }
+  const reviewed = new Map();
+  for (const entry of manifest.packages) {
+    const key = `${entry.name}@${entry.version}`;
+    if (
+      reviewed.has(key) ||
+      !entry.name ||
+      !entry.version ||
+      !entry.spdxExpression ||
+      !entry.evidence ||
+      deniedLicensePattern.test(entry.spdxExpression)
+    ) {
+      throw new Error(`[license-audit] incomplete ${label} package review: ${key}`);
+    }
+    reviewed.set(key, entry);
+  }
+  const lockKeys = new Set(
+    parseUvLockPackages(additionalLockContents)
+      .filter(({ registry }) => registry)
+      .map(({ name, version }) => `${name}@${version}`),
+  );
+  const missing = [...lockKeys].filter((key) => !reviewed.has(key));
+  const stale = [...reviewed.keys()].filter((key) => !lockKeys.has(key));
+  if (missing.length || stale.length) {
+    throw new Error(
+      `[license-audit] ${label} license review drifted; missing=${missing.join(',') || '(none)'} stale=${stale.join(',') || '(none)'}`,
+    );
+  }
+  return {
+    manifest,
+    pythonVersion: additionalPythonVersion,
+    pythonComponents: [...reviewed.values()].map((entry) => ({
+      ecosystem: 'pypi',
+      name: entry.name,
+      version: entry.version,
+      declaredLicense: entry.declaredLicense ?? entry.spdxExpression,
+      license: entry.spdxExpression,
+      licenseEvidence: entry.evidence,
+      development: false,
+      role: entry.role ?? 'sidecar-lock',
+      purl: `pkg:pypi/${encodeURIComponent(entry.name)}@${encodeURIComponent(entry.version)}`,
+      sourceUrl: `https://pypi.org/project/${encodeURIComponent(entry.name)}/${encodeURIComponent(entry.version)}/`,
+    })),
+    pythonRuntimeComponent: auditedStandaloneComponent(manifest.pythonRuntime, {
+      ecosystem: 'runtime',
+      development: false,
+      role: 'bundled-sidecar-runtime',
+      type: 'framework',
+    }),
+    uvBuildToolComponent: auditedStandaloneComponent(manifest.buildTool, {
+      ecosystem: 'build-tool',
+      development: true,
+      role: 'reproducible-build-tool',
+      type: 'application',
+    }),
+  };
+};
+
+const financeDataReaderSidecarAudit = auditAdditionalPythonSidecarManifest(
+  financeDataReaderSidecarManifestPath,
+  'FinanceDataReader Python sidecar dependency manifest',
+);
+
 const cargoManifests = [
   'apps/desktop/shell/Cargo.toml',
   'apps/desktop/backtest-engine/Cargo.toml',
@@ -341,20 +461,39 @@ const components = [
   ...npmComponents,
   ...rustById.values(),
   ...pythonComponents,
+  ...financeDataReaderSidecarAudit.pythonComponents,
   pythonRuntimeComponent,
+  financeDataReaderSidecarAudit.pythonRuntimeComponent,
   uvBuildToolComponent,
+  financeDataReaderSidecarAudit.uvBuildToolComponent,
 ].sort((left, right) =>
   `${left.ecosystem}:${left.name}@${left.version}`.localeCompare(
     `${right.ecosystem}:${right.name}@${right.version}`,
   ),
-);
+).filter((component, index, sorted) => {
+  const key = `${component.ecosystem}:${component.name}@${component.version}`;
+  const first = sorted.findIndex(
+    (candidate) => `${candidate.ecosystem}:${candidate.name}@${candidate.version}` === key,
+  );
+  if (first !== index) {
+    const original = sorted[first];
+    if (original.license !== component.license) {
+      throw new Error(`[license-audit] duplicate component license mismatch: ${key}`);
+    }
+    return false;
+  }
+  return true;
+});
 const componentByCoordinate = new Map(
   components.map((component) => [
     `${component.ecosystem}:${component.name}@${component.version}`,
     component,
   ]),
 );
-for (const connector of pythonSidecarManifest.connectorSoftware) {
+for (const connector of [
+  ...pythonSidecarManifest.connectorSoftware,
+  ...financeDataReaderSidecarAudit.manifest.connectorSoftware,
+]) {
   const coordinate = `${connector.ecosystem}:${connector.name}@${connector.version}`;
   const component = componentByCoordinate.get(coordinate);
   if (
@@ -366,7 +505,10 @@ for (const connector of pythonSidecarManifest.connectorSoftware) {
   }
 }
 const providerIds = new Set();
-for (const provider of pythonSidecarManifest.marketDataProviderTerms) {
+for (const provider of [
+  ...pythonSidecarManifest.marketDataProviderTerms,
+  ...financeDataReaderSidecarAudit.manifest.marketDataProviderTerms,
+]) {
   if (
     !provider.id
     || providerIds.has(provider.id)
@@ -413,6 +555,14 @@ const sbom = {
         value: uvVersion,
       },
       {
+        name: 'zinuto:financeDataReaderSidecarLockSha256',
+        value: financeDataReaderSidecarAudit.manifest.lockSha256,
+      },
+      {
+        name: 'zinuto:financeDataReaderSidecarVersion',
+        value: financeDataReaderSidecarAudit.pythonVersion,
+      },
+      {
         name: 'zinuto:marketDataTermsAreNotSoftwareLicenses',
         value: 'true',
       },
@@ -447,11 +597,17 @@ const noticeRows = components.map(
   (component) =>
     `| ${component.ecosystem} | ${component.name.replaceAll('|', '\\|')} | ${component.version} | ${component.license.replaceAll('|', '\\|')} | ${component.licenseEvidence?.replaceAll('|', '\\|') ?? ''} | ${component.role ?? (component.development ? 'development' : 'runtime')} |`,
 );
-const connectorRows = pythonSidecarManifest.connectorSoftware.map(
+const connectorRows = [
+  ...pythonSidecarManifest.connectorSoftware,
+  ...financeDataReaderSidecarAudit.manifest.connectorSoftware,
+].map(
   (connector) =>
     `| ${connector.label.replaceAll('|', '\\|')} | ${connector.version} | ${connector.spdxExpression.replaceAll('|', '\\|')} | [Project](${connector.projectUrl}) |`,
 );
-const providerTermRows = pythonSidecarManifest.marketDataProviderTerms.map(
+const providerTermRows = [
+  ...pythonSidecarManifest.marketDataProviderTerms,
+  ...financeDataReaderSidecarAudit.manifest.marketDataProviderTerms,
+].map(
   (provider) =>
     `| ${provider.name.replaceAll('|', '\\|')} | ${provider.termsRevision.replaceAll('|', '\\|')} | [Terms](${provider.termsUrl}) |`,
 );
@@ -464,8 +620,9 @@ package, Cargo, and Python registries.
 
 - Snapshot SHA-256: \`${componentsDigest}\`
 - Components: ${components.length}
-- Python sidecar lock SHA-256: \`${pythonSidecarManifest.lockSha256}\`
-- Python sidecar build: CPython ${pythonVersion}, uv ${uvVersion}
+- AKShare sidecar lock SHA-256: \`${pythonSidecarManifest.lockSha256}\`
+- FinanceDataReader sidecar lock SHA-256: \`${financeDataReaderSidecarAudit.manifest.lockSha256}\`
+- Python sidecar builds: CPython ${pythonVersion}, uv ${uvVersion}
 - Audit rule: missing, proprietary, unlicensed, \`SEE LICENSE\`, and
   \`LicenseRef\` declarations fail generation.
 

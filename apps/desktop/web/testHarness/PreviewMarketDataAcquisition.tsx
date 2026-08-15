@@ -2,8 +2,10 @@
 
 import { useRef, useState } from "react";
 import type {
-  MarketDataAcquisitionConnector,
-  MarketDataAcquisitionConnectorId,
+  MarketDataAcquisitionCatalog,
+  MarketDataAcquisitionInstrument,
+  MarketDataAcquisitionMarketId,
+  MarketDataAcquisitionSourcePlanId,
   MarketDataAcquisitionTimeframe,
 } from "../src/api";
 import { noop } from "./i18nWorkspacePreviewSupport";
@@ -15,80 +17,354 @@ import { StandardModalFrame } from "../src/ui/components";
 import { Button } from "../src/ui/primitives/button";
 import { MarketDataAcquisitionResult } from "../src/workspaces/data/dataConfig/MarketDataAcquisitionResult";
 import {
+  MarketDataAcquisitionStepper,
   MarketDataAcquisitionWizard,
   type AcquisitionWizardStep,
 } from "../src/workspaces/data/dataConfig/MarketDataAcquisitionWizard";
 import "../src/workspaces/data/dataConfig/market-data-acquisition.css";
 
-const previewMarketDataAcquisitionConnectors: MarketDataAcquisitionConnector[] =
-  [
+const previewCatalog: MarketDataAcquisitionCatalog = {
+  providers: [
     {
       id: "akshare",
-      version: "1.17.12",
-      market: "A_SHARE",
+      name: "AKShare",
+      version: "1.18.91",
+      license: "MIT",
+      projectUrl: "https://github.com/akfamily/akshare",
+      docsUrl: "https://akshare.akfamily.xyz/",
+      termsUrl: "https://about.eastmoney.com/home/protocol",
+      termsRevision: "preview-2026-08",
       available: true,
       unavailabilityCode: null,
-      supportedTimeframes: ["1m", "5m", "1h", "1d"],
-      datasets: [
-        "stock_zh_a_hist",
-        "stock_zh_a_hist_min_em",
-        "index_zh_a_hist",
-      ],
-      exchanges: [],
-      terms: {
-        projects: [
-          {
-            id: "akshare",
-            name: "AKShare",
-            url: "https://github.com/akfamily/akshare",
-            infoUrl: "https://akshare.akfamily.xyz/",
-            version: "1.17.12",
-            license: "MIT",
-          },
-        ],
-        upstreams: [
-          {
-            id: "eastmoney",
-            upstreamName: "Eastmoney",
-            termsUrl: "https://about.eastmoney.com/",
-            docsUrl: "https://quote.eastmoney.com/",
-            termsRevision: "preview-2026-07",
-          },
-        ],
-      },
     },
     {
       id: "ccxt",
-      version: "4.5.4",
-      market: "CRYPTO_SPOT",
+      name: "CCXT",
+      version: "4.5.73",
+      license: "MIT",
+      projectUrl: "https://github.com/ccxt/ccxt",
+      docsUrl: "https://github.com/ccxt/ccxt/wiki/manual",
+      termsUrl: "https://www.binance.com/en/terms",
+      termsRevision: "preview-2026-08",
       available: true,
       unavailabilityCode: null,
-      supportedTimeframes: ["1m", "5m", "1h", "1d"],
-      datasets: [],
-      exchanges: ["binance", "okx"],
-      terms: {
-        projects: [
-          {
-            id: "ccxt",
-            name: "CCXT",
-            url: "https://github.com/ccxt/ccxt",
-            infoUrl: "https://docs.ccxt.com/",
-            version: "4.5.4",
-            license: "MIT",
-          },
-        ],
-        upstreams: [
-          {
-            id: "binance",
-            upstreamName: "Binance",
-            termsUrl: "https://www.binance.com/en/terms",
-            docsUrl: "https://developers.binance.com/",
-            termsRevision: "preview-2026-07",
-          },
-        ],
-      },
     },
-  ];
+    {
+      id: "financedatareader",
+      name: "FinanceDataReader",
+      version: "0.9.202",
+      license: "MIT",
+      projectUrl: "https://github.com/FinanceData/FinanceDataReader",
+      docsUrl: "https://github.com/FinanceData/FinanceDataReader",
+      termsUrl: "https://finance.yahoo.com/legal/terms.html",
+      termsRevision: "preview-2026-08",
+      available: true,
+      unavailabilityCode: null,
+    },
+  ],
+  assetClasses: [
+    {
+      id: "STOCKS_AND_INDICES",
+      marketIds: [
+        "CN_A_SHARE",
+        "HK_STOCKS",
+        "KR_STOCKS",
+        "US_STOCKS",
+        "JP_STOCKS",
+        "VN_STOCKS",
+        "GLOBAL_INDICES",
+      ],
+    },
+    { id: "FOREX", marketIds: ["FOREX"] },
+    {
+      id: "COMMODITIES_AND_RATES",
+      marketIds: ["COMMODITY_FUTURES", "RATE_FUTURES"],
+    },
+    { id: "CRYPTO", marketIds: ["CRYPTO_SPOT"] },
+  ],
+  markets: [
+    {
+      id: "CN_A_SHARE",
+      assetClassId: "STOCKS_AND_INDICES",
+      timeZone: "Asia/Shanghai",
+      supportedTimeframes: ["1m", "5m", "1h", "1d"],
+      adjustmentOptions: ["none", "qfq", "hfq"],
+      instrumentDiscovery: "CATALOG",
+      sourcePlans: [
+        {
+          id: "CN_A_SHARE_SMART",
+          providerChain: ["akshare", "financedatareader"],
+          fallbackPolicy: "WHOLE_INSTRUMENT_DAILY_UNADJUSTED_ONLY",
+          available: true,
+        },
+      ],
+    },
+    {
+      id: "HK_STOCKS",
+      assetClassId: "STOCKS_AND_INDICES",
+      timeZone: "Asia/Hong_Kong",
+      supportedTimeframes: ["1d"],
+      adjustmentOptions: [],
+      instrumentDiscovery: "CATALOG",
+      sourcePlans: [
+        {
+          id: "FDR_HKEX",
+          providerChain: ["financedatareader"],
+          fallbackPolicy: "NONE",
+          available: true,
+        },
+      ],
+    },
+    {
+      id: "KR_STOCKS",
+      assetClassId: "STOCKS_AND_INDICES",
+      timeZone: "Asia/Seoul",
+      supportedTimeframes: ["1d"],
+      adjustmentOptions: [],
+      instrumentDiscovery: "CATALOG",
+      sourcePlans: [
+        {
+          id: "FDR_KRX",
+          providerChain: ["financedatareader"],
+          fallbackPolicy: "NONE",
+          available: true,
+        },
+      ],
+    },
+    {
+      id: "US_STOCKS",
+      assetClassId: "STOCKS_AND_INDICES",
+      timeZone: "America/New_York",
+      supportedTimeframes: ["1d"],
+      adjustmentOptions: [],
+      instrumentDiscovery: "CATALOG",
+      sourcePlans: [
+        {
+          id: "FDR_US_STOCKS",
+          providerChain: ["financedatareader"],
+          fallbackPolicy: "NONE",
+          available: true,
+        },
+      ],
+    },
+    {
+      id: "JP_STOCKS",
+      assetClassId: "STOCKS_AND_INDICES",
+      timeZone: "Asia/Tokyo",
+      supportedTimeframes: ["1d"],
+      adjustmentOptions: [],
+      instrumentDiscovery: "CATALOG",
+      sourcePlans: [
+        {
+          id: "FDR_TSE",
+          providerChain: ["financedatareader"],
+          fallbackPolicy: "NONE",
+          available: true,
+        },
+      ],
+    },
+    {
+      id: "VN_STOCKS",
+      assetClassId: "STOCKS_AND_INDICES",
+      timeZone: "Asia/Ho_Chi_Minh",
+      supportedTimeframes: ["1d"],
+      adjustmentOptions: [],
+      instrumentDiscovery: "CATALOG",
+      sourcePlans: [
+        {
+          id: "FDR_HOSE",
+          providerChain: ["financedatareader"],
+          fallbackPolicy: "NONE",
+          available: true,
+        },
+      ],
+    },
+    {
+      id: "GLOBAL_INDICES",
+      assetClassId: "STOCKS_AND_INDICES",
+      timeZone: "UTC",
+      supportedTimeframes: ["1d"],
+      adjustmentOptions: [],
+      instrumentDiscovery: "PRESET",
+      sourcePlans: [
+        {
+          id: "FDR_GLOBAL_INDICES",
+          providerChain: ["financedatareader"],
+          fallbackPolicy: "NONE",
+          available: true,
+        },
+      ],
+    },
+    {
+      id: "FOREX",
+      assetClassId: "FOREX",
+      timeZone: "UTC",
+      supportedTimeframes: ["1d"],
+      adjustmentOptions: [],
+      instrumentDiscovery: "PRESET",
+      sourcePlans: [
+        {
+          id: "FDR_FOREX",
+          providerChain: ["financedatareader"],
+          fallbackPolicy: "NONE",
+          available: true,
+        },
+      ],
+    },
+    {
+      id: "COMMODITY_FUTURES",
+      assetClassId: "COMMODITIES_AND_RATES",
+      timeZone: "America/New_York",
+      supportedTimeframes: ["1d"],
+      adjustmentOptions: [],
+      instrumentDiscovery: "PRESET",
+      sourcePlans: [
+        {
+          id: "FDR_COMMODITY_FUTURES",
+          providerChain: ["financedatareader"],
+          fallbackPolicy: "NONE",
+          available: true,
+        },
+      ],
+    },
+    {
+      id: "RATE_FUTURES",
+      assetClassId: "COMMODITIES_AND_RATES",
+      timeZone: "America/New_York",
+      supportedTimeframes: ["1d"],
+      adjustmentOptions: [],
+      instrumentDiscovery: "PRESET",
+      sourcePlans: [
+        {
+          id: "FDR_RATE_FUTURES",
+          providerChain: ["financedatareader"],
+          fallbackPolicy: "NONE",
+          available: true,
+        },
+      ],
+    },
+    {
+      id: "CRYPTO_SPOT",
+      assetClassId: "CRYPTO",
+      timeZone: "UTC",
+      supportedTimeframes: ["1m", "5m", "1h", "1d"],
+      adjustmentOptions: [],
+      instrumentDiscovery: "CATALOG",
+      sourcePlans: [
+        {
+          id: "CCXT_BINANCE_SMART",
+          providerChain: ["ccxt", "financedatareader"],
+          fallbackPolicy: "WHOLE_INSTRUMENT_DAILY_ONLY",
+          available: true,
+        },
+      ],
+    },
+  ],
+};
+
+const previewInstruments: Record<
+  MarketDataAcquisitionMarketId,
+  MarketDataAcquisitionInstrument[]
+> = {
+  CN_A_SHARE: [
+    {
+      symbol: "000001",
+      sourceSymbol: "000001",
+      name: "平安银行",
+      marketId: "CN_A_SHARE",
+      exchangeId: "SZ",
+      sourcePlanIds: ["CN_A_SHARE_SMART"],
+    },
+    {
+      symbol: "600519",
+      sourceSymbol: "600519",
+      name: "贵州茅台",
+      marketId: "CN_A_SHARE",
+      exchangeId: "SH",
+      sourcePlanIds: ["CN_A_SHARE_SMART"],
+    },
+  ],
+  HK_STOCKS: [],
+  KR_STOCKS: [],
+  US_STOCKS: [
+    {
+      symbol: "AAPL",
+      sourceSymbol: "AAPL",
+      name: "Apple Inc.",
+      marketId: "US_STOCKS",
+      exchangeId: "NASDAQ",
+      sourcePlanIds: ["FDR_US_STOCKS"],
+    },
+    {
+      symbol: "IBM",
+      sourceSymbol: "IBM",
+      name: "IBM",
+      marketId: "US_STOCKS",
+      exchangeId: "NYSE",
+      sourcePlanIds: ["FDR_US_STOCKS"],
+    },
+    {
+      symbol: "SPY",
+      sourceSymbol: "SPY",
+      name: "SPDR S&P 500 ETF",
+      marketId: "US_STOCKS",
+      exchangeId: "AMEX",
+      sourcePlanIds: ["FDR_US_STOCKS"],
+    },
+  ],
+  JP_STOCKS: [
+    {
+      symbol: "7203",
+      sourceSymbol: "7203",
+      name: "TOYOTA MOTOR CORPORATION",
+      marketId: "JP_STOCKS",
+      exchangeId: "TSE",
+      sourcePlanIds: ["FDR_TSE"],
+    },
+  ],
+  VN_STOCKS: [],
+  GLOBAL_INDICES: [
+    {
+      symbol: "^GSPC",
+      sourceSymbol: "^GSPC",
+      name: "S&P 500",
+      marketId: "GLOBAL_INDICES",
+      exchangeId: null,
+      sourcePlanIds: ["FDR_GLOBAL_INDICES"],
+    },
+  ],
+  FOREX: [
+    {
+      symbol: "USD/KRW",
+      sourceSymbol: "USD/KRW",
+      name: "US Dollar / Korean Won",
+      marketId: "FOREX",
+      exchangeId: null,
+      sourcePlanIds: ["FDR_FOREX"],
+    },
+  ],
+  COMMODITY_FUTURES: [
+    {
+      symbol: "GC=F",
+      sourceSymbol: "GC=F",
+      name: "Gold futures",
+      marketId: "COMMODITY_FUTURES",
+      exchangeId: null,
+      sourcePlanIds: ["FDR_COMMODITY_FUTURES"],
+    },
+  ],
+  RATE_FUTURES: [],
+  CRYPTO_SPOT: [
+    {
+      symbol: "BTC/USDT",
+      sourceSymbol: "BTC/USDT",
+      name: "BTC/USDT",
+      marketId: "CRYPTO_SPOT",
+      exchangeId: "binance",
+      sourcePlanIds: ["CCXT_BINANCE_SMART"],
+    },
+  ],
+};
 
 type PreviewMarketDataAcquisitionProps = {
   formatStorageBytes: (value: number) => string;
@@ -106,110 +382,57 @@ export const PreviewMarketDataAcquisition = ({
   ttf: acquisitionTtf,
 }: PreviewMarketDataAcquisitionProps) => {
   const initialStep: AcquisitionWizardStep =
-    scenario === "catalog" ? 2 : scenario === "settings" ? 3 : 1;
+    scenario === "catalog" ? 3 : scenario === "settings" ? 4 : 1;
   const [wizardStep, setWizardStep] =
     useState<AcquisitionWizardStep>(initialStep);
-  const [providerId, setProviderId] =
-    useState<MarketDataAcquisitionConnectorId>("akshare");
-  const [akshareInstrumentKind, setAkshareInstrumentKind] = useState<
-    "A_SHARE" | "INDEX"
-  >("A_SHARE");
-  const [akshareSymbols, setAkshareSymbols] = useState(["000001", "600519"]);
-  const [ccxtSymbols, setCcxtSymbols] = useState(["BTC/USDT", "ETH/USDT"]);
-  const [exchangeId, setExchangeId] = useState<"binance" | "okx">("binance");
-  const [adjustment, setAdjustment] = useState<"none" | "qfq" | "hfq">("qfq");
+  const [assetClassId, setAssetClassId] =
+    useState<(typeof previewCatalog.assetClasses)[number]["id"]>(
+      "STOCKS_AND_INDICES",
+    );
+  const [marketId, setMarketId] =
+    useState<MarketDataAcquisitionMarketId>("CN_A_SHARE");
+  const [sourcePlanId, setSourcePlanId] =
+    useState<MarketDataAcquisitionSourcePlanId>("CN_A_SHARE_SMART");
+  const [selectedInstruments, setSelectedInstruments] = useState<
+    MarketDataAcquisitionInstrument[]
+  >(previewInstruments.CN_A_SHARE);
+  const [adjustment, setAdjustment] = useState<"none" | "qfq" | "hfq" | null>(
+    "none",
+  );
   const [timeframe, setTimeframe] =
     useState<MarketDataAcquisitionTimeframe>("1d");
   const [startDate, setStartDate] = useState("2025-07-25");
   const [endDate, setEndDate] = useState("2026-07-25");
   const headingRef = useRef<HTMLHeadingElement | null>(null);
-
-  api.listAkshareAcquisitionInstruments = async () => ({
-    cachedAt: "2026-07-25T08:00:00.000Z",
-    instruments: [
-      {
-        symbol: "000001",
-        name: "平安银行",
-        exchangeId: "SZ",
-        kind: "A_SHARE",
-      },
-      {
-        symbol: "000858",
-        name: "五粮液",
-        exchangeId: "SZ",
-        kind: "A_SHARE",
-      },
-      {
-        symbol: "300750",
-        name: "宁德时代",
-        exchangeId: "SZ",
-        kind: "A_SHARE",
-      },
-      {
-        symbol: "600519",
-        name: "贵州茅台",
-        exchangeId: "SH",
-        kind: "A_SHARE",
-      },
-      {
-        symbol: "601318",
-        name: "中国平安",
-        exchangeId: "SH",
-        kind: "A_SHARE",
-      },
-      {
-        symbol: "688981",
-        name: "中芯国际",
-        exchangeId: "SH",
-        kind: "A_SHARE",
-      },
-      {
-        symbol: "830799",
-        name: "艾融软件",
-        exchangeId: "BJ",
-        kind: "A_SHARE",
-      },
-      {
-        symbol: "INDEX-000001",
-        name: "上证指数",
-        exchangeId: "SH",
-        kind: "INDEX",
-      },
-      {
-        symbol: "INDEX-399001",
-        name: "深证成指",
-        exchangeId: "SZ",
-        kind: "INDEX",
-      },
-    ],
-  });
-  api.listCcxtAcquisitionMarkets = async (previewExchangeId) => ({
-    exchangeId: previewExchangeId,
-    cachedAt: "2026-07-25T08:00:00.000Z",
-    markets: [
-      { symbol: "BTC/USDT", base: "BTC", quote: "USDT", active: true },
-      { symbol: "ETH/USDT", base: "ETH", quote: "USDT", active: true },
-      { symbol: "SOL/USDT", base: "SOL", quote: "USDT", active: true },
-      { symbol: "BNB/USDT", base: "BNB", quote: "USDT", active: true },
-      { symbol: "XRP/USDT", base: "XRP", quote: "USDT", active: true },
-      { symbol: "BTC/USDC", base: "BTC", quote: "USDC", active: true },
-      { symbol: "ETH/USDC", base: "ETH", quote: "USDC", active: true },
-    ],
-  });
-
-  const selectedSymbols =
-    providerId === "akshare" ? akshareSymbols : ccxtSymbols;
-  const selectedConnector =
-    previewMarketDataAcquisitionConnectors.find(
-      (connector) => connector.id === providerId,
-    ) ?? null;
-  const resultSourceLabel = acquisitionTt(
-    providerId === "akshare"
-      ? "appText.marketDataAcquisitionTaskAShareTitle"
-      : "appText.marketDataAcquisitionTaskCryptoTitle",
-  );
+  const market =
+    previewCatalog.markets.find((entry) => entry.id === marketId) ?? null;
+  const resultSourceLabel = "China A shares · AKShare → FinanceDataReader";
   const isSaved = scenario === "saved";
   const isFailed = scenario === "failed";
+
+  api.listMarketDataAcquisitionMarketInstruments = async (
+    requestedMarketId,
+    input = {},
+  ) => ({
+    marketId: requestedMarketId,
+    instruments: previewInstruments[requestedMarketId].filter(
+      (instrument) =>
+        !input.query ||
+        instrument.symbol.includes(input.query.toUpperCase()) ||
+        instrument.name.toUpperCase().includes(input.query.toUpperCase()),
+    ),
+    nextCursor: null,
+    cachedAt:
+      previewCatalog.markets.find((entry) => entry.id === requestedMarketId)
+        ?.instrumentDiscovery === "PRESET"
+        ? null
+        : "2026-08-15T08:00:00.000Z",
+    cacheState:
+      previewCatalog.markets.find((entry) => entry.id === requestedMarketId)
+        ?.instrumentDiscovery === "PRESET"
+        ? "BUNDLED"
+        : "FRESH",
+  });
 
   const formActions =
     wizardStep === 1 ? (
@@ -230,11 +453,20 @@ export const PreviewMarketDataAcquisition = ({
         >
           {acquisitionTt("appText.marketDataAcquisitionBack")}
         </Button>
+        <Button type="button" onClick={() => setWizardStep(3)}>
+          {acquisitionTt("appText.marketDataAcquisitionContinue")}
+        </Button>
+      </>
+    ) : wizardStep === 3 ? (
+      <>
         <Button
           type="button"
-          disabled={selectedSymbols.length === 0}
-          onClick={() => setWizardStep(3)}
+          variant="outline"
+          onClick={() => setWizardStep(2)}
         >
+          {acquisitionTt("appText.marketDataAcquisitionBack")}
+        </Button>
+        <Button type="button" onClick={() => setWizardStep(4)}>
           {acquisitionTt("appText.marketDataAcquisitionContinue")}
         </Button>
       </>
@@ -243,7 +475,7 @@ export const PreviewMarketDataAcquisition = ({
         <Button
           type="button"
           variant="outline"
-          onClick={() => setWizardStep(2)}
+          onClick={() => setWizardStep(3)}
         >
           {acquisitionTt("appText.marketDataAcquisitionBack")}
         </Button>
@@ -282,11 +514,37 @@ export const PreviewMarketDataAcquisition = ({
     <section className="desktop-secondary-window-panel desktop-secondary-window-market-data-acquisition">
       <StandardModalFrame
         title={
-          <h1>{acquisitionTt("appText.marketDataAcquisitionDialogTitle")}</h1>
+          <div className="market-data-acquisition-header-content">
+            <div className="market-data-acquisition-title-row">
+              <h1>
+                {acquisitionTt("appText.marketDataAcquisitionDialogTitle")}
+              </h1>
+              {!isSaved && !isFailed ? (
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon-sm"
+                  className="market-data-acquisition-history-trigger"
+                  aria-label={acquisitionTt(
+                    "appText.marketDataAcquisitionHistoryTitle",
+                  )}
+                  title={acquisitionTt(
+                    "appText.marketDataAcquisitionHistoryTitle",
+                  )}
+                  onClick={noop}
+                >
+                  <VendorIcon name="clock" aria-hidden="true" />
+                </Button>
+              ) : null}
+            </div>
+            {!isSaved && !isFailed ? (
+              <MarketDataAcquisitionStepper
+                tt={acquisitionTt}
+                wizardStep={wizardStep}
+              />
+            ) : null}
+          </div>
         }
-        description={acquisitionTt(
-          "appText.marketDataAcquisitionDialogDescription",
-        )}
         variant="workflow"
         className="market-data-acquisition-dialog"
         headerClassName="market-data-acquisition-header"
@@ -299,7 +557,7 @@ export const PreviewMarketDataAcquisition = ({
             endDate={endDate}
             fileCount={2}
             formattedBytes={formatPreviewStorageBytes(18_600_000)}
-            instrumentCount={selectedSymbols.length}
+            instrumentCount={selectedInstruments.length}
             outputPath="~/Documents/Zinuto/Market Data"
             sourceLabel={resultSourceLabel}
             startDate={startDate}
@@ -338,13 +596,10 @@ export const PreviewMarketDataAcquisition = ({
         ) : (
           <MarketDataAcquisitionWizard
             adjustment={adjustment}
-            akshareInstrumentKind={akshareInstrumentKind}
-            akshareSymbols={akshareSymbols}
-            ccxtSymbols={ccxtSymbols}
-            connectors={previewMarketDataAcquisitionConnectors}
-            connectorsLoading={false}
+            assetClassId={assetClassId}
+            catalog={previewCatalog}
+            catalogLoading={false}
             endDate={endDate}
-            exchangeId={exchangeId}
             fieldErrors={{}}
             folderGrant={{
               grantId: "preview-folder-grant",
@@ -352,34 +607,43 @@ export const PreviewMarketDataAcquisition = ({
             }}
             headingRef={headingRef}
             locale={previewLocale}
-            providerId={providerId}
-            resultSourceLabel={resultSourceLabel}
-            selectedConnector={selectedConnector}
-            selectedSymbols={selectedSymbols}
+            market={market}
+            selectedInstruments={selectedInstruments}
+            sourcePlanId={sourcePlanId}
             startDate={startDate}
             timeframe={timeframe}
-            timeframeOptions={[
-              { value: "1m", label: "1m" },
-              { value: "5m", label: "5m" },
-              { value: "1h", label: "1h" },
-              { value: "1d", label: "1d" },
-            ]}
             tt={acquisitionTt}
             ttf={acquisitionTtf}
             wizardStep={wizardStep}
             onAdjustmentChange={setAdjustment}
-            onAkshareKindChange={(kind) => {
-              setAkshareInstrumentKind(kind);
-              setAkshareSymbols([]);
+            onAssetClassChange={(value) => {
+              setAssetClassId(value);
+              setMarketId("CN_A_SHARE");
+              setSourcePlanId("CN_A_SHARE_SMART");
+              setSelectedInstruments(previewInstruments.CN_A_SHARE);
             }}
-            onAkshareSymbolsChange={setAkshareSymbols}
-            onCcxtSymbolsChange={setCcxtSymbols}
             onChooseFolder={noop}
             onEndDateChange={setEndDate}
-            onExchangeChange={setExchangeId}
+            onInstrumentsChange={setSelectedInstruments}
+            onMarketChange={(value) => {
+              const nextMarket = previewCatalog.markets.find(
+                (entry) => entry.id === value,
+              );
+              const nextPlan =
+                nextMarket?.sourcePlans[0]?.id ?? "CN_A_SHARE_SMART";
+              setMarketId(value);
+              setSourcePlanId(nextPlan);
+              setSelectedInstruments(previewInstruments[value]);
+              setTimeframe(
+                nextMarket?.supportedTimeframes.includes("1d") ? "1d" : "1m",
+              );
+              setAdjustment(
+                nextMarket?.adjustmentOptions.includes("none") ? "none" : null,
+              );
+            }}
             onOpenProject={noop}
-            onProviderChange={setProviderId}
-            onRetryConnectors={noop}
+            onRetryCatalog={noop}
+            onSourcePlanChange={setSourcePlanId}
             onStartDateChange={setStartDate}
             onTimeframeChange={setTimeframe}
           />

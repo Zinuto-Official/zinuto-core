@@ -204,7 +204,7 @@ const desktopOpenApiDesktopLocalDataImportDraftValidationRequestSchema = z.objec
       "previewPlanId": z.lazy(() => desktopOpenApiBoundedIdSchema),
       "targetSourceId": z.string().max(128).optional(),
       "sourceTouched": z.boolean().optional(),
-      "poolName": z.string().max(48).optional(),
+      "poolName": z.string().max(20).optional(),
       "nameTouched": z.boolean().optional(),
     }).strict()).max(500).optional(),
   }).strict().optional(),
@@ -239,6 +239,15 @@ const desktopOpenApiDesktopLocalDataSyncQuickCheckByMetadataRequestSchema = z.ob
   }).strict()).max(20000).optional(),
 }).strict();
 
+const desktopOpenApiDesktopMarketDataAcquisitionCatalogSchema = z.object({
+  "providers": z.array(z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionProviderSchema)).min(3).max(3),
+  "assetClasses": z.array(z.object({
+    "id": z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionAssetClassSchema),
+    "marketIds": z.array(z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionMarketIdSchema)).min(1).max(15),
+  }).strict()).min(4).max(4),
+  "markets": z.array(z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionMarketSchema)).min(1).max(15),
+}).strict();
+
 const desktopOpenApiDesktopMarketDataAcquisitionConnectorCatalogSchema = z.object({
   "connectors": z.array(z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionConnectorSchema)).min(2).max(2),
 }).strict();
@@ -247,7 +256,19 @@ const desktopOpenApiDesktopMarketDataAcquisitionDiscardResultSchema = z.object({
   "discarded": z.boolean(),
 }).strict();
 
+const desktopOpenApiDesktopMarketDataAcquisitionInstrumentCatalogSchema = z.object({
+  "marketId": z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionMarketIdSchema),
+  "instruments": z.array(z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionInstrumentSchema)).max(500),
+  "nextCursor": z.string().min(1).max(128).nullable(),
+  "cachedAt": z.string().max(64).datetime({ offset: true }).nullable(),
+  "cacheState": z.enum(["FRESH", "STALE", "BUNDLED"]),
+}).strict();
+
 const desktopOpenApiDesktopMarketDataAcquisitionJobCreateRequestSchema = z.union([z.lazy(() => desktopOpenApiDesktopAkshareAcquisitionJobCreateRequestSchema), z.lazy(() => desktopOpenApiDesktopCcxtAcquisitionJobCreateRequestSchema)]);
+
+const desktopOpenApiDesktopMarketDataAcquisitionJobListSchema = z.object({
+  "jobs": z.array(z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionJobSummarySchema)).max(500),
+}).strict();
 
 const desktopOpenApiDesktopMarketDataAcquisitionJobSchema = z.object({
   "id": z.lazy(() => desktopOpenApiBoundedIdSchema),
@@ -255,6 +276,28 @@ const desktopOpenApiDesktopMarketDataAcquisitionJobSchema = z.object({
   "connectorId": z.enum(["akshare", "ccxt"]),
   "request": z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionJobCreateRequestSchema),
   "progress": z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionJobProgressSchema),
+  "staging": z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionStagingSummarySchema).nullable(),
+  "error": z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionJobErrorSchema).nullable(),
+  "createdAt": z.string().max(64).datetime({ offset: true }),
+  "updatedAt": z.string().max(64).datetime({ offset: true }),
+}).strict();
+
+const desktopOpenApiDesktopMarketDataAcquisitionMarketJobCreateRequestSchema = z.object({
+  "marketId": z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionMarketIdSchema),
+  "sourcePlanId": z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionSourcePlanIdSchema),
+  "symbols": z.array(z.string().min(1).max(64)).min(1).max(20).refine((items) => new Set(items.map((item) => JSON.stringify(item))).size === items.length, { message: "uniqueItems" }),
+  "timeframe": z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionTimeframeSchema),
+  "startAt": z.string().max(64).datetime({ offset: true }),
+  "endAt": z.string().max(64).datetime({ offset: true }),
+  "adjustment": z.enum(["none", "qfq", "hfq"]).nullable(),
+}).strict();
+
+const desktopOpenApiDesktopMarketDataAcquisitionMarketJobSchema = z.object({
+  "id": z.lazy(() => desktopOpenApiBoundedIdSchema),
+  "status": z.enum(["QUEUED", "RUNNING", "READY_TO_SAVE", "FAILED", "CANCELED"]),
+  "request": z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionMarketJobCreateRequestSchema),
+  "progress": z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionJobProgressSchema),
+  "sourceResults": z.array(z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionSymbolSourceResultSchema)).max(20),
   "staging": z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionStagingSummarySchema).nullable(),
   "error": z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionJobErrorSchema).nullable(),
   "createdAt": z.string().max(64).datetime({ offset: true }),
@@ -430,6 +473,33 @@ const desktopOpenApiImportRelativePathSchema = z.string().min(1).max(1024).regex
 
 const desktopOpenApiImportFileNameSchema = z.string().max(255).regex(new RegExp("^(?:$|.*\\S.*)$"));
 
+const desktopOpenApiDesktopMarketDataAcquisitionProviderSchema = z.object({
+  "id": z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionProviderIdSchema),
+  "name": z.string().min(1).max(128),
+  "version": z.string().min(1).max(64),
+  "license": z.string().min(1).max(64),
+  "projectUrl": z.string().min(1).max(2048),
+  "docsUrl": z.string().min(1).max(2048),
+  "termsUrl": z.string().min(1).max(2048),
+  "termsRevision": z.string().min(1).max(128),
+  "available": z.boolean(),
+  "unavailabilityCode": z.string().min(1).max(128).nullable(),
+}).strict();
+
+const desktopOpenApiDesktopMarketDataAcquisitionAssetClassSchema = z.enum(["STOCKS_AND_INDICES", "FOREX", "COMMODITIES_AND_RATES", "CRYPTO"]);
+
+const desktopOpenApiDesktopMarketDataAcquisitionMarketIdSchema = z.enum(["CN_A_SHARE", "HK_STOCKS", "KR_STOCKS", "US_STOCKS", "JP_STOCKS", "VN_STOCKS", "GLOBAL_INDICES", "FOREX", "COMMODITY_FUTURES", "RATE_FUTURES", "CRYPTO_SPOT"]);
+
+const desktopOpenApiDesktopMarketDataAcquisitionMarketSchema = z.object({
+  "id": z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionMarketIdSchema),
+  "assetClassId": z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionAssetClassSchema),
+  "timeZone": z.string().min(1).max(128),
+  "supportedTimeframes": z.array(z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionTimeframeSchema)).min(1).max(4),
+  "adjustmentOptions": z.array(z.enum(["none", "qfq", "hfq"])).max(3),
+  "instrumentDiscovery": z.enum(["CATALOG", "PRESET"]),
+  "sourcePlans": z.array(z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionSourcePlanSchema)).min(1).max(3),
+}).strict();
+
 const desktopOpenApiDesktopMarketDataAcquisitionConnectorSchema = z.object({
   "id": z.enum(["akshare", "ccxt"]),
   "version": z.string().min(1).max(64),
@@ -442,6 +512,15 @@ const desktopOpenApiDesktopMarketDataAcquisitionConnectorSchema = z.object({
   "terms": z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionConnectorTermsSchema),
 }).strict();
 
+const desktopOpenApiDesktopMarketDataAcquisitionInstrumentSchema = z.object({
+  "symbol": z.string().min(1).max(64),
+  "name": z.string().min(1).max(128),
+  "marketId": z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionMarketIdSchema),
+  "sourceSymbol": z.string().min(1).max(64),
+  "exchangeId": z.string().min(1).max(64).nullable(),
+  "sourcePlanIds": z.array(z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionSourcePlanIdSchema)).min(1).max(3),
+}).strict();
+
 const desktopOpenApiDesktopAkshareAcquisitionJobCreateRequestSchema = z.union([z.lazy(() => desktopOpenApiDesktopAkshareDailyAcquisitionJobCreateRequestSchema), z.lazy(() => desktopOpenApiDesktopAkshareMinuteAcquisitionJobCreateRequestSchema), z.lazy(() => desktopOpenApiDesktopAkshareIndexDailyAcquisitionJobCreateRequestSchema)]);
 
 const desktopOpenApiDesktopCcxtAcquisitionJobCreateRequestSchema = z.object({
@@ -452,6 +531,20 @@ const desktopOpenApiDesktopCcxtAcquisitionJobCreateRequestSchema = z.object({
   "timeframe": z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionTimeframeSchema),
   "startAt": z.string().max(64).datetime({ offset: true }),
   "endAt": z.string().max(64).datetime({ offset: true }),
+}).strict();
+
+const desktopOpenApiDesktopMarketDataAcquisitionJobSummarySchema = z.object({
+  "id": z.lazy(() => desktopOpenApiBoundedIdSchema),
+  "status": z.enum(["QUEUED", "RUNNING", "READY_TO_SAVE", "FAILED", "CANCELED"]),
+  "marketId": z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionMarketIdSchema),
+  "sourcePlanId": z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionSourcePlanIdSchema),
+  "timeframe": z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionTimeframeSchema),
+  "symbolCount": z.number().int().min(1).max(20),
+  "completedSymbols": z.number().int().min(0).max(20),
+  "stage": z.enum(["QUEUED", "CONNECTING", "DOWNLOADING", "NORMALIZING", "VALIDATING", "RETRY_WAIT", "READY_TO_SAVE"]),
+  "error": z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionJobErrorSchema).nullable(),
+  "createdAt": z.string().max(64).datetime({ offset: true }),
+  "updatedAt": z.string().max(64).datetime({ offset: true }),
 }).strict();
 
 const desktopOpenApiDesktopMarketDataAcquisitionJobProgressSchema = z.object({
@@ -467,11 +560,23 @@ const desktopOpenApiDesktopMarketDataAcquisitionStagingSummarySchema = z.object(
   "totalBytes": z.number().int().min(1),
   "manifestSha256": z.string().regex(new RegExp("^[0-9a-f]{64}$")),
   "outputFolderName": z.string().min(1).max(128),
+  "mergedDuplicateBars": z.number().int().min(0),
 }).strict();
 
 const desktopOpenApiDesktopMarketDataAcquisitionJobErrorSchema = z.object({
   "code": z.string().min(1).max(128),
   "args": z.record(z.string(), z.unknown()),
+}).strict();
+
+const desktopOpenApiDesktopMarketDataAcquisitionSourcePlanIdSchema = z.enum(["CN_A_SHARE_SMART", "FDR_HKEX", "FDR_KRX", "FDR_US_STOCKS", "FDR_TSE", "FDR_HOSE", "FDR_GLOBAL_INDICES", "FDR_FOREX", "FDR_COMMODITY_FUTURES", "FDR_RATE_FUTURES", "CCXT_BINANCE_SMART", "CCXT_OKX_SMART"]);
+
+const desktopOpenApiDesktopMarketDataAcquisitionTimeframeSchema = z.enum(["1m", "5m", "1h", "1d"]);
+
+const desktopOpenApiDesktopMarketDataAcquisitionSymbolSourceResultSchema = z.object({
+  "symbol": z.string().min(1).max(64),
+  "sourceSymbol": z.string().min(1).max(64),
+  "finalSource": z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionSourceAttemptSchema).nullable(),
+  "attempts": z.array(z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionSourceAttemptSchema)).min(1).max(3),
 }).strict();
 
 const desktopOpenApiDesktopWorkspaceIdSchema = z.enum(["command-center", "trainer", "history-review-console", "challenge-stats", "special-training", "data-management", "notes", "settings", "custom-indicator", "strategy-backtest"]);
@@ -557,7 +662,14 @@ const desktopOpenApiTradingSessionRangeSchema = z.object({
   "crossesMidnight": z.boolean(),
 }).strict();
 
-const desktopOpenApiDesktopMarketDataAcquisitionTimeframeSchema = z.enum(["1m", "5m", "1h", "1d"]);
+const desktopOpenApiDesktopMarketDataAcquisitionProviderIdSchema = z.enum(["akshare", "ccxt", "financedatareader"]);
+
+const desktopOpenApiDesktopMarketDataAcquisitionSourcePlanSchema = z.object({
+  "id": z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionSourcePlanIdSchema),
+  "providerChain": z.array(z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionProviderIdSchema)).min(1).max(3),
+  "fallbackPolicy": z.enum(["NONE", "WHOLE_INSTRUMENT_DAILY_UNADJUSTED_ONLY", "WHOLE_INSTRUMENT_DAILY_ONLY"]),
+  "available": z.boolean(),
+}).strict();
 
 const desktopOpenApiDesktopMarketDataAcquisitionConnectorTermsSchema = z.object({
   "projects": z.array(z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionProjectSchema)).min(1).max(2),
@@ -592,6 +704,14 @@ const desktopOpenApiDesktopAkshareIndexDailyAcquisitionJobCreateRequestSchema = 
   "startAt": z.string().max(64).datetime({ offset: true }),
   "endAt": z.string().max(64).datetime({ offset: true }),
   "adjustment": z.literal("none"),
+}).strict();
+
+const desktopOpenApiDesktopMarketDataAcquisitionSourceAttemptSchema = z.object({
+  "providerId": z.lazy(() => desktopOpenApiDesktopMarketDataAcquisitionProviderIdSchema),
+  "providerVersion": z.string().min(1).max(64),
+  "upstreamId": z.string().min(1).max(128),
+  "status": z.enum(["SUCCEEDED", "FAILED", "SKIPPED"]),
+  "errorCode": z.string().min(1).max(128).nullable(),
 }).strict();
 
 const desktopOpenApiBacktestOrderSizingModeSchema = z.enum(["FIXED_QTY", "FIXED_AMOUNT", "EQUITY_PERCENT", "ALL_IN"]);
@@ -657,10 +777,15 @@ export const DESKTOP_OPENAPI_COMPONENT_ZOD_SCHEMAS = {
   "DesktopLocalDataIncrementalUpdateByPathRequest": desktopOpenApiDesktopLocalDataIncrementalUpdateByPathRequestSchema,
   "DesktopLocalDataSourceTradingCalendarUpdateRequest": desktopOpenApiDesktopLocalDataSourceTradingCalendarUpdateRequestSchema,
   "DesktopLocalDataSyncQuickCheckByMetadataRequest": desktopOpenApiDesktopLocalDataSyncQuickCheckByMetadataRequestSchema,
+  "DesktopMarketDataAcquisitionCatalog": desktopOpenApiDesktopMarketDataAcquisitionCatalogSchema,
   "DesktopMarketDataAcquisitionConnectorCatalog": desktopOpenApiDesktopMarketDataAcquisitionConnectorCatalogSchema,
   "DesktopMarketDataAcquisitionDiscardResult": desktopOpenApiDesktopMarketDataAcquisitionDiscardResultSchema,
+  "DesktopMarketDataAcquisitionInstrumentCatalog": desktopOpenApiDesktopMarketDataAcquisitionInstrumentCatalogSchema,
   "DesktopMarketDataAcquisitionJobCreateRequest": desktopOpenApiDesktopMarketDataAcquisitionJobCreateRequestSchema,
+  "DesktopMarketDataAcquisitionJobList": desktopOpenApiDesktopMarketDataAcquisitionJobListSchema,
   "DesktopMarketDataAcquisitionJob": desktopOpenApiDesktopMarketDataAcquisitionJobSchema,
+  "DesktopMarketDataAcquisitionMarketJobCreateRequest": desktopOpenApiDesktopMarketDataAcquisitionMarketJobCreateRequestSchema,
+  "DesktopMarketDataAcquisitionMarketJob": desktopOpenApiDesktopMarketDataAcquisitionMarketJobSchema,
   "DesktopWorkspaceReadModel": desktopOpenApiDesktopWorkspaceReadModelSchema,
   "DesktopAkshareAcquisitionInstrument": desktopOpenApiDesktopAkshareAcquisitionInstrumentSchema,
   "BacktestConfig": desktopOpenApiBacktestConfigSchema,
@@ -681,12 +806,21 @@ export const DESKTOP_OPENAPI_COMPONENT_ZOD_SCHEMAS = {
   "DesktopLocalDataIncrementalUpdateUserOverrides": desktopOpenApiDesktopLocalDataIncrementalUpdateUserOverridesSchema,
   "ImportRelativePath": desktopOpenApiImportRelativePathSchema,
   "ImportFileName": desktopOpenApiImportFileNameSchema,
+  "DesktopMarketDataAcquisitionProvider": desktopOpenApiDesktopMarketDataAcquisitionProviderSchema,
+  "DesktopMarketDataAcquisitionAssetClass": desktopOpenApiDesktopMarketDataAcquisitionAssetClassSchema,
+  "DesktopMarketDataAcquisitionMarketId": desktopOpenApiDesktopMarketDataAcquisitionMarketIdSchema,
+  "DesktopMarketDataAcquisitionMarket": desktopOpenApiDesktopMarketDataAcquisitionMarketSchema,
   "DesktopMarketDataAcquisitionConnector": desktopOpenApiDesktopMarketDataAcquisitionConnectorSchema,
+  "DesktopMarketDataAcquisitionInstrument": desktopOpenApiDesktopMarketDataAcquisitionInstrumentSchema,
   "DesktopAkshareAcquisitionJobCreateRequest": desktopOpenApiDesktopAkshareAcquisitionJobCreateRequestSchema,
   "DesktopCcxtAcquisitionJobCreateRequest": desktopOpenApiDesktopCcxtAcquisitionJobCreateRequestSchema,
+  "DesktopMarketDataAcquisitionJobSummary": desktopOpenApiDesktopMarketDataAcquisitionJobSummarySchema,
   "DesktopMarketDataAcquisitionJobProgress": desktopOpenApiDesktopMarketDataAcquisitionJobProgressSchema,
   "DesktopMarketDataAcquisitionStagingSummary": desktopOpenApiDesktopMarketDataAcquisitionStagingSummarySchema,
   "DesktopMarketDataAcquisitionJobError": desktopOpenApiDesktopMarketDataAcquisitionJobErrorSchema,
+  "DesktopMarketDataAcquisitionSourcePlanId": desktopOpenApiDesktopMarketDataAcquisitionSourcePlanIdSchema,
+  "DesktopMarketDataAcquisitionTimeframe": desktopOpenApiDesktopMarketDataAcquisitionTimeframeSchema,
+  "DesktopMarketDataAcquisitionSymbolSourceResult": desktopOpenApiDesktopMarketDataAcquisitionSymbolSourceResultSchema,
   "DesktopWorkspaceId": desktopOpenApiDesktopWorkspaceIdSchema,
   "DesktopWorkspaceReadModelTone": desktopOpenApiDesktopWorkspaceReadModelToneSchema,
   "DesktopWorkspaceCopyRef": desktopOpenApiDesktopWorkspaceCopyRefSchema,
@@ -700,11 +834,13 @@ export const DESKTOP_OPENAPI_COMPONENT_ZOD_SCHEMAS = {
   "CsvMappingSplitTimestamp": desktopOpenApiCsvMappingSplitTimestampSchema,
   "SecurityBookmark": desktopOpenApiSecurityBookmarkSchema,
   "TradingSessionRange": desktopOpenApiTradingSessionRangeSchema,
-  "DesktopMarketDataAcquisitionTimeframe": desktopOpenApiDesktopMarketDataAcquisitionTimeframeSchema,
+  "DesktopMarketDataAcquisitionProviderId": desktopOpenApiDesktopMarketDataAcquisitionProviderIdSchema,
+  "DesktopMarketDataAcquisitionSourcePlan": desktopOpenApiDesktopMarketDataAcquisitionSourcePlanSchema,
   "DesktopMarketDataAcquisitionConnectorTerms": desktopOpenApiDesktopMarketDataAcquisitionConnectorTermsSchema,
   "DesktopAkshareDailyAcquisitionJobCreateRequest": desktopOpenApiDesktopAkshareDailyAcquisitionJobCreateRequestSchema,
   "DesktopAkshareMinuteAcquisitionJobCreateRequest": desktopOpenApiDesktopAkshareMinuteAcquisitionJobCreateRequestSchema,
   "DesktopAkshareIndexDailyAcquisitionJobCreateRequest": desktopOpenApiDesktopAkshareIndexDailyAcquisitionJobCreateRequestSchema,
+  "DesktopMarketDataAcquisitionSourceAttempt": desktopOpenApiDesktopMarketDataAcquisitionSourceAttemptSchema,
   "BacktestOrderSizingMode": desktopOpenApiBacktestOrderSizingModeSchema,
   "BacktestDirectionSignalRule": desktopOpenApiBacktestDirectionSignalRuleSchema,
   "CsvHeaderName": desktopOpenApiCsvHeaderNameSchema,
@@ -777,10 +913,15 @@ export const DESKTOP_OPENAPI_RUNTIME_SCHEMA_BINDINGS = {
   "desktopLocalImportMockSampleExportRequestSchema": { source: "external", component: "DesktopLocalImportMockSampleExportRequest", schema: desktopLocalImportMockSampleExportRequestSchema },
   "desktopLocalImportMockSampleExportResultSchema": { source: "external", component: "DesktopLocalImportMockSampleExportResult", schema: desktopLocalImportMockSampleExportResultSchema },
   "desktopMarketBarFrameSchema": { source: "external", component: "DesktopMarketBarFrame", schema: desktopMarketBarFrameSchema },
+  "desktopMarketDataAcquisitionCatalogSchema": { source: "component", component: "DesktopMarketDataAcquisitionCatalog", schema: desktopOpenApiDesktopMarketDataAcquisitionCatalogSchema },
   "desktopMarketDataAcquisitionConnectorCatalogSchema": { source: "component", component: "DesktopMarketDataAcquisitionConnectorCatalog", schema: desktopOpenApiDesktopMarketDataAcquisitionConnectorCatalogSchema },
   "desktopMarketDataAcquisitionDiscardResultSchema": { source: "component", component: "DesktopMarketDataAcquisitionDiscardResult", schema: desktopOpenApiDesktopMarketDataAcquisitionDiscardResultSchema },
+  "desktopMarketDataAcquisitionInstrumentCatalogSchema": { source: "component", component: "DesktopMarketDataAcquisitionInstrumentCatalog", schema: desktopOpenApiDesktopMarketDataAcquisitionInstrumentCatalogSchema },
   "desktopMarketDataAcquisitionJobCreateRequestSchema": { source: "component", component: "DesktopMarketDataAcquisitionJobCreateRequest", schema: desktopOpenApiDesktopMarketDataAcquisitionJobCreateRequestSchema },
+  "desktopMarketDataAcquisitionJobListSchema": { source: "component", component: "DesktopMarketDataAcquisitionJobList", schema: desktopOpenApiDesktopMarketDataAcquisitionJobListSchema },
   "desktopMarketDataAcquisitionJobSchema": { source: "component", component: "DesktopMarketDataAcquisitionJob", schema: desktopOpenApiDesktopMarketDataAcquisitionJobSchema },
+  "desktopMarketDataAcquisitionMarketJobCreateRequestSchema": { source: "component", component: "DesktopMarketDataAcquisitionMarketJobCreateRequest", schema: desktopOpenApiDesktopMarketDataAcquisitionMarketJobCreateRequestSchema },
+  "desktopMarketDataAcquisitionMarketJobSchema": { source: "component", component: "DesktopMarketDataAcquisitionMarketJob", schema: desktopOpenApiDesktopMarketDataAcquisitionMarketJobSchema },
   "desktopPortableExportPreviewRequestSchema": { source: "external", component: "DesktopPortableExportPreviewRequest", schema: desktopPortableExportPreviewRequestSchema },
   "desktopPortableExportRequestSchema": { source: "external", component: "DesktopPortableExportRequest", schema: desktopPortableExportRequestSchema },
   "desktopPortableImportInspectRequestSchema": { source: "external", component: "DesktopPortableImportInspectRequest", schema: desktopPortableImportInspectRequestSchema },

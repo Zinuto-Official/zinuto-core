@@ -295,45 +295,54 @@ def _filter_rows_to_requested_range(
 
 def _fetch_a_share_daily(
     params: dict[str, Any], start_local: datetime, end_local: datetime
-) -> list[dict[str, Any]]:
+) -> tuple[list[dict[str, Any]], str]:
     adjustment = "" if params["adjustment"] == "none" else params["adjustment"]
     try:
-        return _canonical_rows(
-            ak.stock_zh_a_hist(
-                symbol=params["symbol"],
-                period="daily",
-                start_date=start_local.strftime("%Y%m%d"),
-                end_date=end_local.strftime("%Y%m%d"),
-                adjust=adjustment,
+        return (
+            _canonical_rows(
+                ak.stock_zh_a_hist(
+                    symbol=params["symbol"],
+                    period="daily",
+                    start_date=start_local.strftime("%Y%m%d"),
+                    end_date=end_local.strftime("%Y%m%d"),
+                    adjust=adjustment,
+                ),
+                "stock_zh_a_hist",
             ),
-            "stock_zh_a_hist",
+            "eastmoney",
         )
     except Exception as primary_error:
         tencent_symbol = _a_share_tencent_symbol(params["symbol"])
         if tencent_symbol is not None:
             try:
-                return _canonical_rows(
-                    stock_zh_a_hist_tx(
-                        symbol=tencent_symbol,
-                        start_date=start_local.strftime("%Y%m%d"),
-                        end_date=end_local.strftime("%Y%m%d"),
-                        adjust=adjustment,
+                return (
+                    _canonical_rows(
+                        stock_zh_a_hist_tx(
+                            symbol=tencent_symbol,
+                            start_date=start_local.strftime("%Y%m%d"),
+                            end_date=end_local.strftime("%Y%m%d"),
+                            adjust=adjustment,
+                        ),
+                        "stock_zh_a_hist_tx",
                     ),
-                    "stock_zh_a_hist_tx",
+                    "tencent",
                 )
             except Exception:
                 pass
         sina_symbol = _a_share_sina_symbol(params["symbol"])
         if sina_symbol is not None:
             try:
-                return _canonical_rows(
-                    stock_zh_a_daily(
-                        symbol=sina_symbol,
-                        start_date=start_local.strftime("%Y%m%d"),
-                        end_date=end_local.strftime("%Y%m%d"),
-                        adjust=adjustment,
+                return (
+                    _canonical_rows(
+                        stock_zh_a_daily(
+                            symbol=sina_symbol,
+                            start_date=start_local.strftime("%Y%m%d"),
+                            end_date=end_local.strftime("%Y%m%d"),
+                            adjust=adjustment,
+                        ),
+                        "stock_zh_a_daily",
                     ),
-                    "stock_zh_a_daily",
+                    "sina",
                 )
             except Exception:
                 pass
@@ -346,56 +355,64 @@ def _fetch_a_share_minute(
     end_at: datetime,
     start_local: datetime,
     end_local: datetime,
-) -> list[dict[str, Any]]:
+) -> tuple[list[dict[str, Any]], str]:
     periods = {"1m": "1", "5m": "5", "1h": "60"}
     adjustment = "" if params["adjustment"] == "none" else params["adjustment"]
     try:
-        return _canonical_rows(
-            ak.stock_zh_a_hist_min_em(
-                symbol=params["symbol"],
-                start_date=start_local.strftime("%Y-%m-%d %H:%M:%S"),
-                end_date=end_local.strftime("%Y-%m-%d %H:%M:%S"),
-                period=periods[params["timeframe"]],
-                adjust=adjustment,
+        return (
+            _canonical_rows(
+                ak.stock_zh_a_hist_min_em(
+                    symbol=params["symbol"],
+                    start_date=start_local.strftime("%Y-%m-%d %H:%M:%S"),
+                    end_date=end_local.strftime("%Y-%m-%d %H:%M:%S"),
+                    period=periods[params["timeframe"]],
+                    adjust=adjustment,
+                ),
+                "stock_zh_a_hist_min_em",
             ),
-            "stock_zh_a_hist_min_em",
+            "eastmoney",
         )
     except Exception as primary_error:
         sina_symbol = _a_share_sina_symbol(params["symbol"])
         if sina_symbol is None:
             raise primary_error
         try:
-            return _filter_rows_to_requested_range(
-                _canonical_rows(
-                    stock_zh_a_minute(
-                        symbol=sina_symbol,
-                        period=periods[params["timeframe"]],
-                        adjust=adjustment,
+            return (
+                _filter_rows_to_requested_range(
+                    _canonical_rows(
+                        stock_zh_a_minute(
+                            symbol=sina_symbol,
+                            period=periods[params["timeframe"]],
+                            adjust=adjustment,
+                        ),
+                        "stock_zh_a_minute",
                     ),
-                    "stock_zh_a_minute",
+                    start_at,
+                    end_at,
                 ),
-                start_at,
-                end_at,
+                "sina",
             )
         except Exception:
             raise primary_error
 
 
-def _fetch(request: dict[str, Any]) -> tuple[str, list[dict[str, Any]]]:
+def _fetch(request: dict[str, Any]) -> tuple[str, list[dict[str, Any]], str]:
     operation = request["operation"]
     if operation == "stock_info_a_code_name":
-        return "instruments", _fetch_a_share_instrument_catalog()
+        return "instruments", _fetch_a_share_instrument_catalog(), "eastmoney"
     params = request["params"]
     start_at = datetime.fromisoformat(params["startAt"].replace("Z", "+00:00"))
     end_at = datetime.fromisoformat(params["endAt"].replace("Z", "+00:00"))
     start_local = start_at.astimezone(SHANGHAI_OFFSET)
     end_local = end_at.astimezone(SHANGHAI_OFFSET)
     if operation == "stock_zh_a_hist":
-        return "bars", _fetch_a_share_daily(params, start_local, end_local)
+        rows, upstream_id = _fetch_a_share_daily(params, start_local, end_local)
+        return "bars", _filter_rows_to_requested_range(rows, start_at, end_at), upstream_id
     elif operation == "stock_zh_a_hist_min_em":
-        return "bars", _fetch_a_share_minute(
+        rows, upstream_id = _fetch_a_share_minute(
             params, start_at, end_at, start_local, end_local
         )
+        return "bars", _filter_rows_to_requested_range(rows, start_at, end_at), upstream_id
     else:
         frame = ak.index_zh_a_hist(
             symbol=params["symbol"],
@@ -403,7 +420,13 @@ def _fetch(request: dict[str, Any]) -> tuple[str, list[dict[str, Any]]]:
             start_date=start_local.strftime("%Y%m%d"),
             end_date=end_local.strftime("%Y%m%d"),
         )
-    return "bars", _canonical_rows(frame, operation)
+    return (
+        "bars",
+        _filter_rows_to_requested_range(
+            _canonical_rows(frame, operation), start_at, end_at
+        ),
+        "eastmoney",
+    )
 
 
 def _emit(payload: dict[str, Any]) -> None:
@@ -437,20 +460,21 @@ def main() -> int:
     try:
         request = _parse_request(sys.stdin.buffer.readline(MAX_REQUEST_BYTES + 1))
         request_id = request["requestId"]
-        response_kind, rows = _fetch(request)
-        _emit(
-            {
-                "protocol": PROTOCOL,
-                "requestId": request_id,
-                "ok": True,
-                "runtime": {
-                    "aktools": aktools.__version__,
-                    "akshare": version("akshare"),
-                },
-                "kind": response_kind,
-                "rows": rows,
-            }
-        )
+        response_kind, rows, upstream_id = _fetch(request)
+        payload = {
+            "protocol": PROTOCOL,
+            "requestId": request_id,
+            "ok": True,
+            "runtime": {
+                "aktools": aktools.__version__,
+                "akshare": version("akshare"),
+            },
+            "kind": response_kind,
+            "rows": rows,
+        }
+        if response_kind == "bars":
+            payload["upstreamId"] = upstream_id
+        _emit(payload)
         return 0
     except WorkerError as error:
         _emit(

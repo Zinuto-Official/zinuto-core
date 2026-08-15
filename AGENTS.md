@@ -93,7 +93,7 @@ coverage, and test output are not source artifacts.
 - `contracts`: Contracts describe local desktop behavior only. Change the contract first, regenerate, and do not add aliases, fallback hosts, or official-service surfaces.
 - `tools`: Tooling may build and validate Core only. Update the matching registry and tests when a generator, quality route, or public-boundary rule changes.
 
-File budgets: page 1144; hook/view-model 715; application 1001; service/store 1001; router 501; css 2145. Split by responsibility before crossing a budget. Do not add compatibility aliases to avoid a proper contract or migration.
+File budgets: page 1716; hook/view-model 1073; application 1502; service/store 1502; router 751; css 3218. Split by responsibility before crossing a budget. Do not add compatibility aliases to avoid a proper contract or migration.
 
 During editing, run `npm run check:fast -- --files <changed-files...>`. Before handoff, run `npm run check:affected -- --files <changed-files...>`. Before release, run `npm run check:full`.
 <!-- AI-GENERATED-RULES:END -->

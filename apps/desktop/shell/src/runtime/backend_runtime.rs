@@ -14,11 +14,10 @@ use std::sync::{Mutex, OnceLock};
 use std::thread;
 use std::time::{Duration, Instant};
 
-use tauri::Manager;
-
 use super::backend_startup_circuit::{BackendStartupCircuit, BackendStartupFailure};
 use crate::bridge::transport::clear_backend_http_connection_pool;
 use crate::platform::resolve_desktop_data_dir;
+use tauri::Manager;
 
 mod health;
 mod launch;
@@ -42,7 +41,8 @@ pub(crate) use launch::desktop_release_channel;
 use launch::{
     backend_runtime_state_release_channel_matches_current, backend_working_dir_from_entry,
     configure_akshare_sidecar_env, configure_backend_launch_environment,
-    configure_backend_transport_env, configure_backtest_engine_env, generate_backend_bridge_secret,
+    configure_backend_transport_env, configure_backtest_engine_env,
+    configure_finance_data_reader_sidecar_env, generate_backend_bridge_secret,
     resolve_backend_launch_candidates, resolve_node_runtime_path, BackendLaunchCandidate,
 };
 #[allow(unused_imports)]
@@ -426,6 +426,7 @@ fn spawn_backend_node(
     configure_backend_transport_env(&mut cmd, context.transport);
     configure_backtest_engine_env(&mut cmd, context.app);
     configure_akshare_sidecar_env(&mut cmd, context.app);
+    configure_finance_data_reader_sidecar_env(&mut cmd, context.app);
 
     if let Some(cwd) = candidate
         .working_dir

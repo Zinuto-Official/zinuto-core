@@ -23,9 +23,14 @@ import {
   desktopAkshareAcquisitionInstrumentCatalogSchema,
   desktopCcxtAcquisitionMarketCatalogSchema,
   desktopMarketDataAcquisitionConnectorCatalogSchema,
+  desktopMarketDataAcquisitionCatalogSchema,
   desktopMarketDataAcquisitionDiscardResultSchema,
+  desktopMarketDataAcquisitionInstrumentCatalogSchema,
   desktopMarketDataAcquisitionJobCreateRequestSchema,
+  desktopMarketDataAcquisitionJobListSchema,
   desktopMarketDataAcquisitionJobSchema,
+  desktopMarketDataAcquisitionMarketJobCreateRequestSchema,
+  desktopMarketDataAcquisitionMarketJobSchema,
 } from "./market-data-acquisition.js";
 import {
   desktopWorkspaceIdSchema,
@@ -340,9 +345,16 @@ export const DESKTOP_LOCAL_RESPONSE_SCHEMAS = {
   "/api/v1/training/special/stats/summary": desktopSpecialTrainingStatsSummarySchema,
   "/api/v1/training/special/stats/details/:projectId": desktopSpecialTrainingStatsProjectDetailSchema,
   "/api/v1/data-sources/acquisition-connectors": desktopMarketDataAcquisitionConnectorCatalogSchema,
+  "/api/v1/data-sources/acquisition-catalog": desktopMarketDataAcquisitionCatalogSchema,
+  "/api/v1/data-sources/acquisition-markets/:marketId/instruments": desktopMarketDataAcquisitionInstrumentCatalogSchema,
   "/api/v1/data-sources/acquisition-connectors/ccxt/markets": desktopCcxtAcquisitionMarketCatalogSchema,
   "/api/v1/data-sources/acquisition-connectors/akshare/instruments": desktopAkshareAcquisitionInstrumentCatalogSchema,
   "/api/v1/data-sources/acquisition-jobs": desktopMarketDataAcquisitionJobSchema,
+  "/api/v1/data-sources/acquisition-market-jobs": desktopMarketDataAcquisitionJobListSchema
+    .or(desktopMarketDataAcquisitionMarketJobSchema),
+  "/api/v1/data-sources/acquisition-market-jobs/:jobId": desktopMarketDataAcquisitionMarketJobSchema
+    .or(desktopMarketDataAcquisitionDiscardResultSchema),
+  "/api/v1/data-sources/acquisition-market-jobs/:jobId/cancel": desktopMarketDataAcquisitionMarketJobSchema,
   "/api/v1/data-sources/acquisition-jobs/:jobId": desktopMarketDataAcquisitionJobSchema
     .or(desktopMarketDataAcquisitionDiscardResultSchema),
   "/api/v1/data-sources/acquisition-jobs/:jobId/cancel": desktopMarketDataAcquisitionJobSchema,
@@ -412,6 +424,7 @@ export const DESKTOP_LOCAL_REQUEST_SCHEMAS = {
   "/api/v1/training/special/bank-editor/read-model": desktopSpecialTrainingBankEditorReadModelRequestSchema,
   "/api/v1/training/special/question-bank/reset": desktopSpecialTrainingQuestionBankResetRequestSchema,
   "/api/v1/data-sources/acquisition-jobs": desktopMarketDataAcquisitionJobCreateRequestSchema,
+  "/api/v1/data-sources/acquisition-market-jobs": desktopMarketDataAcquisitionMarketJobCreateRequestSchema,
   "/api/v1/data-sources/import/from-paths": desktopLocalDataImportByPathRequestSchema,
   "/api/v1/data-sources/import/preview/from-path": desktopLocalDataImportPreviewByPathRequestSchema,
   "/api/v1/data-sources/import/preview/discard": desktopLocalDataImportPreviewDiscardRequestSchema,

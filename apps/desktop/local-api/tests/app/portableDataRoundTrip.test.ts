@@ -1419,7 +1419,7 @@ test('portable export/import restores market data and binds replay to imported i
       legalConfirmedForMarketData: true,
     }),
     (error: unknown): boolean => {
-      assert.match(String(error), /CHECK constraint failed|constraint/i);
+      assert.match(String(error), /PORTABLE_DATA_IMPORT_INVALID|constraint/i);
       return true;
     },
   );
@@ -2079,7 +2079,7 @@ test('portable market import cleans written rows when a later selected domain fa
       legalConfirmedForMarketData: true,
     }),
     (error: unknown): boolean => {
-      assert.match(String(error), /CHECK constraint failed|constraint/i);
+      assert.match(String(error), /PORTABLE_DATA_IMPORT_INVALID|constraint/i);
       return true;
     },
   );

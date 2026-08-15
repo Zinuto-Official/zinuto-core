@@ -8,6 +8,7 @@ import {
   optionalBookmarkSchema,
   optionalIdSchema,
   optionalNameSchema,
+  optionalSamplePoolNameSchema,
   symbolSchema,
   timeZoneSchema,
   tokenSchema,
@@ -179,7 +180,7 @@ export const localDataImportDraftValidationSchema = z.object({
               previewPlanId: idSchema,
               targetSourceId: trimmedString(INPUT_LIMITS.idChars).optional(),
               sourceTouched: z.boolean().optional(),
-              poolName: optionalNameSchema,
+              poolName: optionalSamplePoolNameSchema,
               nameTouched: z.boolean().optional(),
             })
             .strict(),

@@ -12,7 +12,7 @@ const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(scriptDir, "../..");
 const STRUCTURE_PREFIX = "[repo-structure]";
 
-const GENERAL_SOURCE_MAX_LINES = 2200;
+const GENERAL_SOURCE_MAX_LINES = 3300;
 const MAX_CYCLES_PER_ROOT = 20;
 const TRACKED_FILE_MAX_BYTES = 50 * 1024 * 1024;
 

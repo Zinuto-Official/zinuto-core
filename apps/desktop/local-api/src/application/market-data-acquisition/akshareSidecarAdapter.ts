@@ -1,10 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 import { randomUUID } from 'node:crypto';
-import fs from 'node:fs';
 import path from 'node:path';
-import { spawn } from 'node:child_process';
-import type { ChildProcess } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { z } from 'zod';
 
@@ -13,17 +10,22 @@ import {
   throwIfAcquisitionCanceled,
   type AcquisitionConnectorAdapter,
   type AcquisitionFetchInput,
+  type AkshareFetchResult,
   type CanonicalMarketBar,
 } from './marketDataAcquisitionTypes.js';
+import {
+  executePythonSidecar,
+  resolvePythonSidecarLaunchSpec,
+  type PythonSidecarLaunchSpec,
+} from './pythonSidecarRuntime.js';
+import {
+  AKSHARE_VERSION,
+  AKTOOLS_VERSION,
+} from './marketDataConnectorVersions.generated.js';
 
 export const AKSHARE_SIDECAR_PROTOCOL = 'zinuto.akshare.v1';
-export const AKTOOLS_VERSION = '0.0.91';
-export const AKSHARE_VERSION = '1.18.91';
+export { AKTOOLS_VERSION, AKSHARE_VERSION };
 
-const RESPONSE_LIMIT_BYTES = 128 * 1024 * 1024;
-const WORKER_TIMEOUT_MS = 120_000;
-const WORKER_TERMINATION_GRACE_MS = 1_000;
-const WORKER_SETTLEMENT_DEADLINE_MS = 3_000;
 const RETRY_DELAYS_MS = [750, 2_000, 5_000] as const;
 const backendDir = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -32,11 +34,7 @@ const backendDir = path.resolve(
 const repositoryDir = path.resolve(backendDir, '../../..');
 const sidecarProjectDir = path.join(backendDir, 'sidecars', 'akshare');
 
-export type AkshareSidecarLaunchSpec = {
-  command: string;
-  args: string[];
-  source: 'TRUSTED_NATIVE' | 'EXPLICIT' | 'GENERATED' | 'DEV_PYTHON';
-};
+export type AkshareSidecarLaunchSpec = PythonSidecarLaunchSpec;
 
 export type AkshareAcquisitionInstrument = {
   symbol: string;
@@ -47,95 +45,32 @@ export type AkshareAcquisitionInstrument = {
 
 export type AkshareAcquisitionAdapter = AcquisitionConnectorAdapter & {
   readonly id: 'akshare';
+  fetchSymbolWithProvenance?(
+    input: AcquisitionFetchInput,
+  ): Promise<AkshareFetchResult>;
   listInstruments(
     signal?: AbortSignal,
   ): Promise<AkshareAcquisitionInstrument[]>;
 };
 
-const executableName = (): string =>
-  process.platform === 'win32'
-    ? 'zinuto-akshare-sidecar.exe'
-    : 'zinuto-akshare-sidecar';
-
-const isRegularFile = (filePath: string): boolean => {
-  try {
-    const metadata = fs.lstatSync(filePath);
-    return !metadata.isSymbolicLink() && metadata.isFile();
-  } catch {
-    return false;
-  }
-};
-
-const isExecutableFile = (filePath: string): boolean => {
-  try {
-    const metadata = fs.lstatSync(filePath);
-    return (
-      !metadata.isSymbolicLink() &&
-      metadata.isFile() &&
-      (process.platform === 'win32' || (metadata.mode & 0o111) !== 0)
-    );
-  } catch {
-    return false;
-  }
-};
-
 export const resolveAkshareSidecarLaunchSpec = (
   env: NodeJS.ProcessEnv = process.env,
 ): AkshareSidecarLaunchSpec | null => {
-  if (env.NODE_ENV === 'production') {
-    const trustedNativePath = String(
-      env.ZINUTO_AKSHARE_TRUSTED_SIDECAR_PATH ?? '',
-    ).trim();
-    if (
-      trustedNativePath &&
-      isExecutableFile(path.resolve(trustedNativePath))
-    ) {
-      return {
-        command: path.resolve(trustedNativePath),
-        args: [],
-        source: 'TRUSTED_NATIVE',
-      };
-    }
-    return null;
-  }
-
-  const explicitPath = String(env.ZINUTO_AKSHARE_SIDECAR_PATH ?? '').trim();
-  if (explicitPath && isExecutableFile(path.resolve(explicitPath))) {
-    return {
-      command: path.resolve(explicitPath),
-      args: [],
-      source: 'EXPLICIT',
-    };
-  }
-
-  const generatedPath = path.join(
-    repositoryDir,
-    'apps',
-    'desktop',
-    'shell',
-    'gen',
-    'market-data-acquisition',
-    'akshare-sidecar',
-    `${process.platform}-${process.arch}`,
-    executableName(),
-  );
-  if (isExecutableFile(generatedPath)) {
-    return { command: generatedPath, args: [], source: 'GENERATED' };
-  }
-
-  const pythonPath =
-    process.platform === 'win32'
-      ? path.join(sidecarProjectDir, '.venv', 'Scripts', 'python.exe')
-      : path.join(sidecarProjectDir, '.venv', 'bin', 'python');
-  const workerPath = path.join(sidecarProjectDir, 'main.py');
-  if (isExecutableFile(pythonPath) && isRegularFile(workerPath)) {
-    return {
-      command: pythonPath,
-      args: [workerPath],
-      source: 'DEV_PYTHON',
-    };
-  }
-  return null;
+  return resolvePythonSidecarLaunchSpec({
+    sidecarDirectory: sidecarProjectDir,
+    generatedRoot: path.join(
+      repositoryDir,
+      'apps',
+      'desktop',
+      'shell',
+      'gen',
+    ),
+    bundleDirectoryName: 'akshare-sidecar',
+    executableBaseName: 'zinuto-akshare-sidecar',
+    explicitPathEnvName: 'ZINUTO_AKSHARE_SIDECAR_PATH',
+    trustedPathEnvName: 'ZINUTO_AKSHARE_TRUSTED_SIDECAR_PATH',
+    env,
+  });
 };
 
 const canonicalBarSchema = z
@@ -169,6 +104,7 @@ const barsSuccessResponseSchema = z
     ok: z.literal(true),
     runtime: runtimeSchema,
     kind: z.literal('bars'),
+    upstreamId: z.enum(['eastmoney', 'tencent', 'sina']).optional(),
     rows: z.array(canonicalBarSchema).max(250_000),
   })
   .strict();
@@ -262,10 +198,10 @@ const sanitizeErrorArgs = (
     ),
   );
 
-export const parseAkshareSidecarResponse = (
+export const parseAkshareSidecarResponseWithProvenance = (
   raw: string,
   requestId: string,
-): CanonicalMarketBar[] => {
+): AkshareFetchResult => {
   let parsed: unknown;
   try {
     parsed = JSON.parse(raw);
@@ -277,7 +213,12 @@ export const parseAkshareSidecarResponse = (
     if (success.data.requestId !== requestId) {
       throw new AcquisitionRuntimeError('AKSHARE_SIDECAR_RESPONSE_MISMATCH');
     }
-    return success.data.rows;
+    return {
+      rows: success.data.rows,
+      // Older frozen v1 workers did not emit this optional additive field.
+      // Treat that historical response as the original Eastmoney primary.
+      upstreamId: success.data.upstreamId ?? 'eastmoney',
+    };
   }
   const failure = errorResponseSchema.safeParse(parsed);
   if (!failure.success || failure.data.requestId !== requestId) {
@@ -288,6 +229,12 @@ export const parseAkshareSidecarResponse = (
     sanitizeErrorArgs(failure.data.error.args),
   );
 };
+
+export const parseAkshareSidecarResponse = (
+  raw: string,
+  requestId: string,
+): CanonicalMarketBar[] =>
+  parseAkshareSidecarResponseWithProvenance(raw, requestId).rows;
 
 export const parseAkshareInstrumentCatalogResponse = (
   raw: string,
@@ -320,34 +267,14 @@ type AkshareSidecarRequest =
   | ReturnType<typeof buildAkshareSidecarRequest>
   | ReturnType<typeof buildAkshareInstrumentCatalogRequest>;
 
-const workerEnvironment = (env: NodeJS.ProcessEnv): NodeJS.ProcessEnv => {
-  const allowedNames = [
-    'SYSTEMROOT',
-    'WINDIR',
-    'PATH',
-    'LANG',
-    'LC_ALL',
-    'SSL_CERT_FILE',
-    'SSL_CERT_DIR',
-    'HTTP_PROXY',
-    'HTTPS_PROXY',
-    'NO_PROXY',
-  ] as const;
-  return Object.fromEntries(
-    allowedNames.flatMap((name) =>
-      typeof env[name] === 'string' ? [[name, env[name]]] : [],
-    ),
-  );
-};
-
 export const executeAkshareSidecar = async ({
   launchSpec,
   request,
   signal,
-  responseLimitBytes = RESPONSE_LIMIT_BYTES,
-  workerTimeoutMs = WORKER_TIMEOUT_MS,
-  terminationGraceMs = WORKER_TERMINATION_GRACE_MS,
-  settlementDeadlineMs = WORKER_SETTLEMENT_DEADLINE_MS,
+  responseLimitBytes,
+  workerTimeoutMs,
+  terminationGraceMs,
+  settlementDeadlineMs,
 }: {
   launchSpec: AkshareSidecarLaunchSpec;
   request: AkshareSidecarRequest;
@@ -356,166 +283,19 @@ export const executeAkshareSidecar = async ({
   workerTimeoutMs?: number;
   terminationGraceMs?: number;
   settlementDeadlineMs?: number;
-}): Promise<string> => {
-  throwIfAcquisitionCanceled(signal);
-  const child = spawn(launchSpec.command, launchSpec.args, {
-    shell: false,
-    windowsHide: true,
-    detached: process.platform !== 'win32',
-    stdio: ['pipe', 'pipe', 'pipe'],
-    env: workerEnvironment(process.env),
+}): Promise<string> =>
+  executePythonSidecar({
+    launchSpec,
+    request,
+    signal,
+    startFailureCode: 'AKSHARE_SIDECAR_START_FAILED',
+    timeoutCode: 'AKSHARE_SIDECAR_TIMEOUT',
+    responseTooLargeCode: 'AKSHARE_SIDECAR_RESPONSE_TOO_LARGE',
+    responseLimitBytes,
+    workerTimeoutMs,
+    terminationGraceMs,
+    settlementDeadlineMs,
   });
-  const stdout: Buffer[] = [];
-  let stdoutBytes = 0;
-  let settled = false;
-  let terminationReason:
-    | 'CANCELED'
-    | 'RESPONSE_TOO_LARGE'
-    | 'TIMEOUT'
-    | null = null;
-  let forceKillTimer: ReturnType<typeof setTimeout> | undefined;
-  let settlementTimer: ReturnType<typeof setTimeout> | undefined;
-
-  const signalChildTree = (target: ChildProcess, signalName: NodeJS.Signals) => {
-    if (!target.pid) {
-      return;
-    }
-    if (process.platform !== 'win32') {
-      try {
-        process.kill(-target.pid, signalName);
-        return;
-      } catch {
-        // The child may have exited between the liveness check and the signal.
-      }
-    }
-    try {
-      target.kill(signalName);
-    } catch {
-      // A later close/error event or the independent deadline settles the call.
-    }
-  };
-
-  const forceKillChildTree = (target: ChildProcess): void => {
-    if (process.platform === 'win32' && target.pid) {
-      const killer = spawn(
-        'taskkill.exe',
-        ['/PID', String(target.pid), '/T', '/F'],
-        {
-          shell: false,
-          windowsHide: true,
-          stdio: 'ignore',
-          env: workerEnvironment(process.env),
-        },
-      );
-      killer.once('error', () => {
-        signalChildTree(target, 'SIGKILL');
-      });
-      killer.unref();
-      return;
-    }
-    signalChildTree(target, 'SIGKILL');
-  };
-
-  let rejectForDeadline: (() => void) | null = null;
-  const terminate = (
-    reason: Exclude<typeof terminationReason, null>,
-  ): void => {
-    if (terminationReason === null) {
-      terminationReason = reason;
-    }
-    child.stdin.destroy();
-    signalChildTree(child, 'SIGTERM');
-    if (forceKillTimer === undefined) {
-      forceKillTimer = setTimeout(() => {
-        forceKillChildTree(child);
-      }, Math.max(0, Math.floor(terminationGraceMs)));
-      forceKillTimer.unref?.();
-    }
-    if (settlementTimer === undefined) {
-      settlementTimer = setTimeout(
-        () => rejectForDeadline?.(),
-        Math.max(1, Math.floor(terminationGraceMs + settlementDeadlineMs)),
-      );
-      settlementTimer.unref?.();
-    }
-  };
-  const cancel = () => terminate('CANCELED');
-  signal.addEventListener('abort', cancel, { once: true });
-  const timeout = setTimeout(() => {
-    terminate('TIMEOUT');
-  }, Math.max(1, Math.floor(workerTimeoutMs)));
-  timeout.unref?.();
-  child.stdout.on('data', (chunk: Buffer) => {
-    stdoutBytes += chunk.length;
-    if (stdoutBytes > responseLimitBytes) {
-      terminate('RESPONSE_TOO_LARGE');
-      return;
-    }
-    stdout.push(chunk);
-  });
-  child.stderr.resume();
-  try {
-    return await new Promise<string>((resolve, reject) => {
-      const rejectForTerminationReason = (): void => {
-        switch (terminationReason) {
-          case 'CANCELED':
-            reject(new AcquisitionRuntimeError('ACQUISITION_CANCELED'));
-            return;
-          case 'RESPONSE_TOO_LARGE':
-            reject(
-              new AcquisitionRuntimeError('AKSHARE_SIDECAR_RESPONSE_TOO_LARGE'),
-            );
-            return;
-          case 'TIMEOUT':
-            reject(new AcquisitionRuntimeError('AKSHARE_SIDECAR_TIMEOUT'));
-            return;
-          default:
-            reject(new AcquisitionRuntimeError('AKSHARE_SIDECAR_START_FAILED'));
-        }
-      };
-      rejectForDeadline = () => {
-        if (settled) return;
-        settled = true;
-        child.stdout.destroy();
-        child.stderr.destroy();
-        forceKillChildTree(child);
-        rejectForTerminationReason();
-      };
-      child.once('error', (error) => {
-        if (settled) return;
-        settled = true;
-        reject(
-          new AcquisitionRuntimeError('AKSHARE_SIDECAR_START_FAILED', {
-            upstreamErrorType: error.name,
-          }),
-        );
-      });
-      child.once('close', () => {
-        if (settled) return;
-        settled = true;
-        if (terminationReason !== null) {
-          rejectForTerminationReason();
-          return;
-        }
-        resolve(Buffer.concat(stdout).toString('utf8').trim());
-      });
-      child.stdin.end(`${JSON.stringify(request)}\n`, 'utf8');
-    });
-  } finally {
-    clearTimeout(timeout);
-    if (forceKillTimer !== undefined) {
-      clearTimeout(forceKillTimer);
-    }
-    if (settlementTimer !== undefined) {
-      clearTimeout(settlementTimer);
-    }
-    rejectForDeadline = null;
-    signal.removeEventListener('abort', cancel);
-    child.stdin.destroy();
-    child.stdout.destroy();
-    child.stderr.destroy();
-  }
-};
 
 const waitForRetry = async (
   delayMs: number,
@@ -548,7 +328,44 @@ export const createAkshareSidecarAdapter = ({
   execute?: typeof executeAkshareSidecar;
   retryDelaysMs?: readonly number[];
   wait?: (delayMs: number, signal: AbortSignal) => Promise<void>;
-} = {}): AkshareAcquisitionAdapter => ({
+} = {}): AkshareAcquisitionAdapter => {
+  const fetchSymbolWithProvenance = async (
+    input: AcquisitionFetchInput,
+  ): Promise<AkshareFetchResult> => {
+    const launchSpec = resolveLaunchSpec();
+    if (!launchSpec) {
+      throw new AcquisitionRuntimeError('AKSHARE_RUNTIME_UNAVAILABLE');
+    }
+    const request = buildAkshareSidecarRequest(input);
+    for (let attempt = 0; attempt <= retryDelaysMs.length; attempt += 1) {
+      const response = await execute({
+        launchSpec,
+        request,
+        signal: input.signal,
+      });
+      try {
+        return parseAkshareSidecarResponseWithProvenance(
+          response,
+          request.requestId,
+        );
+      } catch (error) {
+        if (
+          !(error instanceof AcquisitionRuntimeError) ||
+          error.code !== 'AKSHARE_UPSTREAM_RETRYABLE' ||
+          attempt === retryDelaysMs.length
+        ) {
+          throw error;
+        }
+        const retryAfterMs = retryDelaysMs[attempt]!;
+        input.onRetryWait?.({ attempt: attempt + 1, retryAfterMs });
+        await wait(retryAfterMs, input.signal);
+        input.onRetryResume?.();
+      }
+    }
+    throw new AcquisitionRuntimeError('AKSHARE_UPSTREAM_FAILED');
+  };
+
+  return {
   id: 'akshare',
   isAvailable: () => resolveLaunchSpec() !== null,
   async listInstruments(
@@ -579,36 +396,9 @@ export const createAkshareSidecarAdapter = ({
     }
     throw new AcquisitionRuntimeError('AKSHARE_UPSTREAM_FAILED');
   },
-  async fetchSymbol(
-    input: AcquisitionFetchInput,
-  ): Promise<CanonicalMarketBar[]> {
-    const launchSpec = resolveLaunchSpec();
-    if (!launchSpec) {
-      throw new AcquisitionRuntimeError('AKSHARE_RUNTIME_UNAVAILABLE');
-    }
-    const request = buildAkshareSidecarRequest(input);
-    for (let attempt = 0; attempt <= retryDelaysMs.length; attempt += 1) {
-      const response = await execute({
-        launchSpec,
-        request,
-        signal: input.signal,
-      });
-      try {
-        return parseAkshareSidecarResponse(response, request.requestId);
-      } catch (error) {
-        if (
-          !(error instanceof AcquisitionRuntimeError) ||
-          error.code !== 'AKSHARE_UPSTREAM_RETRYABLE' ||
-          attempt === retryDelaysMs.length
-        ) {
-          throw error;
-        }
-        const retryAfterMs = retryDelaysMs[attempt]!;
-        input.onRetryWait?.({ attempt: attempt + 1, retryAfterMs });
-        await wait(retryAfterMs, input.signal);
-        input.onRetryResume?.();
-      }
-    }
-    throw new AcquisitionRuntimeError('AKSHARE_UPSTREAM_FAILED');
+  fetchSymbolWithProvenance,
+  async fetchSymbol(input: AcquisitionFetchInput): Promise<CanonicalMarketBar[]> {
+    return (await fetchSymbolWithProvenance(input)).rows;
   },
-});
+  };
+};

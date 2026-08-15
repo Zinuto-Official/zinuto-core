@@ -5,10 +5,11 @@ an inventory, not a substitute for the license texts shipped by each package.
 The source distribution retains dependency license files through the normal
 package, Cargo, and Python registries.
 
-- Snapshot SHA-256: `06e4f43590aebacbe52b7a7516f51edaa185da0fbc5510d3769532c8c261339f`
-- Components: 1238
-- Python sidecar lock SHA-256: `98f766385e00fa5bd8d5f0c0e8ed7e5eae13f83f003e45554a4b1880bd38c7b8`
-- Python sidecar build: CPython 3.11.15, uv 0.11.8
+- Snapshot SHA-256: `ea92df7c097cafcb06c5cea497b3d6782905ffc29ef1cc8d9e0f557b96f2f94d`
+- Components: 1236
+- AKShare sidecar lock SHA-256: `98f766385e00fa5bd8d5f0c0e8ed7e5eae13f83f003e45554a4b1880bd38c7b8`
+- FinanceDataReader sidecar lock SHA-256: `2683a9389e744f96445559509abb0981e661a6a1f4b7b367d0f3544c96178aee`
+- Python sidecar builds: CPython 3.11.15, uv 0.11.8
 - Audit rule: missing, proprietary, unlicensed, `SEE LICENSE`, and
   `LicenseRef` declarations fail generation.
 
@@ -22,6 +23,7 @@ market data returned by a third-party provider.
 | AKTools | 0.0.91 | MIT | [Project](https://github.com/akfamily/aktools) |
 | AKShare | 1.18.91 | MIT | [Project](https://github.com/akfamily/akshare) |
 | CCXT | 4.5.73 | MIT | [Project](https://github.com/ccxt/ccxt) |
+| FinanceDataReader | 0.9.202 | MIT | [Project](https://github.com/FinanceData/FinanceDataReader) |
 
 ## Market-data provider terms (not software licenses)
 
@@ -33,8 +35,13 @@ authorization from the provider.
 | Data provider | Reviewed terms revision | Terms |
 | --- | --- | --- |
 | Eastmoney | eastmoney-terms-2025-07-18 | [Terms](https://about.eastmoney.com/home/protocol) |
+| Tencent Finance | tencent-terms-reviewed-2026-08-15 | [Terms](https://www.tencent.com/term-of-service/) |
+| Sina Finance | sina-finance-terms-reviewed-2026-08-15 | [Terms](https://finance.sina.com.cn/roll/2021-05-12/doc-ikmxzfmm2033220.shtml) |
 | Binance | binance-terms-reviewed-2026-07-19 | [Terms](https://www.binance.com/en/terms) |
 | OKX | okx-terms-2026-04-21 | [Terms](https://www.okx.com/help/terms-of-service) |
+| Yahoo Finance | finance-datareader-upstream-review-2026-08-14 | [Terms](https://finance.yahoo.com/legal/terms.html) |
+| Naver Finance | finance-datareader-upstream-review-2026-08-14 | [Terms](https://policy.naver.com/rules/service.html) |
+| Investing.com | finance-datareader-upstream-review-2026-08-14 | [Terms](https://www.investing.com/about-us/terms-and-conditions) |
 
 ## Dependency inventory
 
@@ -855,7 +862,6 @@ authorization from the provider.
 | npm | @types/http-errors | 2.0.5 | MIT |  | development |
 | npm | @types/istanbul-lib-coverage | 2.0.6 | MIT |  | development |
 | npm | @types/node | 24.13.3 | MIT |  | development |
-| npm | @types/node | 24.13.3 | MIT |  | development |
 | npm | @types/node | 25.6.0 | MIT |  | development |
 | npm | @types/pako | 2.0.4 | MIT |  | runtime |
 | npm | @types/qs | 6.15.0 | MIT |  | development |
@@ -870,7 +876,6 @@ authorization from the provider.
 | npm | @xmldom/xmldom | 0.9.10 | MIT |  | runtime |
 | npm | abort-controller | 3.0.0 | MIT |  | development |
 | npm | accepts | 2.0.0 | MIT |  | runtime |
-| npm | ansi-regex | 5.0.1 | MIT |  | development |
 | npm | ansi-regex | 5.0.1 | MIT |  | development |
 | npm | ansi-styles | 4.3.0 | MIT |  | development |
 | npm | any-promise | 1.3.0 | MIT |  | development |
@@ -924,7 +929,6 @@ authorization from the provider.
 | npm | compress-commons | 7.0.0 | MIT |  | development |
 | npm | content-disposition | 1.1.0 | MIT |  | runtime |
 | npm | content-type | 1.0.5 | MIT |  | runtime |
-| npm | content-type | 2.0.0 | MIT |  | runtime |
 | npm | content-type | 2.0.0 | MIT |  | runtime |
 | npm | convert-source-map | 2.0.0 | MIT |  | development |
 | npm | cookie-signature | 1.2.2 | MIT |  | runtime |
@@ -991,7 +995,6 @@ authorization from the provider.
 | npm | get-nonce | 1.0.1 | MIT |  | runtime |
 | npm | get-proto | 1.0.1 | MIT |  | runtime |
 | npm | github-from-package | 0.0.0 | MIT |  | runtime |
-| npm | glob-parent | 5.1.2 | ISC |  | development |
 | npm | glob-parent | 5.1.2 | ISC |  | development |
 | npm | glob-parent | 6.0.2 | ISC |  | development |
 | npm | glob | 13.0.6 | BlueOak-1.0.0 |  | development |
@@ -1081,8 +1084,6 @@ authorization from the provider.
 | npm | performance-now | 2.1.0 | MIT |  | runtime |
 | npm | picocolors | 1.1.1 | ISC |  | development |
 | npm | picomatch | 2.3.2 | MIT |  | development |
-| npm | picomatch | 2.3.2 | MIT |  | development |
-| npm | picomatch | 2.3.2 | MIT |  | development |
 | npm | picomatch | 4.0.4 | MIT |  | development |
 | npm | pify | 2.3.0 | MIT |  | development |
 | npm | pirates | 4.0.7 | MIT |  | development |
@@ -1092,7 +1093,6 @@ authorization from the provider.
 | npm | postcss-js | 4.1.0 | MIT |  | development |
 | npm | postcss-load-config | 6.0.1 | MIT |  | development |
 | npm | postcss-nested | 6.2.0 | MIT |  | development |
-| npm | postcss-selector-parser | 6.1.2 | MIT |  | development |
 | npm | postcss-selector-parser | 6.1.2 | MIT |  | development |
 | npm | postcss-value-parser | 4.2.0 | MIT |  | development |
 | npm | postcss | 8.5.25 | MIT |  | development |
@@ -1117,9 +1117,6 @@ authorization from the provider.
 | npm | read-excel-file | 9.0.9 | MIT |  | runtime |
 | npm | readable-stream | 2.3.8 | MIT |  | runtime |
 | npm | readable-stream | 3.6.2 | MIT |  | runtime |
-| npm | readable-stream | 4.7.0 | MIT |  | development |
-| npm | readable-stream | 4.7.0 | MIT |  | development |
-| npm | readable-stream | 4.7.0 | MIT |  | development |
 | npm | readable-stream | 4.7.0 | MIT |  | development |
 | npm | readdir-glob | 3.0.0 | Apache-2.0 |  | development |
 | npm | readdirp | 3.6.0 | MIT |  | development |
@@ -1157,7 +1154,6 @@ authorization from the provider.
 | npm | string_decoder | 1.3.0 | MIT |  | runtime |
 | npm | string-width | 4.2.3 | MIT |  | development |
 | npm | strip-ansi | 6.0.1 | MIT |  | development |
-| npm | strip-ansi | 6.0.1 | MIT |  | development |
 | npm | strip-json-comments | 2.0.1 | MIT |  | runtime |
 | npm | style-mod | 4.1.3 | MIT |  | runtime |
 | npm | sucrase | 3.35.1 | MIT |  | development |
@@ -1181,13 +1177,11 @@ authorization from the provider.
 | npm | toidentifier | 1.0.1 | MIT |  | runtime |
 | npm | ts-interface-checker | 0.1.13 | Apache-2.0 |  | development |
 | npm | tslib | 2.3.0 | 0BSD |  | runtime |
-| npm | tslib | 2.3.0 | 0BSD |  | runtime |
 | npm | tslib | 2.8.1 | 0BSD |  | runtime |
 | npm | tsx | 4.23.1 | MIT |  | development |
 | npm | tunnel-agent | 0.6.0 | Apache-2.0 |  | runtime |
 | npm | type-is | 2.1.0 | MIT |  | runtime |
 | npm | typescript | 5.9.3 | Apache-2.0 |  | development |
-| npm | undici-types | 7.18.2 | MIT |  | development |
 | npm | undici-types | 7.18.2 | MIT |  | development |
 | npm | undici-types | 7.19.2 | MIT |  | development |
 | npm | undici | 7.29.0 | MIT |  | runtime |
@@ -1226,14 +1220,17 @@ authorization from the provider.
 | pypi | anyio | 4.14.2 | MIT | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/anyio/4.14.2/ | sidecar-lock |
 | pypi | beautifulsoup4 | 4.15.0 | MIT | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/beautifulsoup4/4.15.0/ | sidecar-lock |
 | pypi | certifi | 2026.6.17 | MPL-2.0 | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/certifi/2026.6.17/ | sidecar-lock |
+| pypi | certifi | 2026.7.22 | MPL-2.0 | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/certifi/2026.7.22/ | sidecar-lock |
 | pypi | cffi | 2.1.0 | MIT-0 | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/cffi/2.1.0/ | sidecar-lock |
 | pypi | charset-normalizer | 3.4.9 | MIT | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/charset-normalizer/3.4.9/ | sidecar-lock |
+| pypi | charset-normalizer | 3.5.0 | MIT | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/charset-normalizer/3.5.0/ | sidecar-lock |
 | pypi | click | 8.4.2 | BSD-3-Clause | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/click/8.4.2/ | sidecar-lock |
 | pypi | colorama | 0.4.6 | BSD-3-Clause | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/colorama/0.4.6/ | platform-conditional-sidecar-lock |
 | pypi | curl-cffi | 0.15.0 | MIT | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/curl-cffi/0.15.0/ | sidecar-lock |
 | pypi | decorator | 5.3.1 | BSD-2-Clause | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/decorator/5.3.1/ | sidecar-lock |
 | pypi | et-xmlfile | 2.0.0 | MIT | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/et-xmlfile/2.0.0/ | sidecar-lock |
 | pypi | fastapi | 0.139.2 | MIT | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/fastapi/0.139.2/ | sidecar-lock |
+| pypi | finance-datareader | 0.9.202 | MIT | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/finance-datareader/0.9.202/ | sidecar-lock |
 | pypi | h11 | 0.16.0 | MIT | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/h11/0.16.0/ | sidecar-lock |
 | pypi | html5lib | 1.1 | MIT | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/html5lib/1.1/ | sidecar-lock |
 | pypi | idna | 3.18 | BSD-3-Clause | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/idna/3.18/ | sidecar-lock |
@@ -1245,11 +1242,15 @@ authorization from the provider.
 | pypi | markupsafe | 3.0.3 | BSD-3-Clause | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/markupsafe/3.0.3/ | sidecar-lock |
 | pypi | mdurl | 0.1.2 | MIT | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/mdurl/0.1.2/ | sidecar-lock |
 | pypi | mini-racer | 0.14.1 | ISC | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/mini-racer/0.14.1/ | platform-conditional-sidecar-lock |
+| pypi | narwhals | 2.24.0 | MIT | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/narwhals/2.24.0/ | sidecar-lock |
 | pypi | numpy | 2.4.6 | BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0 | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/numpy/2.4.6/ | sidecar-lock |
 | pypi | openpyxl | 3.1.5 | MIT | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/openpyxl/3.1.5/ | sidecar-lock |
 | pypi | packaging | 26.2 | Apache-2.0 OR BSD-2-Clause | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/packaging/26.2/ | sidecar-lock |
+| pypi | packaging | 26.3 | Apache-2.0 OR BSD-2-Clause | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/packaging/26.3/ | sidecar-lock |
 | pypi | pandas | 3.0.3 | BSD-3-Clause | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/pandas/3.0.3/ | sidecar-lock |
+| pypi | pandas | 3.0.5 | BSD-3-Clause | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/pandas/3.0.5/ | sidecar-lock |
 | pypi | pefile | 2023.2.7 | MIT | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/pefile/2023.2.7/ | platform-conditional-sidecar-lock |
+| pypi | plotly | 6.9.0 | MIT | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/plotly/6.9.0/ | sidecar-lock |
 | pypi | py-mini-racer | 0.6.0 | ISC | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/py-mini-racer/0.6.0/ | platform-conditional-sidecar-lock |
 | pypi | pycparser | 3.0 | BSD-3-Clause | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/pycparser/3.0/ | sidecar-lock |
 | pypi | pydantic-core | 2.46.4 | MIT | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/pydantic-core/2.46.4/ | sidecar-lock |
@@ -1260,15 +1261,19 @@ authorization from the provider.
 | pypi | python-dateutil | 2.9.0.post0 | BSD-3-Clause OR Apache-2.0 | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/python-dateutil/2.9.0.post0/ | sidecar-lock |
 | pypi | python-multipart | 0.0.32 | Apache-2.0 | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/python-multipart/0.0.32/ | sidecar-lock |
 | pypi | pywin32-ctypes | 0.2.3 | BSD-3-Clause | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/pywin32-ctypes/0.2.3/ | platform-conditional-sidecar-lock |
+| pypi | requests-file | 3.0.1 | Apache-2.0 | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/requests-file/3.0.1/ | sidecar-lock |
 | pypi | requests | 2.34.2 | Apache-2.0 | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/requests/2.34.2/ | sidecar-lock |
 | pypi | rich | 15.0.0 | MIT | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/rich/15.0.0/ | sidecar-lock |
 | pypi | setuptools | 83.0.0 | MIT | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/setuptools/83.0.0/ | sidecar-lock |
+| pypi | setuptools | 84.0.0 | MIT | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/setuptools/84.0.0/ | sidecar-lock |
 | pypi | shellingham | 1.5.4 | ISC | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/shellingham/1.5.4/ | sidecar-lock |
 | pypi | six | 1.17.0 | MIT | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/six/1.17.0/ | sidecar-lock |
 | pypi | soupsieve | 2.9 | MIT | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/soupsieve/2.9/ | sidecar-lock |
+| pypi | soupsieve | 2.9.2 | MIT | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/soupsieve/2.9.2/ | sidecar-lock |
 | pypi | starlette | 1.3.1 | BSD-3-Clause | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/starlette/1.3.1/ | sidecar-lock |
 | pypi | tabulate | 0.10.0 | MIT | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/tabulate/0.10.0/ | sidecar-lock |
 | pypi | tqdm | 4.69.0 | MPL-2.0 AND MIT | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/tqdm/4.69.0/ | sidecar-lock |
+| pypi | tqdm | 4.70.0 | MPL-2.0 AND MIT | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/tqdm/4.70.0/ | sidecar-lock |
 | pypi | typer | 0.27.0 | MIT | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/typer/0.27.0/ | sidecar-lock |
 | pypi | typing-extensions | 4.16.0 | PSF-2.0 | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/typing-extensions/4.16.0/ | sidecar-lock |
 | pypi | typing-inspection | 0.4.2 | MIT | Exact-release PyPI Core Metadata and bundled license files: https://pypi.org/project/typing-inspection/0.4.2/ | sidecar-lock |

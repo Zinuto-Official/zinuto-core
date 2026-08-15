@@ -185,11 +185,29 @@ const getRepairableCurrentSchemaDifferenceNames = (): string[] =>
     ({ name }) => `${name}:<definition-mismatch>`,
   );
 
+// Tables added after the first public release are safe to create on demand:
+// their DDL is additive, existing rows are untouched, and a missing table
+// cannot hide user data. This keeps the public repository free of any
+// historical schema migration matrix while existing installs still upgrade.
+const ADDITIVE_REPAIR_TABLES = ["local_data_acquisition_jobs"] as const;
+const ADDITIVE_REPAIR_INDEXES = [
+  {
+    table: "local_data_acquisition_jobs",
+    name: "idx_local_data_acquisition_jobs_updated",
+  },
+] as const;
+
 const isRepairableCurrentSchemaShape = (
   db: Database.Database,
   differences: string[],
 ): boolean => {
-  const expectedDifferences = new Set(getRepairableCurrentSchemaDifferenceNames());
+  const expectedDifferences = new Set([
+    ...getRepairableCurrentSchemaDifferenceNames(),
+    ...ADDITIVE_REPAIR_TABLES.map((name) => `${name}:<missing-table>`),
+    ...ADDITIVE_REPAIR_INDEXES.map(
+      ({ table, name }) => `${table}:<missing-index:${name}>`,
+    ),
+  ]);
   if (
     differences.length === 0 ||
     differences.some((difference) => !expectedDifferences.has(difference))
@@ -244,28 +262,32 @@ const createRecoverableBackup = (
   return backupPath;
 };
 
-const applyCurrentSchemaSamplePoolNameRepair = (db: Database.Database): void => {
+const applyCurrentSchemaRepair = (db: Database.Database): void => {
+  const differences = inspectCoreSchemaManifest(db, DB_SCHEMA_VERSION);
+  const driftedRepairTables = CURRENT_SCHEMA_REPAIR_TABLES.filter(
+    ({ name }) => differences.includes(`${name}:<definition-mismatch>`),
+  );
   const foreignKeysEnabled = Number(db.pragma("foreign_keys", { simple: true })) === 1;
   db.pragma("foreign_keys = OFF");
   try {
     db.transaction(() => {
-      for (const { name, temporaryName } of CURRENT_SCHEMA_REPAIR_TABLES) {
+      for (const { name, temporaryName } of driftedRepairTables) {
         db.exec(`CREATE TEMP TABLE ${temporaryName} AS SELECT * FROM ${name}`);
-      }
-      for (const { name } of CURRENT_SCHEMA_REPAIR_TABLES) {
         db.exec(`DROP TABLE ${name}`);
       }
+      // schemaSql is idempotent (IF NOT EXISTS) and also creates any missing
+      // additive tables such as local_data_acquisition_jobs.
       db.exec(schemaSql);
-      for (const { name, temporaryName } of CURRENT_SCHEMA_REPAIR_TABLES) {
+      for (const { name, temporaryName } of driftedRepairTables) {
         db.exec(`INSERT INTO ${name} SELECT * FROM ${temporaryName}`);
         db.exec(`DROP TABLE ${temporaryName}`);
       }
       if (inspectCoreSchemaManifest(db, DB_SCHEMA_VERSION).length > 0) {
-        throw new Error("CURRENT_SCHEMA_SAMPLE_POOL_NAME_REPAIR_INCOMPLETE");
+        throw new Error("CURRENT_SCHEMA_REPAIR_INCOMPLETE");
       }
       const foreignKeyViolations = db.pragma("foreign_key_check") as unknown[];
       if (foreignKeyViolations.length > 0) {
-        throw new Error("CURRENT_SCHEMA_SAMPLE_POOL_NAME_REPAIR_FOREIGN_KEY_FAILURE");
+        throw new Error("CURRENT_SCHEMA_REPAIR_FOREIGN_KEY_FAILURE");
       }
     })();
   } finally {
@@ -344,7 +366,7 @@ export const upgradeSupportedCoreSchema = (
     }
     assertCurrentSamplePoolNamesFit(db);
     backupPath = createRecoverableBackup(db, storageLayout);
-    applyCurrentSchemaSamplePoolNameRepair(db);
+    applyCurrentSchemaRepair(db);
     return result("UPGRADED", fromVersion, null, backupPath);
   } catch (error) {
     if (isInsufficientDiskSpaceError(error)) {

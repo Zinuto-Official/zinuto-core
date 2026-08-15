@@ -18,6 +18,11 @@ use super::{
     AKSHARE_TRUSTED_SIDECAR_PATH_ENV, BACKTEST_ENGINE_BIN_ENV, BACKTEST_NATIVE_BATCH_ENV,
 };
 
+const FINANCE_DATA_READER_TRUSTED_SIDECAR_PATH_ENV: &str =
+    "ZINUTO_FINANCEDATAREADER_TRUSTED_SIDECAR_PATH";
+const FINANCE_DATA_READER_DEVELOPMENT_SIDECAR_PATH_ENV: &str =
+    "ZINUTO_FINANCEDATAREADER_SIDECAR_PATH";
+
 #[cfg(windows)]
 const MARKET_DATA_HTTPS_PROXY_ENV: &str = "ZINUTO_MARKET_DATA_HTTPS_PROXY";
 
@@ -576,6 +581,68 @@ pub(super) fn configure_akshare_sidecar_env(cmd: &mut Command, app: &tauri::AppH
     }
 }
 
+fn finance_data_reader_sidecar_binary_name() -> &'static str {
+    if cfg!(windows) {
+        "zinuto-finance-datareader-sidecar.exe"
+    } else {
+        "zinuto-finance-datareader-sidecar"
+    }
+}
+
+fn is_regular_finance_data_reader_sidecar_executable(path: &Path) -> bool {
+    let metadata = match fs::symlink_metadata(path) {
+        Ok(value) if !value.file_type().is_symlink() && value.is_file() => value,
+        _ => return false,
+    };
+    #[cfg(unix)]
+    {
+        use std::os::unix::fs::PermissionsExt;
+        metadata.permissions().mode() & 0o111 != 0
+    }
+    #[cfg(not(unix))]
+    {
+        let _ = metadata;
+        true
+    }
+}
+
+fn resolve_finance_data_reader_sidecar_path(app: &tauri::AppHandle) -> Option<PathBuf> {
+    let target_id = akshare_sidecar_target_id()?;
+    let relative_path = Path::new("market-data-acquisition")
+        .join("finance-datareader-sidecar")
+        .join(target_id)
+        .join(finance_data_reader_sidecar_binary_name());
+    let mut candidates = Vec::new();
+    if let Ok(resource_dir) = app.path().resource_dir() {
+        candidates.push(resource_dir.join(&relative_path));
+    }
+    if cfg!(debug_assertions) {
+        candidates.push(
+            PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+                .join("gen")
+                .join(&relative_path),
+        );
+    }
+    candidates.into_iter().find_map(|candidate| {
+        if !is_regular_finance_data_reader_sidecar_executable(&candidate) {
+            return None;
+        }
+        fs::canonicalize(candidate).ok()
+    })
+}
+
+fn clear_inherited_finance_data_reader_sidecar_env(cmd: &mut Command) {
+    cmd.env_remove(FINANCE_DATA_READER_TRUSTED_SIDECAR_PATH_ENV)
+        .env_remove(FINANCE_DATA_READER_DEVELOPMENT_SIDECAR_PATH_ENV);
+}
+
+pub(super) fn configure_finance_data_reader_sidecar_env(cmd: &mut Command, app: &tauri::AppHandle) {
+    clear_inherited_finance_data_reader_sidecar_env(cmd);
+    if let Some(sidecar_path) = resolve_finance_data_reader_sidecar_path(app) {
+        cmd.env(FINANCE_DATA_READER_TRUSTED_SIDECAR_PATH_ENV, sidecar_path);
+    }
+}
+
 #[cfg(any(windows, test))]
 fn normalize_windows_system_proxy_endpoint(value: &str) -> Option<String> {
     let endpoint = value.trim();
@@ -824,7 +891,7 @@ mod tests {
     }
 
     #[test]
-    fn backend_command_removes_inherited_akshare_sidecar_overrides() {
+    fn backend_command_removes_inherited_market_data_sidecar_overrides() {
         let mut command = Command::new("zinuto-test-command");
         command
             .env(
@@ -834,9 +901,18 @@ mod tests {
             .env(
                 AKSHARE_DEVELOPMENT_SIDECAR_PATH_ENV,
                 "/tmp/untrusted-development",
+            )
+            .env(
+                FINANCE_DATA_READER_TRUSTED_SIDECAR_PATH_ENV,
+                "/tmp/untrusted-finance-datareader-production",
+            )
+            .env(
+                FINANCE_DATA_READER_DEVELOPMENT_SIDECAR_PATH_ENV,
+                "/tmp/untrusted-finance-datareader-development",
             );
 
         clear_inherited_akshare_sidecar_env(&mut command);
+        clear_inherited_finance_data_reader_sidecar_env(&mut command);
 
         let configured = command
             .get_envs()
@@ -845,6 +921,8 @@ mod tests {
         for key in [
             AKSHARE_TRUSTED_SIDECAR_PATH_ENV,
             AKSHARE_DEVELOPMENT_SIDECAR_PATH_ENV,
+            FINANCE_DATA_READER_TRUSTED_SIDECAR_PATH_ENV,
+            FINANCE_DATA_READER_DEVELOPMENT_SIDECAR_PATH_ENV,
         ] {
             assert!(configured.iter().any(|(configured_key, value)| {
                 configured_key == std::ffi::OsStr::new(key) && value.is_none()

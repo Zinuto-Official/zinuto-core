@@ -22,6 +22,7 @@ import { isReplayableStartPointOverviewBar } from "@/domains/trainer/startPointO
 import { toFreeReplayEnvironmentRuleCardDisplays } from "@/domains/trainer/freeReplayEnvironmentRuleCardDisplay";
 import { useFreeReplaySetupController } from "@/domains/trainer/useFreeReplaySetupController";
 import { resetFreeReplayDraftLifecycle } from "@/domains/trainer/freeReplayDraftLifecycle";
+import { buildCustomSamplePoolsSignature } from "@/domains/trainer/useTrainerBootstrapData";
 import type { ApiFreeReplayPrepReadModel } from "@/api";
 import { VendorIcon } from "@/assets/graphics";
 import type { useRuntimeStartupState } from "@/app-shell/runtime/runtimeStartupState";
@@ -49,7 +50,7 @@ type FreeReplayPrepEnvironmentSelection = FreeReplayEnvironmentSelection<
 >;
 
 export const useRuntimeFreeReplaySetup = (scope: RuntimeHookScope) => {
-  const { activeSessionTradingSettings, activeToolbarSymbol, applyResolvedTradingSettingsToForm, currentAnchorTs, currentTrainingBaseTimeframe, currentTrainingMinimumBaseTimeframe, currentTrainingPoolMeta, effectiveThemeMode, isBusy, isFreeReplayPrepMode, language, resetTrainerToPrepView: resetActiveTrainerSessionToPrepView, resolveTradingMarketPresetLabel, sessionId, tradingAssetClass, tradingMarketPresetKey, tradingSettings, tradingSettingsText, trainerBaseTimeframe, tt, ui } = scope;
+  const { activeSessionTradingSettings, activeToolbarSymbol, applyResolvedTradingSettingsToForm, currentAnchorTs, currentTrainingBaseTimeframe, currentTrainingMinimumBaseTimeframe, currentTrainingPoolMeta, customSamplePools, effectiveThemeMode, isBusy, isFreeReplayPrepMode, language, resetTrainerToPrepView: resetActiveTrainerSessionToPrepView, resolveTradingMarketPresetLabel, sessionId, tradingAssetClass, tradingMarketPresetKey, tradingSettings, tradingSettingsText, trainerBaseTimeframe, tt, ui } = scope;
   const trainerTradingAssetUi = useMemo(
     () =>
       buildTrainerTradingAssetUi({
@@ -59,6 +60,10 @@ export const useRuntimeFreeReplaySetup = (scope: RuntimeHookScope) => {
         lotStepUnitLabel: tt("appText.lots2"),
       }),
     [activeSessionTradingSettings.allowShortSelling, activeSessionTradingSettings.assetClass, tradingSettingsText],
+  );
+  const customSamplePoolsSignature = useMemo(
+    () => buildCustomSamplePoolsSignature(customSamplePools),
+    [customSamplePools],
   );
   const [freeReplayPrepAnchorIndex, setFreeReplayPrepAnchorIndex] = useState<number | null>(null);
   const [freeReplayPrepAnchorOverviewIndex, setFreeReplayPrepAnchorOverviewIndex] =
@@ -219,6 +224,7 @@ export const useRuntimeFreeReplaySetup = (scope: RuntimeHookScope) => {
     commitFreeReplayPrepEnvironmentSelection,
     currentTrainingBaseTimeframe,
     currentTrainingMinimumBaseTimeframe,
+    customSamplePoolsSignature,
     freeReplayMinimumBaseTimeframeTouched,
     freeReplayPrepAnchorIndex,
     freeReplayPrepConfigState.hideSymbolName,

@@ -496,6 +496,18 @@
       "termsUrl": "https://about.eastmoney.com/home/protocol"
     },
     {
+      "id": "tencent",
+      "name": "Tencent Finance",
+      "termsRevision": "tencent-terms-reviewed-2026-08-15",
+      "termsUrl": "https://www.tencent.com/term-of-service/"
+    },
+    {
+      "id": "sina",
+      "name": "Sina Finance",
+      "termsRevision": "sina-finance-terms-reviewed-2026-08-15",
+      "termsUrl": "https://finance.sina.com.cn/roll/2021-05-12/doc-ikmxzfmm2033220.shtml"
+    },
+    {
       "id": "binance",
       "name": "Binance",
       "termsRevision": "binance-terms-reviewed-2026-07-19",

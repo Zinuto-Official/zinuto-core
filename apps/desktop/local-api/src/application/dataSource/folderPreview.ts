@@ -668,7 +668,8 @@ export const previewLocalDataImportFolderCore = async (
           timestampSamples.map((sample) => sample.parsedMs),
         );
         const acquisitionTimeframeHint =
-          marketDataAcquisitionMetadata?.schemaVersion === 2 &&
+          marketDataAcquisitionMetadata &&
+          marketDataAcquisitionMetadata.schemaVersion !== 1 &&
           marketDataAcquisitionMetadata.importSymbols.includes(item.file.symbol)
             ? marketDataAcquisitionMetadata.timeframe
             : null;
@@ -873,6 +874,17 @@ export const previewLocalDataImportFolderCore = async (
     qualityProgressDone += 1;
     reportQualityProgress();
   }, signal);
+  // A v3 acquisition notice is accepted only after its listed files, symbols,
+  // and timeframe all match the staged payload. At that point its market
+  // timezone is more precise than generic timestamp heuristics (which cannot
+  // reliably infer an exchange zone from daily bars with an ISO offset).
+  // Preserve an explicit existing-source zone when this is a reimport.
+  const verifiedAcquisitionTimeZone =
+    verifiedMarketDataAcquisitionMetadata?.schemaVersion === 3
+      ? verifiedMarketDataAcquisitionMetadata.timeZone === 'UTC'
+        ? 'Etc/UTC'
+        : verifiedMarketDataAcquisitionMetadata.timeZone
+      : undefined;
   const inferredTimeZone = inferImportTimeZone({
     folderName,
     folderPath: normalizedFolderPath,
@@ -882,7 +894,8 @@ export const previewLocalDataImportFolderCore = async (
       symbol: file.symbol
     })),
     freeReplayEnvironmentSuggestion: suggestedFreeReplayEnvironment,
-    existingSourceTimeZone: options?.existingSourceTimeZone,
+    existingSourceTimeZone:
+      options?.existingSourceTimeZone || verifiedAcquisitionTimeZone,
     timestampSamples: timeZoneRawSamples
   });
   const qualityDiagnostics = await buildPreviewQualityDiagnostics(

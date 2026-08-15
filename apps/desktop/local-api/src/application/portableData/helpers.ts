@@ -2,6 +2,7 @@
 
 import { gzipSync, gunzipSync } from 'node:zlib';
 import type Database from 'better-sqlite3';
+import { INPUT_LIMITS } from '@zinuto/shared/input-limits';
 import { createId } from '../../kernel/id.js';
 import { nowIso } from '../../kernel/time.js';
 import { appError } from '../../kernel/appError.js';
@@ -55,6 +56,22 @@ export const PORTABLE_HISTORY_EXPORT_BATCH_SIZE = 200;
 
 export const normalizeText = (value: unknown): string =>
   (typeof value === 'string' ? value : String(value ?? '')).trim();
+
+// Portable bundles can carry names longer than the destination CHECK limits
+// (local source names reach 64 characters; exported fields are not
+// re-validated). Mapped local names are truncated to match the archive
+// write paths, while out-of-spec bundle fields are rejected with a domain
+// error instead of failing mid-import with a raw SQLite CHECK violation.
+const sanitizeLimitedText = (value: unknown, maxChars: number): string =>
+  normalizeText(value).slice(0, maxChars);
+
+const assertBundleTextLimit = (value: unknown, maxChars: number): string => {
+  const normalized = normalizeText(value);
+  if (normalized.length > maxChars) {
+    throw appError('PORTABLE_DATA_IMPORT_INVALID');
+  }
+  return normalized;
+};
 
 export const applyRangeWhere = (
   columnName: string,
@@ -248,18 +265,20 @@ export const normalizePortableTrainingProjectForImport = (
   },
 ): PortableNormalizedTrainingProject => ({
   id: input.targetProjectId,
-  name:
-    normalizeText(input.targetName) ||
-    normalizeText(project.name) ||
-    'Imported Training',
+  name: assertBundleTextLimit(
+    input.targetName ?? project.name ?? 'Imported Training',
+    INPUT_LIMITS.generalNameChars,
+  ),
   createdAt: normalizeText(project.created_at) || normalizeText(project.createdAt) || nowIso(),
   updatedAt: normalizeText(project.updated_at) || normalizeText(project.updatedAt) || nowIso(),
-  symbol: normalizeText(project.symbol),
+  symbol: assertBundleTextLimit(project.symbol, INPUT_LIMITS.symbolChars),
   samplePoolId: input.mappedSamplePoolId,
-  samplePoolName:
-    normalizeText(input.mappedSamplePoolName) ||
-    normalizeText(project.sample_pool_name) ||
-    normalizeText(project.samplePoolName),
+  samplePoolName: normalizeText(input.mappedSamplePoolName)
+    ? sanitizeLimitedText(input.mappedSamplePoolName, INPUT_LIMITS.samplePoolNameChars)
+    : assertBundleTextLimit(
+        project.sample_pool_name ?? project.samplePoolName,
+        INPUT_LIMITS.samplePoolNameChars,
+      ),
   baseTimeframe:
     normalizeText(project.base_timeframe) ||
     normalizeText(project.baseTimeframe) ||
@@ -274,7 +293,9 @@ export const normalizePortableTrainingProjectForImport = (
   totalTrades: Number(project.total_trades ?? project.totalTrades ?? 0),
   finalEquity: Number(project.final_equity ?? project.finalEquity ?? 0),
   equityReturnRate: Number(project.equity_return_rate ?? project.equityReturnRate ?? 0),
-  simulationBatchId: normalizeText(project.simulation_batch_id) || null,
+  simulationBatchId: normalizeText(project.simulation_batch_id)
+    ? assertBundleTextLimit(project.simulation_batch_id, INPUT_LIMITS.idChars)
+    : null,
   sourceTag: normalizeText(project.source_tag),
   summaryJson: normalizeText(project.summary_json) || JSON.stringify(project.summary ?? {}),
   operatorSummaryJson:
