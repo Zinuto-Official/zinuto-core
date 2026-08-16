@@ -12,6 +12,7 @@
     },
     "windows": {
       "nsis": {
+        "languages": ["English", "SimpChinese", "Japanese", "Korean", "Spanish"],
         "displayLanguageSelector": true,
         "installerHooks": "nsis/windows-runtime-resources.nsh"
       }

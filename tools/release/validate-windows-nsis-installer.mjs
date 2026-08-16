@@ -45,6 +45,12 @@ const REQUIRED_INSTALLED_FILES = [
 ];
 
 const REQUIRED_HOOK_FRAGMENTS = [
+  'MUI_CUSTOMFUNCTION_GUIINIT ZinutoCheckWindowsSystemRequirement',
+  'Function ZinutoCheckWindowsSystemRequirement',
+  'ReadRegDWORD $R0 HKLM',
+  '${If} $R0 < 10',
+  'CurrentMajorVersionNumber',
+  'Windows 10 64 位及以上版本',
   'NSIS_HOOK_PREINSTALL',
   'NSIS_HOOK_PREUNINSTALL',
   'Delete "$INSTDIR\\runtime-manifest.json"',
