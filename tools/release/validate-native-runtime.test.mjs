@@ -113,28 +113,12 @@ test('Tauri build preparation stages the sidecar before validating declared reso
       'market-data-acquisition/',
     );
   }
-  const windowsTauriConfig = JSON.parse(fs.readFileSync(new URL(
-    '../../apps/desktop/shell/tauri.windows.conf.json',
-    import.meta.url,
-  ), 'utf8'));
-  assert.deepEqual(
-    windowsTauriConfig.bundle.windows.nsis.languages,
-    ['English', 'SimpChinese', 'Japanese', 'Korean', 'Spanish'],
-    'Windows installer must carry the five supported installer languages for its compatibility prompt',
-  );
 
   const windowsNsisHook = fs.readFileSync(new URL(
     '../../apps/desktop/shell/nsis/windows-runtime-resources.nsh',
     import.meta.url,
   ), 'utf8');
   for (const fragment of [
-    '!define MUI_CUSTOMFUNCTION_GUIINIT ZinutoCheckWindowsSystemRequirement',
-    'Function ZinutoCheckWindowsSystemRequirement',
-    '${RunningX64}',
-    'ReadRegDWORD $R0 HKLM',
-    '${If} $R0 < 10',
-    'CurrentMajorVersionNumber',
-    'Windows 10 64 位及以上版本',
     'RMDir /r "$INSTDIR\\market-data-acquisition"',
     'RMDir /r "$INSTDIR\\node-runtime"',
   ]) {

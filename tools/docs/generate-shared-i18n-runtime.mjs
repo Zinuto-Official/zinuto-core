@@ -27,10 +27,7 @@ const removeStaleGeneratedCatalogs = () => {
       entry.isFile() &&
       /^i18n\.generated\..+\.ts$/u.test(entry.name)
     ) {
-      // Multiple release checks can generate the same catalogs concurrently.
-      // A sibling generator may remove this stale file after readdirSync(),
-      // which is harmless because every invocation writes the full catalog set.
-      fs.rmSync(path.join(sharedRoot, entry.name), { force: true });
+      fs.unlinkSync(path.join(sharedRoot, entry.name));
     }
   }
 };

@@ -121,7 +121,7 @@
   "devDependencies": {
     "@tauri-apps/cli": "2.10.1",
     "c8": "^11.0.0",
-    "yaml": "2.9.0"
+    "yaml": "^1.10.3"
   },
   "optionalDependencies": {
     "@duckdb/node-bindings-linux-x64": "1.4.4-r.3",

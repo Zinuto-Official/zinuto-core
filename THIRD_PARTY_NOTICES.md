@@ -5,7 +5,7 @@ an inventory, not a substitute for the license texts shipped by each package.
 The source distribution retains dependency license files through the normal
 package, Cargo, and Python registries.
 
-- Snapshot SHA-256: `18ecd40334252733b0d1435bc39c66f83e58f07e7789b333b9e0ef41bcdc4425`
+- Snapshot SHA-256: `ba7d8d39745b91a645077f0424984bb6c4a3db6ea16ea6bdd562dd7e01727852`
 - Components: 1219
 - AKShare sidecar lock SHA-256: `ca65c3aef624355c50f54c55d03082c1f906562181d8d964fcb408bed99f7437`
 - FinanceDataReader sidecar lock SHA-256: `2683a9389e744f96445559509abb0981e661a6a1f4b7b367d0f3544c96178aee`
@@ -1202,7 +1202,7 @@ authorization from the provider.
 | npm | write-excel-file | 4.0.5 | MIT |  | development |
 | npm | ws | 8.21.0 | MIT |  | runtime |
 | npm | y18n | 5.0.8 | ISC |  | development |
-| npm | yaml | 2.9.0 | ISC |  | development |
+| npm | yaml | 1.10.3 | ISC |  | development |
 | npm | yargs-parser | 21.1.1 | ISC |  | development |
 | npm | yargs | 17.7.2 | MIT |  | development |
 | npm | yjs | 13.6.30 | MIT |  | runtime |

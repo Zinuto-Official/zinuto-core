@@ -1,7 +1,7 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.5",
-  "serialNumber": "urn:uuid:18ecd403-3425-5733-a0d1-435bc39c66f8",
+  "serialNumber": "urn:uuid:ba7d8d39-745b-51a6-a507-7f0424984bb6",
   "version": 1,
   "metadata": {
     "component": {
@@ -19,7 +19,7 @@
     "properties": [
       {
         "name": "zinuto:dependencySnapshotSha256",
-        "value": "18ecd40334252733b0d1435bc39c66f83e58f07e7789b333b9e0ef41bcdc4425"
+        "value": "ba7d8d39745b91a645077f0424984bb6c4a3db6ea16ea6bdd562dd7e01727852"
       },
       {
         "name": "zinuto:pythonSidecarLockSha256",
@@ -15092,14 +15092,14 @@
       "type": "library",
       "group": "npm",
       "name": "yaml",
-      "version": "2.9.0",
+      "version": "1.10.3",
       "scope": "excluded",
       "licenses": [
         {
           "expression": "ISC"
         }
       ],
-      "purl": "pkg:npm/yaml@2.9.0"
+      "purl": "pkg:npm/yaml@1.10.3"
     },
     {
       "type": "library",
