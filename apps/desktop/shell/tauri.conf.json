@@ -1,7 +1,7 @@
 {
   "$schema": "../../../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "Zinuto Core",
-  "version": "2.0.7",
+  "version": "2.0.6",
   "identifier": "org.zinuto.core",
   "build": {
     "beforeDevCommand": "node ../../tools/release/run-frontend-tauri-dev.mjs",
