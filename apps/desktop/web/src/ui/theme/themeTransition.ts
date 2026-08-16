@@ -51,6 +51,24 @@ const resolveThemeSignature = (root: HTMLElement): string => {
   return `${document.documentElement.getAttribute("data-theme") ?? ""}:${rootTheme}`;
 };
 
+const resolveThemeTransitionBackdropColor = (sourceRoot: HTMLElement): string => {
+  let element: HTMLElement | null = sourceRoot;
+
+  while (element) {
+    const backgroundColor = window.getComputedStyle(element).backgroundColor;
+    if (
+      backgroundColor !== "transparent" &&
+      !backgroundColor.endsWith(", 0)") &&
+      !backgroundColor.endsWith("/ 0)")
+    ) {
+      return backgroundColor;
+    }
+    element = element.parentElement;
+  }
+
+  return "";
+};
+
 const ensureThemeTransitionOverlay = (): HTMLElement => {
   if (overlayLayer && overlayLayer.isConnected) {
     return overlayLayer;
@@ -115,6 +133,7 @@ export const commitThemeChangeWithTransition = (commit: () => void): void => {
 
   const beforeSignature = resolveThemeSignature(sourceRoot);
   const layer = ensureThemeTransitionOverlay();
+  layer.style.backgroundColor = resolveThemeTransitionBackdropColor(sourceRoot);
   layer.style.opacity = "1";
   commit();
 

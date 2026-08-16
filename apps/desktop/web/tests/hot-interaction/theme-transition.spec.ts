@@ -3,15 +3,14 @@
 import { expect, test, type Page } from "@playwright/test";
 
 const liveRootSelector = "#root > .app-root";
-const snapshotSelector = '[data-theme-transition-snapshot="true"]';
+const overlaySelector = '[data-theme-transition-overlay="true"]';
 
 const readThemeTransitionFrame = async (page: Page) =>
   page.evaluate(() => {
     const layer = document.querySelector<HTMLElement>(
-      '[data-theme-transition-snapshot="true"]',
+      '[data-theme-transition-overlay="true"]',
     );
     const liveRoot = document.querySelector<HTMLElement>("#root > .app-root");
-    const snapshotRoot = layer?.querySelector<HTMLElement>(".app-root");
 
     return {
       backdrop: layer ? getComputedStyle(layer).backgroundColor : null,
@@ -20,17 +19,13 @@ const readThemeTransitionFrame = async (page: Page) =>
         : liveRoot?.classList.contains("theme-light")
           ? "light"
           : null,
-      progress: Number(layer?.dataset.themeTransitionProgress ?? "-1"),
-      radius: Number(layer?.dataset.themeTransitionRadius ?? "-1"),
-      snapshotTheme: snapshotRoot?.classList.contains("theme-dark")
-        ? "dark"
-        : snapshotRoot?.classList.contains("theme-light")
-          ? "light"
-          : null,
+      opacity: Number(layer ? getComputedStyle(layer).opacity : "-1"),
+      transitionActive:
+        document.documentElement.dataset.themeTransition === "active",
     };
   });
 
-test("theme toggle reveals the new desktop palette from the center", async ({ page }) => {
+test("theme toggle fades across desktop palettes", async ({ page }) => {
   await page.goto("/ui-catalog.html?theme=light");
   await page.evaluate(() => {
     document.documentElement.style.setProperty(
@@ -46,26 +41,23 @@ test("theme toggle reveals the new desktop palette from the center", async ({ pa
   await darkButton.click();
   await page.waitForFunction(() => {
     const layer = document.querySelector<HTMLElement>(
-      '[data-theme-transition-snapshot="true"]',
+      '[data-theme-transition-overlay="true"]',
     );
     return (
       layer !== null &&
-      Number(layer.dataset.themeTransitionProgress ?? "0") > 0 &&
-      Number(layer.dataset.themeTransitionProgress ?? "1") < 1 &&
-      Number(layer.dataset.themeTransitionRadius ?? "0") > 32
+      document.documentElement.dataset.themeTransition === "active" &&
+      Number(getComputedStyle(layer).opacity) > 0
     );
   });
 
   const frame = await readThemeTransitionFrame(page);
   expect(frame.liveTheme).toBe("dark");
-  expect(frame.snapshotTheme).toBe("light");
+  expect(frame.transitionActive).toBe(true);
   expect(frame.backdrop).not.toBe("rgba(0, 0, 0, 0)");
-  expect(frame.radius).toBeGreaterThan(0);
-  expect(frame.progress).toBeGreaterThan(0);
-  expect(frame.progress).toBeLessThan(1);
+  expect(frame.opacity).toBeGreaterThan(0);
 
   await page.waitForFunction(
-    () => document.querySelector('[data-theme-transition-snapshot="true"]') === null,
+    () => document.querySelector('[data-theme-transition-overlay="true"]') === null,
   );
   await expect(liveRoot).toHaveClass(/theme-dark/);
 
@@ -73,7 +65,7 @@ test("theme toggle reveals the new desktop palette from the center", async ({ pa
   await expect(lightButton).toHaveCount(1);
   await lightButton.click();
   await page.waitForFunction(
-    () => document.querySelector('[data-theme-transition-snapshot="true"]') === null,
+    () => document.querySelector('[data-theme-transition-overlay="true"]') === null,
   );
   await expect(liveRoot).toHaveClass(/theme-light/);
 });
@@ -84,5 +76,5 @@ test("reduced motion switches the theme without creating a snapshot", async ({ p
 
   await page.locator(`${liveRootSelector} button[title="Dark mode"]`).click();
   await expect(page.locator(liveRootSelector)).toHaveClass(/theme-dark/);
-  await expect(page.locator(snapshotSelector)).toHaveCount(0);
+  await expect(page.locator(overlaySelector)).toHaveCount(0);
 });
