@@ -380,58 +380,64 @@ export const MarketAcquisitionInstrumentPicker = ({
             aria-label={tt("appText.marketDataAcquisitionAvailableInstruments")}
             aria-busy={catalogLoading || undefined}
           >
-            {loadFailed && !items.length ? (
-              <span className="market-data-acquisition-market-message" role="alert">
-                {tt("appText.marketDataAcquisitionInstrumentsLoadFailed")}
-              </span>
-            ) : initialCatalogLoading ? (
-              <span className="market-data-acquisition-market-message">
-                {statusMessage}
-              </span>
-            ) : !items.length ? (
-              <span className="market-data-acquisition-market-message">
-                {tt("appText.marketDataAcquisitionNoInstrumentsFound")}
-              </span>
-            ) : (
-              items.map((instrument) => {
-                const selected = selectedSymbols.has(instrument.symbol);
-                return (
-                  <label
-                    className="market-data-acquisition-catalog-option"
-                    key={instrument.symbol}
-                  >
-                    <Checkbox
-                      checked={selected}
-                      disabled={
-                        disabled ||
-                        (!selected &&
-                          value.length >= MARKET_DATA_ACQUISITION_MAX_SYMBOLS)
-                      }
-                      onChange={() => toggle(instrument)}
-                    />
-                    <span>
-                      <strong>{instrument.symbol}</strong>
-                      <small>{instrument.name}</small>
-                    </span>
-                  </label>
-                );
-              })
-            )}
-            {nextCursor ? (
-              <div className="market-data-acquisition-catalog-load-more">
-                <Button
-                  type="button"
-                  size="sm"
-                  variant="ghost"
-                  disabled={disabled || catalogLoading}
-                  onClick={loadMore}
+            <div className="market-data-acquisition-catalog-results">
+              {loadFailed && !items.length ? (
+                <span
+                  className="market-data-acquisition-market-message"
+                  role="alert"
                 >
-                  {loadMode === "MORE" ? <Spinner decorative size="sm" /> : null}
-                  {tt("appText.marketDataAcquisitionLoadMore")}
-                </Button>
-              </div>
-            ) : null}
+                  {tt("appText.marketDataAcquisitionInstrumentsLoadFailed")}
+                </span>
+              ) : initialCatalogLoading ? (
+                <span className="market-data-acquisition-market-message">
+                  {statusMessage}
+                </span>
+              ) : !items.length ? (
+                <span className="market-data-acquisition-market-message">
+                  {tt("appText.marketDataAcquisitionNoInstrumentsFound")}
+                </span>
+              ) : (
+                items.map((instrument) => {
+                  const selected = selectedSymbols.has(instrument.symbol);
+                  return (
+                    <label
+                      className="market-data-acquisition-catalog-option"
+                      key={instrument.symbol}
+                      title={`${instrument.symbol} ${instrument.name}`}
+                    >
+                      <Checkbox
+                        checked={selected}
+                        disabled={
+                          disabled ||
+                          (!selected &&
+                            value.length >= MARKET_DATA_ACQUISITION_MAX_SYMBOLS)
+                        }
+                        onChange={() => toggle(instrument)}
+                      />
+                      <span>
+                        <strong>{instrument.symbol}</strong>
+                        <small>{instrument.name}</small>
+                      </span>
+                    </label>
+                  );
+                })
+              )}
+            </div>
           </div>
+          {nextCursor ? (
+            <div className="market-data-acquisition-catalog-load-more">
+              <Button
+                type="button"
+                size="sm"
+                variant="ghost"
+                disabled={disabled || catalogLoading}
+                onClick={loadMore}
+              >
+                {loadMode === "MORE" ? <Spinner decorative size="sm" /> : null}
+                {tt("appText.marketDataAcquisitionLoadMore")}
+              </Button>
+            </div>
+          ) : null}
         </section>
 
         <section
@@ -459,6 +465,7 @@ export const MarketAcquisitionInstrumentPicker = ({
                 <div
                   className="market-data-acquisition-selected-item"
                   key={instrument.symbol}
+                  title={`${instrument.symbol} ${instrument.name}`}
                 >
                   <span>
                     <strong>{instrument.symbol}</strong>

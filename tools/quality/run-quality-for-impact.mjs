@@ -538,8 +538,8 @@ const listWorkspaceTestFiles = (files, workspaceRoot) =>
     .map((filePath) => toWorkspaceRelativePath(filePath, workspaceRoot))
     .sort((left, right) => left.localeCompare(right, "en"));
 
-const isDesktopWebHotInteractionTestFile = (filePath) =>
-  filePath.startsWith("tests/hot-interaction/") && /\.spec\.[cm]?[jt]sx?$/u.test(filePath);
+const isDesktopWebBrowserTestFile = (filePath) =>
+  /\.spec\.[cm]?[jt]sx?$/u.test(filePath);
 
 const addProductLaneCommands = (commands, laneIds) => {
   for (const laneId of laneIds) {
@@ -675,9 +675,9 @@ const resolveFastCommands = (files, impact) => {
 
   const desktopWebTestFiles = listWorkspaceTestFiles(files, "apps/desktop/web");
   if (desktopWebTestFiles.length > 0) {
-    const hotInteractionTestFiles = desktopWebTestFiles.filter(isDesktopWebHotInteractionTestFile);
+    const browserTestFiles = desktopWebTestFiles.filter(isDesktopWebBrowserTestFile);
     const nodeTestFiles = desktopWebTestFiles.filter(
-      (filePath) => !isDesktopWebHotInteractionTestFile(filePath),
+      (filePath) => !isDesktopWebBrowserTestFile(filePath),
     );
     if (nodeTestFiles.length > 0) {
       commands.push(
@@ -688,7 +688,7 @@ const resolveFastCommands = (files, impact) => {
         ]),
       );
     }
-    if (hotInteractionTestFiles.length > 0) {
+    if (browserTestFiles.length > 0) {
       commands.push(npmRun("test:browser:workspace", ["--workspace=@zinuto/desktop-web"]));
     }
   }

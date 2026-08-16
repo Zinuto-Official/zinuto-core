@@ -121,6 +121,13 @@ test("fast tier keeps source and changed-test checks file scoped", () => {
   );
 });
 
+test("desktop Web Playwright specs use the browser harness instead of the Node runner", () => {
+  assert.deepEqual(
+    commandTexts(["apps/desktop/web/tests/i18n/workspace-pages.spec.ts"], "fast"),
+    ["npm run test:browser:workspace --workspace=@zinuto/desktop-web"],
+  );
+});
+
 test("affected local data-source changes avoid generated-runtime validation", () => {
   const commands = commandTexts([
     "apps/desktop/local-api/src/application/dataSource/csvPreviewUtils.ts",

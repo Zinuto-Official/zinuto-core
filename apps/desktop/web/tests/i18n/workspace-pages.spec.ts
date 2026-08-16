@@ -752,10 +752,18 @@ for (const viewport of [
           ".market-data-acquisition-catalog-panel",
         ),
       );
+      const firstOptionCopy = document.querySelector<HTMLElement>(
+        ".market-data-acquisition-catalog-option > span",
+      );
+      const firstOptionLabels = firstOptionCopy
+        ? Array.from(firstOptionCopy.querySelectorAll<HTMLElement>("strong, small"))
+        : [];
       const dialogRect = dialog?.getBoundingClientRect();
+      const bodyRect = body?.getBoundingClientRect();
       const footerRect = footer?.getBoundingClientRect();
       const panelRects = panels.map((panel) => panel.getBoundingClientRect());
       return {
+        bodyBottom: bodyRect?.bottom ?? Number.POSITIVE_INFINITY,
         bodyHasInlineOverflow: body
           ? body.scrollWidth > body.clientWidth + 1
           : true,
@@ -767,6 +775,9 @@ for (const viewport of [
           left: rect.left,
           top: rect.top,
         })),
+        firstOptionLabelTops: firstOptionLabels.map(
+          (element) => element.getBoundingClientRect().top,
+        ),
         viewportHeight: window.innerHeight,
         viewportWidth: window.innerWidth,
       };
@@ -777,6 +788,16 @@ for (const viewport of [
     expect(geometry.dialogRight).toBeLessThanOrEqual(geometry.viewportWidth);
     expect(geometry.footerBottom).toBeLessThanOrEqual(geometry.viewportHeight);
     expect(geometry.panelRects).toHaveLength(2);
+    expect(geometry.bodyBottom - (geometry.panelRects[0]?.bottom ?? 0)).toBeLessThanOrEqual(
+      22,
+    );
+    expect(geometry.firstOptionLabelTops).toHaveLength(2);
+    expect(
+      Math.abs(
+        (geometry.firstOptionLabelTops[0] ?? 0) -
+          (geometry.firstOptionLabelTops[1] ?? Number.POSITIVE_INFINITY),
+      ),
+    ).toBeLessThanOrEqual(1);
     if (viewport.width > 640) {
       expect(geometry.panelRects[1]?.left).toBeGreaterThan(
         geometry.panelRects[0]?.left ?? 0,
@@ -789,6 +810,44 @@ for (const viewport of [
     expect(i18nFallbackMessages).toEqual([]);
   });
 }
+
+test("DATA acquisition paging stays below the scrollable candidates", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 980, height: 780 });
+  await page.goto(
+    "/i18n-pages.html?page=DATA_ACQUISITION&scenario=catalog-paged&locale=zh-CN&theme=dark",
+  );
+  await expect(
+    page.locator(".market-data-acquisition-catalog-load-more"),
+  ).toBeVisible();
+
+  const pager = await page.evaluate(() => {
+    const list = document.querySelector<HTMLElement>(
+      ".market-data-acquisition-catalog-list",
+    );
+    const loadMore = document.querySelector<HTMLElement>(
+      ".market-data-acquisition-catalog-load-more",
+    );
+    const panel = loadMore?.closest<HTMLElement>(
+      ".market-data-acquisition-catalog-panel",
+    );
+    const listRect = list?.getBoundingClientRect();
+    const loadMoreRect = loadMore?.getBoundingClientRect();
+    const panelRect = panel?.getBoundingClientRect();
+    return {
+      listBottom: listRect?.bottom ?? Number.POSITIVE_INFINITY,
+      loadMoreBottom: loadMoreRect?.bottom ?? Number.POSITIVE_INFINITY,
+      loadMorePosition: loadMore ? getComputedStyle(loadMore).position : "",
+      loadMoreTop: loadMoreRect?.top ?? -1,
+      panelBottom: panelRect?.bottom ?? -1,
+    };
+  });
+
+  expect(pager.loadMorePosition).not.toBe("sticky");
+  expect(pager.loadMoreTop).toBeGreaterThanOrEqual(pager.listBottom - 1);
+  expect(pager.loadMoreBottom).toBeLessThanOrEqual(pager.panelBottom + 1);
+});
 
 for (const scenario of ["saved", "failed"] as const) {
   test(`DATA acquisition ${scenario} state has a clear terminal action boundary`, async ({
@@ -811,6 +870,40 @@ for (const scenario of ["saved", "failed"] as const) {
     ).toHaveCount(3);
   });
 }
+
+test("settings language control follows the standard select width", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 960 });
+  await page.goto(
+    "/i18n-pages.html?page=SETTINGS_GENERAL&locale=zh-CN&theme=dark",
+  );
+  await waitForPreviewAuditIdle(page);
+  await expect(
+    page.locator('.settings-language-control > .settings-language-select'),
+  ).toBeVisible();
+  await expect(page.locator(".settings-language-select")).toHaveCount(2);
+
+  const selectWidths = await page.evaluate(() => {
+    const languageSelect = document.querySelector<HTMLElement>(
+      '.settings-language-control > .settings-language-select',
+    );
+    const closeActionSelect = Array.from(
+      document.querySelectorAll<HTMLElement>(".settings-language-select"),
+    ).find((element) => element !== languageSelect);
+    return {
+      closeActionWidth: closeActionSelect?.getBoundingClientRect().width ?? 0,
+      languageWidth: languageSelect?.getBoundingClientRect().width ?? 0,
+    };
+  });
+
+  expect(selectWidths.languageWidth).toBeGreaterThan(0);
+  expect(selectWidths.closeActionWidth).toBeGreaterThan(0);
+  expect(selectWidths.languageWidth).toBeCloseTo(
+    selectWidths.closeActionWidth,
+    0,
+  );
+});
 
 test("DATA management preview covers empty, populated, precheck, and long paths", async ({
   page,

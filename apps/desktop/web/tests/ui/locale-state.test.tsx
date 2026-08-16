@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import test from "node:test";
 
 import {
@@ -115,4 +116,36 @@ test("system language updates cannot override a manual language preference", () 
       source: "USER",
     },
   );
+});
+
+test("manual language changes wait for a ready catalog and retain a scoped retry", () => {
+  const settingsSource = readFileSync(
+    new URL(
+      "../../src/workspaces/settings/SystemSettingsWorkspacePage.tsx",
+      import.meta.url,
+    ),
+    "utf8",
+  );
+  const runtimeSource = readFileSync(
+    new URL(
+      "../../src/app-shell/runtime/runtimeFreeReplayExecution.ts",
+      import.meta.url,
+    ),
+    "utf8",
+  );
+
+  assert.match(
+    settingsSource,
+    /void setCurrentUiLanguage\(nextLanguage\)[\s\S]*?\.catch\([\s\S]*?setFailedLanguage\(nextLanguage\)[\s\S]*?\.finally\([\s\S]*?setPendingLanguage\(null\)/u,
+  );
+  assert.match(settingsSource, /disabled=\{pendingLanguage !== null\}/u);
+  assert.match(
+    settingsSource,
+    /onClick=\{\(\) => requestLanguageChange\(failedLanguage\)\}/u,
+  );
+  assert.match(
+    runtimeSource,
+    /await ensureLocaleCatalog\(nextLanguage\);[\s\S]*?setLanguage\(nextLanguage\);[\s\S]*?setLanguageSource\("USER"\);/u,
+  );
+  assert.doesNotMatch(runtimeSource, /setCurrentUiLanguage/u);
 });

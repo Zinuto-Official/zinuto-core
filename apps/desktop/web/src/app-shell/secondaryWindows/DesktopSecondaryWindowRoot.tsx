@@ -247,10 +247,6 @@ const useDesktopSecondaryWindowVisualState = (
   );
 
   useEffect(() => {
-    setCurrentUiLanguage(language, { source: "USER", storage: null });
-  }, [language]);
-
-  useEffect(() => {
     setGlobalTradeColorTheme(tradeColorTheme);
   }, [tradeColorTheme]);
 
@@ -483,10 +479,11 @@ export const DesktopSecondaryWindowRoot = ({
   useEffect(() => {
     let disposed = false;
     setLocaleStatus("loading");
-    void settleSecondaryWindowDependencyWithin(
-      ensureLocaleCatalog(visualState.language),
-      "LOCALE",
-    ).then(
+    // A locale catalog is a large, cacheable dynamic import. On a cold
+    // WebView, parsing it can legitimately exceed the route/state deadline;
+    // turning that healthy in-flight load into a terminal error was the cause
+    // of the first language switch requiring a manual retry.
+    void ensureLocaleCatalog(visualState.language).then(
       () => {
         if (!disposed) {
           setLocaleReadyLanguage(visualState.language);
@@ -509,6 +506,15 @@ export const DesktopSecondaryWindowRoot = ({
   }, [visualState.language]);
   const isLocaleReady =
     localeStatus === "ready" && localeReadyLanguage === visualState.language;
+  const renderedLanguage = isLocaleReady
+    ? visualState.language
+    : localeReadyLanguage ?? visualState.language;
+  useEffect(() => {
+    // Keep legacy global translators aligned with the catalog that is actually
+    // rendered. This prevents a route still using a global translator from
+    // emitting raw keys while a replacement catalog is in flight.
+    setCurrentUiLanguage(renderedLanguage, { source: "USER", storage: null });
+  }, [renderedLanguage]);
   const { RouteComponent, routeStatus } = useDesktopSecondaryWindowRoute(
     kind,
     state,
@@ -625,13 +631,13 @@ export const DesktopSecondaryWindowRoot = ({
       mode={visualState.themeMode}
       resolvedMode={visualState.resolvedThemeMode}
     >
-      <I18nProvider locale={visualState.language}>
+      <I18nProvider locale={renderedLanguage}>
         <div
           className={rootClassName}
           style={visualState.rootStyle}
-          lang={visualState.language}
-          data-ui-language={visualState.language}
-          data-script-group={resolveTypographyScriptGroup(visualState.language)}
+          lang={renderedLanguage}
+          data-ui-language={renderedLanguage}
+          data-script-group={resolveTypographyScriptGroup(renderedLanguage)}
           data-locale-width-profile={visualState.localeWidthProfile}
           data-zinuto-secondary-window-platform={platform}
           data-zinuto-secondary-window-route-status={routeStatus}
@@ -668,14 +674,17 @@ export const DesktopSecondaryWindowRoot = ({
             title={windowTitle}
             variant="secondary"
           />
-          {!state || !RouteComponent || !isLocaleReady ? (
+          {!state ||
+          !RouteComponent ||
+          (!isLocaleReady && localeReadyLanguage === null) ||
+          dependencyFailed ? (
             contentFallback
           ) : (
             <Suspense fallback={contentFallback}>
               <RouteComponent
                 kind={kind}
                 state={state}
-                language={visualState.language}
+                language={renderedLanguage}
                 themeMode={visualState.resolvedThemeMode}
                 showGlobalDecimals={visualState.showGlobalDecimals}
                 priceColorMode={visualState.priceColorMode}

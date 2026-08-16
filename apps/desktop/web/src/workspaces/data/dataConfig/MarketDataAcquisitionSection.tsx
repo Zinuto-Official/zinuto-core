@@ -797,6 +797,11 @@ export const MarketDataAcquisitionSection = ({
       : null;
 
   const mergedDuplicates = job?.staging?.mergedDuplicateBars ?? 0;
+  const usesInstrumentSelectionLayout =
+    phase === "FORM" &&
+    !showHistory &&
+    !runtimeErrorText &&
+    wizardStep === 3;
 
   return (
     <section className="desktop-secondary-window-panel desktop-secondary-window-market-data-acquisition">
@@ -842,7 +847,11 @@ export const MarketDataAcquisitionSection = ({
         variant="workflow"
         className="market-data-acquisition-dialog"
         headerClassName="market-data-acquisition-header"
-        bodyClassName="market-data-acquisition-body"
+        bodyClassName={`market-data-acquisition-body${
+          usesInstrumentSelectionLayout
+            ? " market-data-acquisition-body--instrument-selection"
+            : ""
+        }`}
         footerClassName="market-data-acquisition-footer"
         actions={
           <MarketDataAcquisitionActionBars

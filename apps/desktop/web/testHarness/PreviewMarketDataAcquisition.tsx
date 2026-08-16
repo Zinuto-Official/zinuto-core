@@ -382,7 +382,11 @@ export const PreviewMarketDataAcquisition = ({
   ttf: acquisitionTtf,
 }: PreviewMarketDataAcquisitionProps) => {
   const initialStep: AcquisitionWizardStep =
-    scenario === "catalog" ? 3 : scenario === "settings" ? 4 : 1;
+    scenario === "catalog" || scenario === "catalog-paged"
+      ? 3
+      : scenario === "settings"
+        ? 4
+        : 1;
   const [wizardStep, setWizardStep] =
     useState<AcquisitionWizardStep>(initialStep);
   const [assetClassId, setAssetClassId] =
@@ -421,7 +425,10 @@ export const PreviewMarketDataAcquisition = ({
         instrument.symbol.includes(input.query.toUpperCase()) ||
         instrument.name.toUpperCase().includes(input.query.toUpperCase()),
     ),
-    nextCursor: null,
+    nextCursor:
+      scenario === "catalog-paged" && !input.cursor
+        ? "preview-next-page"
+        : null,
     cachedAt:
       previewCatalog.markets.find((entry) => entry.id === requestedMarketId)
         ?.instrumentDiscovery === "PRESET"
@@ -548,7 +555,11 @@ export const PreviewMarketDataAcquisition = ({
         variant="workflow"
         className="market-data-acquisition-dialog"
         headerClassName="market-data-acquisition-header"
-        bodyClassName="market-data-acquisition-body"
+        bodyClassName={`market-data-acquisition-body${
+          !isSaved && !isFailed && wizardStep === 3
+            ? " market-data-acquisition-body--instrument-selection"
+            : ""
+        }`}
         footerClassName="market-data-acquisition-footer"
         actions={isSaved || isFailed ? stateActions : formActions}
       >

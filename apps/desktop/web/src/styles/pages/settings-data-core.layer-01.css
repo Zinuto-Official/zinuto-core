@@ -565,6 +565,22 @@
   min-width: 160px;
 }
 
+.settings-language-control {
+  display: grid;
+  gap: 6px;
+  justify-items: stretch;
+}
+
+.settings-language-switch-status {
+  align-items: center;
+  color: var(--text-subtle);
+  display: flex;
+  font-size: var(--fs-r2);
+  gap: 8px;
+  justify-content: flex-end;
+  line-height: 1.25;
+}
+
 .settings-theme-switch {
   width: min(420px, 100%);
 }

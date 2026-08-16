@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import test from "node:test";
 import { renderToStaticMarkup } from "react-dom/server";
 import { SecondaryWindowLoadingSkeleton } from "../../src/app-shell/secondaryWindows/SecondaryWindowLoadingSkeleton";
@@ -36,4 +37,31 @@ test("secondary windows keep normal loading hidden and expose only recovery", ()
   assert.match(errorHtml, />Close</);
   assert.match(errorHtml, />Retry</);
   assert.doesNotMatch(errorHtml, />Loading\.\.\.</);
+});
+
+test("a cold locale catalog stays pending instead of becoming a retryable timeout", () => {
+  const source = readFileSync(
+    new URL(
+      "../../src/app-shell/secondaryWindows/DesktopSecondaryWindowRoot.tsx",
+      import.meta.url,
+    ),
+    "utf8",
+  );
+
+  assert.doesNotMatch(
+    source,
+    /settleSecondaryWindowDependencyWithin\(\s*ensureLocaleCatalog\(/u,
+  );
+  assert.match(
+    source,
+    /const renderedLanguage = isLocaleReady[\s\S]*localeReadyLanguage/u,
+  );
+  assert.match(
+    source,
+    /setCurrentUiLanguage\(renderedLanguage, \{ source: "USER", storage: null \}\)/u,
+  );
+  assert.match(
+    source,
+    /!state \|\|[\s\S]*?!RouteComponent[\s\S]*?!isLocaleReady[\s\S]*?dependencyFailed/u,
+  );
 });

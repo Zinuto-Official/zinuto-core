@@ -18,7 +18,10 @@ import {
 } from "@/workspaces/data/DataConfigDetailDrawer";
 import { formatStorageBytes } from "@/frontend-kernel/uiOptions";
 import { MarketDataAcquisitionSection } from "@/workspaces/data";
-import { tt, ttf } from "@/frontend-kernel/i18n/messageRuntime";
+import {
+  ttByLanguage,
+  ttfByLanguage,
+} from "@/frontend-kernel/i18n/messageRuntime";
 import {
   SecondaryWindowRoutePlaceholder,
   type SecondaryWindowRouteProps,
@@ -65,6 +68,7 @@ const isDataConfigDetailWindowPayload = (
 
 const CsvImportConfigSecondaryWindow = ({
   state,
+  language,
 }: SecondaryWindowRouteProps) => {
   if (!isCsvImportConfigPayload(state.payload)) {
     return <SecondaryWindowRoutePlaceholder state={state} />;
@@ -79,8 +83,16 @@ const CsvImportConfigSecondaryWindow = ({
     <AppCsvMappingModal
       {...payload}
       presentation="window"
-      tt={tt}
-      ttf={ttf}
+      tt={(key) =>
+        ttByLanguage(language, key as Parameters<typeof ttByLanguage>[1])
+      }
+      ttf={(key, values) =>
+        ttfByLanguage(
+          language,
+          key as Parameters<typeof ttfByLanguage>[1],
+          values,
+        )
+      }
       onPendingImportTimeZoneChange={(timeZone) =>
         emitSafely("SET_TIME_ZONE", { timeZone })
       }
@@ -126,7 +138,7 @@ const CsvImportConfigSecondaryWindow = ({
           code: "VALIDATION_FAILED",
           reason:
             String(ack.reason || "").trim() ||
-            tt("appText.importPreviewFailed"),
+            ttByLanguage(language, "appText.importPreviewFailed"),
         };
       }}
     />
@@ -195,7 +207,10 @@ const MarketDataAcquisitionSecondaryWindow = ({
     if (ack.status !== "ACCEPTED") {
       throw new Error(
         String(ack.reason || "").trim() ||
-          tt("appText.marketDataAcquisitionImportStartFailed"),
+          ttByLanguage(
+            language,
+            "appText.marketDataAcquisitionImportStartFailed",
+          ),
       );
     }
     await closeCurrentDesktopSecondaryWindow();
@@ -210,9 +225,15 @@ const MarketDataAcquisitionSecondaryWindow = ({
       onCloseWindow={() => {
         void closeCurrentDesktopSecondaryWindow();
       }}
-      tt={(key) => tt(key as Parameters<typeof tt>[0])}
+      tt={(key) =>
+        ttByLanguage(language, key as Parameters<typeof ttByLanguage>[1])
+      }
       ttf={(key, values) =>
-        ttf(key as Parameters<typeof ttf>[0], values)
+        ttfByLanguage(
+          language,
+          key as Parameters<typeof ttfByLanguage>[1],
+          values,
+        )
       }
     />
   );

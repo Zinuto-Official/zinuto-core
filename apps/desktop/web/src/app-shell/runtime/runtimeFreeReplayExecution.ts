@@ -50,7 +50,6 @@ import {
   DEFAULT_REPLAY_NOTE_TITLE_BY_LANGUAGE,
 } from "@/ui/config/uiConfig";
 import { getLanguageOptions } from "@/ui/config/uiLabels";
-import { setCurrentUiLanguage } from "@/frontend-kernel/i18n/localeState";
 import { ensureLocaleCatalog } from "@zinuto/shared/i18n";
 import type { SystemStorageCategoryKey } from "@zinuto/shared/systemStorageCategories";
 import {
@@ -182,6 +181,7 @@ export const useRuntimeFreeReplayExecution = (scope: RuntimeHookScope) => {
     setHistorySamplePoolFilter,
     setIsAutoplay,
     setIsBusy,
+    setLanguage,
     setLanguageSource,
     setLocalDataSourceSummaries,
     setReplayNotes,
@@ -554,10 +554,13 @@ export const useRuntimeFreeReplayExecution = (scope: RuntimeHookScope) => {
   const setUserLanguagePreference = useCallback(
     async (nextLanguage: UiLanguage) => {
       await ensureLocaleCatalog(nextLanguage);
-      setCurrentUiLanguage(nextLanguage, { source: "USER" });
+      // Commit the React language and its preference source together. Updating
+      // the global singleton first used to publish next, stale, then next to
+      // secondary windows while the catalog was still being loaded.
+      setLanguage(nextLanguage);
       setLanguageSource("USER");
     },
-    [setLanguageSource],
+    [setLanguage, setLanguageSource],
   );
   const {
     activeLanguageLabel,

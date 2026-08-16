@@ -117,6 +117,36 @@
   overscroll-behavior: contain;
 }
 
+.market-data-acquisition-dialog.ui-standard-modal[data-variant="workflow"]
+  .market-data-acquisition-body--instrument-selection {
+  align-content: stretch;
+  overflow-y: hidden;
+}
+
+.market-data-acquisition-body--instrument-selection
+  .market-data-acquisition-step-panel {
+  min-height: 0;
+  height: 100%;
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.market-data-acquisition-body--instrument-selection
+  .market-data-acquisition-task-step,
+.market-data-acquisition-body--instrument-selection
+  .market-data-acquisition-market-picker {
+  min-height: 0;
+}
+
+.market-data-acquisition-body--instrument-selection
+  .market-data-acquisition-task-step {
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.market-data-acquisition-body--instrument-selection
+  .market-data-acquisition-market-picker {
+  grid-template-rows: auto auto minmax(0, 1fr);
+}
+
 .market-data-acquisition-footer {
   min-width: 0;
   margin: 0;
@@ -799,13 +829,20 @@
 
 .market-data-acquisition-catalog-columns {
   min-width: 0;
+  min-height: 0;
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(240px, 0.65fr);
   gap: 10px;
 }
 
+.market-data-acquisition-body--instrument-selection
+  .market-data-acquisition-catalog-columns {
+  grid-template-rows: minmax(0, 1fr);
+}
+
 .market-data-acquisition-catalog-panel {
   min-width: 0;
+  min-height: 0;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
   overflow: hidden;
@@ -859,17 +896,28 @@
   overscroll-behavior: contain;
 }
 
+.market-data-acquisition-body--instrument-selection
+  .market-data-acquisition-catalog-list,
+.market-data-acquisition-body--instrument-selection
+  .market-data-acquisition-selected-list {
+  height: auto;
+  min-height: 0;
+  max-height: none;
+}
+
+.market-data-acquisition-catalog-results {
+  min-width: 0;
+  display: grid;
+  align-content: start;
+  gap: 2px;
+}
+
 .market-data-acquisition-catalog-load-more {
-  position: sticky;
-  bottom: 0;
   display: flex;
   justify-content: center;
-  padding: 7px 5px 5px;
-  background: linear-gradient(
-    to bottom,
-    color-mix(in srgb, var(--ui-surface-bg-soft) 78%, transparent),
-    var(--ui-surface-bg-soft) 40%
-  );
+  padding: 6px 5px;
+  border-top: 1px solid var(--ui-divider);
+  background: var(--ui-surface-bg-soft);
 }
 
 .market-data-acquisition-catalog-option {

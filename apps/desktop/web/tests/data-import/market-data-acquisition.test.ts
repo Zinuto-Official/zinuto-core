@@ -916,6 +916,26 @@ test("download entry is permanent and the four-step market catalog replaces conn
     acquisitionStylesSource,
     /market-data-acquisition-catalog-list,[\s\S]*height: 300px;/u,
   );
+  assert.match(
+    acquisitionSectionSource,
+    /usesInstrumentSelectionLayout[\s\S]*market-data-acquisition-body--instrument-selection/u,
+  );
+  assert.match(
+    marketAcquisitionPickerSource,
+    /market-data-acquisition-catalog-list[\s\S]*market-data-acquisition-catalog-results[\s\S]*market-data-acquisition-catalog-load-more/u,
+  );
+  assert.match(
+    acquisitionStylesSource,
+    /market-data-acquisition-body--instrument-selection[\s\S]*?\.market-data-acquisition-catalog-list,[\s\S]*?height: auto;/u,
+  );
+  assert.match(
+    acquisitionStylesSource,
+    /market-data-acquisition-catalog-option > span,[\s\S]*display: flex;/u,
+  );
+  assert.doesNotMatch(
+    acquisitionStylesSource,
+    /\.market-data-acquisition-catalog-load-more\s*\{\s*position:\s*sticky;/u,
+  );
   assert.doesNotMatch(
     marketAcquisitionPickerSource,
     new RegExp(prohibitedCatalogPickerTokens, "u"),
@@ -1020,5 +1040,18 @@ test("the saved view stays concise and the secondary frame has no nested border"
   assert.match(
     acquisitionStylesSource,
     /> \.market-data-acquisition-dialog \{[\s\S]*?border: 0;[\s\S]*?border-radius: 0;/u,
+  );
+});
+
+test("data secondary windows translate from their own visual language", () => {
+  assert.match(secondaryDataRouteSource, /ttByLanguage/u);
+  assert.match(secondaryDataRouteSource, /ttfByLanguage/u);
+  assert.match(
+    secondaryDataRouteSource,
+    /MarketDataAcquisitionSecondaryWindow[\s\S]*ttByLanguage\(language/u,
+  );
+  assert.doesNotMatch(
+    secondaryDataRouteSource,
+    /import \{ tt, ttf \} from "@\/frontend-kernel\/i18n\/messageRuntime"/u,
   );
 });

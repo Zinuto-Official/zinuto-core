@@ -10,12 +10,14 @@
 .market-data-acquisition-catalog-option > span,
 .market-data-acquisition-selected-item > span {
   min-width: 0;
-  display: grid;
-  gap: 2px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
 }
 
 .market-data-acquisition-catalog-option strong,
 .market-data-acquisition-selected-item strong {
+  flex: 0 0 auto;
   min-width: 0;
   overflow: hidden;
   color: var(--text-t1);
@@ -26,8 +28,12 @@
 
 .market-data-acquisition-catalog-option small,
 .market-data-acquisition-selected-item small {
+  min-width: 0;
+  overflow: hidden;
   color: var(--text-t3);
   font-size: var(--ty-r1);
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .market-data-acquisition-selected-item {
@@ -459,6 +465,12 @@
   .market-data-acquisition-catalog-cache-status > [data-slot="button"] {
     width: 100%;
     justify-content: center;
+  }
+
+  .market-data-acquisition-body--instrument-selection
+    .market-data-acquisition-catalog-columns {
+    grid-template-rows: repeat(2, minmax(132px, 1fr));
+    overflow-y: auto;
   }
 }
 

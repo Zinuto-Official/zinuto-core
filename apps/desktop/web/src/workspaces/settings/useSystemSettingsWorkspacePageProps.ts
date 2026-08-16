@@ -47,7 +47,6 @@ type UseSystemSettingsWorkspacePagePropsArgs = {
   };
   actions: {
     setCurrentUiLanguage: SystemSettingsWorkspacePageProps["setCurrentUiLanguage"];
-    setLanguage: SystemSettingsWorkspacePageProps["setLanguage"];
     setFontSizePreset: SystemSettingsWorkspacePageProps["setFontSizePreset"];
     setThemeMode: SystemSettingsWorkspacePageProps["setThemeMode"];
     setDesktopCloseButtonAction: SystemSettingsWorkspacePageProps["setDesktopCloseButtonAction"];
@@ -116,7 +115,6 @@ export const useSystemSettingsWorkspacePageProps = ({
     languageOptions: options.languageOptions,
     fontSizePresetOptions: options.fontSizePresetOptions,
     setCurrentUiLanguage: actions.setCurrentUiLanguage,
-    setLanguage: actions.setLanguage,
     setFontSizePreset: actions.setFontSizePreset,
     setThemeMode: actions.setThemeMode,
     setDesktopCloseButtonAction: actions.setDesktopCloseButtonAction,

@@ -133,7 +133,6 @@ export type SystemSettingsWorkspacePageProps = {
   languageOptions: Array<{ key: UiLanguage; label: string }>;
   fontSizePresetOptions: Array<{ key: FontSizePreset; label: string }>;
   setCurrentUiLanguage: (language: UiLanguage) => Promise<void>;
-  setLanguage: (language: UiLanguage) => void;
   setFontSizePreset: (preset: FontSizePreset) => void;
   setThemeMode: (mode: ThemeMode) => void;
   setDesktopCloseButtonAction: (action: DesktopCloseButtonAction) => void;
@@ -197,7 +196,6 @@ export const SystemSettingsWorkspacePage = ({
   languageOptions,
   fontSizePresetOptions,
   setCurrentUiLanguage,
-  setLanguage,
   setFontSizePreset,
   setThemeMode,
   setDesktopCloseButtonAction,
@@ -225,6 +223,12 @@ export const SystemSettingsWorkspacePage = ({
     key: string,
     params?: Record<string, string | number>,
   ) => string;
+  const [pendingLanguage, setPendingLanguage] = useState<UiLanguage | null>(
+    null,
+  );
+  const [failedLanguage, setFailedLanguage] = useState<UiLanguage | null>(
+    null,
+  );
   const [activeTab, setActiveTab] = useState<SystemSettingsTabId>(
     requestedTab ?? DEFAULT_SYSTEM_SETTINGS_TAB,
   );
@@ -500,6 +504,26 @@ export const SystemSettingsWorkspacePage = ({
 
   const formatCurrentValueTitle = (value: string): string =>
     t("settings.general.currentValue", { value });
+  const requestLanguageChange = (value: string) => {
+    const nextLanguage = value as UiLanguage;
+    if (nextLanguage === language || pendingLanguage !== null) {
+      return;
+    }
+    setPendingLanguage(nextLanguage);
+    setFailedLanguage(null);
+    void setCurrentUiLanguage(nextLanguage)
+      .catch((error) => {
+        // The current language remains usable if a dynamic catalog cannot be
+        // loaded. Surface a scoped retry instead of leaving an unhandled
+        // rejection that can take down the whole desktop surface.
+        // eslint-disable-next-line no-console
+        console.error("[system-settings] language catalog load failed", error);
+        setFailedLanguage(nextLanguage);
+      })
+      .finally(() => {
+        setPendingLanguage(null);
+      });
+  };
 
   const renderGeneralTab = () => (
     <>
@@ -510,23 +534,44 @@ export const SystemSettingsWorkspacePage = ({
         <SettingRow
           title={t("settings.general.language.title")}
           control={
-            <SelectField
-              className="settings-language-select"
-              density="large"
-              title={formatCurrentValueTitle(activeLanguageLabel)}
-              aria-label={t("settings.general.language.title")}
-              value={language}
-              onValueChange={(value) => {
-                const nextLanguage = value as UiLanguage;
-                void setCurrentUiLanguage(nextLanguage).then(() => {
-                  setLanguage(nextLanguage);
-                });
-              }}
-              options={languageOptions.map((item) => ({
-                value: item.key,
-                label: item.label,
-              }))}
-            />
+            <div className="settings-language-control">
+              <SelectField
+                className="settings-language-select"
+                density="large"
+                title={formatCurrentValueTitle(activeLanguageLabel)}
+                aria-label={t("settings.general.language.title")}
+                aria-busy={pendingLanguage !== null}
+                disabled={pendingLanguage !== null}
+                value={language}
+                onValueChange={requestLanguageChange}
+                options={languageOptions.map((item) => ({
+                  value: item.key,
+                  label: item.label,
+                }))}
+              />
+              {pendingLanguage !== null ? (
+                <div
+                  className="settings-language-switch-status"
+                  role="status"
+                >
+                  {t("common.status.loading")}
+                </div>
+              ) : failedLanguage !== null ? (
+                <div
+                  className="settings-language-switch-status"
+                  role="status"
+                >
+                  <span>{t("common.status.loadFailed")}</span>
+                  <Button
+                    type="button"
+                    size="sm"
+                    onClick={() => requestLanguageChange(failedLanguage)}
+                  >
+                    {t("appText.retry")}
+                  </Button>
+                </div>
+              ) : null}
+            </div>
           }
         />
 

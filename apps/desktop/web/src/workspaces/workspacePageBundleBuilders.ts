@@ -529,7 +529,6 @@ export const buildSystemSettingsWorkspaceBundleInput = ({
   languageOptions,
   fontSizePresetOptions,
   setCurrentUiLanguage,
-  setLanguage,
   setFontSizePreset,
   setThemeMode,
   setDesktopCloseButtonAction,
@@ -588,7 +587,6 @@ export const buildSystemSettingsWorkspaceBundleInput = ({
   },
   actions: {
     setCurrentUiLanguage,
-    setLanguage,
     setFontSizePreset,
     setThemeMode,
     setDesktopCloseButtonAction,

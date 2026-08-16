@@ -440,7 +440,6 @@ export const renderI18nWorkspacePreviewSecondary = (
           languageOptions={languageOptions}
           fontSizePresetOptions={fontSizePresetOptions}
           setCurrentUiLanguage={noopAsync}
-          setLanguage={noop}
           setFontSizePreset={noop}
           setThemeMode={noop}
           setDesktopCloseButtonAction={noop}

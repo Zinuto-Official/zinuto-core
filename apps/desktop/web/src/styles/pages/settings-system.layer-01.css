@@ -500,6 +500,18 @@
   max-width: 100%;
 }
 
+.settings-redesign-main .settings-language-control {
+  width: var(--settings-choice-control-inline-size);
+  min-width: 0;
+  max-width: 100%;
+}
+
+.settings-redesign-main
+  .settings-language-control
+  > .settings-language-select {
+  width: 100%;
+}
+
 .settings-redesign-main .settings-theme-switch,
 .settings-redesign-main .settings-language-select,
 .settings-redesign-main .settings-trade-theme-select {
