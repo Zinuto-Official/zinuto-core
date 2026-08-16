@@ -44,6 +44,11 @@ run(
   'Building locked FinanceDataReader sidecar',
 );
 run(
+  nodeCommand,
+  ['./tools/release/prepare-backtest-engine.mjs'],
+  'Preparing backtest engine',
+);
+run(
   npmCommand,
   ['run', 'build', '--workspace=@zinuto/desktop-web'],
   'Building desktop web',
@@ -57,11 +62,6 @@ run(
   nodeCommand,
   ['./tools/release/prepare-backend-runtime-bundle.mjs'],
   'Preparing isolated local runtime bundle',
-);
-run(
-  nodeCommand,
-  ['./tools/release/prepare-backtest-engine.mjs'],
-  'Preparing backtest engine',
 );
 run(
   nodeCommand,

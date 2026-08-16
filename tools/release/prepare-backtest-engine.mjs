@@ -44,16 +44,6 @@ const OUTPUT_DUCKDB_LIBRARY_NAME = process.platform === 'win32'
   ? 'duckdb.dll'
   : DUCKDB_LIBRARY_NAMES[0];
 const SHOULD_COPY_DUCKDB_RUNTIME_LIBRARY = process.platform !== 'darwin';
-const NODE_DUCKDB_BINDING_PACKAGE_NAMES = {
-  win32: {
-    x64: 'node-bindings-win32-x64',
-    arm64: 'node-bindings-win32-arm64',
-  },
-  linux: {
-    x64: 'node-bindings-linux-x64',
-    arm64: 'node-bindings-linux-arm64',
-  },
-};
 const MACOS_DUCKDB_BINDING_PACKAGE_NAMES = [
   'node-bindings-darwin-arm64',
   'node-bindings-darwin-x64',
@@ -94,42 +84,14 @@ const collectFiles = (rootDir) => {
   return files;
 };
 
-const isRegularFile = (filePath) => {
-  const stat = fs.lstatSync(filePath, { throwIfNoEntry: false });
-  return Boolean(stat?.isFile() && !stat.isSymbolicLink() && stat.size > 0);
-};
-
-const resolveNodeDuckDbRuntimeLibraryCandidates = () => {
-  const packageName = NODE_DUCKDB_BINDING_PACKAGE_NAMES[process.platform]?.[process.arch];
-  if (!packageName) return [];
-  const relativePath = path.join('@duckdb', packageName, OUTPUT_DUCKDB_LIBRARY_NAME);
-  return [
-    path.join(ROOT_DIR, 'apps', 'desktop', 'shell', 'gen', 'backend-runtime', 'node_modules', relativePath),
-    path.join(ROOT_DIR, 'node_modules', relativePath),
-    path.join(ROOT_DIR, 'apps', 'desktop', 'local-api', 'node_modules', relativePath),
-  ];
-};
-
-const resolveDuckDbRuntimeLibraryPath = () => {
-  const configuredRoot = String(process.env.DUCKDB_LIB_DIR || '').trim();
-  const configuredCandidate = configuredRoot
-    ? path.join(path.resolve(configuredRoot), OUTPUT_DUCKDB_LIBRARY_NAME)
-    : null;
-  const targetCandidates = collectFiles(TARGET_DIR)
+const resolveDuckDbRuntimeLibraryPath = () =>
+  collectFiles(TARGET_DIR)
     .filter((filePath) => DUCKDB_LIBRARY_NAMES.includes(path.basename(filePath)))
     .sort((left, right) => {
       const leftScore = left.includes(`${path.sep}release${path.sep}deps${path.sep}`) ? 0 : 1;
       const rightScore = right.includes(`${path.sep}release${path.sep}deps${path.sep}`) ? 0 : 1;
       return leftScore - rightScore || left.localeCompare(right);
-    });
-  return [
-    configuredCandidate,
-    ...targetCandidates,
-    ...resolveNodeDuckDbRuntimeLibraryCandidates(),
-  ].filter((filePath, index, candidates) => (
-    filePath && candidates.indexOf(filePath) === index && isRegularFile(filePath)
-  ))[0] ?? null;
-};
+    })[0] ?? null;
 
 const runCargoBuild = () => {
   const rustFlags = buildRustFlags();
@@ -181,13 +143,6 @@ if (process.platform !== 'win32') {
 const duckDbRuntimeLibraryPath = SHOULD_COPY_DUCKDB_RUNTIME_LIBRARY
   ? resolveDuckDbRuntimeLibraryPath()
   : null;
-if (SHOULD_COPY_DUCKDB_RUNTIME_LIBRARY && !duckDbRuntimeLibraryPath) {
-  // eslint-disable-next-line no-console
-  console.error(
-    `[backtest-engine] Missing the runtime library required by the built engine (${OUTPUT_DUCKDB_LIBRARY_NAME}).`,
-  );
-  process.exit(1);
-}
 if (duckDbRuntimeLibraryPath) {
   fs.mkdirSync(OUTPUT_DEPS_DIR, { recursive: true });
   fs.copyFileSync(
