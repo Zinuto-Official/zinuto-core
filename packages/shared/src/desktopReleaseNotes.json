@@ -1,37 +1,37 @@
 {
   "schemaVersion": 1,
-  "version": "2.0.6",
-  "publishedAt": "2026-08-13T02:00:00.000Z",
+  "version": "2.0.7",
+  "publishedAt": "2026-08-16T03:30:00.000Z",
   "releaseHighlights": {
     "en": [
-      "Windows now uses a consistent themed title bar for the main window, startup screens, and secondary windows.",
-      "Onboarding falls back to an in-app guide if its companion window cannot become ready.",
-      "User-started CCXT downloads on Windows can use the enabled system HTTP or HTTPS proxy without changing other network traffic.",
-      "Fixed Microsoft Store startup by packaging the Windows backend Node runtime with the app."
+      "Improved local market-data acquisition with resumable downloads, stronger import validation, and download history.",
+      "Improved reliability for data settings, localized secondary windows, runtime shutdown, and restored training drawings.",
+      "Updated the local market-data catalog source for better availability.",
+      "Removed the retired AKTools integration."
     ],
     "zh-CN": [
-      "Windows 的主窗口、启动界面和辅助窗口现在使用一致的主题标题栏。",
-      "如果引导辅助窗口未能就绪，首次使用引导会自动改为应用内显示。",
-      "Windows 上由用户主动发起的 CCXT 下载可以使用已启用的系统 HTTP 或 HTTPS 代理，不影响其他网络流量。",
-      "修复了 Microsoft Store 版 Windows 应用未随包提供后端 Node 运行时而无法启动的问题。"
+      "改进本地市场数据采集，支持断点续传、强化导入校验和下载历史记录。",
+      "提升数据设置、本地化辅助窗口、运行时退出及训练绘图恢复的稳定性。",
+      "更新本地市场数据目录来源，以提升可用性。",
+      "移除了已停用的 AKTools 集成。"
     ],
     "ja": [
-      "Windows のメインウィンドウ、起動画面、補助ウィンドウで、テーマに合った統一タイトルバーを使用するようになりました。",
-      "ガイド用の補助ウィンドウを準備できない場合は、オンボーディングをアプリ内表示へ自動的に切り替えます。",
-      "Windows でユーザーが開始した CCXT ダウンロードは、ほかの通信を変更せず、有効なシステム HTTP または HTTPS プロキシを利用できます。",
-      "Microsoft Store 版 Windows アプリで、バックエンドの Node ランタイムがパッケージに含まれず起動できない問題を修正しました。"
+      "ローカル市場データの取得を改善し、再開可能なダウンロード、より厳格なインポート検証、ダウンロード履歴に対応しました。",
+      "データ設定、ローカライズされた補助ウィンドウ、ランタイム終了、トレーニング描画の復元に関する安定性を改善しました。",
+      "可用性を高めるため、ローカル市場データのカタログソースを更新しました。",
+      "廃止済みの AKTools 連携を削除しました。"
     ],
     "ko": [
-      "Windows의 기본 창, 시작 화면, 보조 창에 테마와 일치하는 제목 표시줄을 일관되게 적용했습니다.",
-      "안내용 보조 창이 준비되지 않으면 온보딩이 앱 내부 안내 화면으로 자동 전환됩니다.",
-      "Windows에서 사용자가 시작한 CCXT 다운로드는 다른 네트워크 트래픽을 바꾸지 않고 활성화된 시스템 HTTP 또는 HTTPS 프록시를 사용할 수 있습니다.",
-      "Microsoft Store용 Windows 앱에 백엔드 Node 런타임이 포함되지 않아 시작할 수 없던 문제를 수정했습니다."
+      "로컬 시장 데이터 수집을 개선하여 이어받기 가능한 다운로드, 강화된 가져오기 검증 및 다운로드 기록을 지원합니다.",
+      "데이터 설정, 현지화된 보조 창, 런타임 종료 및 트레이닝 드로잉 복원의 안정성을 개선했습니다.",
+      "가용성을 높이기 위해 로컬 시장 데이터 카탈로그 소스를 업데이트했습니다.",
+      "폐기된 AKTools 연동을 제거했습니다."
     ],
     "es": [
-      "Windows ahora usa una barra de título coherente con el tema en la ventana principal, el inicio y las ventanas secundarias.",
-      "Si la ventana auxiliar no llega a estar lista, la guía inicial se muestra automáticamente dentro de la aplicación.",
-      "Las descargas de CCXT iniciadas por el usuario en Windows pueden usar el proxy HTTP o HTTPS habilitado en el sistema sin modificar el resto del tráfico.",
-      "Se corrigió el inicio desde Microsoft Store al incluir el entorno Node del backend de Windows en la aplicación."
+      "Mejora la adquisición local de datos de mercado con descargas reanudables, validación de importaciones reforzada e historial de descargas.",
+      "Mejora la fiabilidad de los ajustes de datos, las ventanas secundarias localizadas, el cierre del entorno de ejecución y la restauración de dibujos de entrenamiento.",
+      "Actualiza la fuente del catálogo local de datos de mercado para mejorar la disponibilidad.",
+      "Elimina la integración retirada de AKTools."
     ]
   }
 }
