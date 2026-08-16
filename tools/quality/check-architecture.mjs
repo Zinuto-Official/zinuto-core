@@ -1427,7 +1427,7 @@ if (fs.existsSync(tauriWindowsConfigPath)) {
   if (installerHooks !== REQUIRED_WINDOWS_NSIS_INSTALLER_HOOK) {
     pushViolation(
       tauriWindowsConfigPath,
-      `Windows NSIS installerHooks must stay on "${REQUIRED_WINDOWS_NSIS_INSTALLER_HOOK}" so packaged runtime resources are installed.`,
+      `Windows NSIS installerHooks must stay on "${REQUIRED_WINDOWS_NSIS_INSTALLER_HOOK}" so stale generated runtime paths are removed before Tauri installs bundle.resources.`,
     );
   }
 }

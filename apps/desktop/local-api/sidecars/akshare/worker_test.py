@@ -19,6 +19,21 @@ class FakeFrame:
 
 
 class WorkerMappingTest(unittest.TestCase):
+    def test_parent_watchdog_detects_only_a_missing_or_reparented_parent(self):
+        with patch.object(main.os, "getppid", return_value=123), patch.object(
+            main.os, "kill"
+        ) as kill:
+            self.assertFalse(main._parent_process_disappeared(123))
+            kill.assert_called_once_with(123, 0)
+
+        with patch.object(main.os, "getppid", return_value=1):
+            self.assertTrue(main._parent_process_disappeared(123))
+
+        with patch.object(main.os, "getppid", return_value=123), patch.object(
+            main.os, "kill", side_effect=ProcessLookupError
+        ):
+            self.assertTrue(main._parent_process_disappeared(123))
+
     def test_daily_chinese_columns_map_to_canonical_fields(self):
         rows = main._canonical_rows(
             FakeFrame(

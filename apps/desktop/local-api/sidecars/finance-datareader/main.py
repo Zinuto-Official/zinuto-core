@@ -11,8 +11,11 @@ from __future__ import annotations
 
 import json
 import math
+import os
 import re
+import signal
 import sys
+import threading
 import time as clock
 from contextlib import redirect_stdout
 from datetime import datetime, time
@@ -26,6 +29,59 @@ import FinanceDataReader as fdr
 import requests
 
 PROTOCOL = "zinuto.finance-datareader.v1"
+_PARENT_PID_ENV = "ZINUTO_PYTHON_SIDECAR_PARENT_PID"
+_PARENT_WATCH_INTERVAL_SECONDS = 0.25
+
+
+def _expected_parent_pid() -> int | None:
+    raw = os.environ.get(_PARENT_PID_ENV, "").strip()
+    if not re.fullmatch(r"[1-9][0-9]{0,9}", raw):
+        return None
+    parent_pid = int(raw)
+    return parent_pid if parent_pid > 1 else None
+
+
+def _parent_process_disappeared(expected_parent_pid: int) -> bool:
+    if os.getppid() != expected_parent_pid:
+        return True
+    try:
+        os.kill(expected_parent_pid, 0)
+    except ProcessLookupError:
+        return True
+    except PermissionError:
+        return False
+    return False
+
+
+def _terminate_after_parent_exit() -> None:
+    # Node creates a detached POSIX process group so cancellation can reap
+    # worker grandchildren. If the Node parent is killed first, terminate that
+    # same isolated group rather than leaving a frozen sidecar behind.
+    if os.name == "posix":
+        try:
+            if os.getpgrp() == os.getpid():
+                os.killpg(os.getpgrp(), signal.SIGKILL)
+        except OSError:
+            pass
+    os._exit(0)
+
+
+def _start_parent_watchdog() -> None:
+    # Windows uses taskkill /T from the desktop parent. The detached-process
+    # case exists only on POSIX, where the worker must watch its Node parent.
+    if os.name != "posix":
+        return
+    expected_parent_pid = _expected_parent_pid()
+    if expected_parent_pid is None:
+        return
+
+    def watch_parent() -> None:
+        while True:
+            if _parent_process_disappeared(expected_parent_pid):
+                _terminate_after_parent_exit()
+            clock.sleep(_PARENT_WATCH_INTERVAL_SECONDS)
+
+    threading.Thread(target=watch_parent, name="zinuto-parent-watchdog", daemon=True).start()
 
 
 def _connector_version() -> str:
@@ -535,6 +591,7 @@ def _handle_request_line(raw_line: bytes) -> dict[str, Any]:
 
 def main() -> None:
     freeze_support()
+    _start_parent_watchdog()
     raw_line = sys.stdin.buffer.readline(MAX_REQUEST_BYTES + 1)
     response = _handle_request_line(raw_line)
     sys.stdout.write(json.dumps(response, ensure_ascii=False, separators=(",", ":")) + "\n")

@@ -21,6 +21,21 @@ class FakeFrame:
 
 
 class FinanceDataReaderWorkerTest(unittest.TestCase):
+    def test_parent_watchdog_detects_only_a_missing_or_reparented_parent(self):
+        with patch.object(main.os, "getppid", return_value=123), patch.object(
+            main.os, "kill"
+        ) as kill:
+            self.assertFalse(main._parent_process_disappeared(123))
+            kill.assert_called_once_with(123, 0)
+
+        with patch.object(main.os, "getppid", return_value=1):
+            self.assertTrue(main._parent_process_disappeared(123))
+
+        with patch.object(main.os, "getppid", return_value=123), patch.object(
+            main.os, "kill", side_effect=ProcessLookupError
+        ):
+            self.assertTrue(main._parent_process_disappeared(123))
+
     def test_rejects_fred_and_ecos_before_reader_dispatch(self):
         for symbol in ("FRED:DFF", "ECOS:722Y001"):
             with self.assertRaises(main.WorkerError) as context:

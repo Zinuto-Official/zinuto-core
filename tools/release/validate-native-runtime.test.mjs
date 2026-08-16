@@ -120,15 +120,19 @@ test('Tauri build preparation stages the sidecar before validating declared reso
   ), 'utf8');
   for (const fragment of [
     'RMDir /r "$INSTDIR\\market-data-acquisition"',
-    'SetOutPath "$INSTDIR\\market-data-acquisition"',
-    'gen\\market-data-acquisition\\*',
+    'RMDir /r "$INSTDIR\\node-runtime"',
   ]) {
     assert.equal(
       windowsNsisHook.includes(fragment),
       true,
-      `Windows NSIS hook must preserve the market-data sidecar resources: ${fragment}`,
+      `Windows NSIS hook must remove stale generated runtime resources: ${fragment}`,
     );
   }
+  assert.doesNotMatch(
+    windowsNsisHook,
+    /^\s*(?:File|SetOutPath)\b/mu,
+    'Windows NSIS hook must not copy runtime bytes that Tauri bundle.resources already installs',
+  );
 
   const windowsInstallerValidator = fs.readFileSync(new URL(
     './validate-windows-nsis-installer.mjs',

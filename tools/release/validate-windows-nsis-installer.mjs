@@ -47,12 +47,12 @@ const REQUIRED_INSTALLED_FILES = [
 const REQUIRED_HOOK_FRAGMENTS = [
   'NSIS_HOOK_PREINSTALL',
   'NSIS_HOOK_PREUNINSTALL',
-  'gen\\runtime-manifest.json',
-  'gen\\backend-runtime\\apps',
-  'gen\\backend-runtime\\node_modules',
-  'gen\\backtest-engine',
-  'gen\\market-data-acquisition',
-  'runtime\\node\\bin\\node.exe',
+  'Delete "$INSTDIR\\runtime-manifest.json"',
+  'RMDir /r "$INSTDIR\\apps"',
+  'RMDir /r "$INSTDIR\\node_modules"',
+  'RMDir /r "$INSTDIR\\backtest-engine"',
+  'RMDir /r "$INSTDIR\\market-data-acquisition"',
+  'RMDir /r "$INSTDIR\\node-runtime"',
 ];
 
 const normalizeForDisplay = (targetPath) =>
@@ -199,6 +199,11 @@ const validateNsisHookWiring = () => {
       );
     }
   });
+  if (/^\s*(?:File|SetOutPath)\b/mu.test(hookText)) {
+    throw new Error(
+      `Windows NSIS runtime resource hook must only remove stale paths; Tauri bundle.resources owns payload installation: ${WINDOWS_NSIS_HOOK_PATH}`,
+    );
+  }
 
   const generatedNsisScript = readText(GENERATED_NSIS_SCRIPT_PATH, 'generated NSIS installer script');
   if (!generatedNsisScript.includes(path.basename(REQUIRED_WINDOWS_NSIS_INSTALLER_HOOK))) {

@@ -145,6 +145,12 @@ export const pythonSidecarWorkerEnvironment = (
   );
 };
 
+const pythonSidecarParentWatchdogEnvironment = (): NodeJS.ProcessEnv => (
+  process.platform === 'win32'
+    ? {}
+    : { ZINUTO_PYTHON_SIDECAR_PARENT_PID: String(process.pid) }
+);
+
 const signalChildTree = (
   target: ChildProcess,
   signalName: NodeJS.Signals,
@@ -174,7 +180,10 @@ const forceKillChildTree = (target: ChildProcess): void => {
         shell: false,
         windowsHide: true,
         stdio: 'ignore',
-        env: pythonSidecarWorkerEnvironment(process.env),
+        env: {
+          ...pythonSidecarWorkerEnvironment(process.env),
+          ...pythonSidecarParentWatchdogEnvironment(),
+        },
       },
     );
     killer.once('error', () => signalChildTree(target, 'SIGKILL'));
@@ -218,7 +227,10 @@ export const executePythonSidecar = async ({
     windowsHide: true,
     detached: process.platform !== 'win32',
     stdio: ['pipe', 'pipe', 'pipe'],
-    env: pythonSidecarWorkerEnvironment(process.env),
+    env: {
+      ...pythonSidecarWorkerEnvironment(process.env),
+      ...pythonSidecarParentWatchdogEnvironment(),
+    },
   });
   const stdout: Buffer[] = [];
   let stdoutBytes = 0;
