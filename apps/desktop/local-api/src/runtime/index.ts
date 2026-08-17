@@ -191,6 +191,12 @@ let marketRuntime: null | {
 } = null;
 let apiRouter: express.Router | null = null;
 const desktopApiBasePath = DESKTOP_LOCAL_API_BASE_PATH;
+const BACKTEST_RECOVERY_RETRY_DELAY_MS = 250;
+
+const waitForBacktestRecoveryRetry = (): Promise<void> =>
+  new Promise((resolve) => {
+    setTimeout(resolve, BACKTEST_RECOVERY_RETRY_DELAY_MS);
+  });
 
 if (!STARTUP_PREFLIGHT_STATUS.startupAllowed) {
   // eslint-disable-next-line no-console
@@ -320,10 +326,18 @@ if (STARTUP_PREFLIGHT_STATUS.startupAllowed) {
         return false;
       }
     };
-    // eslint-disable-next-line no-await-in-loop
+    // A failed recovery can be caused by a transient SQLite/native-module
+    // boundary. Give the first attempt time to release its handles before the
+    // bounded retry, while keeping startup deterministic and finite.
     if (!(await recoverBacktestBatchesOnce())) {
-      // eslint-disable-next-line no-await-in-loop
-      await recoverBacktestBatchesOnce();
+      await waitForBacktestRecoveryRetry();
+      if (!(await recoverBacktestBatchesOnce())) {
+        // eslint-disable-next-line no-console
+        console.error(
+          '[zinuto-backend] interrupted backtest batch recovery failed after retry',
+          { retryDelayMs: BACKTEST_RECOVERY_RETRY_DELAY_MS },
+        );
+      }
     }
     backtestRuntime = { stop: backtestRuntimeModule.stopBacktestRuntime };
     specialTrainingModule.ensureDefaultSpecialTrainingQuestionBankSeed();
