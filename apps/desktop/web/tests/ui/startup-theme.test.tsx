@@ -329,8 +329,17 @@ test("desktop startup bootstraps viewport before mounting app shell", () => {
   assert.match(rootBootstrapSource, /phase:\s*"pending"/u);
   assert.match(rootBootstrapSource, /<AppRootBootShell\s*\/>/u);
   assert.match(rootBootstrapSource, /<StartupExitOverlay>/u);
+  assert.match(rootBootstrapSource, /ensurePreferencesLocale/u);
+  assert.match(rootBootstrapSource, /await ensurePreferencesLocale\(normalized\)/u);
+  assert.match(
+    rootBootstrapSource,
+    /await ensurePreferencesLocale\(recoveredPreferences\.preferences\)/u,
+  );
   assert.match(rootBootstrapSource, /preferences:\s*normalized/u);
-  assert.match(rootBootstrapSource, /preferences:\s*buildRuntimeFailureFallbackBootPreferences\(\)/u);
+  assert.match(
+    rootBootstrapSource,
+    /const fallbackPreferences = buildRuntimeFailureFallbackBootPreferences\(\)/u,
+  );
   assert.doesNotMatch(rootBootstrapSource, /preferences:\s*current\.preferences/u);
   assert.doesNotMatch(rootBootstrapSource, /preferences:\s*null/u);
   assert.doesNotMatch(viewportApiSource, /DESKTOP_VIEWPORT_METRICS_CHANGED_EVENT/u);

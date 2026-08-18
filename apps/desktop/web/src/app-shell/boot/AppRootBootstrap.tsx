@@ -12,6 +12,13 @@ import {
 import { AppRootBootShell } from "@/app-shell/AppRootBootShell";
 import { AppRootRuntime } from "@/app-shell/runtime/AppRootRuntime";
 import { StartupExitOverlay } from "@/app-shell/boot/StartupExitOverlay";
+import { getCurrentUiLanguage } from "@/frontend-kernel/i18n/localeState";
+import { loadLocaleWithFallback } from "@/frontend-kernel/preReactBootstrap";
+import {
+  APP_UI_LANGUAGES,
+  type AppUiLanguage,
+} from "@/ui/config/appUiLanguage";
+import { ensureLocaleCatalog } from "@zinuto/shared/i18n";
 import {
   establishRecoveredPreferencesPersistenceRebase,
   mergeRecoveredRuntimePreferences,
@@ -24,6 +31,37 @@ import {
 const APP_ROOT_BOOT_PREFERENCES_TIMEOUT_MS = 2_000;
 const APP_ROOT_BOOT_PREFERENCES_RETRY_DELAYS_MS = [0] as const;
 const APP_ROOT_BOOT_PREFERENCES_RECOVERY_RETRY_MS = 5_000;
+
+const resolveBootUiLanguage = (
+  uiSettings: NormalizedAppPreferences["uiSettings"],
+): AppUiLanguage => {
+  const persistedLanguage = uiSettings.language;
+  const persistedSource =
+    uiSettings.languageSource === "USER" ||
+    uiSettings.languageSource === "SYSTEM"
+      ? uiSettings.languageSource
+      : persistedLanguage
+        ? "USER"
+        : "SYSTEM";
+  if (
+    persistedSource === "USER" &&
+    APP_UI_LANGUAGES.includes(persistedLanguage as AppUiLanguage)
+  ) {
+    return persistedLanguage as AppUiLanguage;
+  }
+  return getCurrentUiLanguage();
+};
+
+const ensurePreferencesLocale = async (
+  preferences: NormalizedAppPreferences,
+): Promise<void> => {
+  const language = resolveBootUiLanguage(preferences.uiSettings);
+  await loadLocaleWithFallback({
+    loadPrimaryLocale: () => ensureLocaleCatalog(language),
+    loadFallbackLocale:
+      language === "en" ? undefined : () => ensureLocaleCatalog("en"),
+  });
+};
 
 type AppRootBootState =
   | { phase: "pending" }
@@ -91,6 +129,7 @@ export const AppRootBootstrap = () => {
           const recoveredPreferences = mergeRecoveredRuntimePreferences(
             normalized,
           );
+          await ensurePreferencesLocale(recoveredPreferences.preferences);
           writeCachedAppPreferencesSnapshot(
             recoveredPreferences.preferences,
           );
@@ -158,6 +197,7 @@ export const AppRootBootstrap = () => {
         }
         try {
           const normalized = await loadRuntimeBootPreferences();
+          await ensurePreferencesLocale(normalized);
           if (disposed) {
             return;
           }
@@ -174,9 +214,15 @@ export const AppRootBootstrap = () => {
       if (disposed) {
         return;
       }
+      const fallbackPreferences = buildRuntimeFailureFallbackBootPreferences();
+      try {
+        await ensurePreferencesLocale(fallbackPreferences);
+      } catch (error) {
+        console.error("[zinuto-startup] fallback locale catalog failed", error);
+      }
       setBootState({
         phase: "ready",
-        preferences: buildRuntimeFailureFallbackBootPreferences(),
+        preferences: fallbackPreferences,
         preferencesLoadedFromRuntime: false,
       });
       void recoverRuntimePreferences();
