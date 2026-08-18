@@ -119,6 +119,12 @@ export type VendorIconName =
 
 const DEFAULT_SVG_CONFIG: SVGProps<SVGSVGElement> = {
   viewBox: "0 0 24 24",
+  // Keep the first paint bounded while a lazily loaded workspace stylesheet is
+  // still being applied. Without intrinsic dimensions, an SVG falls back to
+  // the browser's 300x150 replaced-element size and briefly flashes at full
+  // page scale during the first tab switch.
+  width: "1em",
+  height: "1em",
   "aria-hidden": true,
   fill: "none",
   stroke: "currentColor",
