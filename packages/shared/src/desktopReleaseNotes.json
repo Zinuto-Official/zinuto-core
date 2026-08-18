@@ -1,37 +1,42 @@
 {
   "schemaVersion": 1,
-  "version": "2.0.7",
+  "version": "2.0.8",
   "publishedAt": "2026-08-18T00:00:00.000Z",
   "releaseHighlights": {
     "en": [
       "Windows now uses a consistent themed title bar for the main window, startup screens, and secondary windows.",
       "Onboarding falls back to an in-app guide if its companion window cannot become ready.",
       "User-started CCXT downloads on Windows can use the enabled system HTTP or HTTPS proxy without changing other network traffic.",
-      "Fixed Microsoft Store startup by packaging the Windows backend Node runtime with the app."
+      "Fixed Microsoft Store startup by packaging the Windows backend Node runtime with the app.",
+      "Desktop shutdown now confirms once and exits quickly without waiting on backend cleanup."
     ],
     "zh-CN": [
       "Windows 的主窗口、启动界面和辅助窗口现在使用一致的主题标题栏。",
       "如果引导辅助窗口未能就绪，首次使用引导会自动改为应用内显示。",
       "Windows 上由用户主动发起的 CCXT 下载可以使用已启用的系统 HTTP 或 HTTPS 代理，不影响其他网络流量。",
-      "修复了 Microsoft Store 版 Windows 应用未随包提供后端 Node 运行时而无法启动的问题。"
+      "修复了 Microsoft Store 版 Windows 应用未随包提供后端 Node 运行时而无法启动的问题。",
+      "桌面端退出现在只确认一次，并会快速退出，不再等待后端清理完成。"
     ],
     "ja": [
       "Windows のメインウィンドウ、起動画面、補助ウィンドウで、テーマに合った統一タイトルバーを使用するようになりました。",
       "ガイド用の補助ウィンドウを準備できない場合は、オンボーディングをアプリ内表示へ自動的に切り替えます。",
       "Windows でユーザーが開始した CCXT ダウンロードは、ほかの通信を変更せず、有効なシステム HTTP または HTTPS プロキシを利用できます。",
-      "Microsoft Store 版 Windows アプリで、バックエンドの Node ランタイムがパッケージに含まれず起動できない問題を修正しました。"
+      "Microsoft Store 版 Windows アプリで、バックエンドの Node ランタイムがパッケージに含まれず起動できない問題を修正しました。",
+      "デスクトップの終了確認を一度だけ行い、バックエンドの後処理を待たずにすばやく終了するようにしました。"
     ],
     "ko": [
       "Windows의 기본 창, 시작 화면, 보조 창에 테마와 일치하는 제목 표시줄을 일관되게 적용했습니다.",
       "안내용 보조 창이 준비되지 않으면 온보딩이 앱 내부 안내 화면으로 자동 전환됩니다.",
       "Windows에서 사용자가 시작한 CCXT 다운로드는 다른 네트워크 트래픽을 바꾸지 않고 활성화된 시스템 HTTP 또는 HTTPS 프록시를 사용할 수 있습니다.",
-      "Microsoft Store용 Windows 앱에 백엔드 Node 런타임이 포함되지 않아 시작할 수 없던 문제를 수정했습니다."
+      "Microsoft Store용 Windows 앱에 백엔드 Node 런타임이 포함되지 않아 시작할 수 없던 문제를 수정했습니다.",
+      "데스크톱 종료 확인을 한 번만 표시하고 백엔드 정리를 기다리지 않고 빠르게 종료하도록 개선했습니다."
     ],
     "es": [
       "Windows ahora usa una barra de título coherente con el tema en la ventana principal, el inicio y las ventanas secundarias.",
       "Si la ventana auxiliar no llega a estar lista, la guía inicial se muestra automáticamente dentro de la aplicación.",
       "Las descargas de CCXT iniciadas por el usuario en Windows pueden usar el proxy HTTP o HTTPS habilitado en el sistema sin modificar el resto del tráfico.",
-      "Se corrigió el inicio desde Microsoft Store al incluir el entorno Node del backend de Windows en la aplicación."
+      "Se corrigió el inicio desde Microsoft Store al incluir el entorno Node del backend de Windows en la aplicación.",
+      "El cierre del escritorio ahora confirma una sola vez y termina rápidamente sin esperar la limpieza del backend."
     ]
   }
 }
