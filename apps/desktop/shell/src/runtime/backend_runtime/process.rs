@@ -207,6 +207,53 @@ pub(super) fn terminate_backend_pid(pid: u32) -> bool {
     !matches!(pid_existence(pid), ProcessExistence::Exists)
 }
 
+#[cfg(unix)]
+pub(super) fn request_backend_pid_shutdown(pid: u32) -> bool {
+    if !pid_exists(pid) {
+        return true;
+    }
+    send_signal_to_process_group(pid, libc::SIGTERM) || send_signal_to_pid(pid, libc::SIGTERM)
+}
+
+#[cfg(windows)]
+pub(super) fn request_backend_pid_shutdown(pid: u32) -> bool {
+    if pid_existence(pid) == ProcessExistence::Missing {
+        return true;
+    }
+    let mut command = Command::new("taskkill");
+    suppress_windows_console_window(&mut command);
+    command
+        .args(["/PID", &pid.to_string(), "/T"])
+        .status()
+        .map(|status| status.success())
+        .unwrap_or(false)
+}
+
+pub(super) fn request_tracked_child_shutdown(child: &mut Child) -> bool {
+    if wait_for_tracked_child_exit(child, 0) {
+        return true;
+    }
+    let pid = child.id();
+    #[cfg(unix)]
+    {
+        send_signal_to_process_group(pid, libc::SIGTERM) || send_signal_to_pid(pid, libc::SIGTERM)
+    }
+    #[cfg(windows)]
+    {
+        let mut command = Command::new("taskkill");
+        suppress_windows_console_window(&mut command);
+        command
+            .args(["/PID", &pid.to_string(), "/T"])
+            .status()
+            .map(|status| status.success())
+            .unwrap_or(false)
+    }
+    #[cfg(all(not(unix), not(windows)))]
+    {
+        child.kill().is_ok()
+    }
+}
+
 pub(super) fn terminate_tracked_child_process(child: &mut Child) {
     #[cfg(unix)]
     {

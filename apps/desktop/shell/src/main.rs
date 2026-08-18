@@ -15,13 +15,14 @@ use crate::bridge::{
     ai_conversion_guide, csv_folder_staging, market_data_acquisition_output, BridgeCommandError,
 };
 use crate::runtime::backend_runtime;
-use std::time::Duration;
+use std::sync::Mutex;
+use std::time::{Duration, Instant};
 use tauri::menu::MenuBuilder;
 use tauri::tray::{MouseButton, TrayIconBuilder, TrayIconEvent};
 use tauri::webview::PageLoadEvent;
 #[cfg(target_os = "macos")]
 use tauri::ActivationPolicy;
-use tauri::{Listener, Manager};
+use tauri::{Emitter, Listener, Manager};
 #[cfg(windows)]
 use tauri::{LogicalSize, Size};
 
@@ -30,8 +31,197 @@ const MAIN_WINDOW_DISPLAY_FALLBACK_DELAYS_MS: &[u64] = &[3_000];
 const TRAY_ICON_ID: &str = "zinuto-main-tray";
 const TRAY_MENU_OPEN_ID: &str = "zinuto-tray-open";
 const TRAY_MENU_QUIT_ID: &str = "zinuto-tray-quit";
+const DESKTOP_MAIN_WINDOW_CLOSE_REQUESTED_EVENT: &str =
+    "zinuto://v1/desktop-main-window-close-requested";
+const DESKTOP_CLOSE_HANDLER_LEASE_MS: u64 = 5_000;
+const DESKTOP_CLOSE_REQUEST_ACK_TIMEOUT_MS: u64 = 1_500;
+const DESKTOP_CLOSE_REQUEST_KEEPALIVE_TIMEOUT_MS: u64 = 5_000;
 #[cfg(target_os = "macos")]
 const MACOS_STATUS_BAR_ICON_BYTES: &[u8] = include_bytes!("../icons/status-bar-template.png");
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum DesktopShutdownAction {
+    Exit,
+    Restart,
+}
+
+#[derive(Default)]
+struct DesktopShutdownCoordinator(Mutex<Option<DesktopShutdownAction>>);
+
+impl DesktopShutdownCoordinator {
+    fn claim(&self, action: DesktopShutdownAction) -> bool {
+        let mut current = self
+            .0
+            .lock()
+            .unwrap_or_else(|poisoned| poisoned.into_inner());
+        if current.is_some() {
+            return false;
+        }
+        *current = Some(action);
+        true
+    }
+}
+
+#[derive(Clone, Debug)]
+struct DesktopCloseRequest {
+    request_id: String,
+    created_at: Instant,
+    acknowledged_at: Option<Instant>,
+    last_keepalive: Instant,
+}
+
+#[derive(Default)]
+struct DesktopCloseRequestState {
+    handler_last_seen: Option<Instant>,
+    pending: Option<DesktopCloseRequest>,
+    next_request_id: u64,
+}
+
+#[derive(Default)]
+struct DesktopCloseRequestCoordinator(Mutex<DesktopCloseRequestState>);
+
+enum DesktopCloseRequestWatchState {
+    Resolved,
+    Waiting,
+    Fallback,
+}
+
+impl DesktopCloseRequestCoordinator {
+    fn set_handler_active(&self, active: bool) {
+        let mut state = self
+            .0
+            .lock()
+            .unwrap_or_else(|poisoned| poisoned.into_inner());
+        state.handler_last_seen = active.then(Instant::now);
+    }
+
+    fn handler_is_alive(&self) -> bool {
+        let state = self
+            .0
+            .lock()
+            .unwrap_or_else(|poisoned| poisoned.into_inner());
+        state
+            .handler_last_seen
+            .map(|last_seen| {
+                last_seen.elapsed() < Duration::from_millis(DESKTOP_CLOSE_HANDLER_LEASE_MS)
+            })
+            .unwrap_or(false)
+    }
+
+    fn begin_request(&self) -> (String, bool) {
+        let mut state = self
+            .0
+            .lock()
+            .unwrap_or_else(|poisoned| poisoned.into_inner());
+        if let Some(pending) = &state.pending {
+            return (pending.request_id.clone(), false);
+        }
+        state.next_request_id = state.next_request_id.saturating_add(1);
+        let now = Instant::now();
+        let request_id = format!("close-{}", state.next_request_id);
+        state.pending = Some(DesktopCloseRequest {
+            request_id: request_id.clone(),
+            created_at: now,
+            acknowledged_at: None,
+            last_keepalive: now,
+        });
+        (request_id, true)
+    }
+
+    fn acknowledge(&self, request_id: &str) {
+        let mut state = self
+            .0
+            .lock()
+            .unwrap_or_else(|poisoned| poisoned.into_inner());
+        if let Some(pending) = state.pending.as_mut() {
+            if pending.request_id == request_id {
+                let now = Instant::now();
+                pending.acknowledged_at = Some(now);
+                pending.last_keepalive = now;
+                state.handler_last_seen = Some(now);
+            }
+        }
+    }
+
+    fn keepalive(&self, request_id: &str) {
+        let mut state = self
+            .0
+            .lock()
+            .unwrap_or_else(|poisoned| poisoned.into_inner());
+        if let Some(pending) = state.pending.as_mut() {
+            if pending.request_id == request_id {
+                let now = Instant::now();
+                pending.last_keepalive = now;
+                state.handler_last_seen = Some(now);
+            }
+        }
+    }
+
+    fn resolve(&self, request_id: &str) -> bool {
+        let mut state = self
+            .0
+            .lock()
+            .unwrap_or_else(|poisoned| poisoned.into_inner());
+        if state
+            .pending
+            .as_ref()
+            .map(|pending| pending.request_id == request_id)
+            .unwrap_or(false)
+        {
+            state.pending = None;
+            return true;
+        }
+        false
+    }
+
+    fn resolve_pending(&self) {
+        let mut state = self
+            .0
+            .lock()
+            .unwrap_or_else(|poisoned| poisoned.into_inner());
+        state.pending = None;
+    }
+
+    fn watch_state(&self, request_id: &str) -> DesktopCloseRequestWatchState {
+        let state = self
+            .0
+            .lock()
+            .unwrap_or_else(|poisoned| poisoned.into_inner());
+        let Some(pending) = state.pending.as_ref() else {
+            return DesktopCloseRequestWatchState::Resolved;
+        };
+        if pending.request_id != request_id {
+            return DesktopCloseRequestWatchState::Resolved;
+        }
+        if pending.acknowledged_at.is_none()
+            && pending.created_at.elapsed()
+                >= Duration::from_millis(DESKTOP_CLOSE_REQUEST_ACK_TIMEOUT_MS)
+        {
+            return DesktopCloseRequestWatchState::Fallback;
+        }
+        if pending.acknowledged_at.is_some()
+            && pending.last_keepalive.elapsed()
+                >= Duration::from_millis(DESKTOP_CLOSE_REQUEST_KEEPALIVE_TIMEOUT_MS)
+        {
+            return DesktopCloseRequestWatchState::Fallback;
+        }
+        DesktopCloseRequestWatchState::Waiting
+    }
+}
+
+#[derive(Clone, Copy, Debug, serde::Deserialize)]
+#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
+enum DesktopCloseRequestResolution {
+    Cancel,
+    Quit,
+    MinimizeToTray,
+}
+
+#[derive(Clone, serde::Serialize)]
+#[serde(rename_all = "camelCase")]
+struct DesktopMainWindowCloseRequestedPayload {
+    request_id: String,
+}
 #[tauri::command(rename_all = "camelCase")]
 async fn stage_csv_folder_for_import(
     app: tauri::AppHandle,
@@ -110,33 +300,45 @@ fn desktop_release_channel() -> &'static str {
 }
 
 #[tauri::command(rename_all = "camelCase")]
+fn desktop_main_window_close_handler_status(app: tauri::AppHandle, active: bool) {
+    if let Some(coordinator) = app.try_state::<DesktopCloseRequestCoordinator>() {
+        coordinator.set_handler_active(active);
+    }
+}
+
+#[tauri::command(rename_all = "camelCase")]
+fn desktop_main_window_close_request_ack(app: tauri::AppHandle, request_id: String) {
+    if let Some(coordinator) = app.try_state::<DesktopCloseRequestCoordinator>() {
+        coordinator.acknowledge(&request_id);
+    }
+}
+
+#[tauri::command(rename_all = "camelCase")]
+fn desktop_main_window_close_request_keepalive(app: tauri::AppHandle, request_id: String) {
+    if let Some(coordinator) = app.try_state::<DesktopCloseRequestCoordinator>() {
+        coordinator.keepalive(&request_id);
+    }
+}
+
+#[tauri::command(rename_all = "camelCase")]
+fn desktop_main_window_close_request_resolve(
+    app: tauri::AppHandle,
+    request_id: String,
+    _action: DesktopCloseRequestResolution,
+) {
+    if let Some(coordinator) = app.try_state::<DesktopCloseRequestCoordinator>() {
+        coordinator.resolve(&request_id);
+    }
+}
+
+#[tauri::command(rename_all = "camelCase")]
 fn desktop_app_quit(app: tauri::AppHandle) {
-    // Run shutdown off the IPC responder so the command returns immediately;
-    // the process exit is scheduled on the main thread after shutdown.
-    let shutdown_app = app.clone();
-    let exit_app = app.clone();
-    std::thread::spawn(move || {
-        shutdown_desktop_runtime(&shutdown_app);
-        let exit_main_app = exit_app.clone();
-        let _ = exit_app.run_on_main_thread(move || {
-            exit_main_app.exit(0);
-        });
-    });
+    request_desktop_shutdown(app, DesktopShutdownAction::Exit);
 }
 
 #[tauri::command(rename_all = "camelCase")]
 fn desktop_app_restart(app: tauri::AppHandle) {
-    // Same async pattern as desktop_app_quit: shutdown must not block the
-    // command response, and request_restart runs on the main thread.
-    let shutdown_app = app.clone();
-    let restart_app = app.clone();
-    std::thread::spawn(move || {
-        shutdown_desktop_runtime(&shutdown_app);
-        let restart_main_app = restart_app.clone();
-        let _ = restart_app.run_on_main_thread(move || {
-            restart_main_app.request_restart();
-        });
-    });
+    request_desktop_shutdown(app, DesktopShutdownAction::Restart);
 }
 
 #[tauri::command(rename_all = "camelCase")]
@@ -295,10 +497,152 @@ fn handle_main_webview_page_load(webview: &tauri::Webview, event: PageLoadEvent)
     }
 }
 
-fn shutdown_desktop_runtime(app: &tauri::AppHandle) {
+fn schedule_desktop_exit(app: &tauri::AppHandle) {
+    let exit_app = app.clone();
+    if let Err(error) = app.run_on_main_thread(move || exit_app.exit(0)) {
+        eprintln!("[zinuto] failed to schedule desktop exit on the main thread: {error}");
+        app.exit(0);
+    }
+}
+
+fn schedule_desktop_restart(app: &tauri::AppHandle) {
+    let restart_app = app.clone();
+    if let Err(error) = app.run_on_main_thread(move || restart_app.request_restart()) {
+        eprintln!("[zinuto] failed to schedule desktop restart on the main thread: {error}");
+        app.request_restart();
+    }
+}
+
+fn begin_desktop_shutdown(
+    app: &tauri::AppHandle,
+    action: DesktopShutdownAction,
+    dispatch_action: bool,
+) -> bool {
+    let Some(coordinator) = app.try_state::<DesktopShutdownCoordinator>() else {
+        eprintln!("[zinuto] shutdown coordinator is unavailable");
+        return false;
+    };
+    if !coordinator.claim(action) {
+        return false;
+    }
+
+    eprintln!("[zinuto] desktop shutdown accepted: action={action:?}, dispatch={dispatch_action}");
+
+    // This atomic flag is the fast safety boundary for startup and watchdog
+    // work. It must be set before the process exit is requested, while all
+    // potentially blocking backend work remains off the event loop.
     backend_runtime::mark_backend_shutdown_requested(app);
-    transport::shutdown_backend_http_transport(app);
-    backend_runtime::terminate_tracked_backend_on_exit(app);
+    if let Some(close_coordinator) = app.try_state::<DesktopCloseRequestCoordinator>() {
+        close_coordinator.resolve_pending();
+    }
+
+    match action {
+        DesktopShutdownAction::Exit => {
+            // These operations only cancel in-process bridge work and send a
+            // non-blocking signal. Do them before scheduling app.exit so a
+            // fast native teardown cannot strand the child before its own
+            // shutdown/watchdog path gets a chance to run.
+            transport::shutdown_backend_http_transport(app);
+            backend_runtime::request_tracked_backend_shutdown(app);
+            if dispatch_action {
+                schedule_desktop_exit(app);
+            }
+        }
+        DesktopShutdownAction::Restart => {
+            transport::shutdown_backend_http_transport(app);
+            let hide_app = app.clone();
+            let _ = app.run_on_main_thread(move || {
+                if let Some(window) = hide_app.get_webview_window(MAIN_WINDOW_LABEL) {
+                    let _ = window.hide();
+                }
+            });
+
+            let cleanup_app = app.clone();
+            std::thread::spawn(move || {
+                transport::shutdown_backend_http_transport(&cleanup_app);
+                // Restart must still wait for the old backend to leave its
+                // transport before starting the replacement process, but the
+                // wait is isolated from the UI/event-loop path.
+                backend_runtime::terminate_tracked_backend_on_exit(&cleanup_app);
+                if dispatch_action {
+                    schedule_desktop_restart(&cleanup_app);
+                }
+            });
+        }
+    }
+    true
+}
+
+fn request_desktop_shutdown(app: tauri::AppHandle, action: DesktopShutdownAction) {
+    begin_desktop_shutdown(&app, action, true);
+}
+
+fn observe_desktop_exit_requested(app: &tauri::AppHandle, code: Option<i32>) {
+    let action = if code == Some(tauri::RESTART_EXIT_CODE) {
+        DesktopShutdownAction::Restart
+    } else {
+        DesktopShutdownAction::Exit
+    };
+    // The runtime is already processing an exit request here. Claim the same
+    // lifecycle and start cleanup, but never request another exit from inside
+    // this event or wait for the backend before returning.
+    begin_desktop_shutdown(app, action, false);
+}
+
+fn watch_close_request_fallback(app: tauri::AppHandle, request_id: String) {
+    std::thread::spawn(move || loop {
+        std::thread::sleep(Duration::from_millis(250));
+        let watch_state = app
+            .try_state::<DesktopCloseRequestCoordinator>()
+            .map(|coordinator| coordinator.watch_state(&request_id))
+            .unwrap_or(DesktopCloseRequestWatchState::Fallback);
+        match watch_state {
+            DesktopCloseRequestWatchState::Resolved => return,
+            DesktopCloseRequestWatchState::Waiting => continue,
+            DesktopCloseRequestWatchState::Fallback => {
+                eprintln!(
+                    "[zinuto] desktop close request {} was not serviced; falling back to quit",
+                    request_id
+                );
+                request_desktop_shutdown(app.clone(), DesktopShutdownAction::Exit);
+                return;
+            }
+        }
+    });
+}
+
+fn handle_main_window_close_requested(app: &tauri::AppHandle, api: &tauri::CloseRequestApi) {
+    if backend_runtime::backend_shutdown_requested(app) {
+        return;
+    }
+
+    let Some(close_coordinator) = app.try_state::<DesktopCloseRequestCoordinator>() else {
+        request_desktop_shutdown(app.clone(), DesktopShutdownAction::Exit);
+        return;
+    };
+    if !close_coordinator.handler_is_alive() {
+        eprintln!("[zinuto] desktop close handler is unavailable; falling back to quit");
+        request_desktop_shutdown(app.clone(), DesktopShutdownAction::Exit);
+        return;
+    }
+
+    api.prevent_close();
+    let (request_id, is_new_request) = close_coordinator.begin_request();
+    if !is_new_request {
+        return;
+    }
+
+    if let Err(error) = app.emit(
+        DESKTOP_MAIN_WINDOW_CLOSE_REQUESTED_EVENT,
+        DesktopMainWindowCloseRequestedPayload {
+            request_id: request_id.clone(),
+        },
+    ) {
+        eprintln!("[zinuto] failed to emit desktop close request: {error}");
+        request_desktop_shutdown(app.clone(), DesktopShutdownAction::Exit);
+        return;
+    }
+    watch_close_request_fallback(app.clone(), request_id);
 }
 
 #[cfg(target_os = "macos")]
@@ -350,8 +694,7 @@ fn setup_desktop_tray(app: &tauri::App) -> tauri::Result<()> {
         .on_menu_event(|app, event| match event.id().as_ref() {
             TRAY_MENU_OPEN_ID => restore_main_window(app),
             TRAY_MENU_QUIT_ID => {
-                shutdown_desktop_runtime(app);
-                app.exit(0);
+                request_desktop_shutdown(app.clone(), DesktopShutdownAction::Exit);
             }
             _ => {}
         });
@@ -457,6 +800,10 @@ fn main() {
         commit_market_data_acquisition_output,
         backend_startup_preflight_status,
         desktop_release_channel,
+        desktop_main_window_close_handler_status,
+        desktop_main_window_close_request_ack,
+        desktop_main_window_close_request_keepalive,
+        desktop_main_window_close_request_resolve,
         desktop_app_quit,
         desktop_app_restart,
         main_webview_busy_signal,
@@ -470,6 +817,8 @@ fn main() {
             handle_main_webview_page_load(webview, payload.event());
         })
         .setup(|app| {
+            app.manage(DesktopShutdownCoordinator::default());
+            app.manage(DesktopCloseRequestCoordinator::default());
             backend_runtime::initialize_backend_runtime_state(app);
             transport::initialize_backend_http_registry(app);
             setup_desktop_tray(app)?;
@@ -551,15 +900,16 @@ fn main() {
             event: tauri::WindowEvent::CloseRequested { api, .. },
             ..
         } if label == MAIN_WINDOW_LABEL => {
-            api.prevent_close();
+            handle_main_window_close_requested(app, &api);
         }
         #[cfg(target_os = "macos")]
         tauri::RunEvent::Reopen { .. } => {
             restore_main_window(app);
         }
-        tauri::RunEvent::ExitRequested { .. } | tauri::RunEvent::Exit => {
-            shutdown_desktop_runtime(app);
+        tauri::RunEvent::ExitRequested { code, .. } => {
+            observe_desktop_exit_requested(app, code);
         }
+        tauri::RunEvent::Exit => {}
         _ => {}
     });
 }
@@ -624,5 +974,55 @@ mod main_window_viewport_tests {
         assert!(!should_restore_main_window_for_display_fallback(Some(true)));
         assert!(should_restore_main_window_for_display_fallback(Some(false)));
         assert!(should_restore_main_window_for_display_fallback(None));
+    }
+}
+
+#[cfg(test)]
+mod desktop_close_lifecycle_tests {
+    use super::{
+        DesktopCloseRequestCoordinator, DesktopCloseRequestWatchState, DesktopShutdownAction,
+        DesktopShutdownCoordinator,
+    };
+
+    #[test]
+    fn shutdown_coordinator_accepts_only_the_first_owner() {
+        let coordinator = DesktopShutdownCoordinator::default();
+
+        assert!(coordinator.claim(DesktopShutdownAction::Exit));
+        assert!(!coordinator.claim(DesktopShutdownAction::Restart));
+    }
+
+    #[test]
+    fn close_request_is_deduplicated_and_resolvable() {
+        let coordinator = DesktopCloseRequestCoordinator::default();
+        coordinator.set_handler_active(true);
+
+        let (first_id, first_request) = coordinator.begin_request();
+        let (second_id, second_request) = coordinator.begin_request();
+
+        assert!(coordinator.handler_is_alive());
+        assert!(first_request);
+        assert!(!second_request);
+        assert_eq!(first_id, second_id);
+
+        coordinator.acknowledge(&first_id);
+        assert!(matches!(
+            coordinator.watch_state(&first_id),
+            DesktopCloseRequestWatchState::Waiting
+        ));
+        assert!(coordinator.resolve(&first_id));
+        assert!(matches!(
+            coordinator.watch_state(&first_id),
+            DesktopCloseRequestWatchState::Resolved
+        ));
+        assert!(!coordinator.resolve(&first_id));
+    }
+
+    #[test]
+    fn inactive_close_handler_is_not_considered_alive() {
+        let coordinator = DesktopCloseRequestCoordinator::default();
+        coordinator.set_handler_active(false);
+
+        assert!(!coordinator.handler_is_alive());
     }
 }

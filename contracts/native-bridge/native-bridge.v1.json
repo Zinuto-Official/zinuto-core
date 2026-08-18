@@ -108,6 +108,60 @@
       "response": "null"
     },
     {
+      "name": "desktop_main_window_close_handler_status",
+      "request": {
+        "active": "boolean"
+      },
+      "response": "null"
+    },
+    {
+      "name": "desktop_main_window_close_request_ack",
+      "request": {
+        "requestId": "string"
+      },
+      "constraints": {
+        "requestId": {
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "response": "null"
+    },
+    {
+      "name": "desktop_main_window_close_request_keepalive",
+      "request": {
+        "requestId": "string"
+      },
+      "constraints": {
+        "requestId": {
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "response": "null"
+    },
+    {
+      "name": "desktop_main_window_close_request_resolve",
+      "request": {
+        "requestId": "string",
+        "action": "CANCEL | QUIT | MINIMIZE_TO_TRAY"
+      },
+      "constraints": {
+        "requestId": {
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "action": {
+          "enum": [
+            "CANCEL",
+            "QUIT",
+            "MINIMIZE_TO_TRAY"
+          ]
+        }
+      },
+      "response": "null"
+    },
+    {
       "name": "main_webview_busy_signal",
       "request": {
         "busy": "boolean"
@@ -397,6 +451,18 @@
       "constraints": {
         "language": {
           "enum": ["en", "zh-CN", "ja", "ko", "es"]
+        }
+      }
+    },
+    {
+      "name": "zinuto://v1/desktop-main-window-close-requested",
+      "payload": {
+        "requestId": "string"
+      },
+      "constraints": {
+        "requestId": {
+          "minLength": 1,
+          "maxLength": 128
         }
       }
     }

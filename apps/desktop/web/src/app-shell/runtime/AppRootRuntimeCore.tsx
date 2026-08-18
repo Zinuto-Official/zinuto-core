@@ -20,6 +20,8 @@ import { useRuntimeSecondaryWindows } from "@/app-shell/runtime/runtimeSecondary
 import { useRuntimeGlobalOverlayHost } from "@/app-shell/runtime/runtimeGlobalOverlayHost";
 import { useRuntimeStartupRefresh } from "@/app-shell/runtime/useRuntimeStartupRefresh";
 import { RuntimeAppHost } from "@/app-shell/runtime/RuntimeAppHost";
+import { DesktopCloseBehaviorController } from "@/app-shell/DesktopCloseBehaviorController";
+import { I18nProvider } from "@/frontend-kernel/i18n";
 import { setDesktopDevTextSelectionEnabled } from "@/ui/desktopInteractionPolicy";
 
 export type AppRootRuntimeProps = {
@@ -259,28 +261,38 @@ export const AppRootRuntimeCore = ({
   });
 
   return (
-    <RuntimeAppHost
-      scope={{
-        initialUiSettings,
-        initialDataPoolRemovedSymbolsBySourceId,
-        canPersistUiSettings,
-        ...runtimeStartupState,
-        ...runtimeStartupHistoryState,
-        ...runtimeStartupPersistence,
-        ...runtimeTrainerChartSession,
-        ...runtimeTrainerMarketSettings,
-        ...runtimeTrainerPoolChartPipeline,
-        ...runtimeTrainerChartOrchestration,
-        ...runtimeFreeReplaySetup,
-        ...runtimeFreeReplayExecution,
-        ...runtimeTradingSettingsAndImport,
-        ...runtimeDataResetNavigation,
-        ...runtimeNoteEditorAndShortcuts,
-        ...runtimeWorkspaceProps,
-        ...runtimeWorkspaceBundles,
-        ...runtimeSecondaryWindows,
-        ...runtimeGlobalOverlayHost,
-      }}
-    />
+    <I18nProvider locale={runtimeStartupState.language}>
+      <DesktopCloseBehaviorController
+        desktopCloseButtonAction={runtimeStartupState.desktopCloseButtonAction}
+        setDesktopCloseButtonAction={
+          runtimeStartupState.setDesktopCloseButtonAction
+        }
+        buildUiSettings={runtimeStartupPersistence.buildUiSettingsForPersist}
+        canPersistUiSettings={canPersistUiSettings}
+      />
+      <RuntimeAppHost
+        scope={{
+          initialUiSettings,
+          initialDataPoolRemovedSymbolsBySourceId,
+          canPersistUiSettings,
+          ...runtimeStartupState,
+          ...runtimeStartupHistoryState,
+          ...runtimeStartupPersistence,
+          ...runtimeTrainerChartSession,
+          ...runtimeTrainerMarketSettings,
+          ...runtimeTrainerPoolChartPipeline,
+          ...runtimeTrainerChartOrchestration,
+          ...runtimeFreeReplaySetup,
+          ...runtimeFreeReplayExecution,
+          ...runtimeTradingSettingsAndImport,
+          ...runtimeDataResetNavigation,
+          ...runtimeNoteEditorAndShortcuts,
+          ...runtimeWorkspaceProps,
+          ...runtimeWorkspaceBundles,
+          ...runtimeSecondaryWindows,
+          ...runtimeGlobalOverlayHost,
+        }}
+      />
+    </I18nProvider>
   );
 };

@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 import { useCallback } from "react";
-import { DesktopCloseBehaviorController } from "@/app-shell/DesktopCloseBehaviorController";
 import { I18nProvider } from "@/frontend-kernel/i18n";
 import { renderRuntimeDesktopShell } from "@/app-shell/runtime/workspace-shell/runtimeDesktopShellRenderer";
 import type { UiSettings } from "@/frontend-kernel/appTypes";
@@ -176,12 +175,6 @@ export const RuntimeAppHost = ({ scope }: { scope: RuntimeAppHostScope }) => {
         utilityDialogsProps: scope.utilityDialogsProps,
         actionDialogNode: scope.actionDialogNode,
       })}
-      <DesktopCloseBehaviorController
-        desktopCloseButtonAction={scope.desktopCloseButtonAction}
-        setDesktopCloseButtonAction={scope.setDesktopCloseButtonAction}
-        buildUiSettings={scope.buildUiSettingsForPersist}
-        canPersistUiSettings={scope.canPersistUiSettings}
-      />
     </I18nProvider>
   );
 };

@@ -945,10 +945,17 @@ export const hideDesktopAppToTray = async (): Promise<void> => {
     return;
   }
   const windowModule = await loadTauriWindowModule();
-  for (const kind of DESKTOP_SECONDARY_WINDOW_KINDS) {
+  const currentWindow = windowModule.getCurrentWindow();
+  // Hide the main window first. Secondary-window reuse bookkeeping is
+  // best-effort and must never keep the user's primary window visible.
+  await currentWindow.hide().catch(() => undefined);
+
+  const hideSecondaryWindow = async (
+    kind: DesktopSecondaryWindowKind,
+  ): Promise<void> => {
     const existingWindow = await getDesktopSecondaryWindowByLabel(kind);
     if (!existingWindow) {
-      continue;
+      return;
     }
     // A window can still be native-hidden while its current revision loads.
     // Cancelling pending visibility first prevents content-ready from reopening
@@ -956,7 +963,7 @@ export const hideDesktopAppToTray = async (): Promise<void> => {
     desktopSecondaryWindowFocusRuntime.clearPending(kind);
     const isVisible = await existingWindow.isVisible().catch(() => false);
     if (!isVisible) {
-      continue;
+      return;
     }
     await existingWindow.hide().catch(() => undefined);
     markDesktopSecondaryWarmWindow(kind);
@@ -966,11 +973,13 @@ export const hideDesktopAppToTray = async (): Promise<void> => {
         () => undefined,
       );
     }
-  }
-  await windowModule
-    .getCurrentWindow()
-    .hide()
-    .catch(() => undefined);
+  };
+
+  await Promise.allSettled(
+    Array.from(DESKTOP_SECONDARY_WINDOW_KINDS).map((kind) =>
+      hideSecondaryWindow(kind).catch(() => undefined),
+    ),
+  );
 };
 
 export const quitDesktopApp = async (): Promise<void> => {

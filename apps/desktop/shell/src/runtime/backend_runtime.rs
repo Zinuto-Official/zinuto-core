@@ -60,8 +60,8 @@ use preflight::{
 };
 use process::{
     clear_starting_backend_pid, format_backend_startup_exit_status, record_starting_backend_pid,
-    take_starting_backend_pid, terminate_backend_pid, terminate_tracked_child_process,
-    tracked_backend_pid,
+    request_backend_pid_shutdown, request_tracked_child_shutdown, take_starting_backend_pid,
+    terminate_backend_pid, terminate_tracked_child_process, tracked_backend_pid,
 };
 #[cfg(windows)]
 use process::{pid_existence, ProcessExistence};
@@ -996,5 +996,21 @@ pub(crate) fn terminate_tracked_backend_on_exit(app: &tauri::AppHandle) {
     }
     if let Some(pid) = take_starting_backend_pid(app) {
         let _ = terminate_backend_pid(pid);
+    }
+}
+
+pub(crate) fn request_tracked_backend_shutdown(app: &tauri::AppHandle) {
+    clear_cached_ready_backend_transport(app);
+    if let Some(state) = app.try_state::<BackendProcess>() {
+        if let Ok(mut guard) = state.0.lock() {
+            if let Some(child) = guard.as_mut() {
+                let _ = request_tracked_child_shutdown(child);
+            }
+        } else {
+            eprintln!("[backend_runtime] mutex poisoned in request_tracked_backend_shutdown");
+        }
+    }
+    if let Some(pid) = take_starting_backend_pid(app) {
+        let _ = request_backend_pid_shutdown(pid);
     }
 }

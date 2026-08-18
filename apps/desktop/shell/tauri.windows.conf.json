@@ -13,6 +13,7 @@
     "windows": {
       "nsis": {
         "displayLanguageSelector": true,
+        "installerIcon": "icons/icon.ico",
         "installerHooks": "nsis/windows-runtime-resources.nsh"
       }
     }

@@ -61,12 +61,16 @@ test("remembered close choice is written as a ui setting without dropping existi
   );
 });
 
-test("main close controller prompts for ask and only persists remembered choices", () => {
+test("main close controller uses the native lease and commits without waiting for cleanup", () => {
   const source = readSource(
     "src/app-shell/DesktopCloseBehaviorController.tsx",
   );
   assert.match(source, /subscribeDesktopMainWindowCloseRequested/u);
-  assert.match(source, /event\.preventDefault\(\)/u);
+  assert.match(source, /acknowledgeDesktopMainWindowCloseRequest/u);
+  assert.match(source, /keepaliveDesktopMainWindowCloseRequest/u);
+  assert.match(source, /resolveDesktopMainWindowCloseRequest/u);
+  assert.match(source, /setDesktopMainWindowCloseHandlerStatus/u);
+  assert.doesNotMatch(source, /event\.preventDefault\(\)/u);
   assert.match(source, /resolveDesktopCloseRequestPlan/u);
   assert.match(source, /setDialogOpen\(true\)/u);
   assert.match(
@@ -77,14 +81,15 @@ test("main close controller prompts for ask and only persists remembered choices
     source,
     /accessibilityDescription=\{t\("desktop\.closeDialog\.description"\)\}/u,
   );
-  assert.match(source, /if \(rememberSelection\)/u);
-  assert.match(source, /api\.updateAppUiSettings/u);
+  assert.match(source, /if \(remember\)/u);
+  assert.match(source, /writeCachedAppUiSettingsSnapshot/u);
+  assert.match(source, /api\s*\.updateAppUiSettings/u);
   assert.match(source, /catch\(\(\) => undefined\)/u);
-  assert.match(source, /setDialogOpen\(true\);\s*\}\)\s*\.finally/u);
   assert.match(
     source,
-    /void runCloseAction\(plan\)\.catch\(\(\) => \{[\s\S]*setRememberSelection\(false\);[\s\S]*setDialogOpen\(true\);[\s\S]*\}\);/u,
+    /void executeDesktopClosePlan\(action, requestId\)[\s\S]*\.finally\(/u,
   );
+  assert.match(source, /clearActiveCloseRequest\(requestId\)/u);
   assert.match(source, /api\.hideDesktopAppToTray/u);
   assert.match(source, /api\.quitDesktopApp/u);
 });
@@ -112,11 +117,15 @@ test("desktop api hides secondary windows for reuse before hiding main to tray",
     /const state = desktopSecondaryWindowStateStore\.get\(kind\)[\s\S]*notifyDesktopSecondaryWindowHiddenForReuse\(state\)/u,
   );
   assert.match(source, /WINDOW_HIDDEN_FOR_REUSE/u);
-  assert.match(source, /getCurrentWindow\(\)\s*\.hide\(\)/u);
+  const mainHideIndex = source.indexOf("await currentWindow.hide()");
+  const secondaryHideIndex = source.indexOf("const hideSecondaryWindow");
+  assert.notEqual(mainHideIndex, -1);
+  assert.ok(secondaryHideIndex > mainHideIndex);
+  assert.match(source, /Promise\.allSettled\(/u);
   assert.match(source, /desktop_app_quit/u);
 });
 
-test("desktop shell close fallback does not bypass the web close behavior controller", () => {
+test("desktop shell close requests use a lease and fall back to fast quit", () => {
   const source = readDesktopShellSource("src/main.rs");
   const closeRequestedIndex = source.indexOf(
     "event: tauri::WindowEvent::CloseRequested { api, .. },",
@@ -132,8 +141,23 @@ test("desktop shell close fallback does not bypass the web close behavior contro
     exitRequestedIndex,
   );
   assert.match(mainCloseBranchSource, /label == MAIN_WINDOW_LABEL/u);
-  assert.match(mainCloseBranchSource, /api\.prevent_close\(\);/u);
-  assert.doesNotMatch(mainCloseBranchSource, /\.hide\(/u);
+  assert.match(
+    mainCloseBranchSource,
+    /handle_main_window_close_requested\(app, &api\);/u,
+  );
+  assert.match(source, /fn handle_main_window_close_requested/u);
+  assert.match(source, /handler_is_alive\(\)/u);
+  assert.match(source, /api\.prevent_close\(\);/u);
+  assert.match(source, /DESKTOP_MAIN_WINDOW_CLOSE_REQUESTED_EVENT/u);
+  assert.match(source, /request_desktop_shutdown\(app\.clone\(\), DesktopShutdownAction::Exit\)/u);
+  assert.doesNotMatch(source, /shutdown_desktop_runtime/u);
+
+  const exitHandlingSource = source.slice(
+    exitRequestedIndex,
+    source.indexOf("tauri::RunEvent::Exit =>", exitRequestedIndex),
+  );
+  assert.match(exitHandlingSource, /observe_desktop_exit_requested/u);
+  assert.doesNotMatch(exitHandlingSource, /terminate_tracked_backend_on_exit/u);
 });
 
 test("desktop shell restores the main window when the macOS dock icon reopens the app", () => {

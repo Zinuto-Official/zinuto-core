@@ -12,6 +12,7 @@ import {
 import {
   isTauriRuntime,
   loadTauriCoreModule,
+  loadTauriEventModule,
   loadTauriWebviewModule,
   loadTauriWindowModule,
 } from "@/api/desktopNativeBridge";
@@ -434,7 +435,7 @@ export const notifyDesktopMainWindowReadyToShow = async (): Promise<void> => {
 };
 
 export type DesktopMainWindowCloseRequestEvent = {
-  preventDefault: () => void;
+  requestId: string;
 };
 
 export const subscribeDesktopMainWindowCloseRequested = async (
@@ -443,13 +444,16 @@ export const subscribeDesktopMainWindowCloseRequested = async (
   if (!isTauriRuntime()) {
     return () => undefined;
   }
-  const windowModule = await loadTauriWindowModule();
-  const currentWindow = windowModule.getCurrentWindow();
-  const unlisten = await currentWindow.onCloseRequested((event) => {
-    handler({
-      preventDefault: () => event.preventDefault(),
-    });
-  });
+  const eventModule = await loadTauriEventModule();
+  const unlisten = await eventModule.listen<{ requestId?: unknown }>(
+    "zinuto://v1/desktop-main-window-close-requested",
+    (event) => {
+      const requestId = String(event.payload?.requestId ?? "").trim();
+      if (requestId) {
+        handler({ requestId });
+      }
+    },
+  );
   return createTauriUnlistenCleanup(unlisten);
 };
 

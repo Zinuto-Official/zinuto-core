@@ -15,11 +15,14 @@ import {
   buildUiSettingsWithDesktopCloseButtonAction,
 } from "@/app-shell/desktopCloseBehavior";
 import {
+  writeCachedAppUiSettingsSnapshot,
+} from "@/app-shell/appPreferencesModel";
+import {
   resolveDesktopCloseRequestPlan,
   type DesktopCloseRequestPlan,
 } from "@/frontend-kernel/windowBehavior";
 import type {
-  UiSettings
+  UiSettings,
 } from "@/frontend-kernel/appTypes";
 import { useI18n } from "@/frontend-kernel/i18n";
 import { Button } from "@/ui/primitives/button";
@@ -42,11 +45,16 @@ export type DesktopCloseBehaviorControllerProps = {
 
 const executeDesktopClosePlan = async (
   plan: Exclude<DesktopCloseRequestPlan, "PROMPT">,
+  requestId: string,
 ): Promise<void> => {
   if (plan === "QUIT") {
     await api.quitDesktopApp();
     return;
   }
+  await api.resolveDesktopMainWindowCloseRequest(
+    requestId,
+    "MINIMIZE_TO_TRAY",
+  );
   await api.hideDesktopAppToTray();
 };
 
@@ -61,38 +69,88 @@ export const DesktopCloseBehaviorController = ({
   const [rememberSelection, setRememberSelection] = useState(false);
   const [pendingAction, setPendingAction] =
     useState<CloseExecutionAction | null>(null);
+  const [activeCloseRequestId, setActiveCloseRequestId] = useState<string | null>(
+    null,
+  );
   const desktopCloseButtonActionRef = useRef(desktopCloseButtonAction);
   const isExecutingCloseActionRef = useRef(false);
+  const activeCloseRequestIdRef = useRef<string | null>(null);
 
   useEffect(() => {
     desktopCloseButtonActionRef.current = desktopCloseButtonAction;
   }, [desktopCloseButtonAction]);
 
-  const runCloseAction = useCallback(async (action: CloseExecutionAction) => {
-    if (isExecutingCloseActionRef.current) {
-      return;
-    }
-    isExecutingCloseActionRef.current = true;
-    try {
-      await executeDesktopClosePlan(action);
-    } finally {
-      isExecutingCloseActionRef.current = false;
-    }
-  }, []);
-
   const rememberCloseAction = useCallback(
-    async (action: CloseExecutionAction) => {
+    (action: CloseExecutionAction) => {
       if (!canPersistUiSettings) {
         return;
       }
-      const nextSettings = buildUiSettingsWithDesktopCloseButtonAction(
-        buildUiSettings(),
-        action,
-      );
-      await api.updateAppUiSettings(nextSettings as Record<string, unknown>);
       setDesktopCloseButtonAction(action);
+      let nextSettings: UiSettings;
+      try {
+        nextSettings = buildUiSettingsWithDesktopCloseButtonAction(
+          buildUiSettings(),
+          action,
+        );
+      } catch {
+        // Remembering a choice is best-effort. The in-memory setting above
+        // still takes effect for this session, and the close action must keep
+        // going even if startup state is not ready to be serialized.
+        return;
+      }
+      try {
+        writeCachedAppUiSettingsSnapshot(nextSettings);
+      } catch {
+        // A broken local cache must never turn a close click into a disabled
+        // modal. The backend write below remains best-effort as well.
+      }
+      // The local cache is the immediate durable intent. The backend write is
+      // deliberately best-effort because quit must not wait for IPC/runtime
+      // cleanup; startup recovery will rebase this cached setting if needed.
+      void api
+        .updateAppUiSettings(nextSettings as Record<string, unknown>)
+        .catch(() => undefined);
     },
     [buildUiSettings, canPersistUiSettings, setDesktopCloseButtonAction],
+  );
+
+  const clearActiveCloseRequest = useCallback((requestId: string) => {
+    if (activeCloseRequestIdRef.current !== requestId) {
+      return;
+    }
+    activeCloseRequestIdRef.current = null;
+    setActiveCloseRequestId(null);
+  }, []);
+
+  const commitCloseAction = useCallback(
+    (action: CloseExecutionAction, requestId: string, remember: boolean) => {
+      if (isExecutingCloseActionRef.current) {
+        return;
+      }
+      isExecutingCloseActionRef.current = true;
+      setPendingAction(action);
+      setDialogOpen(false);
+      if (remember) {
+        rememberCloseAction(action);
+      }
+
+      void executeDesktopClosePlan(action, requestId)
+        .then(() => {
+          clearActiveCloseRequest(requestId);
+        })
+        .catch(() => {
+          // A native quit command is expected to be fire-and-forget. If it
+          // really failed, restore a usable prompt rather than leaving the
+          // action button permanently disabled.
+          setRememberSelection(false);
+          setDialogOpen(true);
+        })
+        .finally(() => {
+          isExecutingCloseActionRef.current = false;
+          setPendingAction(null);
+        });
+    },
+    [clearActiveCloseRequest, rememberCloseAction],
   );
 
   const handleDialogClose = useCallback(() => {
@@ -100,32 +158,47 @@ export const DesktopCloseBehaviorController = ({
       return;
     }
     setDialogOpen(false);
-  }, [pendingAction]);
+    setRememberSelection(false);
+    const requestId = activeCloseRequestIdRef.current;
+    if (!requestId) {
+      return;
+    }
+    void api
+      .resolveDesktopMainWindowCloseRequest(requestId, "CANCEL")
+      .then(() => {
+        clearActiveCloseRequest(requestId);
+      })
+      .catch(() => {
+        // Keep the native lease alive and restore the prompt if the cancel
+        // acknowledgement itself could not cross the bridge.
+        setDialogOpen(true);
+      });
+  }, [clearActiveCloseRequest, pendingAction]);
 
   const handleCloseChoice = useCallback(
     (action: CloseExecutionAction) => {
-      setPendingAction(action);
-      void Promise.resolve()
-        .then(async () => {
-          if (rememberSelection) {
-            await rememberCloseAction(action).catch(() => undefined);
-          }
-          setDialogOpen(false);
-          await runCloseAction(action);
-        })
-        .catch(() => {
-          setDialogOpen(true);
-        })
-        .finally(() => {
-          setPendingAction(null);
-        });
+      const requestId = activeCloseRequestIdRef.current;
+      if (!requestId) {
+        return;
+      }
+      commitCloseAction(action, requestId, rememberSelection);
     },
-    [rememberCloseAction, rememberSelection, runCloseAction],
+    [commitCloseAction, rememberSelection],
   );
 
   const handleCloseRequested = useCallback(
-    (event: { preventDefault: () => void }) => {
-      event.preventDefault();
+    ({ requestId }: { requestId: string }) => {
+      if (activeCloseRequestIdRef.current === requestId) {
+        void api
+          .keepaliveDesktopMainWindowCloseRequest(requestId)
+          .catch(() => undefined);
+        return;
+      }
+      activeCloseRequestIdRef.current = requestId;
+      setActiveCloseRequestId(requestId);
+      void api
+        .acknowledgeDesktopMainWindowCloseRequest(requestId)
+        .catch(() => undefined);
       const plan = resolveDesktopCloseRequestPlan(
         desktopCloseButtonActionRef.current,
       );
@@ -134,32 +207,64 @@ export const DesktopCloseBehaviorController = ({
         setDialogOpen(true);
         return;
       }
-      void runCloseAction(plan).catch(() => {
-        setRememberSelection(false);
-        setDialogOpen(true);
-      });
+      commitCloseAction(plan, requestId, false);
     },
-    [runCloseAction],
+    [commitCloseAction],
   );
 
   useEffect(() => {
     let disposed = false;
     let cleanup: () => void = () => undefined;
-    void api
-      .subscribeDesktopMainWindowCloseRequested(handleCloseRequested)
-      .then((unlisten) => {
+    let stopHeartbeat: () => void = () => undefined;
+    void (async () => {
+      try {
+        const unlisten =
+          await api.subscribeDesktopMainWindowCloseRequested(
+            handleCloseRequested,
+          );
         if (disposed) {
           unlisten();
           return;
         }
         cleanup = unlisten;
-      })
-      .catch(() => undefined);
+        await api.setDesktopMainWindowCloseHandlerStatus(true);
+        if (disposed) {
+          return;
+        }
+        const heartbeatTimer = window.setInterval(() => {
+          void api
+            .setDesktopMainWindowCloseHandlerStatus(true)
+            .catch(() => undefined);
+        }, 2_000);
+        stopHeartbeat = () => window.clearInterval(heartbeatTimer);
+      } catch {
+        // The native arbiter deliberately treats an unregistered handler as
+        // a safe direct-quit fallback.
+      }
+    })();
     return () => {
       disposed = true;
+      stopHeartbeat();
       cleanup();
+      void api
+        .setDesktopMainWindowCloseHandlerStatus(false)
+        .catch(() => undefined);
     };
   }, [handleCloseRequested]);
+
+  useEffect(() => {
+    if (!activeCloseRequestId) {
+      return () => undefined;
+    }
+    const keepalive = () => {
+      void api
+        .keepaliveDesktopMainWindowCloseRequest(activeCloseRequestId)
+        .catch(() => undefined);
+    };
+    keepalive();
+    const keepaliveTimer = window.setInterval(keepalive, 1_000);
+    return () => window.clearInterval(keepaliveTimer);
+  }, [activeCloseRequestId]);
 
   return (
     <AppModal

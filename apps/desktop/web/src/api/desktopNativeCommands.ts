@@ -99,6 +99,78 @@ export const restartDesktopApp = async (): Promise<void> => {
   }
 };
 
+export type DesktopCloseRequestAction =
+  | "CANCEL"
+  | "QUIT"
+  | "MINIMIZE_TO_TRAY";
+
+type DesktopCloseLifecycleCommand =
+  | "desktop_main_window_close_handler_status"
+  | "desktop_main_window_close_request_ack"
+  | "desktop_main_window_close_request_keepalive"
+  | "desktop_main_window_close_request_resolve";
+
+const invokeDesktopCloseLifecycleCommand = async (
+  command: DesktopCloseLifecycleCommand,
+  payload: Record<string, unknown>,
+): Promise<void> => {
+  if (!isTauriRuntime()) {
+    throw new Error(tt("appText.request"));
+  }
+  const mod = await loadTauriCoreModule();
+  try {
+    switch (command) {
+      case "desktop_main_window_close_handler_status":
+        await mod.invoke<void>("desktop_main_window_close_handler_status", payload);
+        break;
+      case "desktop_main_window_close_request_ack":
+        await mod.invoke<void>("desktop_main_window_close_request_ack", payload);
+        break;
+      case "desktop_main_window_close_request_keepalive":
+        await mod.invoke<void>("desktop_main_window_close_request_keepalive", payload);
+        break;
+      case "desktop_main_window_close_request_resolve":
+        await mod.invoke<void>("desktop_main_window_close_request_resolve", payload);
+        break;
+    }
+  } catch (error) {
+    throw toNativeCommandApiError(error);
+  }
+};
+
+export const setDesktopMainWindowCloseHandlerStatus = async (
+  active: boolean,
+): Promise<void> =>
+  invokeDesktopCloseLifecycleCommand(
+    "desktop_main_window_close_handler_status",
+    { active },
+  );
+
+export const acknowledgeDesktopMainWindowCloseRequest = async (
+  requestId: string,
+): Promise<void> =>
+  invokeDesktopCloseLifecycleCommand(
+    "desktop_main_window_close_request_ack",
+    { requestId },
+  );
+
+export const keepaliveDesktopMainWindowCloseRequest = async (
+  requestId: string,
+): Promise<void> =>
+  invokeDesktopCloseLifecycleCommand(
+    "desktop_main_window_close_request_keepalive",
+    { requestId },
+  );
+
+export const resolveDesktopMainWindowCloseRequest = async (
+  requestId: string,
+  action: DesktopCloseRequestAction,
+): Promise<void> =>
+  invokeDesktopCloseLifecycleCommand(
+    "desktop_main_window_close_request_resolve",
+    { action, requestId },
+  );
+
 export type CustomIndicatorAiConversionGuideSaveResult =
   | "SAVED"
   | "CANCELLED";
