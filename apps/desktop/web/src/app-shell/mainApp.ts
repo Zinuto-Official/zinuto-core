@@ -30,6 +30,7 @@ import {
 import { installDesktopInteractionPolicy } from '@/ui/desktopInteractionPolicy';
 import { formatDotJoinedText } from '@/ui/formatting/i18nDisplay';
 import { AppRootBootShell } from '@/app-shell/AppRootBootShell';
+import { loadLocaleWithFallback } from '@/frontend-kernel/preReactBootstrap';
 import {
   RetryableLazyModuleSurface,
   type RetryableLazyModuleError,
@@ -490,6 +491,15 @@ const renderApp = () => {
 
 const STARTUP_TASK_DEADLINE_MS = 1_500;
 
+const loadMainAppLocale = async (): Promise<void> => {
+  const language = getCurrentUiLanguage();
+  await loadLocaleWithFallback({
+    loadPrimaryLocale: () => ensureLocaleCatalog(language),
+    loadFallbackLocale:
+      language === 'en' ? undefined : () => ensureLocaleCatalog('en'),
+  });
+};
+
 const settleStartupTaskWithin = async (
   label: string,
   task: Promise<unknown>,
@@ -518,10 +528,11 @@ const startApp = async (): Promise<void> => {
   });
   await Promise.all([
     settleStartupTaskWithin('viewport bootstrap', bootstrapDesktopViewport()),
-    settleStartupTaskWithin(
-      'locale bootstrap',
-      ensureLocaleCatalog(getCurrentUiLanguage()),
-    ),
+    // Locale catalog loading is a hard dependency of AppRootRuntimeCore. A
+    // cold Tauri WebView may need longer than the viewport deadline to parse
+    // the large dynamic catalog; rendering before it is installed makes
+    // uiConfig bundles appear to be missing and trips MAIN_APP_RUNTIME.
+    loadMainAppLocale(),
   ]);
   if (!hasTauriRuntimeBridge(window)) {
     renderApp();
@@ -533,4 +544,6 @@ const startApp = async (): Promise<void> => {
 };
 
 installResizeObserverLoopErrorGuard();
-void startApp();
+void startApp().catch((error) => {
+  console.error('[zinuto-startup] main app bootstrap failed', error);
+});

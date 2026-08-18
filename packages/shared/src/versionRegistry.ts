@@ -4,7 +4,7 @@ import { REPLAY_NOTE_DOCUMENT_SCHEMA_VERSION } from "./replayNoteDocument.js";
 import { SYSTEM_DEV_SIMULATION_PROFILE_SPEC_VERSION } from "./systemDevSimulationProfiles.js";
 import { TRADING_RULE_PRESET_CATALOG_VERSION } from "./trading.js";
 
-export const ZINUTO_SOFTWARE_VERSION = "2.0.6";
+export const ZINUTO_SOFTWARE_VERSION = "2.0.7";
 
 export const ZINUTO_VERSION_MATRIX_SCHEMA_VERSION = 1 as const;
 

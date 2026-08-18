@@ -118,7 +118,7 @@ test("trainer trade log strip uses the stable resize observer wrapper", () => {
 test("desktop root ignores browser ResizeObserver loop notifications", () => {
   const source = readSource("../../src/app-shell/mainApp.ts");
   const guardCallIndex = source.indexOf("installResizeObserverLoopErrorGuard();");
-  const bootCallIndex = source.indexOf("void startApp();");
+  const bootCallIndex = source.indexOf("void startApp()");
 
   assert.match(
     source,

@@ -19,6 +19,7 @@ import {
   isTrainerSellShortcutEvent,
   isTrainerUndoShortcutEvent,
   resetTrainerKeyboardModifierState,
+  resolveTrainerShortcutKey,
   resolveTrainerHoldShortcutActionKey,
   resolveTrainerRatioPresetHotkeyIndex,
   updateTrainerKeyboardModifierStateOnKeyDown,
@@ -296,7 +297,7 @@ export const useTrainerKeyboardShortcuts = ({
         return;
       }
 
-      const key = event.key.toLowerCase();
+      const key = resolveTrainerShortcutKey(event);
 
       if (key === 'escape') {
         if (latest.activeDrawToolRef.current !== 'cursor') {

@@ -80,7 +80,7 @@ const revealPreReactBootstrapFailure = (error: unknown): void => {
   retryButton.addEventListener("click", () => window.location.reload());
 };
 
-const loadLocaleWithFallback = async ({
+export const loadLocaleWithFallback = async ({
   loadFallbackLocale,
   loadPrimaryLocale,
 }: Pick<

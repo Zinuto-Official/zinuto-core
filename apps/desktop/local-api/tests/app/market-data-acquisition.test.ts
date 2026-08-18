@@ -27,6 +27,7 @@ import {
 import {
   createMarketDataAcquisitionService,
 } from "../../src/application/market-data-acquisition/marketDataAcquisitionService.js";
+import { pythonSidecarWorkerEnvironment } from "../../src/application/market-data-acquisition/pythonSidecarRuntime.js";
 import { createMemoryAcquisitionJobStore } from "../../src/infrastructure/db/marketDataAcquisition/marketDataAcquisitionJobStore.js";
 import {
   AcquisitionRuntimeError,
@@ -44,6 +45,19 @@ const ccxtRequest = {
   startAt: "2026-07-18T00:00:00Z",
   endAt: "2026-07-18T00:05:00Z",
 };
+
+test("Python sidecar workers receive a code-page-independent protocol environment", () => {
+  const workerEnvironment = pythonSidecarWorkerEnvironment({
+    LANG: "zh_CN.GBK",
+    PYTHONIOENCODING: "cp936",
+    PYTHONUTF8: "0",
+    ZINUTO_TEST_SECRET: "must-not-cross-the-boundary",
+  });
+  assert.equal(workerEnvironment.LANG, "zh_CN.GBK");
+  assert.equal(workerEnvironment.PYTHONIOENCODING, "utf-8");
+  assert.equal(workerEnvironment.PYTHONUTF8, "1");
+  assert.equal(workerEnvironment.ZINUTO_TEST_SECRET, undefined);
+});
 
 test("CCXT uses a validated proxy supplied by the Windows desktop shell", () => {
   assert.equal(

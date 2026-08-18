@@ -1,13 +1,13 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.5",
-  "serialNumber": "urn:uuid:ba7d8d39-745b-51a6-a507-7f0424984bb6",
+  "serialNumber": "urn:uuid:8ab84851-0862-5675-afac-c84653feace1",
   "version": 1,
   "metadata": {
     "component": {
       "type": "application",
       "name": "Zinuto Core",
-      "version": "2.0.6",
+      "version": "2.0.7",
       "licenses": [
         {
           "license": {
@@ -19,7 +19,7 @@
     "properties": [
       {
         "name": "zinuto:dependencySnapshotSha256",
-        "value": "ba7d8d39745b91a645077f0424984bb6c4a3db6ea16ea6bdd562dd7e01727852"
+        "value": "8ab8485108625675efacc84653feace11e28339bea95337f1478e2fedacc031c"
       },
       {
         "name": "zinuto:pythonSidecarLockSha256",
@@ -10633,14 +10633,14 @@
       "type": "library",
       "group": "npm",
       "name": "@types/istanbul-lib-coverage",
-      "version": "2.0.6",
+      "version": "2.0.7",
       "scope": "excluded",
       "licenses": [
         {
           "expression": "MIT"
         }
       ],
-      "purl": "pkg:npm/%40types%2Fistanbul-lib-coverage@2.0.6"
+      "purl": "pkg:npm/%40types%2Fistanbul-lib-coverage@2.0.7"
     },
     {
       "type": "library",

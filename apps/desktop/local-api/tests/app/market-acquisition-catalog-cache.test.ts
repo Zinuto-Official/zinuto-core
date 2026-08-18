@@ -134,6 +134,40 @@ test('manual refresh bypasses a fresh catalog and version fingerprints invalidat
   assert.equal(upstreamCalls, 3);
 });
 
+test('catalog cache rejects replacement-character names and reloads the catalog', async (t) => {
+  const cacheDir = await fs.mkdtemp(
+    path.join(os.tmpdir(), 'zinuto-market-catalog-cache-encoding-'),
+  );
+  t.after(() => fs.rm(cacheDir, { recursive: true, force: true }));
+  const now = () => new Date('2026-08-15T00:00:00.000Z');
+  const cache = createMarketAcquisitionCatalogCache({ cacheDir, now });
+  const input = catalogInput({
+    forceRefresh: false,
+    load: async () => instruments,
+  });
+
+  await cache.readOrLoad(input);
+  const cacheFile = path.join(cacheDir, 'JP_STOCKS--FDR_TSE.json');
+  const raw = await fs.readFile(cacheFile, 'utf8');
+  await fs.writeFile(
+    cacheFile,
+    raw.replace('TOYOTA MOTOR CORPORATION', 'TOYOTA � CORPORATION'),
+    'utf8',
+  );
+
+  let upstreamCalls = 0;
+  const refreshed = await cache.readOrLoad({
+    ...input,
+    load: async () => {
+      upstreamCalls += 1;
+      return [{ symbol: '7203', name: 'TOYOTA MOTOR CORPORATION', exchangeId: 'TSE' }];
+    },
+  });
+  assert.equal(upstreamCalls, 1);
+  assert.equal(refreshed.cacheState, 'FRESH');
+  assert.equal(refreshed.instruments[0]?.name, 'TOYOTA MOTOR CORPORATION');
+});
+
 test('concurrent catalog reads merge one upstream load and a missing cache does not hide an error', async (t) => {
   const cacheDir = await fs.mkdtemp(
     path.join(os.tmpdir(), 'zinuto-market-catalog-concurrent-'),

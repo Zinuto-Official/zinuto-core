@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 import { useEffect } from "react";
+import { resolveKeyboardShortcutKey } from "@/frontend-kernel/keyboardShortcutKey";
 
 export const useCustomIndicatorWorkbenchShortcuts = ({
   isActive,
@@ -23,7 +24,7 @@ export const useCustomIndicatorWorkbenchShortcuts = ({
       if (!isPrimaryShortcut || event.altKey || event.shiftKey) {
         return;
       }
-      const normalizedKey = event.key.toLowerCase();
+      const normalizedKey = resolveKeyboardShortcutKey(event);
       if (normalizedKey === "s") {
         event.preventDefault();
         void saveIndicator();

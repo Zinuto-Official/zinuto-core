@@ -419,7 +419,12 @@ export const normalizeMarketAcquisitionCatalogRows = ({
     }
     const name = row.name.trim();
     const exchangeId = row.exchangeId?.trim() || null;
-    if (!name || name.length > 128 || (exchangeId && exchangeId.length > 64)) {
+    if (
+      !name ||
+      name.length > 128 ||
+      name.includes('\uFFFD') ||
+      (exchangeId && exchangeId.length > 64)
+    ) {
       continue;
     }
     if (

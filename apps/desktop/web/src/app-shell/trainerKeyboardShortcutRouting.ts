@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
+import { resolveKeyboardShortcutKey } from "@/frontend-kernel/keyboardShortcutKey";
+
 export type TrainerKeyboardModifierState = {
   metaKey: boolean;
   ctrlKey: boolean;
@@ -25,6 +27,10 @@ export const createTrainerKeyboardModifierState = (): TrainerKeyboardModifierSta
   altKey: false,
   shiftKey: false,
 });
+
+export const resolveTrainerShortcutKey = (
+  event: TrainerKeyboardEventLike,
+): string => resolveKeyboardShortcutKey(event);
 
 const normalizeKeyboardKey = (value: unknown): string =>
   String(value ?? "").trim().toLowerCase();

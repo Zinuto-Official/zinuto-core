@@ -11,6 +11,7 @@ import {
   isTrainerUndoShortcutEvent,
   resolveTrainerHoldShortcutActionKey,
   resolveTrainerRatioPresetHotkeyIndex,
+  resolveTrainerShortcutKey,
   updateTrainerKeyboardModifierStateOnKeyDown,
   updateTrainerKeyboardModifierStateOnKeyUp,
 } from "../../src/app-shell/trainerKeyboardShortcutRouting";
@@ -141,6 +142,18 @@ test("trainer keyboard routing recognizes physical buy and sell hotkeys", () => 
   assert.equal(isTrainerSellShortcutEvent({ key: "s", code: "" }), true);
   assert.equal(isTrainerSellShortcutEvent({ key: "", code: "KeyS" }), true);
   assert.equal(isTrainerSellShortcutEvent({ key: "Process", code: "KeyS" }), true);
+});
+
+test("trainer keyboard routing uses the physical key when an IME localizes event.key", () => {
+  assert.equal(
+    resolveTrainerShortcutKey({ key: "Process", code: "KeyN" }),
+    "n",
+  );
+  assert.equal(
+    resolveTrainerShortcutKey({ key: "漢", code: "KeyK" }),
+    "k",
+  );
+  assert.equal(resolveTrainerShortcutKey({ key: "n", code: "" }), "n");
 });
 
 test("trainer keyboard routing maps hold shortcuts for all trainer surfaces", () => {

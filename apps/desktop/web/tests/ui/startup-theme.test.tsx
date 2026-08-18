@@ -240,7 +240,12 @@ test("desktop startup bootstraps viewport before mounting app shell", () => {
   assert.doesNotMatch(bootstrapSource, /^await\s/mu);
   assert.match(
     mainSource,
-    /settleStartupTaskWithin\([\s\S]*?bootstrapDesktopViewport\(\)[\s\S]*?settleStartupTaskWithin\([\s\S]*?ensureLocaleCatalog\(getCurrentUiLanguage\(\)\)[\s\S]*?renderApp\(\);/u,
+    /settleStartupTaskWithin\([\s\S]*?bootstrapDesktopViewport\(\)[\s\S]*?loadMainAppLocale\(\)[\s\S]*?renderApp\(\);/u,
+  );
+  assert.match(mainSource, /await loadLocaleWithFallback\(\{/u);
+  assert.doesNotMatch(
+    mainSource,
+    /settleStartupTaskWithin\([\s\S]*?ensureLocaleCatalog\(getCurrentUiLanguage\(\)\)/u,
   );
   assert.match(mainSource, /STARTUP_TASK_DEADLINE_MS\s*=\s*1_500/u);
   assert.match(preReactBootstrapSource, /PRE_REACT_BOOTSTRAP_WATCHDOG_MS\s*=\s*8_000/u);

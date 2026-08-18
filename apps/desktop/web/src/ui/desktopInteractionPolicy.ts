@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
+import { resolveKeyboardShortcutKey } from "@/frontend-kernel/keyboardShortcutKey";
+
 export const ZINUTO_CONTEXT_MENU_TRIGGER_ATTRIBUTE =
   "data-zinuto-context-menu";
 export const ZINUTO_CONTEXT_MENU_TRIGGER_VALUE = "app";
@@ -96,15 +98,8 @@ const closestMatches = (
   selector: string,
 ): boolean => Boolean(target.closest(selector));
 
-const resolveShortcutKey = (event: DesktopShortcutEvent): string => {
-  const key = String(event.key ?? "").trim().toLowerCase();
-  if (key) {
-    return key;
-  }
-  const code = String(event.code ?? "").trim().toLowerCase();
-  const keyCodeMatch = code.match(/^key([a-z])$/u);
-  return keyCodeMatch?.[1] ?? code;
-};
+const resolveShortcutKey = (event: DesktopShortcutEvent): string =>
+  resolveKeyboardShortcutKey(event);
 
 export const shouldAllowDesktopContextMenu = (
   target: unknown,

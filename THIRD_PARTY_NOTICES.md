@@ -5,7 +5,7 @@ an inventory, not a substitute for the license texts shipped by each package.
 The source distribution retains dependency license files through the normal
 package, Cargo, and Python registries.
 
-- Snapshot SHA-256: `ba7d8d39745b91a645077f0424984bb6c4a3db6ea16ea6bdd562dd7e01727852`
+- Snapshot SHA-256: `8ab8485108625675efacc84653feace11e28339bea95337f1478e2fedacc031c`
 - Components: 1219
 - AKShare sidecar lock SHA-256: `ca65c3aef624355c50f54c55d03082c1f906562181d8d964fcb408bed99f7437`
 - FinanceDataReader sidecar lock SHA-256: `2683a9389e744f96445559509abb0981e661a6a1f4b7b367d0f3544c96178aee`
@@ -859,7 +859,7 @@ authorization from the provider.
 | npm | @types/express-serve-static-core | 5.1.1 | MIT |  | development |
 | npm | @types/express | 5.0.6 | MIT |  | development |
 | npm | @types/http-errors | 2.0.5 | MIT |  | development |
-| npm | @types/istanbul-lib-coverage | 2.0.6 | MIT |  | development |
+| npm | @types/istanbul-lib-coverage | 2.0.7 | MIT |  | development |
 | npm | @types/node | 24.13.3 | MIT |  | development |
 | npm | @types/node | 25.6.0 | MIT |  | development |
 | npm | @types/pako | 2.0.4 | MIT |  | runtime |

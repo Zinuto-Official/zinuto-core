@@ -21,6 +21,20 @@ class FakeFrame:
 
 
 class FinanceDataReaderWorkerTest(unittest.TestCase):
+    def test_protocol_emission_is_ascii_and_round_trips_non_ascii_names(self):
+        output = io.BytesIO()
+        payload = {
+            "protocol": main.PROTOCOL,
+            "requestId": "catalog-encoding",
+            "ok": True,
+            "rows": [{"symbol": "005930", "name": "삼성전자"}],
+        }
+        with patch.object(main.sys, "stdout", type("Stdout", (), {"buffer": output})()):
+            main._emit(payload)
+        encoded = output.getvalue()
+        self.assertEqual(encoded.decode("ascii"), encoded.decode("utf-8"))
+        self.assertEqual(json.loads(encoded)["rows"][0]["name"], "삼성전자")
+
     def test_parent_watchdog_detects_only_a_missing_or_reparented_parent(self):
         with patch.object(main.os, "getppid", return_value=123), patch.object(
             main.os, "kill"

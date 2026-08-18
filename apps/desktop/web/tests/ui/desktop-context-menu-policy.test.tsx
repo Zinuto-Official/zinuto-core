@@ -156,6 +156,15 @@ test("desktop interaction policy blocks browser devtools shortcuts only", () => 
     true,
   );
   assert.equal(
+    isDesktopDevtoolsShortcut({
+      key: "Process",
+      code: "KeyI",
+      ctrlKey: true,
+      shiftKey: true,
+    }),
+    true,
+  );
+  assert.equal(
     isDesktopDevtoolsShortcut({ key: "j", metaKey: true, altKey: true }),
     true,
   );

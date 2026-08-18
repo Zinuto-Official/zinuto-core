@@ -589,13 +589,22 @@ def _handle_request_line(raw_line: bytes) -> dict[str, Any]:
         )
 
 
+def _emit(payload: dict[str, Any]) -> None:
+    # NDJSON is an inter-process protocol, not a terminal. ASCII JSON keeps
+    # non-ASCII upstream names independent of the Windows system code page.
+    encoded = (
+        json.dumps(payload, ensure_ascii=True, separators=(",", ":")) + "\n"
+    ).encode("ascii")
+    sys.stdout.buffer.write(encoded)
+    sys.stdout.buffer.flush()
+
+
 def main() -> None:
     freeze_support()
     _start_parent_watchdog()
     raw_line = sys.stdin.buffer.readline(MAX_REQUEST_BYTES + 1)
     response = _handle_request_line(raw_line)
-    sys.stdout.write(json.dumps(response, ensure_ascii=False, separators=(",", ":")) + "\n")
-    sys.stdout.flush()
+    _emit(response)
 
 
 if __name__ == "__main__":

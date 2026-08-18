@@ -487,9 +487,13 @@ def _fetch(request: dict[str, Any]) -> tuple[str, list[dict[str, Any]], str]:
 
 
 def _emit(payload: dict[str, Any]) -> None:
-    sys.stdout.write(json.dumps(payload, ensure_ascii=False, separators=(",", ":")))
-    sys.stdout.write("\n")
-    sys.stdout.flush()
+    # NDJSON is an inter-process protocol, not a terminal. ASCII JSON keeps
+    # non-ASCII upstream names independent of the Windows system code page.
+    encoded = (
+        json.dumps(payload, ensure_ascii=True, separators=(",", ":")) + "\n"
+    ).encode("ascii")
+    sys.stdout.buffer.write(encoded)
+    sys.stdout.buffer.flush()
 
 
 def _retryable_status_code(error: Exception) -> int | None:

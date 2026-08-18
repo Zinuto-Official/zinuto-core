@@ -221,7 +221,7 @@ const sanitizeJobError = (error: unknown): AcquisitionJob['error'] => {
 
 export const createMarketDataAcquisitionService = ({
   stagingRoot,
-  catalogCacheDir = path.join(stagingRoot, '.catalog-v1'),
+  catalogCacheDir = path.join(stagingRoot, '.catalog-v2'),
   createId,
   now,
   akshareAdapter = createAkshareSidecarAdapter(),

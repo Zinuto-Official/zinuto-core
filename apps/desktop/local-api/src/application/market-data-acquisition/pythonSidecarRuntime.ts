@@ -138,11 +138,17 @@ export const pythonSidecarWorkerEnvironment = (
     'HTTPS_PROXY',
     'NO_PROXY',
   ] as const;
-  return Object.fromEntries(
-    allowedNames.flatMap((name) =>
-      typeof env[name] === 'string' ? [[name, env[name]]] : [],
+  return {
+    ...Object.fromEntries(
+      allowedNames.flatMap((name) =>
+        typeof env[name] === 'string' ? [[name, env[name]]] : [],
+      ),
     ),
-  );
+    // The sidecar protocol is UTF-8/ASCII at the process boundary even on
+    // Windows installations whose legacy locale is GBK, CP949, or CP932.
+    PYTHONIOENCODING: 'utf-8',
+    PYTHONUTF8: '1',
+  };
 };
 
 const pythonSidecarParentWatchdogEnvironment = (): NodeJS.ProcessEnv => (

@@ -12,7 +12,10 @@ import type {
 export const MARKET_ACQUISITION_CATALOG_CACHE_TTL_MS =
   7 * 24 * 60 * 60 * 1_000;
 
-const CATALOG_CACHE_SCHEMA_VERSION = 1;
+// Version 2 invalidates catalogs written by the old Windows code-page
+// boundary. Those records may contain replacement characters that cannot be
+// repaired after the original byte stream was decoded incorrectly.
+const CATALOG_CACHE_SCHEMA_VERSION = 2;
 const MAX_CACHE_FILE_BYTES = 6_000_000;
 const MAX_CATALOG_INSTRUMENTS = 20_000;
 const SAFE_CATALOG_ID = /^[A-Z0-9_]{1,64}$/u;
@@ -61,6 +64,7 @@ const isInstrument = (
     symbol.length <= 64 &&
     name.length > 0 &&
     name.length <= 128 &&
+    !name.includes('\uFFFD') &&
     (exchangeId === null ||
       (typeof exchangeId === 'string' &&
         exchangeId.trim().length > 0 &&

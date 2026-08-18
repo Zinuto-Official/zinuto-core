@@ -40,18 +40,18 @@ test("bundled release notes remain complete for every desktop locale", () => {
 });
 
 test("future release timestamps are scheduled until their publication instant", () => {
-  assert.equal(desktopLocalReleaseManifest.version, "2.0.6");
+  assert.equal(desktopLocalReleaseManifest.version, "2.0.7");
   assert.equal(
     resolveDesktopReleasePublicationState(
       desktopLocalReleaseManifest.publishedAt,
-      Date.parse("2026-08-13T01:59:59.000Z"),
+      Date.parse("2026-08-17T23:59:59.000Z"),
     ),
     "SCHEDULED",
   );
   assert.equal(
     resolveDesktopReleasePublicationState(
       desktopLocalReleaseManifest.publishedAt,
-      Date.parse("2026-08-13T02:00:00.000Z"),
+      Date.parse("2026-08-18T00:00:00.000Z"),
     ),
     "PUBLISHED",
   );
