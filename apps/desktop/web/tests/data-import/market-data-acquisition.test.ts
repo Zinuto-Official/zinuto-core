@@ -961,6 +961,14 @@ test("download entry is permanent and the four-step market catalog replaces conn
     acquisitionWizardSource,
     /marketDataAcquisitionThirdPartyUseLabel[\s\S]*marketDataAcquisitionThirdPartyUseNotice[\s\S]*marketDataAcquisitionReviewOriginalTermsNotice/u,
   );
+  assert.match(
+    acquisitionWizardSource,
+    /market-data-acquisition-source-availability[\s\S]*market-data-acquisition-source-meta[\s\S]*market-data-acquisition-project-links/u,
+  );
+  assert.match(
+    acquisitionStylesSource,
+    /market-data-acquisition-source-meta[\s\S]*padding-inline-start: 38px/u,
+  );
   assert.doesNotMatch(
     acquisitionWizardSource,
     /Checkbox|thirdPartyUseConfirmed|onThirdPartyUseConfirmedChange|marketDataAcquisitionThirdPartyUseAcknowledgement/u,

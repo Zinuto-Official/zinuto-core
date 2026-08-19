@@ -395,31 +395,33 @@ export const MarketDataAcquisitionWizard = ({
                       </p>
                     </div>
                   </div>
-                  <small>
-                    {tt(
-                      "appText.marketDataAcquisitionReviewOriginalTermsNotice",
-                    )}
-                  </small>
-                  <div className="market-data-acquisition-project-links">
-                    {providers.map((provider) => (
-                      <Button
-                        type="button"
-                        size="sm"
-                        variant="outline"
-                        key={provider.id}
-                        onClick={() => onOpenProject(provider.projectUrl)}
-                      >
-                        {ttf(
-                          "appText.marketDataAcquisitionProviderVersionValue0Value1",
-                          [provider.name, provider.version],
-                        )}
-                      </Button>
-                    ))}
+                  <div className="market-data-acquisition-source-meta">
+                    <small>
+                      {tt(
+                        "appText.marketDataAcquisitionReviewOriginalTermsNotice",
+                      )}
+                    </small>
+                    <div className="market-data-acquisition-project-links">
+                      {providers.map((provider) => (
+                        <Button
+                          type="button"
+                          size="sm"
+                          variant="outline"
+                          key={provider.id}
+                          onClick={() => onOpenProject(provider.projectUrl)}
+                        >
+                          {ttf(
+                            "appText.marketDataAcquisitionProviderVersionValue0Value1",
+                            [provider.name, provider.version],
+                          )}
+                        </Button>
+                      ))}
+                    </div>
+                    <AcquisitionFieldError
+                      id="market-data-acquisition-projects-error"
+                      message={fieldErrors.projects}
+                    />
                   </div>
-                  <AcquisitionFieldError
-                    id="market-data-acquisition-projects-error"
-                    message={fieldErrors.projects}
-                  />
                 </div>
               ) : null}
               <AcquisitionFieldError

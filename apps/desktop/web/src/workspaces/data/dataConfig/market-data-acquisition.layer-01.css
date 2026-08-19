@@ -392,7 +392,14 @@
 }
 
 .market-data-acquisition-source-details
-  > .market-data-acquisition-project-links {
+  > .market-data-acquisition-source-meta {
+  min-width: 0;
+  display: grid;
+  gap: 10px;
+  padding-inline-start: 38px;
+}
+
+.market-data-acquisition-source-meta > .market-data-acquisition-project-links {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
