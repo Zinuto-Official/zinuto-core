@@ -1,6 +1,6 @@
 {
   "name": "@zinuto/desktop-web",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "license": "GPL-3.0-only",
   "private": true,
   "type": "module",
@@ -76,7 +76,7 @@
     "@tauri-apps/api": "2.10.1",
     "@tauri-apps/plugin-dialog": "2.7.0",
     "@tauri-apps/plugin-opener": "2.5.3",
-    "@zinuto/shared": "2.0.8",
+    "@zinuto/shared": "2.0.9",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "codemirror": "^6.0.2",

@@ -1,42 +1,42 @@
 {
   "schemaVersion": 1,
-  "version": "2.0.8",
-  "publishedAt": "2026-08-18T00:00:00.000Z",
+  "version": "2.0.9",
+  "publishedAt": "2026-08-20T00:00:00.000Z",
   "releaseHighlights": {
     "en": [
-      "Windows now uses a consistent themed title bar for the main window, startup screens, and secondary windows.",
-      "Onboarding falls back to an in-app guide if its companion window cannot become ready.",
-      "User-started CCXT downloads on Windows can use the enabled system HTTP or HTTPS proxy without changing other network traffic.",
-      "Fixed Microsoft Store startup by packaging the Windows backend Node runtime with the app.",
-      "Desktop shutdown now confirms once and exits quickly without waiting on backend cleanup."
+      "Improved local runtime and market storage reliability, including clearer historical source handling.",
+      "Hardened historical market-data acquisition with bounded validation and safer staging.",
+      "Clarified market-source details and historical acquisition plans in the data settings flow.",
+      "Improved local DuckDB runtime preparation and market storage maintenance.",
+      "Bounded the desktop icon's first paint for a more stable startup presentation."
     ],
     "zh-CN": [
-      "Windows 的主窗口、启动界面和辅助窗口现在使用一致的主题标题栏。",
-      "如果引导辅助窗口未能就绪，首次使用引导会自动改为应用内显示。",
-      "Windows 上由用户主动发起的 CCXT 下载可以使用已启用的系统 HTTP 或 HTTPS 代理，不影响其他网络流量。",
-      "修复了 Microsoft Store 版 Windows 应用未随包提供后端 Node 运行时而无法启动的问题。",
-      "桌面端退出现在只确认一次，并会快速退出，不再等待后端清理完成。"
+      "改进本地运行时和市场数据存储的可靠性，并让历史数据源处理更加清晰。",
+      "强化历史市场数据获取，增加有界校验并让暂存流程更加安全。",
+      "在数据设置流程中进一步明确市场数据源详情和历史数据获取计划。",
+      "改进本地 DuckDB 运行时准备和市场数据存储维护。",
+      "限制桌面图标的首次绘制范围，让启动画面更加稳定。"
     ],
     "ja": [
-      "Windows のメインウィンドウ、起動画面、補助ウィンドウで、テーマに合った統一タイトルバーを使用するようになりました。",
-      "ガイド用の補助ウィンドウを準備できない場合は、オンボーディングをアプリ内表示へ自動的に切り替えます。",
-      "Windows でユーザーが開始した CCXT ダウンロードは、ほかの通信を変更せず、有効なシステム HTTP または HTTPS プロキシを利用できます。",
-      "Microsoft Store 版 Windows アプリで、バックエンドの Node ランタイムがパッケージに含まれず起動できない問題を修正しました。",
-      "デスクトップの終了確認を一度だけ行い、バックエンドの後処理を待たずにすばやく終了するようにしました。"
+      "ローカルランタイムと市場データ保存の信頼性を高め、過去データのソース処理を明確にしました。",
+      "過去の市場データ取得を強化し、検証とステージングを安全な範囲に制限しました。",
+      "データ設定フローで市場データソースの詳細と過去データ取得計画を明確にしました。",
+      "ローカル DuckDB ランタイムの準備と市場データ保存のメンテナンスを改善しました。",
+      "デスクトップアイコンの初回描画を制限し、起動画面をより安定させました。"
     ],
     "ko": [
-      "Windows의 기본 창, 시작 화면, 보조 창에 테마와 일치하는 제목 표시줄을 일관되게 적용했습니다.",
-      "안내용 보조 창이 준비되지 않으면 온보딩이 앱 내부 안내 화면으로 자동 전환됩니다.",
-      "Windows에서 사용자가 시작한 CCXT 다운로드는 다른 네트워크 트래픽을 바꾸지 않고 활성화된 시스템 HTTP 또는 HTTPS 프록시를 사용할 수 있습니다.",
-      "Microsoft Store용 Windows 앱에 백엔드 Node 런타임이 포함되지 않아 시작할 수 없던 문제를 수정했습니다.",
-      "데스크톱 종료 확인을 한 번만 표시하고 백엔드 정리를 기다리지 않고 빠르게 종료하도록 개선했습니다."
+      "로컬 런타임과 시장 데이터 저장의 안정성을 높이고 과거 데이터 소스 처리를 더 명확하게 했습니다.",
+      "과거 시장 데이터 수집을 강화하고 검증과 스테이징을 안전한 범위로 제한했습니다.",
+      "데이터 설정 흐름에서 시장 데이터 소스 상세 정보와 과거 데이터 수집 계획을 더 명확하게 했습니다.",
+      "로컬 DuckDB 런타임 준비와 시장 데이터 저장 관리를 개선했습니다.",
+      "데스크톱 아이콘의 첫 표시 범위를 제한해 시작 화면을 더 안정적으로 만들었습니다."
     ],
     "es": [
-      "Windows ahora usa una barra de título coherente con el tema en la ventana principal, el inicio y las ventanas secundarias.",
-      "Si la ventana auxiliar no llega a estar lista, la guía inicial se muestra automáticamente dentro de la aplicación.",
-      "Las descargas de CCXT iniciadas por el usuario en Windows pueden usar el proxy HTTP o HTTPS habilitado en el sistema sin modificar el resto del tráfico.",
-      "Se corrigió el inicio desde Microsoft Store al incluir el entorno Node del backend de Windows en la aplicación.",
-      "El cierre del escritorio ahora confirma una sola vez y termina rápidamente sin esperar la limpieza del backend."
+      "Mejoramos la fiabilidad del runtime local y del almacenamiento de mercado, con un manejo más claro de las fuentes históricas.",
+      "Reforzamos la adquisición de datos de mercado históricos con validación acotada y staging más seguro.",
+      "Aclaramos los detalles de las fuentes de mercado y los planes de adquisición histórica en los ajustes de datos.",
+      "Mejoramos la preparación del runtime local de DuckDB y el mantenimiento del almacenamiento de mercado.",
+      "Limitamos el primer renderizado del icono del escritorio para una presentación de inicio más estable."
     ]
   }
 }
