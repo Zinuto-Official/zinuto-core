@@ -6439,16 +6439,6 @@
       "es": "Sobre las fuentes de datos"
     }
   },
-  "appText.marketDataAcquisitionSourceBoundaryNotice": {
-    "kind": "text",
-    "locales": {
-      "zh-CN": "Zinuto 仅在本机集成并调用第三方开源组件，不提供、托管或转售行情数据。组件功能及其可能访问的数据源由相应第三方独立提供；开源许可、使用协议、数据授权与限制，均以组件原始项目及相关权利方公布的条款为准。",
-      "en": "Zinuto only integrates and invokes third-party open-source components on this device; it does not provide, host, or resell market data. The components and any data sources they may access are independently provided by third parties. Their original projects and the relevant rights holders' published terms govern open-source licences, usage terms, data permissions, and restrictions.",
-      "ja": "Zinuto はこの端末上で第三者のオープンソースコンポーネントを組み込み、呼び出すだけで、市場データの提供、ホスティング、再販売は行いません。コンポーネントの機能とアクセスする可能性のあるデータ元は各第三者が独立して提供します。オープンソースライセンス、利用条件、データ利用許諾および制限は、コンポーネントの元プロジェクトと関係する権利者が公表する条件に従います。",
-      "ko": "Zinuto는 이 기기에서 제3자 오픈 소스 구성 요소를 통합하고 호출할 뿐이며 시세 데이터를 제공, 호스팅 또는 재판매하지 않습니다. 구성 요소의 기능과 구성 요소가 접근할 수 있는 데이터 소스는 각 제3자가 독립적으로 제공합니다. 오픈 소스 라이선스, 이용 약관, 데이터 권한 및 제한은 구성 요소의 원본 프로젝트와 관련 권리자가 게시한 조건을 따릅니다.",
-      "es": "Zinuto solo integra e invoca componentes de código abierto de terceros en este dispositivo; no proporciona, aloja ni revende datos de mercado. Los componentes y las fuentes de datos a las que puedan acceder son ofrecidos de forma independiente por terceros. Las licencias, condiciones de uso, autorizaciones y restricciones de datos se rigen por el proyecto original y por las condiciones publicadas por los titulares correspondientes."
-    }
-  },
   "appText.marketDataAcquisitionThirdPartyUseLabel": {
     "kind": "text",
     "locales": {
@@ -6462,41 +6452,21 @@
   "appText.marketDataAcquisitionThirdPartyUseNotice": {
     "kind": "text",
     "locales": {
-      "zh-CN": "第三方组件可能访问境内或境外数据源，实际访问路径也可能随组件或相关服务调整。在部分国家或地区，连接可能受网络条件、地区政策、第三方限制、接口变更、限流或维护影响。Zinuto 不参与第三方授权，也不控制或保证第三方数据及服务的可用性、完整性、及时性、准确性或特定用途适用性；相关判断及使用责任由用户自行承担。",
-      "en": "Third-party components may access domestic or overseas data sources, and the actual route may change with the component or related services. Connectivity in some countries or regions can be affected by network conditions, regional policies, third-party restrictions, API changes, rate limits, or maintenance. Zinuto does not grant third-party permissions and does not control or warrant the availability, completeness, timeliness, accuracy, or fitness for a particular purpose of third-party data or services; you are responsible for these determinations and for your use.",
-      "ja": "第三者コンポーネントは国内または海外のデータ元へアクセスする場合があり、実際の経路もコンポーネントや関連サービスの変更に伴って変わることがあります。一部の国や地域では、ネットワーク状況、地域の方針、第三者の制限、API の変更、利用制限、保守の影響を受ける場合があります。Zinuto は第三者の許諾に関与せず、第三者データやサービスの可用性、完全性、適時性、正確性、特定目的への適合性を管理または保証しません。これらの確認と利用に関する責任は利用者が負います。",
-      "ko": "제3자 구성 요소는 국내 또는 해외 데이터 소스에 접근할 수 있으며 실제 접근 경로도 구성 요소나 관련 서비스의 변경에 따라 달라질 수 있습니다. 일부 국가나 지역에서는 네트워크 상태, 지역 정책, 제3자 제한, API 변경, 요청 제한 또는 점검의 영향을 받을 수 있습니다. Zinuto는 제3자 권한 부여에 관여하지 않으며 제3자 데이터나 서비스의 이용 가능성, 완전성, 적시성, 정확성 또는 특정 목적 적합성을 통제하거나 보증하지 않습니다. 이에 대한 판단과 사용 책임은 사용자에게 있습니다.",
-      "es": "Los componentes de terceros pueden acceder a fuentes de datos nacionales o extranjeras, y la ruta efectiva puede cambiar con el componente o los servicios relacionados. En algunos países o regiones, la conexión puede verse afectada por las condiciones de red, políticas regionales, restricciones de terceros, cambios de API, límites o mantenimiento. Zinuto no interviene en las autorizaciones de terceros ni controla o garantiza la disponibilidad, integridad, puntualidad, exactitud o idoneidad para un fin concreto de sus datos o servicios; el usuario es responsable de estas comprobaciones y de su uso."
+      "zh-CN": "第三方组件可能访问境内或境外数据源，实际访问路径也可能随组件或相关服务调整。在部分国家或地区，连接可能受网络条件、地区政策、第三方限制、接口变更、限流或维护影响。继续获取数据即表示你已查阅下方组件项目的原始开源许可和使用协议，确认所需的数据访问和使用授权、所在地区可用性、技术可行性及拟定用途合规性，并同意自行承担相关判断和使用责任。Zinuto 不参与第三方授权，也不控制或保证第三方数据及服务的可用性、完整性、及时性、准确性或特定用途适用性。",
+      "en": "Third-party components may access domestic or overseas data sources, and the actual route may change with the component or related services. Connectivity in some countries or regions can be affected by network conditions, regional policies, third-party restrictions, API changes, rate limits, or maintenance. Continuing to retrieve data means that you have reviewed the original open-source licences and usage terms of the component projects below, confirmed the required data-access and usage permissions, regional availability, technical feasibility, and compliance of your intended use, and agreed to take responsibility for these determinations and your use. Zinuto does not grant third-party permissions and does not control or warrant the availability, completeness, timeliness, accuracy, or fitness for a particular purpose of third-party data or services.",
+      "ja": "第三者コンポーネントは国内または海外のデータ元へアクセスする場合があり、実際の経路もコンポーネントや関連サービスの変更に伴って変わることがあります。一部の国や地域では、ネットワーク状況、地域の方針、第三者の制限、API の変更、利用制限、保守の影響を受ける場合があります。データの取得を続けることにより、下記コンポーネントの元のオープンソースライセンスと利用条件を確認し、必要なデータアクセス・利用許諾、所在地での可用性、技術的実現可能性、予定する用途の適合性を確認したうえで、これらの判断と利用に関する責任を自ら負うことを示します。Zinuto は第三者の許諾に関与せず、第三者データやサービスの可用性、完全性、適時性、正確性、特定目的への適合性を管理または保証しません。",
+      "ko": "제3자 구성 요소는 국내 또는 해외 데이터 소스에 접근할 수 있으며 실제 접근 경로도 구성 요소나 관련 서비스의 변경에 따라 달라질 수 있습니다. 일부 국가나 지역에서는 네트워크 상태, 지역 정책, 제3자 제한, API 변경, 요청 제한 또는 점검의 영향을 받을 수 있습니다. 데이터 받기를 계속하면 아래 구성 요소 프로젝트의 원본 오픈 소스 라이선스와 이용 조건을 검토하고 필요한 데이터 접근 및 사용 권한, 현재 지역의 이용 가능 여부, 기술적 실행 가능성, 사용 목적의 적합성을 확인했으며 이러한 판단과 사용에 대한 책임을 스스로 부담한다는 뜻입니다. Zinuto는 제3자 권한 부여에 관여하지 않으며 제3자 데이터나 서비스의 이용 가능성, 완전성, 적시성, 정확성 또는 특정 목적 적합성을 통제하거나 보증하지 않습니다.",
+      "es": "Los componentes de terceros pueden acceder a fuentes de datos nacionales o extranjeras, y la ruta efectiva puede cambiar con el componente o los servicios relacionados. En algunos países o regiones, la conexión puede verse afectada por las condiciones de red, políticas regionales, restricciones de terceros, cambios de API, límites o mantenimiento. Continuar obteniendo datos significa que has revisado las licencias originales de código abierto y las condiciones de uso de los proyectos de los componentes que aparecen abajo, has confirmado las autorizaciones necesarias de acceso y uso de datos, la disponibilidad regional, la viabilidad técnica y la conformidad del uso previsto, y aceptas asumir la responsabilidad de estas comprobaciones y de tu uso. Zinuto no interviene en las autorizaciones de terceros ni controla o garantiza la disponibilidad, integridad, puntualidad, exactitud o idoneidad para un fin concreto de sus datos o servicios."
     }
   },
   "appText.marketDataAcquisitionReviewOriginalTermsNotice": {
     "kind": "text",
     "locales": {
-      "zh-CN": "请通过下方组件项目入口查阅原始开源许可和使用协议；相关数据授权与服务限制仍以对应权利方公布的内容为准。",
-      "en": "Use the component project links below to review the original open-source licences and usage terms. Data permissions and service restrictions remain subject to the terms published by the relevant rights holders.",
-      "ja": "下記のコンポーネントプロジェクトから元のオープンソースライセンスと利用条件を確認してください。データ利用許諾とサービス上の制限は、関係する権利者が公表する内容に従います。",
-      "ko": "아래 구성 요소 프로젝트 링크에서 원본 오픈 소스 라이선스와 이용 약관을 확인하세요. 데이터 권한과 서비스 제한은 관련 권리자가 게시한 조건을 따릅니다.",
-      "es": "Consulta las licencias originales y las condiciones de uso mediante los enlaces de los proyectos que aparecen abajo. Las autorizaciones de datos y las restricciones del servicio siguen sujetas a las condiciones publicadas por los titulares correspondientes."
-    }
-  },
-  "appText.marketDataAcquisitionThirdPartyUseAcknowledgement": {
-    "kind": "text",
-    "locales": {
-      "zh-CN": "我已自行查阅组件原始项目及相关条款，并确认所需的数据访问和使用授权、所在地区可用性、技术可行性及拟定用途合规性；我选择继续使用第三方组件。",
-      "en": "I have reviewed the component's original project and applicable terms, and I have independently confirmed the required data-access and usage permissions, regional availability, technical feasibility, and compliance of my intended use. I choose to continue with the third-party component.",
-      "ja": "コンポーネントの元プロジェクトと関連条件を自ら確認し、必要なデータアクセス・利用許諾、所在地での可用性、技術的実現可能性、予定する用途の適合性を確認しました。第三者コンポーネントの使用を続けます。",
-      "ko": "구성 요소의 원본 프로젝트와 관련 조건을 직접 검토했으며 필요한 데이터 접근 및 사용 권한, 현재 지역의 이용 가능 여부, 기술적 실행 가능성, 사용 목적의 적합성을 확인했습니다. 제3자 구성 요소 사용을 계속하겠습니다.",
-      "es": "He revisado el proyecto original del componente y las condiciones aplicables, y he confirmado por mi cuenta las autorizaciones necesarias de acceso y uso de datos, la disponibilidad regional, la viabilidad técnica y la conformidad del uso previsto. Elijo continuar con el componente de terceros."
-    }
-  },
-  "appText.marketDataAcquisitionThirdPartyUseConfirmationRequired": {
-    "kind": "text",
-    "locales": {
-      "zh-CN": "请先完成第三方组件、数据授权、地区可用性和用途合规性确认，再继续下载。",
-      "en": "Confirm the third-party component, data permissions, regional availability, and compliance of your intended use before continuing the download.",
-      "ja": "ダウンロードを続ける前に、第三者コンポーネント、データ利用許諾、所在地での可用性、予定する用途の適合性を確認してください。",
-      "ko": "다운로드를 계속하기 전에 제3자 구성 요소, 데이터 권한, 지역 이용 가능 여부 및 사용 목적의 적합성을 확인하세요.",
-      "es": "Antes de continuar la descarga, confirma el componente de terceros, las autorizaciones de datos, la disponibilidad regional y la conformidad del uso previsto."
+      "zh-CN": "相关数据授权与服务限制仍以对应权利方公布的内容为准。",
+      "en": "Data permissions and service restrictions remain subject to the terms published by the relevant rights holders.",
+      "ja": "データ利用許諾とサービス上の制限は、関係する権利者が公表する内容に従います。",
+      "ko": "데이터 권한과 서비스 제한은 관련 권리자가 게시한 조건을 따릅니다.",
+      "es": "Las autorizaciones de datos y las restricciones del servicio siguen sujetas a las condiciones publicadas por los titulares correspondientes."
     }
   },
   "appText.marketDataAcquisitionConnectorVersionValue0": {
@@ -8347,6 +8317,16 @@
       "ja": "データ元",
       "ko": "데이터 소스",
       "es": "Fuente de datos"
+    }
+  },
+  "appText.marketDataAcquisitionSourcePlanValue0Value1": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "{0} · {1}",
+      "en": "{0} · {1}",
+      "ja": "{0} · {1}",
+      "ko": "{0} · {1}",
+      "es": "{0} · {1}"
     }
   },
   "appText.marketDataAcquisitionFallbackPolicyValue0": {

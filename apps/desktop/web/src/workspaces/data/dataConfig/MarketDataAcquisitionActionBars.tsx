@@ -20,7 +20,6 @@ type MarketDataAcquisitionActionBarsProps = {
   savedOutputFinalPath: string | null;
   selectedMarketPresent: boolean;
   selectedPlanAvailable: boolean;
-  thirdPartyUseConfirmed: boolean;
   tt: Translate;
   wizardStep: AcquisitionWizardStep;
   onCancelDownload: () => void;
@@ -47,7 +46,6 @@ export const MarketDataAcquisitionActionBars = ({
   savedOutputFinalPath,
   selectedMarketPresent,
   selectedPlanAvailable,
-  thirdPartyUseConfirmed,
   tt,
   wizardStep,
   onCancelDownload,
@@ -91,9 +89,7 @@ export const MarketDataAcquisitionActionBars = ({
           <Button
             type="button"
             disabled={
-              !selectedMarketPresent ||
-              !selectedPlanAvailable ||
-              !thirdPartyUseConfirmed
+              !selectedMarketPresent || !selectedPlanAvailable
             }
             onClick={() => onMoveToStep(3)}
           >

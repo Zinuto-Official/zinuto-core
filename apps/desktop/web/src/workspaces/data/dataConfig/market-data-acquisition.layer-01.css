@@ -398,28 +398,6 @@
   gap: 8px;
 }
 
-.market-data-acquisition-third-party-confirmation {
-  min-width: 0;
-  display: flex;
-  align-items: flex-start;
-  gap: 9px;
-  padding: 10px 12px;
-  border: 1px solid var(--ui-surface-border);
-  border-radius: var(--radius-control);
-  background: var(--ui-surface-bg);
-  color: var(--text-t1);
-  cursor: pointer;
-}
-
-.market-data-acquisition-third-party-confirmation > .app-checkbox {
-  flex: 0 0 auto;
-  margin-top: 2px;
-}
-
-.market-data-acquisition-third-party-confirmation > span {
-  min-width: 0;
-}
-
 .market-data-acquisition-task-option {
   position: relative;
   min-width: 0;
@@ -585,27 +563,6 @@
 .market-data-acquisition-disclosure [data-slot="button"] small {
   color: var(--text-t3);
   font-weight: 520;
-}
-
-.market-data-acquisition-source-boundary {
-  min-width: 0;
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  padding: 10px 12px;
-  border-radius: var(--radius-control);
-  background: var(--ui-surface-bg-soft);
-  color: var(--text-t2);
-  font-size: var(--ty-r1);
-  line-height: 1.45;
-}
-
-.market-data-acquisition-source-boundary svg {
-  width: 16px;
-  height: 16px;
-  flex: 0 0 auto;
-  margin-top: 2px;
-  color: var(--text-t3);
 }
 
 .market-data-acquisition-field {

@@ -11,7 +11,6 @@ import type {
 } from "@/api";
 import { VendorIcon } from "@/assets/graphics";
 import { Button } from "@/ui/primitives/button";
-import { Checkbox } from "@/ui/primitives/checkbox";
 import { DatePicker } from "@/ui/primitives/date-picker";
 import { RadioGroup, RadioItem } from "@/ui/primitives/radio-group";
 import { SelectField } from "@/ui/primitives/select-field";
@@ -21,6 +20,7 @@ import {
   marketAcquisitionAssetClassDescriptionKey,
   marketAcquisitionAssetClassLabelKey,
   marketAcquisitionMarketLabelKey,
+  marketAcquisitionSourcePlanLabel,
 } from "@/workspaces/data/dataConfig/marketAcquisitionPresentation";
 
 type Translate = (key: string) => string;
@@ -36,7 +36,6 @@ type AcquisitionWizardFieldErrors = {
   source?: string;
   startDate?: string;
   symbols?: string;
-  thirdPartyUse?: string;
   timeframe?: string;
 };
 
@@ -60,7 +59,6 @@ type MarketDataAcquisitionWizardProps = {
   selectedInstruments: MarketDataAcquisitionInstrument[];
   sourcePlanId: MarketDataAcquisitionSourcePlanId | null;
   startDate: string;
-  thirdPartyUseConfirmed: boolean;
   timeframe: MarketDataAcquisitionTimeframe;
   tt: Translate;
   ttf: TranslateFormatted;
@@ -75,7 +73,6 @@ type MarketDataAcquisitionWizardProps = {
   onRetryCatalog: () => void;
   onSourcePlanChange: (value: MarketDataAcquisitionSourcePlanId) => void;
   onStartDateChange: (value: string) => void;
-  onThirdPartyUseConfirmedChange: (value: boolean) => void;
   onTimeframeChange: (value: MarketDataAcquisitionTimeframe) => void;
 };
 
@@ -96,18 +93,6 @@ const AcquisitionFieldError = ({
       {message}
     </small>
   ) : null;
-
-const sourceLabel = (
-  sourcePlan: MarketDataAcquisitionMarket["sourcePlans"][number],
-  catalog: MarketDataAcquisitionCatalog,
-): string =>
-  sourcePlan.providerChain
-    .map(
-      (providerId) =>
-        catalog.providers.find((entry) => entry.id === providerId)?.name ??
-        providerId,
-    )
-    .join(" / ");
 
 export const MarketDataAcquisitionStepper = ({
   tt,
@@ -166,7 +151,6 @@ export const MarketDataAcquisitionWizard = ({
   selectedInstruments,
   sourcePlanId,
   startDate,
-  thirdPartyUseConfirmed,
   timeframe,
   tt,
   ttf,
@@ -181,7 +165,6 @@ export const MarketDataAcquisitionWizard = ({
   onRetryCatalog,
   onSourcePlanChange,
   onStartDateChange,
-  onThirdPartyUseConfirmedChange,
   onTimeframeChange,
 }: MarketDataAcquisitionWizardProps) => {
   const assetClasses = catalog?.assetClasses ?? [];
@@ -361,7 +344,14 @@ export const MarketDataAcquisitionWizard = ({
                     value={sourcePlanId ?? ""}
                     options={market.sourcePlans.map((plan) => ({
                       value: plan.id,
-                      label: catalog ? sourceLabel(plan, catalog) : plan.id,
+                      label: catalog
+                        ? marketAcquisitionSourcePlanLabel(
+                            plan,
+                            catalog,
+                            tt,
+                            ttf,
+                          )
+                        : plan.id,
                       disabled: !plan.available,
                     }))}
                     aria-invalid={Boolean(fieldErrors.source)}
@@ -378,14 +368,18 @@ export const MarketDataAcquisitionWizard = ({
                   <span>
                     {tt("appText.marketDataAcquisitionSourcePlanLabel")}
                   </span>
-                  <strong>{sourceLabel(selectedPlan, catalog)}</strong>
+                  <strong>
+                    {marketAcquisitionSourcePlanLabel(
+                      selectedPlan,
+                      catalog,
+                      tt,
+                      ttf,
+                    )}
+                  </strong>
                 </div>
               ) : null}
               {selectedPlan && catalog ? (
                 <div className="market-data-acquisition-source-details">
-                  <p>
-                    {tt("appText.marketDataAcquisitionSourceBoundaryNotice")}
-                  </p>
                   <div
                     id="market-data-acquisition-third-party-notice"
                     className="market-data-acquisition-source-availability"
@@ -425,26 +419,6 @@ export const MarketDataAcquisitionWizard = ({
                   <AcquisitionFieldError
                     id="market-data-acquisition-projects-error"
                     message={fieldErrors.projects}
-                  />
-                  <label className="market-data-acquisition-third-party-confirmation">
-                    <Checkbox
-                      checked={thirdPartyUseConfirmed}
-                      disabled={!selectedPlan.available}
-                      aria-invalid={Boolean(fieldErrors.thirdPartyUse)}
-                      aria-describedby="market-data-acquisition-third-party-notice market-data-acquisition-third-party-confirmation-error"
-                      onChange={(event) =>
-                        onThirdPartyUseConfirmedChange(event.target.checked)
-                      }
-                    />
-                    <span>
-                      {tt(
-                        "appText.marketDataAcquisitionThirdPartyUseAcknowledgement",
-                      )}
-                    </span>
-                  </label>
-                  <AcquisitionFieldError
-                    id="market-data-acquisition-third-party-confirmation-error"
-                    message={fieldErrors.thirdPartyUse}
                   />
                 </div>
               ) : null}
@@ -633,7 +607,12 @@ export const MarketDataAcquisitionWizard = ({
                 <dt>{tt("appText.marketDataAcquisitionSourcePlanLabel")}</dt>
                 <dd>
                   {selectedPlan && catalog
-                    ? sourceLabel(selectedPlan, catalog)
+                    ? marketAcquisitionSourcePlanLabel(
+                        selectedPlan,
+                        catalog,
+                        tt,
+                        ttf,
+                      )
                     : ""}
                 </dd>
               </div>

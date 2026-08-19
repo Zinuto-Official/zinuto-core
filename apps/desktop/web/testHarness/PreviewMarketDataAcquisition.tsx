@@ -397,7 +397,6 @@ export const PreviewMarketDataAcquisition = ({
     useState<MarketDataAcquisitionMarketId>("CN_A_SHARE");
   const [sourcePlanId, setSourcePlanId] =
     useState<MarketDataAcquisitionSourcePlanId>("CN_A_SHARE_SMART");
-  const [thirdPartyUseConfirmed, setThirdPartyUseConfirmed] = useState(false);
   const [selectedInstruments, setSelectedInstruments] = useState<
     MarketDataAcquisitionInstrument[]
   >(previewInstruments.CN_A_SHARE);
@@ -463,7 +462,7 @@ export const PreviewMarketDataAcquisition = ({
         </Button>
         <Button
           type="button"
-          disabled={!thirdPartyUseConfirmed}
+          disabled={!market || !sourcePlanId}
           onClick={() => setWizardStep(3)}
         >
           {acquisitionTt("appText.marketDataAcquisitionContinue")}
@@ -491,7 +490,7 @@ export const PreviewMarketDataAcquisition = ({
         >
           {acquisitionTt("appText.marketDataAcquisitionBack")}
         </Button>
-        <Button type="button" disabled={!thirdPartyUseConfirmed} onClick={noop}>
+        <Button type="button" onClick={noop}>
           {acquisitionTt("appText.marketDataAcquisitionStartDownload")}
         </Button>
       </>
@@ -627,7 +626,6 @@ export const PreviewMarketDataAcquisition = ({
             selectedInstruments={selectedInstruments}
             sourcePlanId={sourcePlanId}
             startDate={startDate}
-            thirdPartyUseConfirmed={thirdPartyUseConfirmed}
             timeframe={timeframe}
             tt={acquisitionTt}
             ttf={acquisitionTtf}
@@ -637,7 +635,6 @@ export const PreviewMarketDataAcquisition = ({
               setAssetClassId(value);
               setMarketId("CN_A_SHARE");
               setSourcePlanId("CN_A_SHARE_SMART");
-              setThirdPartyUseConfirmed(false);
               setSelectedInstruments(previewInstruments.CN_A_SHARE);
             }}
             onChooseFolder={noop}
@@ -651,7 +648,6 @@ export const PreviewMarketDataAcquisition = ({
                 nextMarket?.sourcePlans[0]?.id ?? "CN_A_SHARE_SMART";
               setMarketId(value);
               setSourcePlanId(nextPlan);
-              setThirdPartyUseConfirmed(false);
               setSelectedInstruments(previewInstruments[value]);
               setTimeframe(
                 nextMarket?.supportedTimeframes.includes("1d") ? "1d" : "1m",
@@ -664,10 +660,8 @@ export const PreviewMarketDataAcquisition = ({
             onRetryCatalog={noop}
             onSourcePlanChange={(value) => {
               setSourcePlanId(value);
-              setThirdPartyUseConfirmed(false);
             }}
             onStartDateChange={setStartDate}
-            onThirdPartyUseConfirmedChange={setThirdPartyUseConfirmed}
             onTimeframeChange={setTimeframe}
           />
         )}

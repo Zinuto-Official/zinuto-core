@@ -32,7 +32,10 @@ import {
   resolveMarketDataAcquisitionSaveErrorKey,
   readMarketDataAcquisitionValidationDetail,
 } from "@/workspaces/data/dataConfig/marketDataAcquisitionModel";
-import { marketAcquisitionMarketLabelKey } from "@/workspaces/data/dataConfig/marketAcquisitionPresentation";
+import {
+  marketAcquisitionMarketLabelKey,
+  marketAcquisitionSourcePlanLabel,
+} from "@/workspaces/data/dataConfig/marketAcquisitionPresentation";
 import { MarketDataAcquisitionResult } from "@/workspaces/data/dataConfig/MarketDataAcquisitionResult";
 import { MarketDataAcquisitionHistory } from "@/workspaces/data/dataConfig/MarketDataAcquisitionHistory";
 import { MarketDataAcquisitionStatePage } from "@/workspaces/data/dataConfig/MarketDataAcquisitionStatePage";
@@ -70,8 +73,7 @@ type AcquisitionField =
   | "startDate"
   | "endDate"
   | "folder"
-  | "projects"
-  | "thirdPartyUse";
+  | "projects";
 type AcquisitionFieldErrors = Partial<Record<AcquisitionField, string>>;
 type AcquisitionFolderGrant = MarketDataAcquisitionFolderPreference;
 
@@ -123,16 +125,12 @@ const planLabel = (
   catalog: MarketDataAcquisitionCatalog | null,
   market: MarketDataAcquisitionMarket | null,
   sourcePlanId: MarketDataAcquisitionSourcePlanId | null,
+  tt: Translate,
+  ttf: TranslateFormatted,
 ): string => {
   const plan = market?.sourcePlans.find((entry) => entry.id === sourcePlanId);
   if (!plan || !catalog) return "";
-  return plan.providerChain
-    .map(
-      (providerId) =>
-        catalog.providers.find((entry) => entry.id === providerId)?.name ??
-        providerId,
-    )
-    .join(" / ");
+  return marketAcquisitionSourcePlanLabel(plan, catalog, tt, ttf);
 };
 
 export const MarketDataAcquisitionSection = ({
@@ -158,7 +156,6 @@ export const MarketDataAcquisitionSection = ({
     useState<MarketDataAcquisitionMarketId | null>(null);
   const [sourcePlanId, setSourcePlanId] =
     useState<MarketDataAcquisitionSourcePlanId | null>(null);
-  const [thirdPartyUseConfirmed, setThirdPartyUseConfirmed] = useState(false);
   const [selectedInstruments, setSelectedInstruments] = useState<
     MarketDataAcquisitionInstrument[]
   >([]);
@@ -292,7 +289,6 @@ export const MarketDataAcquisitionSection = ({
       setAssetClassId(nextAssetClassId);
       setMarketId(null);
       setSourcePlanId(null);
-      setThirdPartyUseConfirmed(false);
       setSelectedInstruments([]);
       setAdjustment(null);
       setTimeframe("1d");
@@ -312,7 +308,6 @@ export const MarketDataAcquisitionSection = ({
         null;
       setMarketId(nextMarketId);
       setSourcePlanId(nextPlan?.id ?? null);
-      setThirdPartyUseConfirmed(false);
       setSelectedInstruments([]);
       setTimeframe(
         nextMarket.supportedTimeframes.includes("1d")
@@ -332,11 +327,9 @@ export const MarketDataAcquisitionSection = ({
     (nextSourcePlanId: MarketDataAcquisitionSourcePlanId) => {
       if (nextSourcePlanId === sourcePlanId) return;
       setSourcePlanId(nextSourcePlanId);
-      setThirdPartyUseConfirmed(false);
       setSelectedInstruments([]);
       clearFieldError("source");
       clearFieldError("symbols");
-      clearFieldError("thirdPartyUse");
     },
     [clearFieldError, sourcePlanId],
   );
@@ -483,11 +476,6 @@ export const MarketDataAcquisitionSection = ({
         "appText.marketDataAcquisitionConnectorUnavailable",
       );
     }
-    if (!thirdPartyUseConfirmed) {
-      nextFieldErrors.thirdPartyUse = tt(
-        "appText.marketDataAcquisitionThirdPartyUseConfirmationRequired",
-      );
-    }
     const symbols = selectedInstruments.map((instrument) => instrument.symbol);
     if (!symbols.length) {
       nextFieldErrors.symbols = tt(
@@ -534,8 +522,7 @@ export const MarketDataAcquisitionSection = ({
         nextFieldErrors.assetClass
           ? 1
           : nextFieldErrors.market ||
-              nextFieldErrors.source ||
-              nextFieldErrors.thirdPartyUse
+              nextFieldErrors.source
             ? 2
             : nextFieldErrors.symbols
               ? 3
@@ -608,7 +595,6 @@ export const MarketDataAcquisitionSection = ({
     selectedPlan,
     sourcePlanId,
     startDate,
-    thirdPartyUseConfirmed,
     timeframe,
     tt,
     ttf,
@@ -749,13 +735,15 @@ export const MarketDataAcquisitionSection = ({
       )
     : 0;
   const canStartOnline = Boolean(
-    selectedPlan?.available && thirdPartyUseConfirmed && !catalogLoading,
+    selectedPlan?.available && !catalogLoading,
   );
   const resultSourceLabel = selectedMarket
     ? `${tt(marketAcquisitionMarketLabelKey(selectedMarket.id))} · ${planLabel(
         catalog,
         selectedMarket,
         sourcePlanId,
+        tt,
+        ttf,
       )}`
     : "";
   const actualSourceLabel =
@@ -772,7 +760,7 @@ export const MarketDataAcquisitionSection = ({
       .join(tt("app.joiner.slash")) || resultSourceLabel;
   const failedReturnStep: AcquisitionWizardStep = fieldErrors.assetClass
     ? 1
-    : fieldErrors.market || fieldErrors.source || fieldErrors.thirdPartyUse
+    : fieldErrors.market || fieldErrors.source
       ? 2
       : fieldErrors.symbols
         ? 3
@@ -880,7 +868,6 @@ export const MarketDataAcquisitionSection = ({
             savedOutputFinalPath={savedOutput?.finalPath ?? null}
             selectedMarketPresent={Boolean(selectedMarket)}
             selectedPlanAvailable={Boolean(selectedPlan?.available)}
-            thirdPartyUseConfirmed={thirdPartyUseConfirmed}
             tt={tt}
             wizardStep={wizardStep}
             onCancelDownload={() => void cancelDownload()}
@@ -933,7 +920,6 @@ export const MarketDataAcquisitionSection = ({
               selectedInstruments={selectedInstruments}
               sourcePlanId={sourcePlanId}
               startDate={startDate}
-              thirdPartyUseConfirmed={thirdPartyUseConfirmed}
               timeframe={timeframe}
               tt={tt}
               ttf={ttf}
@@ -960,10 +946,6 @@ export const MarketDataAcquisitionSection = ({
                 setStartDate(value);
                 clearFieldError("startDate");
                 clearFieldError("endDate");
-              }}
-              onThirdPartyUseConfirmedChange={(value) => {
-                setThirdPartyUseConfirmed(value);
-                if (value) clearFieldError("thirdPartyUse");
               }}
               onTimeframeChange={(value) => {
                 setTimeframe(value);

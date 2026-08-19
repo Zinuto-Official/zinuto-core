@@ -2,8 +2,13 @@
 
 import type {
   MarketDataAcquisitionAssetClass,
+  MarketDataAcquisitionCatalog,
   MarketDataAcquisitionMarketId,
+  MarketDataAcquisitionSourcePlanId,
 } from "@/api";
+
+type Translate = (key: string) => string;
+type TranslateFormatted = (key: string, values?: Array<unknown>) => string;
 
 export const marketAcquisitionAssetClassLabelKey = (
   assetClassId: MarketDataAcquisitionAssetClass["id"],
@@ -44,3 +49,40 @@ export const marketAcquisitionMarketLabelKey = (
     RATE_FUTURES: "appText.marketDataAcquisitionMarketRateFutures",
     CRYPTO_SPOT: "appText.marketDataAcquisitionMarketCryptoSpot",
   })[marketId];
+
+export const marketAcquisitionSourcePlanExchangeLabelKey = (
+  sourcePlanId: MarketDataAcquisitionSourcePlanId,
+): string | null => {
+  switch (sourcePlanId) {
+    case "CCXT_BINANCE_SMART":
+      return "appText.marketDataAcquisitionExchangeBinance";
+    case "CCXT_OKX_SMART":
+      return "appText.marketDataAcquisitionExchangeOkx";
+    default:
+      return null;
+  }
+};
+
+export const marketAcquisitionSourcePlanLabel = (
+  sourcePlan: MarketDataAcquisitionCatalog["markets"][number]["sourcePlans"][number],
+  catalog: MarketDataAcquisitionCatalog,
+  tt: Translate,
+  ttf: TranslateFormatted,
+): string => {
+  const providerLabel = sourcePlan.providerChain
+    .map(
+      (providerId) =>
+        catalog.providers.find((entry) => entry.id === providerId)?.name ??
+        providerId,
+    )
+    .join(" / ");
+  const exchangeLabelKey = marketAcquisitionSourcePlanExchangeLabelKey(
+    sourcePlan.id,
+  );
+  return exchangeLabelKey
+    ? ttf("appText.marketDataAcquisitionSourcePlanValue0Value1", [
+        tt(exchangeLabelKey),
+        providerLabel,
+      ])
+    : providerLabel;
+};

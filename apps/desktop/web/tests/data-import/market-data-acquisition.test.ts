@@ -12,6 +12,10 @@ import {
   resolveMarketDataAcquisitionErrorMessageKey,
 } from "../../src/workspaces/data/dataConfig/marketDataAcquisitionModel";
 import {
+  marketAcquisitionSourcePlanExchangeLabelKey,
+  marketAcquisitionSourcePlanLabel,
+} from "../../src/workspaces/data/dataConfig/marketAcquisitionPresentation";
+import {
   createDesktopSecondaryWindowActionAckLedger,
   doesDesktopSecondaryWindowActionAckMatchRequest,
   isDesktopSecondaryWindowActionRequestRevisionCurrent,
@@ -251,6 +255,71 @@ test("date validation reports each field before a download starts", () => {
   assert.deepEqual(
     resolveMarketDataAcquisitionDateIssues("2026-03-01", "2026-03-02"),
     {},
+  );
+});
+
+test("source plan labels distinguish crypto exchanges from the shared connector chain", () => {
+  const catalog = {
+    providers: [
+      { id: "ccxt", name: "CCXT" },
+      { id: "financedatareader", name: "FinanceDataReader" },
+    ],
+    markets: [],
+    assetClasses: [],
+  } as unknown as Parameters<typeof marketAcquisitionSourcePlanLabel>[1];
+  const translate = (key: string) =>
+    key.endsWith("ExchangeBinance") ? "Binance Spot" : "OKX Spot";
+  const translateFormatted = (_key: string, values?: Array<unknown>) =>
+    `${String(values?.[0] ?? "")} · ${String(values?.[1] ?? "")}`;
+  const binancePlan = {
+    id: "CCXT_BINANCE_SMART" as const,
+    providerChain: ["ccxt", "financedatareader"],
+    fallbackPolicy: "WHOLE_INSTRUMENT_DAILY_ONLY",
+    available: true,
+  } satisfies Parameters<typeof marketAcquisitionSourcePlanLabel>[0];
+  const okxPlan = {
+    ...binancePlan,
+    id: "CCXT_OKX_SMART" as const,
+  };
+  assert.equal(
+    marketAcquisitionSourcePlanExchangeLabelKey(binancePlan.id),
+    "appText.marketDataAcquisitionExchangeBinance",
+  );
+  assert.equal(
+    marketAcquisitionSourcePlanExchangeLabelKey(okxPlan.id),
+    "appText.marketDataAcquisitionExchangeOkx",
+  );
+  assert.notEqual(
+    marketAcquisitionSourcePlanLabel(
+      binancePlan,
+      catalog,
+      translate,
+      translateFormatted,
+    ),
+    marketAcquisitionSourcePlanLabel(
+      okxPlan,
+      catalog,
+      translate,
+      translateFormatted,
+    ),
+  );
+  assert.equal(
+    marketAcquisitionSourcePlanLabel(
+      binancePlan,
+      catalog,
+      translate,
+      translateFormatted,
+    ),
+    "Binance Spot · CCXT / FinanceDataReader",
+  );
+  assert.equal(
+    marketAcquisitionSourcePlanLabel(
+      okxPlan,
+      catalog,
+      translate,
+      translateFormatted,
+    ),
+    "OKX Spot · CCXT / FinanceDataReader",
   );
 });
 
@@ -827,8 +896,16 @@ test("download entry is permanent and the four-step market catalog replaces conn
     /marketDataAcquisitionSourcePlanLabel/u,
   );
   assert.match(
-    acquisitionWizardSource,
-    /const sourceLabel[\s\S]*sourcePlan\.providerChain/u,
+    marketAcquisitionPresentationSource,
+    /marketAcquisitionSourcePlanExchangeLabelKey[\s\S]*CCXT_BINANCE_SMART[\s\S]*CCXT_OKX_SMART/u,
+  );
+  assert.match(
+    marketAcquisitionPresentationSource,
+    /marketAcquisitionSourcePlanLabel[\s\S]*providerLabel[\s\S]*exchangeLabelKey/u,
+  );
+  assert.match(
+    acquisitionSectionSource,
+    /planLabel[\s\S]*marketAcquisitionSourcePlanLabel[\s\S]*ttf/u,
   );
   assert.match(
     acquisitionWizardSource,
@@ -871,30 +948,36 @@ test("download entry is permanent and the four-step market catalog replaces conn
     /downloadDir\(\)[\s\S]*defaultPath,[\s\S]*directory: true/u,
   );
   assert.match(acquisitionStylesSource, /market-data-acquisition-source-plan/u);
+  assert.doesNotMatch(
+    acquisitionStylesSource,
+    /market-data-acquisition-source-boundary/u,
+  );
   assert.doesNotMatch(acquisitionWizardSource, /sourceAvailabilityNoticeKey/u);
+  assert.doesNotMatch(
+    acquisitionWizardSource,
+    /marketDataAcquisitionSourceBoundaryNotice/u,
+  );
   assert.match(
     acquisitionWizardSource,
-    /marketDataAcquisitionThirdPartyUseNotice[\s\S]*marketDataAcquisitionReviewOriginalTermsNotice[\s\S]*<Checkbox[\s\S]*thirdPartyUseConfirmed[\s\S]*marketDataAcquisitionThirdPartyUseAcknowledgement/u,
+    /marketDataAcquisitionThirdPartyUseLabel[\s\S]*marketDataAcquisitionThirdPartyUseNotice[\s\S]*marketDataAcquisitionReviewOriginalTermsNotice/u,
   );
-  assert.match(
+  assert.doesNotMatch(
+    acquisitionWizardSource,
+    /Checkbox|thirdPartyUseConfirmed|onThirdPartyUseConfirmedChange|marketDataAcquisitionThirdPartyUseAcknowledgement/u,
+  );
+  assert.doesNotMatch(
     acquisitionSectionSource,
-    /setThirdPartyUseConfirmed\(false\)[\s\S]*marketDataAcquisitionThirdPartyUseConfirmationRequired/u,
+    /thirdPartyUseConfirmed|marketDataAcquisitionThirdPartyUseConfirmationRequired/u,
   );
-  assert.match(
-    acquisitionActionBarsSource,
-    /!selectedPlanAvailable \|\|[\s\S]*!thirdPartyUseConfirmed/u,
-  );
+  assert.doesNotMatch(acquisitionActionBarsSource, /thirdPartyUseConfirmed/u);
   const dataSettingsMessages = JSON.parse(dataSettingsMessagesSource) as Record<
     string,
     { locales: Record<string, string> }
   >;
   const responsibilityCopyKeys = [
-    "appText.marketDataAcquisitionSourceBoundaryNotice",
     "appText.marketDataAcquisitionThirdPartyUseLabel",
     "appText.marketDataAcquisitionThirdPartyUseNotice",
     "appText.marketDataAcquisitionReviewOriginalTermsNotice",
-    "appText.marketDataAcquisitionThirdPartyUseAcknowledgement",
-    "appText.marketDataAcquisitionThirdPartyUseConfirmationRequired",
     "appText.marketDataAcquisitionErrorConnection",
     "appText.marketDataAcquisitionErrorRateLimited",
     "appText.marketDataAcquisitionErrorFormatChanged",
@@ -906,13 +989,7 @@ test("download entry is permanent and the four-step market catalog replaces conn
   assert.match(
     dataSettingsMessages["appText.marketDataAcquisitionThirdPartyUseNotice"]
       .locales["zh-CN"],
-    /境内或境外[\s\S]*Zinuto 不参与第三方授权[\s\S]*用户自行承担/u,
-  );
-  assert.match(
-    dataSettingsMessages[
-      "appText.marketDataAcquisitionThirdPartyUseAcknowledgement"
-    ].locales["zh-CN"],
-    /原始项目[\s\S]*数据访问和使用授权[\s\S]*地区可用性[\s\S]*技术可行性[\s\S]*用途合规性/u,
+    /境内或境外[\s\S]*继续获取数据即表示[\s\S]*自行承担[\s\S]*Zinuto 不参与第三方授权/u,
   );
   assert.doesNotMatch(
     responsibilityCopy,
