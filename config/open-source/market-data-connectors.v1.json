@@ -54,11 +54,11 @@
       "projectUrl": "https://github.com/ccxt/ccxt",
       "dependencyLock": {
         "file": "package-lock.json",
-        "sha256": "2bc6ba2eb39fbaf59ee6dcc8201f08ea1d198a9eaa0646660d46020bd770265f"
+        "sha256": "888fcbe7c8faa84078df5b8f525d64459cd210e3ee543c9e9b6b6cdaa408d6f6"
       },
       "projectFile": {
         "file": "apps/desktop/local-api/package.json",
-        "sha256": "502ac7c77b46f1c5561adc89fa41785bba015c9fe96039f75c12c3697a891797"
+        "sha256": "55781bb789ccd47cebe2ab8286262b1cb25db0bf7d0e1c3c7e66bcd51786e373"
       },
       "sidecar": null,
       "upstreamTerms": [

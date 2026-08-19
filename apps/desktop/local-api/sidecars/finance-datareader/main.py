@@ -18,7 +18,7 @@ import sys
 import threading
 import time as clock
 from contextlib import redirect_stdout
-from datetime import datetime, time
+from datetime import datetime, time, timedelta
 from importlib.metadata import version
 from multiprocessing import freeze_support
 from pathlib import Path
@@ -284,6 +284,20 @@ def _strip_suffix(symbol: str, suffix: str) -> str:
     return symbol[: -len(suffix)] if symbol.upper().endswith(suffix) else symbol
 
 
+def _normalize_hk_symbol(symbol: str) -> str:
+    """Match Yahoo's HK ticker spelling without damaging RMB counters.
+
+    FDR's HKEX directory currently returns ordinary HK tickers as five digits
+    (for example 00700 and 09988), while Yahoo expects 0700.HK and 9988.HK.
+    Five-digit RMB-counter tickers such as 80700 are already canonical and
+    must remain untouched.
+    """
+    normalized = _strip_suffix(symbol, ".HK")
+    if normalized.isdigit() and normalized.startswith("0"):
+        normalized = normalized.lstrip("0") or "0"
+    return normalized.zfill(4) if normalized.isdigit() else normalized
+
+
 def _reader_request(market_id: str, symbol: str) -> tuple[str, str]:
     """Map a validated market symbol to FDR's explicit reader route.
 
@@ -298,7 +312,7 @@ def _reader_request(market_id: str, symbol: str) -> tuple[str, str]:
         exchange = "SSE" if normalized.startswith(("5", "6", "9")) else "SZSE"
         return f"{exchange}:{normalized}", "yahoo-finance"
     if market_id == "HK_STOCKS":
-        return f"HKEX:{_strip_suffix(normalized, '.HK').zfill(4)}", "yahoo-finance"
+        return f"HKEX:{_normalize_hk_symbol(normalized)}", "yahoo-finance"
     if market_id == "KR_STOCKS":
         return f"NAVER:{normalized}", "naver-finance"
     if market_id == "US_STOCKS":
@@ -321,7 +335,9 @@ def _status_code(error: BaseException) -> int | None:
 
 def _is_retryable_upstream_error(error: BaseException) -> bool:
     if isinstance(error, requests.exceptions.JSONDecodeError):
-        return False
+        # Yahoo occasionally returns a transient non-JSON edge response. One
+        # bounded retry distinguishes that from a stable schema change.
+        return True
     status = _status_code(error)
     if status is not None:
         return status == 408 or status == 429 or status >= 500
@@ -351,6 +367,15 @@ def _upstream_worker_error(
     if status is not None:
         args["statusCode"] = status
     if operation == "bars" and status in {400, 404, 410, 422}:
+        return WorkerError("FINANCEDATAREADER_SYMBOL_UNAVAILABLE", args)
+    if (
+        operation == "bars"
+        and isinstance(error, KeyError)
+        and error.args == ("timestamp",)
+    ):
+        # FDR's Yahoo reader indexes the chart payload by ``timestamp``. A
+        # missing key is its empty-symbol/date response, not a changed OHLCV
+        # table schema.
         return WorkerError("FINANCEDATAREADER_SYMBOL_UNAVAILABLE", args)
     if isinstance(
         error,
@@ -439,7 +464,33 @@ def _canonical_rows(
             or (end_at is not None and timestamp_value > end_at)
         ):
             continue
-        values = {name: _finite_number(record[column]) for name, column in required.items()}
+        try:
+            values = {
+                name: _finite_number(record[column])
+                for name, column in required.items()
+            }
+        except WorkerError:
+            raw_values = [record[column] for column in required.values()]
+            finite_values = []
+            for value in raw_values:
+                try:
+                    finite_values.append(math.isfinite(float(value)))
+                except (TypeError, ValueError):
+                    finite_values.append(False)
+            if not any(finite_values):
+                # Yahoo can insert all-null holiday placeholders into an
+                # otherwise valid daily series. They are not price bars.
+                continue
+            raise
+        if market_id == "FOREX":
+            # Yahoo FX daily bars can differ by a few ticks between the open /
+            # close fields and its reported range. Preserve every reported
+            # value while expanding only the mathematical OHLC envelope.
+            reported_prices = tuple(
+                values[name] for name in ("Open", "High", "Low", "Close")
+            )
+            values["High"] = max(reported_prices)
+            values["Low"] = min(reported_prices)
         rows.append(
             {
                 "timestamp": timestamp,
@@ -458,12 +509,18 @@ def _canonical_rows(
 def _read_bars(params: dict[str, Any]) -> tuple[list[dict[str, Any]], str]:
     market_id = params["marketId"]
     reader_symbol, upstream_id = _reader_request(market_id, params["symbol"])
+    # FDR/Yahoo treats a multi-day end date as exclusive. Request one extra
+    # calendar day and rely on the strict instant-range filter below so the
+    # user-selected final day is retained without staging any later bar.
+    reader_end_date = (
+        datetime.fromisoformat(params["endAt"][:10]).date() + timedelta(days=1)
+    ).isoformat()
     frame = _read_upstream(
         "bars",
         lambda: fdr.DataReader(
             reader_symbol,
             params["startAt"][:10],
-            params["endAt"][:10],
+            reader_end_date,
         ),
     )
     return (

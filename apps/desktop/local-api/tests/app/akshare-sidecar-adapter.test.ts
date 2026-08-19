@@ -131,6 +131,23 @@ test('AKShare bars preserve the actual internal fallback upstream for source pro
   );
 });
 
+test('AKShare no-data responses map to the acquisition no-data error', () => {
+  const request = buildAkshareInstrumentCatalogRequest();
+  const response = JSON.stringify({
+    protocol: AKSHARE_SIDECAR_PROTOCOL,
+    requestId: request.requestId,
+    ok: false,
+    error: {
+      code: 'AKSHARE_NO_DATA',
+      args: { symbol: '600000' },
+    },
+  });
+  assert.throws(
+    () => parseAkshareSidecarResponse(response, request.requestId),
+    /ACQUISITION_NO_DATA/u,
+  );
+});
+
 test('AKShare index jobs strip the controlled prefix before sidecar execution', () => {
   const indexInput = {
     jobId: 'index-job',

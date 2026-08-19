@@ -6442,11 +6442,61 @@
   "appText.marketDataAcquisitionSourceBoundaryNotice": {
     "kind": "text",
     "locales": {
-      "zh-CN": "Zinuto 不提供数据，只在本机使用开源连接器完成连接与导入。连接器直接向原始提供方请求数据；使用协议、许可和规则以原始提供方为准",
-      "en": "Zinuto does not provide this data. It uses open-source connectors on your device to connect and import it. Connectors request data directly from the original provider; its terms, licences, and rules apply",
-      "ja": "Zinuto はデータを提供せず、端末上でオープンソースのコネクタを使って接続・取り込みを行います。コネクタは元の提供元へ直接リクエストし、利用条件・ライセンス・規則はその提供元に従います",
-      "ko": "Zinuto는 데이터를 제공하지 않으며, 기기에서 오픈 소스 커넥터로 연결 및 가져오기만 수행합니다. 커넥터는 원래 제공처에 직접 데이터를 요청하며 이용 조건, 라이선스 및 규칙은 해당 제공처를 따릅니다",
-      "es": "Zinuto no proporciona estos datos; solo usa conectores de código abierto en tu dispositivo para conectarlos e importarlos. Los conectores solicitan los datos directamente al proveedor original; se aplican sus condiciones, licencias y normas"
+      "zh-CN": "Zinuto 仅在本机集成并调用第三方开源组件，不提供、托管或转售行情数据。组件功能及其可能访问的数据源由相应第三方独立提供；开源许可、使用协议、数据授权与限制，均以组件原始项目及相关权利方公布的条款为准。",
+      "en": "Zinuto only integrates and invokes third-party open-source components on this device; it does not provide, host, or resell market data. The components and any data sources they may access are independently provided by third parties. Their original projects and the relevant rights holders' published terms govern open-source licences, usage terms, data permissions, and restrictions.",
+      "ja": "Zinuto はこの端末上で第三者のオープンソースコンポーネントを組み込み、呼び出すだけで、市場データの提供、ホスティング、再販売は行いません。コンポーネントの機能とアクセスする可能性のあるデータ元は各第三者が独立して提供します。オープンソースライセンス、利用条件、データ利用許諾および制限は、コンポーネントの元プロジェクトと関係する権利者が公表する条件に従います。",
+      "ko": "Zinuto는 이 기기에서 제3자 오픈 소스 구성 요소를 통합하고 호출할 뿐이며 시세 데이터를 제공, 호스팅 또는 재판매하지 않습니다. 구성 요소의 기능과 구성 요소가 접근할 수 있는 데이터 소스는 각 제3자가 독립적으로 제공합니다. 오픈 소스 라이선스, 이용 약관, 데이터 권한 및 제한은 구성 요소의 원본 프로젝트와 관련 권리자가 게시한 조건을 따릅니다.",
+      "es": "Zinuto solo integra e invoca componentes de código abierto de terceros en este dispositivo; no proporciona, aloja ni revende datos de mercado. Los componentes y las fuentes de datos a las que puedan acceder son ofrecidos de forma independiente por terceros. Las licencias, condiciones de uso, autorizaciones y restricciones de datos se rigen por el proyecto original y por las condiciones publicadas por los titulares correspondientes."
+    }
+  },
+  "appText.marketDataAcquisitionThirdPartyUseLabel": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "第三方组件、数据授权与可用性",
+      "en": "Third-party components, data permissions, and availability",
+      "ja": "第三者コンポーネント、データ利用許諾、可用性",
+      "ko": "제3자 구성 요소, 데이터 권한 및 이용 가능 여부",
+      "es": "Componentes de terceros, autorizaciones y disponibilidad"
+    }
+  },
+  "appText.marketDataAcquisitionThirdPartyUseNotice": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "第三方组件可能访问境内或境外数据源，实际访问路径也可能随组件或相关服务调整。在部分国家或地区，连接可能受网络条件、地区政策、第三方限制、接口变更、限流或维护影响。Zinuto 不参与第三方授权，也不控制或保证第三方数据及服务的可用性、完整性、及时性、准确性或特定用途适用性；相关判断及使用责任由用户自行承担。",
+      "en": "Third-party components may access domestic or overseas data sources, and the actual route may change with the component or related services. Connectivity in some countries or regions can be affected by network conditions, regional policies, third-party restrictions, API changes, rate limits, or maintenance. Zinuto does not grant third-party permissions and does not control or warrant the availability, completeness, timeliness, accuracy, or fitness for a particular purpose of third-party data or services; you are responsible for these determinations and for your use.",
+      "ja": "第三者コンポーネントは国内または海外のデータ元へアクセスする場合があり、実際の経路もコンポーネントや関連サービスの変更に伴って変わることがあります。一部の国や地域では、ネットワーク状況、地域の方針、第三者の制限、API の変更、利用制限、保守の影響を受ける場合があります。Zinuto は第三者の許諾に関与せず、第三者データやサービスの可用性、完全性、適時性、正確性、特定目的への適合性を管理または保証しません。これらの確認と利用に関する責任は利用者が負います。",
+      "ko": "제3자 구성 요소는 국내 또는 해외 데이터 소스에 접근할 수 있으며 실제 접근 경로도 구성 요소나 관련 서비스의 변경에 따라 달라질 수 있습니다. 일부 국가나 지역에서는 네트워크 상태, 지역 정책, 제3자 제한, API 변경, 요청 제한 또는 점검의 영향을 받을 수 있습니다. Zinuto는 제3자 권한 부여에 관여하지 않으며 제3자 데이터나 서비스의 이용 가능성, 완전성, 적시성, 정확성 또는 특정 목적 적합성을 통제하거나 보증하지 않습니다. 이에 대한 판단과 사용 책임은 사용자에게 있습니다.",
+      "es": "Los componentes de terceros pueden acceder a fuentes de datos nacionales o extranjeras, y la ruta efectiva puede cambiar con el componente o los servicios relacionados. En algunos países o regiones, la conexión puede verse afectada por las condiciones de red, políticas regionales, restricciones de terceros, cambios de API, límites o mantenimiento. Zinuto no interviene en las autorizaciones de terceros ni controla o garantiza la disponibilidad, integridad, puntualidad, exactitud o idoneidad para un fin concreto de sus datos o servicios; el usuario es responsable de estas comprobaciones y de su uso."
+    }
+  },
+  "appText.marketDataAcquisitionReviewOriginalTermsNotice": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "请通过下方组件项目入口查阅原始开源许可和使用协议；相关数据授权与服务限制仍以对应权利方公布的内容为准。",
+      "en": "Use the component project links below to review the original open-source licences and usage terms. Data permissions and service restrictions remain subject to the terms published by the relevant rights holders.",
+      "ja": "下記のコンポーネントプロジェクトから元のオープンソースライセンスと利用条件を確認してください。データ利用許諾とサービス上の制限は、関係する権利者が公表する内容に従います。",
+      "ko": "아래 구성 요소 프로젝트 링크에서 원본 오픈 소스 라이선스와 이용 약관을 확인하세요. 데이터 권한과 서비스 제한은 관련 권리자가 게시한 조건을 따릅니다.",
+      "es": "Consulta las licencias originales y las condiciones de uso mediante los enlaces de los proyectos que aparecen abajo. Las autorizaciones de datos y las restricciones del servicio siguen sujetas a las condiciones publicadas por los titulares correspondientes."
+    }
+  },
+  "appText.marketDataAcquisitionThirdPartyUseAcknowledgement": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "我已自行查阅组件原始项目及相关条款，并确认所需的数据访问和使用授权、所在地区可用性、技术可行性及拟定用途合规性；我选择继续使用第三方组件。",
+      "en": "I have reviewed the component's original project and applicable terms, and I have independently confirmed the required data-access and usage permissions, regional availability, technical feasibility, and compliance of my intended use. I choose to continue with the third-party component.",
+      "ja": "コンポーネントの元プロジェクトと関連条件を自ら確認し、必要なデータアクセス・利用許諾、所在地での可用性、技術的実現可能性、予定する用途の適合性を確認しました。第三者コンポーネントの使用を続けます。",
+      "ko": "구성 요소의 원본 프로젝트와 관련 조건을 직접 검토했으며 필요한 데이터 접근 및 사용 권한, 현재 지역의 이용 가능 여부, 기술적 실행 가능성, 사용 목적의 적합성을 확인했습니다. 제3자 구성 요소 사용을 계속하겠습니다.",
+      "es": "He revisado el proyecto original del componente y las condiciones aplicables, y he confirmado por mi cuenta las autorizaciones necesarias de acceso y uso de datos, la disponibilidad regional, la viabilidad técnica y la conformidad del uso previsto. Elijo continuar con el componente de terceros."
+    }
+  },
+  "appText.marketDataAcquisitionThirdPartyUseConfirmationRequired": {
+    "kind": "text",
+    "locales": {
+      "zh-CN": "请先完成第三方组件、数据授权、地区可用性和用途合规性确认，再继续下载。",
+      "en": "Confirm the third-party component, data permissions, regional availability, and compliance of your intended use before continuing the download.",
+      "ja": "ダウンロードを続ける前に、第三者コンポーネント、データ利用許諾、所在地での可用性、予定する用途の適合性を確認してください。",
+      "ko": "다운로드를 계속하기 전에 제3자 구성 요소, 데이터 권한, 지역 이용 가능 여부 및 사용 목적의 적합성을 확인하세요.",
+      "es": "Antes de continuar la descarga, confirma el componente de terceros, las autorizaciones de datos, la disponibilidad regional y la conformidad del uso previsto."
     }
   },
   "appText.marketDataAcquisitionConnectorVersionValue0": {
@@ -7792,31 +7842,21 @@
   "appText.marketDataAcquisitionErrorConnection": {
     "kind": "text",
     "locales": {
-      "zh-CN": "无法连接所选数据源，请检查网络后重试",
-      "en": "Could not connect to the selected source. Check your network and retry",
-      "ja": "選択したデータ元に接続できません。通信状況を確認して再試行してください",
-      "ko": "선택한 데이터 소스에 연결할 수 없습니다. 네트워크를 확인한 후 다시 시도하세요",
-      "es": "No se pudo conectar con la fuente. Comprueba la red y reintenta"
-    }
-  },
-  "appText.marketDataAcquisitionErrorAkshareConnection": {
-    "kind": "text",
-    "locales": {
-      "zh-CN": "行情数据源暂时不可用，请检查本机网络或代理后重试",
-      "en": "The market data source is temporarily unavailable. Check this device's network or proxy and retry",
-      "ja": "市場データの取得元が一時的に利用できません。この端末のネットワークまたはプロキシを確認して再試行してください",
-      "ko": "시장 데이터 소스를 일시적으로 사용할 수 없습니다. 이 기기의 네트워크 또는 프록시를 확인한 후 다시 시도하세요",
-      "es": "La fuente de datos de mercado no está disponible temporalmente. Comprueba la red o el proxy de este dispositivo e inténtalo de nuevo"
+      "zh-CN": "第三方组件或其数据源当前无法连接。可能受网络条件、地区限制、第三方限流、维护或接口调整影响。请先确认所在地区可访问且你有权使用，再稍后重试；第三方服务的可用性不由 Zinuto 控制。",
+      "en": "The third-party component or its data source cannot be reached right now. Network conditions, regional restrictions, third-party rate limits, maintenance, or interface changes may be involved. Confirm that it is accessible in your region and that you are authorised to use it, then try again later. Zinuto does not control third-party service availability.",
+      "ja": "第三者コンポーネントまたはそのデータ元へ現在接続できません。ネットワーク状況、地域制限、第三者の利用制限、保守、インターフェース変更の影響が考えられます。所在地で利用可能であり、必要な利用権限があることを確認してから、しばらくして再試行してください。第三者サービスの可用性は Zinuto の管理対象ではありません。",
+      "ko": "제3자 구성 요소 또는 해당 데이터 소스에 현재 연결할 수 없습니다. 네트워크 상태, 지역 제한, 제3자 요청 제한, 점검 또는 인터페이스 변경의 영향일 수 있습니다. 현재 지역에서 접근 가능하고 사용할 권한이 있는지 확인한 뒤 나중에 다시 시도하세요. 제3자 서비스의 이용 가능 여부는 Zinuto가 통제하지 않습니다.",
+      "es": "No se puede acceder ahora al componente de terceros o a su fuente de datos. Puede deberse a las condiciones de red, restricciones regionales, límites de terceros, mantenimiento o cambios de interfaz. Confirma que sea accesible en tu región y que tengas autorización para usarlo, y vuelve a intentarlo más tarde. Zinuto no controla la disponibilidad de servicios de terceros."
     }
   },
   "appText.marketDataAcquisitionErrorRateLimited": {
     "kind": "text",
     "locales": {
-      "zh-CN": "数据源请求过于频繁，请稍后重试",
-      "en": "The source is rate limiting requests. Try again later",
-      "ja": "データ元の利用制限に達しました。しばらくしてから再試行してください",
-      "ko": "데이터 소스 요청 한도에 도달했습니다. 잠시 후 다시 시도하세요",
-      "es": "La fuente está limitando las solicitudes. Inténtalo más tarde"
+      "zh-CN": "第三方服务正在限制请求。该限制不由 Zinuto 控制，请稍后再试。",
+      "en": "The third-party service is rate limiting requests. Zinuto does not control this limit; try again later.",
+      "ja": "第三者サービスによってリクエストが制限されています。この制限は Zinuto の管理対象ではありません。しばらくして再試行してください。",
+      "ko": "제3자 서비스가 요청을 제한하고 있습니다. 이 제한은 Zinuto가 통제하지 않으므로 나중에 다시 시도하세요.",
+      "es": "El servicio de terceros está limitando las solicitudes. Zinuto no controla este límite; vuelve a intentarlo más tarde."
     }
   },
   "appText.marketDataAcquisitionErrorNoData": {
@@ -7832,11 +7872,11 @@
   "appText.marketDataAcquisitionErrorFormatChanged": {
     "kind": "text",
     "locales": {
-      "zh-CN": "数据源返回格式发生变化，当前无法安全保存",
-      "en": "The source format changed, so the data cannot be saved safely",
-      "ja": "データ元の形式が変わったため、安全に保存できません",
-      "ko": "데이터 소스 형식이 변경되어 안전하게 저장할 수 없습니다",
-      "es": "El formato de la fuente cambió y no se puede guardar con seguridad"
+      "zh-CN": "第三方组件或其数据源返回格式发生变化。Zinuto 已停止保存，避免写入未经校验的数据。",
+      "en": "The response format from the third-party component or its data source changed. Zinuto stopped the save to avoid writing unvalidated data.",
+      "ja": "第三者コンポーネントまたはそのデータ元の応答形式が変わりました。未検証のデータを書き込まないよう、Zinuto は保存を中止しました。",
+      "ko": "제3자 구성 요소 또는 해당 데이터 소스의 응답 형식이 변경되었습니다. Zinuto는 검증되지 않은 데이터가 저장되지 않도록 저장을 중단했습니다.",
+      "es": "El formato de respuesta del componente de terceros o de su fuente de datos ha cambiado. Zinuto detuvo el guardado para evitar escribir datos sin validar."
     }
   },
   "appText.marketDataAcquisitionErrorLocalValidation": {
@@ -8062,11 +8102,11 @@
   "appText.marketDataAcquisitionErrorMarketUnavailable": {
     "kind": "text",
     "locales": {
-      "zh-CN": "所选市场或周期当前不可用，请重新选择",
-      "en": "The selected market or interval is unavailable. Choose again",
-      "ja": "選択した市場または足種を利用できません。選び直してください",
-      "ko": "선택한 시장 또는 주기를 사용할 수 없습니다. 다시 선택하세요",
-      "es": "El mercado o intervalo no está disponible. Vuelve a elegir"
+      "zh-CN": "第三方组件当前无法提供所选市场、标的或周期。请在确认组件能力、数据授权及地区可用性后重新选择；此状态不表示 Zinuto 安装损坏。",
+      "en": "The third-party component cannot currently provide the selected market, instrument, or interval. Confirm the component's capabilities, data permissions, and regional availability, then choose again. This does not indicate that the Zinuto installation is damaged.",
+      "ja": "第三者コンポーネントは現在、選択した市場、銘柄、または足種を提供できません。コンポーネントの機能、データ利用許諾、所在地での可用性を確認してから選び直してください。Zinuto のインストール破損を示すものではありません。",
+      "ko": "제3자 구성 요소는 현재 선택한 시장, 종목 또는 주기를 제공할 수 없습니다. 구성 요소 기능, 데이터 권한 및 지역 이용 가능 여부를 확인한 뒤 다시 선택하세요. 이는 Zinuto 설치가 손상되었다는 의미가 아닙니다.",
+      "es": "El componente de terceros no puede proporcionar actualmente el mercado, instrumento o intervalo seleccionado. Confirma sus capacidades, las autorizaciones de datos y la disponibilidad regional, y vuelve a elegir. Este estado no indica que la instalación de Zinuto esté dañada."
     }
   },
   "appText.marketDataAcquisitionErrorRangeTooLarge": {

@@ -493,9 +493,9 @@ fn publishes_verified_v3_market_output() {
         root.path(),
         job_id,
         b"datetime,open\n",
-        "000001.csv",
+        "中国创博·000319.csv",
         "CN_A_SHARE",
-        &["000001"],
+        &["000319"],
     );
 
     let published =
@@ -515,7 +515,7 @@ fn publishes_verified_v3_market_output() {
             .expect("destination should canonicalize")
             .join(output_folder_name)
     );
-    assert!(published.final_path.join("000001.csv").is_file());
+    assert!(published.final_path.join("中国创博·000319.csv").is_file());
     assert!(published.final_path.join("SOURCE.md").is_file());
 }
 

@@ -116,6 +116,25 @@ class FinanceDataReaderWorkerTest(unittest.TestCase):
         self.assertEqual(rows[0]["timestamp"], "2026-01-02T16:00:00+09:00")
         self.assertEqual(rows[0]["close"], 11.0)
 
+    def test_forex_range_is_expanded_to_include_reported_open_and_close(self):
+        frame = FakeFrame(
+            [
+                (
+                    "2026-01-02",
+                    {
+                        "Open": 1.105583,
+                        "High": 1.105339,
+                        "Low": 1.10,
+                        "Close": 1.106,
+                        "Volume": 0,
+                    },
+                )
+            ]
+        )
+        rows = main._canonical_rows(frame, "FOREX")
+        self.assertEqual(rows[0]["high"], 1.106)
+        self.assertEqual(rows[0]["low"], 1.10)
+
     def test_partial_or_single_value_series_is_rejected(self):
         frame = FakeFrame(
             [
@@ -128,6 +147,26 @@ class FinanceDataReaderWorkerTest(unittest.TestCase):
         with self.assertRaises(main.WorkerError) as context:
             main._canonical_rows(frame, "US_STOCKS")
         self.assertEqual(context.exception.code, "FINANCEDATAREADER_OHLCV_UNAVAILABLE")
+
+    def test_all_null_holiday_placeholder_is_skipped_but_partial_rows_fail(self):
+        placeholder = {
+            "Open": float("nan"),
+            "High": float("nan"),
+            "Low": float("nan"),
+            "Close": float("nan"),
+            "Volume": float("nan"),
+        }
+        valid = {"Open": 10, "High": 12, "Low": 9, "Close": 11, "Volume": 100}
+        rows = main._canonical_rows(
+            FakeFrame([("2026-01-01", placeholder), ("2026-01-02", valid)]),
+            "FOREX",
+        )
+        self.assertEqual([row["timestamp"][:10] for row in rows], ["2026-01-02"])
+
+        partial = {**valid, "Volume": float("nan")}
+        with self.assertRaises(main.WorkerError) as context:
+            main._canonical_rows(FakeFrame([("2026-01-02", partial)]), "FOREX")
+        self.assertEqual(context.exception.code, "FINANCEDATAREADER_UPSTREAM_SCHEMA_INVALID")
 
     def test_a_share_reader_uses_the_explicit_fdr_exchange_route(self):
         with patch.object(main.fdr, "DataReader", return_value=FakeFrame(
@@ -222,6 +261,45 @@ class FinanceDataReaderWorkerTest(unittest.TestCase):
             ("KS11", "krx-index-cache"),
         )
 
+    def test_hk_directory_symbols_map_to_yahoo_without_damaging_rmb_counters(self):
+        self.assertEqual(
+            main._reader_request("HK_STOCKS", "00700"),
+            ("HKEX:0700", "yahoo-finance"),
+        )
+        self.assertEqual(
+            main._reader_request("HK_STOCKS", "09988.HK"),
+            ("HKEX:9988", "yahoo-finance"),
+        )
+        self.assertEqual(
+            main._reader_request("HK_STOCKS", "80700"),
+            ("HKEX:80700", "yahoo-finance"),
+        )
+
+    def test_fdr_end_date_is_made_inclusive_and_later_rows_are_filtered(self):
+        frame = FakeFrame(
+            [
+                (
+                    "2026-01-03",
+                    {"Open": 10, "High": 12, "Low": 9, "Close": 11, "Volume": 100},
+                ),
+                (
+                    "2026-01-04",
+                    {"Open": 11, "High": 13, "Low": 10, "Close": 12, "Volume": 110},
+                ),
+            ]
+        )
+        with patch.object(main.fdr, "DataReader", return_value=frame) as reader:
+            rows, _upstream = main._read_bars(
+                {
+                    "marketId": "US_STOCKS",
+                    "symbol": "AAPL",
+                    "startAt": "2026-01-01T00:00:00-05:00",
+                    "endAt": "2026-01-03T23:59:59-05:00",
+                }
+            )
+        self.assertEqual(reader.call_args.args, ("YAHOO:AAPL", "2026-01-01", "2026-01-04"))
+        self.assertEqual([row["timestamp"][:10] for row in rows], ["2026-01-03"])
+
     def test_yahoo_boundary_rows_outside_the_requested_range_are_not_staged(self):
         frame = FakeFrame(
             [
@@ -310,6 +388,16 @@ class FinanceDataReaderWorkerTest(unittest.TestCase):
         sleep.assert_called_once_with(main.UPSTREAM_RETRY_DELAY_SECONDS)
         self.assertEqual(upstream, "yahoo-finance")
         self.assertEqual(len(rows), 1)
+
+    def test_transient_json_response_is_retryable(self):
+        error = requests.exceptions.JSONDecodeError("invalid", "not-json", 0)
+        self.assertTrue(main._is_retryable_upstream_error(error))
+
+    def test_missing_yahoo_timestamp_is_a_symbol_availability_failure(self):
+        error = main._upstream_worker_error(
+            KeyError("timestamp"), operation="bars", attempt_count=2
+        )
+        self.assertEqual(error.code, "FINANCEDATAREADER_SYMBOL_UNAVAILABLE")
 
     def test_missing_symbol_is_classified_without_a_protocol_or_schema_error(self):
         response = requests.Response()

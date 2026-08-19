@@ -70,7 +70,8 @@ type AcquisitionField =
   | "startDate"
   | "endDate"
   | "folder"
-  | "projects";
+  | "projects"
+  | "thirdPartyUse";
 type AcquisitionFieldErrors = Partial<Record<AcquisitionField, string>>;
 type AcquisitionFolderGrant = MarketDataAcquisitionFolderPreference;
 
@@ -157,6 +158,7 @@ export const MarketDataAcquisitionSection = ({
     useState<MarketDataAcquisitionMarketId | null>(null);
   const [sourcePlanId, setSourcePlanId] =
     useState<MarketDataAcquisitionSourcePlanId | null>(null);
+  const [thirdPartyUseConfirmed, setThirdPartyUseConfirmed] = useState(false);
   const [selectedInstruments, setSelectedInstruments] = useState<
     MarketDataAcquisitionInstrument[]
   >([]);
@@ -290,6 +292,7 @@ export const MarketDataAcquisitionSection = ({
       setAssetClassId(nextAssetClassId);
       setMarketId(null);
       setSourcePlanId(null);
+      setThirdPartyUseConfirmed(false);
       setSelectedInstruments([]);
       setAdjustment(null);
       setTimeframe("1d");
@@ -309,6 +312,7 @@ export const MarketDataAcquisitionSection = ({
         null;
       setMarketId(nextMarketId);
       setSourcePlanId(nextPlan?.id ?? null);
+      setThirdPartyUseConfirmed(false);
       setSelectedInstruments([]);
       setTimeframe(
         nextMarket.supportedTimeframes.includes("1d")
@@ -328,9 +332,11 @@ export const MarketDataAcquisitionSection = ({
     (nextSourcePlanId: MarketDataAcquisitionSourcePlanId) => {
       if (nextSourcePlanId === sourcePlanId) return;
       setSourcePlanId(nextSourcePlanId);
+      setThirdPartyUseConfirmed(false);
       setSelectedInstruments([]);
       clearFieldError("source");
       clearFieldError("symbols");
+      clearFieldError("thirdPartyUse");
     },
     [clearFieldError, sourcePlanId],
   );
@@ -477,6 +483,11 @@ export const MarketDataAcquisitionSection = ({
         "appText.marketDataAcquisitionConnectorUnavailable",
       );
     }
+    if (!thirdPartyUseConfirmed) {
+      nextFieldErrors.thirdPartyUse = tt(
+        "appText.marketDataAcquisitionThirdPartyUseConfirmationRequired",
+      );
+    }
     const symbols = selectedInstruments.map((instrument) => instrument.symbol);
     if (!symbols.length) {
       nextFieldErrors.symbols = tt(
@@ -522,7 +533,9 @@ export const MarketDataAcquisitionSection = ({
       moveToStep(
         nextFieldErrors.assetClass
           ? 1
-          : nextFieldErrors.market || nextFieldErrors.source
+          : nextFieldErrors.market ||
+              nextFieldErrors.source ||
+              nextFieldErrors.thirdPartyUse
             ? 2
             : nextFieldErrors.symbols
               ? 3
@@ -595,6 +608,7 @@ export const MarketDataAcquisitionSection = ({
     selectedPlan,
     sourcePlanId,
     startDate,
+    thirdPartyUseConfirmed,
     timeframe,
     tt,
     ttf,
@@ -734,7 +748,9 @@ export const MarketDataAcquisitionSection = ({
         ),
       )
     : 0;
-  const canStartOnline = Boolean(selectedPlan?.available && !catalogLoading);
+  const canStartOnline = Boolean(
+    selectedPlan?.available && thirdPartyUseConfirmed && !catalogLoading,
+  );
   const resultSourceLabel = selectedMarket
     ? `${tt(marketAcquisitionMarketLabelKey(selectedMarket.id))} · ${planLabel(
         catalog,
@@ -756,7 +772,7 @@ export const MarketDataAcquisitionSection = ({
       .join(tt("app.joiner.slash")) || resultSourceLabel;
   const failedReturnStep: AcquisitionWizardStep = fieldErrors.assetClass
     ? 1
-    : fieldErrors.market || fieldErrors.source
+    : fieldErrors.market || fieldErrors.source || fieldErrors.thirdPartyUse
       ? 2
       : fieldErrors.symbols
         ? 3
@@ -798,10 +814,7 @@ export const MarketDataAcquisitionSection = ({
 
   const mergedDuplicates = job?.staging?.mergedDuplicateBars ?? 0;
   const usesInstrumentSelectionLayout =
-    phase === "FORM" &&
-    !showHistory &&
-    !runtimeErrorText &&
-    wizardStep === 3;
+    phase === "FORM" && !showHistory && !runtimeErrorText && wizardStep === 3;
 
   return (
     <section className="desktop-secondary-window-panel desktop-secondary-window-market-data-acquisition">
@@ -867,6 +880,7 @@ export const MarketDataAcquisitionSection = ({
             savedOutputFinalPath={savedOutput?.finalPath ?? null}
             selectedMarketPresent={Boolean(selectedMarket)}
             selectedPlanAvailable={Boolean(selectedPlan?.available)}
+            thirdPartyUseConfirmed={thirdPartyUseConfirmed}
             tt={tt}
             wizardStep={wizardStep}
             onCancelDownload={() => void cancelDownload()}
@@ -919,6 +933,7 @@ export const MarketDataAcquisitionSection = ({
               selectedInstruments={selectedInstruments}
               sourcePlanId={sourcePlanId}
               startDate={startDate}
+              thirdPartyUseConfirmed={thirdPartyUseConfirmed}
               timeframe={timeframe}
               tt={tt}
               ttf={ttf}
@@ -945,6 +960,10 @@ export const MarketDataAcquisitionSection = ({
                 setStartDate(value);
                 clearFieldError("startDate");
                 clearFieldError("endDate");
+              }}
+              onThirdPartyUseConfirmedChange={(value) => {
+                setThirdPartyUseConfirmed(value);
+                if (value) clearFieldError("thirdPartyUse");
               }}
               onTimeframeChange={(value) => {
                 setTimeframe(value);

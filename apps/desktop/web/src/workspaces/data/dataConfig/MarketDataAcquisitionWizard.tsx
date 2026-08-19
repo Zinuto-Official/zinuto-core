@@ -11,6 +11,7 @@ import type {
 } from "@/api";
 import { VendorIcon } from "@/assets/graphics";
 import { Button } from "@/ui/primitives/button";
+import { Checkbox } from "@/ui/primitives/checkbox";
 import { DatePicker } from "@/ui/primitives/date-picker";
 import { RadioGroup, RadioItem } from "@/ui/primitives/radio-group";
 import { SelectField } from "@/ui/primitives/select-field";
@@ -35,6 +36,7 @@ type AcquisitionWizardFieldErrors = {
   source?: string;
   startDate?: string;
   symbols?: string;
+  thirdPartyUse?: string;
   timeframe?: string;
 };
 
@@ -58,6 +60,7 @@ type MarketDataAcquisitionWizardProps = {
   selectedInstruments: MarketDataAcquisitionInstrument[];
   sourcePlanId: MarketDataAcquisitionSourcePlanId | null;
   startDate: string;
+  thirdPartyUseConfirmed: boolean;
   timeframe: MarketDataAcquisitionTimeframe;
   tt: Translate;
   ttf: TranslateFormatted;
@@ -72,6 +75,7 @@ type MarketDataAcquisitionWizardProps = {
   onRetryCatalog: () => void;
   onSourcePlanChange: (value: MarketDataAcquisitionSourcePlanId) => void;
   onStartDateChange: (value: string) => void;
+  onThirdPartyUseConfirmedChange: (value: boolean) => void;
   onTimeframeChange: (value: MarketDataAcquisitionTimeframe) => void;
 };
 
@@ -162,6 +166,7 @@ export const MarketDataAcquisitionWizard = ({
   selectedInstruments,
   sourcePlanId,
   startDate,
+  thirdPartyUseConfirmed,
   timeframe,
   tt,
   ttf,
@@ -176,6 +181,7 @@ export const MarketDataAcquisitionWizard = ({
   onRetryCatalog,
   onSourcePlanChange,
   onStartDateChange,
+  onThirdPartyUseConfirmedChange,
   onTimeframeChange,
 }: MarketDataAcquisitionWizardProps) => {
   const assetClasses = catalog?.assetClasses ?? [];
@@ -380,7 +386,27 @@ export const MarketDataAcquisitionWizard = ({
                   <p>
                     {tt("appText.marketDataAcquisitionSourceBoundaryNotice")}
                   </p>
-                  <div>
+                  <div
+                    id="market-data-acquisition-third-party-notice"
+                    className="market-data-acquisition-source-availability"
+                    role="note"
+                  >
+                    <VendorIcon name="globe2" aria-hidden="true" />
+                    <div>
+                      <strong>
+                        {tt("appText.marketDataAcquisitionThirdPartyUseLabel")}
+                      </strong>
+                      <p>
+                        {tt("appText.marketDataAcquisitionThirdPartyUseNotice")}
+                      </p>
+                    </div>
+                  </div>
+                  <small>
+                    {tt(
+                      "appText.marketDataAcquisitionReviewOriginalTermsNotice",
+                    )}
+                  </small>
+                  <div className="market-data-acquisition-project-links">
                     {providers.map((provider) => (
                       <Button
                         type="button"
@@ -396,6 +422,30 @@ export const MarketDataAcquisitionWizard = ({
                       </Button>
                     ))}
                   </div>
+                  <AcquisitionFieldError
+                    id="market-data-acquisition-projects-error"
+                    message={fieldErrors.projects}
+                  />
+                  <label className="market-data-acquisition-third-party-confirmation">
+                    <Checkbox
+                      checked={thirdPartyUseConfirmed}
+                      disabled={!selectedPlan.available}
+                      aria-invalid={Boolean(fieldErrors.thirdPartyUse)}
+                      aria-describedby="market-data-acquisition-third-party-notice market-data-acquisition-third-party-confirmation-error"
+                      onChange={(event) =>
+                        onThirdPartyUseConfirmedChange(event.target.checked)
+                      }
+                    />
+                    <span>
+                      {tt(
+                        "appText.marketDataAcquisitionThirdPartyUseAcknowledgement",
+                      )}
+                    </span>
+                  </label>
+                  <AcquisitionFieldError
+                    id="market-data-acquisition-third-party-confirmation-error"
+                    message={fieldErrors.thirdPartyUse}
+                  />
                 </div>
               ) : null}
               <AcquisitionFieldError

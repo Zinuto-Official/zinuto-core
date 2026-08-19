@@ -356,6 +356,54 @@ class WorkerMappingTest(unittest.TestCase):
                     },
                 )
 
+    def test_index_uses_sina_when_eastmoney_disconnects(self):
+        request = main._parse_request(
+            json.dumps(
+                {
+                    "protocol": main.PROTOCOL,
+                    "requestId": "index-fallback",
+                    "operation": "index_zh_a_hist",
+                    "params": {
+                        "symbol": "000300",
+                        "timeframe": "1d",
+                        "startAt": "2026-07-01T00:00:00+08:00",
+                        "endAt": "2026-07-18T23:59:59+08:00",
+                        "adjustment": "none",
+                    },
+                }
+            ).encode("utf-8")
+        )
+        calls = []
+
+        def index_zh_a_hist(**_kwargs):
+            raise main.requests.exceptions.ConnectionError("connection reset")
+
+        def stock_zh_index_daily(**kwargs):
+            calls.append(kwargs)
+            return FakeFrame(
+                [
+                    {
+                        "date": "2026-07-18",
+                        "open": 3500,
+                        "high": 3520,
+                        "low": 3480,
+                        "close": 3510,
+                        "volume": 1000,
+                    }
+                ]
+            )
+
+        with patch.object(
+            main, "ak", SimpleNamespace(index_zh_a_hist=index_zh_a_hist)
+        ), patch.object(main, "stock_zh_index_daily", stock_zh_index_daily):
+            kind, rows, upstream_id = main._fetch(request)
+        self.assertEqual(kind, "bars")
+        self.assertEqual(upstream_id, "sina")
+        self.assertEqual(rows[0]["timestamp"], "2026-07-18T15:00:00+08:00")
+        self.assertEqual(calls, [{"symbol": "sh000300"}])
+        self.assertEqual(main._a_share_index_symbol("399001"), "sz399001")
+        self.assertEqual(main._a_share_index_symbol("899050"), "bj899050")
+
     def test_daily_uses_tencent_when_eastmoney_disconnects(self):
         request = main._parse_request(
             json.dumps(
@@ -480,6 +528,61 @@ class WorkerMappingTest(unittest.TestCase):
             ],
         )
 
+    def test_empty_requested_bar_ranges_are_reported_as_no_data(self):
+        cases = (
+            ("stock_zh_a_hist", "daily-no-data"),
+            ("stock_zh_a_hist_min_em", "minute-no-data"),
+        )
+        for operation, request_id in cases:
+            with self.subTest(operation=operation):
+                request = main._parse_request(
+                    json.dumps(
+                        {
+                            "protocol": main.PROTOCOL,
+                            "requestId": request_id,
+                            "operation": operation,
+                            "params": {
+                                "symbol": "000001",
+                                "timeframe": "1d" if operation == "stock_zh_a_hist" else "1h",
+                                "startAt": "2026-07-24T00:00:00+08:00",
+                                "endAt": "2026-07-24T23:59:59+08:00",
+                                "adjustment": "none",
+                            },
+                        }
+                    ).encode("utf-8")
+                )
+                fetch_name = (
+                    "_fetch_a_share_daily"
+                    if operation == "stock_zh_a_hist"
+                    else "_fetch_a_share_minute"
+                )
+                with patch.object(main, fetch_name, return_value=([], "eastmoney")):
+                    with self.assertRaises(main.WorkerError) as context:
+                        main._fetch(request)
+                self.assertEqual(context.exception.code, "AKSHARE_NO_DATA")
+
+    def test_empty_requested_index_range_is_reported_as_no_data(self):
+        request = main._parse_request(
+            json.dumps(
+                {
+                    "protocol": main.PROTOCOL,
+                    "requestId": "index-no-data",
+                    "operation": "index_zh_a_hist",
+                    "params": {
+                        "symbol": "000001",
+                        "timeframe": "1d",
+                        "startAt": "2026-07-24T00:00:00+08:00",
+                        "endAt": "2026-07-24T23:59:59+08:00",
+                        "adjustment": "none",
+                    },
+                }
+            ).encode("utf-8")
+        )
+        with patch.object(main, "_fetch_a_share_index", return_value=([], "eastmoney")):
+            with self.assertRaises(main.WorkerError) as context:
+                main._fetch(request)
+        self.assertEqual(context.exception.code, "AKSHARE_NO_DATA")
+
     def test_minute_uses_sina_and_filters_the_requested_range_when_eastmoney_disconnects(
         self,
     ):
@@ -554,6 +657,80 @@ class WorkerMappingTest(unittest.TestCase):
             calls,
             [{"symbol": "sz000001", "period": "60", "adjust": ""}],
         )
+
+    def test_adjusted_minute_fallback_applies_the_effective_sina_factor(self):
+        for adjustment, factor_column, factor, expected_open in (
+            ("qfq", "qfq_factor", 1.25, 16.0),
+            ("hfq", "hfq_factor", 3.0, 60.0),
+        ):
+            with self.subTest(adjustment=adjustment):
+                request = main._parse_request(
+                    json.dumps(
+                        {
+                            "protocol": main.PROTOCOL,
+                            "requestId": f"minute-{adjustment}",
+                            "operation": "stock_zh_a_hist_min_em",
+                            "params": {
+                                "symbol": "000001",
+                                "timeframe": "5m",
+                                "startAt": "2026-07-24T09:00:00+08:00",
+                                "endAt": "2026-07-24T15:00:00+08:00",
+                                "adjustment": adjustment,
+                            },
+                        }
+                    ).encode("utf-8")
+                )
+                calls = []
+
+                def stock_zh_a_hist_min_em(**_kwargs):
+                    raise main.requests.exceptions.ConnectionError("connection reset")
+
+                def stock_zh_a_minute(**kwargs):
+                    calls.append(kwargs)
+                    return FakeFrame(
+                        [
+                            {
+                                "day": "2026-07-24 10:00:00",
+                                "open": 20,
+                                "high": 22,
+                                "low": 19,
+                                "close": 21,
+                                "volume": 200,
+                            }
+                        ]
+                    )
+
+                def stock_zh_a_daily(**kwargs):
+                    calls.append(kwargs)
+                    return FakeFrame(
+                        [
+                            {"date": "1900-01-01", factor_column: factor + 1},
+                            {"date": "2026-07-16", factor_column: factor},
+                        ]
+                    )
+
+                with patch.object(
+                    main,
+                    "ak",
+                    SimpleNamespace(stock_zh_a_hist_min_em=stock_zh_a_hist_min_em),
+                ), patch.object(
+                    main, "stock_zh_a_minute", stock_zh_a_minute
+                ), patch.object(main, "stock_zh_a_daily", stock_zh_a_daily):
+                    kind, rows, upstream_id = main._fetch(request)
+                self.assertEqual(kind, "bars")
+                self.assertEqual(upstream_id, "sina")
+                self.assertEqual(rows[0]["open"], expected_open)
+                self.assertEqual(rows[0]["volume"], 200.0)
+                self.assertEqual(
+                    calls,
+                    [
+                        {"symbol": "sz000001", "period": "5", "adjust": ""},
+                        {
+                            "symbol": "sz000001",
+                            "adjust": f"{adjustment}-factor",
+                        },
+                    ],
+                )
 
     def test_daily_uses_sina_for_a_beijing_exchange_symbol_when_eastmoney_disconnects(
         self,

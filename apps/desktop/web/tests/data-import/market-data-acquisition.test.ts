@@ -56,6 +56,13 @@ const acquisitionWizardSource = readFileSync(
   ),
   "utf8",
 );
+const dataSettingsMessagesSource = readFileSync(
+  new URL(
+    "../../../../../packages/shared/src/i18n/messages/data-settings.json",
+    import.meta.url,
+  ),
+  "utf8",
+);
 const marketAcquisitionPickerSource = readFileSync(
   new URL(
     "../../src/workspaces/data/dataConfig/MarketAcquisitionInstrumentPicker.tsx",
@@ -259,11 +266,11 @@ test("every acquisition error code resolves to safe localized copy", () => {
   );
   assert.equal(
     resolveMarketDataAcquisitionErrorMessageKey("AKSHARE_UPSTREAM_FAILED"),
-    "appText.marketDataAcquisitionErrorAkshareConnection",
+    "appText.marketDataAcquisitionErrorConnection",
   );
   assert.equal(
     resolveMarketDataAcquisitionErrorMessageKey("AKSHARE_UPSTREAM_RETRYABLE"),
-    "appText.marketDataAcquisitionErrorAkshareConnection",
+    "appText.marketDataAcquisitionErrorConnection",
   );
   assert.equal(
     resolveMarketDataAcquisitionErrorMessageKey("AKSHARE_UPSTREAM_RETRYABLE", {
@@ -283,6 +290,16 @@ test("every acquisition error code resolves to safe localized copy", () => {
       "ACQUISITION_FALLBACK_EXHAUSTED",
       { fallbackErrorCode: "FINANCEDATAREADER_UPSTREAM_FAILED" },
     ),
+    "appText.marketDataAcquisitionErrorConnection",
+  );
+  assert.equal(
+    resolveMarketDataAcquisitionErrorMessageKey(
+      "FINANCEDATAREADER_UPSTREAM_FAILED",
+    ),
+    "appText.marketDataAcquisitionErrorConnection",
+  );
+  assert.equal(
+    resolveMarketDataAcquisitionErrorMessageKey("CCXT_UPSTREAM_FAILED"),
     "appText.marketDataAcquisitionErrorConnection",
   );
   assert.equal(
@@ -854,6 +871,53 @@ test("download entry is permanent and the four-step market catalog replaces conn
     /downloadDir\(\)[\s\S]*defaultPath,[\s\S]*directory: true/u,
   );
   assert.match(acquisitionStylesSource, /market-data-acquisition-source-plan/u);
+  assert.doesNotMatch(acquisitionWizardSource, /sourceAvailabilityNoticeKey/u);
+  assert.match(
+    acquisitionWizardSource,
+    /marketDataAcquisitionThirdPartyUseNotice[\s\S]*marketDataAcquisitionReviewOriginalTermsNotice[\s\S]*<Checkbox[\s\S]*thirdPartyUseConfirmed[\s\S]*marketDataAcquisitionThirdPartyUseAcknowledgement/u,
+  );
+  assert.match(
+    acquisitionSectionSource,
+    /setThirdPartyUseConfirmed\(false\)[\s\S]*marketDataAcquisitionThirdPartyUseConfirmationRequired/u,
+  );
+  assert.match(
+    acquisitionActionBarsSource,
+    /!selectedPlanAvailable \|\|[\s\S]*!thirdPartyUseConfirmed/u,
+  );
+  const dataSettingsMessages = JSON.parse(dataSettingsMessagesSource) as Record<
+    string,
+    { locales: Record<string, string> }
+  >;
+  const responsibilityCopyKeys = [
+    "appText.marketDataAcquisitionSourceBoundaryNotice",
+    "appText.marketDataAcquisitionThirdPartyUseLabel",
+    "appText.marketDataAcquisitionThirdPartyUseNotice",
+    "appText.marketDataAcquisitionReviewOriginalTermsNotice",
+    "appText.marketDataAcquisitionThirdPartyUseAcknowledgement",
+    "appText.marketDataAcquisitionThirdPartyUseConfirmationRequired",
+    "appText.marketDataAcquisitionErrorConnection",
+    "appText.marketDataAcquisitionErrorRateLimited",
+    "appText.marketDataAcquisitionErrorFormatChanged",
+    "appText.marketDataAcquisitionErrorMarketUnavailable",
+  ];
+  const responsibilityCopy = responsibilityCopyKeys
+    .flatMap((key) => Object.values(dataSettingsMessages[key].locales))
+    .join("\n");
+  assert.match(
+    dataSettingsMessages["appText.marketDataAcquisitionThirdPartyUseNotice"]
+      .locales["zh-CN"],
+    /境内或境外[\s\S]*Zinuto 不参与第三方授权[\s\S]*用户自行承担/u,
+  );
+  assert.match(
+    dataSettingsMessages[
+      "appText.marketDataAcquisitionThirdPartyUseAcknowledgement"
+    ].locales["zh-CN"],
+    /原始项目[\s\S]*数据访问和使用授权[\s\S]*地区可用性[\s\S]*技术可行性[\s\S]*用途合规性/u,
+  );
+  assert.doesNotMatch(
+    responsibilityCopy,
+    /Yahoo|Naver|Binance|OKX|Eastmoney|Tencent|Sina|东方财富|腾讯|新浪/u,
+  );
   assert.match(
     marketAcquisitionPickerSource,
     /listMarketDataAcquisitionMarketInstruments/u,

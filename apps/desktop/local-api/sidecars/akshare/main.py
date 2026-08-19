@@ -23,6 +23,7 @@ from typing import Any
 
 import akshare as ak
 import requests
+from akshare.index.index_stock_zh import stock_zh_index_daily, stock_zh_index_daily_tx
 from akshare.stock.stock_zh_a_sina import stock_zh_a_daily, stock_zh_a_minute
 from akshare.stock.stock_zh_a_tx import stock_zh_a_spot_tx
 from akshare.stock_feature.stock_hist_tx import stock_zh_a_hist_tx
@@ -47,6 +48,8 @@ DAILY_OPERATIONS = {
     "index_zh_a_hist",
     "stock_zh_a_hist_tx",
     "stock_zh_a_daily",
+    "stock_zh_index_daily",
+    "stock_zh_index_daily_tx",
 }
 
 
@@ -340,6 +343,14 @@ def _a_share_sina_symbol(symbol: str) -> str | None:
     return f"{exchange_id.lower()}{symbol}"
 
 
+def _a_share_index_symbol(symbol: str) -> str:
+    if symbol.startswith("399"):
+        return f"sz{symbol}"
+    if symbol.startswith("899"):
+        return f"bj{symbol}"
+    return f"sh{symbol}"
+
+
 def _filter_rows_to_requested_range(
     rows: list[dict[str, Any]], start_at: datetime, end_at: datetime
 ) -> list[dict[str, Any]]:
@@ -348,6 +359,121 @@ def _filter_rows_to_requested_range(
         for row in rows
         if start_at <= datetime.fromisoformat(row["timestamp"]) <= end_at
     ]
+
+
+def _require_requested_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    if not rows:
+        raise WorkerError("AKSHARE_NO_DATA")
+    return rows
+
+
+def _adjust_sina_minute_rows(
+    rows: list[dict[str, Any]],
+    factor_frame: Any,
+    adjustment: str,
+) -> list[dict[str, Any]]:
+    """Apply Sina's official daily factors to raw minute bars.
+
+    AKShare's current adjusted-minute merge can return NaN rows. The raw
+    minute endpoint and factor endpoint are both sound, so reproduce AKShare's
+    qfq/hfq formula with the factor effective on each trading day.
+    """
+    if factor_frame is None or not hasattr(factor_frame, "to_dict"):
+        raise WorkerError("AKSHARE_UPSTREAM_SCHEMA_INVALID")
+    factor_column = f"{adjustment}_factor"
+    events: list[tuple[datetime, float]] = []
+    for record in factor_frame.to_dict(orient="records"):
+        if (
+            not isinstance(record, dict)
+            or "date" not in record
+            or factor_column not in record
+        ):
+            raise WorkerError("AKSHARE_UPSTREAM_SCHEMA_INVALID")
+        factor = _finite_number(record[factor_column])
+        if factor <= 0:
+            raise WorkerError("AKSHARE_UPSTREAM_SCHEMA_INVALID")
+        events.append((datetime.fromisoformat(str(record["date"])[:10]), factor))
+    events.sort(key=lambda item: item[0])
+    if not events:
+        raise WorkerError("AKSHARE_UPSTREAM_SCHEMA_INVALID")
+
+    adjusted: list[dict[str, Any]] = []
+    for row in rows:
+        row_day = datetime.fromisoformat(row["timestamp"]).replace(tzinfo=None)
+        applicable = [
+            factor
+            for event_day, factor in events
+            if event_day.date() <= row_day.date()
+        ]
+        if not applicable:
+            raise WorkerError("AKSHARE_UPSTREAM_SCHEMA_INVALID")
+        factor = applicable[-1]
+        multiplier = 1 / factor if adjustment == "qfq" else factor
+        adjusted.append(
+            {
+                **row,
+                "open": row["open"] * multiplier,
+                "high": row["high"] * multiplier,
+                "low": row["low"] * multiplier,
+                "close": row["close"] * multiplier,
+            }
+        )
+    return adjusted
+
+
+def _fetch_a_share_index(
+    params: dict[str, Any],
+    start_at: datetime,
+    end_at: datetime,
+    start_local: datetime,
+    end_local: datetime,
+) -> tuple[list[dict[str, Any]], str]:
+    def requested_rows(frame: Any, operation: str) -> list[dict[str, Any]]:
+        rows = _filter_rows_to_requested_range(
+            _canonical_rows(frame, operation), start_at, end_at
+        )
+        if not rows:
+            raise WorkerError("AKSHARE_NO_DATA")
+        return rows
+
+    try:
+        return (
+            requested_rows(
+                ak.index_zh_a_hist(
+                    symbol=params["symbol"],
+                    period="daily",
+                    start_date=start_local.strftime("%Y%m%d"),
+                    end_date=end_local.strftime("%Y%m%d"),
+                ),
+                "index_zh_a_hist",
+            ),
+            "eastmoney",
+        )
+    except Exception as primary_error:
+        index_symbol = _a_share_index_symbol(params["symbol"])
+        try:
+            return (
+                requested_rows(
+                    stock_zh_index_daily(symbol=index_symbol),
+                    "stock_zh_index_daily",
+                ),
+                "sina",
+            )
+        except Exception:
+            try:
+                return (
+                    requested_rows(
+                        stock_zh_index_daily_tx(
+                            symbol=index_symbol,
+                            start_date=start_local.strftime("%Y%m%d"),
+                            end_date=end_local.strftime("%Y%m%d"),
+                        ),
+                        "stock_zh_index_daily_tx",
+                    ),
+                    "tencent",
+                )
+            except Exception:
+                raise primary_error
 
 
 def _fetch_a_share_daily(
@@ -434,21 +560,28 @@ def _fetch_a_share_minute(
         if sina_symbol is None:
             raise primary_error
         try:
-            return (
-                _filter_rows_to_requested_range(
-                    _canonical_rows(
-                        stock_zh_a_minute(
-                            symbol=sina_symbol,
-                            period=periods[params["timeframe"]],
-                            adjust=adjustment,
-                        ),
-                        "stock_zh_a_minute",
+            rows = _filter_rows_to_requested_range(
+                _canonical_rows(
+                    stock_zh_a_minute(
+                        symbol=sina_symbol,
+                        period=periods[params["timeframe"]],
+                        adjust="",
                     ),
-                    start_at,
-                    end_at,
+                    "stock_zh_a_minute",
                 ),
-                "sina",
+                start_at,
+                end_at,
             )
+            if adjustment:
+                rows = _adjust_sina_minute_rows(
+                    rows,
+                    stock_zh_a_daily(
+                        symbol=sina_symbol,
+                        adjust=f"{adjustment}-factor",
+                    ),
+                    adjustment,
+                )
+            return rows, "sina"
         except Exception:
             raise primary_error
 
@@ -464,19 +597,21 @@ def _fetch(request: dict[str, Any]) -> tuple[str, list[dict[str, Any]], str]:
     end_local = end_at.astimezone(SHANGHAI_OFFSET)
     if operation == "stock_zh_a_hist":
         rows, upstream_id = _fetch_a_share_daily(params, start_local, end_local)
-        return "bars", _filter_rows_to_requested_range(rows, start_at, end_at), upstream_id
+        return "bars", _require_requested_rows(
+            _filter_rows_to_requested_range(rows, start_at, end_at)
+        ), upstream_id
     elif operation == "stock_zh_a_hist_min_em":
         rows, upstream_id = _fetch_a_share_minute(
             params, start_at, end_at, start_local, end_local
         )
-        return "bars", _filter_rows_to_requested_range(rows, start_at, end_at), upstream_id
+        return "bars", _require_requested_rows(
+            _filter_rows_to_requested_range(rows, start_at, end_at)
+        ), upstream_id
     else:
-        frame = ak.index_zh_a_hist(
-            symbol=params["symbol"],
-            period="daily",
-            start_date=start_local.strftime("%Y%m%d"),
-            end_date=end_local.strftime("%Y%m%d"),
+        rows, upstream_id = _fetch_a_share_index(
+            params, start_at, end_at, start_local, end_local
         )
+        return "bars", _require_requested_rows(rows), upstream_id
     return (
         "bars",
         _filter_rows_to_requested_range(

@@ -2,6 +2,8 @@
 
 import path from 'node:path';
 
+import { canonicalizeTimeZone } from '@zinuto/shared/timezone';
+
 import { previewLocalDataImportFolderCore } from '../dataSource/folderPreview.js';
 import type { MarketDataAcquisitionSourceMetadataV3 } from '../dataSource/marketDataAcquisitionSourceMetadata.js';
 import { parseSymbolFromFileName } from '../dataSource/sourceIdentity.js';
@@ -17,6 +19,12 @@ import {
 } from './acquisitionStaging.js';
 
 const CANONICAL_HEADERS = ['datetime', 'open', 'high', 'low', 'close', 'volume'];
+
+const areEquivalentTimeZones = (left: string, right: string): boolean => {
+  const canonicalLeft = canonicalizeTimeZone(left);
+  const canonicalRight = canonicalizeTimeZone(right);
+  return canonicalLeft !== null && canonicalLeft === canonicalRight;
+};
 
 type ValidationCheck =
   | 'files'
@@ -114,7 +122,7 @@ export const validateAcquisitionStagingWithImportPreview = async ({
         detectedTimeframe: preview.detectedTimeframes[0] ?? preview.detectedTimeframe ?? null,
       });
     }
-    if (preview.suggestedTimeZone !== expectedTimeZone) {
+    if (!areEquivalentTimeZones(preview.suggestedTimeZone, expectedTimeZone)) {
       validationFailure('timezone', {
         connectorId: request.connectorId,
         expectedTimeZone,
@@ -259,7 +267,7 @@ export const validateMarketAcquisitionStagingWithImportPreview = async ({
         detectedTimeframe: preview.detectedTimeframes[0] ?? preview.detectedTimeframe ?? null,
       });
     }
-    if (preview.suggestedTimeZone !== expectedPreviewTimeZone) {
+    if (!areEquivalentTimeZones(preview.suggestedTimeZone, expectedPreviewTimeZone)) {
       validationFailure('timezone', {
         marketId: request.marketId,
         expectedTimeZone: expectedPreviewTimeZone,

@@ -233,6 +233,10 @@ export const createMarketDataAcquisitionService = ({
 }: ServiceDependencies) => {
   const jobs = new Map<string, AcquisitionJob>();
   const marketJobs = new Map<string, MarketAcquisitionJob>();
+  const marketInstrumentNamesByJob = new Map<
+    string,
+    ReadonlyMap<string, string>
+  >();
   const abortControllers = new Map<string, AbortController>();
   let activeJobId: string | null = null;
   let runningPromise: Promise<void> | null = null;
@@ -333,6 +337,8 @@ export const createMarketDataAcquisitionService = ({
     akshareAdapter,
     ccxtAdapter,
     financeDataReaderAdapter,
+    instrumentNamesForJob: (jobId) =>
+      marketInstrumentNamesByJob.get(jobId) ?? new Map(),
     validateMarketStaging,
     sanitizeJobError,
   });
@@ -446,6 +452,39 @@ export const createMarketDataAcquisitionService = ({
         });
       },
     });
+  };
+
+  const resolveRequestedInstrumentNames = async (
+    request: MarketAcquisitionRequest,
+  ): Promise<ReadonlyMap<string, string>> => {
+    const selectedMarket = resolveMarketAcquisitionMarket(
+      currentMarketCatalog(),
+      request.marketId,
+    );
+    let instruments: readonly MarketAcquisitionCatalogCacheInstrument[];
+    if (selectedMarket.instrumentDiscovery === 'PRESET') {
+      instruments = marketAcquisitionPresets(request.marketId);
+    } else {
+      try {
+        instruments = (
+          await loadDynamicMarketCatalog({
+            marketId: request.marketId,
+            sourcePlanId: request.sourcePlanId,
+            forceRefresh: false,
+          })
+        ).instruments;
+      } catch {
+        // A name is presentation metadata. Never prevent an otherwise valid
+        // direct-symbol download when a catalog refresh is unavailable.
+        instruments = [];
+      }
+    }
+    const requested = new Set(request.symbols);
+    return new Map(
+      instruments
+        .filter((instrument) => requested.has(instrument.symbol))
+        .map((instrument) => [instrument.symbol, instrument.name]),
+    );
   };
 
   const listMarketInstruments = async ({
@@ -852,6 +891,10 @@ export const createMarketDataAcquisitionService = ({
       activeJobId = id;
       try {
         await pruneMarketJobs();
+        marketInstrumentNamesByJob.set(
+          id,
+          await resolveRequestedInstrumentNames(request),
+        );
         const createdAt = now().toISOString();
         const job: MarketAcquisitionJob = {
           id,
@@ -875,11 +918,13 @@ export const createMarketDataAcquisitionService = ({
         jobStore.upsert(serializeMarketJob(job));
         queueMicrotask(() => {
           runningPromise = runMarketJob(id).finally(() => {
+            marketInstrumentNamesByJob.delete(id);
             runningPromise = null;
           });
         });
         return cloneMarketJob(job);
       } catch (error) {
+        marketInstrumentNamesByJob.delete(id);
         if (activeJobId === id) activeJobId = null;
         throw error;
       }

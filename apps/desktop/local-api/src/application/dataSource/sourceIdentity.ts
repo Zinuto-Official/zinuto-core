@@ -5,7 +5,11 @@ import { INPUT_LIMITS } from '@zinuto/shared/input-limits';
 import { appError } from '../../kernel/appError.js';
 
 export const parseSymbolFromFileName = (fileName: string): string => {
-  const symbol = path.basename(fileName, path.extname(fileName)).trim().toUpperCase();
+  const stem = path.basename(fileName, path.extname(fileName)).trim();
+  const separatorIndex = stem.lastIndexOf('·');
+  const symbol = (
+    separatorIndex > 0 ? stem.slice(separatorIndex + 1) : stem
+  ).trim().toUpperCase();
   if (!symbol || symbol.length > INPUT_LIMITS.symbolChars) {
     throw appError('CSV_FILENAME_INVALID', { fileName });
   }

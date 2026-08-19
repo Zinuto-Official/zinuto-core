@@ -117,8 +117,8 @@ export const buildMarketDataAcquisitionRequest = (input: {
           input.akshareInstrumentKind === "INDEX"
             ? "index_zh_a_hist"
             : input.timeframe === "1d"
-            ? "stock_zh_a_hist"
-            : "stock_zh_a_hist_min_em",
+              ? "stock_zh_a_hist"
+              : "stock_zh_a_hist_min_em",
         symbols: input.symbols,
         timeframe: input.timeframe,
         startAt: toDateTimeWithOffset(input.startDate, false, "+08:00"),
@@ -137,7 +137,6 @@ export const buildMarketDataAcquisitionRequest = (input: {
       };
 
 export type MarketDataAcquisitionErrorMessageKey =
-  | "appText.marketDataAcquisitionErrorAkshareConnection"
   | "appText.marketDataAcquisitionErrorCanceled"
   | "appText.marketDataAcquisitionErrorConnection"
   | "appText.marketDataAcquisitionErrorFormatChanged"
@@ -169,8 +168,7 @@ const ACQUISITION_ERROR_MESSAGE_KEYS: Record<
   ACQUISITION_CANCELED: "appText.marketDataAcquisitionErrorCanceled",
   ACQUISITION_IMPORT_VALIDATION_FAILED:
     "appText.marketDataAcquisitionErrorLocalValidation",
-  ACQUISITION_BAR_INVALID:
-    "appText.marketDataAcquisitionErrorLocalValidation",
+  ACQUISITION_BAR_INVALID: "appText.marketDataAcquisitionErrorLocalValidation",
   ACQUISITION_TIMEZONE_INVALID:
     "appText.marketDataAcquisitionErrorLocalValidation",
   ACQUISITION_TIMEFRAME_INVALID:
@@ -183,8 +181,7 @@ const ACQUISITION_ERROR_MESSAGE_KEYS: Record<
     "appText.marketDataAcquisitionErrorLocalValidation",
   ACQUISITION_SYMBOL_RESULT_MISSING:
     "appText.marketDataAcquisitionErrorLocalValidation",
-  ACQUISITION_INTERRUPTED:
-    "appText.marketDataAcquisitionErrorInterrupted",
+  ACQUISITION_INTERRUPTED: "appText.marketDataAcquisitionErrorInterrupted",
   ACQUISITION_ROW_LIMIT_EXCEEDED:
     "appText.marketDataAcquisitionErrorRangeTooLarge",
   ACQUISITION_PAGE_LIMIT_EXCEEDED:
@@ -200,17 +197,14 @@ const ACQUISITION_ERROR_MESSAGE_KEYS: Record<
   AKSHARE_SIDECAR_TIMEOUT: "appText.marketDataAcquisitionErrorConnection",
   AKSHARE_SIDECAR_RESPONSE_INVALID:
     "appText.marketDataAcquisitionErrorFormatChanged",
-  AKSHARE_UPSTREAM_FAILED:
-    "appText.marketDataAcquisitionErrorAkshareConnection",
-  AKSHARE_UPSTREAM_RETRYABLE:
-    "appText.marketDataAcquisitionErrorAkshareConnection",
+  AKSHARE_UPSTREAM_FAILED: "appText.marketDataAcquisitionErrorConnection",
+  AKSHARE_UPSTREAM_RETRYABLE: "appText.marketDataAcquisitionErrorConnection",
   AKSHARE_UPSTREAM_SCHEMA_INVALID:
     "appText.marketDataAcquisitionErrorFormatChanged",
   CCXT_UPSTREAM_FAILED: "appText.marketDataAcquisitionErrorConnection",
   CCXT_UPSTREAM_SCHEMA_INVALID:
     "appText.marketDataAcquisitionErrorFormatChanged",
-  CCXT_OHLCV_UNAVAILABLE:
-    "appText.marketDataAcquisitionErrorMarketUnavailable",
+  CCXT_OHLCV_UNAVAILABLE: "appText.marketDataAcquisitionErrorMarketUnavailable",
   CCXT_TIMEFRAME_UNAVAILABLE:
     "appText.marketDataAcquisitionErrorMarketUnavailable",
   CCXT_SYMBOL_UNAVAILABLE:
@@ -257,12 +251,15 @@ export const resolveMarketDataAcquisitionErrorMessageKey = (
   rawCode: unknown,
   rawArgs?: unknown,
 ): MarketDataAcquisitionErrorMessageKey => {
-  const code = String(rawCode || "").trim().toUpperCase();
+  const code = String(rawCode || "")
+    .trim()
+    .toUpperCase();
   if (code === "ACQUISITION_FALLBACK_EXHAUSTED") {
     const fallbackErrorCode =
       rawArgs && typeof rawArgs === "object"
         ? String(
-            (rawArgs as { fallbackErrorCode?: unknown }).fallbackErrorCode ?? "",
+            (rawArgs as { fallbackErrorCode?: unknown }).fallbackErrorCode ??
+              "",
           )
             .trim()
             .toUpperCase()
@@ -300,16 +297,30 @@ export const resolveMarketDataAcquisitionErrorMessageKey = (
   ) {
     return "appText.marketDataAcquisitionErrorFormatChanged";
   }
-  if (/SIDECAR.*UNAVAILABLE|CONNECTOR.*UNAVAILABLE|RUNTIME.*UNAVAILABLE/u.test(code)) {
+  if (
+    /SIDECAR.*UNAVAILABLE|CONNECTOR.*UNAVAILABLE|RUNTIME.*UNAVAILABLE/u.test(
+      code,
+    )
+  ) {
     return "appText.marketDataAcquisitionErrorRuntimeUnavailable";
   }
-  if (/SYMBOL_UNAVAILABLE|SPOT_SYMBOL_UNAVAILABLE|TIMEFRAME_UNAVAILABLE|OHLCV_UNAVAILABLE|EXCHANGE_UNAVAILABLE/u.test(code)) {
+  if (
+    /SYMBOL_UNAVAILABLE|SPOT_SYMBOL_UNAVAILABLE|TIMEFRAME_UNAVAILABLE|OHLCV_UNAVAILABLE|EXCHANGE_UNAVAILABLE/u.test(
+      code,
+    )
+  ) {
     return "appText.marketDataAcquisitionErrorMarketUnavailable";
   }
-  if (/LIMIT_EXCEEDED|PAGE_LIMIT|ROW_LIMIT|OUTPUT_LIMIT|FILE_LIMIT/u.test(code)) {
+  if (
+    /LIMIT_EXCEEDED|PAGE_LIMIT|ROW_LIMIT|OUTPUT_LIMIT|FILE_LIMIT/u.test(code)
+  ) {
     return "appText.marketDataAcquisitionErrorRangeTooLarge";
   }
-  if (/UPSTREAM_FAILED|NETWORK|TIMEOUT|TIMED_OUT|CONNECTION|UNREACHABLE/u.test(code)) {
+  if (
+    /UPSTREAM_FAILED|NETWORK|TIMEOUT|TIMED_OUT|CONNECTION|UNREACHABLE/u.test(
+      code,
+    )
+  ) {
     return "appText.marketDataAcquisitionErrorConnection";
   }
   return "appText.marketDataAcquisitionJobFailed";
@@ -317,7 +328,11 @@ export const resolveMarketDataAcquisitionErrorMessageKey = (
 
 export const readMarketDataAcquisitionErrorCode = (error: unknown): string => {
   if (error && typeof error === "object") {
-    const record = error as { code?: unknown; message?: unknown; name?: unknown };
+    const record = error as {
+      code?: unknown;
+      message?: unknown;
+      name?: unknown;
+    };
     const explicitCode = String(record.code || "").trim();
     if (explicitCode) {
       return explicitCode;
@@ -346,7 +361,9 @@ export type MarketDataAcquisitionSaveErrorKey =
 export const resolveMarketDataAcquisitionSaveErrorKey = (
   rawCode: unknown,
 ): MarketDataAcquisitionSaveErrorKey => {
-  const code = String(rawCode || "").trim().toUpperCase();
+  const code = String(rawCode || "")
+    .trim()
+    .toUpperCase();
   if (
     code === "MARKET_DATA_ACQUISITION_MANIFEST_INVALID" ||
     code === "MARKET_DATA_ACQUISITION_MANIFEST_HASH_MISMATCH"
@@ -406,7 +423,9 @@ export const readMarketDataAcquisitionValidationDetail = (
   rawCode: unknown,
   rawArgs?: unknown,
 ): MarketDataAcquisitionValidationDetail | null => {
-  const code = String(rawCode || "").trim().toUpperCase();
+  const code = String(rawCode || "")
+    .trim()
+    .toUpperCase();
   const args =
     rawArgs && typeof rawArgs === "object"
       ? (rawArgs as Record<string, unknown>)
@@ -415,17 +434,26 @@ export const readMarketDataAcquisitionValidationDetail = (
   if (check === "timeframe") {
     return {
       key: "appText.marketDataAcquisitionValidationDetailTimeframe",
-      params: [readErrorArg(args, "expectedTimeframe"), readErrorArg(args, "detectedTimeframe")],
+      params: [
+        readErrorArg(args, "expectedTimeframe"),
+        readErrorArg(args, "detectedTimeframe"),
+      ],
     };
   }
   if (check === "timezone") {
     return {
       key: "appText.marketDataAcquisitionValidationDetailTimezone",
-      params: [readErrorArg(args, "expectedTimeZone"), readErrorArg(args, "suggestedTimeZone")],
+      params: [
+        readErrorArg(args, "expectedTimeZone"),
+        readErrorArg(args, "suggestedTimeZone"),
+      ],
     };
   }
   if (check === "symbols") {
-    return { key: "appText.marketDataAcquisitionValidationDetailSymbols", params: [] };
+    return {
+      key: "appText.marketDataAcquisitionValidationDetailSymbols",
+      params: [],
+    };
   }
   if (check === "files") {
     return {
@@ -438,10 +466,16 @@ export const readMarketDataAcquisitionValidationDetail = (
     };
   }
   if (check === "headers") {
-    return { key: "appText.marketDataAcquisitionValidationDetailHeaders", params: [] };
+    return {
+      key: "appText.marketDataAcquisitionValidationDetailHeaders",
+      params: [],
+    };
   }
   if (check === "metadata") {
-    return { key: "appText.marketDataAcquisitionValidationDetailMetadata", params: [] };
+    return {
+      key: "appText.marketDataAcquisitionValidationDetailMetadata",
+      params: [],
+    };
   }
   if (check === "sourceResults") {
     const symbol = readErrorArg(args, "symbol");

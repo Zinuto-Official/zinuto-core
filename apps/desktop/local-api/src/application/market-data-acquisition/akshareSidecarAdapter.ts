@@ -130,6 +130,7 @@ const errorResponseSchema = z
           'AKSHARE_UPSTREAM_SCHEMA_INVALID',
           'AKSHARE_UPSTREAM_FAILED',
           'AKSHARE_UPSTREAM_RETRYABLE',
+          'AKSHARE_NO_DATA',
           'ACQUISITION_ROW_LIMIT_EXCEEDED',
         ]),
         args: z.record(z.string(), z.unknown()),
@@ -196,6 +197,9 @@ const sanitizeErrorArgs = (
     ),
   );
 
+const mapAkshareSidecarErrorCode = (code: string): string =>
+  code === 'AKSHARE_NO_DATA' ? 'ACQUISITION_NO_DATA' : code;
+
 export const parseAkshareSidecarResponseWithProvenance = (
   raw: string,
   requestId: string,
@@ -223,7 +227,7 @@ export const parseAkshareSidecarResponseWithProvenance = (
     throw new AcquisitionRuntimeError('AKSHARE_SIDECAR_RESPONSE_INVALID');
   }
   throw new AcquisitionRuntimeError(
-    failure.data.error.code,
+    mapAkshareSidecarErrorCode(failure.data.error.code),
     sanitizeErrorArgs(failure.data.error.args),
   );
 };
@@ -256,7 +260,7 @@ export const parseAkshareInstrumentCatalogResponse = (
     throw new AcquisitionRuntimeError('AKSHARE_SIDECAR_RESPONSE_INVALID');
   }
   throw new AcquisitionRuntimeError(
-    failure.data.error.code,
+    mapAkshareSidecarErrorCode(failure.data.error.code),
     sanitizeErrorArgs(failure.data.error.args),
   );
 };

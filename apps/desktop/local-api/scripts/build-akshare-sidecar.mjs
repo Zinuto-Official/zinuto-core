@@ -176,6 +176,8 @@ execFileSync(
     "--hidden-import",
     "akshare",
     "--hidden-import",
+    "akshare.index.index_stock_zh",
+    "--hidden-import",
     "akshare.stock_feature.stock_hist_tx",
     "--hidden-import",
     "akshare.stock.stock_zh_a_sina",

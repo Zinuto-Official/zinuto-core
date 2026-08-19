@@ -356,6 +356,70 @@
   gap: 8px;
 }
 
+.market-data-acquisition-source-details
+  > .market-data-acquisition-source-availability {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 10px 12px;
+  border: 1px solid
+    color-mix(in srgb, var(--visual-warning-base) 28%, transparent);
+  border-radius: var(--radius-control);
+  background: color-mix(
+    in srgb,
+    var(--visual-warning-base) 7%,
+    var(--ui-surface-bg)
+  );
+}
+
+.market-data-acquisition-source-availability > svg {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 auto;
+  margin-top: 2px;
+  color: var(--visual-warning-base);
+}
+
+.market-data-acquisition-source-availability > div {
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.market-data-acquisition-source-availability strong {
+  color: var(--text-t1);
+}
+
+.market-data-acquisition-source-details
+  > .market-data-acquisition-project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.market-data-acquisition-third-party-confirmation {
+  min-width: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 10px 12px;
+  border: 1px solid var(--ui-surface-border);
+  border-radius: var(--radius-control);
+  background: var(--ui-surface-bg);
+  color: var(--text-t1);
+  cursor: pointer;
+}
+
+.market-data-acquisition-third-party-confirmation > .app-checkbox {
+  flex: 0 0 auto;
+  margin-top: 2px;
+}
+
+.market-data-acquisition-third-party-confirmation > span {
+  min-width: 0;
+}
+
 .market-data-acquisition-task-option {
   position: relative;
   min-width: 0;

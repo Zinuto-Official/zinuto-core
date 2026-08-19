@@ -52,6 +52,7 @@ type MarketRuntimeDependencies = {
   akshareAdapter: AkshareAdapterDependency;
   ccxtAdapter: CcxtAcquisitionAdapter;
   financeDataReaderAdapter: FinanceDataReaderAcquisitionAdapter;
+  instrumentNamesForJob: (jobId: string) => ReadonlyMap<string, string>;
   validateMarketStaging: typeof validateMarketAcquisitionStagingWithImportPreview;
   sanitizeJobError: (error: unknown) => AcquisitionJob['error'];
 };
@@ -123,6 +124,7 @@ export const createMarketAcquisitionJobRunner = ({
   akshareAdapter,
   ccxtAdapter,
   financeDataReaderAdapter,
+  instrumentNamesForJob,
   validateMarketStaging,
   sanitizeJobError,
 }: MarketRuntimeDependencies) => async (jobId: string): Promise<void> => {
@@ -439,6 +441,7 @@ export const createMarketAcquisitionJobRunner = ({
       rowsBySymbol,
       sourceResults,
       mergedDuplicateBars: mergedDuplicates,
+      instrumentNamesBySymbol: instrumentNamesForJob(jobId),
     });
     await validateMarketStaging({
       payloadRoot: path.join(stagingRoot, jobId, 'payload'),

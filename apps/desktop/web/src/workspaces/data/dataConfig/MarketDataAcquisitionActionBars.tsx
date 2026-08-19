@@ -2,12 +2,8 @@
 
 import { Button } from "@/ui/primitives/button";
 import { Spinner } from "@/ui/primitives/loading";
-import type {
-  AcquisitionDialogPhase,
-} from "@/workspaces/data/dataConfig/MarketDataAcquisitionSection";
-import type {
-  AcquisitionWizardStep,
-} from "@/workspaces/data/dataConfig/MarketDataAcquisitionWizard";
+import type { AcquisitionDialogPhase } from "@/workspaces/data/dataConfig/MarketDataAcquisitionSection";
+import type { AcquisitionWizardStep } from "@/workspaces/data/dataConfig/MarketDataAcquisitionWizard";
 
 type Translate = (key: string) => string;
 
@@ -24,6 +20,7 @@ type MarketDataAcquisitionActionBarsProps = {
   savedOutputFinalPath: string | null;
   selectedMarketPresent: boolean;
   selectedPlanAvailable: boolean;
+  thirdPartyUseConfirmed: boolean;
   tt: Translate;
   wizardStep: AcquisitionWizardStep;
   onCancelDownload: () => void;
@@ -50,6 +47,7 @@ export const MarketDataAcquisitionActionBars = ({
   savedOutputFinalPath,
   selectedMarketPresent,
   selectedPlanAvailable,
+  thirdPartyUseConfirmed,
   tt,
   wizardStep,
   onCancelDownload,
@@ -83,12 +81,20 @@ export const MarketDataAcquisitionActionBars = ({
     if (wizardStep === 2) {
       return (
         <>
-          <Button type="button" variant="outline" onClick={() => onMoveToStep(1)}>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => onMoveToStep(1)}
+          >
             {tt("appText.marketDataAcquisitionBack")}
           </Button>
           <Button
             type="button"
-            disabled={!selectedMarketPresent || !selectedPlanAvailable}
+            disabled={
+              !selectedMarketPresent ||
+              !selectedPlanAvailable ||
+              !thirdPartyUseConfirmed
+            }
             onClick={() => onMoveToStep(3)}
           >
             {tt("appText.marketDataAcquisitionContinue")}
@@ -99,7 +105,11 @@ export const MarketDataAcquisitionActionBars = ({
     if (wizardStep === 3) {
       return (
         <>
-          <Button type="button" variant="outline" onClick={() => onMoveToStep(2)}>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => onMoveToStep(2)}
+          >
             {tt("appText.marketDataAcquisitionBack")}
           </Button>
           <Button
@@ -117,7 +127,11 @@ export const MarketDataAcquisitionActionBars = ({
         <Button type="button" variant="outline" onClick={() => onMoveToStep(3)}>
           {tt("appText.marketDataAcquisitionBack")}
         </Button>
-        <Button type="button" disabled={!canStartOnline} onClick={onStartDownload}>
+        <Button
+          type="button"
+          disabled={!canStartOnline}
+          onClick={onStartDownload}
+        >
           {tt("appText.marketDataAcquisitionStartDownload")}
         </Button>
       </>
@@ -184,7 +198,11 @@ export const MarketDataAcquisitionActionBars = ({
         >
           {tt("appText.marketDataAcquisitionAdjustSettings")}
         </Button>
-        <Button type="button" disabled={!canStartOnline} onClick={onStartDownload}>
+        <Button
+          type="button"
+          disabled={!canStartOnline}
+          onClick={onStartDownload}
+        >
           {tt("appText.marketDataAcquisitionRetryDownload")}
         </Button>
       </>

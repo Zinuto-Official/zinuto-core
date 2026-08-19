@@ -40,8 +40,7 @@ const timeframeMilliseconds = {
   '1d': 86_400_000,
 } as const;
 
-const sha256 = (value: Uint8Array): string =>
-  createHash('sha256').update(value).digest('hex');
+const sha256 = (value: Uint8Array): string => createHash('sha256').update(value).digest('hex');
 
 const createOutputFolderName = (
   connectorId: 'akshare' | 'ccxt',
@@ -162,16 +161,7 @@ export const normalizeAndValidateAcquisitionBars = ({
 const toCsv = (rows: CanonicalMarketBar[]): string => {
   const lines = ['datetime,open,high,low,close,volume'];
   for (const row of rows) {
-    lines.push(
-      [
-        row.timestamp,
-        row.open,
-        row.high,
-        row.low,
-        row.close,
-        row.volume,
-      ].join(','),
-    );
+    lines.push([row.timestamp, row.open, row.high, row.low, row.close, row.volume].join(','));
   }
   return `${lines.join('\n')}\n`;
 };
@@ -195,37 +185,14 @@ const writeAtomicFile = async (filePath: string, contents: Buffer): Promise<void
 
 const connectorSourceDetails = (request: AcquisitionRequest) => {
   if (request.connectorId === 'akshare') {
-    const isIndex = request.dataset === 'index_zh_a_hist';
     return {
-      connector: `Zinuto whitelist NDJSON adapter for AKShare ${AKSHARE_VERSION}`,
-      upstream: isIndex
-        ? 'AKShare China index interface (Eastmoney source)'
-        : 'AKShare A-share interface (Eastmoney source)',
-      projects: [
-        `AKShare ${AKSHARE_VERSION} — https://github.com/akfamily/akshare`,
-        'AKShare introduction — https://akshare.akfamily.xyz/introduction.html',
-      ],
-      termsUrl: 'https://about.eastmoney.com/home/protocol',
-      docsUrl: isIndex
-        ? 'https://akshare.akfamily.xyz/data/index/index.html'
-        : 'https://akshare.akfamily.xyz/data/stock/stock.html',
-    };
-  }
-  if (request.exchangeId === 'binance') {
-    return {
-      connector: `CCXT ${CCXT_VERSION}`,
-      upstream: 'Binance Spot public market data',
-      projects: [`CCXT ${CCXT_VERSION} — https://github.com/ccxt/ccxt`],
-      termsUrl: 'https://www.binance.com/en/terms',
-      docsUrl: 'https://developers.binance.com/en/docs/products/spot/rest-api',
+      connector: `AKShare ${AKSHARE_VERSION}`,
+      project: 'https://github.com/akfamily/akshare',
     };
   }
   return {
     connector: `CCXT ${CCXT_VERSION}`,
-    upstream: 'OKX Spot public market data',
-    projects: [`CCXT ${CCXT_VERSION} — https://github.com/ccxt/ccxt`],
-    termsUrl: 'https://www.okx.com/help/terms-of-service',
-    docsUrl: 'https://www.okx.com/docs-v5/en/',
+    project: 'https://github.com/ccxt/ccxt',
   };
 };
 
@@ -240,7 +207,6 @@ const buildSourceNotice = ({
 }): string => {
   const source = connectorSourceDetails(request);
   const adjustment = request.connectorId === 'akshare' ? request.adjustment : 'not applicable';
-  const exchange = request.connectorId === 'ccxt' ? request.exchangeId : 'not applicable';
   const sourceMetadata = serializeMarketDataAcquisitionSourceMetadata({
     schemaVersion: 2,
     connectorId: request.connectorId,
@@ -249,33 +215,33 @@ const buildSourceNotice = ({
     importSymbols: request.symbols.map(resolveAcquisitionImportSymbol),
     timeframe: request.timeframe,
   });
-  return `# Data source\n\n` +
-    `Zinuto only invoked a local open-source connector. The download was made directly by this computer and Zinuto does not distribute or host the market data. Check the selected source's terms for your use.\n\n` +
+  return (
+    `# Data source\n\n` +
+    `Zinuto integrated and invoked a third-party open-source component only on this computer. The component may use domestic or overseas third-party data sources. Zinuto does not provide, host, or resell market data, does not grant third-party data permissions, and does not control or warrant third-party service availability or data quality.\n\n` +
+    `Before using the downloaded data, independently review the component's original project and all applicable terms, and confirm the required data permissions, regional availability, technical feasibility, and compliance of the intended use. These determinations and the use of the data are the user's responsibility.\n\n` +
     `- Retrieved at: ${createdAt}\n` +
-    `- Connector: ${source.connector}\n` +
-    `- Upstream: ${source.upstream}\n` +
-    source.projects.map((project) => `- Project: ${project}\n`).join('') +
-    `- Source terms/docs: ${source.termsUrl}\n` +
-    `- API/interface docs: ${source.docsUrl}\n` +
+    `- Third-party open-source component: ${source.connector}\n` +
+    `- Original component project and licence: ${source.project}\n` +
     `- Symbols: ${request.symbols.join(', ')}\n` +
     `- Timeframe: ${request.timeframe}\n` +
     `- Requested range: ${request.startAt} — ${request.endAt}\n` +
-    `- Exchange: ${exchange}\n` +
     `- Adjustment: ${adjustment}\n` +
     `- Timestamp zone: ${request.connectorId === 'akshare' ? 'Asia/Shanghai (+08:00)' : 'UTC (Z)'}\n\n` +
     `## Import symbol mapping\n\n` +
-    request.symbols.map((symbol) =>
-      `- \`${resolveAcquisitionDataFileName(symbol)}\` → \`${resolveAcquisitionImportSymbol(symbol)}\` (source: \`${symbol}\`)\n`
-    ).join('') +
+    request.symbols
+      .map(
+        (symbol) =>
+          `- \`${resolveAcquisitionDataFileName(symbol)}\` → \`${resolveAcquisitionImportSymbol(symbol)}\` (source: \`${symbol}\`)\n`,
+      )
+      .join('') +
     `\n` +
     `## Data file SHA-256\n\n` +
     dataFiles.map((file) => `- \`${file.relativePath}\`: \`${file.sha256}\``).join('\n') +
-    `\n\n${sourceMetadata}\n`;
+    `\n\n${sourceMetadata}\n`
+  );
 };
 
-const buildManifestRequest = (
-  request: AcquisitionRequest,
-): AcquisitionManifest['request'] => ({
+const buildManifestRequest = (request: AcquisitionRequest): AcquisitionManifest['request'] => ({
   market: request.connectorId === 'akshare' ? 'A_SHARE' : 'CRYPTO_SPOT',
   timeframe: request.timeframe,
   startAt: request.startAt,
@@ -315,7 +281,9 @@ export const prepareAcquisitionStaging = async ({
     for (const symbol of request.symbols) {
       const rows = rowsBySymbol.get(symbol);
       if (!rows) {
-        throw new AcquisitionRuntimeError('ACQUISITION_SYMBOL_RESULT_MISSING', { symbol });
+        throw new AcquisitionRuntimeError('ACQUISITION_SYMBOL_RESULT_MISSING', {
+          symbol,
+        });
       }
       const fileName = resolveAcquisitionDataFileName(symbol);
       if (fileNames.has(fileName)) {
@@ -349,11 +317,7 @@ export const prepareAcquisitionStaging = async ({
         maxBytes: ACQUISITION_MAX_TOTAL_BYTES,
       });
     }
-    const outputFolderName = createOutputFolderName(
-      request.connectorId,
-      createdAt,
-      jobId,
-    );
+    const outputFolderName = createOutputFolderName(request.connectorId, createdAt, jobId);
     const manifest: AcquisitionManifest = {
       schemaVersion: 1,
       jobId,
@@ -415,7 +379,9 @@ const expectedOffsetMinutes = (timestampMs: number, timeZone: string): number =>
     );
     return Math.round((localMilliseconds - timestampMs) / 60_000);
   } catch {
-    throw new AcquisitionRuntimeError('ACQUISITION_TIMEZONE_INVALID', { timeZone });
+    throw new AcquisitionRuntimeError('ACQUISITION_TIMEZONE_INVALID', {
+      timeZone,
+    });
   }
 };
 
@@ -525,8 +491,38 @@ export const resolveMarketAcquisitionImportSymbol = (symbol: string): string => 
   return result;
 };
 
-export const resolveMarketAcquisitionDataFileName = (symbol: string): string =>
-  `${resolveMarketAcquisitionImportSymbol(symbol)}.csv`;
+const MARKET_DATA_FILE_NAME_MAX_BYTES = 240;
+
+const truncateUtf8 = (value: string, maxBytes: number): string => {
+  let result = '';
+  for (const character of value) {
+    if (Buffer.byteLength(result + character, 'utf8') > maxBytes) break;
+    result += character;
+  }
+  return result;
+};
+
+const sanitizeInstrumentNameForFile = (value: string): string =>
+  value
+    .normalize('NFKC')
+    .replace(/[<>:"/\\|?*\u0000-\u001F\u007F·]/gu, ' ')
+    .replace(/\s+/gu, ' ')
+    .replace(/^[. ]+|[. ]+$/gu, '');
+
+export const resolveMarketAcquisitionDataFileName = (
+  symbol: string,
+  instrumentName?: string | null,
+): string => {
+  const importSymbol = resolveMarketAcquisitionImportSymbol(symbol);
+  const safeName = sanitizeInstrumentNameForFile(instrumentName ?? '');
+  if (!safeName) return `${importSymbol}.csv`;
+  const suffix = `·${importSymbol}.csv`;
+  const name = truncateUtf8(
+    safeName,
+    MARKET_DATA_FILE_NAME_MAX_BYTES - Buffer.byteLength(suffix, 'utf8'),
+  ).trim();
+  return name ? `${name}${suffix}` : `${importSymbol}.csv`;
+};
 
 type MarketAcquisitionManifest = {
   schemaVersion: 3;
@@ -541,11 +537,7 @@ type MarketAcquisitionManifest = {
   files: AcquisitionManifestFile[];
 };
 
-const marketOutputFolderName = (
-  marketId: string,
-  createdAt: string,
-  jobId: string,
-): string => {
+const marketOutputFolderName = (marketId: string, createdAt: string, jobId: string): string => {
   const date = new Date(createdAt);
   if (!Number.isFinite(date.getTime())) {
     throw new AcquisitionRuntimeError('ACQUISITION_TIMESTAMP_INVALID');
@@ -563,40 +555,22 @@ const marketOutputFolderName = (
   return `Zinuto-Data-${safeMarket}-${timestamp}-${jobToken}`;
 };
 
-const marketSourceDetails = (providerId: string, upstreamId: string) => {
+const marketSourceDetails = (providerId: string) => {
   if (providerId === 'akshare') {
     return {
       connector: `AKShare ${AKSHARE_VERSION}`,
       project: 'https://github.com/akfamily/akshare',
-      terms: upstreamId === 'tencent'
-        ? 'https://www.tencent.com/term-of-service/'
-        : upstreamId === 'sina'
-          ? 'https://finance.sina.com.cn/roll/2021-05-12/doc-ikmxzfmm2033220.shtml'
-          : 'https://about.eastmoney.com/home/protocol',
-      upstream: upstreamId,
     };
   }
   if (providerId === 'ccxt') {
     return {
       connector: `CCXT ${CCXT_VERSION}`,
       project: 'https://github.com/ccxt/ccxt',
-      terms: upstreamId === 'okx'
-        ? 'https://www.okx.com/help/terms-of-service'
-        : 'https://www.binance.com/en/terms',
-      upstream: upstreamId,
     };
   }
   return {
     connector: `FinanceDataReader ${FINANCE_DATA_READER_VERSION}`,
     project: 'https://github.com/FinanceData/FinanceDataReader',
-    terms: upstreamId === 'naver-finance'
-      ? 'https://policy.naver.com/rules/service.html'
-      : upstreamId === 'krx-index-cache'
-        ? 'https://global.krx.co.kr/contents/GLB/01/0102/0102010100/GLB0102010100.jsp'
-        : upstreamId === 'investing-com'
-          ? 'https://www.investing.com/about-us/terms-and-conditions'
-          : 'https://finance.yahoo.com/legal/terms.html',
-    upstream: upstreamId,
   };
 };
 
@@ -606,12 +580,14 @@ const buildMarketSourceNotice = ({
   timeZone,
   sourceResults,
   dataFiles,
+  instrumentNamesBySymbol,
 }: {
   request: MarketAcquisitionRequest;
   createdAt: string;
   timeZone: string;
   sourceResults: MarketAcquisitionJob['sourceResults'];
   dataFiles: AcquisitionManifestFile[];
+  instrumentNamesBySymbol: ReadonlyMap<string, string>;
 }): string => {
   const resolved = sourceResults.map((result) => {
     if (!result.finalSource) {
@@ -621,19 +597,16 @@ const buildMarketSourceNotice = ({
     }
     return result;
   });
-  const finalProviderIds = new Set(
-    resolved.map((result) => result.finalSource!.providerId),
-  );
-  const connectorId = finalProviderIds.size === 1
-    ? [...finalProviderIds][0]!
-    : 'mixed';
+  const finalProviderIds = new Set(resolved.map((result) => result.finalSource!.providerId));
+  const connectorId = finalProviderIds.size === 1 ? [...finalProviderIds][0]! : 'mixed';
   const sourceMetadata = serializeMarketDataAcquisitionSourceMetadata({
     schemaVersion: 3,
     connectorId,
     adjustment: request.adjustment,
     sourceSymbols: resolved.map((result) => result.sourceSymbol),
     importSymbols: resolved.map((result) =>
-      resolveMarketAcquisitionImportSymbol(result.sourceSymbol)),
+      resolveMarketAcquisitionImportSymbol(result.sourceSymbol),
+    ),
     timeframe: request.timeframe,
     marketId: request.marketId,
     timeZone,
@@ -644,30 +617,37 @@ const buildMarketSourceNotice = ({
       attempts: result.attempts,
     })),
   });
-  const sources = resolved.map((result) => {
-    const finalSource = result.finalSource!;
-    const details = marketSourceDetails(
-      finalSource.providerId,
-      finalSource.upstreamId,
-    );
-    const attempts = result.attempts
-      .map(
-        (attempt) =>
-          `${attempt.providerId}@${attempt.providerVersion} ${attempt.status}` +
-          (attempt.errorCode ? ` (${attempt.errorCode})` : ''),
-      )
-      .join(' → ');
-    return `- \`${result.sourceSymbol}\` → \`${resolveMarketAcquisitionDataFileName(result.sourceSymbol)}\`: ${details.connector}; upstream \`${details.upstream}\`; attempts ${attempts}\n`;
-  }).join('');
-  const providerDetails = [...new Map(
-    resolved.map((result) => {
+  const sources = resolved
+    .map((result) => {
       const finalSource = result.finalSource!;
-      const details = marketSourceDetails(finalSource.providerId, finalSource.upstreamId);
-      return [`${finalSource.providerId}:${finalSource.upstreamId}`, details] as const;
-    }),
-  ).values()];
-  return `# Data source\n\n` +
-    `Zinuto invoked only local open-source connectors. This computer retrieved the data directly from the selected upstream; Zinuto does not host or redistribute market data. Check every listed upstream's terms for your use.\n\n` +
+      const details = marketSourceDetails(finalSource.providerId);
+      const attempts = result.attempts
+        .map(
+          (attempt) =>
+            `${attempt.providerId}@${attempt.providerVersion} ${attempt.status}` +
+            (attempt.errorCode ? ` (${attempt.errorCode})` : ''),
+        )
+        .join(' → ');
+      const fileName = resolveMarketAcquisitionDataFileName(
+        result.sourceSymbol,
+        instrumentNamesBySymbol.get(result.symbol),
+      );
+      return `- \`${result.sourceSymbol}\` → \`${fileName}\`: ${details.connector}; component attempts ${attempts}\n`;
+    })
+    .join('');
+  const providerDetails = [
+    ...new Map(
+      resolved.map((result) => {
+        const finalSource = result.finalSource!;
+        const details = marketSourceDetails(finalSource.providerId);
+        return [finalSource.providerId, details] as const;
+      }),
+    ).values(),
+  ];
+  return (
+    `# Data source\n\n` +
+    `Zinuto integrated and invoked third-party open-source components only on this computer. A component may use domestic or overseas third-party data sources. Zinuto does not provide, host, or resell market data, does not grant third-party data permissions, and does not control or warrant third-party service availability or data quality.\n\n` +
+    `Before using the downloaded data, independently review each component's original project and all applicable terms, and confirm the required data permissions, regional availability, technical feasibility, and compliance of the intended use. These determinations and the use of the data are the user's responsibility.\n\n` +
     `- Retrieved at: ${createdAt}\n` +
     `- Market: ${request.marketId}\n` +
     `- Source plan: ${request.sourcePlanId}\n` +
@@ -675,13 +655,17 @@ const buildMarketSourceNotice = ({
     `- Requested range: ${request.startAt} — ${request.endAt}\n` +
     `- Adjustment: ${request.adjustment ?? 'not applicable'}\n` +
     `- Timestamp zone: ${timeZone}\n` +
-    providerDetails.map((details) =>
-      `- Connector/project: ${details.connector} — ${details.project}\n- Upstream terms: ${details.terms}\n`,
-    ).join('') +
-    `\n## Per-instrument provenance\n\n${sources}\n` +
+    providerDetails
+      .map(
+        (details) =>
+          `- Third-party open-source component: ${details.connector}\n- Original component project and licence: ${details.project}\n`,
+      )
+      .join('') +
+    `\n## Per-instrument component record\n\n${sources}\n` +
     `## Data file SHA-256\n\n` +
     dataFiles.map((file) => `- \`${file.relativePath}\`: \`${file.sha256}\``).join('\n') +
-    `\n\n${sourceMetadata}\n`;
+    `\n\n${sourceMetadata}\n`
+  );
 };
 
 export const prepareMarketAcquisitionStaging = async ({
@@ -693,6 +677,7 @@ export const prepareMarketAcquisitionStaging = async ({
   rowsBySymbol,
   sourceResults,
   mergedDuplicateBars,
+  instrumentNamesBySymbol = new Map(),
 }: {
   stagingRoot: string;
   jobId: string;
@@ -702,6 +687,7 @@ export const prepareMarketAcquisitionStaging = async ({
   rowsBySymbol: ReadonlyMap<string, CanonicalMarketBar[]>;
   sourceResults: MarketAcquisitionJob['sourceResults'];
   mergedDuplicateBars: number;
+  instrumentNamesBySymbol?: ReadonlyMap<string, string>;
 }) => {
   if (request.symbols.length > ACQUISITION_MAX_SYMBOLS) {
     throw new AcquisitionRuntimeError('ACQUISITION_SYMBOL_LIMIT_EXCEEDED', {
@@ -720,9 +706,14 @@ export const prepareMarketAcquisitionStaging = async ({
       const rows = rowsBySymbol.get(symbol);
       const sourceResult = sourceBySymbol.get(symbol);
       if (!rows || !sourceResult?.finalSource) {
-        throw new AcquisitionRuntimeError('ACQUISITION_SYMBOL_RESULT_MISSING', { symbol });
+        throw new AcquisitionRuntimeError('ACQUISITION_SYMBOL_RESULT_MISSING', {
+          symbol,
+        });
       }
-      const fileName = resolveMarketAcquisitionDataFileName(sourceResult.sourceSymbol);
+      const fileName = resolveMarketAcquisitionDataFileName(
+        sourceResult.sourceSymbol,
+        instrumentNamesBySymbol.get(sourceResult.symbol),
+      );
       if (fileNames.has(fileName)) {
         throw new AcquisitionRuntimeError('ACQUISITION_FILE_NAME_CONFLICT');
       }
@@ -743,6 +734,7 @@ export const prepareMarketAcquisitionStaging = async ({
         timeZone,
         sourceResults,
         dataFiles: files,
+        instrumentNamesBySymbol,
       }),
       'utf8',
     );

@@ -24,9 +24,7 @@ import {
   createCcxtAcquisitionAdapter,
   resolveMarketDataHttpsProxy,
 } from "../../src/application/market-data-acquisition/ccxtAcquisitionAdapter.js";
-import {
-  createMarketDataAcquisitionService,
-} from "../../src/application/market-data-acquisition/marketDataAcquisitionService.js";
+import { createMarketDataAcquisitionService } from "../../src/application/market-data-acquisition/marketDataAcquisitionService.js";
 import { pythonSidecarWorkerEnvironment } from "../../src/application/market-data-acquisition/pythonSidecarRuntime.js";
 import { createMemoryAcquisitionJobStore } from "../../src/infrastructure/db/marketDataAcquisition/marketDataAcquisitionJobStore.js";
 import {
@@ -383,8 +381,13 @@ test("single local acquisition job writes canonical CSV, source notice, and nati
     path.join(jobRoot, "payload", "SOURCE.md"),
     "utf8",
   );
-  assert.match(source, /Zinuto does not distribute or host the market data/u);
-  assert.match(source, /https:\/\/www\.binance\.com\/en\/terms/u);
+  assert.match(source, /third-party open-source component/u);
+  assert.match(source, /https:\/\/github\.com\/ccxt\/ccxt/u);
+  assert.match(
+    source,
+    /data permissions, regional availability, technical feasibility/u,
+  );
+  assert.doesNotMatch(source, /binance\.com|Upstream|Source terms/u);
   assert.match(source, /`BTC-USDT\.csv` → `BTC-USDT` \(source: `BTC\/USDT`\)/u);
   const manifestBytes = await fs.readFile(path.join(jobRoot, "manifest.json"));
   const manifest = JSON.parse(manifestBytes.toString("utf8")) as {
@@ -499,8 +502,11 @@ test("AKShare output passes the production import preview with Shanghai time and
     path.join(stagingRoot, created.id, "payload", "SOURCE.md"),
     "utf8",
   );
-  assert.match(source, /AKShare 1\.18\.91.*github\.com\/akfamily\/akshare/u);
-  assert.match(source, /akshare\.akfamily\.xyz\/introduction\.html/u);
+  assert.match(
+    source,
+    /AKShare 1\.18\.91[\s\S]*github\.com\/akfamily\/akshare/u,
+  );
+  assert.doesNotMatch(source, /akshare\.akfamily\.xyz|eastmoney/u);
   assert.match(source, /Adjustment: qfq/u);
   assert.match(source, /Asia\/Shanghai \(\+08:00\)/u);
   assert.match(source, /zinuto-market-data-acquisition:.*"adjustment":"qfq"/u);
@@ -572,8 +578,9 @@ test("AKShare index output keeps the INDEX prefix through CSV naming and import 
     true,
   );
   const source = await fs.readFile(path.join(payloadRoot, "SOURCE.md"), "utf8");
-  assert.match(source, /AKShare China index interface/u);
-  assert.match(source, /data\/index\/index\.html/u);
+  assert.match(source, /AKShare 1\.18\.91/u);
+  assert.match(source, /https:\/\/github\.com\/akfamily\/akshare/u);
+  assert.doesNotMatch(source, /Eastmoney|eastmoney|data\/index\/index\.html/u);
   assert.match(
     source,
     /`INDEX-000001\.csv` → `INDEX-000001` \(source: `INDEX-000001`\)/u,
@@ -1275,7 +1282,11 @@ test("the generic acquisition catalog exposes every reviewed FDR price market an
       return [
         { symbol: "ZZZ", name: "AAPL lookup by name", exchangeId: "NASDAQ" },
         { symbol: "AAPL-P", name: "Preferred US share", exchangeId: "NASDAQ" },
-        { symbol: "XAAPL", name: "Cross-listed security", exchangeId: "NASDAQ" },
+        {
+          symbol: "XAAPL",
+          name: "Cross-listed security",
+          exchangeId: "NASDAQ",
+        },
         { symbol: "AAPL", name: "Apple Inc.", exchangeId: "NASDAQ" },
       ];
     },
@@ -1410,7 +1421,8 @@ test("market directories rank code matches and paginate normalized catalog rows"
       id: "financedatareader",
       isAvailable: () => true,
       listInstruments: async () => instruments,
-      fetchSymbol: async () => assert.fail("catalog lookup must not fetch bars"),
+      fetchSymbol: async () =>
+        assert.fail("catalog lookup must not fetch bars"),
     },
   });
 
@@ -1428,7 +1440,10 @@ test("market directories rank code matches and paginate normalized catalog rows"
     query: "",
     cursor: firstPage.nextCursor ?? "",
   });
-  assert.deepEqual(lastPage.instruments.map((entry) => entry.symbol), ["0100"]);
+  assert.deepEqual(
+    lastPage.instruments.map((entry) => entry.symbol),
+    ["0100"],
+  );
   const exactCode = await service.listAcquisitionMarketInstruments({
     marketId: "JP_STOCKS",
     sourcePlanId: "FDR_TSE",
@@ -1496,6 +1511,40 @@ test("Japanese stock jobs accept a direct TSE code and retain FDR provenance", a
   await service.discardMarketJob(created.id);
 });
 
+test("Vietnam market validation accepts the canonical Asia/Saigon alias", async (t) => {
+  const stagingRoot = await fs.mkdtemp(
+    path.join(os.tmpdir(), "zinuto-market-vn-timezone-"),
+  );
+  t.after(() => fs.rm(stagingRoot, { recursive: true, force: true }));
+  const service = createMarketDataAcquisitionService({
+    stagingRoot,
+    createId: () => "mktvn001",
+    now: () => new Date("2026-01-05T00:00:00.000Z"),
+    financeDataReaderAdapter: {
+      id: "financedatareader",
+      isAvailable: () => true,
+      listInstruments: async () => [],
+      fetchSymbol: async () => ({
+        rows: dailyRows("+07:00"),
+        upstreamId: "yahoo-finance",
+      }),
+    },
+  });
+
+  const created = await service.createMarketJob({
+    marketId: "VN_STOCKS",
+    sourcePlanId: "FDR_HOSE",
+    symbols: ["FPT"],
+    timeframe: "1d",
+    startAt: "2026-01-01T00:00:00+07:00",
+    endAt: "2026-01-04T23:59:59+07:00",
+    adjustment: null,
+  });
+  const ready = await waitForMarketStatus(service, created.id, "READY_TO_SAVE");
+  assert.equal(ready.status, "READY_TO_SAVE");
+  await service.discardMarketJob(created.id);
+});
+
 test("new market jobs retain whole-instrument provenance across the A-share and FDR fallback chain", async (t) => {
   const stagingRoot = await fs.mkdtemp(
     path.join(os.tmpdir(), "zinuto-market-mixed-"),
@@ -1556,10 +1605,67 @@ test("new market jobs retain whole-instrument provenance across the A-share and 
     path.join(stagingRoot, created.id, "payload", "SOURCE.md"),
     "utf8",
   );
-  assert.match(source, /Per-instrument provenance/u);
+  assert.match(source, /Per-instrument component record/u);
   assert.match(source, /akshare@[A-Za-z0-9.+-]+ FAILED/u);
   assert.match(source, /financedatareader@0\.9\.202 SUCCEEDED/u);
+  const userFacingSourceNotice = source.split(
+    "<!-- zinuto-market-data-acquisition:",
+  )[0];
+  assert.match(userFacingSourceNotice, /domestic or overseas/u);
+  assert.match(userFacingSourceNotice, /user's responsibility/u);
+  assert.doesNotMatch(
+    userFacingSourceNotice,
+    /Yahoo|Naver|Binance|OKX|Eastmoney|Tencent|Sina/u,
+  );
   assert.match(source, /"schemaVersion":3,"connectorId":"mixed"/u);
+});
+
+test("market downloads name files as instrument name followed by code", async (t) => {
+  const stagingRoot = await fs.mkdtemp(
+    path.join(os.tmpdir(), "zinuto-market-named-file-"),
+  );
+  t.after(() => fs.rm(stagingRoot, { recursive: true, force: true }));
+  const service = createMarketDataAcquisitionService({
+    stagingRoot,
+    createId: () => "mktname1",
+    now: () => new Date("2026-01-05T00:00:00.000Z"),
+    akshareAdapter: {
+      id: "akshare",
+      isAvailable: () => true,
+      listInstruments: async () => [
+        {
+          symbol: "000319",
+          name: "中国创博",
+          exchangeId: "SZ",
+          kind: "A_SHARE",
+        },
+      ],
+      fetchSymbol: async () =>
+        assert.fail("provenance fetch path should be used"),
+      fetchSymbolWithProvenance: async () => ({
+        rows: dailyRows("+08:00"),
+        upstreamId: "sina",
+      }),
+    },
+  });
+
+  const created = await service.createMarketJob({
+    marketId: "CN_A_SHARE",
+    sourcePlanId: "CN_A_SHARE_SMART",
+    symbols: ["000319"],
+    timeframe: "1d",
+    startAt: "2026-01-01T00:00:00+08:00",
+    endAt: "2026-01-04T23:59:59+08:00",
+    adjustment: "none",
+  });
+  await waitForMarketStatus(service, created.id, "READY_TO_SAVE");
+  const payloadRoot = path.join(stagingRoot, created.id, "payload");
+  assert.equal(
+    (await fs.stat(path.join(payloadRoot, "中国创博·000319.csv"))).isFile(),
+    true,
+  );
+  const source = await fs.readFile(path.join(payloadRoot, "SOURCE.md"), "utf8");
+  assert.match(source, /`000319` → `中国创博·000319\.csv`/u);
 });
 
 test("the generic mainland market retains curated indexes without sending them to FDR", async (t) => {
@@ -1882,10 +1988,7 @@ test("startup recovers persisted market jobs, interrupts running ones, and sweep
   });
   const readyJobDir = path.join(stagingRoot, "job-0002-ready");
   await fs.mkdir(readyJobDir, { recursive: true });
-  await fs.writeFile(
-    path.join(readyJobDir, "manifest.json"),
-    "{}",
-  );
+  await fs.writeFile(path.join(readyJobDir, "manifest.json"), "{}");
   const orphanDir = path.join(stagingRoot, "job-0000-orphan");
   await fs.mkdir(orphanDir, { recursive: true });
   await fs.writeFile(path.join(orphanDir, "payload.csv"), "orphan");
@@ -1916,10 +2019,7 @@ test("startup recovers persisted market jobs, interrupts running ones, and sweep
   assert.equal(running.status, "FAILED");
   assert.equal(running.error?.code, "ACQUISITION_INTERRUPTED");
 
-  await assert.rejects(
-    fs.access(orphanDir),
-    /ENOENT/u,
-  );
+  await assert.rejects(fs.access(orphanDir), /ENOENT/u);
 
   await service.discardMarketJob("job-0002-ready");
   assert.equal(
