@@ -416,7 +416,7 @@
       "en": "Notes created during training will automatically appear here",
       "ja": "トレーニング中に作成したノートはここに自動で集約されます",
       "ko": "훈련 중 만든 노트는 여기에 자동으로 모입니다",
-      "es": "Las notas creadas durante el entrenamiento apareceran aqui automáticamente"
+      "es": "Las notas creadas durante el entrenamiento aparecerán aquí automáticamente"
     }
   },
   "appText.notesData": {
@@ -2477,7 +2477,7 @@
         "flashTodayMetricLabel": "Mejor ventaja hoy",
         "flashTodayMetricSupportTemplate": "Acierto {0} / velocidad {1} s",
         "flashRecentMetricLabelTemplate": "Acierto últimas {0}",
-        "flashRecentMetricSupportTemplate": "Velocidad {0} s / perdidas {1}",
+        "flashRecentMetricSupportTemplate": "Velocidad {0} s / pérdidas {1}",
         "flashColdMetricLabel": "Foco actual",
         "flashColdMetricValue": "Dirección",
         "flashColdMetricSupport": "Acierto · oportunidades perdidas",
@@ -2707,7 +2707,7 @@
   "uiLabels.ui.commandCenterMetricReplayBars": {
     "kind": "text",
     "locales": {
-      "zh-CN": "累计推演K 线",
+      "zh-CN": "累计推演 K 线",
       "en": "Replay Bars",
       "ja": "リプレイ本数",
       "ko": "리플레이 봉 수",
@@ -3461,7 +3461,7 @@
       "en": "Shows how much pre-cost profit was eaten by slippage, fees, funding, and borrow",
       "ja": "スリッページ、手数料、資金費、借株費がコスト前利益をどれだけ削ったかを表示",
       "ko": "슬리피지, 수수료, 자금비, 대차비가 비용 전 이익을 얼마나 줄였는지 봅니다",
-      "es": "Muestra cuánto profit consumen slippage, comisiones, funding y préstamo"
+      "es": "Muestra cuánto beneficio consumen el deslizamiento, las comisiones, la financiación y el préstamo"
     }
   },
   "uiLabels.ui.reviewBehaviorCutLoss": {
@@ -3901,7 +3901,7 @@
       "en": "Cap full-size exposure next round and replay the three worst sizing sessions first",
       "ja": "次回はフルサイズ露出に上限をかけ、サイズ判断が最悪だった 3 セッションから再生してください",
       "ko": "다음 라운드에서는 풀사이즈 익스포저를 제한하고, 최악의 사이징 세션 3개를 먼저 리플레이하세요",
-      "es": "Limita la exposición a tamaño completo en la próxima ronda y reproduce primero las tres peores sesiones de sizing"
+      "es": "Limita la exposición a tamaño completo en la próxima ronda y reproduce primero las tres peores sesiones de dimensionamiento"
     }
   },
   "uiLabels.ui.reviewIssueProfitabilityDrill": {

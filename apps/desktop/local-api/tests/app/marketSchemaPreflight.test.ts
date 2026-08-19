@@ -81,7 +81,13 @@ const createCurrentVersionPartialMarketDb = async (): Promise<void> => {
 await createCurrentVersionPartialMarketDb();
 
 const [
-  { db, STARTUP_PREFLIGHT_STATUS },
+  {
+    db,
+    DATABASE_RUNTIME_STATE,
+    getDatabaseStorageFootprint,
+    requireDatabase,
+    STARTUP_PREFLIGHT_STATUS,
+  },
   { closeMarketDatabase, getMarketBarCount },
 ] = await Promise.all([
   import("../../src/infrastructure/db/database.js"),
@@ -100,6 +106,9 @@ test.after(async () => {
 test("market db initialization blocks and preserves current-version partial schema", async () => {
   assert.equal(STARTUP_PREFLIGHT_STATUS.mode, "BLOCKED");
   assert.equal(STARTUP_PREFLIGHT_STATUS.startupAllowed, false);
+  assert.equal(DATABASE_RUNTIME_STATE.available, false);
+  assert.throws(() => requireDatabase(), /LOCAL_DATABASE_UNAVAILABLE/u);
+  assert.throws(() => getDatabaseStorageFootprint(), /LOCAL_DATABASE_UNAVAILABLE/u);
   assert.equal(
     STARTUP_PREFLIGHT_STATUS.blockReason,
     "LOCAL_DATA_NEEDS_ATTENTION",

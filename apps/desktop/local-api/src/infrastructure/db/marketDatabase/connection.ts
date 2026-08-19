@@ -16,7 +16,11 @@ import {
 } from './schema.js';
 import { initializeCurrentMarketSchema } from './schemaDefinition.js';
 import { MARKET_VOLUME_STORAGE_SQL } from './ohlcvSql.js';
-import { cleanupMarketStorageArtifacts, removeMarketStorageFiles } from './storageFiles.js';
+import {
+  cleanupMarketStorageArtifacts,
+  recoverMarketDbBackupIfCanonicalMissing,
+  removeMarketStorageFiles,
+} from './storageFiles.js';
 import { toSafeInt } from './utils.js';
 import { isAppError } from '../../../kernel/appError.js';
 import { isLocalMarketDataNeedsAttentionError } from './schema.js';
@@ -431,6 +435,7 @@ export const ensureMarketBarsStageTable = async (connection: DuckDBConnection): 
 };
 
 const initMarketDb = async (): Promise<MarketDbContext> => {
+  await recoverMarketDbBackupIfCanonicalMissing();
   const existingMarketDb = fs.existsSync(MARKET_DB_FILE_PATH);
 
   // Transient lock/IO failures (file locked by a concurrent DuckDB process,
@@ -648,22 +653,26 @@ export const resetMarketDbContext = async (options?: {
 
   try {
     await closeMarketReadConnectionPool();
+    let closeFailure: unknown = null;
     if (contextPromise) {
       try {
         const context = await contextPromise;
         try {
           context.connection.closeSync();
-        } catch {
-          // ignore close failures
+        } catch (error) {
+          closeFailure = error;
         }
         try {
           context.instance.closeSync();
-        } catch {
-          // ignore close failures
+        } catch (error) {
+          closeFailure ??= error;
         }
       } catch {
         // ignore failed initialization during reset
       }
+    }
+    if (closeFailure) {
+      throw closeFailure;
     }
     if (shouldRemoveStorageFiles) {
       await removeMarketStorageFiles();
@@ -671,8 +680,6 @@ export const resetMarketDbContext = async (options?: {
     if (shouldCleanupArtifacts) {
       await cleanupMarketStorageArtifacts();
     }
-  } catch {
-    // ignore close failures
   } finally {
     if (marketDbContextPromise === contextPromise) {
       marketDbContextPromise = null;

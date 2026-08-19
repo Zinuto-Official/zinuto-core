@@ -31,6 +31,7 @@ import {
 import { reinitializeStartupLocalData } from '../infrastructure/db/database/startupReinitialize.js';
 import { createApiInteractionActivityTracker } from './apiInteractionActivity.js';
 import { isRequestAllowedWhileStartupBlocked } from './startupBlockedRequestPolicy.js';
+import { bridgeSecretsEqual, readBackendBridgeSecret } from './backendBridgeSecret.js';
 
 const app = express();
 const apiInteractionActivity = createApiInteractionActivityTracker({
@@ -45,12 +46,8 @@ const runtimeStatePath = runtimeStatePathRaw ? path.resolve(runtimeStatePathRaw)
 const parentPidRaw = typeof process.env.ZINUTO_BACKEND_PARENT_PID === 'string' ? process.env.ZINUTO_BACKEND_PARENT_PID.trim() : '';
 const parsedParentPid = Number.parseInt(parentPidRaw, 10);
 const backendParentPid = Number.isInteger(parsedParentPid) && parsedParentPid > 1 ? parsedParentPid : 0;
-const backendBridgeSecretRaw =
-  typeof process.env.ZINUTO_BACKEND_BRIDGE_SECRET === 'string'
-    ? process.env.ZINUTO_BACKEND_BRIDGE_SECRET.trim()
-    : '';
-const backendBridgeSecret = backendBridgeSecretRaw;
 delete process.env.ZINUTO_BACKEND_BRIDGE_SECRET;
+const backendBridgeSecret = await readBackendBridgeSecret().catch(() => '');
 const backendBridgeHeaderName = 'x-zinuto-bridge-token';
 
 type LocalApiErrorStage =
@@ -439,7 +436,7 @@ app.use(desktopApiBasePath, (req: express.Request, res: express.Response, next: 
 app.use(desktopApiBasePath, (req: express.Request, res: express.Response, next: express.NextFunction) => {
   const requestTokenRaw = req.header(backendBridgeHeaderName);
   const requestToken = typeof requestTokenRaw === 'string' ? requestTokenRaw.trim() : '';
-  if (!requestToken || requestToken !== backendBridgeSecret) {
+  if (!requestToken || !bridgeSecretsEqual(backendBridgeSecret, requestToken)) {
     res.status(401).json(buildErrorEnvelope({
       req,
       errorCode: 'BACKEND_BRIDGE_UNAUTHORIZED',

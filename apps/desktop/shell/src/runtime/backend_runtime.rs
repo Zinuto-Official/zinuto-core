@@ -3,6 +3,7 @@
 use std::fs;
 #[cfg(unix)]
 use std::io;
+use std::io::Write;
 #[cfg(unix)]
 use std::os::fd::AsRawFd;
 #[cfg(windows)]
@@ -97,7 +98,6 @@ const BACKEND_HEALTH_POLL_INTERVAL: Duration = Duration::from_millis(100);
 const BACKEND_CONNECTABILITY_PROBE_TIMEOUT: Duration = Duration::from_millis(150);
 const BACKEND_STARTUP_GATE_POLL_INTERVAL: Duration = Duration::from_millis(500);
 const BACKEND_STARTUP_HEALTH_TIMEOUT_MS: u64 = 20_000;
-const BACKEND_BRIDGE_SECRET_ENV: &str = "ZINUTO_BACKEND_BRIDGE_SECRET";
 const BACKEND_STARTUP_PROGRESS_ENV: &str = "ZINUTO_BACKEND_STARTUP_PROGRESS_PATH";
 const BACKEND_RUNTIME_MANIFEST_DIGEST_ENV: &str = "ZINUTO_BACKEND_RUNTIME_MANIFEST_DIGEST";
 const BACKTEST_ENGINE_BIN_ENV: &str = "ZINUTO_BACKTEST_ENGINE_BIN";
@@ -416,8 +416,8 @@ fn spawn_backend_node(
             BACKEND_STARTUP_PROGRESS_ENV,
             context.startup_progress_path.to_string_lossy().to_string(),
         )
-        .env(BACKEND_BRIDGE_SECRET_ENV, context.bridge_secret)
-        .stdin(Stdio::null())
+        .env_remove("ZINUTO_BACKEND_BRIDGE_SECRET")
+        .stdin(Stdio::piped())
         .stdout(Stdio::inherit())
         .stderr(Stdio::inherit());
 
@@ -436,7 +436,30 @@ fn spawn_backend_node(
         cmd.current_dir(cwd);
     }
 
-    cmd.spawn().map_err(|error| format!("{:?}", error.kind()))
+    let mut child = cmd.spawn().map_err(|error| format!("{:?}", error.kind()))?;
+    let write_result = child
+        .stdin
+        .take()
+        .ok_or_else(|| "BROKEN_PIPE".to_string())
+        .and_then(|stdin| {
+            write_backend_bridge_secret(stdin, context.bridge_secret)
+                .map_err(|error| format!("{:?}", error.kind()))
+        });
+    if let Err(error) = write_result {
+        let _ = child.kill();
+        let _ = child.wait();
+        return Err(error);
+    }
+    Ok(child)
+}
+
+fn write_backend_bridge_secret<W: Write>(
+    mut writer: W,
+    bridge_secret: &str,
+) -> std::io::Result<()> {
+    writer.write_all(bridge_secret.as_bytes())?;
+    writer.write_all(b"\n")?;
+    writer.flush()
 }
 
 fn wait_for_backend_runtime_state(

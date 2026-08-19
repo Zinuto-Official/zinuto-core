@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "sourceOrigin": "https://github.com/duckdb/duckdb",
+  "releaseVersion": "1.5.3",
+  "crateVersion": "1.10503.1",
+  "platforms": {
+    "darwin-arm64": {
+      "rustTarget": "aarch64-apple-darwin",
+      "archiveFileName": "libduckdb-osx-universal.zip",
+      "archiveBytes": 34970713,
+      "archiveSha256": "386f8e8b3b4bc8d128762327121e22065ce45f2ee55ef1b1f412ce11e0e6c51f",
+      "libraryFileName": "libduckdb.dylib",
+      "files": {
+        "duckdb.h": { "bytes": 243691, "sha256": "a945d26914308094551b04c4445ee92b12d1a5b38b1d71d50803078e01e65845" },
+        "duckdb.hpp": { "bytes": 2036023, "sha256": "d33ec45c8c5d9a60bf1c598cba2fc804bafb8794314893ed7b50eb9030b07cc7" },
+        "libduckdb.dylib": { "bytes": 112275440, "sha256": "2de60b6210a6bc9a1405dabd1e26d8ea8ce8c0d03d992ceba0f4f61ccbe031a5" }
+      }
+    },
+    "darwin-x64": {
+      "rustTarget": "x86_64-apple-darwin",
+      "archiveFileName": "libduckdb-osx-universal.zip",
+      "archiveBytes": 34970713,
+      "archiveSha256": "386f8e8b3b4bc8d128762327121e22065ce45f2ee55ef1b1f412ce11e0e6c51f",
+      "libraryFileName": "libduckdb.dylib",
+      "files": {
+        "duckdb.h": { "bytes": 243691, "sha256": "a945d26914308094551b04c4445ee92b12d1a5b38b1d71d50803078e01e65845" },
+        "duckdb.hpp": { "bytes": 2036023, "sha256": "d33ec45c8c5d9a60bf1c598cba2fc804bafb8794314893ed7b50eb9030b07cc7" },
+        "libduckdb.dylib": { "bytes": 112275440, "sha256": "2de60b6210a6bc9a1405dabd1e26d8ea8ce8c0d03d992ceba0f4f61ccbe031a5" }
+      }
+    },
+    "linux-arm64": {
+      "rustTarget": "aarch64-unknown-linux-gnu",
+      "archiveFileName": "libduckdb-linux-arm64.zip",
+      "archiveBytes": 37553046,
+      "archiveSha256": "162806d591c0431d031d9bdf43dbecc5f00755da01a2064df68f9a69a6f50a10",
+      "libraryFileName": "libduckdb.so",
+      "files": {
+        "duckdb.h": { "bytes": 243691, "sha256": "a945d26914308094551b04c4445ee92b12d1a5b38b1d71d50803078e01e65845" },
+        "duckdb.hpp": { "bytes": 2036023, "sha256": "d33ec45c8c5d9a60bf1c598cba2fc804bafb8794314893ed7b50eb9030b07cc7" },
+        "libduckdb.so": { "bytes": 62804656, "sha256": "1e42de13bc7badaa093932c933073c5b8ea801bac83d694949bce1d500ff0728" },
+        "libduckdb_static.a": { "bytes": 74671542, "sha256": "34e16ba7e8f6681c683c1ebf655ae2448275625b6080edd3b3db2c232c8447e2" }
+      }
+    },
+    "linux-x64": {
+      "rustTarget": "x86_64-unknown-linux-gnu",
+      "archiveFileName": "libduckdb-linux-amd64.zip",
+      "archiveBytes": 41143829,
+      "archiveSha256": "0a926eba5bce0abc0010f4b9109133e4440cb74e97bd10fd2d0fc2a721621b05",
+      "libraryFileName": "libduckdb.so",
+      "files": {
+        "duckdb.h": { "bytes": 243691, "sha256": "a945d26914308094551b04c4445ee92b12d1a5b38b1d71d50803078e01e65845" },
+        "duckdb.hpp": { "bytes": 2036023, "sha256": "d33ec45c8c5d9a60bf1c598cba2fc804bafb8794314893ed7b50eb9030b07cc7" },
+        "libduckdb.so": { "bytes": 70346224, "sha256": "b926328da25bf83bffc207938478d8016d93c6649346228ea92bd8ad0fa7ba3e" },
+        "libduckdb_static.a": { "bytes": 80303572, "sha256": "3975718ba34b08c07b3a111005f8068a5fa07abb84d9158c65364f1ced68a8e3" }
+      }
+    },
+    "win32-arm64": {
+      "rustTarget": "aarch64-pc-windows-msvc",
+      "archiveFileName": "libduckdb-windows-arm64.zip",
+      "archiveBytes": 14259479,
+      "archiveSha256": "e3edbaffc815e87918c0c0450996b48e0c61627e92682dab9ed9742649ce5586",
+      "libraryFileName": "duckdb.dll",
+      "files": {
+        "duckdb.dll": { "bytes": 42310448, "sha256": "e1a0b525e0b2ddbaaee1e169aca8dbbde8cd7bf94c8da4f29441a70aa53073b8" },
+        "duckdb.h": { "bytes": 249979, "sha256": "3a306e2615209b87f5dd9403bb9055728c18aaebf380c2a2c4758741eefcae09" },
+        "duckdb.hpp": { "bytes": 2094240, "sha256": "d310fe1eb35003009c8bd094d00f8e8f9847dfd70fc0beee8c1f713ff0b3d687" },
+        "duckdb.lib": { "bytes": 1985272, "sha256": "7d2dad0d29dbec317a0860808965bf81a34416b229f17e5474edc937226d3ea5" }
+      }
+    },
+    "win32-x64": {
+      "rustTarget": "x86_64-pc-windows-msvc",
+      "archiveFileName": "libduckdb-windows-amd64.zip",
+      "archiveBytes": 13563250,
+      "archiveSha256": "11842aca19ec7a415ffbb732ec4818a1562111fb4151fd59d1b3a40b551db26e",
+      "libraryFileName": "duckdb.dll",
+      "files": {
+        "duckdb.dll": { "bytes": 36934960, "sha256": "bd4dd87fc2780efc9db46f70d949829d4d38677ee6b1e2ca8b14eba3495d77c9" },
+        "duckdb.h": { "bytes": 249979, "sha256": "3a306e2615209b87f5dd9403bb9055728c18aaebf380c2a2c4758741eefcae09" },
+        "duckdb.hpp": { "bytes": 2094531, "sha256": "26e187c080a9aed1c721bd88ea4c76e84f98da19da56d1679f47ad7cc5e782a2" },
+        "duckdb.lib": { "bytes": 1985272, "sha256": "76ba4650e49d030a1d656693962d9285cc55b693c95bbf12e23b4039bd6baacb" }
+      }
+    }
+  }
+}

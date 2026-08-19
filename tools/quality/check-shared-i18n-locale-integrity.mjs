@@ -105,12 +105,30 @@ const SAME_AS_ENGLISH_PRODUCT_KEYS = new Set([
   "appText.aboutZinutoCompany",
   "appText.atr14",
   "appText.edge5x",
-  "appText.survival90Percent",
   "appText.zinuto",
   "appText.zinutoReplay",
   "shell.brand.name",
   "uiLabels.ui.reviewRuleMakerTaker",
 ]);
+const NON_LOCALIZED_TERM_RULES = Object.freeze({
+  ja: Object.freeze([
+    { pattern: /\bbenchmark\b/iu, label: "Benchmark" },
+    { pattern: /\bmultiplier\b/iu, label: "multiplier" },
+  ]),
+  ko: Object.freeze([
+    { pattern: /\bbytes?\b/iu, label: "byte/bytes" },
+    { pattern: /\bsync\b/iu, label: "sync" },
+  ]),
+  es: Object.freeze([
+    { pattern: /\bdefault\b/iu, label: "default" },
+    { pattern: /\bprofit\b/iu, label: "profit" },
+    { pattern: /\bsizing\b/iu, label: "sizing" },
+    { pattern: /\bstats\b/iu, label: "stats" },
+    { pattern: /\bsync\b/iu, label: "sync" },
+  ]),
+});
+const NON_LOCALIZED_TERM_METADATA_PATH_RE =
+  /(?:^|\.)(?:availability|code|decisionStyle|exampleKind|formula|id|key|kind|previewStyle)$/u;
 const DESKTOP_HELP_VENDOR_KEY_RE =
   /^uiConfig\.desktopHelp\.bundle\.articles\.(?:data-acquire|data-source-by-market)\.keywords\[\d+\]$/u;
 const DESKTOP_HELP_VENDOR_NAMES = new Set([
@@ -305,6 +323,15 @@ const hasHighRiskEnglishPlaceholder = (locale, keyPath, value) => {
   );
 };
 
+const findNonLocalizedTerm = (locale, keyPath, value) => {
+  if (NON_LOCALIZED_TERM_METADATA_PATH_RE.test(keyPath)) {
+    return null;
+  }
+  return (NON_LOCALIZED_TERM_RULES[locale] ?? []).find(({ pattern }) =>
+    pattern.test(String(value ?? "")),
+  ) ?? null;
+};
+
 const visitValue = ({ locale, filePath, keyPath, value }) => {
   if (typeof value === "string") {
     if (keyPath.endsWith(".bundle")) {
@@ -331,6 +358,16 @@ const visitValue = ({ locale, filePath, keyPath, value }) => {
         filePath,
         keyPath,
         reason: "high-risk English placeholder remained in non-English locale",
+        value,
+      });
+    }
+    const nonLocalizedTerm = findNonLocalizedTerm(locale, keyPath, value);
+    if (nonLocalizedTerm) {
+      pushViolation({
+        locale,
+        filePath,
+        keyPath,
+        reason: "non-localized term remained: " + nonLocalizedTerm.label,
         value,
       });
     }

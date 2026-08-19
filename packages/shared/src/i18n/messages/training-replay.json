@@ -32,7 +32,7 @@
   "appText.advanced1BarPeriod": {
     "kind": "text",
     "locales": {
-      "zh-CN": "已按当前周期推进 1 根K 线",
+      "zh-CN": "已按当前周期推进 1 根 K 线",
       "en": "Advanced 1 bar in the current period",
       "ja": "現在の時間足で1本進めました",
       "ko": "현재 주기에서 1봉 진행했습니다",
@@ -162,7 +162,7 @@
   "appText.barChange": {
     "kind": "text",
     "locales": {
-      "zh-CN": "当前K 线涨跌幅",
+      "zh-CN": "当前 K 线涨跌幅",
       "en": "Current bar change",
       "ja": "現在足の騰落率",
       "ko": "현재 봉 등락률",
@@ -172,7 +172,7 @@
   "appText.barClose": {
     "kind": "text",
     "locales": {
-      "zh-CN": "当前K 线收盘价",
+      "zh-CN": "当前 K 线收盘价",
       "en": "Current bar close",
       "ja": "現在足の終値",
       "ko": "현재 봉 종가",
@@ -182,7 +182,7 @@
   "appText.bars": {
     "kind": "text",
     "locales": {
-      "zh-CN": "根K 线",
+      "zh-CN": "根 K 线",
       "en": "Bars",
       "ja": "本",
       "ko": "봉",
@@ -192,7 +192,7 @@
   "appText.barsAvailableSymbol": {
     "kind": "text",
     "locales": {
-      "zh-CN": "当前标的暂无可绘制K 线",
+      "zh-CN": "当前标的暂无可绘制 K 线",
       "en": "No bars available for this instrument",
       "ja": "この銘柄には表示可能な足がありません",
       "ko": "현재 종목은 표시할 캔들이 없습니다",
@@ -342,7 +342,7 @@
   "appText.clickItemJumpBarBeforeGap": {
     "kind": "text",
     "locales": {
-      "zh-CN": "点击条目可跳转到缺口前一根K 线",
+      "zh-CN": "点击条目可跳转到缺口前一根 K 线",
       "en": "Click an item to jump to the bar before the gap",
       "ja": "項目をクリックするとギャップ直前の足へ移動します",
       "ko": "항목을 클릭하면 공백 직전 캔들로 이동합니다",
@@ -352,7 +352,7 @@
   "appText.clickItemJumpRelatedBar": {
     "kind": "text",
     "locales": {
-      "zh-CN": "点击条目可跳转到对应K 线",
+      "zh-CN": "点击条目可跳转到对应 K 线",
       "en": "Click an item to jump to the related bar",
       "ja": "項目をクリックすると該当の足へ移動します",
       "ko": "항목을 클릭하면 해당 캔들로 이동합니다",
@@ -496,7 +496,7 @@
       "en": "Delete {0}? Stats will no longer be available, and this cannot be undone",
       "ja": "{0} を削除しますか？統計は見られなくなり、元に戻せません",
       "ko": "{0} 기록을 삭제할까요? 통계를 볼 수 없으며 되돌릴 수 없습니다",
-      "es": "¿Borrar {0}? Las stats dejarán de estar disponibles y no se puede deshacer"
+      "es": "¿Borrar {0}? Las estadísticas dejarán de estar disponibles y no se puede deshacer"
     }
   },
   "appText.detectedValue0OpenPositionsSellCloseValue1BuyValue2": {
@@ -642,7 +642,7 @@
   "appText.extremeVolatilityBars": {
     "kind": "text",
     "locales": {
-      "zh-CN": "极端波动K 线",
+      "zh-CN": "极端波动 K 线",
       "en": "Extreme Volatility Bars",
       "ja": "極端変動K線",
       "ko": "극단 변동 봉",
@@ -652,7 +652,7 @@
   "appText.extremeVolatilityBarsDetected": {
     "kind": "text",
     "locales": {
-      "zh-CN": "未检测到极端波动K 线",
+      "zh-CN": "未检测到极端波动 K 线",
       "en": "No extreme volatility bars detected",
       "ja": "極端変動K線は検出されませんでした",
       "ko": "극단 변동 봉이 감지되지 않았습니다",
@@ -696,7 +696,7 @@
       "en": "Fees and rules affect fills, average price, sellable qty, and stats",
       "ja": "手数料とルールは約定、平均価格、売却可能数、統計に影響します",
       "ko": "수수료와 규칙은 체결, 평균가, 매도 가능 수량, 통계에 영향을 줍니다",
-      "es": "Comisiones y reglas afectan ejecuciones, precio medio, cantidad vendible y stats"
+      "es": "Las comisiones y las reglas afectan a las ejecuciones, el precio medio, la cantidad vendible y las estadísticas"
     }
   },
   "appText.feesAccount": {
@@ -752,7 +752,7 @@
   "appText.futureBarsLeftOpenPositionRemainsFreeReplay": {
     "kind": "text",
     "locales": {
-      "zh-CN": "已无后续K 线且当前无持仓，本局自由推演结束",
+      "zh-CN": "已无后续 K 线且当前无持仓，本局自由推演结束",
       "en": "No future bars remain and there is no open position. This free replay run is over",
       "ja": "今後の足がなく、現在ポジションもありません。この自由リプレイは終了です",
       "ko": "남은 미래 봉이 없고 보유 포지션도 없습니다. 이번 자유 리플레이가 종료됩니다",
@@ -902,7 +902,7 @@
   "appText.klineDoesExist": {
     "kind": "text",
     "locales": {
-      "zh-CN": "当前K 线不存在",
+      "zh-CN": "当前 K 线不存在",
       "en": "Current bar does not exist",
       "ja": "現在のK線が存在しません",
       "ko": "현재 봉이 없습니다",
@@ -922,7 +922,7 @@
   "appText.lastKlineTransactionPriceModeNextOpeningPrice": {
     "kind": "text",
     "locales": {
-      "zh-CN": "当前为最后一根K 线，成交价模式为“下一根开盘价”，无法继续",
+      "zh-CN": "当前为最后一根 K 线，成交价模式为“下一根开盘价”，无法继续",
       "en": "This is the last bar, and fill price mode is \"next open\", so replay cannot continue",
       "ja": "現在は最後の足で、約定価格モードが「次足始値」のため続行できません",
       "ko": "현재 마지막 봉이며 체결가 모드가 \"다음 시가\"라 계속할 수 없습니다",
@@ -1122,7 +1122,7 @@
   "appText.missingBars": {
     "kind": "text",
     "locales": {
-      "zh-CN": "缺失K 线",
+      "zh-CN": "缺失 K 线",
       "en": "Missing Bars",
       "ja": "欠損本数",
       "ko": "누락 캔들 수",
@@ -1162,7 +1162,7 @@
   "appText.nextBarOpenFallbackCloseIfNextBar": {
     "kind": "text",
     "locales": {
-      "zh-CN": "下一根K 线开盘价（无下一根时使用当前K 线收盘价）",
+      "zh-CN": "下一根 K 线开盘价（无下一根时使用当前 K 线收盘价）",
       "en": "Next bar open (fallback to current close if no next bar)",
       "ja": "次足始値（次足がない場合は現在足の終値）",
       "ko": "다음 봉 시가(다음 봉이 없으면 현재 봉 종가 사용)",
@@ -1172,7 +1172,7 @@
   "appText.nextKline": {
     "kind": "text",
     "locales": {
-      "zh-CN": "已无下一根K 线",
+      "zh-CN": "已无下一根 K 线",
       "en": "No next bar",
       "ja": "次のK線がありません",
       "ko": "다음 봉이 없습니다",
@@ -1182,7 +1182,7 @@
   "appText.nextKline2": {
     "kind": "text",
     "locales": {
-      "zh-CN": "已无下一根K 线",
+      "zh-CN": "已无下一根 K 线",
       "en": "No next bar",
       "ja": "次のK線がありません",
       "ko": "다음 봉이 없습니다",
@@ -1202,7 +1202,7 @@
   "appText.nextKlineBuyingSellingPromptEndTraining": {
     "kind": "text",
     "locales": {
-      "zh-CN": "已无下一根K 线，买入/卖出将提示结束训练",
+      "zh-CN": "已无下一根 K 线，买入/卖出将提示结束训练",
       "en": "No next bar. Buy/sell will prompt you to end training",
       "ja": "次のK線がありません。売買するとトレーニング終了の確認が表示されます",
       "ko": "다음 봉이 없습니다. 매수/매도 시 훈련 종료 확인이 표시됩니다",
@@ -1222,7 +1222,7 @@
   "appText.openingPriceNextLineAvailableTransaction": {
     "kind": "text",
     "locales": {
-      "zh-CN": "当前没有可用于成交的下一根K 线开盘价",
+      "zh-CN": "当前没有可用于成交的下一根 K 线开盘价",
       "en": "No next-bar open is available for execution",
       "ja": "約定に使える次足始値がありません",
       "ko": "체결에 사용할 다음 봉 시가가 없습니다",
@@ -2396,7 +2396,7 @@
       "en": "Delete {projectName}? Stats will be unavailable, and this cannot be undone",
       "ja": "{projectName} を削除しますか？統計は見られなくなり、元に戻せません",
       "ko": "{projectName} 기록을 삭제할까요? 통계를 볼 수 없으며 되돌릴 수 없습니다",
-      "es": "¿Borrar {projectName}? Las stats dejarán de estar disponibles y no se puede deshacer"
+      "es": "¿Borrar {projectName}? Las estadísticas dejarán de estar disponibles y no se puede deshacer"
     }
   },
   "dialogs.training.deleteOneTitle": {
@@ -2412,7 +2412,7 @@
   "dialogs.training.noNextBarTitle": {
     "kind": "text",
     "locales": {
-      "zh-CN": "已无下一根K 线",
+      "zh-CN": "已无下一根 K 线",
       "en": "No next bar",
       "ja": "次のK線はありません",
       "ko": "다음 봉은 없습니다",
@@ -3837,9 +3837,9 @@
         "decisionElapsedLabel": "耗时",
         "decisionStreakLabel": "连续命中",
         "decisionTimedOutLabel": "超时观望",
-        "fastArenaUnknownMaskTemplate": "？ 未知行情（{0} 根K 线）",
+        "fastArenaUnknownMaskTemplate": "？ 未知行情（{0} 根 K 线）",
         "fastArenaKnownZoneLabel": "已知区域",
-        "fastArenaFutureZoneTemplate": "未来区域（{0} 根K 线）",
+        "fastArenaFutureZoneTemplate": "未来区域（{0} 根 K 线）",
         "fastArenaAverageLabel": "平均",
         "fastArenaLockedLabel": "已锁定",
         "fastArenaSellHotkeyLabel": "S",
@@ -3879,7 +3879,7 @@
         "fastDecisionStrictnessStrictSubtitle": "仅明确单边走势，且收益空间达到风险 2 倍时有效",
         "fastDecisionStrictnessOptionTitleTemplate": "{0}（{1}倍）",
         "entryLimitLabel": "开仓上限",
-        "horizonLimitLabel": "固定K 线窗口",
+        "horizonLimitLabel": "固定 K 线窗口",
         "operationUnlimitedValueLabel": "无限制",
         "questionCountLabel": "题量",
         "requireStopLossLabel": "必须止损",
@@ -4118,7 +4118,7 @@
         "challengeDashboardRiskFirstActionBarsTemplate": "第 {0} 根",
         "challengeDashboardClearHistoryActionLabel": "清空历史",
         "challengeDashboardClearHistoryConfirmTitle": "确认清空挑战历史",
-        "challengeDashboardClearHistoryConfirmDescriptionTemplate": "此操作会删除当前模式（{0}）的全部挑战战绩统计统计历史，且不可恢复",
+        "challengeDashboardClearHistoryConfirmDescriptionTemplate": "此操作会删除当前模式（{0}）的全部挑战战绩统计历史，且不可恢复",
         "challengeDashboardClearHistoryCancelLabel": "取消",
         "challengeDashboardClearHistoryConfirmActionLabel": "确认清空",
         "goalLabel": "训练目标",
@@ -4198,7 +4198,7 @@
         "fastDecisionCapitalTimingMinutesTemplate": "{0}分钟",
         "fastDecisionCapitalTimingHoursTemplate": "{0}小时",
         "fastDecisionCapitalTimingDaysTemplate": "{0}个交易日",
-        "fastDecisionCapitalTimingBarsTemplate": "{0}根K 线",
+        "fastDecisionCapitalTimingBarsTemplate": "{0} 根 K 线",
         "fastDecisionCapitalSessionTitle": "资金结果总览",
         "fastDecisionCapitalSessionSummaryTemplate": "若每题独立投入 {0}，本轮合计投入 {1}，结果 {2} / {3}",
         "fastDecisionCapitalPositiveCountLabel": "正收益题数",
@@ -4956,7 +4956,7 @@
         "riskDisciplineStatusRescueLabel": "コスト低減進捗",
         "riskDisciplineStatusRescueValueTemplate": "初期費用{0}、現在の費用{1}",
         "riskDisciplineStatusRescueDeltaTemplate": "{0}の",
-        "riskDisciplineStatusHolderLabel": "Benchmarkの比較",
+        "riskDisciplineStatusHolderLabel": "ベンチマーク比較",
         "riskDisciplineHolderShortLabel": "ベンチマーク",
         "riskDisciplineActualShortLabel": "実績",
         "riskDisciplineStatusHolderValueTemplate": "基礎流れ{0} 流れの流れ {1}",
@@ -5801,7 +5801,7 @@
         "sessionSettlementBiasBalancedSummary": "Las decisiones long/short están equilibradas",
         "sessionSettlementBiasLongSummary": "Mejora la precisión en long",
         "sessionSettlementBiasShortSummary": "Mejora la precisión en short",
-        "sessionSettlementBiasObserveSummary": "Demasiado observe. Vigila entradas perdidas",
+        "sessionSettlementBiasObserveSummary": "Demasiada espera. Vigila las entradas perdidas",
         "sessionSettlementReviewTitle": "Revisión por pregunta",
         "sessionSettlementReviewSubtitle": "Haz clic en la tarjeta para ver la repetición completa del mercado de la pregunta",
         "sessionSettlementReviewQuestionTemplate": "Pregunta {0}",
@@ -6085,7 +6085,7 @@
         "riskDisciplineActionReasonEntryLimitReached": "Límite de entradas",
         "riskDisciplineActionReasonQuantityZero": "Bajo el mínimo",
         "riskDisciplineActionReasonUndoEmpty": "Nada que deshacer",
-        "fastDecisionCapitalObserveCorrectSummary": "Mantenerse fuera fue la decision correcta, por lo que el patrimonio de la cuenta se mantuvo estable",
+        "fastDecisionCapitalObserveCorrectSummary": "Mantenerse fuera fue la decisión correcta, por lo que el patrimonio de la cuenta se mantuvo estable",
         "fastDecisionCapitalObserveMissSummary": "Te quedaste fuera. La línea punteada muestra el mejor escenario",
         "fastDecisionCapitalTimingMinutesTemplate": "{0} min",
         "fastDecisionCapitalTimingHoursTemplate": "{0} h",
@@ -6605,7 +6605,7 @@
           "CRYPTO": "純保有数量"
         },
         "trainerPositionValueLabelByAssetClass": {
-          "STOCK": "ネット保有値",
+          "STOCK": "ネットポジション価値",
           "FUTURES": "純名目エクスポージャー",
           "FOREX": "純名目エクスポージャー",
           "CRYPTO": "純ポジション名目額"
@@ -6734,7 +6734,7 @@
         },
         "contractMultiplierLabelByAssetClass": {
           "STOCK": "取引乗数",
-          "FUTURES": "契約のmultiplier",
+          "FUTURES": "契約乗数",
           "FOREX": "標準契約サイズ",
           "CRYPTO": "契約面値"
         },
@@ -6821,7 +6821,7 @@
           "CRYPTO": "순보유 수량"
         },
         "trainerPositionValueLabelByAssetClass": {
-          "STOCK": "순 위치 가치",
+          "STOCK": "순포지션 가치",
           "FUTURES": "순명목 익스포저",
           "FOREX": "순명목 익스포저",
           "CRYPTO": "순포지션 명목금액"
@@ -6918,7 +6918,7 @@
         },
         "minTradeStepLabel": "최소 거래 단위",
         "commissionRateLabel": "수수료율",
-        "slippageRateLabel": "슬리피지 속도",
+        "slippageRateLabel": "슬리피지율",
         "stampDutyRateLabel": "인지세율",
         "stampDutyModeLabel": "인지세 징수 방법",
         "stampDutyModeOptionLabels": {
@@ -6956,7 +6956,7 @@
         },
         "longInitialMarginRatioLabel": "롱 초기 증거금률",
         "longMaintenanceMarginRatioLabel": "롱 유지 증거금률",
-        "longFinancingAnnualRateLabel": "자금 조달을 위한 연합 이자율",
+        "longFinancingAnnualRateLabel": "자금 조달 연환산 금리",
         "shortInitialMarginRatioLabel": "초기 마진율",
         "shortMaintenanceMarginRatioLabel": "유지 증거금률",
         "shortBorrowAnnualRateLabel": "차입 연환산 금리",
@@ -7001,9 +7001,9 @@
           "CRYPTO": "Por cantidad"
         },
         "trainerTradeQuantityPlaceholderByAssetClass": {
-          "STOCK": "Introducir lots",
-          "FUTURES": "Introducir lots",
-          "FOREX": "Introducir lots",
+          "STOCK": "Introducir lotes",
+          "FUTURES": "Introducir lotes",
+          "FOREX": "Introducir lotes",
           "CRYPTO": "Introducir cantidad"
         },
         "trainerTradeQuantityUnitByAssetClass": {
@@ -7033,7 +7033,7 @@
         "trainerPositionQtyLabelByAssetClass": {
           "STOCK": "Acciones netas",
           "FUTURES": "Contratos netos",
-          "FOREX": "Lots netos",
+          "FOREX": "Lotes netos",
           "CRYPTO": "Cantidad neta"
         },
         "trainerPositionValueLabelByAssetClass": {
@@ -7066,7 +7066,7 @@
         "importRuleDrawerApplyActionLabel": "Guardar y aplicar",
         "importRuleDrawerSaveAsNewActionLabel": "Guardar como nueva plantilla",
         "importRuleDrawerOverwriteActionLabel": "Anular la plantilla original",
-        "importRuleDrawerBuiltInHint": "Los valores integrados pueden restaurarse; guardar crea override local",
+        "importRuleDrawerBuiltInHint": "Los valores integrados pueden restaurarse; guardar crea una sobrescritura local",
         "importRuleDrawerOverwriteConfirmTitle": "Guardar cambios de reglas",
         "importRuleDrawerOverwriteConfirmDescription": "Esta plantilla cambió. Sobrescríbela o guarda una nueva regla",
         "importRuleSummarySettlementModeLabels": {
@@ -7155,7 +7155,7 @@
           "CRYPTO": "Tasa maker"
         },
         "takerFeeRateLabelByAssetClass": {
-          "FUTURES": "Comisión de bolsa / regulatoria por lot",
+          "FUTURES": "Comisión de bolsa / regulatoria por lote",
           "FOREX": "Tasa de spread",
           "CRYPTO": "Tasa taker"
         },
@@ -7691,7 +7691,7 @@
       "en": "Avg Take-Profit",
       "ja": "平均利確幅",
       "ko": "평균 익절",
-      "es": "Take-profit medio"
+      "es": "Objetivo de ganancias medio"
     }
   },
   "uiLabels.ui.metricAvgTradePnl": {
@@ -10171,7 +10171,7 @@
       "en": "Ulcer index",
       "ja": "ウルサー指数",
       "ko": "울서 지수",
-      "es": "Indice Ulcer"
+      "es": "Índice de úlcera"
     }
   },
   "trainer.strategyBacktest.totalTrades": {
@@ -10221,7 +10221,7 @@
       "en": "Avg loss",
       "ja": "平均損失",
       "ko": "평균 손실",
-      "es": "Perdida media"
+      "es": "Pérdida media"
     }
   },
   "trainer.strategyBacktest.largestWin": {
@@ -10241,7 +10241,7 @@
       "en": "Largest loss",
       "ja": "最大損失",
       "ko": "최대 손실",
-      "es": "Mayor perdida"
+      "es": "Mayor pérdida"
     }
   },
   "trainer.strategyBacktest.maxConsecutiveWins": {
@@ -10251,7 +10251,7 @@
       "en": "Max win streak",
       "ja": "最大連勝",
       "ko": "최장 연승",
-      "es": "Racha ganadora max"
+      "es": "Racha ganadora máxima"
     }
   },
   "trainer.strategyBacktest.maxConsecutiveLosses": {
@@ -10261,7 +10261,7 @@
       "en": "Max loss streak",
       "ja": "最大連敗",
       "ko": "최장 연패",
-      "es": "Racha perdedora max"
+      "es": "Racha perdedora máxima"
     }
   },
   "trainer.strategyBacktest.exposure": {
@@ -10271,7 +10271,7 @@
       "en": "Exposure",
       "ja": "エクスポージャー",
       "ko": "노출도",
-      "es": "Exposicion"
+      "es": "Exposición"
     }
   },
   "trainer.strategyBacktest.totalCost": {
@@ -10331,7 +10331,7 @@
       "en": "Information ratio",
       "ja": "情報比率",
       "ko": "정보 비율",
-      "es": "Ratio informacion"
+      "es": "Ratio de información"
     }
   },
   "trainer.strategyBacktest.correlation": {
@@ -10341,7 +10341,7 @@
       "en": "Correlation",
       "ja": "相関",
       "ko": "상관관계",
-      "es": "Correlacion"
+      "es": "Correlación"
     }
   },
   "trainer.strategyBacktest.trackingError": {
@@ -10361,7 +10361,7 @@
       "en": "Skewness",
       "ja": "歪度",
       "ko": "왜도",
-      "es": "Asimetria"
+      "es": "Asimetría"
     }
   },
   "trainer.strategyBacktest.kurtosis": {
@@ -10571,7 +10571,7 @@
       "en": "Period return standard deviation annualized",
       "ja": "期間リターンの標準偏差を年率化します",
       "ko": "기간 수익률 표준편차를 연환산합니다",
-      "es": "Desviacion de retornos por periodo anualizada"
+      "es": "Desviación de retornos por periodo anualizada"
     }
   },
   "trainer.strategyBacktest.tooltip.sharpe": {
@@ -10591,7 +10591,7 @@
       "en": "Annualized excess return divided by downside deviation",
       "ja": "超過リターンを下方偏差で割った年率比率です",
       "ko": "초과 수익을 하방 편차로 나눈 연환산 비율입니다",
-      "es": "Retorno excedente anualizado sobre desviacion bajista"
+      "es": "Retorno excedente anualizado sobre desviación bajista"
     }
   },
   "trainer.strategyBacktest.tooltip.calmar": {
@@ -10601,7 +10601,7 @@
       "en": "CAGR divided by max drawdown",
       "ja": "CAGR を最大ドローダウンで割った値です",
       "ko": "CAGR을 최대 낙폭으로 나눈 값입니다",
-      "es": "CAGR dividido por la caida maxima"
+      "es": "CAGR dividido por la caída máxima"
     }
   },
   "trainer.strategyBacktest.tooltip.downsideDeviation": {
@@ -10631,7 +10631,7 @@
       "en": "Largest peak-to-trough equity decline",
       "ja": "資金曲線のピークから谷までの最大下落です",
       "ko": "자금 곡선 고점 대비 저점의 최대 하락입니다",
-      "es": "Mayor caida desde maximo a minimo del capital"
+      "es": "Mayor caída desde máximo a mínimo del capital"
     }
   },
   "trainer.strategyBacktest.tooltip.avgDrawdown": {
@@ -10641,7 +10641,7 @@
       "en": "Average drawdown while the curve is underwater",
       "ja": "水面下にある期間の平均ドローダウンです",
       "ko": "수중 구간 낙폭의 평균값입니다",
-      "es": "Caida media mientras la curva esta bajo maximo"
+      "es": "Caída media mientras la curva está bajo el máximo"
     }
   },
   "trainer.strategyBacktest.tooltip.maxDrawdownDuration": {
@@ -10651,7 +10651,7 @@
       "en": "Longest consecutive underwater observation count",
       "ja": "連続して水面下にあった最長観測数です",
       "ko": "연속으로 낙폭 상태였던 최장 관측 수입니다",
-      "es": "Mayor numero de observaciones bajo el maximo"
+      "es": "Mayor número de observaciones bajo el máximo"
     }
   },
   "trainer.strategyBacktest.tooltip.ulcerIndex": {
@@ -10661,7 +10661,7 @@
       "en": "Root mean square of drawdowns, emphasizing deep losses",
       "ja": "ドローダウン平方平均の平方根で、深い下落を強調します",
       "ko": "낙폭 제곱 평균의 제곱근으로 깊은 하락을 강조합니다",
-      "es": "Raiz cuadratica media de caidas, resalta perdidas profundas"
+      "es": "Raíz cuadrática media de las caídas; resalta las pérdidas profundas"
     }
   },
   "trainer.strategyBacktest.tooltip.totalTrades": {
@@ -10671,7 +10671,7 @@
       "en": "Number of closed trades",
       "ja": "決済済み取引の数です",
       "ko": "청산된 거래 수입니다",
-      "es": "Numero de operaciones cerradas"
+      "es": "Número de operaciones cerradas"
     }
   },
   "trainer.strategyBacktest.tooltip.winRate": {
@@ -10691,7 +10691,7 @@
       "en": "Gross profit divided by absolute gross loss",
       "ja": "総利益を総損失の絶対値で割った値です",
       "ko": "총 이익을 총 손실 절대값으로 나눈 값입니다",
-      "es": "Beneficio bruto dividido por perdida bruta absoluta"
+      "es": "Beneficio bruto dividido por la pérdida bruta absoluta"
     }
   },
   "trainer.strategyBacktest.tooltip.payoffRatio": {
@@ -10701,7 +10701,7 @@
       "en": "Average win divided by absolute average loss",
       "ja": "平均利益を平均損失の絶対値で割った値です",
       "ko": "평균 이익을 평균 손실 절대값으로 나눈 값입니다",
-      "es": "Ganancia media dividida por perdida media absoluta"
+      "es": "Ganancia media dividida por la pérdida media absoluta"
     }
   },
   "trainer.strategyBacktest.tooltip.expectancy": {
@@ -10711,7 +10711,7 @@
       "en": "Average PnL per closed trade",
       "ja": "決済取引1件あたりの平均損益です",
       "ko": "청산 거래당 평균 손익입니다",
-      "es": "PyG medio por operacion cerrada"
+      "es": "PyG medio por operación cerrada"
     }
   },
   "trainer.strategyBacktest.tooltip.avgWin": {
@@ -10741,7 +10741,7 @@
       "en": "Largest winning closed trade",
       "ja": "最大の利益決済取引です",
       "ko": "가장 큰 이익 청산 거래입니다",
-      "es": "Mayor operacion cerrada ganadora"
+      "es": "Mayor operación cerrada ganadora"
     }
   },
   "trainer.strategyBacktest.tooltip.largestLoss": {
@@ -10751,7 +10751,7 @@
       "en": "Largest losing closed trade",
       "ja": "最大の損失決済取引です",
       "ko": "가장 큰 손실 청산 거래입니다",
-      "es": "Mayor operacion cerrada perdedora"
+      "es": "Mayor operación cerrada perdedora"
     }
   },
   "trainer.strategyBacktest.tooltip.maxConsecutiveWins": {
@@ -10781,7 +10781,7 @@
       "en": "Share of observed periods with an open position",
       "ja": "建玉があった観測期間の比率です",
       "ko": "포지션이 열린 관측 기간의 비율입니다",
-      "es": "Porcentaje de periodos con posicion abierta"
+      "es": "Porcentaje de periodos con posición abierta"
     }
   },
   "trainer.strategyBacktest.tooltip.totalCost": {
@@ -10801,7 +10801,7 @@
       "en": "Buy-and-hold return over the overlapping range",
       "ja": "同じ重複期間の買い持ちリターンです",
       "ko": "겹치는 구간의 매수 보유 수익률입니다",
-      "es": "Retorno de comprar y mantener en el tramo comun"
+      "es": "Retorno de comprar y mantener en el tramo común"
     }
   },
   "trainer.strategyBacktest.tooltip.excessReturn": {
@@ -10821,7 +10821,7 @@
       "en": "Annualized excess return after benchmark beta exposure",
       "ja": "ベンチマーク beta 露出を控除した年率超過リターンです",
       "ko": "벤치마크 beta 노출을 제외한 연환산 초과 수익률입니다",
-      "es": "Retorno excedente anual tras exposicion beta a referencia"
+      "es": "Retorno excedente anual tras la exposición beta a la referencia"
     }
   },
   "trainer.strategyBacktest.tooltip.beta": {
@@ -10851,7 +10851,7 @@
       "en": "Correlation between strategy and benchmark period returns",
       "ja": "戦略とベンチマークの期間リターンの相関です",
       "ko": "전략과 벤치마크 기간 수익률의 상관계수입니다",
-      "es": "Correlacion entre retornos de estrategia y referencia"
+      "es": "Correlación entre los retornos de la estrategia y la referencia"
     }
   },
   "trainer.strategyBacktest.tooltip.trackingError": {

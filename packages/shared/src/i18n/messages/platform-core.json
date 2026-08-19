@@ -3826,7 +3826,7 @@
       "en": "Startup diagnostics",
       "ja": "起動診断",
       "ko": "시작 진단",
-      "es": "Diagnostico de inicio"
+      "es": "Diagnóstico de inicio"
     }
   },
   "appText.startupStarting": {
@@ -4004,7 +4004,7 @@
     "locales": {
       "zh-CN": "生存率 90%",
       "en": "Survival 90%",
-      "ja": "Survival 90%",
+      "ja": "生存率 90%",
       "ko": "생존율 90%",
       "es": "Supervivencia 90 %"
     }

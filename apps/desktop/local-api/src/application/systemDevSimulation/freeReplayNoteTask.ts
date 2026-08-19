@@ -342,7 +342,7 @@ const buildFreeReplayReflectionEntries = (params: {
     emotionState: {
       value:
         params.language === 'zh-CN'
-          ? `当前摘要：${reviewSummary}。重点检查自己是否因为连续K线而产生追价冲动。`
+          ? `当前摘要：${reviewSummary}。重点检查自己是否因为连续 K 线而产生追价冲动。`
           : `Current summary: ${reviewSummary}. Watch for chasing after several bars in the same direction.`,
     },
   };

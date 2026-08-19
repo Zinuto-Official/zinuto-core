@@ -7,6 +7,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import {
+  ensureVerifiedDuckdbRuntime,
+  verifiedDuckdbCargoEnvironment,
+} from './duckdb-runtime-cache.mjs';
 
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
 const ROOT_DIR = path.resolve(SCRIPT_DIR, '../..');
@@ -62,45 +66,13 @@ const buildRustFlags = () => {
   return [existing, ...macosRpathFlags].filter(Boolean).join(' ');
 };
 
-const collectFiles = (rootDir) => {
-  if (!fs.existsSync(rootDir) || !fs.statSync(rootDir).isDirectory()) {
-    return [];
-  }
-  const files = [];
-  const pending = [rootDir];
-  while (pending.length > 0) {
-    const current = pending.pop();
-    fs.readdirSync(current, { withFileTypes: true }).forEach((entry) => {
-      const entryPath = path.join(current, entry.name);
-      if (entry.isDirectory()) {
-        pending.push(entryPath);
-        return;
-      }
-      if (entry.isFile()) {
-        files.push(entryPath);
-      }
-    });
-  }
-  return files;
-};
-
-const resolveDuckDbRuntimeLibraryPath = () =>
-  collectFiles(TARGET_DIR)
-    .filter((filePath) => DUCKDB_LIBRARY_NAMES.includes(path.basename(filePath)))
-    .sort((left, right) => {
-      const leftScore = left.includes(`${path.sep}release${path.sep}deps${path.sep}`) ? 0 : 1;
-      const rightScore = right.includes(`${path.sep}release${path.sep}deps${path.sep}`) ? 0 : 1;
-      return leftScore - rightScore || left.localeCompare(right);
-    })[0] ?? null;
-
-const runCargoBuild = () => {
+const runCargoBuild = (duckdbRuntime) => {
   const rustFlags = buildRustFlags();
-  const env = {
+  const env = verifiedDuckdbCargoEnvironment(duckdbRuntime, {
     ...process.env,
     CARGO_BUILD_JOBS: process.env.CARGO_BUILD_JOBS || '2',
-    DUCKDB_DOWNLOAD_LIB: process.env.DUCKDB_DOWNLOAD_LIB || '1',
     ...(rustFlags ? { RUSTFLAGS: rustFlags } : {}),
-  };
+  });
   const result = spawnSync(
     'cargo',
     ['build', '--release', '--manifest-path', ENGINE_MANIFEST_PATH],
@@ -122,7 +94,8 @@ const runCargoBuild = () => {
   }
 };
 
-runCargoBuild();
+const duckdbRuntime = await ensureVerifiedDuckdbRuntime();
+runCargoBuild(duckdbRuntime);
 
 if (!fs.existsSync(SOURCE_BIN_PATH) || !fs.statSync(SOURCE_BIN_PATH).isFile()) {
   // eslint-disable-next-line no-console
@@ -141,7 +114,7 @@ if (process.platform !== 'win32') {
 }
 
 const duckDbRuntimeLibraryPath = SHOULD_COPY_DUCKDB_RUNTIME_LIBRARY
-  ? resolveDuckDbRuntimeLibraryPath()
+  ? duckdbRuntime.libraryPath
   : null;
 if (duckDbRuntimeLibraryPath) {
   fs.mkdirSync(OUTPUT_DEPS_DIR, { recursive: true });

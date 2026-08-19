@@ -530,6 +530,8 @@ export const toBackendErrorMessage = (
     case "LOCAL_DATA_IMPORT_JOB_CONTROL_INVALID":
     case "CUSTOM_INDICATOR_PROFILES_INVALID":
       return tt("appText.parameterIncorrect");
+    case "MARKET_STORAGE_REMOVAL_FAILED":
+      return tt("appText.localDataResetFailed");
     case "RESET_ALL_DATA_FAILED":
     case "RESET_ALL_DATA_JOURNAL_READ_FAILED":
     case "RESET_ALL_DATA_JOURNAL_UPDATE_FAILED":

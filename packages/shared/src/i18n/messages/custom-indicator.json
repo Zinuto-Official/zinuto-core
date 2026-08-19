@@ -35,7 +35,7 @@
       "zh-CN": "指标配置存储超限：{0} > {1} 字节",
       "en": "Indicator profile too large: {0} > {1} bytes",
       "ja": "指標プロファイルが大きすぎます: {0} > {1} バイト",
-      "ko": "지표 프로필이 너무 큽니다: {0} > {1} bytes",
+      "ko": "지표 프로필이 너무 큽니다: {0} > {1}바이트",
       "es": "Perfil de indicador demasiado grande: {0} > {1} bytes"
     }
   },
@@ -404,7 +404,7 @@
           "expectedStatementIdentifier": "Se requiere un identificador de sentencia",
           "expectedAssignmentOperator": "Se requiere un operador de asignación. Use \":=\" para variables intermedias y \":\" para variables de salida",
           "expectedPlotDirective": "Se requiere una directiva de gráfico después de la coma",
-          "plotDirectiveCannotBeEmpty": "Las directivas de gráfico no pueden estar vacias",
+          "plotDirectiveCannotBeEmpty": "Las directivas de gráfico no pueden estar vacías",
           "expectedSemicolonAfterStatement": "Se requiere un punto y coma \";\" al final de la sentencia",
           "expectedStatementOrFunctionCall": "Se requiere un operador de asignación, un operador de salida o una sentencia de llamada de función",
           "expectedGroupedExpressionClose": "Se requiere un paréntesis de cierre \")\" después de la expresión agrupada",
@@ -417,7 +417,7 @@
           "invalidNumberLiteral": "Literal numérico inválido: {0}",
           "unterminatedCommentBlock": "Bloque de comentario sin cerrar. Se requiere el cierre \"}\"",
           "unterminatedStringLiteral": "Literal de cadena sin cerrar",
-          "unexpectedCharacter": "Caracter inesperado: {0}"
+          "unexpectedCharacter": "Carácter inesperado: {0}"
         },
         "compiler": {
           "indicatorNameCannotBeEmpty": "El nombre del indicador no puede estar vacío",
@@ -433,7 +433,7 @@
           "unsupportedRenderFunction": "Función sin ruta de render implementada: {0}. Bloqueada por fail-closed render guard",
           "unsupportedFunction": "Función no soportada: {0}",
           "unsupportedPlotDirective": "Directiva de gráfico no soportada: {0} (salida: {1})",
-          "outputKeyCannotBeEmpty": "La clave de salida no puede estar vacia",
+          "outputKeyCannotBeEmpty": "La clave de salida no puede estar vacía",
           "outputRequired": "El script del indicador debe contener al menos una sentencia de salida (\":\")",
           "outputCountExceeded": "La cantidad de salidas supera el límite: {0} > {1}",
           "duplicatedOutputInScript": "Salida duplicada en el script: {0}",
@@ -33913,7 +33913,7 @@
                   "summary": "Este punto estabiliza la creación y validación de indicadores personalizados.",
                   "formula": "FAST_N := 12;\nSLOW_N := 26;\nSIGNAL_N := 9;\nFAST := EMA(C, FAST_N);\nSLOW := EMA(C, SLOW_N);\nDIF: FAST - SLOW, COLOR60A5FA;\nDEA: EMA(DIF, SIGNAL_N), COLORF59E0B;\nMACD: (DIF - DEA) * 2, STICK, COLORRED;",
                   "description": "Ejecute la fórmula mostrada en la vista previa, verifique el resultado en el gráfico y luego ajuste condiciones o estilo paso a paso.",
-                  "example": "Ejecute primero los valores por defecto, reduzca FAST_N y observe cómo DIF y el histograma reacciónan más rápido.",
+                  "example": "Ejecute primero los valores por defecto, reduzca FAST_N y observe cómo DIF y el histograma reaccionan más rápido.",
                   "runnableScript": true,
                   "kind": "template",
                   "useWhen": "Úselo cuando necesite decidir rápidamente qué parte revisar primero.",
@@ -42407,7 +42407,7 @@
   "uiLabels.ui.customIndicatorInputBars": {
     "kind": "text",
     "locales": {
-      "zh-CN": "输入K 线",
+      "zh-CN": "输入 K 线",
       "en": "Input Bars",
       "ja": "入力本数",
       "ko": "입력 봉",

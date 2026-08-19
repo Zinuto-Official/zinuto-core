@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
-import fs from 'node:fs';
 import fsPromises from 'node:fs/promises';
 import path from 'node:path';
 import type { DuckDBConnection } from '@duckdb/node-api';
@@ -32,6 +31,7 @@ import {
   cleanupMarketCompactArtifacts,
   cleanupMarketStorageArtifacts,
   randomCompactSuffix,
+  replaceMarketDatabaseFile,
   safeStatSize,
 } from './storageFiles.js';
 import { acquireMarketPrewarmExecutionQuiesceLease } from './prewarmExecutionState.js';
@@ -359,24 +359,11 @@ const deepCompactMarketStorage = async (
         shouldRestoreStageTable = false;
         await notifyProgress(78);
 
-        let backupMoved = false;
-        try {
-          if (fs.existsSync(MARKET_DB_FILE_PATH)) {
-            await fsPromises.rm(backupDbPath, { force: true });
-            await fsPromises.rename(MARKET_DB_FILE_PATH, backupDbPath);
-            backupMoved = true;
-          }
-          await fsPromises.rename(compactDbPath, MARKET_DB_FILE_PATH);
-          await notifyProgress(90);
-          if (backupMoved) {
-            await fsPromises.rm(backupDbPath, { force: true });
-          }
-        } catch (error) {
-          if (!fs.existsSync(MARKET_DB_FILE_PATH) && backupMoved && fs.existsSync(backupDbPath)) {
-            await fsPromises.rename(backupDbPath, MARKET_DB_FILE_PATH).catch(() => undefined);
-          }
-          throw error;
-        }
+        await replaceMarketDatabaseFile({
+          replacementPath: compactDbPath,
+          backupPath: backupDbPath,
+        });
+        await notifyProgress(90);
         await notifyProgress(100);
       } catch (error) {
         if (shouldRestoreStageTable) {
@@ -388,7 +375,6 @@ const deepCompactMarketStorage = async (
   } finally {
     await fsPromises.rm(exportDirPath, { recursive: true, force: true }).catch(() => undefined);
     await fsPromises.rm(compactDbPath, { force: true }).catch(() => undefined);
-    await fsPromises.rm(backupDbPath, { force: true }).catch(() => undefined);
     await cleanupMarketCompactArtifacts();
   }
 };

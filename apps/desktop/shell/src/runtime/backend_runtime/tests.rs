@@ -5,6 +5,13 @@ use super::*;
 use crate::runtime::backend_orphan::BackendOrphanEndpointEvidence;
 
 #[test]
+fn backend_bridge_secret_is_written_once_to_the_child_pipe() {
+    let mut bytes = Vec::new();
+    write_backend_bridge_secret(&mut bytes, "0123456789abcdef").expect("write bridge secret");
+    assert_eq!(bytes, b"0123456789abcdef\n");
+}
+
+#[test]
 fn backend_startup_preflight_v1_event_serializes_the_complete_status() {
     assert_eq!(
         BACKEND_STARTUP_PREFLIGHT_STATUS_EVENT_V1,

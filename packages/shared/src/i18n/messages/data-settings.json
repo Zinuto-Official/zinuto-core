@@ -1146,7 +1146,7 @@
       "en": "Finalizing local caches",
       "ja": "ローカルキャッシュを整理中",
       "ko": "로컬 캐시 정리 중",
-      "es": "Finalizando la cache local"
+      "es": "Finalizando la caché local"
     }
   },
   "appText.folder": {
@@ -1166,7 +1166,7 @@
       "en": "Folder permission expired. Please re-select the original folder",
       "ja": "フォルダー権限の有効期限が切れました。元のフォルダーを再選択してください",
       "ko": "폴더 권한이 만료되었습니다. 원본 폴더를 다시 선택하세요",
-      "es": "El permiso de la carpeta vencio. Vuelve a seleccionar la carpeta original"
+      "es": "El permiso de la carpeta venció. Vuelve a seleccionar la carpeta original"
     }
   },
   "appText.folderSelected": {
@@ -1376,7 +1376,7 @@
       "en": "Local folder imports, sync, and rebind tasks stay here",
       "ja": "ローカルフォルダーのインポート、同期、再バインドはここにまとまります",
       "ko": "로컬 폴더 가져오기, 동기화, 재연결 작업이 여기에 모입니다",
-      "es": "Los datos de mercado locales, sync y revinculación se reúnen aquí"
+      "es": "Los datos de mercado locales, la sincronización y la revinculación se reúnen aquí"
     }
   },
   "appText.localImportedDataUpdatesAvailable": {
@@ -2326,7 +2326,7 @@
       "en": "Local data needs attention before startup",
       "ja": "起動前にローカルデータの確認が必要です",
       "ko": "시작 전에 로컬 데이터를 먼저 확인해야 합니다",
-      "es": "Los datos locales requieren atencion antes del inicio"
+      "es": "Los datos locales requieren atención antes del inicio"
     }
   },
   "appText.localDataSchemaMismatchBeforeStartup": {
@@ -2336,7 +2336,7 @@
       "en": "Local data schema does not match this version",
       "ja": "ローカルデータ構造が現在のバージョンと一致しません",
       "ko": "로컬 데이터 스키마가 현재 버전과 일치하지 않습니다",
-      "es": "El esquema de datos locales no coincide con esta version"
+      "es": "El esquema de datos locales no coincide con esta versión"
     }
   },
   "appText.localDataCorruptedBeforeStartup": {
@@ -2366,7 +2366,7 @@
       "en": "Confirm reinitialize",
       "ja": "再初期化を確認",
       "ko": "다시 초기화 확인",
-      "es": "Confirmar reinicializacion"
+      "es": "Confirmar reinicialización"
     }
   },
   "appText.reinitializingLocalData": {
@@ -2386,7 +2386,7 @@
       "en": "This moves the old local core/market data into quarantine, then creates fresh local data for the current version",
       "ja": "古いローカル core/market データを隔離してから、現在のバージョン用に新しいローカルデータを作成します",
       "ko": "이 작업은 기존 로컬 core/market 데이터를 격리한 뒤 현재 버전에 맞는 새 로컬 데이터를 만듭니다",
-      "es": "Esto pone en cuarentena los datos locales core/market antiguos y crea datos locales nuevos para la version actual"
+      "es": "Esto pone en cuarentena los datos locales core/market antiguos y crea datos locales nuevos para la versión actual"
     }
   },
   "appText.startupLocalDataReinitializeFailed": {
@@ -2396,7 +2396,7 @@
       "en": "Local data reinitialization failed. Keep the diagnostics and try again",
       "ja": "ローカルデータの再初期化に失敗しました。診断情報を残して再試行してください",
       "ko": "로컬 데이터 다시 초기화에 실패했습니다. 진단 정보를 보관한 뒤 다시 시도하세요",
-      "es": "No se pudieron reinicializar los datos locales. Conserva los diagnosticos e intentalo de nuevo"
+      "es": "No se pudieron reinicializar los datos locales. Conserva los diagnósticos e inténtalo de nuevo"
     }
   },
   "appText.localDataResetFailed": {
@@ -2506,7 +2506,7 @@
       "en": "Manual path migration required",
       "ja": "手動のパス移行が必要です",
       "ko": "수동 경로 마이그레이션 필요",
-      "es": "Se requiere migracion manual de ruta"
+      "es": "Se requiere una migración manual de la ruta"
     }
   },
   "appText.mappingStatusComplete": {
@@ -2636,7 +2636,7 @@
       "en": "This is a one-off supplement. It will not overwrite the saved folder or saved import scope",
       "ja": "これは一度きりの補充です。保存済みフォルダーや保存済みインポート範囲は上書きしません",
       "ko": "이번 작업은 1회성 보충입니다. 저장된 폴더나 저장된 가져오기 범위를 덮어쓰지 않습니다",
-      "es": "Este es un complemento puntual. No sobrescribira la carpeta guardada ni el alcance de importación guardado"
+      "es": "Este es un complemento puntual. No sobrescribirá la carpeta guardada ni el alcance de importación guardado"
     }
   },
   "appText.oneQuickMarketPresetRemainsAssetClassDeleted": {
@@ -2666,7 +2666,7 @@
       "en": "Path Migration",
       "ja": "パス移行",
       "ko": "경로 마이그레이션",
-      "es": "Migracion de ruta"
+      "es": "Migración de ruta"
     }
   },
   "appText.pendingDataSources": {
@@ -2686,7 +2686,7 @@
       "en": "Pending Sync",
       "ja": "同期待ち",
       "ko": "동기화 대기",
-      "es": "Sync pendiente"
+      "es": "Sincronización pendiente"
     }
   },
   "appText.planReuseSavedDataSourceTimeZone": {
@@ -2786,7 +2786,7 @@
       "en": "Choose a valid transfer package path",
       "ja": "有効な移行パッケージのパスを選択してください",
       "ko": "유효한 이전 패키지 경로를 선택하세요",
-      "es": "Elige una ruta valida para el paquete de transferencia"
+      "es": "Elige una ruta válida para el paquete de transferencia"
     }
   },
   "appText.portablePackageInvalid": {
@@ -2826,7 +2826,7 @@
       "en": "Rebuild this source when you need to change the time zone, parsing rules, or start over cleanly",
       "ja": "タイムゾーンや解析ルールを変えるとき、または作り直すときにこのソースを再構築します",
       "ko": "시간대나 해석 규칙을 바꾸거나 처음부터 다시 만들 때 이 소스를 재구성합니다",
-      "es": "Reconstruye está fuente cuando necesites cambiar la zona horaria, las reglas de analisis o rehacer todo"
+      "es": "Reconstruye esta fuente cuando necesites cambiar la zona horaria, las reglas de análisis o rehacer todo"
     }
   },
   "appText.recentlyUpdated": {
@@ -2862,7 +2862,7 @@
   "appText.removeLocalSamplePoolsTheirImportedLocalPrice": {
     "kind": "text",
     "locales": {
-      "zh-CN": "将清空本地样本池及其导入的本地K 线数据，且不可恢复。是否继续？",
+      "zh-CN": "将清空本地样本池及其导入的本地 K 线数据，且不可恢复。是否继续？",
       "en": "This will remove local sample pools and their imported local price data. The action cannot be undone. Continue?",
       "ja": "ローカルサンプルプールと取り込んだローカルK線データを削除します。この操作は元に戻せません。続行しますか？",
       "ko": "로컬 샘플 풀과 가져온 로컬 봉 데이터를 모두 지우며 복구할 수 없습니다. 계속하시겠습니까?",
@@ -3075,7 +3075,7 @@
       "zh-CN": "样本池「{0}」已手动剔除 {1} 个标的。同步会按本地文件做增量对比；若本地仍存在这些标的，可能会被重新加入",
       "en": "Sample Pool \"{0}\": {1} instruments removed locally. Sync may add them back if files still contain them",
       "ja": "サンプルプール「{0}」で {1} 銘柄を除外中。ファイルに残っていれば同期で戻る場合があります",
-      "ko": "샘플 풀 \"{0}\": {1}개 종목을 제외했습니다. 파일에 남아 있으면 sync로 다시 추가될 수 있습니다",
+      "ko": "샘플 풀 \"{0}\": {1}개 종목을 제외했습니다. 파일에 남아 있으면 동기화로 다시 추가될 수 있습니다",
       "es": "Pool \"{0}\": {1} instrumentos excluidos. La sincronización puede reañadirlos si siguen en archivos"
     }
   },
@@ -3345,7 +3345,7 @@
       "zh-CN": "数据源「{0}」同步完成：新增 {1} 个标的，更新 {2} 个现有标的，前补 {3} 条，后补 {4} 条，未变化文件 {5} 个",
       "en": "Sync complete for \"{0}\": +{1} instruments, {2} updated, {3} prepended, {4} appended, {5} unchanged files",
       "ja": "「{0}」同期完了: 新規 {1}、更新 {2}、前補 {3}、後補 {4}、未変更 {5}",
-      "ko": "\"{0}\" sync 완료: 신규 {1}, 업데이트 {2}, 앞쪽 {3}, 뒤쪽 {4}, 변경 없음 {5}",
+      "ko": "\"{0}\" 동기화 완료: 신규 {1}, 업데이트 {2}, 앞쪽 {3}, 뒤쪽 {4}, 변경 없음 {5}",
       "es": "Sincronización completa en \"{0}\": +{1} instrumentos, {2} actualizados, {3} antes, {4} después, {5} sin cambios"
     }
   },
@@ -3395,7 +3395,7 @@
       "zh-CN": "本次同步忽略了 {0} 条重叠记录、{1} 条内部区间记录、{2} 条冲突记录",
       "en": "Sync ignored {0} overlapping, {1} in-range, and {2} conflict rows",
       "ja": "同期で重複 {0}、範囲内 {1}、競合 {2} 行を無視しました",
-      "ko": "sync에서 중복 {0}, 범위 내 {1}, 충돌 {2}행을 제외했습니다",
+      "ko": "동기화에서 중복 {0}, 범위 내 {1}, 충돌 {2}행을 제외했습니다",
       "es": "Sincronización omitió {0} solapadas, {1} internas y {2} en conflicto"
     }
   },
@@ -3566,7 +3566,7 @@
       "en": "No sync tasks are running",
       "ja": "実行中の同期タスクはありません",
       "ko": "진행 중인 동기화 작업이 없습니다",
-      "es": "No hay tareas de sync en ejecución"
+      "es": "No hay tareas de sincronización en ejecución"
     }
   },
   "appText.syncUseSavedFolderSavedImportScope": {
@@ -3796,7 +3796,7 @@
       "en": "During the pullback, the plan waited for confirmation before adding or trimming risk",
       "ja": "戻り局面では確認シグナルを待ってから追加や縮小を判断した",
       "ko": "되돌림 구간에서는 확인 신호를 기다린 뒤 추가 진입이나 축소를 결정했다",
-      "es": "Durante el retroceso, el plan espero confirmación antes de aumentar o reducir riesgo"
+      "es": "Durante el retroceso, el plan esperó confirmación antes de aumentar o reducir el riesgo"
     }
   },
   "appText.systemDevSimulation.narrativeSegment.2": {
@@ -3826,7 +3826,7 @@
       "en": "Once the structure started to flatten, risk exposure was reduced to preserve the next setup",
       "ja": "構造が鈍り始めたら次の機会を残すために先にリスクを絞った",
       "ko": "구조가 둔화되기 시작하면 다음 기회를 남기기 위해 위험 노출을 먼저 줄였다",
-      "es": "Cuando la estructura empezo a perder fuerza, primero se redujo la exposición al riesgo"
+      "es": "Cuando la estructura empezó a perder fuerza, primero se redujo la exposición al riesgo"
     }
   },
   "appText.systemDevSimulation.narrativeSegment.5": {
@@ -3856,7 +3856,7 @@
       "en": "When the move turned adverse, size was cut first and the next clear setup was awaited",
       "ja": "不利な値動きではまず縮小して、次の明確なシグナルを待った",
       "ko": "불리한 변동이 나오면 먼저 감산하고 다음 명확한 신호를 기다렸다",
-      "es": "Ante un movimiento adverso, primero se redujo tamaño y se espero la siguiente senal clara"
+      "es": "Ante un movimiento adverso, primero se redujo el tamaño y se esperó la siguiente señal clara"
     }
   },
   "appText.systemDevSimulation.narrativeSegment.8": {
@@ -3926,7 +3926,7 @@
       "en": "Decision time",
       "ja": "判断時間",
       "ko": "판단 시간",
-      "es": "Tiempo de decision"
+      "es": "Tiempo de decisión"
     }
   },
   "appText.systemDevSimulation.summary.edgeRatio": {
@@ -3976,7 +3976,7 @@
       "en": "Call",
       "ja": "判断",
       "ko": "판단",
-      "es": "Decision"
+      "es": "Decisión"
     }
   },
   "appText.systemDevSimulation.summary.maxDrawdown": {
@@ -4412,7 +4412,7 @@
   "appText.validLineDataFoundImportFile": {
     "kind": "text",
     "locales": {
-      "zh-CN": "导入文件中没有有效K 线",
+      "zh-CN": "导入文件中没有有效 K 线",
       "en": "No valid bar data was found in the import file",
       "ja": "取り込みファイルに有効な K線がありません",
       "ko": "가져오기 파일에 유효한 K 라인이 없습니다",
@@ -4592,7 +4592,7 @@
   "dialogs.localData.clearPoolsDescription": {
     "kind": "text",
     "locales": {
-      "zh-CN": "将清空本地样本池及其导入的本地K 线数据，且不可恢复。是否继续？",
+      "zh-CN": "将清空本地样本池及其导入的本地 K 线数据，且不可恢复。是否继续？",
       "en": "This will remove local sample pools and their imported local price data. The action cannot be undone. Continue?",
       "ja": "ローカルサンプルプールと取り込んだローカルK線データを削除します。この操作は元に戻せません。続行しますか？",
       "ko": "로컬 샘플 풀과 가져온 로컬 봉 데이터를 모두 지우며 복구할 수 없습니다. 계속하시겠습니까?",
@@ -4686,7 +4686,7 @@
       "en": "Internal heavy-load mode. Local writes will increase noticeably",
       "ja": "内部向け高負荷モードです。ローカル書き込みが大きく増えます",
       "ko": "내부용 고부하 모드입니다. 로컬 쓰기가 크게 늘어납니다",
-      "es": "Modo interno de alta carga. Las escrituras locales aumentaran de forma notable"
+      "es": "Modo interno de alta carga. Las escrituras locales aumentarán de forma notable"
     }
   },
   "settings.devSimulation.profile.title": {
@@ -5036,7 +5036,7 @@
       "en": "Standard",
       "ja": "標準",
       "ko": "보통",
-      "es": "Estandar"
+      "es": "Estándar"
     }
   },
   "settings.general.fontSize.title": {
@@ -5466,7 +5466,7 @@
       "en": "Old-history cleanup removes details and snapshots; lists, stats, notes, and imports stay",
       "ja": "古い履歴の整理では詳細とスナップショットを削除し、一覧、統計、メモ、導入データは残します",
       "ko": "오래된 기록 정리는 세부정보와 스냅샷만 삭제하며 목록, 통계, 노트, 가져온 데이터는 유지합니다",
-      "es": "Limpieza antigua borra detalles y snapshots; listas, stats, notas e importaciones quedan"
+      "es": "La limpieza de datos antiguos borra detalles e instantáneas; conserva listas, estadísticas, notas e importaciones"
     }
   },
   "settings.storage.historyRetention.window.ONE_MONTH": {
@@ -5926,7 +5926,7 @@
         "legalConfirmLabel": "위 서드파티 시세 데이터 이전 안내를 확인했습니다",
         "legalNotice": "데이터를 복사할 권한을 확인하세요. 앱은 서드파티 데이터를 제공하거나 라이선스하지 않습니다. 패키지는 암호화되지 않으니 안전하게 보관하세요.",
         "marketDataLabel": "로컬 시세 데이터",
-        "marketContextHint": "가져온 데이터로 훈련과 기록 맥락을 바로 복원합니다. sync를 재개하려면 나중에 원본 폴더를 다시 연결하세요",
+        "marketContextHint": "가져온 데이터로 훈련과 기록 맥락을 바로 복원합니다. 동기화를 재개하려면 나중에 원본 폴더를 다시 연결하세요",
         "restoreCountsLabel": "전체 맥락 복원",
         "offlineValidationHint": "네트워크나 서버 확인 없이 완전히 오프라인으로 작동합니다",
         "nonDestructiveHint": "기본은 추가, 건너뛰기, 재매핑입니다. 설정은 확인 후에만 교체됩니다",
@@ -6056,7 +6056,7 @@
       "en": "Unchecked affects this run only; checked saves as this sample pool default",
       "ja": "未選択なら今回のみ。選択するとこのサンプルプールの既定環境になります",
       "ko": "선택하지 않으면 이번 실행만 적용됩니다. 선택하면 이 샘플 풀 기본값으로 저장됩니다",
-      "es": "Sin marcar afecta solo esta ronda; marcado guarda el default del pool de muestras"
+      "es": "Sin marcar afecta solo esta ronda; marcado guarda el valor predeterminado del pool de muestras"
     }
   },
   "uiLabels.ui.freeReplayEnvironmentSyncLabel": {
@@ -6429,16 +6429,6 @@
       "es": "Comprobar de nuevo"
     }
   },
-  "appText.marketDataAcquisitionTechnicalDisclosure": {
-    "kind": "text",
-    "locales": {
-      "zh-CN": "数据来源说明",
-      "en": "About data sources",
-      "ja": "データ提供元について",
-      "ko": "데이터 출처 안내",
-      "es": "Sobre las fuentes de datos"
-    }
-  },
   "appText.marketDataAcquisitionThirdPartyUseLabel": {
     "kind": "text",
     "locales": {
@@ -6452,21 +6442,21 @@
   "appText.marketDataAcquisitionThirdPartyUseNotice": {
     "kind": "text",
     "locales": {
-      "zh-CN": "第三方组件可能访问境内或境外数据源，实际访问路径也可能随组件或相关服务调整。在部分国家或地区，连接可能受网络条件、地区政策、第三方限制、接口变更、限流或维护影响。继续获取数据即表示你已查阅下方组件项目的原始开源许可和使用协议，确认所需的数据访问和使用授权、所在地区可用性、技术可行性及拟定用途合规性，并同意自行承担相关判断和使用责任。Zinuto 不参与第三方授权，也不控制或保证第三方数据及服务的可用性、完整性、及时性、准确性或特定用途适用性。",
-      "en": "Third-party components may access domestic or overseas data sources, and the actual route may change with the component or related services. Connectivity in some countries or regions can be affected by network conditions, regional policies, third-party restrictions, API changes, rate limits, or maintenance. Continuing to retrieve data means that you have reviewed the original open-source licences and usage terms of the component projects below, confirmed the required data-access and usage permissions, regional availability, technical feasibility, and compliance of your intended use, and agreed to take responsibility for these determinations and your use. Zinuto does not grant third-party permissions and does not control or warrant the availability, completeness, timeliness, accuracy, or fitness for a particular purpose of third-party data or services.",
-      "ja": "第三者コンポーネントは国内または海外のデータ元へアクセスする場合があり、実際の経路もコンポーネントや関連サービスの変更に伴って変わることがあります。一部の国や地域では、ネットワーク状況、地域の方針、第三者の制限、API の変更、利用制限、保守の影響を受ける場合があります。データの取得を続けることにより、下記コンポーネントの元のオープンソースライセンスと利用条件を確認し、必要なデータアクセス・利用許諾、所在地での可用性、技術的実現可能性、予定する用途の適合性を確認したうえで、これらの判断と利用に関する責任を自ら負うことを示します。Zinuto は第三者の許諾に関与せず、第三者データやサービスの可用性、完全性、適時性、正確性、特定目的への適合性を管理または保証しません。",
-      "ko": "제3자 구성 요소는 국내 또는 해외 데이터 소스에 접근할 수 있으며 실제 접근 경로도 구성 요소나 관련 서비스의 변경에 따라 달라질 수 있습니다. 일부 국가나 지역에서는 네트워크 상태, 지역 정책, 제3자 제한, API 변경, 요청 제한 또는 점검의 영향을 받을 수 있습니다. 데이터 받기를 계속하면 아래 구성 요소 프로젝트의 원본 오픈 소스 라이선스와 이용 조건을 검토하고 필요한 데이터 접근 및 사용 권한, 현재 지역의 이용 가능 여부, 기술적 실행 가능성, 사용 목적의 적합성을 확인했으며 이러한 판단과 사용에 대한 책임을 스스로 부담한다는 뜻입니다. Zinuto는 제3자 권한 부여에 관여하지 않으며 제3자 데이터나 서비스의 이용 가능성, 완전성, 적시성, 정확성 또는 특정 목적 적합성을 통제하거나 보증하지 않습니다.",
-      "es": "Los componentes de terceros pueden acceder a fuentes de datos nacionales o extranjeras, y la ruta efectiva puede cambiar con el componente o los servicios relacionados. En algunos países o regiones, la conexión puede verse afectada por las condiciones de red, políticas regionales, restricciones de terceros, cambios de API, límites o mantenimiento. Continuar obteniendo datos significa que has revisado las licencias originales de código abierto y las condiciones de uso de los proyectos de los componentes que aparecen abajo, has confirmado las autorizaciones necesarias de acceso y uso de datos, la disponibilidad regional, la viabilidad técnica y la conformidad del uso previsto, y aceptas asumir la responsabilidad de estas comprobaciones y de tu uso. Zinuto no interviene en las autorizaciones de terceros ni controla o garantiza la disponibilidad, integridad, puntualidad, exactitud o idoneidad para un fin concreto de sus datos o servicios."
+      "zh-CN": "第三方组件可能访问境内或境外数据源，实际访问路径也可能随组件或相关服务调整。在部分国家或地区，连接可能受网络条件、地区政策、第三方限制、接口变更、限流或维护影响。继续获取数据即表示你已查阅下方组件项目的原始开源许可和使用协议，确认所需的数据访问和使用授权、所在地区可用性、技术可行性及拟定用途合规性，并同意自行承担相关判断和使用责任。Zinuto 不参与第三方授权，也不控制或保证第三方数据及服务的可用性、完整性、及时性、准确性或特定用途适用性",
+      "en": "Third-party components may access domestic or overseas data sources, and the actual route may change with the component or related services. Connectivity in some countries or regions can be affected by network conditions, regional policies, third-party restrictions, API changes, rate limits, or maintenance. Continuing to retrieve data means that you have reviewed the original open-source licenses and usage terms of the component projects below, confirmed the required data-access and usage permissions, regional availability, technical feasibility, and compliance of your intended use, and agreed to take responsibility for these determinations and your use. Zinuto does not grant third-party permissions and does not control or warrant the availability, completeness, timeliness, accuracy, or fitness for a particular purpose of third-party data or services",
+      "ja": "第三者コンポーネントは国内または海外のデータ元へアクセスする場合があり、実際の経路もコンポーネントや関連サービスの変更に伴って変わることがあります。一部の国や地域では、ネットワーク状況、地域の方針、第三者の制限、API の変更、利用制限、保守の影響を受ける場合があります。データの取得を続けることにより、下記コンポーネントの元のオープンソースライセンスと利用条件を確認し、必要なデータアクセス・利用許諾、所在地での可用性、技術的実現可能性、予定する用途の適合性を確認したうえで、これらの判断と利用に関する責任を自ら負うことを示します。Zinuto は第三者の許諾に関与せず、第三者データやサービスの可用性、完全性、適時性、正確性、特定目的への適合性を管理または保証しません",
+      "ko": "제3자 구성 요소는 국내 또는 해외 데이터 소스에 접근할 수 있으며 실제 접근 경로도 구성 요소나 관련 서비스의 변경에 따라 달라질 수 있습니다. 일부 국가나 지역에서는 네트워크 상태, 지역 정책, 제3자 제한, API 변경, 요청 제한 또는 점검의 영향을 받을 수 있습니다. 데이터 받기를 계속하면 아래 구성 요소 프로젝트의 원본 오픈 소스 라이선스와 이용 조건을 검토하고 필요한 데이터 접근 및 사용 권한, 현재 지역의 이용 가능 여부, 기술적 실행 가능성, 사용 목적의 적합성을 확인했으며 이러한 판단과 사용에 대한 책임을 스스로 부담한다는 뜻입니다. Zinuto는 제3자 권한 부여에 관여하지 않으며 제3자 데이터나 서비스의 이용 가능성, 완전성, 적시성, 정확성 또는 특정 목적 적합성을 통제하거나 보증하지 않습니다",
+      "es": "Los componentes de terceros pueden acceder a fuentes de datos nacionales o extranjeras, y la ruta efectiva puede cambiar con el componente o los servicios relacionados. En algunos países o regiones, la conexión puede verse afectada por las condiciones de red, políticas regionales, restricciones de terceros, cambios de API, límites o mantenimiento. Continuar obteniendo datos significa que has revisado las licencias originales de código abierto y las condiciones de uso de los proyectos de los componentes que aparecen abajo, has confirmado las autorizaciones necesarias de acceso y uso de datos, la disponibilidad regional, la viabilidad técnica y la conformidad del uso previsto, y aceptas asumir la responsabilidad de estas comprobaciones y de tu uso. Zinuto no interviene en las autorizaciones de terceros ni controla o garantiza la disponibilidad, integridad, puntualidad, exactitud o idoneidad para un fin concreto de sus datos o servicios"
     }
   },
   "appText.marketDataAcquisitionReviewOriginalTermsNotice": {
     "kind": "text",
     "locales": {
-      "zh-CN": "相关数据授权与服务限制仍以对应权利方公布的内容为准。",
-      "en": "Data permissions and service restrictions remain subject to the terms published by the relevant rights holders.",
-      "ja": "データ利用許諾とサービス上の制限は、関係する権利者が公表する内容に従います。",
-      "ko": "데이터 권한과 서비스 제한은 관련 권리자가 게시한 조건을 따릅니다.",
-      "es": "Las autorizaciones de datos y las restricciones del servicio siguen sujetas a las condiciones publicadas por los titulares correspondientes."
+      "zh-CN": "相关数据授权与服务限制仍以对应权利方公布的内容为准",
+      "en": "Data permissions and service restrictions remain subject to the terms published by the relevant rights holders",
+      "ja": "データ利用許諾とサービス上の制限は、関係する権利者が公表する内容に従います",
+      "ko": "데이터 권한과 서비스 제한은 관련 권리자가 게시한 조건을 따릅니다",
+      "es": "Las autorizaciones de datos y las restricciones del servicio siguen sujetas a las condiciones publicadas por los titulares correspondientes"
     }
   },
   "appText.marketDataAcquisitionConnectorVersionValue0": {
@@ -6887,16 +6877,6 @@
       "ja": "フォルダを変更",
       "ko": "폴더 변경",
       "es": "Cambiar carpeta"
-    }
-  },
-  "appText.marketDataAcquisitionFolderFirstUseHint": {
-    "kind": "text",
-    "locales": {
-      "zh-CN": "首次保存时，请选择目标文件夹",
-      "en": "For the first save, choose a destination folder",
-      "ja": "初回の保存時に保存先フォルダを選択してください",
-      "ko": "처음 저장할 때 대상 폴더를 선택하세요",
-      "es": "Al guardar por primera vez, elige una carpeta de destino"
     }
   },
   "appText.marketDataAcquisitionFolderRememberedHint": {
@@ -7812,21 +7792,21 @@
   "appText.marketDataAcquisitionErrorConnection": {
     "kind": "text",
     "locales": {
-      "zh-CN": "第三方组件或其数据源当前无法连接。可能受网络条件、地区限制、第三方限流、维护或接口调整影响。请先确认所在地区可访问且你有权使用，再稍后重试；第三方服务的可用性不由 Zinuto 控制。",
-      "en": "The third-party component or its data source cannot be reached right now. Network conditions, regional restrictions, third-party rate limits, maintenance, or interface changes may be involved. Confirm that it is accessible in your region and that you are authorised to use it, then try again later. Zinuto does not control third-party service availability.",
-      "ja": "第三者コンポーネントまたはそのデータ元へ現在接続できません。ネットワーク状況、地域制限、第三者の利用制限、保守、インターフェース変更の影響が考えられます。所在地で利用可能であり、必要な利用権限があることを確認してから、しばらくして再試行してください。第三者サービスの可用性は Zinuto の管理対象ではありません。",
-      "ko": "제3자 구성 요소 또는 해당 데이터 소스에 현재 연결할 수 없습니다. 네트워크 상태, 지역 제한, 제3자 요청 제한, 점검 또는 인터페이스 변경의 영향일 수 있습니다. 현재 지역에서 접근 가능하고 사용할 권한이 있는지 확인한 뒤 나중에 다시 시도하세요. 제3자 서비스의 이용 가능 여부는 Zinuto가 통제하지 않습니다.",
-      "es": "No se puede acceder ahora al componente de terceros o a su fuente de datos. Puede deberse a las condiciones de red, restricciones regionales, límites de terceros, mantenimiento o cambios de interfaz. Confirma que sea accesible en tu región y que tengas autorización para usarlo, y vuelve a intentarlo más tarde. Zinuto no controla la disponibilidad de servicios de terceros."
+      "zh-CN": "第三方组件或其数据源当前无法连接。可能受网络条件、地区限制、第三方限流、维护或接口调整影响。请先确认所在地区可访问且你有权使用，再稍后重试；第三方服务的可用性不由 Zinuto 控制",
+      "en": "The third-party component or its data source cannot be reached right now. Network conditions, regional restrictions, third-party rate limits, maintenance, or interface changes may be involved. Confirm that it is accessible in your region and that you are authorized to use it, then try again later. Zinuto does not control third-party service availability",
+      "ja": "第三者コンポーネントまたはそのデータ元へ現在接続できません。ネットワーク状況、地域制限、第三者の利用制限、保守、インターフェース変更の影響が考えられます。所在地で利用可能であり、必要な利用権限があることを確認してから、しばらくして再試行してください。第三者サービスの可用性は Zinuto の管理対象ではありません",
+      "ko": "제3자 구성 요소 또는 해당 데이터 소스에 현재 연결할 수 없습니다. 네트워크 상태, 지역 제한, 제3자 요청 제한, 점검 또는 인터페이스 변경의 영향일 수 있습니다. 현재 지역에서 접근 가능하고 사용할 권한이 있는지 확인한 뒤 나중에 다시 시도하세요. 제3자 서비스의 이용 가능 여부는 Zinuto가 통제하지 않습니다",
+      "es": "No se puede acceder ahora al componente de terceros o a su fuente de datos. Puede deberse a las condiciones de red, restricciones regionales, límites de terceros, mantenimiento o cambios de interfaz. Confirma que sea accesible en tu región y que tengas autorización para usarlo, y vuelve a intentarlo más tarde. Zinuto no controla la disponibilidad de servicios de terceros"
     }
   },
   "appText.marketDataAcquisitionErrorRateLimited": {
     "kind": "text",
     "locales": {
-      "zh-CN": "第三方服务正在限制请求。该限制不由 Zinuto 控制，请稍后再试。",
-      "en": "The third-party service is rate limiting requests. Zinuto does not control this limit; try again later.",
-      "ja": "第三者サービスによってリクエストが制限されています。この制限は Zinuto の管理対象ではありません。しばらくして再試行してください。",
-      "ko": "제3자 서비스가 요청을 제한하고 있습니다. 이 제한은 Zinuto가 통제하지 않으므로 나중에 다시 시도하세요.",
-      "es": "El servicio de terceros está limitando las solicitudes. Zinuto no controla este límite; vuelve a intentarlo más tarde."
+      "zh-CN": "第三方服务正在限制请求。该限制不由 Zinuto 控制，请稍后再试",
+      "en": "The third-party service is rate limiting requests. Zinuto does not control this limit; try again later",
+      "ja": "第三者サービスによってリクエストが制限されています。この制限は Zinuto の管理対象ではありません。しばらくして再試行してください",
+      "ko": "제3자 서비스가 요청을 제한하고 있습니다. 이 제한은 Zinuto가 통제하지 않으므로 나중에 다시 시도하세요",
+      "es": "El servicio de terceros está limitando las solicitudes. Zinuto no controla este límite; vuelve a intentarlo más tarde"
     }
   },
   "appText.marketDataAcquisitionErrorNoData": {
@@ -7842,11 +7822,11 @@
   "appText.marketDataAcquisitionErrorFormatChanged": {
     "kind": "text",
     "locales": {
-      "zh-CN": "第三方组件或其数据源返回格式发生变化。Zinuto 已停止保存，避免写入未经校验的数据。",
-      "en": "The response format from the third-party component or its data source changed. Zinuto stopped the save to avoid writing unvalidated data.",
-      "ja": "第三者コンポーネントまたはそのデータ元の応答形式が変わりました。未検証のデータを書き込まないよう、Zinuto は保存を中止しました。",
-      "ko": "제3자 구성 요소 또는 해당 데이터 소스의 응답 형식이 변경되었습니다. Zinuto는 검증되지 않은 데이터가 저장되지 않도록 저장을 중단했습니다.",
-      "es": "El formato de respuesta del componente de terceros o de su fuente de datos ha cambiado. Zinuto detuvo el guardado para evitar escribir datos sin validar."
+      "zh-CN": "第三方组件或其数据源返回格式发生变化。Zinuto 已停止保存，避免写入未经校验的数据",
+      "en": "The response format from the third-party component or its data source changed. Zinuto stopped the save to avoid writing unvalidated data",
+      "ja": "第三者コンポーネントまたはそのデータ元の応答形式が変わりました。未検証のデータを書き込まないよう、Zinuto は保存を中止しました",
+      "ko": "제3자 구성 요소 또는 해당 데이터 소스의 응답 형식이 변경되었습니다. Zinuto는 검증되지 않은 데이터가 저장되지 않도록 저장을 중단했습니다",
+      "es": "El formato de respuesta del componente de terceros o de su fuente de datos ha cambiado. Zinuto detuvo el guardado para evitar escribir datos sin validar"
     }
   },
   "appText.marketDataAcquisitionErrorLocalValidation": {
@@ -8072,11 +8052,11 @@
   "appText.marketDataAcquisitionErrorMarketUnavailable": {
     "kind": "text",
     "locales": {
-      "zh-CN": "第三方组件当前无法提供所选市场、标的或周期。请在确认组件能力、数据授权及地区可用性后重新选择；此状态不表示 Zinuto 安装损坏。",
-      "en": "The third-party component cannot currently provide the selected market, instrument, or interval. Confirm the component's capabilities, data permissions, and regional availability, then choose again. This does not indicate that the Zinuto installation is damaged.",
-      "ja": "第三者コンポーネントは現在、選択した市場、銘柄、または足種を提供できません。コンポーネントの機能、データ利用許諾、所在地での可用性を確認してから選び直してください。Zinuto のインストール破損を示すものではありません。",
-      "ko": "제3자 구성 요소는 현재 선택한 시장, 종목 또는 주기를 제공할 수 없습니다. 구성 요소 기능, 데이터 권한 및 지역 이용 가능 여부를 확인한 뒤 다시 선택하세요. 이는 Zinuto 설치가 손상되었다는 의미가 아닙니다.",
-      "es": "El componente de terceros no puede proporcionar actualmente el mercado, instrumento o intervalo seleccionado. Confirma sus capacidades, las autorizaciones de datos y la disponibilidad regional, y vuelve a elegir. Este estado no indica que la instalación de Zinuto esté dañada."
+      "zh-CN": "第三方组件当前无法提供所选市场、标的或周期。请在确认组件能力、数据授权及地区可用性后重新选择；此状态不表示 Zinuto 安装损坏",
+      "en": "The third-party component cannot currently provide the selected market, instrument, or interval. Confirm the component's capabilities, data permissions, and regional availability, then choose again. This does not indicate that the Zinuto installation is damaged",
+      "ja": "第三者コンポーネントは現在、選択した市場、銘柄、または足種を提供できません。コンポーネントの機能、データ利用許諾、所在地での可用性を確認してから選び直してください。Zinuto のインストール破損を示すものではありません",
+      "ko": "제3자 구성 요소는 현재 선택한 시장, 종목 또는 주기를 제공할 수 없습니다. 구성 요소 기능, 데이터 권한 및 지역 이용 가능 여부를 확인한 뒤 다시 선택하세요. 이는 Zinuto 설치가 손상되었다는 의미가 아닙니다",
+      "es": "El componente de terceros no puede proporcionar actualmente el mercado, instrumento o intervalo seleccionado. Confirma sus capacidades, las autorizaciones de datos y la disponibilidad regional, y vuelve a elegir. Este estado no indica que la instalación de Zinuto esté dañada"
     }
   },
   "appText.marketDataAcquisitionErrorRangeTooLarge": {

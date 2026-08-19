@@ -215,7 +215,7 @@ test("no-valid-bars job errors keep actionable local data copy", () => {
     const resolved = resolveLocalDataImportJobErrorMessage("CSV_NO_VALID_BARS");
 
     assert.equal(resolved, tt("appText.validLineDataFoundImportFile"));
-    assert.match(resolved, /没有有效K 线/);
+    assert.match(resolved, /没有有效 K 线/);
   } finally {
     setCurrentUiLanguage("en", { source: "USER", storage: null });
   }

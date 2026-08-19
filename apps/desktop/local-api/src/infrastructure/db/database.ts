@@ -174,83 +174,85 @@ export const STARTUP_PREFLIGHT_STATUS = runStartupPreflight(STORAGE_LAYOUT, {
   requireMarketData: !isolatedCoreMaintenanceRuntime,
 });
 
-export const db = STARTUP_PREFLIGHT_STATUS.startupAllowed
+const openedDatabase = STARTUP_PREFLIGHT_STATUS.startupAllowed
   ? openDatabaseWithoutDestructiveRecovery(DB_FILE_PATH)
-  : (null as unknown as import("better-sqlite3").Database);
+  : null;
+export const DATABASE_RUNTIME_STATE = STARTUP_PREFLIGHT_STATUS.startupAllowed
+  ? ({ available: true as const })
+  : ({
+      available: false as const,
+      reason: STARTUP_PREFLIGHT_STATUS.blockReason || "STARTUP_PREFLIGHT_BLOCKED",
+      startupStatus: STARTUP_PREFLIGHT_STATUS,
+    });
+
+export const requireDatabase = (): NonNullable<typeof openedDatabase> => {
+  if (!openedDatabase) {
+    throw Object.assign(new Error("LOCAL_DATABASE_UNAVAILABLE"), {
+      code: "LOCAL_DATABASE_UNAVAILABLE",
+      startupStatus: STARTUP_PREFLIGHT_STATUS,
+    });
+  }
+  return openedDatabase;
+};
+
+type OpenedDatabase = NonNullable<typeof openedDatabase>;
+const bindDatabaseMethod = <Key extends keyof OpenedDatabase>(
+  key: Key,
+): OpenedDatabase[Key] => ((...args: unknown[]) => {
+  const database = requireDatabase();
+  const method = database[key];
+  if (typeof method !== "function") {
+    throw new Error("LOCAL_DATABASE_METHOD_UNAVAILABLE");
+  }
+  return Reflect.apply(method, database, args);
+}) as OpenedDatabase[Key];
+
+// Existing stores receive a fail-closed forwarding handle so importing their
+// modules remains safe while startup is blocked. It never substitutes data or
+// an in-memory database; every operation resolves the one real opened database.
+// New composition code should prefer requireDatabase() and inject that instance.
+export const db = {
+  prepare: bindDatabaseMethod("prepare"),
+  transaction: bindDatabaseMethod("transaction"),
+  exec: bindDatabaseMethod("exec"),
+  pragma: bindDatabaseMethod("pragma"),
+  close: bindDatabaseMethod("close"),
+} as OpenedDatabase;
+
 const maintenanceApi = STARTUP_PREFLIGHT_STATUS.startupAllowed
   ? createDatabaseMaintenanceApi({
-      db,
+      db: requireDatabase(),
       dbFilePath: DB_FILE_PATH,
     })
-  : {
-      getDatabaseStorageFootprint: () => ({
-        dbBytes: 0,
-        walBytes: 0,
-        shmBytes: 0,
-        totalBytes: 0,
-      }),
-      checkpointDatabaseStorage: () => ({
-        dbBytes: 0,
-        walBytes: 0,
-        shmBytes: 0,
-        totalBytes: 0,
-      }),
-      reclaimDatabaseStorage: () => ({
-        dbBytes: 0,
-        walBytes: 0,
-        shmBytes: 0,
-        totalBytes: 0,
-      }),
-      runDatabaseMaintenance: () => ({
-        footprintBefore: {
-          dbBytes: 0,
-          walBytes: 0,
-          shmBytes: 0,
-          totalBytes: 0,
-        },
-        footprintAfter: {
-          dbBytes: 0,
-          walBytes: 0,
-          shmBytes: 0,
-          totalBytes: 0,
-        },
-        reclaimedBytes: 0,
-      }),
-      getDatabaseStorageUsageSummary: () => ({
-        measuredAt: new Date().toISOString(),
-        source: "PHYSICAL_FALLBACK" as const,
-        categories: {
-          trainingDataBytes: 0,
-          replayNotesBytes: 0,
-          marketDataBytes: 0,
-          systemSettingsBytes: 0,
-          statsDataBytes: 0,
-          otherBytes: 0,
-        },
-        logicalTotalBytes: 0,
-        physicalFootprint: {
-          dbBytes: 0,
-          walBytes: 0,
-          shmBytes: 0,
-          totalBytes: 0,
-        },
-        physicalTotalBytes: 0,
-      }),
-    };
+  : null;
 
-export const getDatabaseStorageFootprint =
-  maintenanceApi.getDatabaseStorageFootprint;
-export const checkpointDatabaseStorage =
-  maintenanceApi.checkpointDatabaseStorage;
-export const reclaimDatabaseStorage = maintenanceApi.reclaimDatabaseStorage;
-export const runDatabaseMaintenance = maintenanceApi.runDatabaseMaintenance;
-export const getDatabaseStorageUsageSummary =
-  maintenanceApi.getDatabaseStorageUsageSummary;
+const requireDatabaseMaintenance = () => {
+  if (!maintenanceApi) {
+    throw Object.assign(new Error("LOCAL_DATABASE_UNAVAILABLE"), {
+      code: "LOCAL_DATABASE_UNAVAILABLE",
+      startupStatus: STARTUP_PREFLIGHT_STATUS,
+    });
+  }
+  return maintenanceApi;
+};
+
+export const getDatabaseStorageFootprint = () =>
+  requireDatabaseMaintenance().getDatabaseStorageFootprint();
+export const checkpointDatabaseStorage = (
+  mode?: Parameters<NonNullable<typeof maintenanceApi>["checkpointDatabaseStorage"]>[0],
+) => requireDatabaseMaintenance().checkpointDatabaseStorage(mode);
+export const reclaimDatabaseStorage = () =>
+  requireDatabaseMaintenance().reclaimDatabaseStorage();
+export const runDatabaseMaintenance = () =>
+  requireDatabaseMaintenance().runDatabaseMaintenance();
+export const getDatabaseStorageUsageSummary = () =>
+  requireDatabaseMaintenance().getDatabaseStorageUsageSummary();
 
 let databaseInitialized = false;
 let databaseClosed = false;
 
 const ensureSystemInstrumentEntries = (): void => {
+  const db = requireDatabase();
   const seedInstruments = listSystemSeedInstruments();
   const selectBySymbol = db.prepare(
     "SELECT id FROM instruments WHERE symbol = ? AND base_timeframe = ? AND market = 'SYSTEM'",
@@ -329,6 +331,7 @@ export const initDatabase = async (): Promise<void> => {
     return;
   }
   databaseInitialized = true;
+  const db = requireDatabase();
   BACKEND_STARTUP_PROGRESS.heartbeat();
 
   const schemaStatements = splitSchemaStatements(schemaSql);
@@ -441,7 +444,7 @@ export const closeLocalDatabase = (): void => {
     return;
   }
   try {
-    db.close();
+    requireDatabase().close();
   } catch {
     // best-effort shutdown cleanup
   } finally {

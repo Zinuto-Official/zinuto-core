@@ -94,6 +94,9 @@ const normalizeEntryName = (entryName, descriptor) => {
   if (segments.some((segment) => !segment || segment === '.' || segment === '..')) {
     throw new Error(`unsafe archive entry path: ${entryName}`);
   }
+  if (descriptor.archiveLayout === 'rootless') {
+    return segments;
+  }
   if (segments[0] !== archiveRootName(descriptor)) {
     throw new Error(`archive entry is outside the expected runtime root: ${entryName}`);
   }
