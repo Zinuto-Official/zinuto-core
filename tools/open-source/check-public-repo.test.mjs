@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 import assert from 'node:assert/strict';
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -198,5 +198,25 @@ test('public tree scans source runtime directories but skips only the bundled No
       'apps/desktop/local-api/src/runtime/index.ts',
       'apps/desktop/shell/src/runtime/backend.rs',
     ]);
+  });
+});
+
+test('pre-commit rejects private Overlay paths before repository quality code runs', () => {
+  withTemporaryTree((rootDir) => {
+    execFileSync('git', ['init', '--initial-branch=main'], { cwd: rootDir });
+    const privateContract = path.join(rootDir, 'contracts', 'official-service.v1.yaml');
+    fs.mkdirSync(path.dirname(privateContract), { recursive: true });
+    fs.writeFileSync(privateContract, 'private contract\n');
+    execFileSync('git', ['add', '--all'], { cwd: rootDir });
+
+    const hookPath = path.resolve(import.meta.dirname, '..', '..', '.githooks', 'pre-commit');
+    const result = spawnSync('bash', [hookPath], {
+      cwd: rootDir,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
+    assert.notEqual(result.status, 0);
+    assert.match(result.stderr, /private Release\/Official paths must never enter public Zinuto Core/u);
+    assert.match(result.stderr, /contracts\/official-service\.v1\.yaml/u);
   });
 });

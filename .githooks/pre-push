@@ -2,9 +2,30 @@
 set -euo pipefail
 
 readonly zero='0000000000000000000000000000000000000000'
-while read -r local_ref local_sha remote_ref remote_sha; do
-  if [[ "$remote_ref" == refs/heads/* && "$remote_ref" != 'refs/heads/main' && "$local_sha" != "$zero" ]]; then
-    printf 'Refusing push: main is the only persistent Zinuto branch (%s).\n' "$remote_ref" >&2
-    exit 1
-  fi
-done
+push_input="$(cat)"
+
+if [[ -n "$push_input" ]]; then
+  while read -r local_ref local_sha remote_ref remote_sha; do
+    if [[ "$remote_ref" == refs/heads/* && "$remote_ref" != 'refs/heads/main' && "$local_sha" != "$zero" ]]; then
+      printf 'Refusing push: main is the only persistent Zinuto branch (%s).\n' "$remote_ref" >&2
+      exit 1
+    fi
+    if [[ "$remote_ref" == 'refs/heads/main' && "$local_sha" == "$zero" ]]; then
+      printf 'Refusing push: the persistent main branch cannot be deleted.\n' >&2
+      exit 1
+    fi
+  done <<< "$push_input"
+fi
+
+required="$(git config --bool --local zinuto.pushGateRequired 2>/dev/null || true)"
+if [[ "$required" != 'true' ]]; then
+  exit 0
+fi
+
+push_gate="$(git config --local --get zinuto.pushGateHook 2>/dev/null || true)"
+if [[ -z "$push_gate" || ! -f "$push_gate" || -L "$push_gate" ]]; then
+  printf 'Refusing push: the governed workspace push gate is not installed; run the workspace setup command.\n' >&2
+  exit 1
+fi
+
+printf '%s\n' "$push_input" | node "$push_gate" verify-push "$@"

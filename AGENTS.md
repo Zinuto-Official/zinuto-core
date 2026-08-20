@@ -10,6 +10,9 @@ visibility is an external setting and never changes this source boundary.
   branches or branch-backed worktrees.
 - Preserve unrelated changes. Never commit generated build output, credentials,
   signing material, or machine-specific paths.
+- If Release/Official source appears in this checkout, do not stage it. Preserve
+  the incident state in a recoverable local stash, restore the public tree, and
+  fix the Release materialization boundary before continuing.
 - A release tool may create a detached worktree from an exact reviewed commit.
   Do not edit or retain that worktree as a development branch.
 

@@ -11,4 +11,27 @@ if git diff --cached --quiet --; then
   exit 0
 fi
 
+# This check is intentionally self-contained. The private Release Overlay can
+# replace ordinary Core quality scripts while it is materialized, so the hook
+# must reject unmistakable private-source paths before invoking repository code.
+forbidden_paths=()
+while IFS= read -r -d '' staged_path; do
+  case "$staged_path" in
+    apps/*official*|apps/*Official*|config/*official*|config/*Official*|contracts/*official*|contracts/*Official*|packages/*official*|packages/*Official*|tools/*official*|tools/*Official*|\
+    config/brand/active-composition.json|config/distribution-policy.json|\
+    apps/desktop/shell/capabilities/self-updater.json|\
+    apps/desktop/web/src/app-shell/notices/*|\
+    apps/desktop/web/src/domains/desktop-notices/*|\
+    apps/desktop/web/src/domains/desktop-updates/*)
+      forbidden_paths+=("$staged_path")
+      ;;
+  esac
+done < <(git diff --cached --name-only --diff-filter=ACMRT -z --)
+
+if (( ${#forbidden_paths[@]} > 0 )); then
+  printf 'Refusing commit: private Release/Official paths must never enter public Zinuto Core:\n' >&2
+  printf '  %s\n' "${forbidden_paths[@]}" >&2
+  exit 1
+fi
+
 npm run check:affected -- --staged
