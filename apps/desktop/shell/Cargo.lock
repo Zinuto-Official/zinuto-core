@@ -5152,7 +5152,7 @@ dependencies = [
 
 [[package]]
 name = "zinuto-core"
-version = "2.0.10"
+version = "2.0.11"
 dependencies = [
  "block2",
  "libc",

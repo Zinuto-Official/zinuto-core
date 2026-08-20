@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "productVersion": "2.0.10",
+  "productVersion": "2.0.11",
   "localFeatures": {
     "freeReplay": true,
     "specialTraining": true,

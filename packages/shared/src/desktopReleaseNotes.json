@@ -1,42 +1,42 @@
 {
   "schemaVersion": 1,
-  "version": "2.0.10",
+  "version": "2.0.11",
   "publishedAt": "2026-08-20T00:00:00.000Z",
   "releaseHighlights": {
     "en": [
-      "Fixed macOS Direct updates so downloaded versions can install and restart normally.",
-      "Hardened updater packaging to exclude macOS metadata that could block application replacement.",
-      "Added archive-layout validation before an updater package is signed.",
-      "Updater packages now reject AppleDouble files and unexpected top-level entries.",
-      "Resumed release verification rechecks the updater archive before reuse."
+      "Fixed Windows Store Apple sign-in callbacks by registering the Zinuto URI protocol in the MSIX manifest.",
+      "Hardened Store manifest validation so missing URI callback registration fails before packaging.",
+      "Improved Windows Store purchase recovery so Store subscriptions can be reconciled after checkout.",
+      "Kept Store purchase state authoritative to Microsoft Store and the account service.",
+      "Added recovery-safe validation for interrupted Store sign-in and purchase flows."
     ],
     "zh-CN": [
-      "修复 macOS 直装版更新，使已下载的新版本能够正常安装并重启。",
-      "强化更新包生成流程，排除可能阻止应用替换的 macOS 元数据。",
-      "在更新包签名前增加归档目录结构校验。",
-      "更新包现在会拒绝 AppleDouble 文件和意外的顶层条目。",
-      "恢复发布流程时会重新校验更新归档，避免复用异常文件。"
+      "修复 Windows Store 版 Apple 登录回调，在 MSIX manifest 中注册 Zinuto URI 协议。",
+      "强化 Store manifest 校验，在打包前拒绝缺少 URI 回调注册的包。",
+      "改进 Windows Store 购买恢复，使 Store 订阅可以在购买后完成核验。",
+      "保持购买状态以 Microsoft Store 和账户服务为唯一权威。",
+      "为中断的 Store 登录和购买流程增加可恢复校验。"
     ],
     "ja": [
-      "macOS 直装版で、ダウンロード済みの更新を正常にインストールして再起動できるよう修正しました。",
-      "アプリの置き換えを妨げる可能性がある macOS メタデータを除外するよう、更新パッケージ生成を強化しました。",
-      "更新パッケージへ署名する前にアーカイブ構成を検証するようにしました。",
-      "AppleDouble ファイルや想定外のトップレベル項目を含む更新パッケージを拒否します。",
-      "中断したリリースの再開時にも更新アーカイブを再検証します。"
+      "Windows Store 版の Apple サインインコールバックを修正し、MSIX manifest に Zinuto URI プロトコルを登録しました。",
+      "Store manifest の検証を強化し、URI コールバック登録のないパッケージを事前に拒否します。",
+      "Windows Store 購入の復元を改善し、購入後に Store サブスクリプションを検証できるようにしました。",
+      "購入状態の唯一の正規ソースを Microsoft Store とアカウントサービスに保ちます。",
+      "中断した Store サインインと購入フローの復旧検証を追加しました。"
     ],
     "ko": [
-      "macOS 직접 설치 버전에서 다운로드한 업데이트가 정상적으로 설치되고 다시 시작되도록 수정했습니다.",
-      "앱 교체를 막을 수 있는 macOS 메타데이터를 제외하도록 업데이트 패키징을 강화했습니다.",
-      "업데이트 패키지에 서명하기 전에 아카이브 구조를 검증합니다.",
-      "AppleDouble 파일과 예상하지 않은 최상위 항목이 포함된 업데이트 패키지를 거부합니다.",
-      "중단된 릴리스를 다시 시작할 때 업데이트 아카이브를 다시 검증합니다."
+      "Windows Store 버전의 Apple 로그인 콜백을 수정하고 MSIX manifest에 Zinuto URI 프로토콜을 등록했습니다.",
+      "Store manifest 검증을 강화해 URI 콜백 등록이 없는 패키지를 패키징 전에 거부합니다.",
+      "Windows Store 구매 복구를 개선해 구매 후 Store 구독을 검증할 수 있습니다.",
+      "구매 상태의 단일 권위를 Microsoft Store와 계정 서비스로 유지합니다.",
+      "중단된 Store 로그인 및 구매 흐름을 복구하는 검증을 추가했습니다."
     ],
     "es": [
-      "Corregimos las actualizaciones directas de macOS para que las versiones descargadas se instalen y reinicien correctamente.",
-      "Reforzamos el empaquetado de actualizaciones para excluir metadatos de macOS que podían impedir el reemplazo de la aplicación.",
-      "Añadimos una validación de la estructura del archivo antes de firmar el paquete de actualización.",
-      "Los paquetes de actualización ahora rechazan archivos AppleDouble y entradas superiores inesperadas.",
-      "La reanudación de una publicación vuelve a validar el archivo de actualización antes de reutilizarlo."
+      "Corregimos los callbacks de inicio de sesión de Apple en Windows Store registrando el protocolo URI de Zinuto en el manifest MSIX.",
+      "Reforzamos la validación del manifest de Store para rechazar paquetes sin registro del callback URI antes del empaquetado.",
+      "Mejoramos la recuperación de compras de Windows Store para verificar la suscripción después del pago.",
+      "Mantenemos Microsoft Store y el servicio de cuentas como autoridades únicas del estado de compra.",
+      "Añadimos validación recuperable para flujos interrumpidos de inicio de sesión y compra en Store."
     ]
   }
 }
