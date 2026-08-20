@@ -1,42 +1,42 @@
 {
   "schemaVersion": 1,
-  "version": "2.0.9",
+  "version": "2.0.10",
   "publishedAt": "2026-08-20T00:00:00.000Z",
   "releaseHighlights": {
     "en": [
-      "Improved local runtime and market storage reliability, including clearer historical source handling.",
-      "Hardened historical market-data acquisition with bounded validation and safer staging.",
-      "Clarified market-source details and historical acquisition plans in the data settings flow.",
-      "Improved local DuckDB runtime preparation and market storage maintenance.",
-      "Bounded the desktop icon's first paint for a more stable startup presentation."
+      "Fixed macOS Direct updates so downloaded versions can install and restart normally.",
+      "Hardened updater packaging to exclude macOS metadata that could block application replacement.",
+      "Added archive-layout validation before an updater package is signed.",
+      "Updater packages now reject AppleDouble files and unexpected top-level entries.",
+      "Resumed release verification rechecks the updater archive before reuse."
     ],
     "zh-CN": [
-      "改进本地运行时和市场数据存储的可靠性，并让历史数据源处理更加清晰。",
-      "强化历史市场数据获取，增加有界校验并让暂存流程更加安全。",
-      "在数据设置流程中进一步明确市场数据源详情和历史数据获取计划。",
-      "改进本地 DuckDB 运行时准备和市场数据存储维护。",
-      "限制桌面图标的首次绘制范围，让启动画面更加稳定。"
+      "修复 macOS 直装版更新，使已下载的新版本能够正常安装并重启。",
+      "强化更新包生成流程，排除可能阻止应用替换的 macOS 元数据。",
+      "在更新包签名前增加归档目录结构校验。",
+      "更新包现在会拒绝 AppleDouble 文件和意外的顶层条目。",
+      "恢复发布流程时会重新校验更新归档，避免复用异常文件。"
     ],
     "ja": [
-      "ローカルランタイムと市場データ保存の信頼性を高め、過去データのソース処理を明確にしました。",
-      "過去の市場データ取得を強化し、検証とステージングを安全な範囲に制限しました。",
-      "データ設定フローで市場データソースの詳細と過去データ取得計画を明確にしました。",
-      "ローカル DuckDB ランタイムの準備と市場データ保存のメンテナンスを改善しました。",
-      "デスクトップアイコンの初回描画を制限し、起動画面をより安定させました。"
+      "macOS 直装版で、ダウンロード済みの更新を正常にインストールして再起動できるよう修正しました。",
+      "アプリの置き換えを妨げる可能性がある macOS メタデータを除外するよう、更新パッケージ生成を強化しました。",
+      "更新パッケージへ署名する前にアーカイブ構成を検証するようにしました。",
+      "AppleDouble ファイルや想定外のトップレベル項目を含む更新パッケージを拒否します。",
+      "中断したリリースの再開時にも更新アーカイブを再検証します。"
     ],
     "ko": [
-      "로컬 런타임과 시장 데이터 저장의 안정성을 높이고 과거 데이터 소스 처리를 더 명확하게 했습니다.",
-      "과거 시장 데이터 수집을 강화하고 검증과 스테이징을 안전한 범위로 제한했습니다.",
-      "데이터 설정 흐름에서 시장 데이터 소스 상세 정보와 과거 데이터 수집 계획을 더 명확하게 했습니다.",
-      "로컬 DuckDB 런타임 준비와 시장 데이터 저장 관리를 개선했습니다.",
-      "데스크톱 아이콘의 첫 표시 범위를 제한해 시작 화면을 더 안정적으로 만들었습니다."
+      "macOS 직접 설치 버전에서 다운로드한 업데이트가 정상적으로 설치되고 다시 시작되도록 수정했습니다.",
+      "앱 교체를 막을 수 있는 macOS 메타데이터를 제외하도록 업데이트 패키징을 강화했습니다.",
+      "업데이트 패키지에 서명하기 전에 아카이브 구조를 검증합니다.",
+      "AppleDouble 파일과 예상하지 않은 최상위 항목이 포함된 업데이트 패키지를 거부합니다.",
+      "중단된 릴리스를 다시 시작할 때 업데이트 아카이브를 다시 검증합니다."
     ],
     "es": [
-      "Mejoramos la fiabilidad del runtime local y del almacenamiento de mercado, con un manejo más claro de las fuentes históricas.",
-      "Reforzamos la adquisición de datos de mercado históricos con validación acotada y staging más seguro.",
-      "Aclaramos los detalles de las fuentes de mercado y los planes de adquisición histórica en los ajustes de datos.",
-      "Mejoramos la preparación del runtime local de DuckDB y el mantenimiento del almacenamiento de mercado.",
-      "Limitamos el primer renderizado del icono del escritorio para una presentación de inicio más estable."
+      "Corregimos las actualizaciones directas de macOS para que las versiones descargadas se instalen y reinicien correctamente.",
+      "Reforzamos el empaquetado de actualizaciones para excluir metadatos de macOS que podían impedir el reemplazo de la aplicación.",
+      "Añadimos una validación de la estructura del archivo antes de firmar el paquete de actualización.",
+      "Los paquetes de actualización ahora rechazan archivos AppleDouble y entradas superiores inesperadas.",
+      "La reanudación de una publicación vuelve a validar el archivo de actualización antes de reutilizarlo."
     ]
   }
 }

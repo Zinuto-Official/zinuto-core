@@ -2883,7 +2883,7 @@ dependencies = [
 
 [[package]]
 name = "zinuto-core-backtest-engine"
-version = "2.0.9"
+version = "2.0.10"
 dependencies = [
  "assert_cmd",
  "chrono",

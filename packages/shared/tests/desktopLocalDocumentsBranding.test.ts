@@ -11,7 +11,7 @@ import {
 } from "../dist/desktopLocalDocuments.js";
 
 test("bundled release notes remain complete for every desktop locale", () => {
-  assert.equal(desktopLocalReleaseManifest.version?.trim().length, 5);
+  assert.equal(desktopLocalReleaseManifest.version, "2.0.10");
   assert.ok(Date.parse(desktopLocalReleaseManifest.publishedAt));
 
   for (const locale of desktopLocalDocumentLocales) {
@@ -40,7 +40,7 @@ test("bundled release notes remain complete for every desktop locale", () => {
 });
 
 test("future release timestamps are scheduled until their publication instant", () => {
-  assert.equal(desktopLocalReleaseManifest.version, "2.0.9");
+  assert.equal(desktopLocalReleaseManifest.version, "2.0.10");
   assert.equal(
     resolveDesktopReleasePublicationState(
       desktopLocalReleaseManifest.publishedAt,
