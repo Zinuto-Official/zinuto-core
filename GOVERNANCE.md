@@ -31,15 +31,17 @@ source. Triage is the maximum routine role for people who handle issues and
 pull requests without maintaining source. Write access is limited to trusted
 source maintainers; the ability to build Core is never a reason to grant it.
 
-Before the repository becomes public, rulesets must protect `main` and `v*`.
-Only authorized maintainers may create signed annotated `v*` tags, and no one
-may update or delete them. A source version stops at the Git tag: maintainers do
-not create a GitHub Release object or attach DMG, EXE, or other binary assets.
+Official organization rulesets must protect `main` and `v*`. Only authorized
+maintainers may create signed annotated `v*` tags, and no one may update or
+delete them. A source version stops at the Git tag: maintainers do not create a
+GitHub Release object or attach DMG, EXE, or other binary assets.
 
-Every Core Actions workflow declares `contents: read`. Core has no company
-signing Secret, Variable, Environment, or self-hosted signing runner. Core
-contributors and build operators do not receive access to the private release
-repository, signing Keychains, Windows private keys, or official release hosts.
+Every tracked Core Actions workflow declares `contents: read`, but GitHub
+Actions execution remains disabled under the workspace policy. Required gates
+run locally or on a designated host. Core has no company signing Secret,
+Variable, Environment, or self-hosted signing runner. Core contributors and
+build operators do not receive access to the private release repository,
+signing Keychains, Windows private keys, or official release hosts.
 
 ## Source versions and local builds
 

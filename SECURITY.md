@@ -2,10 +2,11 @@
 
 ## Supported versions
 
-Before the first public release, security fixes target the latest `main`
-revision. After publication, they also target the latest published Zinuto Core
-source release in the 2.x line. Distributors maintain the binaries they build
-from this source.
+Security fixes target the latest `main` revision. When a Zinuto Core source tag
+in the 2.x line is published and remains supported, fixes also target the latest
+such tag. Repository visibility and published-tag state are live GitHub facts;
+this policy does not freeze either one in prose. Distributors maintain the
+binaries they build from this source.
 
 ## Upstream advisories
 

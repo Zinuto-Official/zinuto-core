@@ -33,10 +33,12 @@ Update that document or its JSON registry instead.
 Use the Node.js version pinned in `.nvmrc`, Rust stable, uv `0.11.8`, the
 checked npm lockfile, and the [Tauri 2 platform
 prerequisites](https://v2.tauri.app/start/prerequisites/).
-The Ubuntu `Core Change CI` and `Full Desktop Gate` jobs must install the same
-Tauri 2 Linux development libraries before any affected or full gate can
-compile the shell; Playwright's browser dependencies do not replace the GTK,
-WebKitGTK, AppIndicator, XDo, SVG, and OpenSSL development packages.
+On Ubuntu, install the Tauri 2 Linux development libraries before an affected
+or full gate compiles the shell; Playwright's browser dependencies do not
+replace the GTK, WebKitGTK, AppIndicator, XDo, SVG, and OpenSSL development
+packages. GitHub Actions execution is disabled by workspace policy, so the
+checks below are local or designated-host gates rather than hosted workflow
+results.
 
 ```sh
 git clone https://github.com/<your-github-name>/zinuto-core.git
@@ -164,8 +166,8 @@ maintainer records an accepted agreement in
 `contributors/cla-signatures.json`; a pull request cannot approve its own CLA.
 A `Signed-off-by` line is not a substitute.
 
-The company must approve the ICLA and CCLA templates before public contribution
-intake opens.
+Only company-approved versions of the ICLA and CCLA templates may be used for
+contribution intake; checking a template into Git does not approve it.
 
 ## Developer badge
 
