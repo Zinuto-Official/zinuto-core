@@ -28,6 +28,7 @@ import {
   normalizeText,
   rewritePortableReplayContextArchive,
 } from "./helpers.js";
+import { parsePortableUserSettingsRow } from "./portableSettingsPayload.js";
 import type {
   ExportNoteBundle,
   ExportSettingsBundle,
@@ -184,7 +185,13 @@ export const validatePortableImportDomainPayloads = (
           keyColumn: "domain_key",
           key: "SETTINGS",
         });
-        parsePayloadJson<ExportSettingsBundle | null>(row?.payload_json, null);
+        const bundle = parsePayloadJson<ExportSettingsBundle | null>(
+          row?.payload_json,
+          null,
+        );
+        if (bundle?.userSettings) {
+          parsePortableUserSettingsRow(bundle.userSettings);
+        }
         break;
       }
       case "CUSTOM_INDICATORS":

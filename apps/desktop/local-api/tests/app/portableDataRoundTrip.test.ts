@@ -410,6 +410,59 @@ test('portable settings import keeps local settings unless replacement is confir
   assert.equal(readUserSettingsForTest()?.initialSecuritiesBalance, 777777);
 });
 
+test('portable settings import rejects non-finite numbers before changing local settings', async () => {
+  const exportPath = path.join(
+    tempDataDir,
+    'portable-settings-non-finite.otp-package',
+  );
+  upsertUserSettingsForTest({
+    initialSecuritiesBalance: 246810,
+    marketPresetId: 'A_SHARE',
+  });
+  await executePortableExport({
+    outputPath: exportPath,
+    domains: ['SETTINGS'],
+    appBuildVersion: 'test-build',
+  });
+  await rewritePortablePayloadForTest(exportPath, (payloadDb) => {
+    const row = payloadDb
+      .prepare(
+        `SELECT payload_json AS payloadJson
+           FROM portable_export_settings
+          WHERE domain_key = 'SETTINGS'`,
+      )
+      .get() as { payloadJson: string };
+    const bundle = JSON.parse(row.payloadJson) as {
+      userSettings: Record<string, unknown>;
+    };
+    bundle.userSettings.initial_securities_balance = 'Infinity';
+    payloadDb
+      .prepare(
+        `UPDATE portable_export_settings
+            SET payload_json = ?
+          WHERE domain_key = 'SETTINGS'`,
+      )
+      .run(JSON.stringify(bundle));
+  });
+
+  await assert.rejects(
+    inspectPortableImportPackage({ inputPath: exportPath }),
+    expectAppErrorCode('PORTABLE_DATA_IMPORT_INVALID'),
+  );
+  await assert.rejects(
+    executePortableImport({
+      inputPath: exportPath,
+      domains: ['SETTINGS'],
+      settingsConflictMode: 'REPLACE_TARGET',
+    }),
+    expectAppErrorCode('PORTABLE_DATA_IMPORT_INVALID'),
+  );
+  assert.deepEqual(readUserSettingsForTest(), {
+    initialSecuritiesBalance: 246810,
+    marketPresetId: 'A_SHARE',
+  });
+});
+
 test('portable custom indicator round trip preserves parameters and revisions', async () => {
   const exportPath = path.join(
     tempDataDir,
