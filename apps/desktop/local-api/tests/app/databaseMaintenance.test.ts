@@ -7,7 +7,18 @@ import path from "node:path";
 import test from "node:test";
 import Database from "better-sqlite3";
 
-import { createDatabaseMaintenanceApi } from "../../src/infrastructure/db/database/maintenance.js";
+import {
+  createDatabaseMaintenanceApi,
+  quoteSqlIdentifier,
+} from "../../src/infrastructure/db/database/maintenance.js";
+
+test("database maintenance quotes every dynamic SQLite identifier", () => {
+  assert.equal(quoteSqlIdentifier("training_projects"), '"training_projects"');
+  assert.equal(
+    quoteSqlIdentifier('training_projects"; DROP TABLE users; --'),
+    '"training_projects""; DROP TABLE users; --"',
+  );
+});
 
 test("database maintenance sweeps stale duckdb temp artifacts and keeps fresh files", async () => {
   const tempDir = await fs.promises.mkdtemp(

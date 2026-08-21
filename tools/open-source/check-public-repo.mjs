@@ -383,6 +383,9 @@ export const inspectPublicRepository = (rootDir = defaultRootDir) => {
   if (tauriConfig.identifier !== expectedCommunityComposition.bundleIdentifier) {
     failures.push('tauri.conf.json must default to the community bundle identifier');
   }
+  if (tauriConfig.app?.windows?.some((window) => window?.devtools !== false)) {
+    failures.push('community Tauri windows must explicitly disable devtools');
+  }
   const defaultCapability = readJson('apps/desktop/shell/capabilities/default.json');
   const capabilityPermissions = defaultCapability.permissions ?? [];
   if (capabilityPermissions.includes('opener:default')) {

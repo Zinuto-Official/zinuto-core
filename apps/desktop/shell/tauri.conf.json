@@ -19,7 +19,7 @@
         "minWidth": 960,
         "minHeight": 640,
         "dragDropEnabled": true,
-        "devtools": true,
+        "devtools": false,
         "resizable": true,
         "visible": false,
         "backgroundColor": "#EEF2F7",

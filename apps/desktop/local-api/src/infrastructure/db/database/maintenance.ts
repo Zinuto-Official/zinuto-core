@@ -29,6 +29,9 @@ type StorageUsageEstimateTableConfig = {
   approxBytesPerRow: number;
 };
 
+export const quoteSqlIdentifier = (value: string): string =>
+  `"${String(value).replaceAll('"', '""')}"`;
+
 const STORAGE_USAGE_ESTIMATE_TABLES: StorageUsageEstimateTableConfig[] = [
   {
     tableName: "training_projects",
@@ -460,7 +463,9 @@ export const createDatabaseMaintenanceApi = ({
     try {
       let stmt = storageUsageCountStmtCache.get(normalizedTableName);
       if (!stmt) {
-        stmt = db.prepare(`SELECT COUNT(*) AS count FROM ${normalizedTableName}`);
+        stmt = db.prepare(
+          `SELECT COUNT(*) AS count FROM ${quoteSqlIdentifier(normalizedTableName)}`,
+        );
         storageUsageCountStmtCache.set(normalizedTableName, stmt);
       }
       const row = stmt.get() as { count?: unknown } | undefined;
