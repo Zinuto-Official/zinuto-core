@@ -259,10 +259,13 @@ export const applyDesktopWebviewZoom = async (
         Math.abs(lastAppliedDesktopWebviewZoom - viewport.scale) >= 0.001
       ) {
         await webviewMod.getCurrentWebview().setZoom(viewport.scale);
+        // setZoom can itself emit resize before its promise resolves. Remember
+        // the completed native write even if that event queued a newer read;
+        // otherwise every read writes the same zoom and starts another resize.
+        lastAppliedDesktopWebviewZoom = viewport.scale;
         if (requestRevision !== desktopWebviewZoomRequestRevision) {
           return null;
         }
-        lastAppliedDesktopWebviewZoom = viewport.scale;
       }
 
       return viewport;

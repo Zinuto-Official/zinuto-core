@@ -1,6 +1,6 @@
 {
   "name": "zinuto",
-  "version": "2.0.11",
+  "version": "2.0.12",
   "license": "GPL-3.0-only",
   "private": true,
   "engines": {
@@ -26,7 +26,7 @@
     "@types/react-dom": "19.2.3",
     "nanoid": "3.3.18",
     "react-remove-scroll": "2.7.2",
-    "qs": "6.15.2"
+    "qs": "6.16.0"
   },
   "scripts": {
     "preinstall": "node ./tools/release/check-node-version.mjs",

@@ -48,12 +48,21 @@ export const whenElementRenderable = (
   let hasRun = false;
   let stableRenderableFrames = 0;
   let callbackCleanup: ElementRenderableCleanup | null = null;
+  let resizeObserver: ResizeObserver | null = null;
+  let mutationObserver: MutationObserver | null = null;
+  const wakeEvents = ['resize', 'visibilitychange', 'transitionend', 'animationend'] as const;
+  const stopWatching = () => {
+    resizeObserver?.disconnect();
+    mutationObserver?.disconnect();
+    for (const event of wakeEvents) window.removeEventListener(event, schedule, true);
+  };
 
   const runCallback = () => {
     if (hasRun || disconnected) {
       return;
     }
     hasRun = true;
+    stopWatching();
     callbackCleanup = callback() ?? null;
   };
 
@@ -62,7 +71,13 @@ export const whenElementRenderable = (
     if (disconnected || hasRun) {
       return;
     }
-    stableRenderableFrames = isElementRenderable(element) ? stableRenderableFrames + 1 : 0;
+    if (!isElementRenderable(element)) {
+      stableRenderableFrames = 0;
+      // Hidden charts sleep until layout or visibility changes. Polling every
+      // frame would keep the WebView rendering for an unopened workspace.
+      return;
+    }
+    stableRenderableFrames += 1;
     if (stableRenderableFrames >= requiredStableFrames) {
       runCallback();
       return;
@@ -70,10 +85,27 @@ export const whenElementRenderable = (
     rafId = window.requestAnimationFrame(check);
   };
 
-  rafId = window.requestAnimationFrame(check);
+  const schedule = () => {
+    if (!disconnected && !hasRun && !rafId) rafId = window.requestAnimationFrame(check);
+  };
+  if (typeof ResizeObserver !== 'undefined') {
+    resizeObserver = new ResizeObserver(schedule);
+    resizeObserver.observe(element);
+  }
+  if (typeof MutationObserver !== 'undefined') {
+    mutationObserver = new MutationObserver(schedule);
+    // Ancestor classes and inline styles can change inherited visibility
+    // without changing the chart's dimensions.
+    for (let ancestor: HTMLElement | null = element; ancestor; ancestor = ancestor.parentElement) {
+      mutationObserver.observe(ancestor, { attributes: true, attributeFilter: ['class', 'style', 'hidden'] });
+    }
+  }
+  for (const event of wakeEvents) window.addEventListener(event, schedule, true);
+  schedule();
 
   return () => {
     disconnected = true;
+    stopWatching();
     if (rafId) {
       window.cancelAnimationFrame(rafId);
       rafId = 0;
@@ -94,10 +126,9 @@ export const attachStableElementResizeObserver = (
   let lastHeight = -1;
 
   const schedule = (force = false) => {
+    if (disconnected) return;
     pendingForce = pendingForce || force;
-    if (rafId) {
-      window.cancelAnimationFrame(rafId);
-    }
+    if (rafId) return;
     rafId = window.requestAnimationFrame(() => {
       rafId = 0;
       if (disconnected) {

@@ -5,7 +5,7 @@ an inventory, not a substitute for the license texts shipped by each package.
 The source distribution retains dependency license files through the normal
 package, Cargo, and Python registries.
 
-- Snapshot SHA-256: `ba7d8d39745b91a645077f0424984bb6c4a3db6ea16ea6bdd562dd7e01727852`
+- Snapshot SHA-256: `356d255b8d39153fae8eeb89572dc89ef577e4bd81493cb593dcd0dd0d7cb848`
 - Components: 1219
 - AKShare sidecar lock SHA-256: `ca65c3aef624355c50f54c55d03082c1f906562181d8d964fcb408bed99f7437`
 - FinanceDataReader sidecar lock SHA-256: `2683a9389e744f96445559509abb0981e661a6a1f4b7b367d0f3544c96178aee`
@@ -444,8 +444,8 @@ authorization from the provider.
 | cargo | rustix | 0.38.44 | Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT |  | runtime |
 | cargo | rustix | 1.1.4 | Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT |  | runtime |
 | cargo | rustls-pki-types | 1.14.1 | MIT OR Apache-2.0 |  | runtime |
-| cargo | rustls-webpki | 0.103.13 | ISC |  | runtime |
-| cargo | rustls | 0.23.40 | Apache-2.0 OR ISC OR MIT |  | runtime |
+| cargo | rustls-webpki | 0.103.15 | ISC |  | runtime |
+| cargo | rustls | 0.23.45 | Apache-2.0 OR ISC OR MIT |  | runtime |
 | cargo | rustversion | 1.0.22 | MIT OR Apache-2.0 |  | runtime |
 | cargo | ryu | 1.0.23 | Apache-2.0 OR BSL-1.0 |  | runtime |
 | cargo | same-file | 1.0.6 | Unlicense/MIT |  | runtime |
@@ -872,7 +872,7 @@ authorization from the provider.
 | npm | @types/serve-static | 2.2.0 | MIT |  | development |
 | npm | @types/trusted-types | 2.0.7 | MIT |  | runtime |
 | npm | @vitejs/plugin-react | 6.0.1 | MIT |  | development |
-| npm | @xmldom/xmldom | 0.9.10 | MIT |  | runtime |
+| npm | @xmldom/xmldom | 0.9.12 | MIT |  | runtime |
 | npm | abort-controller | 3.0.0 | MIT |  | development |
 | npm | accepts | 2.0.0 | MIT |  | runtime |
 | npm | ansi-regex | 5.0.1 | MIT |  | development |
@@ -894,7 +894,7 @@ authorization from the provider.
 | npm | bare-url | 2.4.2 | Apache-2.0 |  | development |
 | npm | base64-arraybuffer | 1.0.2 | MIT |  | runtime |
 | npm | base64-js | 1.5.1 | MIT |  | runtime |
-| npm | baseline-browser-mapping | 2.10.27 | Apache-2.0 |  | development |
+| npm | baseline-browser-mapping | 2.11.24 | Apache-2.0 |  | development |
 | npm | better-sqlite3 | 12.9.0 | MIT |  | runtime |
 | npm | binary-extensions | 2.3.0 | MIT |  | development |
 | npm | bindings | 1.5.0 | MIT |  | runtime |
@@ -903,7 +903,7 @@ authorization from the provider.
 | npm | body-parser | 2.3.0 | MIT |  | runtime |
 | npm | brace-expansion | 5.0.9 | MIT |  | development |
 | npm | braces | 3.0.3 | MIT |  | development |
-| npm | browserslist | 4.28.2 | MIT |  | development |
+| npm | browserslist | 4.29.0 | MIT |  | development |
 | npm | buffer-crc32 | 1.0.0 | MIT |  | development |
 | npm | buffer | 5.7.1 | MIT |  | runtime |
 | npm | buffer | 6.0.3 | MIT |  | development |
@@ -913,7 +913,7 @@ authorization from the provider.
 | npm | call-bind-apply-helpers | 1.0.2 | MIT |  | runtime |
 | npm | call-bound | 1.0.4 | MIT |  | runtime |
 | npm | camelcase-css | 2.0.1 | MIT |  | development |
-| npm | caniuse-lite | 1.0.30001791 | CC-BY-4.0 |  | development |
+| npm | caniuse-lite | 1.0.30001810 | CC-BY-4.0 |  | development |
 | npm | canvg | 3.0.11 | MIT |  | runtime |
 | npm | ccxt | 4.5.73 | MIT |  | runtime |
 | npm | chokidar | 3.6.0 | MIT |  | development |
@@ -954,13 +954,13 @@ authorization from the provider.
 | npm | duplexer2 | 0.1.4 | BSD-3-Clause |  | runtime |
 | npm | echarts | 6.1.0 | Apache-2.0 |  | runtime |
 | npm | ee-first | 1.1.1 | MIT |  | runtime |
-| npm | electron-to-chromium | 1.5.349 | ISC |  | development |
+| npm | electron-to-chromium | 1.5.430 | ISC |  | development |
 | npm | emoji-regex | 8.0.0 | MIT |  | development |
 | npm | encodeurl | 2.0.0 | MIT |  | runtime |
 | npm | end-of-stream | 1.4.5 | MIT |  | runtime |
 | npm | es-define-property | 1.0.1 | MIT |  | runtime |
 | npm | es-errors | 1.3.0 | MIT |  | runtime |
-| npm | es-object-atoms | 1.1.1 | MIT |  | runtime |
+| npm | es-object-atoms | 1.1.2 | MIT |  | runtime |
 | npm | esbuild | 0.28.1 | MIT |  | development |
 | npm | escalade | 3.2.0 | MIT |  | development |
 | npm | escape-html | 1.0.3 | MIT |  | runtime |
@@ -1064,7 +1064,7 @@ authorization from the provider.
 | npm | node-abi | 3.90.0 | MIT |  | runtime |
 | npm | node-gyp-build | 4.8.4 | MIT |  | runtime |
 | npm | node-int64 | 0.4.0 | MIT |  | runtime |
-| npm | node-releases | 2.0.38 | MIT |  | development |
+| npm | node-releases | 2.0.55 | MIT |  | development |
 | npm | normalize-path | 3.0.0 | MIT |  | development |
 | npm | object-assign | 4.1.1 | MIT |  | development |
 | npm | object-hash | 3.0.0 | MIT |  | development |
@@ -1092,7 +1092,7 @@ authorization from the provider.
 | npm | postcss-js | 4.1.0 | MIT |  | development |
 | npm | postcss-load-config | 6.0.1 | MIT |  | development |
 | npm | postcss-nested | 6.2.0 | MIT |  | development |
-| npm | postcss-selector-parser | 6.1.2 | MIT |  | development |
+| npm | postcss-selector-parser | 6.1.4 | MIT |  | development |
 | npm | postcss-value-parser | 4.2.0 | MIT |  | development |
 | npm | postcss | 8.5.25 | MIT |  | development |
 | npm | prebuild-install | 7.1.3 | MIT |  | runtime |
@@ -1100,7 +1100,7 @@ authorization from the provider.
 | npm | process | 0.11.10 | MIT |  | development |
 | npm | proxy-addr | 2.0.7 | MIT |  | runtime |
 | npm | pump | 3.0.4 | MIT |  | runtime |
-| npm | qs | 6.15.2 | BSD-3-Clause |  | runtime |
+| npm | qs | 6.16.0 | BSD-3-Clause |  | runtime |
 | npm | queue-microtask | 1.2.3 | MIT |  | development |
 | npm | raf | 3.4.1 | MIT |  | runtime |
 | npm | range-parser | 1.2.1 | MIT |  | runtime |
@@ -1141,7 +1141,7 @@ authorization from the provider.
 | npm | side-channel-list | 1.0.1 | MIT |  | runtime |
 | npm | side-channel-map | 1.0.1 | MIT |  | runtime |
 | npm | side-channel-weakmap | 1.0.2 | MIT |  | runtime |
-| npm | side-channel | 1.1.0 | MIT |  | runtime |
+| npm | side-channel | 1.1.1 | MIT |  | runtime |
 | npm | signal-exit | 4.1.0 | ISC |  | development |
 | npm | simple-concat | 1.0.1 | MIT |  | runtime |
 | npm | simple-get | 4.0.1 | MIT |  | runtime |
@@ -1187,7 +1187,7 @@ authorization from the provider.
 | npm | universalify | 2.0.1 | MIT |  | runtime |
 | npm | unpipe | 1.0.0 | MIT |  | runtime |
 | npm | unzipper | 0.12.3 | MIT |  | runtime |
-| npm | update-browserslist-db | 1.2.3 | MIT |  | development |
+| npm | update-browserslist-db | 1.3.3 | MIT |  | development |
 | npm | use-callback-ref | 1.3.3 | MIT |  | runtime |
 | npm | use-sidecar | 1.1.3 | MIT |  | runtime |
 | npm | util-deprecate | 1.0.2 | MIT |  | runtime |

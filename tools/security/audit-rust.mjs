@@ -20,16 +20,6 @@ const shippingTargets = Object.freeze([
   "x86_64-pc-windows-msvc",
 ]);
 const reviewedTargetExcludedWarnings = new Set([
-  "unmaintained|RUSTSEC-2024-0413|atk@0.18.2",
-  "unmaintained|RUSTSEC-2024-0416|atk-sys@0.18.2",
-  "unmaintained|RUSTSEC-2024-0412|gdk@0.18.2",
-  "unmaintained|RUSTSEC-2024-0418|gdk-sys@0.18.2",
-  "unmaintained|RUSTSEC-2024-0411|gdkwayland-sys@0.18.2",
-  "unmaintained|RUSTSEC-2024-0417|gdkx11@0.18.2",
-  "unmaintained|RUSTSEC-2024-0414|gdkx11-sys@0.18.2",
-  "unmaintained|RUSTSEC-2024-0415|gtk@0.18.2",
-  "unmaintained|RUSTSEC-2024-0420|gtk-sys@0.18.2",
-  "unmaintained|RUSTSEC-2024-0419|gtk3-macros@0.18.2",
   "unmaintained|RUSTSEC-2024-0370|proc-macro-error@1.0.4",
   "unsound|RUSTSEC-2024-0429|glib@0.18.5",
 ]);

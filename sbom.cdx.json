@@ -1,13 +1,13 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.5",
-  "serialNumber": "urn:uuid:ba7d8d39-745b-51a6-a507-7f0424984bb6",
+  "serialNumber": "urn:uuid:356d255b-8d39-553f-ae8e-eb89572dc89e",
   "version": 1,
   "metadata": {
     "component": {
       "type": "application",
       "name": "Zinuto Core",
-      "version": "2.0.11",
+      "version": "2.0.12",
       "licenses": [
         {
           "license": {
@@ -19,7 +19,7 @@
     "properties": [
       {
         "name": "zinuto:dependencySnapshotSha256",
-        "value": "ba7d8d39745b91a645077f0424984bb6c4a3db6ea16ea6bdd562dd7e01727852"
+        "value": "356d255b8d39153fae8eeb89572dc89ef577e4bd81493cb593dcd0dd0d7cb848"
       },
       {
         "name": "zinuto:pythonSidecarLockSha256",
@@ -5238,27 +5238,27 @@
       "type": "library",
       "group": "cargo",
       "name": "rustls-webpki",
-      "version": "0.103.13",
+      "version": "0.103.15",
       "scope": "required",
       "licenses": [
         {
           "expression": "ISC"
         }
       ],
-      "purl": "pkg:cargo/rustls-webpki@0.103.13"
+      "purl": "pkg:cargo/rustls-webpki@0.103.15"
     },
     {
       "type": "library",
       "group": "cargo",
       "name": "rustls",
-      "version": "0.23.40",
+      "version": "0.23.45",
       "scope": "required",
       "licenses": [
         {
           "expression": "Apache-2.0 OR ISC OR MIT"
         }
       ],
-      "purl": "pkg:cargo/rustls@0.23.40"
+      "purl": "pkg:cargo/rustls@0.23.45"
     },
     {
       "type": "library",
@@ -10802,14 +10802,14 @@
       "type": "library",
       "group": "npm",
       "name": "@xmldom/xmldom",
-      "version": "0.9.10",
+      "version": "0.9.12",
       "scope": "required",
       "licenses": [
         {
           "expression": "MIT"
         }
       ],
-      "purl": "pkg:npm/%40xmldom%2Fxmldom@0.9.10"
+      "purl": "pkg:npm/%40xmldom%2Fxmldom@0.9.12"
     },
     {
       "type": "library",
@@ -11088,14 +11088,14 @@
       "type": "library",
       "group": "npm",
       "name": "baseline-browser-mapping",
-      "version": "2.10.27",
+      "version": "2.11.24",
       "scope": "excluded",
       "licenses": [
         {
           "expression": "Apache-2.0"
         }
       ],
-      "purl": "pkg:npm/baseline-browser-mapping@2.10.27"
+      "purl": "pkg:npm/baseline-browser-mapping@2.11.24"
     },
     {
       "type": "library",
@@ -11205,14 +11205,14 @@
       "type": "library",
       "group": "npm",
       "name": "browserslist",
-      "version": "4.28.2",
+      "version": "4.29.0",
       "scope": "excluded",
       "licenses": [
         {
           "expression": "MIT"
         }
       ],
-      "purl": "pkg:npm/browserslist@4.28.2"
+      "purl": "pkg:npm/browserslist@4.29.0"
     },
     {
       "type": "library",
@@ -11335,14 +11335,14 @@
       "type": "library",
       "group": "npm",
       "name": "caniuse-lite",
-      "version": "1.0.30001791",
+      "version": "1.0.30001810",
       "scope": "excluded",
       "licenses": [
         {
           "expression": "CC-BY-4.0"
         }
       ],
-      "purl": "pkg:npm/caniuse-lite@1.0.30001791"
+      "purl": "pkg:npm/caniuse-lite@1.0.30001810"
     },
     {
       "type": "library",
@@ -11868,14 +11868,14 @@
       "type": "library",
       "group": "npm",
       "name": "electron-to-chromium",
-      "version": "1.5.349",
+      "version": "1.5.430",
       "scope": "excluded",
       "licenses": [
         {
           "expression": "ISC"
         }
       ],
-      "purl": "pkg:npm/electron-to-chromium@1.5.349"
+      "purl": "pkg:npm/electron-to-chromium@1.5.430"
     },
     {
       "type": "library",
@@ -11946,14 +11946,14 @@
       "type": "library",
       "group": "npm",
       "name": "es-object-atoms",
-      "version": "1.1.1",
+      "version": "1.1.2",
       "scope": "required",
       "licenses": [
         {
           "expression": "MIT"
         }
       ],
-      "purl": "pkg:npm/es-object-atoms@1.1.1"
+      "purl": "pkg:npm/es-object-atoms@1.1.2"
     },
     {
       "type": "library",
@@ -13298,14 +13298,14 @@
       "type": "library",
       "group": "npm",
       "name": "node-releases",
-      "version": "2.0.38",
+      "version": "2.0.55",
       "scope": "excluded",
       "licenses": [
         {
           "expression": "MIT"
         }
       ],
-      "purl": "pkg:npm/node-releases@2.0.38"
+      "purl": "pkg:npm/node-releases@2.0.55"
     },
     {
       "type": "library",
@@ -13662,14 +13662,14 @@
       "type": "library",
       "group": "npm",
       "name": "postcss-selector-parser",
-      "version": "6.1.2",
+      "version": "6.1.4",
       "scope": "excluded",
       "licenses": [
         {
           "expression": "MIT"
         }
       ],
-      "purl": "pkg:npm/postcss-selector-parser@6.1.2"
+      "purl": "pkg:npm/postcss-selector-parser@6.1.4"
     },
     {
       "type": "library",
@@ -13766,14 +13766,14 @@
       "type": "library",
       "group": "npm",
       "name": "qs",
-      "version": "6.15.2",
+      "version": "6.16.0",
       "scope": "required",
       "licenses": [
         {
           "expression": "BSD-3-Clause"
         }
       ],
-      "purl": "pkg:npm/qs@6.15.2"
+      "purl": "pkg:npm/qs@6.16.0"
     },
     {
       "type": "library",
@@ -14299,14 +14299,14 @@
       "type": "library",
       "group": "npm",
       "name": "side-channel",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "scope": "required",
       "licenses": [
         {
           "expression": "MIT"
         }
       ],
-      "purl": "pkg:npm/side-channel@1.1.0"
+      "purl": "pkg:npm/side-channel@1.1.1"
     },
     {
       "type": "library",
@@ -14897,14 +14897,14 @@
       "type": "library",
       "group": "npm",
       "name": "update-browserslist-db",
-      "version": "1.2.3",
+      "version": "1.3.3",
       "scope": "excluded",
       "licenses": [
         {
           "expression": "MIT"
         }
       ],
-      "purl": "pkg:npm/update-browserslist-db@1.2.3"
+      "purl": "pkg:npm/update-browserslist-db@1.3.3"
     },
     {
       "type": "library",

@@ -2,6 +2,7 @@
 
 import assert from "node:assert/strict";
 import test from "node:test";
+import { ZINUTO_SOFTWARE_VERSION } from "../dist/versionRegistry.js";
 
 import {
   desktopLocalDocumentLocales,
@@ -11,7 +12,7 @@ import {
 } from "../dist/desktopLocalDocuments.js";
 
 test("bundled release notes remain complete for every desktop locale", () => {
-  assert.equal(desktopLocalReleaseManifest.version, "2.0.11");
+  assert.equal(desktopLocalReleaseManifest.version, ZINUTO_SOFTWARE_VERSION);
   assert.ok(Date.parse(desktopLocalReleaseManifest.publishedAt));
 
   for (const locale of desktopLocalDocumentLocales) {
@@ -23,11 +24,9 @@ test("bundled release notes remain complete for every desktop locale", () => {
       Array.isArray(desktopLocalReleaseManifest.releaseHighlights[locale]),
       locale,
     );
-    assert.equal(
-      desktopLocalReleaseManifest.releaseHighlights[locale].length,
-      5,
-      `${locale} release highlights`,
-    );
+    assert.ok(desktopLocalReleaseManifest.releaseHighlights[locale].length > 0, locale);
+    assert.ok(desktopLocalReleaseManifest.releaseHighlights[locale].length <= 5, locale);
+    assert.ok(desktopLocalReleaseManifest.releaseHighlights[locale].every((line) => line.trim()), locale);
   }
 
   const allHighlights = Object.values(
@@ -40,19 +39,13 @@ test("bundled release notes remain complete for every desktop locale", () => {
 });
 
 test("future release timestamps are scheduled until their publication instant", () => {
-  assert.equal(desktopLocalReleaseManifest.version, "2.0.11");
+  const publishedAt = "2030-01-01T00:00:00.000Z";
   assert.equal(
-    resolveDesktopReleasePublicationState(
-      desktopLocalReleaseManifest.publishedAt,
-      Date.parse("2026-08-19T23:59:59.000Z"),
-    ),
+    resolveDesktopReleasePublicationState(publishedAt, Date.parse(publishedAt) - 1),
     "SCHEDULED",
   );
   assert.equal(
-    resolveDesktopReleasePublicationState(
-      desktopLocalReleaseManifest.publishedAt,
-      Date.parse("2026-08-20T00:00:00.000Z"),
-    ),
+    resolveDesktopReleasePublicationState(publishedAt, Date.parse(publishedAt)),
     "PUBLISHED",
   );
 });

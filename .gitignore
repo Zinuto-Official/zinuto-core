@@ -60,3 +60,4 @@ apps/admin-android/**/*.p12
 apps/admin-android/**/*.p8
 apps/admin-android/**/reports/
 apps/desktop/shell/gen/backend-runtime-freshness.json
+.codegraph/

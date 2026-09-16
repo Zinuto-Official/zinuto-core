@@ -2,13 +2,13 @@
 
 export const attachRafResizeMeasurement = (element: HTMLElement, measure: () => void): (() => void) => {
   let frameId = 0;
+  let disposed = false;
 
   const scheduleMeasure = () => {
-    if (frameId) {
-      window.cancelAnimationFrame(frameId);
-    }
+    if (disposed || frameId) return;
     frameId = window.requestAnimationFrame(() => {
       frameId = 0;
+      if (disposed) return;
       measure();
     });
   };
@@ -24,6 +24,7 @@ export const attachRafResizeMeasurement = (element: HTMLElement, measure: () => 
   }
 
   return () => {
+    disposed = true;
     if (frameId) {
       window.cancelAnimationFrame(frameId);
     }

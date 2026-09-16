@@ -18,6 +18,15 @@ const environment = verifiedDuckdbCargoEnvironment(runtime, {
   ...process.env,
   CARGO_BUILD_JOBS: process.env.CARGO_BUILD_JOBS || '2',
 });
+if (process.platform === 'darwin') {
+  // Cargo's test launcher can replace dynamic-library search paths. Bind the
+  // verified library to these local test executables; packaged builds retain
+  // their separate relocatable runtime layout.
+  const flags = environment.CARGO_ENCODED_RUSTFLAGS
+    ? environment.CARGO_ENCODED_RUSTFLAGS.split('\u001f')
+    : String(environment.RUSTFLAGS || '').split(/\s+/u).filter(Boolean);
+  environment.CARGO_ENCODED_RUSTFLAGS = [...flags, '-C', `link-arg=-Wl,-rpath,${runtime.libraryRoot}`].join('\u001f');
+}
 
 for (const args of [
   ['clippy', '--manifest-path', MANIFEST_PATH, '--all-targets', '--all-features', '--', '-D', 'warnings'],

@@ -8,6 +8,10 @@ import type { MarketBarFrame, OhlcvBar } from '../../domain/models.js';
 import { runtimeLimits } from '../../kernel/runtimeLimits.js';
 
 const MARKET_BAR_CHUNK_CACHE_LIMIT = 192;
+// Entry counts alone allow a few large reads to retain an entire data set.
+// These row budgets bound cached payloads independently of request sizes.
+const MARKET_BAR_CHUNK_CACHE_MAX_ROWS = 131_072;
+const MARKET_BAR_FRAME_CACHE_MAX_ROWS = 250_000;
 const MARKET_BAR_CHUNK_CACHE_TTL_MS = 8 * 60 * 1000;
 const MARKET_BAR_COUNT_CACHE_LIMIT = runtimeLimits.marketBarCountCacheMaxEntries;
 const MARKET_BAR_COUNT_CACHE_TTL_MS = runtimeLimits.marketBarCountCacheTtlMs;
@@ -116,15 +120,19 @@ export const setCachedMarketBarChunk = (
 ): void => {
   pruneExpiredMarketBarChunkCache(Date.now());
   const key = buildMarketBarChunkCacheKey(instrumentId, chunkStart);
+  marketBarChunkCache.delete(key);
+  if (bars.length > MARKET_BAR_CHUNK_CACHE_MAX_ROWS) return;
   touchMarketBarChunkCache(key, {
     loadedAt: Date.now(),
     bars
   });
-  while (marketBarChunkCache.size > MARKET_BAR_CHUNK_CACHE_LIMIT) {
+  let cachedRows = [...marketBarChunkCache.values()].reduce((total, entry) => total + entry.bars.length, 0);
+  while (marketBarChunkCache.size > MARKET_BAR_CHUNK_CACHE_LIMIT || cachedRows > MARKET_BAR_CHUNK_CACHE_MAX_ROWS) {
     const oldestKey = marketBarChunkCache.keys().next().value;
     if (!oldestKey) {
       break;
     }
+    cachedRows -= marketBarChunkCache.get(oldestKey)!.bars.length;
     marketBarChunkCache.delete(oldestKey);
   }
 };
@@ -204,15 +212,19 @@ export const setCachedMarketBarFrame = (
     return;
   }
   pruneExpiredMarketBarFrameCache(Date.now());
+  marketBarFrameCache.delete(normalizedKey);
+  if (frame.timestampMs.length > MARKET_BAR_FRAME_CACHE_MAX_ROWS) return;
   touchMarketBarFrameCache(normalizedKey, {
     loadedAt: Date.now(),
     frame
   });
-  while (marketBarFrameCache.size > MARKET_BAR_FRAME_CACHE_LIMIT) {
+  let cachedRows = [...marketBarFrameCache.values()].reduce((total, entry) => total + entry.frame.timestampMs.length, 0);
+  while (marketBarFrameCache.size > MARKET_BAR_FRAME_CACHE_LIMIT || cachedRows > MARKET_BAR_FRAME_CACHE_MAX_ROWS) {
     const oldestKey = marketBarFrameCache.keys().next().value;
     if (!oldestKey) {
       break;
     }
+    cachedRows -= marketBarFrameCache.get(oldestKey)!.frame.timestampMs.length;
     marketBarFrameCache.delete(oldestKey);
   }
 };

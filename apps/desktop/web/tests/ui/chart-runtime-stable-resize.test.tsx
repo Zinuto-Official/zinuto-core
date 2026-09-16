@@ -29,6 +29,7 @@ const withMockBrowserRuntime = (
     flushAnimationFrames: (frameCount?: number) => void;
     dispatchWindowResize: () => void;
     observers: MockResizeObserverInstance[];
+    pendingFrames: () => number;
   }) => void,
 ) => {
   const globalTarget = globalThis as Record<string, unknown>;
@@ -92,6 +93,7 @@ const withMockBrowserRuntime = (
   try {
     run({
       observers,
+      pendingFrames: () => animationFrames.size,
       dispatchWindowResize: () => {
         listeners.get("resize")?.forEach((listener) => {
           const event = { type: "resize" } as Event;
@@ -168,7 +170,7 @@ test("stable chart resize observer dedupes same-size events and supports force",
 });
 
 test("chart renderability helper waits for visible nonzero geometry", () => {
-  withMockBrowserRuntime(({ flushAnimationFrames }) => {
+  withMockBrowserRuntime(({ flushAnimationFrames, observers, pendingFrames }) => {
     let width = 0;
     const height = 180;
     const element = {
@@ -200,7 +202,9 @@ test("chart renderability helper waits for visible nonzero geometry", () => {
     flushAnimationFrames(2);
     assert.equal(initCount, 0);
 
+    assert.equal(pendingFrames(), 0, "hidden charts must stop requesting animation frames");
     element.visibility = "visible";
+    observers[0]?.trigger();
     assert.equal(isElementRenderable(element), true);
     flushAnimationFrames();
     assert.equal(initCount, 0);
@@ -265,7 +269,7 @@ test("chart renderability helper runs inner cleanup after initialization", () =>
 });
 
 test("chart renderability helper does not initialize while hidden beyond the old fallback window", () => {
-  withMockBrowserRuntime(({ flushAnimationFrames }) => {
+  withMockBrowserRuntime(({ flushAnimationFrames, observers, pendingFrames }) => {
     const element = {
       visibility: "hidden",
       display: "block",
@@ -287,7 +291,9 @@ test("chart renderability helper does not initialize while hidden beyond the old
     flushAnimationFrames(30);
     assert.equal(initCount, 0);
 
+    assert.equal(pendingFrames(), 0, "hidden charts must stop requesting animation frames");
     element.visibility = "visible";
+    observers[0]?.trigger();
     flushAnimationFrames();
     assert.equal(initCount, 0);
     flushAnimationFrames();
