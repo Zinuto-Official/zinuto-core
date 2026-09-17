@@ -384,6 +384,26 @@ test("every acquisition error code resolves to safe localized copy", () => {
     ),
     "appText.marketDataAcquisitionErrorLocalValidation",
   );
+  assert.equal(
+    resolveMarketDataAcquisitionErrorMessageKey(
+      "ACQUISITION_INSTRUMENT_CATALOG_EMPTY",
+    ),
+    "appText.marketDataAcquisitionErrorNoData",
+  );
+  assert.equal(
+    resolveMarketDataAcquisitionErrorMessageKey(
+      "ACQUISITION_INSTRUMENT_CATALOG_INVALID",
+    ),
+    "appText.marketDataAcquisitionErrorFormatChanged",
+  );
+  assert.equal(
+    resolveMarketDataAcquisitionErrorMessageKey("SOME_CATALOG_EMPTY"),
+    "appText.marketDataAcquisitionErrorNoData",
+  );
+  assert.equal(
+    resolveMarketDataAcquisitionErrorMessageKey("SOME_CATALOG_INVALID"),
+    "appText.marketDataAcquisitionErrorFormatChanged",
+  );
 });
 
 test("terminal action ACK times out when the main listener never answers", async () => {

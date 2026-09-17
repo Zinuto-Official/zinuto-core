@@ -9,6 +9,8 @@ import type {
   DesktopMarketDataAcquisitionSourcePlanId,
 } from '@zinuto/shared/contracts-desktop/api';
 
+import { AcquisitionRuntimeError } from './marketDataAcquisitionTypes.js';
+
 export const MARKET_ACQUISITION_CATALOG_CACHE_TTL_MS =
   7 * 24 * 60 * 60 * 1_000;
 
@@ -128,7 +130,7 @@ const normalizeLoadedInstruments = (
     instruments.length > MAX_CATALOG_INSTRUMENTS ||
     !instruments.every(isInstrument)
   ) {
-    throw new Error('MARKET_ACQUISITION_CATALOG_INVALID');
+    throw new AcquisitionRuntimeError('ACQUISITION_INSTRUMENT_CATALOG_INVALID');
   }
   const unique = new Map<string, MarketAcquisitionCatalogCacheInstrument>();
   for (const instrument of instruments) {
@@ -164,7 +166,10 @@ export const createMarketAcquisitionCatalogCache = ({
     sourcePlanId,
   }: Pick<CatalogCacheLoadInput, 'marketId' | 'sourcePlanId'>): string => {
     if (!SAFE_CATALOG_ID.test(marketId) || !SAFE_CATALOG_ID.test(sourcePlanId)) {
-      throw new Error('MARKET_ACQUISITION_CATALOG_CACHE_KEY_INVALID');
+      throw new AcquisitionRuntimeError('ACQUISITION_MARKET_UNAVAILABLE', {
+        marketId,
+        sourcePlanId,
+      });
     }
     return path.join(cacheDir, `${marketId}--${sourcePlanId}.json`);
   };
@@ -191,7 +196,7 @@ export const createMarketAcquisitionCatalogCache = ({
     const filePath = resolveFilePath(record);
     const contents = JSON.stringify(record);
     if (Buffer.byteLength(contents, 'utf8') > MAX_CACHE_FILE_BYTES) {
-      throw new Error('MARKET_ACQUISITION_CATALOG_CACHE_TOO_LARGE');
+      throw new AcquisitionRuntimeError('ACQUISITION_OUTPUT_LIMIT_EXCEEDED');
     }
     const temporaryPath = `${filePath}.${randomUUID()}.tmp`;
     const handle = await fs.open(temporaryPath, 'wx', 0o600);

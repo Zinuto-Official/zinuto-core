@@ -14,6 +14,10 @@ import { Checkbox } from "@/ui/primitives/checkbox";
 import { Input } from "@/ui/primitives/input";
 import { Spinner } from "@/ui/primitives/loading";
 import { MARKET_DATA_ACQUISITION_MAX_SYMBOLS } from "@/workspaces/data/dataConfig/marketDataAcquisitionModel";
+import {
+  readMarketDataAcquisitionErrorCode,
+  resolveMarketDataAcquisitionErrorMessageKey,
+} from "@/workspaces/data/dataConfig/marketDataAcquisitionModel";
 
 type Translate = (key: string) => string;
 type TranslateFormatted = (key: string, values?: Array<unknown>) => string;
@@ -69,6 +73,10 @@ export const MarketAcquisitionInstrumentPicker = ({
     useState<number | null>(null);
   const [loadFailed, setLoadFailed] = useState(false);
   const [loadTimedOut, setLoadTimedOut] = useState(false);
+  const [loadErrorCode, setLoadErrorCode] = useState<string | null>(null);
+  const [loadErrorArgs, setLoadErrorArgs] = useState<
+    Record<string, unknown> | undefined
+  >(undefined);
   const [loadTrigger, setLoadTrigger] = useState<LoadTrigger>({
     revision: 0,
     forceRefresh: false,
@@ -111,6 +119,8 @@ export const MarketAcquisitionInstrumentPicker = ({
       setLoadMode(mode);
       setLoadFailed(false);
       setLoadTimedOut(false);
+      setLoadErrorCode(null);
+      setLoadErrorArgs(undefined);
       updateCountdown();
       const countdown = window.setInterval(
         updateCountdown,
@@ -155,6 +165,11 @@ export const MarketAcquisitionInstrumentPicker = ({
           setLoadTimedOut(
             hasApiErrorCode(error, DIRECTORY_LOAD_TIMEOUT_ERROR_CODE),
           );
+          setLoadErrorCode(readMarketDataAcquisitionErrorCode(error) || null);
+          const errorArgs = (error as { args?: Record<string, unknown> }).args;
+          setLoadErrorArgs(
+            errorArgs && typeof errorArgs === "object" ? errorArgs : undefined,
+          );
         }
       } finally {
         window.clearInterval(countdown);
@@ -182,6 +197,8 @@ export const MarketAcquisitionInstrumentPicker = ({
     setLoadMode(mode);
     setLoadFailed(false);
     setLoadTimedOut(false);
+    setLoadErrorCode(null);
+    setLoadErrorArgs(undefined);
     setDirectoryLoadSecondsRemaining(null);
     const timeout = window.setTimeout(
       () => {
@@ -238,6 +255,8 @@ export const MarketAcquisitionInstrumentPicker = ({
     setLoadMode("MORE");
     setLoadFailed(false);
     setLoadTimedOut(false);
+    setLoadErrorCode(null);
+    setLoadErrorArgs(undefined);
     setDirectoryLoadSecondsRemaining(null);
     void loadPage({
       cursor: nextCursor,
@@ -280,6 +299,13 @@ export const MarketAcquisitionInstrumentPicker = ({
   const catalogLoading = loadMode !== null;
   const initialCatalogLoading = loadMode === "INITIAL" && !hasLoadedCatalog;
   const showRefresh = dynamicCatalog && !catalogLoading;
+  const loadErrorMessageKey =
+    loadFailed && !loadTimedOut && loadErrorCode
+      ? resolveMarketDataAcquisitionErrorMessageKey(
+          loadErrorCode,
+          loadErrorArgs,
+        )
+      : "appText.marketDataAcquisitionInstrumentsLoadFailed";
   const statusMessage = catalogLoading
     ? directoryLoadSecondsRemaining === null
       ? loadMode === "SEARCH"
@@ -298,7 +324,7 @@ export const MarketAcquisitionInstrumentPicker = ({
       : isStale
         ? tt("appText.marketDataAcquisitionCatalogRefreshFailedUsingCache")
         : loadFailed
-          ? tt("appText.marketDataAcquisitionInstrumentsLoadFailed")
+          ? tt(loadErrorMessageKey)
           : dynamicCatalog && formattedUpdatedAt
             ? ttf("appText.marketDataAcquisitionCatalogCachedAtValue0", [
                 formattedUpdatedAt,
@@ -386,7 +412,11 @@ export const MarketAcquisitionInstrumentPicker = ({
                   className="market-data-acquisition-market-message"
                   role="alert"
                 >
-                  {tt("appText.marketDataAcquisitionInstrumentsLoadFailed")}
+                  {loadTimedOut
+                    ? tt(
+                        "appText.marketDataAcquisitionCatalogLoadTimedOut",
+                      )
+                    : tt(loadErrorMessageKey)}
                 </span>
               ) : initialCatalogLoading ? (
                 <span className="market-data-acquisition-market-message">

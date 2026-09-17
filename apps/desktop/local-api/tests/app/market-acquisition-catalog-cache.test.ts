@@ -11,6 +11,7 @@ import {
   MARKET_ACQUISITION_CATALOG_CACHE_TTL_MS,
   type MarketAcquisitionCatalogCacheInstrument,
 } from '../../src/application/market-data-acquisition/marketAcquisitionCatalogCache.js';
+import { AcquisitionRuntimeError } from '../../src/application/market-data-acquisition/marketDataAcquisitionTypes.js';
 
 const instruments: MarketAcquisitionCatalogCacheInstrument[] = [
   { symbol: '7203', name: 'TOYOTA MOTOR CORPORATION', exchangeId: 'TSE' },
@@ -210,5 +211,27 @@ test('concurrent catalog reads merge one upstream load and a missing cache does 
       }),
     ),
     /no cached directory/u,
+  );
+});
+
+test('catalog cache surfaces a classified error when the loaded directory is empty', async (t) => {
+  const cacheDir = await fs.mkdtemp(
+    path.join(os.tmpdir(), 'zinuto-market-catalog-classified-'),
+  );
+  t.after(() => fs.rm(cacheDir, { recursive: true, force: true }));
+  const cache = createMarketAcquisitionCatalogCache({
+    cacheDir,
+    now: () => new Date('2026-08-15T00:00:00.000Z'),
+  });
+  const error = await cache
+    .readOrLoad(catalogInput({ forceRefresh: false, load: async () => [] }))
+    .then(
+      () => null,
+      (failure: unknown) => failure,
+    );
+  assert.ok(error instanceof AcquisitionRuntimeError);
+  assert.equal(
+    (error as AcquisitionRuntimeError).code,
+    'ACQUISITION_INSTRUMENT_CATALOG_INVALID',
   );
 });

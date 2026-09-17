@@ -245,6 +245,10 @@ const ACQUISITION_ERROR_MESSAGE_KEYS: Record<
     "appText.marketDataAcquisitionErrorMarketUnavailable",
   ACQUISITION_FALLBACK_EXHAUSTED:
     "appText.marketDataAcquisitionErrorConnection",
+  ACQUISITION_INSTRUMENT_CATALOG_EMPTY:
+    "appText.marketDataAcquisitionErrorNoData",
+  ACQUISITION_INSTRUMENT_CATALOG_INVALID:
+    "appText.marketDataAcquisitionErrorFormatChanged",
 };
 
 export const resolveMarketDataAcquisitionErrorMessageKey = (
@@ -287,11 +291,11 @@ export const resolveMarketDataAcquisitionErrorMessageKey = (
   if (/RATE_LIMIT|TOO_MANY_REQUESTS|(?:^|_)429(?:_|$)/u.test(code)) {
     return "appText.marketDataAcquisitionErrorRateLimited";
   }
-  if (/NO_DATA|EMPTY_RESULT/u.test(code)) {
+  if (/NO_DATA|EMPTY_RESULT|CATALOG_EMPTY/u.test(code)) {
     return "appText.marketDataAcquisitionErrorNoData";
   }
   if (
-    /SCHEMA|RESPONSE_INVALID|RESPONSE_MISMATCH|BAR_INVALID|TIMESTAMP_INVALID|TIMEZONE_INVALID|DUPLICATE_CONFLICT|SYMBOL_RESULT_MISSING/u.test(
+    /SCHEMA|RESPONSE_INVALID|RESPONSE_MISMATCH|CATALOG_INVALID|BAR_INVALID|TIMESTAMP_INVALID|TIMEZONE_INVALID|DUPLICATE_CONFLICT|SYMBOL_RESULT_MISSING/u.test(
       code,
     )
   ) {
@@ -312,7 +316,7 @@ export const resolveMarketDataAcquisitionErrorMessageKey = (
     return "appText.marketDataAcquisitionErrorMarketUnavailable";
   }
   if (
-    /LIMIT_EXCEEDED|PAGE_LIMIT|ROW_LIMIT|OUTPUT_LIMIT|FILE_LIMIT/u.test(code)
+    /LIMIT_EXCEEDED|PAGE_LIMIT|ROW_LIMIT|OUTPUT_LIMIT|FILE_LIMIT|CACHE_TOO_LARGE/u.test(code)
   ) {
     return "appText.marketDataAcquisitionErrorRangeTooLarge";
   }

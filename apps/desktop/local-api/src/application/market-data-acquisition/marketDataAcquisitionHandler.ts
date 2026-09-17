@@ -58,6 +58,13 @@ const appErrorStatus = (code: string): number => {
   if (code === 'ACQUISITION_JOB_NOT_FOUND') return 404;
   if (code === 'ACQUISITION_JOB_ACTIVE') return 409;
   if (code === 'ACQUISITION_CONNECTOR_UNAVAILABLE') return 503;
+  if (
+    code === 'ACQUISITION_INSTRUMENT_CATALOG_EMPTY' ||
+    code === 'ACQUISITION_INSTRUMENT_CATALOG_INVALID'
+  )
+    return 502;
+  if (code.endsWith('_RUNTIME_UNAVAILABLE')) return 503;
+  if (code.endsWith('_SIDECAR_TIMEOUT')) return 504;
   if (code.endsWith('_UPSTREAM_FAILED')) return 502;
   return 400;
 };
