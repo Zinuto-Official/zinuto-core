@@ -8,16 +8,12 @@
       <p align="center">Un espacio de trabajo de escritorio, centrado en datos locales, para repetir mercados, practicar y probar estrategias.</p>
     </td>
     <td width="66%" valign="middle">
-      <a href="https://www.zinuto.com/es/">
-        <img src="docs/assets/readme/core-overview.es.jpg" alt="Centro de entrenamiento de Zinuto Core en español" width="100%">
-      </a>
+      <img src="docs/assets/readme/core-overview.es.jpg" alt="Centro de entrenamiento de Zinuto Core en español" width="100%">
     </td>
   </tr>
 </table>
 
 <p align="center">
-  <a href="https://www.zinuto.com/es/"><strong>Sitio web oficial</strong></a> ·
-  <a href="https://www.zinuto.com/es/download/"><strong>Descargar Zinuto oficial</strong></a> ·
   <a href="#build-and-run">Compilar Core</a> ·
   <a href="#contribute">Contribuir</a>
 </p>
@@ -30,17 +26,7 @@
   <strong>Español</strong>
 </p>
 
-> Para la mayoría de las personas, [descargar la versión oficial de Zinuto](https://www.zinuto.com/es/download/) es la forma más sencilla de instalar, recibir actualizaciones y usar Zinuto. Este repositorio está pensado para quienes quieren leer el código, aprender de él, modificarlo o compilar por su cuenta la edición Core, que funciona de forma local.
-
-## ¿Zinuto oficial o Zinuto Core?
-
-| | Zinuto oficial | Zinuto Core |
-| --- | --- | --- |
-| Recomendado para | Quien busca una aplicación mantenida y lista para instalar | Quien quiere leer, modificar y compilar el código GPL |
-| Instalación | Descarga de un instalador mantenido | Compilación local desde este repositorio |
-| Cuenta y actualizaciones | Incluye reconocimiento de cuenta y canales de actualización oficiales | No incluye cuenta, servicio alojado ni actualizador del producto |
-| Herramientas locales | Incluye el espacio de trabajo local de Core | Ejecuta ese espacio directamente desde el código fuente |
-| Licencia | Consulta las condiciones de la distribución oficial | `GPL-3.0-only` |
+> Zinuto ha dejado de operar. Si deseas seguir utilizando las herramientas locales, puedes compilar Core a partir del código fuente de este repositorio siguiendo las instrucciones que aparecen más abajo. Core funciona localmente sin una cuenta oficial ni servicios alojados. Ya no se ofrecen descargas oficiales, servicios de cuenta ni actualizaciones del producto.
 
 Core no se conecta a un bróker ni envía órdenes reales. Es una herramienta de investigación y práctica, no asesoramiento financiero. Cuando los datos ya están disponibles en el equipo, las funciones principales no requieren una cuenta ni conexión permanente. Los conectores de datos opcionales solo realizan solicitudes cuando tú inicias una adquisición. Esas solicitudes salen directamente de tu equipo hacia el proveedor elegido, sin pasar por un servicio de Zinuto. El proveedor ve tu IP pública o la IP de salida de tu proxy o VPN.
 
@@ -156,48 +142,6 @@ No hace falta entender todo el proyecto para ayudar. Un informe de error reprodu
 6. Abre un Pull Request hacia la rama predeterminada de este repositorio y explica el efecto para el usuario.
 
 Los mantenedores trabajan en `main`. Las personas externas usan ramas dentro de sus propios Forks. Informa de problemas de seguridad de forma privada según [SECURITY.md](SECURITY.md), nunca en un Issue público.
-
-<a id="developer-badge"></a>
-
-## Activar la insignia de Desarrollador en Zinuto oficial
-
-La insignia de Desarrollador reconoce contribuciones de código aceptadas. Pertenece a tu cuenta oficial de Zinuto; no desbloquea funciones de Core ni concede acceso de escritura al repositorio.
-
-1. Inicia sesión en Zinuto oficial y abre **Centro de cuenta > Reconocimiento > Vincular GitHub**. La conexión solicita el permiso `read:user` de GitHub.
-2. Envía un Pull Request al repositorio oficial de Zinuto Core. Debe proceder de una cuenta normal de GitHub, no de un bot, y dirigirse a la rama predeterminada del repositorio.
-3. Un mantenedor revisa y fusiona la contribución.
-4. Cuando el servicio oficial procesa la fusión, la insignia aparece en tu cuenta. También puede reconocer una contribución válida anterior si vinculas GitHub después.
-
-La insignia es válida durante un año desde una contribución fusionada que cumpla los requisitos. Las estrellas, los Issues, los Pull Requests sin fusionar y las fusiones que solo existen en un Fork no la activan.
-
-<a id="support"></a>
-
-## Ayuda a que el proyecto continúe
-
-Zinuto nació como una herramienta que queríamos usar nosotros mismos. Un grupo pequeño siguió construyéndola fuera del horario de trabajo porque creemos que practicar con atención no debería depender de un terminal costoso ni de una cuenta remota. Los cambios del sistema operativo, los formatos de datos, las pruebas, la documentación y cada respuesta bien pensada requieren tiempo real.
-
-Si Zinuto te ha servido, puedes marcar el repositorio con una estrella, escribir un Issue útil, mejorar una traducción, enviar un parche o apoyar el trabajo de forma voluntaria. Cualquiera de esas acciones nos dice que merece la pena seguir.
-
-<table>
-  <tr>
-    <td align="center" width="50%">
-      <a href="https://www.zinuto.com/zh-CN/support-development/">
-        <img src="docs/assets/readme/alipay-official-logo.png" alt="Alipay" width="240">
-      </a>
-    </td>
-    <td align="center" width="50%">
-      <a href="https://ko-fi.com/zinuto">
-        <img src="docs/assets/readme/kofi-support.png" alt="Apoya Zinuto en Ko-fi" width="336">
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td align="center"><a href="https://www.zinuto.com/zh-CN/support-development/">Apoya a Zinuto a través del canal de Alipay del sitio web oficial</a></td>
-    <td align="center"><strong>Ko-fi</strong><br><a href="https://ko-fi.com/zinuto">ko-fi.com/zinuto</a></td>
-  </tr>
-</table>
-
-El apoyo es opcional. No compra funciones, prioridad, acceso ni resultados de inversión, y Core seguirá siendo software GPL. Si quieres obtener la insignia oficial de Colaborador, empieza desde el flujo de apoyo dentro de tu cuenta iniciada en Zinuto oficial para que la aportación pueda asociarse correctamente.
 
 ## Licencia, seguridad y marca
 

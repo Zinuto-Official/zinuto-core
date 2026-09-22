@@ -8,16 +8,12 @@
       <p align="center">相場のリプレイ、反復練習、ストラテジーのバックテストを自分のコンピューターで行えるデスクトップ環境です。</p>
     </td>
     <td width="66%" valign="middle">
-      <a href="https://www.zinuto.com/ja/">
-        <img src="docs/assets/readme/core-overview.ja.jpg" alt="Zinuto Core 日本語トレーニングセンター" width="100%">
-      </a>
+      <img src="docs/assets/readme/core-overview.ja.jpg" alt="Zinuto Core 日本語トレーニングセンター" width="100%">
     </td>
   </tr>
 </table>
 
 <p align="center">
-  <a href="https://www.zinuto.com/ja/"><strong>公式サイト</strong></a> ·
-  <a href="https://www.zinuto.com/ja/download/"><strong>Zinuto 公式版をダウンロード</strong></a> ·
   <a href="#build-and-run">Core をビルド</a> ·
   <a href="#contribute">コントリビュート</a>
 </p>
@@ -30,17 +26,7 @@
   <a href="README.es.md">Español</a>
 </p>
 
-> 多くの方には、インストールと更新が簡単な [Zinuto 公式版](https://www.zinuto.com/ja/download/) をおすすめします。このリポジトリは、コードを読みたい方、仕組みを学びたい方、機能を変更したい方、ローカル版の Core を自分でビルドしたい方のためのものです。
-
-## Zinuto 公式版と Zinuto Core の違い
-
-| | Zinuto 公式版 | Zinuto Core |
-| --- | --- | --- |
-| 向いている方 | メンテナンスされたアプリをすぐに使いたい方 | GPL ソースを読み、変更し、自分でビルドしたい方 |
-| インストール | 公式インストーラーをダウンロード | このリポジトリからローカルでビルド |
-| アカウントと更新 | 公式アカウントの認定と更新チャンネルを提供 | アカウント、ホスト型サービス、製品アップデーターは含まない |
-| ローカル機能 | Core のローカルワークスペースを収録 | ローカルワークスペースをソースから直接実行 |
-| ライセンス | 公式配布条件を参照 | `GPL-3.0-only` |
+> Zinuto はサービスを終了しました。ローカル機能を引き続き利用したい方は、以下の手順に従って、このリポジトリのソースから Core を自分でビルドできます。Core は公式アカウントやホスト型サービスに依存せず、ローカルで動作します。公式版のダウンロード、アカウントサービス、製品アップデートの提供は終了しました。
 
 Core は証券会社に接続せず、実際の注文も出しません。調査と練習のためのツールであり、投資助言ではありません。データをローカルに用意すれば、主要な機能はアカウントや常時接続なしで利用できます。オプションのデータコネクターが通信するのは、利用者がデータ取得を開始したときだけです。リクエストは Zinuto のサービスを経由せず、お使いのコンピューターから選択したデータ提供元へ直接送られます。提供元から見えるのは、通常の公開 IP、プロキシ、または VPN の出口 IP です。
 
@@ -156,48 +142,6 @@ npm run check:public-repo
 6. このリポジトリのデフォルトブランチに Pull Request を作成し、利用者への影響を説明します。
 
 メンテナーは `main` で開発し、外部コントリビューターは自分の Fork 内のブランチを使います。セキュリティ問題は公開 Issue にせず、[SECURITY.md](SECURITY.md) に従って非公開で報告してください。
-
-<a id="developer-badge"></a>
-
-## Zinuto 公式版の開発者バッジを有効にする
-
-開発者バッジは、採用されたコード貢献への認定です。公式 Zinuto アカウントに表示されるもので、Core の機能やリポジトリの書き込み権限を付与するものではありません。
-
-1. Zinuto 公式版にサインインし、**アカウントセンター > 認定 > GitHub を連携**を開きます。連携時に求める GitHub 権限は `read:user` です。
-2. Zinuto Core の公式リポジトリへ Pull Request を送ります。ボットではない通常の GitHub ユーザーが作成し、リポジトリのデフォルトブランチを対象にする必要があります。
-3. メンテナーがレビューし、貢献をマージします。
-4. 公式サービスがマージ記録を処理すると、アカウントに開発者バッジが表示されます。GitHub 連携前の対象貢献も、連携後に照合できます。
-
-条件を満たしたマージから1年間、バッジは有効です。Star、Issue、未マージの Pull Request、自分の Fork 内だけのマージでは有効になりません。
-
-<a id="support"></a>
-
-## プロジェクトを続けるために
-
-Zinuto は、私たち自身が使いたいと思った道具から始まりました。丁寧な練習に高価な端末やリモートアカウントは必要ないはずだと考え、少人数で仕事の合間に作り続けています。OS の変更、データ形式への対応、テスト、ドキュメント、ひとつひとつの返信には、どれも時間がかかります。
-
-Zinuto が役に立ったなら、Star、内容のある Issue、翻訳の改善、パッチ、任意の支援という形で参加できます。どの形も、このプロジェクトを続ける理由になります。
-
-<table>
-  <tr>
-    <td align="center" width="50%">
-      <a href="https://www.zinuto.com/zh-CN/support-development/">
-        <img src="docs/assets/readme/alipay-official-logo.png" alt="Alipay" width="240">
-      </a>
-    </td>
-    <td align="center" width="50%">
-      <a href="https://ko-fi.com/zinuto">
-        <img src="docs/assets/readme/kofi-support.png" alt="Ko-fi で Zinuto を支援" width="336">
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td align="center"><a href="https://www.zinuto.com/zh-CN/support-development/">公式サイトの Alipay チャネルを通じて支援</a></td>
-    <td align="center"><strong>Ko-fi</strong><br><a href="https://ko-fi.com/zinuto">ko-fi.com/zinuto</a></td>
-  </tr>
-</table>
-
-支援は任意です。機能、優先対応、アクセス権、投資成果を購入するものではなく、Core は引き続き GPL ソフトウェアです。公式サポーターバッジを希望する場合は、支援記録を正しく関連付けるため、サインインした Zinuto 公式版の支援フローから始めてください。
 
 ## ライセンス、セキュリティ、ブランド
 

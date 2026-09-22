@@ -8,16 +8,12 @@
       <p align="center">시장 리플레이, 반복 훈련, 전략 백테스트를 내 컴퓨터에서 할 수 있는 데스크톱 작업 공간입니다.</p>
     </td>
     <td width="66%" valign="middle">
-      <a href="https://www.zinuto.com/ko/">
-        <img src="docs/assets/readme/core-overview.ko.jpg" alt="Zinuto Core 한국어 트레이닝 센터" width="100%">
-      </a>
+      <img src="docs/assets/readme/core-overview.ko.jpg" alt="Zinuto Core 한국어 트레이닝 센터" width="100%">
     </td>
   </tr>
 </table>
 
 <p align="center">
-  <a href="https://www.zinuto.com/ko/"><strong>공식 웹사이트</strong></a> ·
-  <a href="https://www.zinuto.com/ko/download/"><strong>Zinuto 공식 버전 다운로드</strong></a> ·
   <a href="#build-and-run">Core 빌드</a> ·
   <a href="#contribute">기여하기</a>
 </p>
@@ -30,17 +26,7 @@
   <a href="README.es.md">Español</a>
 </p>
 
-> 대부분의 사용자에게는 설치와 업데이트가 간편한 [Zinuto 공식 버전](https://www.zinuto.com/ko/download/)이 알맞습니다. 이 저장소는 코드를 살펴보고, 구현을 배우고, 기능을 바꾸거나 완전한 로컬 Core 버전을 직접 빌드하려는 분을 위한 공간입니다.
-
-## Zinuto 공식 버전과 Zinuto Core
-
-| | Zinuto 공식 버전 | Zinuto Core |
-| --- | --- | --- |
-| 권장 대상 | 관리되는 앱을 바로 설치해 사용하려는 분 | GPL 소스를 읽고, 수정하고, 직접 빌드하려는 분 |
-| 설치 | 관리되는 설치 파일 다운로드 | 이 저장소에서 로컬 빌드 |
-| 계정과 업데이트 | 공식 계정 인증 및 업데이트 채널 제공 | 계정, 호스팅 서비스, 제품 업데이트 기능 없음 |
-| 로컬 도구 | Core 로컬 작업 공간 포함 | 소스에서 로컬 작업 공간을 직접 실행 |
-| 라이선스 | 공식 배포 조건 참고 | `GPL-3.0-only` |
+> Zinuto는 운영을 종료했습니다. 로컬 기능을 계속 사용하려면 아래 안내에 따라 이 저장소의 소스로 Core를 직접 빌드할 수 있습니다. Core는 공식 계정이나 호스팅 서비스 없이 로컬에서 실행됩니다. 공식 버전 다운로드, 계정 서비스 및 제품 업데이트 제공은 종료되었습니다.
 
 Core는 증권사에 연결하거나 실제 주문을 전송하지 않습니다. 연구와 연습을 위한 도구이며 투자 조언이 아닙니다. 데이터를 로컬에 준비한 뒤에는 계정이나 지속적인 인터넷 연결 없이 주요 기능을 사용할 수 있습니다. 선택형 데이터 커넥터는 사용자가 데이터 수집을 시작할 때만 외부에 요청합니다. 이 요청은 Zinuto 서비스를 거치지 않고 사용자의 컴퓨터에서 선택한 데이터 제공처로 직접 전송됩니다. 데이터 제공처에는 사용자의 공인 IP 또는 프록시나 VPN의 출구 IP가 보입니다.
 
@@ -156,48 +142,6 @@ npm run check:public-repo
 6. 이 저장소의 기본 브랜치로 Pull Request를 열고 사용자에게 미치는 영향을 설명합니다.
 
 관리자는 `main`에서 개발하고 외부 기여자는 자신의 Fork 안에서 브랜치를 사용합니다. 보안 문제는 공개 Issue로 올리지 말고 [SECURITY.md](SECURITY.md)에 따라 비공개로 알려 주세요.
-
-<a id="developer-badge"></a>
-
-## Zinuto 공식 버전에서 개발자 배지 켜기
-
-개발자 배지는 채택된 코드 기여를 인정하는 표시입니다. 공식 Zinuto 계정에 표시되며 Core 기능을 열거나 저장소 쓰기 권한을 주지는 않습니다.
-
-1. Zinuto 공식 버전에 로그인한 뒤 **계정 센터 > 인정 > GitHub 연결**을 엽니다. 연결할 때 요청하는 GitHub 권한은 `read:user`입니다.
-2. Zinuto Core 공식 저장소에 Pull Request를 제출합니다. 봇이 아닌 일반 GitHub 사용자 계정이 작성해야 하며 저장소의 기본 브랜치를 대상으로 해야 합니다.
-3. 관리자가 기여 내용을 검토하고 병합합니다.
-4. 공식 서비스가 병합 기록을 처리하면 계정에 개발자 배지가 표시됩니다. GitHub 연결 전에 이루어진 적격 기여도 연결 후 다시 확인할 수 있습니다.
-
-조건을 충족한 병합 기여 시점부터 배지는 1년 동안 유효합니다. Star, Issue, 병합되지 않은 Pull Request, 개인 Fork 안에서만 이루어진 병합은 배지를 활성화하지 않습니다.
-
-<a id="support"></a>
-
-## 프로젝트가 계속 나아갈 수 있도록
-
-Zinuto는 우리가 직접 쓰고 싶었던 도구에서 시작했습니다. 신중한 연습에 비싼 단말이나 원격 계정이 꼭 필요하지는 않다고 믿었기에, 소수의 사람들이 본업이 끝난 뒤에도 조금씩 만들어 왔습니다. 운영체제 변화, 데이터 형식 대응, 테스트, 문서, 성실한 답변에는 모두 실제 시간이 듭니다.
-
-Zinuto가 도움이 되었다면 저장소에 Star를 남기거나, 유용한 Issue를 작성하거나, 번역을 다듬거나, 패치를 제출하거나, 자발적으로 개발을 후원할 수 있습니다. 어떤 방식이든 이 프로젝트를 계속할 이유가 됩니다.
-
-<table>
-  <tr>
-    <td align="center" width="50%">
-      <a href="https://www.zinuto.com/zh-CN/support-development/">
-        <img src="docs/assets/readme/alipay-official-logo.png" alt="Alipay" width="240">
-      </a>
-    </td>
-    <td align="center" width="50%">
-      <a href="https://ko-fi.com/zinuto">
-        <img src="docs/assets/readme/kofi-support.png" alt="Ko-fi에서 Zinuto 후원" width="336">
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td align="center"><a href="https://www.zinuto.com/zh-CN/support-development/">공식 웹사이트의 Alipay 채널을 통해 후원</a></td>
-    <td align="center"><strong>Ko-fi</strong><br><a href="https://ko-fi.com/zinuto">ko-fi.com/zinuto</a></td>
-  </tr>
-</table>
-
-후원은 선택 사항입니다. 기능, 우선 처리, 접근 권한, 투자 성과를 구매하는 것이 아니며 Core는 계속 GPL 소프트웨어로 남습니다. 공식 후원자 배지를 원한다면 후원 기록이 올바르게 연결되도록 로그인한 Zinuto 공식 버전 안의 후원 절차에서 시작하세요.
 
 ## 라이선스, 보안, 브랜드
 

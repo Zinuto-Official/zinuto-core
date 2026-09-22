@@ -8,16 +8,12 @@
       <p align="center">A desktop workspace for market replay, deliberate practice, and strategy backtesting on your own computer.</p>
     </td>
     <td width="66%" valign="middle">
-      <a href="https://www.zinuto.com/en/">
-        <img src="docs/assets/readme/core-overview.en.jpg" alt="Zinuto Core training center in English" width="100%">
-      </a>
+      <img src="docs/assets/readme/core-overview.en.jpg" alt="Zinuto Core training center in English" width="100%">
     </td>
   </tr>
 </table>
 
 <p align="center">
-  <a href="https://www.zinuto.com/en/"><strong>Official website</strong></a> ·
-  <a href="https://www.zinuto.com/en/download/"><strong>Download official Zinuto</strong></a> ·
   <a href="#build-and-run">Build Core</a> ·
   <a href="#contribute">Contribute</a>
 </p>
@@ -30,17 +26,7 @@
   <a href="README.es.md">Español</a>
 </p>
 
-> For most people, the [official Zinuto download](https://www.zinuto.com/en/download/) is the easiest way to install, update, and use Zinuto. This repository is for people who want to inspect the code, learn from it, change it, or build the fully local Core edition themselves.
-
-## Official Zinuto or Zinuto Core?
-
-| | Official Zinuto | Zinuto Core |
-| --- | --- | --- |
-| Best for | A maintained, ready-to-install experience | Reading, changing, and self-building the GPL source |
-| Installation | Download a maintained installer | Build locally from this repository |
-| Account and updates | Includes official account recognition and update channels | No account, hosted service, or product updater |
-| Local tools | Includes the Core local workspace | Includes the local workspace directly from source |
-| License | See the official distribution terms | `GPL-3.0-only` |
+> Zinuto has been discontinued. If you wish to continue using the local tools, you can build Core from the source in this repository by following the build instructions below. Core runs locally without an official account or hosted service. Official downloads, account services, and product updates are no longer available.
 
 Core does not connect to a broker or place real orders. It is a research and practice tool, not investment advice. Once your data is available locally, the main workspace can be used without an account or a continuous network connection. Optional data connectors make outbound requests only when you start an acquisition. Those requests go directly from your computer to the selected provider, not through a Zinuto service. The provider sees your public IP or the egress IP of your proxy or VPN.
 
@@ -156,50 +142,6 @@ You do not need to understand the whole project before helping. A reproducible b
 6. Open a pull request to this repository's default branch and explain the user impact.
 
 Maintainers develop on `main`. External contributors use branches in their own forks. Please report security issues privately through [SECURITY.md](SECURITY.md), not through a public issue.
-
-<a id="developer-badge"></a>
-
-## Light up the Developer badge in official Zinuto
-
-The Developer badge recognizes accepted code contributions. It belongs to your official Zinuto account and does not unlock Core features or grant repository access.
-
-1. In official Zinuto, sign in and open **Account Center > Recognition > Link GitHub**. The connection requests GitHub's `read:user` scope.
-2. Submit a pull request to the official Zinuto Core repository. The pull request must target the repository's default branch and come from a normal GitHub user account, not a bot.
-3. A maintainer reviews and merges the contribution.
-4. After the official service processes the merged contribution, the Developer badge appears in your account. An eligible contribution made before linking can also be reconciled after you connect GitHub.
-
-The badge remains valid for one year from a qualifying merged contribution. Stars, issues, unmerged pull requests, and merges that exist only inside a fork do not activate it.
-
-<a id="support"></a>
-
-## Keep the project moving
-
-Zinuto began as a tool we wanted to use ourselves. A small group kept building it after work because we believe careful practice should not depend on an expensive terminal or a remote account. Operating-system changes, data formats, testing, documentation, and thoughtful replies all take real time.
-
-If Zinuto has helped you, you can star the repository, write a useful issue, improve a translation, submit a patch, or support the work voluntarily. Each of those tells us the project is worth carrying forward.
-
-<table>
-  <tr>
-    <td align="center" width="50%">
-      <a href="https://www.zinuto.com/zh-CN/support-development/">
-        <img src="docs/assets/readme/alipay-official-logo.png" alt="Alipay" width="240">
-      </a>
-    </td>
-    <td align="center" width="50%">
-      <a href="https://ko-fi.com/zinuto">
-        <img src="docs/assets/readme/kofi-support.png" alt="Support Zinuto on Ko-fi" width="336">
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td align="center"><a href="https://www.zinuto.com/zh-CN/support-development/">Support through the official Alipay channel</a></td>
-    <td align="center"><strong>Ko-fi</strong><br><a href="https://ko-fi.com/zinuto">ko-fi.com/zinuto</a></td>
-  </tr>
-</table>
-
-Support is optional. It does not buy features, priority, access, or investment results, and Core remains GPL software. If you want an official Supporter badge, begin from the support flow inside your signed-in official Zinuto account so the contribution can be associated correctly.
-
-Official Zinuto also offers four optional digital Support Medals. A medal is a public thank-you and collectible, never a feature unlock. [View the medals and open the matching tier in the installed official app](https://www.zinuto.com/en/support-medals/?source=github-readme).
 
 ## License, safety, and brand
 

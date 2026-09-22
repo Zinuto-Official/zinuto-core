@@ -8,16 +8,12 @@
       <p align="center">一套在自己电脑上完成行情复盘、刻意练习和策略回测的桌面工作台。</p>
     </td>
     <td width="66%" valign="middle">
-      <a href="https://www.zinuto.com/zh-CN/">
-        <img src="docs/assets/readme/core-overview.zh-CN.jpg" alt="Zinuto Core 简体中文训练中心" width="100%">
-      </a>
+      <img src="docs/assets/readme/core-overview.zh-CN.jpg" alt="Zinuto Core 简体中文训练中心" width="100%">
     </td>
   </tr>
 </table>
 
 <p align="center">
-  <a href="https://www.zinuto.com/zh-CN/"><strong>访问官方网站</strong></a> ·
-  <a href="https://www.zinuto.com/zh-CN/download/"><strong>下载 Zinuto 官方版</strong></a> ·
   <a href="#build-and-run">构建 Core</a> ·
   <a href="#contribute">参与贡献</a>
 </p>
@@ -30,17 +26,7 @@
   <a href="README.es.md">Español</a>
 </p>
 
-> 对大多数用户来说，[下载 Zinuto 官方版](https://www.zinuto.com/zh-CN/download/)是最省心的选择，可以直接安装、接收更新并使用完整的官方体验。这个仓库更适合希望阅读源码、学习实现、修改功能或亲自构建纯本地 Core 版的人。
-
-## Zinuto 官方版和 Zinuto Core 有什么区别？
-
-| | Zinuto 官方版 | Zinuto Core |
-| --- | --- | --- |
-| 更适合 | 希望开箱即用的普通用户 | 希望阅读、修改或自行构建 GPL 源码的人 |
-| 安装方式 | 下载维护中的安装包 | 从本仓库在本地构建 |
-| 账户与更新 | 提供官方账户身份和更新渠道 | 不含账户、在线服务和产品更新器 |
-| 本地工具 | 包含 Core 的本地工作台 | 直接从源码运行本地工作台 |
-| 许可证 | 以官方发行条款为准 | `GPL-3.0-only` |
+> Zinuto 已关停。如果你仍需要使用其中的本地功能，可以按照下方说明，从本仓库源码自行构建 Core 并继续使用。Core 在本机运行，不依赖官方账户或在线服务。官方版下载、账户服务和产品更新已停止提供。
 
 Core 不连接券商，也不会下真实订单。它用于研究和练习，不构成投资建议。本地数据准备好以后，主要工作流不需要账户，也不需要持续联网。只有在你主动开始获取数据时，可选数据连接器才会访问网络。这些请求会从你的电脑直接发往所选数据提供方，不经过 Zinuto 服务；对方看到的是你的公网 IP，或代理、VPN 的出口 IP。
 
@@ -156,48 +142,6 @@ npm run check:public-repo
 6. 向本仓库默认分支提交 Pull Request，并说明它给用户带来的变化。
 
 维护者在 `main` 上开发，外部贡献者在自己的 Fork 中使用分支。安全问题请按 [SECURITY.md](SECURITY.md) 私下报告，不要公开提交 Issue。
-
-<a id="developer-badge"></a>
-
-## 点亮 Zinuto 官方版里的开发者勋章
-
-开发者勋章用于感谢已被接受的代码贡献。它属于你的 Zinuto 官方账户，不会解锁 Core 功能，也不会自动给予仓库写入权限。
-
-1. 在 Zinuto 官方版中登录，打开**账户中心 > 身份认可 > 关联 GitHub**。连接时只申请 GitHub 的 `read:user` 权限。
-2. 向 Zinuto Core 官方仓库提交 Pull Request。它必须由正常的 GitHub 用户账户提交，不是机器人账户，并且目标是仓库的默认分支。
-3. 维护者完成审查并合并贡献。
-4. 官方服务处理完这条合并记录后，开发者勋章会显示在你的账户中。如果贡献发生在关联 GitHub 之前，关联后也可以补充核对符合条件的历史记录。
-
-一次符合条件的合并贡献可以让勋章保持一年有效。Star、Issue、未合并的 Pull Request，以及只在个人 Fork 内完成的合并，都不会点亮勋章。
-
-<a id="support"></a>
-
-## 让这个项目继续走下去
-
-Zinuto 最初只是我们自己很想用的一件工具。几个人在工作之外一点点把它做起来，因为我们相信，认真练习不应该依赖昂贵的终端，也不应该必须把数据交给远程账户。系统更新、数据格式变化、测试、文档和每一次认真回复，都需要真实的时间。
-
-如果 Zinuto 对你有帮助，你可以给仓库一个 Star，写一条有价值的 Issue，改好一句翻译，提交一个补丁，也可以自愿支持开发。每一种方式都在告诉我们，这个项目值得继续做下去。
-
-<table>
-  <tr>
-    <td align="center" width="50%">
-      <a href="https://www.zinuto.com/zh-CN/support-development/">
-        <img src="docs/assets/readme/alipay-official-logo.png" alt="支付宝" width="240">
-      </a>
-    </td>
-    <td align="center" width="50%">
-      <a href="https://ko-fi.com/zinuto">
-        <img src="docs/assets/readme/kofi-support.png" alt="通过 Ko-fi 支持 Zinuto" width="336">
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td align="center"><a href="https://www.zinuto.com/zh-CN/support-development/">通过官网支付宝渠道支持</a></td>
-    <td align="center"><strong>Ko-fi</strong><br><a href="https://ko-fi.com/zinuto">ko-fi.com/zinuto</a></td>
-  </tr>
-</table>
-
-支持完全自愿，不会购买功能、优先级、访问权限或投资结果，Core 也会继续遵守 GPL。如果你希望获得官方支持者勋章，请从已登录的 Zinuto 官方版内进入支持流程，这样系统才能正确关联你的支持记录。
 
 ## 许可证、安全与品牌
 
